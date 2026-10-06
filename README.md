@@ -1,7 +1,7 @@
 # GEMSDOE48 — Dempster–Shafer fault-discovery submission for the DOE GEMS Prize (DrivenData #306)
 
-**Live site:** <https://buffedlizard55-lab.github.io/GEMSDOE48/> ·
-**How to submit:** [docs/executive-summary.html](https://buffedlizard55-lab.github.io/GEMSDOE48/executive-summary.html) ·
+**Live site:** <https://buffedlizard55-lab.github.io/GEMSDOE48/docs/index.html> ·
+**How to submit:** [docs/executive-summary.html](https://buffedlizard55-lab.github.io/GEMSDOE48/docs/executive-summary.html) ·
 **Competition:** <https://www.drivendata.org/competitions/306/competition-doe-gems/> ·
 **Metric & format:** [page 967](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/)
 
@@ -41,6 +41,16 @@
 Diagnostic layers (for geologists, not for submission) are in `docs/downloads/diagnostics/`:
 normalised Dempster belief, **conflict K (where the two families disagree)**, Yager m(Θ), and
 Dempster m(Θ).
+
+## ⚠ Which GEMSDOE48 file to upload (three sessions produced DS files)
+
+| file | verdict |
+|---|---|
+| **`gemsdoe48-h48-1-ds-fusion-b2xh32tip-20261006-407bb7f4-zeros.tif` (this file)** | **Upload this one.** Strict superset of the live 0.2778 file plus 100 dots, 0 flank dots, downside ≥ 0.2773 |
+| `gemsdoe48-h48-ds-yager-conflict-20261006.tif` (PR #1, earlier session) | **Not recommended** (IR-48-13): 6,040 validated b2 dots down-weighted to 0.137, plus 3,894 re-added flank dots. LSI 0.2383 |
+| PR #2 decision file (b2 × h33-d) | Not merged. Re-adds the same 3,894 flank dots. LSI 0.2590 |
+
+Earlier session's README and pages are preserved in [`docs/prev-pr1/`](docs/prev-pr1/).
 
 ## Key findings of this session (all measured; see [method](docs/md/method.md))
 

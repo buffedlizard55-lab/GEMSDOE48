@@ -275,4 +275,66 @@ it is a strict superset of the 0.2778 file plus 100 dots.</p>
 across the LSI-estimated <code>T</code> of 5,763 ×0.5…×1.5. If each sits on a straight 1-px truth line it
 alone credits (credit 3.0): DTI ≤ 0.287–0.305. A dot is break-even at a mean credit of 0.0556.
 Receipt: <code>evidence/risk_bound.json</code>.</p>
+<h2>6. Three GEMSDOE48 DS files on the same instruments [MEASURED]</h2>
+<p>Three sessions produced Dempster–Shafer files for this repo. Same instruments, same bytes logic
+(<code>scripts/compare_ds_files.py</code> → <code>evidence/ds_file_comparison.json</code>):</p>
+<table>
+<thead>
+<tr>
+<th>file</th>
+<th style="text-align: right;">px</th>
+<th style="text-align: right;">mass</th>
+<th>values</th>
+<th style="text-align: right;">b2 dots kept at 1.0</th>
+<th style="text-align: right;">within 200 m of catalogue</th>
+<th style="text-align: right;">LSI pred.</th>
+<th style="text-align: right;">SGMC mean</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>b2 (live 0.2778, reference)</td>
+<td style="text-align: right;">37,654</td>
+<td style="text-align: right;">37,654</td>
+<td>{1}</td>
+<td style="text-align: right;">37,654</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.26351</td>
+<td style="text-align: right;">0.09697</td>
+</tr>
+<tr>
+<td><strong>H48-1, this file (primary)</strong></td>
+<td style="text-align: right;">37,754</td>
+<td style="text-align: right;">37,754</td>
+<td>{1}</td>
+<td style="text-align: right;"><strong>37,654</strong></td>
+<td style="text-align: right;"><strong>0</strong></td>
+<td style="text-align: right;"><strong>0.26336</strong></td>
+<td style="text-align: right;">0.09702</td>
+</tr>
+<tr>
+<td>PR #1 on main (Yager, graded)</td>
+<td style="text-align: right;">47,905</td>
+<td style="text-align: right;">33,326</td>
+<td>{0.086, 0.137, 1}</td>
+<td style="text-align: right;">31,614</td>
+<td style="text-align: right;">3,894</td>
+<td style="text-align: right;">0.23826</td>
+<td style="text-align: right;">0.08539</td>
+</tr>
+<tr>
+<td>PR #2 (b2 × h33-d decision)</td>
+<td style="text-align: right;">47,905</td>
+<td style="text-align: right;">47,905</td>
+<td>{1}</td>
+<td style="text-align: right;">37,654</td>
+<td style="text-align: right;">3,894</td>
+<td style="text-align: right;">0.25903</td>
+<td style="text-align: right;">0.09863</td>
+</tr>
+</tbody>
+</table>
+<p>LSI cannot rank within ±0.003, but the PR #1 gap (−0.025) is coarse-scale, the kind of
+difference LSI does resolve (LOO MAE 0.018 across 17 files). The mechanism is also explicit:
+down-weighted validated dots plus re-added flank mass.</p>
 <hr><p style="font-size:.8rem;color:#667">GEMSDOE48 · built from <code>docs/md/method.md</code> by <code>scripts/build_site.py</code></p></main></body></html>

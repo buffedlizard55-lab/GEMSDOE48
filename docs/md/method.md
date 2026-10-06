@@ -144,3 +144,19 @@ it is a strict superset of the 0.2778 file plus 100 dots.
 across the LSI-estimated `T` of 5,763 ×0.5…×1.5. If each sits on a straight 1-px truth line it
 alone credits (credit 3.0): DTI ≤ 0.287–0.305. A dot is break-even at a mean credit of 0.0556.
 Receipt: `evidence/risk_bound.json`.
+
+## 6. Three GEMSDOE48 DS files on the same instruments [MEASURED]
+
+Three sessions produced Dempster–Shafer files for this repo. Same instruments, same bytes logic
+(`scripts/compare_ds_files.py` → `evidence/ds_file_comparison.json`):
+
+| file | px | mass | values | b2 dots kept at 1.0 | within 200 m of catalogue | LSI pred. | SGMC mean |
+|---|---:|---:|---|---:|---:|---:|---:|
+| b2 (live 0.2778, reference) | 37,654 | 37,654 | {1} | 37,654 | 0 | 0.26351 | 0.09697 |
+| **H48-1, this file (primary)** | 37,754 | 37,754 | {1} | **37,654** | **0** | **0.26336** | 0.09702 |
+| PR #1 on main (Yager, graded) | 47,905 | 33,326 | {0.086, 0.137, 1} | 31,614 | 3,894 | 0.23826 | 0.08539 |
+| PR #2 (b2 × h33-d decision) | 47,905 | 47,905 | {1} | 37,654 | 3,894 | 0.25903 | 0.09863 |
+
+LSI cannot rank within ±0.003, but the PR #1 gap (−0.025) is coarse-scale, the kind of
+difference LSI does resolve (LOO MAE 0.018 across 17 files). The mechanism is also explicit:
+down-weighted validated dots plus re-added flank mass.

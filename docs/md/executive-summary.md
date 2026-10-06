@@ -11,6 +11,9 @@
 | **Unique name** (start of the note) | `{{UNIQUE}}` |
 | **Note (optional)** | `{{NOTE}}` |
 
+> **Upload the file above, not** `gemsdoe48-h48-ds-yager-conflict-20261006.tif` (an earlier
+> session's file still in `downloads/`). See IR-48-13 in [irregularities](irregularities.html).
+
 ## Steps
 
 1. Log in at <https://www.drivendata.org/competitions/306/competition-doe-gems/> (your account).
