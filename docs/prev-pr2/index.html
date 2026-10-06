@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GEMSDOE48 · Dempster-Shafer family fusion · DOE GEMS Prize</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>GEMSDOE48 — Dempster-Shafer family fusion</h1>
+    <p>A unique submission for the <b>DOE GEMS Prize</b> (DrivenData #306): the two strongest
+    independently-built fault surfaces — the spacing-tuned <b>dotted</b> family and the
+    <b>tip/step-over</b> family — combined with Dempster's rule of combination, so that
+    <em>disagreement is carried forward as evidence, not averaged away.</em></p>
+  </div>
+</header>
+<nav><div class="wrap">
+  <a class="active" href="index.html">Overview &amp; download</a>
+  <a href="executive-summary.html">Executive summary / how to submit</a>
+  <a href="method.html">Method</a>
+  <a href="../validation.html">Validation</a>
+  <a href="hypotheses.html">Next hypotheses</a>
+  <a href="sources.html">Sources</a>
+  <a href="irregularities.html">Irregularities</a>
+</div></nav>
+
+<div class="wrap">
+
+<div class="hero">
+  <h2>⬇ ONE-CLICK SUBMISSION FILE</h2>
+  <p><span class="badge ok">format-audited</span><span class="badge ok">holdout-gated</span><span class="badge claim">UNSCORED — no organizer score exists yet</span></p>
+  <a class="btn" href="../downloads/gemsdoe48-ds-dotted-x-tipstepover-20261006T201749Z-95897e3f8125-decision-zeros.tif">⬇ Download submission GeoTIFF (.tif)</a>
+  <p class="mono">gemsdoe48-ds-dotted-x-tipstepover-20261006T201749Z-95897e3f8125-decision-zeros.tif · 169,061 bytes</p>
+  <table>
+    <tr><th>Unique submission name</th><td class="mono">GEMSDOE48-DS-DOTTED-x-TIPSTEPOVER-95897e3f8125</td></tr>
+    <tr><th>Paste-ready note (173/200 chars)</th><td class="mono">GEMSDOE48 Dempster-Shafer fusion dotted 0.2778 x tip-stepover 0.2632; union support 47905 dots full confidence per holdout tier sweep; unassigned-mass layer; id 95897e3f8125</td></tr>
+    <tr><th>SHA-256</th><td class="mono">a913f633925e9e683be150ec7826d8dad6cca44589bf832ec5d8e689ccda5c52 (receipt: <a href="../data/build_submission-pr2-20261006.json">evidence/build_submission.json</a>)</td></tr>
+    <tr><th>Grid &amp; format</th><td>single band · float32 · EPSG:32611 · 100 m · 3730×3292 · all 12,279,160 cells finite · values in [0,1] · 0 NaN · no nodata tag · 47,905 emitted dots · 0 dots on the public catalogue</td></tr>
+  </table>
+  <div class="note"><b>Portal error “Predicted values must be in range [0, 1]”:</b> this file is immune.
+  Every cell is finite, min = 0.0, max = 1.0, and there is no nodata sentinel tag
+  (a large negative nodata sentinel is the second known cause of that rejection).</div>
+</div>
+
+<div class="grid">
+  <div class="card">
+    <h3>Also downloadable: the graded DS belief + diagnostics</h3>
+    <p class="small">The literal normalized combined belief and the disagreement layers a geologist reads:</p>
+    <ul class="small">
+      <li><a href="../downloads/gemsdoe48-ds-dotted-x-tipstepover-20261006T201749Z-95897e3f8125-belief-zeros.tif">normalized combined belief Bel(F) ∈ [0,1]</a> — tiers {1.0 both-family, 0.4975 single-family}</li>
+      <li><a href="../downloads/gemsdoe48-ds-unassigned-mass-20261006T201749Z-95897e3f8125.tif">unassigned mass m<sub>12</sub>(Θ)</a> — preserved ignorance after combination</li>
+      <li><a href="../downloads/gemsdoe48-ds-conflict-20261006T201749Z-95897e3f8125.tif">conflict K</a> — where the families actively contradict</li>
+      <li><a href="../downloads/gemsdoe48-ds-plausibility-20261006T201749Z-95897e3f8125.tif">plausibility Pl(F)</a> · <a href="../downloads/gemsdoe48-ds-belief-raw-20261006T201749Z-95897e3f8125.tif">raw belief</a></li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>Why two files?</h3>
+    <p class="small">The <b>belief file</b> is the graded evidential surface (Shafer 1976): where the fused
+    evidence commits, where it abstains. The <b>decision file</b> (primary) is what the
+    spatially-blocked off-catalogue holdout selected for submission: the DS support
+    (combined belief &gt; 0) emitted at full confidence, because the tier sweep measured
+    full confidence as optimal (see <a href="../validation.html">validation</a>). Same evidence,
+    two representations — submit the decision file.</p>
+  </div>
+</div>
+
+<h2 class="sec">What was combined, and why it is unique</h2>
+<table>
+  <tr><th></th><th>Dotted family (input 1)</th><th>Tip/step-over family (input 2)</th></tr>
+  <tr>
+    <td>Artifact</td>
+    <td>GEMSDOE32 <span class="mono">h33-h33-2-b2</span><br><span class="small">spacing-tuned dot-thin, catalogue-flank prune B=2</span></td>
+    <td>GEMSDOE33 <span class="mono">h33d-analog-tip-stepover-r30</span><br><span class="small">fault-tip kinematic protection + Euler SI=0 corroboration + analog-field transfer</span></td>
+  </tr>
+  <tr>
+    <td>Owner-reported live score</td>
+    <td class="num"><b>0.2778</b> <span class="badge claim">CLAIM</span></td>
+    <td class="num"><b>0.2632</b> <span class="badge claim">CLAIM</span></td>
+  </tr>
+  <tr>
+    <td>Dots</td><td class="num">37,654</td><td class="num">41,865</td>
+  </tr>
+  <tr>
+    <td>Provenance (byte-verified)</td>
+    <td class="mono">sha256 c55bafc470054e82… = GEMSDOE32 published receipt</td>
+    <td class="mono">sha256 87f857d505e23247… = GEMSDOE33 published receipt</td>
+  </tr>
+</table>
+<p>Independence measured on this grid: Jaccard overlap 0.660 — 10,251 tip-only dots
+(3,080 of them &gt;300 m from any dotted dot) and 6,040 dotted-only dots.
+The fused support emits <b>47,905 dots</b>: 31,614 corroborated (both families) +
+16,291 disagreement dots that a naive intersection would delete and a naive average
+would blur to 0.5. No previous submission in the GEMSDOE series is this union, and the
+Dempster-Shafer construction (belief/plausibility/unassigned/conflict layers, holdout-calibrated
+tier policy) has not appeared in any sibling repository. <b>This submission is unique.</b></p>
+
+<h2 class="sec">Evidence at a glance</h2>
+<table>
+  <tr><th>Instrument</th><th>Finding</th></tr>
+  <tr><td>Spatially-blocked holdout, SGMC off-catalogue truth (pooled, n=61,664 px)</td>
+      <td>DS decision emission <span class="win">DTI 0.0960</span> beats dotted parent 0.0940 and tip parent 0.0942; graded belief 0.0880; intersection-only 0.0806 <span class="lose">(over-pruned)</span></td></tr>
+  <tr><td>Singleton tier sweep (off-catalogue)</td>
+      <td>Strictly monotone: value 0.25 → 0.0843 … 1.00 → 0.0960. Disagreement dots are net-positive; hedging them costs.</td></tr>
+  <tr><td>Catalogue leakage audit</td>
+      <td>0 emitted dots on the public catalogue (min distance 100 m, tip-protected) — no wasted false-positive mass on known faults.</td></tr>
+  <tr><td>Not-the-naive-mean check</td>
+      <td>Values differ from (dotted+tip)/2 at exactly the 16,291 single-source dots (0.49754 vs 0.5); DS tiers + unassigned/conflict layers have no average-based counterpart. Pearson r ≈ 1.0 on support is reported honestly — for binary inputs DS belief is a monotone transform of the mean; the evidential content is in the tier structure and preserved ignorance.</td></tr>
+  <tr><td>Metric implementation</td>
+      <td>Official distance-weighted Tversky (α=0.2, β=0.8, R=300 m, graded), implemented verbatim from the problem page; 8/8 unit tests incl. cross-validation against a literal transcription and hand-computed cases.</td></tr>
+</table>
+
+<h2 class="sec">Can this beat 0.2778 / 0.3195? — the honest answer</h2>
+<p><b>Upside case:</b> the metric is a budget — each emitted pixel must clear the credit bar
+≈ 0.2·DTI ≈ 0.055. The 0.2778 base cleared it with 37,654 dots; this submission adds 10,251
+disagreement dots that the best available off-catalogue truth proxy rates net-positive
+(+0.0020 pooled DTI over the better parent). If the hidden expert-mapped faults reward the
+union as the SGMC proxy does, the score should improve over the parents; the Final Prize
+Round additionally re-scores against an <em>expanded</em> label set built from expert review of
+submissions — disagreement dots are precisely candidate new faults, corroborated by one of the
+two strongest independent families.</p>
+<p><b>Downside case:</b> if the hidden set penalizes the extra 10,251 dots more than the proxy
+does, the score lands at or below the 0.2778 parent. Expected value is positive on the only
+instrument that has ever ranked these families correctly (the catalogue proxy is known to be
+anti-predictive for this playbook — dotted scored 0.2778 live while ranking <em>last</em> on
+catalogue truth).</p>
+<p><b>Closing the gap to 0.3195+ requires more credit density</b> — better detectors, not
+better budgeting. The ranked research agenda for that is on the
+<a href="hypotheses.html">next-hypotheses page</a>.</p>
+
+<footer>
+  GEMSDOE48 · built 2026-10-06 · grid pinned by sha256
+  <span class="mono">2176d08e…</span> (official sample_submission mirror) ·
+  no organizer score exists for any artifact here until submitted ·
+  all owner-reported scores are claims, not receipts ·
+  <a href="irregularities.html">irregularity register</a>
+</footer>
+</div>
+<div style="margin:1rem;padding:1rem;border:2px solid #b65c00;background:#fff0d7;color:#3d270e"><strong>Historical PR archive.</strong> This earlier page is preserved for provenance and may contain superseded claims. See the <a href="../index.html">current overview</a> and <a href="../validation.html">current validation</a>.</div>
+</body>
+</html>

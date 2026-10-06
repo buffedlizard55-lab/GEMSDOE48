@@ -31,4 +31,4 @@ Source: [official leaderboard](https://www.drivendata.org/competitions/306/compe
 
 ## Operational constraint
 
-The [DrivenData Terms of Use](https://www.drivendata.org/termsofuse/) were checked. No leaderboard polling, automated monitor, or scraping loop is implemented. The leaderboard snapshot above is a single manual read and may become stale. Before using any current-best comparison, obtain a fresh authorized view and record its date without automated collection.
+The [DrivenData Terms of Use](https://www.drivendata.org/termsofuse/) were checked. No leaderboard polling, automated monitor, or scraping loop is active. This branch disables the upstream six-hour workflow and preserves it as `.github/workflows/feed.yml.disabled`; `scripts/refresh_leaderboard.py` is parser-only and exits without network access. The snapshot above is a single dated observation and may become stale. Do not automate access; verify current rules and authorization before any future observation.

@@ -69,7 +69,7 @@ The previous main-branch experiment tested an `alpha=0.99` normalized DS belief 
 
 ## Leaderboard and attribution irregularities
 
-The official page was read once on **2026-10-06 UTC**. It showed `xiaofanhu` at 0.3774 (#1), `alexoktaba` at 0.3345 (#2), `nchuzhoy` at 0.3262 (#3), and DARD at 0.3195 (#7)—not 0.3195 as the highest. The displayed 0.2778 row belonged to `extradr19` (#13, 10 submissions). The local H33-2-B2 receipt says “UNSCORED”; no organizer evidence links it to that 0.2778 row. The H33-D 0.2632 value is an owner-reported claim, not an authenticated file-level score. See [`docs/irregularities.md`](docs/irregularities.md). No leaderboard monitor or scraping job is included.
+The official page was read once on **2026-10-06 UTC**. It showed `xiaofanhu` at 0.3774 (#1), `alexoktaba` at 0.3345 (#2), `nchuzhoy` at 0.3262 (#3), and DARD at 0.3195 (#7)—not 0.3195 as the highest. The displayed 0.2778 row belonged to `extradr19` (#13, 10 submissions). The local H33-2-B2 receipt says “UNSCORED”; no organizer evidence links it to that 0.2778 row. The H33-D 0.2632 value is an owner-reported claim, not an authenticated file-level score. See [`docs/irregularities.md`](docs/irregularities.md). This branch disables the upstream six-hour feed and preserves it as `.github/workflows/feed.yml.disabled`; the retained parser cannot fetch the page.
 
 ## Method and assumptions
 
@@ -115,7 +115,7 @@ python scripts/validate_submission.py --receipt evidence/submission_validation_2
 python scripts/run_spatial_holdout.py          # catalogue + SGMC proxy blocks; no slot decision
 ```
 
-The historical alpha=.99 builder is preserved separately as `scripts/previous_build_submission.py`; it is not the default. Build and holdout receipts are dated and hash-pinned. Four review passes—including compatibility and like-for-like SGMC re-evaluation after main advanced—are recorded in [`evidence/review_passes_20261006.md`](evidence/review_passes_20261006.md).
+The current rho=.5 builder remains `scripts/build_submission.py`. The earlier alpha=.99 builder snapshot is retained as `scripts/previous_build_submission.py`, and the exact builder from the merged main branch is preserved as `scripts/previous_main_build_submission.py`; neither is the default. Build and holdout receipts are dated and hash-pinned. Four review passes—including API compatibility and like-for-like SGMC re-evaluation after main advanced—are recorded in [`evidence/review_passes_20261006.md`](evidence/review_passes_20261006.md).
 
 ## Sources
 

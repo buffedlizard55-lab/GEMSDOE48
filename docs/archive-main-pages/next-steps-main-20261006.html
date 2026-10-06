@@ -1,0 +1,40 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GEMSDOE48 · next-steps</title><style>body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;margin:0;color:#1d2330;background:#f6f7fb;line-height:1.55}
+nav{background:#14213d;padding:.6rem 1rem;position:sticky;top:0}nav a{color:#fff;margin-right:1.1rem;text-decoration:none;font-size:.95rem}
+nav a.on{border-bottom:2px solid #fca311}main{max-width:1050px;margin:auto;padding:1.2rem 1.4rem;background:#fff}
+table{border-collapse:collapse;width:100%;font-size:.9rem;margin:.6rem 0}th,td{border:1px solid #dde;padding:.35rem .5rem;vertical-align:top}
+th{background:#eef1f8}code{background:#f0f2f7;padding:.05rem .3rem;border-radius:3px;font-size:.88em;word-break:break-all}
+pre{background:#f0f2f7;padding:.7rem;overflow:auto}img{max-width:100%;border:1px solid #dde;margin:.5rem 0}
+.dl{background:#fff8e6;border:2px solid #fca311;border-radius:8px;padding:.6rem 1.1rem;margin-bottom:1rem}
+.btn{display:inline-block;background:#fca311;color:#14213d;font-weight:700;padding:.55rem 1rem;border-radius:6px;text-decoration:none;word-break:break-all}
+blockquote{border-left:4px solid #fca311;margin:.8rem 0;padding:.2rem .9rem;background:#fafafa}</style></head><body><nav><a href="../index.html" class="">Home</a><a href="../executive-summary.html" class="">How to submit</a><a href="../method.html" class="">Method & 0.2778 autopsy</a><a href="../hypotheses.html" class="">Hypotheses</a><a href="../irregularities.html" class="">Irregularities</a><a href="../next-steps.html" class="on">Next steps</a><a href="../leaderboard.html" class="">Leaderboard</a><a href="../sources.html" class="">Sources</a></nav><main><h1>Next steps, ranked by P(Win) impact</h1>
+<ol>
+<li><strong>H48-2: native 1 m LiDAR scarps via GitHub Actions</strong> (the only path to 0.32–0.38).
+   The matrix workflow streams one 3DEP tile per job, computes paired profile curvature at 1 m,
+   and commits a 100 m detection raster (~kB) per tile. Data obtainability was verified (TNM API).
+   Blocker: this sandbox has no USGS egress, so it must run on Actions runners.</li>
+<li><strong>Spend 3 slots on the λ-probe.</strong> Submit S1 = this file, S2 = this file × 0.5, and
+   S3 = this file + N dots far from any fault. <code>1/DTI</code> is linear in <code>1/λ</code>, so the three returns
+   give exact <code>T</code>, <code>F</code>, <code>K</code>. That turns LSI from a coarse instrument into an exact one and settles
+   IR-48-06 and IR-48-12. All three probes score ≤ the anchor, so they cannot cost rank.</li>
+<li><strong>H48-5: dry-season Sentinel-2 NDVI lineaments</strong> (Actions job via Element84 STAC). Mask
+   NLCD cultivated land.</li>
+<li><strong>Extend the uniqueness audit</strong> to all ~47 sibling repos (git-tree listing, then download
+   only <code>.tif</code> files with matching pixel counts).</li>
+<li><strong>Replace Dempster with Denœux's cautious rule</strong> once a second genuinely independent source
+   (H48-2 or H48-5) exists. Then the fusion has real independent evidence to fuse.</li>
+<li><strong>Record every live score</strong> in <code>registry/live_scores.json</code>. Each new score tightens LSI.</li>
+</ol>
+<h2>Limitations / access needed</h2>
+<ul>
+<li><strong>DrivenData login.</strong> Not available, and never requested. Scores are owner-reported, and the
+  owner must upload files.</li>
+<li><strong>Network.</strong> No egress to USGS, AWS, ScienceBase or community.drivendata.org from the sandbox.
+  GitHub Actions has egress.</li>
+<li><strong>Compute.</strong> 2 CPU, 3 GB RAM, no GPU. Enough for 100 m work, not for 1 m processing of the
+  whole footprint.</li>
+<li><strong>Truth.</strong> The hidden expert labels are unknowable offline, so fine-scale selection needs live
+  probes.</li>
+</ul>
+<hr><p style="font-size:.8rem;color:#667">GEMSDOE48 · built from <code>docs/md/next-steps.md</code> by <code>scripts/build_site.py</code></p></main><div style="margin:1rem auto;max-width:1050px;padding:1rem;border:2px solid #b65c00;background:#fff0d7;color:#3d270e"><strong>Historical archive.</strong> This page is preserved from earlier upstream work and may contain superseded claims. It is not the current candidate or slot recommendation. See the <a href="../index.html">current GEMSDOE48 overview</a> and current blocked-fold <a href="../validation.html">validation</a>.</div>
+</body></html>

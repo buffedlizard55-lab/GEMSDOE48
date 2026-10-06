@@ -1,0 +1,157 @@
+{
+ "source": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+ "retrieved_utc": "2026-10-06",
+ "method": "fetched via agent web tool (sandbox has no DrivenData egress); first 25 rows; rank 25 score truncated in the fetch",
+ "rows": [
+  {
+   "rank": 1,
+   "participant": "xiaofanhu",
+   "best_public": 0.3774,
+   "submissions": 11
+  },
+  {
+   "rank": 2,
+   "participant": "alexoktaba",
+   "best_public": 0.3345,
+   "submissions": 23
+  },
+  {
+   "rank": 3,
+   "participant": "nchuzhoy",
+   "best_public": 0.3262,
+   "submissions": 5
+  },
+  {
+   "rank": 4,
+   "participant": "kinghorton42",
+   "best_public": 0.3222,
+   "submissions": 8
+  },
+  {
+   "rank": 5,
+   "participant": "joeyfezster",
+   "best_public": 0.322,
+   "submissions": 22
+  },
+  {
+   "rank": 6,
+   "participant": "Batik Shirt Brothers",
+   "best_public": 0.3218,
+   "submissions": 21
+  },
+  {
+   "rank": 7,
+   "participant": "DARD",
+   "best_public": 0.3195,
+   "submissions": 15
+  },
+  {
+   "rank": 8,
+   "participant": "ndavis7",
+   "best_public": 0.2888,
+   "submissions": 8
+  },
+  {
+   "rank": 9,
+   "participant": "mzoorob",
+   "best_public": 0.2884,
+   "submissions": 25
+  },
+  {
+   "rank": 10,
+   "participant": "GrigorSargsyan",
+   "best_public": 0.2876,
+   "submissions": 12
+  },
+  {
+   "rank": 11,
+   "participant": "HardcoreTechGod",
+   "best_public": 0.2854,
+   "submissions": 6
+  },
+  {
+   "rank": 12,
+   "participant": "op01",
+   "best_public": 0.2792,
+   "submissions": 6
+  },
+  {
+   "rank": 13,
+   "participant": "extradr19",
+   "best_public": 0.2778,
+   "submissions": 10
+  },
+  {
+   "rank": 14,
+   "participant": "wbg1",
+   "best_public": 0.275,
+   "submissions": 12
+  },
+  {
+   "rank": 15,
+   "participant": "smashi34",
+   "best_public": 0.271,
+   "submissions": 10
+  },
+  {
+   "rank": 16,
+   "participant": "smrtdoog5",
+   "best_public": 0.2708,
+   "submissions": 10
+  },
+  {
+   "rank": 17,
+   "participant": "jgaines",
+   "best_public": 0.2638,
+   "submissions": 22
+  },
+  {
+   "rank": 18,
+   "participant": "ad3002",
+   "best_public": 0.2634,
+   "submissions": 22
+  },
+  {
+   "rank": 19,
+   "participant": "No Fault of Our Own",
+   "best_public": 0.2628,
+   "submissions": 22
+  },
+  {
+   "rank": 20,
+   "participant": "SDCF9",
+   "best_public": 0.26,
+   "submissions": 11
+  },
+  {
+   "rank": 21,
+   "participant": "kpomazi",
+   "best_public": 0.2517,
+   "submissions": 12
+  },
+  {
+   "rank": 22,
+   "participant": "tchu",
+   "best_public": 0.2511,
+   "submissions": 19
+  },
+  {
+   "rank": 23,
+   "participant": "BrandenKMurray",
+   "best_public": 0.2502,
+   "submissions": 12
+  },
+  {
+   "rank": 24,
+   "participant": "nsabaj",
+   "best_public": 0.2488,
+   "submissions": 9
+  },
+  {
+   "rank": 25,
+   "participant": "moongrega",
+   "best_public": null,
+   "submissions": null
+  }
+ ]
+}

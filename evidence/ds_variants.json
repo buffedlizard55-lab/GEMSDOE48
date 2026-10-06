@@ -1,0 +1,97 @@
+{
+ "frozen": {
+  "A_OFF": 0.2,
+  "A_ON": 0.5,
+  "R_TOP": 0.9,
+  "NMS_R": 2.8,
+  "reliabilities": {
+   "b2": 0.9000000000000001,
+   "h32tip": 0.8582073434125271,
+   "h33d": 0.8526997840172786
+  }
+ },
+ "b2_reference": {
+  "S": 37654,
+  "lsi_pred": 0.26350617867118775,
+  "sgmc_folds": [
+   0.09798478771047907,
+   0.09752662033947898,
+   0.11839849101684503,
+   0.07396319302226466
+  ],
+  "sgmc_mean": 0.09696827302226693
+ },
+ "V1_b2+h32tip": {
+  "S": 37754,
+  "lsi_pred": 0.2633567296605728,
+  "sgmc_folds": [
+   0.09814687173157356,
+   0.09749835969907475,
+   0.11847677473992367,
+   0.07393971723535861
+  ],
+  "sgmc_mean": 0.09701543085148265,
+  "keys": [
+   "b2",
+   "h32tip"
+  ],
+  "added_vs_b2": 100,
+  "removed_vs_b2": 0,
+  "pearson_bel_vs_naive_mean": 0.9621094465255737,
+  "spearman_bel_vs_naive_mean": 0.968192342600495,
+  "jaccard_emission_vs_naive_mean": 0.9824418237338107,
+  "naive_S": 37555,
+  "conflict_px_gt_0_3": 26973,
+  "flank_dots": 0,
+  "masked_dots": 0
+ },
+ "V2_b2+h33d": {
+  "S": 37887,
+  "lsi_pred": 0.26305170486460216,
+  "sgmc_folds": [
+   0.0983634687506416,
+   0.09754960581475182,
+   0.11841618181340449,
+   0.07422026728612686
+  ],
+  "sgmc_mean": 0.0971373809162312,
+  "keys": [
+   "b2",
+   "h33d"
+  ],
+  "added_vs_b2": 233,
+  "removed_vs_b2": 0,
+  "pearson_bel_vs_naive_mean": 0.9657620191574097,
+  "spearman_bel_vs_naive_mean": 0.973920892247735,
+  "jaccard_emission_vs_naive_mean": 0.8180022502812851,
+  "naive_S": 34824,
+  "conflict_px_gt_0_3": 22937,
+  "flank_dots": 0,
+  "masked_dots": 0
+ },
+ "V3_b2+h32tip+h33d": {
+  "S": 37961,
+  "lsi_pred": 0.2629497884252612,
+  "sgmc_folds": [
+   0.09847689584136715,
+   0.09746861753920459,
+   0.11839672332807129,
+   0.07404727543291965
+  ],
+  "sgmc_mean": 0.09709737803539067,
+  "keys": [
+   "b2",
+   "h32tip",
+   "h33d"
+  ],
+  "added_vs_b2": 533,
+  "removed_vs_b2": 226,
+  "pearson_bel_vs_naive_mean": 0.932899534702301,
+  "spearman_bel_vs_naive_mean": 0.9558735311867682,
+  "jaccard_emission_vs_naive_mean": 0.9625592417061611,
+  "naive_S": 36577,
+  "conflict_px_gt_0_3": 35144,
+  "flank_dots": 0,
+  "masked_dots": 0
+ }
+}

@@ -1,26 +1,37 @@
-# Python environments, build artefacts, and test caches
+# Python environments, caches, and build outputs
 .venv/
 venv/
 __pycache__/
 *.py[cod]
 .pytest_cache/
+.mypy_cache/
+.ruff_cache/
 .coverage
 htmlcov/
 *.egg-info/
 build/
 dist/
 
-# Existing project data mirrors are tracked only when explicitly added; do not
-# accidentally add future large or private downloads.
+# Reproducible heavy intermediates; JSON receipts stay tracked.
+evidence/ds_layers/*.npy
+evidence/**/*.npy
+
+# Existing raw/source mirror data are tracked in the upstream project, but do not
+# accidentally add future local/private downloads or generated masks.
 data/raw/
 data/proxy/*
 !data/proxy/.gitkeep
 data/source_mirrors/*.tif
 !data/source_mirrors/.gitkeep
 
-external_ref/
+# Local scratch and external references
 scratch/
+external_ref/
 nohup.out
+/tmp/
 
+# Partial downloads and OS files
 docs/downloads/*.partial
 *.partial
+.DS_Store
+Thumbs.db

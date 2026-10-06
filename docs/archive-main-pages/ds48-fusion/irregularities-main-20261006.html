@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Irregularities · GEMSDOE48</title>
+<link rel="stylesheet" href="../../assets/ds48-fusion/site.css">
+</head><body>
+<header class="top"><div class="wrap">
+  <div class="brand"><span class="dot"></span><b>GEMSDOE48</b>
+    <span class="tag">Dempster&ndash;Shafer disagreement-preserving fusion</span></div>
+  <nav><a href="../../ds48-fusion/index.html">Submission</a><a href="../../ds48-fusion/executive-summary.html">How to submit</a><a href="../../ds48-fusion/research.html">Why 0.2778 won</a><a href="../../ds48-fusion/hypotheses.html">Hypotheses</a><a href="../../ds48-fusion/sources.html">Sources</a><a href="../../ds48-fusion/irregularities.html" class="on">Irregularities</a></nav>
+</div></header>
+<div class="namestrip"><div class="wrap">
+  <span class="ns-label">Unique submission name</span>
+  <code class="ns-name">GEMSDOE48-DS48-FUSION</code>
+  <a class="ns-dl" download href="../../downloads/gemsdoe48-ds48-emission.tif">
+    ↓ Download the .tif</a>
+</div></div>
+<div class="xlink"><div class="wrap">
+  This is the <b>DS48 fusion</b> sub-site. The repository landing page is
+  <a href="../../index.html">docs/index.html</a>, and its
+  <a href="../../leaderboard.html">leaderboard page</a> carries a <b>newer snapshot</b> than the
+  2026-10-02 figure quoted here — a later session measured the leader at 0.3774, not 0.3195.
+  Treat both numbers as dated, and the landing page as the newer one.
+</div></div>
+<main class="wrap">
+  <div class="hero"><h1>Irregularities</h1><p class="lead">Every check that failed, every source that disagreed with a sibling, and every item still open.</p></div>
+
+<section>
+  <p>An irregularity is recorded whenever a claim in this repository disagrees with a source, a
+  measurement, or another repository. Open items are not hidden; they are the work queue.</p>
+  <table class="sources"><tr><th>id</th><th>status</th><th>finding</th><th>handling</th></tr>
+  <tr><td><code>IR-48-01</code></td><td><span class="badge amber">disclosed</span></td><td>In the official data drop, <code>labels.tif</code> and <code>existing_faults.tif</code> are byte-identical.</td><td>Both are SHA-256 <code>7ba308ccdc4418b3…</code>, 425,830 bytes, 60,988 fault pixels; verified with <code>cmp</code> and with <code>hashlib.sha256</code> in <code>tests/test_inputs.py</code>. Consequence: the published catalogue is simultaneously the training label and the pre-scoring mask, so a locally-trained model that reproduces the catalogue is reproducing the mask, not the target.</td></tr><tr><td><code>IR-48-02</code></td><td><span class="badge amber">disclosed</span></td><td>The sibling README <code>GEMSDOE32/README.md</code> attributes live score 0.2600 to the 40,199-pixel file and 0.2708 to a 36,308-pixel prune, contradicting the task brief's own ledger and the file names.</td><td>The brief lists <code>h27-4-r1-solo-d2-8</code> (40,199 px) at 0.2708 and <code>gems25-dotted-h19-5-d2-8</code> (44,090 px) at 0.2600, which is what this repository uses. The sibling's inversion of that pair therefore recovers different amounts; its published τ<sub>live</sub> = 0.05416 is nevertheless reproduced exactly here (0.2 × 0.2708) because the bar depends only on the score. Flagged for the owner to resolve against the submissions page.</td></tr><tr><td><code>IR-48-03</code></td><td><span class="badge amber">partly resolved</span></td><td>The owner's earlier upload was rejected with &ldquo;Predicted values must be in range [0, 1]&rdquo;.</td><td>Cause not established by the siblings, and not established here either. But one candidate mechanism is now <b>excluded by evidence</b>: the family raster <code>dotted_d2_8_02708.tif</code> carries <code>NaN</code> in all 7,111,787 cells outside the study area and has an owner-reported accepted live score of 0.2708, so a <code>NaN</code> nodata tag outside the footprint does <i>not</i> trigger the message. The remaining candidate is a value outside [0, 1]. All four files shipped here have <code>NaN count = 0</code>, <code>min = 0.0</code>, <code>max &le; 1</code>, and out-of-range count = 0, re-read from the bytes on disk in <code>registry/submission_build.json</code> and re-checked in <code>tests/test_submission.py</code>. Status: open on the cause, closed on this repository's exposure to it.</td></tr><tr><td><code>IR-48-04</code></td><td><span class="badge amber">resolved</span></td><td>The catalogue-blocked holdout ranks the four artifacts with known live scores in the exact reverse order of the leaderboard.</td><td>Spearman ρ = −1.0, n = 4. The instrument is consequently <b>demoted from gate to descriptive</b> for all support-choice questions. Corroborated independently by <code>GEMSDOE32 IR-32-PROXY-01</code> and <code>GEMSDOE24 IR-H19-HARNESS-LEAK</code>.</td></tr><tr><td><code>IR-48-05</code></td><td><span class="badge amber">open</span></td><td>Hypothesis H48-D cannot be validated without new external data.</td><td>The free, official source is USGS 3DEP. <b>Obtainability is not verified:</b> every 3DEP-adjacent host tested returns HTTP 000 from this sandbox. H48-D must not be proposed as viable until the tiles are in <code>data/</code> and a byte receipt exists.</td></tr><tr><td><code>IR-48-06</code></td><td><span class="badge amber">disclosed</span></td><td>The Dempster–Shafer belief and the naive mean have identical rankings on the union support.</td><td>Spearman ρ = 0.9999999. Because a union pixel has belief exactly 1 in its own family, both statistics are monotone functions of the other family's belief alone. This repository therefore does <b>not</b> claim that Dempster–Shafer improves emission ranking; it claims the calibrated belief value, the conflict mass and the unassigned mass, which an average does not provide. Reproduced from the measurement, not asserted away.</td></tr><tr><td><code>IR-48-07</code></td><td><span class="badge amber">open, corrected</span></td><td>The hexagonal covering-optimal re-emission arm was described in this repository as falsified. Re-reading the measurement, that description was WRONG.</td><td>The hexagonal lattice is the provably optimal plane covering, so a covering-based re-emission should have reduced mass at equal coverage. At matched mass the best of the 11 hex covers (spacing 5.6 px, 37,499 dots) is <b>x1.019 above</b> the live-best base on the SGMC off-catalogue layer and <b>x12.5 above</b> it on the catalogue-in-corridor layer -- not below it on any layer, which is what an earlier summary of this repository claimed. The catalogue-side gain carries no live information (that instrument is anti-monotone, IR-48-04); the SGMC-side +1.9 % is inside the noise of re-sampling the same 48,394-pixel union corridor at a similar mass. Status: a live-candidate worth at most one slot, UNVALIDATED, and a corrected claim rather than a falsification. Interpretation of why the covering argument under-delivers: the shipped dots are information-weighted along the ridges, so the covering argument applies to a support region that the dots are not uniformly sampling. Retained as evidence, not deleted.</td></tr><tr><td><code>IR-48-08</code></td><td><span class="badge amber">disclosed</span></td><td>The belief, m(Θ) and conflict rasters have small numbers of non-zero pixels outside the study footprint (893 for belief and conflict, all 7,111,787 for m(Θ)).</td><td>This is geometrically correct, not a defect: a committed pixel within 300 m of the footprint boundary has a kernel that extends past it, and m(Θ) = (1−a₁)(1−a₂)/(1−K) is positive everywhere for reliabilities below 1. Only the <b>emission</b> is required to be empty outside the footprint, and it is (0 pixels).</td></tr><tr><td><code>IR-48-09</code></td><td><span class="badge amber">open</span></td><td>The public leaderboard moved between reads: 0.3262 (nchuzhoy, 2026-10-04) and 0.3195 (DARD, 2026-10-02) both appear as “top”.</td><td>Snapshots are dated, not authoritative. No artifact in this repository has an organizer score, and this repository cannot fetch the leaderboard itself without breaching the Terms of Use.</td></tr></table>
+</section>
+<section class="callout">
+  <h2>How to report one</h2>
+  <p>Open an issue on the repository using the template in
+  <code>.github/ISSUE_TEMPLATE/irregularity.md</code>. Include the id, the artifact's SHA-256, and
+  the command that reproduces the finding; a claim without a reproducible command is not a
+  measurement.</p>
+</section>
+
+  <footer><p>Built from <code>registry/</code> and <code>evidence/</code> by
+  <code>scripts/build_site.py</code>. Owner-reported scores are labelled
+  <span class="badge amber">OWNER-REPORT</span>; local measurements are labelled
+  <span class="badge blue">PROXY</span> or <span class="badge">DERIVED</span>.
+  No organizer score exists for any artifact in this repository.</p></footer>
+</main><div style="margin:1rem auto;max-width:1050px;padding:1rem;border:2px solid #b65c00;background:#fff0d7;color:#3d270e"><strong>Historical archive.</strong> This page is preserved from earlier upstream work and may contain superseded claims. It is not the current candidate or slot recommendation. See the <a href="../../index.html">current GEMSDOE48 overview</a> and current blocked-fold <a href="../../validation.html">validation</a>.</div>
+</body></html>

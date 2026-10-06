@@ -1,0 +1,52 @@
+{
+ "b2_live_02778": {
+  "px": 37654,
+  "mass": 37654.0,
+  "values": [
+   1.0
+  ],
+  "lsi_pred": 0.26351,
+  "sgmc_mean": 0.09697,
+  "contains_all_b2": true,
+  "extra_vs_b2": 0,
+  "within_200m_catalogue": 0
+ },
+ "this_PR3_H48-1": {
+  "px": 37754,
+  "mass": 37754.0,
+  "values": [
+   1.0
+  ],
+  "lsi_pred": 0.26336,
+  "sgmc_mean": 0.09702,
+  "contains_all_b2": true,
+  "extra_vs_b2": 100,
+  "within_200m_catalogue": 0
+ },
+ "main_PR1_yager": {
+  "px": 47905,
+  "mass": 33326.4213218689,
+  "values": [
+   0.08629441261291504,
+   0.13705584406852722,
+   1.0
+  ],
+  "lsi_pred": 0.23826,
+  "sgmc_mean": 0.08539,
+  "contains_all_b2": true,
+  "extra_vs_b2": 10251,
+  "within_200m_catalogue": 3894
+ },
+ "PR2_decision": {
+  "px": 47905,
+  "mass": 47905.0,
+  "values": [
+   1.0
+  ],
+  "lsi_pred": 0.25903,
+  "sgmc_mean": 0.09863,
+  "contains_all_b2": true,
+  "extra_vs_b2": 10251,
+  "within_200m_catalogue": 3894
+ }
+}

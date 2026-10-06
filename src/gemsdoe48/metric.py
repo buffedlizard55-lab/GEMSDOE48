@@ -14,8 +14,10 @@ and also provides a validity-mask-aware function for spatial subdomains.
 """
 from __future__ import annotations
 
+from dataclasses import dataclass
 from functools import lru_cache
 from math import ceil, hypot
+from typing import ClassVar, Iterable
 
 import numpy as np
 from scipy.ndimage import distance_transform_edt
@@ -29,6 +31,11 @@ PIXEL_M = DEFAULT_PIXEL_SIZE_M
 R_PX = R_M / PIXEL_M
 EPSILON = 1e-12
 EPS = EPSILON
+KERNEL_REACH_M = DEFAULT_RADIUS_M
+PIXEL_SIZE_M = DEFAULT_PIXEL_SIZE_M
+R_M = DEFAULT_RADIUS_M
+PIXEL_M = DEFAULT_PIXEL_SIZE_M
+R_PX = R_M / PIXEL_M
 
 
 def triangular_kernel(distance_m: np.ndarray | float, radius_m: float = DEFAULT_RADIUS_M) -> np.ndarray:
@@ -54,6 +61,62 @@ def _offsets(radius_m: float, pixel_size_m: float) -> tuple[tuple[int, int, floa
     return tuple(offsets)
 
 
+# Stable compatibility surface used by the earlier upstream implementation.
+OFFSETS = _offsets(DEFAULT_RADIUS_M, DEFAULT_PIXEL_SIZE_M)
+N_OFFSETS = len(OFFSETS)
+K_VALUES = np.asarray([weight for _, _, weight in OFFSETS], dtype=np.float64)
+DR = np.asarray([dy for dy, _, _ in OFFSETS], dtype=np.int64)
+DC = np.asarray([dx for _, dx, _ in OFFSETS], dtype=np.int64)
+
+
+def kernel_offsets(pixel_size_m: float = DEFAULT_PIXEL_SIZE_M, reach_m: float = DEFAULT_RADIUS_M):
+    """Return all non-zero integer-grid offsets and their triangular weights."""
+    return _offsets(float(reach_m), float(pixel_size_m))
+
+
+def offsets_as_tuples() -> Iterable[tuple[int, int, float]]:
+    """Compatibility helper returning the registered kernel offsets."""
+    return tuple(OFFSETS)
+
+
+def _shift(values: np.ndarray, dy: int, dx: int, fill: float = 0.0) -> np.ndarray:
+    """Move an array by ``(+dy,+dx)`` with constant fill and no wraparound."""
+    arr = np.asarray(values)
+    if arr.ndim != 2:
+        raise ValueError("shift input must be 2-D")
+    h, w = arr.shape
+    out = np.full(arr.shape, fill, dtype=np.float64)
+    r0, r1 = max(dy, 0), min(h, h + dy)
+    c0, c1 = max(dx, 0), min(w, w + dx)
+    if r0 < r1 and c0 < c1:
+        out[r0:r1, c0:c1] = arr[r0 - dy:r1 - dy, c0 - dx:c1 - dx]
+    return out
+
+
+def max_credit_field(field: np.ndarray) -> np.ndarray:
+    """For every target pixel, maximum nearby prediction times kernel weight."""
+    values = np.asarray(field, dtype=np.float64)
+    if values.ndim != 2:
+        raise ValueError("field must be 2-D")
+    values = np.where(np.isfinite(values), values, 0.0)
+    best = np.zeros(values.shape, dtype=np.float64)
+    for dy, dx, weight in OFFSETS:
+        np.maximum(best, _shift(values, dy, dx) * weight, out=best)
+    return best
+
+
+def max_kernel_to_truth(truth_mask: np.ndarray) -> np.ndarray:
+    """Return max kernel credit from any truth pixel at every grid cell."""
+    truth = np.asarray(truth_mask, dtype=bool)
+    if truth.ndim != 2:
+        raise ValueError("truth_mask must be 2-D")
+    values = truth.astype(np.float64)
+    best = np.zeros(values.shape, dtype=np.float64)
+    for dy, dx, weight in OFFSETS:
+        np.maximum(best, _shift(values, dy, dx) * weight, out=best)
+    return best
+
+
 def _prediction_at_neighbor(values: np.ndarray, dy: int, dx: int) -> np.ndarray:
     """At target (y,x), return values[y+dy,x+dx], zero outside the grid."""
     h, w = values.shape
@@ -73,20 +136,18 @@ def _prediction_at_neighbor(values: np.ndarray, dy: int, dx: int) -> np.ndarray:
 
 
 def coverage_field(prediction: np.ndarray, truth_mask: np.ndarray | None = None) -> np.ndarray:
-    """Return per-cell max kernel-weighted prediction credit.
+    """Return maximum nearby prediction credit, optionally only at truth pixels.
 
-    ``truth_mask`` is accepted for compatibility with the earlier implementation;
-    coverage is computed over the full raster and callers select truth cells afterward.
+    Without ``truth_mask`` this is the full per-cell max-credit field. With a mask,
+    values away from truth pixels are zero, matching the upstream helper contract.
     """
-    p = np.asarray(prediction, dtype=np.float64)
-    if p.ndim != 2:
-        raise ValueError("prediction must be a 2-D array")
-    p = np.where(np.isfinite(p), p, 0.0)
-    best = np.zeros(p.shape, dtype=np.float64)
-    for dy, dx, weight in _offsets(DEFAULT_RADIUS_M, DEFAULT_PIXEL_SIZE_M):
-        candidate = _prediction_at_neighbor(p, dy, dx) * weight
-        np.maximum(best, candidate, out=best)
-    return best
+    best = max_credit_field(prediction)
+    if truth_mask is None:
+        return best
+    truth = np.asarray(truth_mask, dtype=bool)
+    if truth.shape != best.shape:
+        raise ValueError("truth_mask shape does not match prediction")
+    return np.where(truth, best, 0.0)
 
 
 def distance_weighted_tversky(
@@ -149,6 +210,95 @@ def distance_weighted_tversky(
     return {"tp": tp, "fp": fp, "fn": fn, "n_truth": n_truth, "dti": dti, "coverage": float(tp / n_truth)}
 
 
+@dataclass(frozen=True)
+class DTIResult:
+    """Metric components with attributes and a mapping-compatible legacy view."""
+
+    dti: float
+    tpw: float
+    fpw: float
+    fnw: float
+    mass: float
+    self_credit: float
+    n_truth: int
+    n_emitted: int
+    coverage: float
+
+    _ALIASES: ClassVar[dict[str, str]] = {
+        "DTI": "dti", "dti": "dti", "TPw": "tpw", "tpw": "tpw",
+        "FPw": "fpw", "fpw": "fpw", "FNw": "fnw", "fnw": "fnw",
+        "S": "mass", "M": "self_credit", "mass": "mass",
+        "self_credit": "self_credit", "n_truth": "n_truth",
+        "n_emitted": "n_emitted", "n_pred_positive": "n_emitted", "coverage": "coverage",
+    }
+
+    def __getitem__(self, key: str):
+        try:
+            return getattr(self, self._ALIASES[key])
+        except KeyError as exc:
+            raise KeyError(f"{key!r} is not a metric component") from exc
+
+    def keys(self) -> list[str]:
+        return sorted(self._ALIASES)
+
+    def as_dict(self) -> dict[str, float | int]:
+        return {
+            "dti": self.dti, "tpw": self.tpw, "fpw": self.fpw, "fnw": self.fnw,
+            "mass": self.mass, "self_credit": self.self_credit,
+            "n_truth": self.n_truth, "n_emitted": self.n_emitted,
+            "coverage": self.coverage,
+        }
+
+
+def dti(
+    prediction: np.ndarray,
+    truth_mask: np.ndarray,
+    footprint: np.ndarray | None = None,
+    *,
+    validate: bool = True,
+    precomputed_max_kernel: np.ndarray | None = None,
+) -> DTIResult:
+    """Return exact official DTI components for a full-grid prediction surface."""
+    p = np.asarray(prediction, dtype=np.float64)
+    if p.ndim != 2:
+        raise ValueError(f"prediction must be 2-D, got shape {p.shape}")
+    p = np.where(np.isfinite(p), p, 0.0)
+    truth = np.asarray(truth_mask).astype(bool, copy=True)
+    if truth.shape != p.shape:
+        raise ValueError(f"truth {truth.shape} != prediction {p.shape}")
+    if validate and np.any((p < 0.0) | (p > 1.0)):
+        bad = int(((p < 0.0) | (p > 1.0)).sum())
+        raise ValueError(f"{bad} prediction values outside [0, 1]")
+    if footprint is not None:
+        active = np.asarray(footprint, dtype=bool)
+        if active.shape != p.shape:
+            raise ValueError("footprint shape mismatch")
+        p = np.where(active, p, 0.0)
+        truth &= active
+
+    mass = float(p.sum(dtype=np.float64))
+    n_emitted = int(np.count_nonzero(p > 0.0))
+    n_truth = int(truth.sum())
+    credit = max_credit_field(p)
+    if precomputed_max_kernel is None:
+        kernel_to_truth = max_kernel_to_truth(truth)
+    else:
+        kernel_to_truth = np.asarray(precomputed_max_kernel, dtype=np.float64)
+        if kernel_to_truth.shape != p.shape:
+            raise ValueError("precomputed_max_kernel shape mismatch")
+    tpw = float(credit[truth].sum(dtype=np.float64))
+    self_credit = float((p * kernel_to_truth).sum(dtype=np.float64))
+    fpw = float(mass - self_credit)
+    fnw = float(n_truth - tpw)
+    denominator = tpw + ALPHA * fpw + BETA * fnw + EPSILON
+    score = float(tpw / denominator) if denominator > 0.0 else 0.0
+    return DTIResult(
+        dti=score, tpw=tpw, fpw=fpw, fnw=fnw, mass=mass,
+        self_credit=self_credit, n_truth=n_truth, n_emitted=n_emitted,
+        coverage=float(tpw / n_truth) if n_truth else float("nan"),
+    )
+
+
 def dti_components_fast(pred: np.ndarray, truth: np.ndarray) -> dict[str, float | int]:
     """Compatibility wrapper returning the previous project key names."""
     pred_array = np.asarray(pred)
@@ -168,31 +318,80 @@ def dti_fast(pred: np.ndarray, truth: np.ndarray) -> float:
     return float(dti_components_fast(pred, truth)["DTI"])
 
 
-def dti_bruteforce(pred: np.ndarray, truth: np.ndarray) -> dict[str, float | int]:
+def dti_bruteforce(
+    prediction: np.ndarray,
+    truth_mask: np.ndarray,
+    footprint: np.ndarray | None = None,
+) -> DTIResult:
     """Literal pixel-pair transcription used as an independent reference oracle."""
-    p = np.where(np.isfinite(pred), pred, 0.0).astype(np.float64)
-    g = np.asarray(truth) > 0
-    gy, gx = np.nonzero(g)
-    py, px = np.nonzero(p > 0)
-    tp = 0.0
-    fn = 0.0
-    for i in range(len(gy)):
+    p = np.asarray(prediction, dtype=np.float64)
+    if p.ndim != 2:
+        raise ValueError("prediction must be 2-D")
+    p = np.where(np.isfinite(p), p, 0.0)
+    truth = np.asarray(truth_mask).astype(bool, copy=True)
+    if truth.shape != p.shape:
+        raise ValueError("truth shape mismatch")
+    if footprint is not None:
+        active = np.asarray(footprint, dtype=bool)
+        if active.shape != p.shape:
+            raise ValueError("footprint shape mismatch")
+        p = np.where(active, p, 0.0)
+        truth &= active
+
+    gy, gx = np.nonzero(truth)
+    py, px = np.nonzero(p > 0.0)
+    if gy.size == 0:
+        raise ValueError("no truth pixels")
+    tpw = 0.0
+    for r, c in zip(gy, gx):
         best = 0.0
-        for j in range(len(py)):
-            distance = hypot((py[j] - gy[i]) * PIXEL_M, (px[j] - gx[i]) * PIXEL_M)
-            if distance <= R_M:
-                best = max(best, p[py[j], px[j]] * max(1.0 - distance / R_M, 0.0))
-        tp += best
-        fn += 1.0 - best
-    fp = 0.0
-    for j in range(len(py)):
-        nearest_credit = 0.0
-        for i in range(len(gy)):
-            distance = hypot((py[j] - gy[i]) * PIXEL_M, (px[j] - gx[i]) * PIXEL_M)
-            if distance <= R_M:
-                nearest_credit = max(nearest_credit, max(1.0 - distance / R_M, 0.0))
-        fp += p[py[j], px[j]] * (1.0 - nearest_credit)
-    denominator = tp + ALPHA * fp + BETA * fn
-    dti = float(tp / (denominator + EPSILON)) if len(gy) else 0.0
-    return {"TPw": tp, "FPw": fp, "FNw": fn, "DTI": dti,
-            "n_truth": int(len(gy)), "n_pred_positive": int(len(py))}
+        for pr, pc in zip(py, px):
+            distance = hypot((pr - r) * PIXEL_M, (pc - c) * PIXEL_M)
+            if distance < R_M:
+                best = max(best, float(p[pr, pc]) * max(1.0 - distance / R_M, 0.0))
+        tpw += best
+
+    fpw = 0.0
+    self_credit = 0.0
+    for pr, pc in zip(py, px):
+        nearest = 0.0
+        for r, c in zip(gy, gx):
+            distance = hypot((pr - r) * PIXEL_M, (pc - c) * PIXEL_M)
+            if distance < R_M:
+                nearest = max(nearest, max(1.0 - distance / R_M, 0.0))
+        value = float(p[pr, pc])
+        fpw += value * (1.0 - nearest)
+        self_credit += value * nearest
+
+    n_truth = int(gy.size)
+    mass = float(p.sum(dtype=np.float64))
+    fnw = float(n_truth - tpw)
+    denominator = tpw + ALPHA * fpw + BETA * fnw + EPSILON
+    return DTIResult(
+        dti=float(tpw / denominator), tpw=float(tpw), fpw=float(fpw), fnw=fnw,
+        mass=mass, self_credit=float(self_credit), n_truth=n_truth,
+        n_emitted=int(py.size), coverage=float(tpw / n_truth),
+    )
+
+
+def credit_bar(dti_value: float) -> float:
+    """Marginal credit threshold: an added unit pixel helps iff k > alpha*DTI."""
+    return ALPHA * float(dti_value)
+
+
+def optimal_value_is_binary() -> str:
+    """State the derivative result for graded values under the official DTI."""
+    return "binary {0,1} is DTI-optimal; graded surfaces lose"
+
+
+def dilate(mask: np.ndarray, radius_px: int) -> np.ndarray:
+    """Boolean cross-structure dilation by ``radius_px`` iterations."""
+    out = np.asarray(mask, dtype=bool).copy()
+    for _ in range(int(radius_px)):
+        current = out
+        up = np.zeros_like(current); up[1:, :] = current[:-1, :]
+        down = np.zeros_like(current); down[:-1, :] = current[1:, :]
+        left = np.zeros_like(current); left[:, 1:] = current[:, :-1]
+        right = np.zeros_like(current); right[:, :-1] = current[:, 1:]
+        out = current | up | down | left | right
+    return out
