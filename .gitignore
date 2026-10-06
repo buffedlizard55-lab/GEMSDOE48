@@ -1,0 +1,18 @@
+# Python environment and test artefacts
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
+
+# Public mirror data are restored by hash-pinned scripts; do not redistribute implicitly.
+data/proxy/*
+!data/proxy/.gitkeep
+data/source_mirrors/*.tif
+!data/source_mirrors/.gitkeep
+
+docs/downloads/*.partial
+*.partial

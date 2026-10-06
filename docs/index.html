@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="GEMSDOE48 research project: conflict-aware fault evidence fusion, downloadable GeoTIFF, blocked validation, and transparent limitations.">
+  <title>GEMSDOE48 — evidence, not certainty</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #132720;
+      --muted: #52645b;
+      --paper: #f5f4ed;
+      --panel: #fffefa;
+      --line: #d8ddd2;
+      --green: #214f3d;
+      --green-soft: #e4eee5;
+      --amber: #8d4b16;
+      --amber-soft: #fff0d7;
+      --red: #8e3329;
+      --red-soft: #f9e8e2;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); line-height: 1.6; }
+    a { color: var(--green); text-underline-offset: 3px; }
+    a:hover { color: #132720; }
+    .wrap { width: min(1100px, calc(100% - 36px)); margin: 0 auto; }
+    header { padding: 58px 0 42px; background: #183a30; color: #f5f4ed; }
+    header .eyebrow { color: #b6d3be; text-transform: uppercase; letter-spacing: .15em; font-size: .76rem; font-weight: 700; }
+    h1 { margin: .4rem 0 .65rem; font-size: clamp(2.25rem, 6vw, 4.4rem); line-height: 1; letter-spacing: -.055em; }
+    .deck { max-width: 760px; margin: 0; color: #d8e7dc; font-size: clamp(1.05rem, 2vw, 1.25rem); }
+    header a { color: #d7ebd7; }
+    main { padding: 32px 0 64px; }
+    .warning { border: 1px solid #e5ba80; background: var(--amber-soft); color: #56330e; border-radius: 12px; padding: 16px 20px; margin: 0 0 24px; }
+    .warning strong { color: var(--red); letter-spacing: .03em; }
+    .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 18px; align-items: stretch; }
+    .card { border: 1px solid var(--line); border-radius: 14px; padding: 22px; background: var(--panel); box-shadow: 0 4px 18px rgba(28,52,39,.035); }
+    .download-card { background: var(--green-soft); border-color: #bfcebf; }
+    h2 { margin: 0 0 12px; font-size: 1.45rem; letter-spacing: -.025em; }
+    h3 { margin: 25px 0 8px; font-size: 1.05rem; }
+    p { margin: 0 0 12px; }
+    .button { display: inline-block; margin: 8px 0 4px; padding: 12px 18px; border-radius: 8px; background: var(--green); color: white; text-decoration: none; font-weight: 750; }
+    .button:hover { color: white; background: #183a30; }
+    .small { color: var(--muted); font-size: .9rem; }
+    .file-meta { margin-top: 14px; font-family: var(--mono); font-size: .79rem; overflow-wrap: anywhere; color: #3b5145; }
+    .diag-links { display: flex; flex-wrap: wrap; gap: 10px 18px; margin-top: 14px; font-size: .92rem; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 18px; }
+    .metric { padding: 18px; border-radius: 11px; background: #f2f4ee; border: 1px solid var(--line); }
+    .metric strong { display: block; font-size: 1.45rem; font-variant-numeric: tabular-nums; letter-spacing: -.035em; }
+    .metric span { color: var(--muted); font-size: .87rem; }
+    section { margin-top: 28px; }
+    table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: .92rem; }
+    th, td { padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: right; }
+    th:first-child, td:first-child { text-align: left; }
+    thead th { color: var(--muted); font-size: .78rem; text-transform: uppercase; letter-spacing: .08em; }
+    tbody tr:last-child { font-weight: 750; background: #f1f4ee; }
+    .negative { color: var(--red); }
+    .hypotheses { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .hypothesis { border-left: 3px solid #79967d; padding: 8px 12px; background: #f5f6f1; }
+    .hypothesis b { display: block; }
+    .note { padding: 14px 16px; border-radius: 9px; background: #17251f; color: #e5eee7; font-family: var(--mono); font-size: .9rem; overflow-wrap: anywhere; }
+    .links { display: flex; flex-wrap: wrap; gap: 10px 22px; }
+    footer { padding: 24px 0 42px; border-top: 1px solid var(--line); color: var(--muted); font-size: .88rem; }
+    @media (max-width: 760px) {
+      header { padding: 40px 0 32px; }
+      .hero-grid, .hypotheses { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: 1fr; }
+      .table-scroll { overflow-x: auto; }
+      table { min-width: 650px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="eyebrow">DOE GEMS Prize Challenge · research artifact · 2026-10-06</div>
+      <h1>GEMSDOE48</h1>
+      <p class="deck">A reproducible test of conflict-aware fusion for sparse fault-candidate maps—built to preserve disagreement, scored against public catalogue proxies, and gated by evidence rather than optimism.</p>
+    </div>
+  </header>
+  <main class="wrap">
+    <div class="warning">
+      <strong>NOT CLEARED FOR A SUBMISSION SLOT.</strong>
+      The four-block proxy diagnostic loses to the tip/stepover input and to arithmetic averaging in all four blocks. The labels and source surfaces are public third-party mirrors, not organizer-authenticated; the frozen surfaces were not rebuilt fold-by-fold; reusable license terms were not verified. Do not submit this candidate on the basis of these results.
+    </div>
+
+    <div class="hero-grid">
+      <article class="card download-card">
+        <p class="eyebrow" style="color:#41664d">Unique research candidate</p>
+        <h2>Conflict-aware Dempster fusion</h2>
+        <p>One-band float32 GeoTIFF on the competition grid. In-footprint beliefs are in [0,1]; outside cells are NaN/nodata, matching the official sample-template convention.</p>
+        <a class="button" href="downloads/GEMSDOE48-DS-conflict-aware-fusion-20261006.tif" download>↓ Download candidate GeoTIFF</a>
+        <div class="file-meta">GEMSDOE48-DS-FUSION-20261006<br>489,868 bytes · SHA-256 818957c0cb69caf360d445c7f7a684578c37528f363b5d84f5ae3be832e7413f</div>
+        <div class="diag-links">
+          <a href="downloads/GEMSDOE48-unassigned-mass-20261006.tif" download>Download unassigned mass m(Θ)</a>
+          <a href="downloads/GEMSDOE48-raw-conflict-K-20261006.tif" download>Download raw conflict K</a>
+        </div>
+      </article>
+      <article class="card">
+        <h2>Decision snapshot</h2>
+        <p>The fusion improves over dotted-only but is weaker than the tip/stepover source and simple averaging on the conditional catalogue-proxy test.</p>
+        <div class="grid">
+          <div class="metric"><strong>0.032588</strong><span>Fusion mean DTI</span></div>
+          <div class="metric"><strong>0.086820</strong><span>Tip/stepover mean DTI</span></div>
+          <div class="metric"><strong>0 / 4</strong><span>Folds beating tip/stepover</span></div>
+        </div>
+        <p class="small" style="margin-top:14px">No competition score or projected leaderboard score is claimed. Local format checks passed; organizer upload acceptance was not tested.</p>
+      </article>
+    </div>
+
+    <section class="card">
+      <h2>Spatial-block diagnostic</h2>
+      <p class="small">Fixed four quadrants, each evaluated on its held-out core plus a 300 m halo. Official distance-weighted Tversky equations; public catalogue labels only.</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Candidate</th><th>NW</th><th>NE</th><th>SW</th><th>SE</th><th>Mean DTI</th></tr></thead>
+          <tbody>
+            <tr><td>Dotted input</td><td>0.006140</td><td>0.008567</td><td>0.007524</td><td>0.005091</td><td>0.006831</td></tr>
+            <tr><td>Tip/stepover input</td><td>0.082720</td><td>0.102030</td><td>0.089601</td><td>0.072930</td><td>0.086820</td></tr>
+            <tr><td>Arithmetic mean</td><td>0.0439999</td><td>0.054671</td><td>0.048245</td><td>0.038710</td><td>0.046406</td></tr>
+            <tr><td>Discounted Dempster fusion</td><td>0.030871</td><td>0.038664</td><td>0.033773</td><td>0.027043</td><td>0.032588</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:14px"><b>Paired mean delta:</b> vs dotted <span style="color:#214f3d">+0.025757 (4/4 positive)</span>; vs tip/stepover <span class="negative">−0.054232 (0/4)</span>; vs mean <span class="negative">−0.013819 (0/4)</span>.</p>
+      <p class="small">Because the source artifacts were generated using the full public catalogue (the H33-2-B2 owner audit describes a full-catalogue proximity prune), withheld catalogue geometry may have influenced them. These are conditional diagnostics, not leakage-free validation or a private-test estimate.</p>
+    </section>
+
+    <section class="card">
+      <h2>What the fusion does—and does not say</h2>
+      <p>Each binary source value is treated as an operational opinion: <code>m(F)=0.5p</code>, <code>m(not F)=0.5(1−p)</code>, <code>m(Θ)=0.5</code>. After normalized Dempster combination, source agreement at a positive pixel yields fault belief 0.75; a one-source-only pixel yields belief 1/3, residual ignorance 1/3, and raw pre-normalization conflict <code>K=0.25</code>. The disagreement remains visible instead of being deleted by a consensus rule.</p>
+      <p><b>Important:</b> the inputs are sparse binary emissions, not calibrated probabilities; interpreting zero as counter-evidence is an assumption. The `rho=0.5` discount is preregistered, not estimated. The two surfaces share 31,614 positive cells (Jaccard 0.6599), so they are not treated as independent.</p>
+      <p><b>Arithmetic-average check:</b> the output is not the arithmetic mean: 47,905 in-footprint cells differ; in the positive union the mean absolute difference is 0.221661 and maximum absolute difference is 0.25. Exact comparison matters because both surfaces are highly correlated and sparse.</p>
+    </section>
+
+    <section class="card">
+      <h2>Preregistered geology hypotheses</h2>
+      <div class="hypotheses">
+        <div class="hypothesis"><b>1 · Conflict-aware surface fusion</b>Existing dotted + tip/stepover candidate maps; expected DTI unknown; low cost. Proxy test failed the promotion gate.</div>
+        <div class="hypothesis"><b>2 · Stratigraphic-contact topology</b>USGS GeMS/SGMC unit contacts plus magnetic/gravity breaks; moderate potential, medium-high cost; exact coverage unaudited.</div>
+        <div class="hypothesis"><b>3 · OPERA InSAR gradients</b>Persistent line-of-sight displacement discontinuities; low-moderate public DTI potential, high processing cost; no granules downloaded.</div>
+        <div class="hypothesis"><b>4 · Hydrography profile breaks</b>NHDPlus HR/3DHP channels plus 3DEP; terrain-dependent potential; in-footprint coverage unaudited.</div>
+        <div class="hypothesis"><b>5 · Geothermal favorability spread</b>USGS Great Basin favorability median + ensemble spread; exploratory prior, not fault truth; large package not downloaded.</div>
+      </div>
+      <p class="small" style="margin-top:16px">Layer details, physical signatures, off-catalogue rationale, differences from prior methods, source checks, and costs are in the frozen <a href="research/hypotheses-20261006.md">hypothesis slate</a>.</p>
+    </section>
+
+    <section class="card">
+      <h2>Paste-ready note</h2>
+      <p class="note">GEMSDOE48 DS fusion | H33-2-B2 dotted + H33-D tip/step-over; rho=0.5; conflict/ignorance diagnostic; unscored research candidate.</p>
+      <p class="small">129 characters. The unique candidate name is <code>GEMSDOE48-DS-FUSION-20261006</code>.</p>
+    </section>
+
+    <section class="card">
+      <h2>Provenance, reproducibility, and review</h2>
+      <div class="links">
+        <a href="../README.md">Project README and repeat-use guide</a>
+        <a href="research/holdout-results-20261006.md">Holdout result and limitations</a>
+        <a href="../evidence/build_receipt_20261006.json">Build receipt and input hashes</a>
+        <a href="../evidence/submission_validation_20261006.json">Local format audit</a>
+        <a href="../evidence/holdout_20261006.json">Full fold-by-fold JSON</a>
+        <a href="irregularities.md">Leaderboard / attribution irregularities</a>
+        <a href="sources.md">Sources and provenance</a>
+      </div>
+      <p class="small" style="margin-top:14px">Candidate surfaces and proxy labels were obtained from public third-party owner mirrors and are not organizer-authenticated. The official leaderboard was read once on 2026-10-06; no automatic monitoring was built. See the receipts and source audit before using any result.</p>
+    </section>
+  </main>
+  <footer><div class="wrap">GEMSDOE48 · Built for transparent research, not an unsupported score claim. Challenge format details: <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">official problem page</a>.</div></footer>
+</body>
+</html>

@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "generated_utc": "2026-10-06T20:27:13.191171+00:00",
+  "submission_status": "UNSCORED_RESEARCH_CANDIDATE_NOT_SLOT_CLEARED",
+  "submission_name": "GEMSDOE48-DS-FUSION-20261006",
+  "submission_note": "GEMSDOE48 DS fusion | H33-2-B2 dotted + H33-D tip/step-over; rho=0.5; conflict/ignorance diagnostic; unscored research candidate.",
+  "submission_note_length": 129,
+  "submission_file": {
+    "path": "docs/downloads/GEMSDOE48-DS-conflict-aware-fusion-20261006.tif",
+    "bytes": 489868,
+    "dtype": "float32",
+    "bands": 1,
+    "width": 3292,
+    "height": 3730,
+    "crs": "EPSG:32611",
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    "nodata": "NaN",
+    "finite_cells": 5167373,
+    "nodata_cells": 7111787,
+    "min": 0.0,
+    "max": 0.75,
+    "range_0_1_with_nan_outside": true
+  },
+  "submission_sha256": "818957c0cb69caf360d445c7f7a684578c37528f363b5d84f5ae3be832e7413f",
+  "diagnostic_files": {
+    "unassigned_mass": {
+      "path": "docs/downloads/GEMSDOE48-unassigned-mass-20261006.tif",
+      "bytes": 387276,
+      "dtype": "float32",
+      "bands": 1,
+      "width": 3292,
+      "height": 3730,
+      "crs": "EPSG:32611",
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": "NaN",
+      "finite_cells": 5167373,
+      "nodata_cells": 7111787,
+      "min": 0.25,
+      "max": 0.3333333432674408,
+      "range_0_1_with_nan_outside": true,
+      "sha256": "975c217ef803a45041077a219ba460134a8c84c8ea9f7ffc0414ddb47cb54ccd"
+    },
+    "raw_conflict_K": {
+      "path": "docs/downloads/GEMSDOE48-raw-conflict-K-20261006.tif",
+      "bytes": 271060,
+      "dtype": "float32",
+      "bands": 1,
+      "width": 3292,
+      "height": 3730,
+      "crs": "EPSG:32611",
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": "NaN",
+      "finite_cells": 5167373,
+      "nodata_cells": 7111787,
+      "min": 0.0,
+      "max": 0.25,
+      "range_0_1_with_nan_outside": true,
+      "sha256": "5daa6eaf7ce78603896b0696df5be67d9a71971da936e030161c3157944b576b"
+    }
+  },
+  "inputs": {
+    "dotted": {
+      "path": "data/source_mirrors/gemsdoe32-h33-h33-2-b2.tif",
+      "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+      "positive_pixels_inside_footprint": 37654
+    },
+    "tip_stepover": {
+      "path": "data/source_mirrors/GEMSDOE33-h33d-tip-stepover.tif",
+      "sha256": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757",
+      "positive_pixels_inside_footprint": 41865
+    },
+    "footprint_mask": {
+      "path": "data/source_mirrors/footprint-mask.tif",
+      "sha256": "ddadb8c96cda673b91ddaa0bbed2aa955c358a8f6196c4c4e8fa70d454dd429f",
+      "valid_cells": 5167373
+    }
+  },
+  "grid": {
+    "crs": "EPSG:32611",
+    "resolution_m": 100,
+    "height": 3730,
+    "width": 3292,
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ]
+  },
+  "evidence_combination": {
+    "rule": "Canonical Dempster combination after symmetric reliability discounting",
+    "reliability_discount_rho": 0.5,
+    "source_mass": {
+      "m_fault": "rho*p",
+      "m_not_fault": "rho*(1-p)",
+      "m_Theta": "1-rho"
+    },
+    "combined_fault": "m(F) after normalized Dempster rule",
+    "unassigned_layer": "normalized residual m(Theta) within footprint; NaN/nodata outside survey footprint",
+    "raw_conflict_layer": "K=m1(F)m2(not_F)+m1(not_F)m2(F), before Dempster normalization",
+    "assumptions": [
+      "The owner-mirror input surfaces are binary sparse emissions; interpreting zero as evidence for not-fault is a modeling assumption, not calibrated probability semantics.",
+      "rho=0.5 is a fixed symmetric discount chosen before holdout, not an empirically estimated source reliability.",
+      "The sources are not assumed statistically independent; shared-backbone risk remains."
+    ],
+    "range_normalization": "No min-max stretch; masses are already in [0,1] and are preserved."
+  },
+  "anti_average_check": {
+    "arithmetic_mean_equal_to_combination": false,
+    "different_cells_within_footprint": 47905,
+    "pearson_full_footprint": 0.9993554465838586,
+    "pearson_on_union_only": 0.9999999999999978,
+    "mae_full_footprint": 0.002054944634437561,
+    "mae_on_union_only": 0.22166091203689575,
+    "max_abs_difference": 0.25,
+    "note": "Because both source masks are binary and sparse, the union-only Pearson correlation is structurally uninformative; exact inequality, MAE, mass values, and conflict counts are reported as well."
+  },
+  "surface_overlap": {
+    "intersection_cells": 31614,
+    "union_cells": 47905,
+    "xor_disagreement_cells": 16291,
+    "intersection_over_union": 0.6599311136624569,
+    "dotted_fraction_also_in_tip": 0.839592075211133,
+    "tip_fraction_also_in_dotted": 0.755141526334647
+  },
+  "organizer_score": null,
+  "score_claim": "No organizer score exists for this artifact. No projected leaderboard score is reported."
+}

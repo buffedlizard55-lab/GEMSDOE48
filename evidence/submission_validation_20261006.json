@@ -1,0 +1,49 @@
+{
+  "status": "PASS_LOCAL_FORMAT_AUDIT_NOT_ORGANIZER_ACCEPTANCE",
+  "file": "docs/downloads/GEMSDOE48-DS-conflict-aware-fusion-20261006.tif",
+  "sha256": "818957c0cb69caf360d445c7f7a684578c37528f363b5d84f5ae3be832e7413f",
+  "bytes": 489868,
+  "dtype": "float32",
+  "bands": 1,
+  "shape": [
+    3730,
+    3292
+  ],
+  "crs": "EPSG:32611",
+  "resolution_m": [
+    100.0,
+    100.0
+  ],
+  "nodata": "NaN",
+  "finite_inside_footprint": true,
+  "nan_outside_footprint": true,
+  "finite_footprint_cells": 5167373,
+  "nan_outside_cells": 7111787,
+  "min_inside_footprint": 0.0,
+  "max_inside_footprint": 0.75,
+  "all_in_footprint_range_0_1": true,
+  "positive_cells": 47905,
+  "positive_mass": 29140.833495169878,
+  "grid_profile": {
+    "width": 3292,
+    "height": 3730,
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ]
+  },
+  "tags": {
+    "footprint_mask_sha256": "ddadb8c96cda673b91ddaa0bbed2aa955c358a8f6196c4c4e8fa70d454dd429f",
+    "frame": "{fault, not_fault, Theta}",
+    "model": "discounted Dempster combination",
+    "reliability_discount": "0.5",
+    "source_dotted_sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+    "source_tip_sha256": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757",
+    "submission_name": "GEMSDOE48-DS-FUSION-20261006",
+    "AREA_OR_POINT": "Area"
+  }
+}
