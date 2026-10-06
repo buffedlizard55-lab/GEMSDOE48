@@ -20,6 +20,18 @@ blockquote{border-left:4px solid #fca311;margin:.8rem 0;padding:.2rem .9rem;back
 <p><b>Format caveat:</b> finite zeros are stored outside the footprint to keep every value in [0,1]; this conflicts with the official null/NaN-outside wording. Portal acceptance was not tested.</p>
 </div>
 
+<h2>H49 — conflict-balanced DS emission (latest artifact; proxy-best measured, still not slot-cleared)</h2>
+<div class="dl">
+<h2>⬇ H49 conflict-balanced TIFF (click to download; NOT CLEARED FOR SUBMISSION)</h2>
+<p><a class="btn" href="downloads/gemsdoe48-h49-ds-conflict-balanced-20261006-e6f08013888b.tif">Download H49 candidate .tif</a>
+<a class="btn" href="downloads/gemsdoe48-h49-ds-conflict-balanced-20261006.zip">Download single-file .zip</a></p>
+<p>SHA-256 <code>e6f08013888b625db7d187d79bb75ba36c45d068081b77a3dd405ab7eec3d472</code> · single-band float32 · EPSG:32611 · 100 m · 3730 × 3292 · 47,905 cells · every one of the 12,279,160 cells finite and in [0,1] (re-read from the written bytes).</p>
+<p><b>Name:</b> <code>GEMSDOE48-H49-DS-CONFLICT-BALANCED-e6f08013888b</code><br>
+<b>Short note (196/200):</b> <code>H49 Dempster-Shafer fusion of dotted + tip/step-over families; Yager keeps conflict as unassigned mass; pignistic-ranked, spatially balanced 47,905-cell emission; all-finite [0,1]; id e6f08013888b</code></p>
+<p>It <b>beats both parents on two independent proxy protocols</b> (16 blocks: 0.102942 vs 0.096132 dotted; four quadrants: 0.102791 vs 0.096700) and is not the naïve mean (Pearson r 0.883 vs the mean, max abs difference 1.0). It is still <b>not cleared for a weekly slot</b>: the live-anchored calibration brackets its expected live change at −0.010 to +0.005, and the proxy demonstrably mis-orders the two parents by ~0.001, so a 0.007 proxy gap is inside the instrument's own error.</p>
+<p><a href="downloads/gemsdoe48-h49-ds-conflict-balanced-20261006-unassigned-diagnostic.tif">Unassigned-belief diagnostic (do not submit)</a> · <a href="downloads/gemsdoe48-h49-ds-conflict-balanced-20261006-belief-field.tif">Normalised belief field (do not submit)</a> · <a href="downloads/gemsdoe48-h49-ds-conflict-balanced-20261006-audit.json">Audit receipt</a> · <a href="data/h49-quadrant-proxy.json">Four-quadrant proxy receipt</a> · <a href="h49/index.html">H49 sub-site</a></p>
+</div>
+
 <h2>Later-main DS48 re-emission — also not slot-cleared</h2>
 <p>A separate Dempster-ranked, mass-matched emission was added by PR #6. Its receipt reports SGMC off-catalogue DTI 0.09068 versus 0.09613 for the dotted baseline (about 5.7% lower); its catalogue-based proxy is anti-monotone with the known live ladder. It is <strong>unscored and not cleared for a slot</strong>. The <a href="ds48-fusion/index.html">PR #6 research subsite</a> preserves its method and diagnostic layers; it is not an upload recommendation.</p>
 <h2>Previous H48-1 file — available for comparison, not a slot recommendation</h2>

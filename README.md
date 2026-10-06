@@ -31,9 +31,85 @@ score has been observed.
 - **Corrected SGMC proxy DTI:** Yager 0.08407; tip 0.09709; dotted 0.09613; naïve mean 0.09030. Proxy only—not private truth or organizer score. See [`v2 receipt`](docs/data/proxy-validation.json); [`v1 retraction`](docs/data/proxy-validation-v1-retracted.json).
 - **Format caveat:** all cells are finite and in [0,1], with zero outside. This passes a local range audit but does not establish the cause of the reported portal error or demonstrate portal acceptance; it also does **not** satisfy the official page's null/NaN-outside language. The portal was not tested.
 - **Suggested name:** `GEMSDOE48-H48-DS-CONFLICT` · **suggested short note:** `H48 dotted+tip Yager fusion; distinct in bounded scan; SGMC proxy gate failed; do not spend slot`.
+- **PR #7 H49 conflict-balanced emission (proxy-best measured so far; still not slot-cleared):** [`gemsdoe48-h49-ds-conflict-balanced-20261006-e6f08013888b.tif`](docs/downloads/gemsdoe48-h49-ds-conflict-balanced-20261006-e6f08013888b.tif), 47,905 px, one-band float32, EPSG:32611, 100 m, 3730×3292, every cell finite and in [0,1], SHA-256 `e6f08013888b625db7d187d79bb75ba36c45d068081b77a3dd405ab7eec3d472`. It beats both parents on two independent proxy protocols (16 blocks: 0.102942 vs dotted 0.096132; four quadrants: 0.102791 vs dotted 0.096700) and is not the naïve mean (Pearson r 0.883). It is nevertheless **not cleared for a weekly slot**: the live-anchored calibration brackets its expected live change at −0.010 to +0.005, and the proxy demonstrably mis-orders the two parents by ~0.001, so a 0.007 proxy gap does not justify spending a slot. [H49 sub-site](docs/h49/index.html); [audit](docs/downloads/gemsdoe48-h49-ds-conflict-balanced-20261006-audit.json).
 - **PR #6 DS48 emission (comparison only):** [`gemsdoe48-ds48-emission.tif`](docs/downloads/gemsdoe48-ds48-emission.tif), 37,654 px; byte-format checks passed. It scored 0.09068 on the owner-derived SGMC off-catalogue proxy versus 0.09613 for the dotted baseline (about 5.7% lower). The separate catalogue-proximity proxy is anti-monotone with the known live ladder (Spearman −1, n=4), so that apparent gain cannot clear it. No organizer score or portal acceptance exists. [PR #6 research site](docs/ds48-fusion/index.html).
 
 This result supersedes any prior page/README phrase that says to upload a fusion. H48-1, the PR #6 DS48 emission, and the Yager raster remain research artifacts only. **None is cleared for a weekly slot**; do not treat a download button or a format audit as a submission recommendation.
+
+---
+
+## H49 — conflict-balanced DS emission (this session; proxy-best, not slot-cleared)
+
+**Artifact:** `GEMSDOE48-H49-DS-CONFLICT-BALANCED-e6f08013888b` —
+[`docs/downloads/gemsdoe48-h49-ds-conflict-balanced-20261006-e6f08013888b.tif`](docs/downloads/gemsdoe48-h49-ds-conflict-balanced-20261006-e6f08013888b.tif)
+(258,444 B; SHA-256 `e6f08013888b625db7d187d79bb75ba36c45d068081b77a3dd405ab7eec3d472`;
+single-member [ZIP](docs/downloads/gemsdoe48-h49-ds-conflict-balanced-20261006.zip) SHA-256
+`b8f4dabf32fd18dfe9cab5de93adcf2d770f0aecf014fdffa555512a7c191b0b`, deterministic).
+
+Paste-ready note (196/200 chars):
+`H49 Dempster-Shafer fusion of dotted + tip/step-over families; Yager keeps conflict as unassigned mass; pignistic-ranked, spatially balanced 47,905-cell emission; all-finite [0,1]; id e6f08013888b`
+
+Diagnostics (**do not submit**): [unassigned mass](docs/downloads/gemsdoe48-h49-ds-conflict-balanced-20261006-unassigned-diagnostic.tif) · [normalised belief](docs/downloads/gemsdoe48-h49-ds-conflict-balanced-20261006-belief-field.tif) · [audit](docs/downloads/gemsdoe48-h49-ds-conflict-balanced-20261006-audit.json).
+
+**Method.** Each sparse family becomes `s(x) = max over its cells of k(d(x,y))` using the
+competition's own triangular kernel, so `s` is literally "credit if a truth pixel sat here".
+Masses `m(F) = r·s`, `m(N) = r·(1−s)`, `m(Θ) = 1−r` with preregistered `r_dotted = 0.90`,
+`r_tip = 0.802`. Combination is conjunctive with **Yager's** transfer of conflict `K` to `m(Θ)`;
+classical normalised Dempster (divide by `1−K`) deletes exactly the disagreement the brief asks
+us to keep, and is computed only for contrast. Ranking is pignistic; emission admits cells in
+descending order subject to a 2.5-cell minimum separation until the budget |dotted ∪ tip| = 47,905
+is reached, at `p = 1` (optimal: credit and cost are both linear in `p` while credit per truth
+pixel is capped).
+
+**Why the budget and the spacing, not the ranking, carry the gain.** Budget-neutral fusion at the
+live-tuned 37,654 dots reproduces the dotted parent almost exactly (37,645/37,654 overlap) and no
+ranking beats it — the gain is in the extra, spatially balanced mass, not in re-ordering.
+
+**Instrument calibration (the decision rests here, not on the proxy ranking).** The lineage
+`d28 (44,090) ⊃ h27-4 (40,199) ⊃ h33-2-b2 (37,654)` gives two removal sets whose live outcomes are
+known. Scoring them in proxy units and comparing with their live effect reproduces GEMSDOE32's
+independently measured safety factor of 2.08 to within 3 %. Against that bar: the raw union's
+tip-only cells return 0.58 × bar (reject); the fused, balanced placement of the same mass returns
+1.08 × bar optimistic, 0.81 × conservative — point estimate −0.003 live, bracket −0.010 to +0.005.
+[Receipt](docs/data/h49-instrument-calibration.json).
+
+**Measured comparisons (proxy DTI, never leaderboard score).**
+
+| emission | cells | 16 blocks | Δ vs dotted | blocks won | 4 quadrants |
+|---|---:|---:|---:|---:|---:|
+| **H49 submission** | 47,905 | **0.102942** | **+0.006809** | 10 / 11 | **0.102791** |
+| naïve union | 47,905 | 0.098979 | +0.002846 | 9 / 11 | 0.099052 |
+| tip parent | 41,865 | 0.097094 | +0.000961 | 8 / 11 | 0.097561 |
+| dotted parent | 37,654 | 0.096132 | 0 | — | 0.096700 |
+| weighted mean 0.64/0.36 | 39,170 | 0.091067 | −0.005065 | 0 / 11 | 0.091064 |
+| naïve mean 0.5/0.5 | 39,760 | 0.090303 | −0.005829 | 0 / 11 | 0.090230 |
+| intersection only | 31,614 | 0.082233 | −0.013899 | 0 / 11 | 0.082002 |
+| H48-1 binary Dempster | — | — | — | — | 0.096727 |
+| H48 Yager raster | — | — | — | — | 0.083889 |
+
+**Resolution limit, stated openly.** Both proxy protocols put the tip family ~0.001 proxy DTI
+*above* the dotted family, while the live board has the dotted family ahead by 0.0146. Proxy gaps
+below ~0.005 therefore carry no information; that is why the margin above is reported as
+break-even rather than as a gain, and why the slot gate stays closed.
+
+**Hypotheses.** H-A (lineament-coherence pruning) was tested and **falsified**: every quintile of
+every geometric feature carries 0.13–0.17 proxy credit per cell against a 0.037 removal bar
+([receipt](docs/data/h49-coherence-pruning.json)). Five ranked replacements are on the
+[H49 hypotheses page](docs/hypotheses.html) — blind-geothermal targeting first — but **obtainability
+was checked and failed**: `usgs.gov`, `gdr.openei.org`, `sciencebase.gov`, `earthquake.usgs.gov` and
+`dropbox.com` all fail TLS at the socket from this sandbox, so they are ranked, not ready.
+
+**Reproduce this session.**
+```bash
+bash scripts/fetch_inputs.sh                       # gh-authenticated, SHA-256 pinned
+.venv/bin/python scripts/analyze_parents.py         # decomposition + live-anchored inversion
+.venv/bin/python scripts/calibrate_instrument.py    # the check that decides everything
+.venv/bin/python scripts/test_coherence_pruning.py  # hypothesis H-A (falsified)
+.venv/bin/python scripts/test_budget_neutral.py     # budget-neutral fusion (dead end)
+.venv/bin/python scripts/budget_sweep.py            # marginal credit vs budget
+.venv/bin/python scripts/build_submission_h49.py    # emit, re-read, audit
+.venv/bin/python scripts/validate_proxy_h49.py      # four-quadrant cross-check
+```
 
 ---
 
