@@ -1,1 +1,96 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Sources · GEMSDOE48</title><link rel="stylesheet" href="assets/style.css"></head><body><header><h1>Verified source register</h1><nav><a href="index.html">Executive summary</a><a href="hypotheses.html">Hypotheses</a><a href="method.html">Method & evidence</a><a href="sources.html">Sources</a></nav></header><main class="wrap"><table><thead><tr><th>Claim used</th><th>Source / evidence class</th><th>Verification note</th></tr></thead><tbody><tr><td>Task, feature layers, metric, α=.2, β=.8, 300 m kernel, GeoTIFF requirements</td><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">DrivenData official problem description</a></td><td>Primary organizer source, reviewed 2026-10-06.</td></tr><tr><td>Current public leader 0.3774</td><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">Official leaderboard</a></td><td>Point-in-time observation on 2026-10-06; mutable.</td></tr><tr><td>GeoDAWN acquisition and products</td><td><a href="https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7">USGS ScienceBase release</a>, DOI 10.5066/P93LGLVQ</td><td>Official .gov data release. Survey resolution/flight-height differences are documented there.</td></tr><tr><td>Horizontal-gradient maxima identify edges such as faults, intrusions, contacts</td><td><a href="https://www.usgs.gov/software/pymaxspots-computing-and-connecting-horizontal-gradient-maxima-potential-field-geophysics">USGS pymaxspots</a>, DOI 10.5066/P13FSKEM</td><td>Official 2025 CC0 software release; makes H48-A obtainable and implementable.</td></tr><tr><td>3DEP products are free, no use restrictions</td><td><a href="https://www.usgs.gov/3d-elevation-program/about-3dep-products-services">USGS 3DEP products</a></td><td>Official availability/licensing statement; competition separately supplies 1 m DEM links.</td></tr><tr><td>Step-overs, terminations and discontinuities favor permeability/fluid flow</td><td><a href="https://pubs.usgs.gov/publication/70196066">USGS publication record: Siler, Hinz & Faulds (2018)</a>, DOI 10.1130/B31729.1; <a href="https://www.osti.gov/servlets/purl/1724082">DOE/OSTI Faulds & Hinz (2015)</a></td><td>Official USGS and DOE-hosted records.</td></tr><tr><td>Dempster-Shafer definitions; Dempster vs Yager conflict handling</td><td><a href="https://www.stat.berkeley.edu/~aldous/Real_World/dempster_shafer.pdf">Sentz & Ferson (2002), SAND2002-0835</a></td><td>DOE/Sandia report; sections 2.1–2.2.3. Supports the correction that classical normalization does not retain K.</td></tr><tr><td>Dotted parent bytes</td><td><a href="https://buffedlizard55-lab.github.io/GEMSDOE32/docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif">GEMSDOE32 owner artifact</a></td><td>SHA-256 pinned c55b…; owner source, not organizer-authenticated.</td></tr><tr><td>Tip parent bytes</td><td><a href="https://buffedlizard55-lab.github.io/GEMSDOE33/docs/downloads/GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e.tif">GEMSDOE33 owner artifact</a></td><td>SHA-256 pinned 87f8…; owner source, not organizer-authenticated.</td></tr><tr><td>Template / labels / SGMC proxy bytes</td><td>Hash-pinned owner mirror derived from competition/USGS data; hashes in build script and audit</td><td>Not organizer-authenticated. Dropbox failed TLS in this environment; GitHub mirrors were fetched and hash checked. Flagged rather than presented as official bytes.</td></tr></tbody></table><h2>Source policy</h2><p>Official organizer or .gov sources establish competition/science claims. Owner pages establish only artifact bytes and owner reports. A hash proves byte identity, not geological validity or score attribution.</p></main><footer>Manual review links are intentionally direct and visible.</footer></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sources · GEMSDOE48</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>Sources — official links for manual review</h1>
+    <p>Every external claim on this site traces to one of these. “Verified 2026-10-06” means
+    fetched and read in this session; “mirrored, hash-pinned” means the bytes were fetched via
+    the GitHub API and their SHA-256 matches the published receipt.</p>
+  </div>
+</header>
+<nav><div class="wrap">
+  <a href="index.html">Overview &amp; download</a>
+  <a href="executive-summary.html">Executive summary / how to submit</a>
+  <a href="method.html">Method</a>
+  <a href="validation.html">Validation</a>
+  <a href="hypotheses.html">Next hypotheses</a>
+  <a class="active" href="sources.html">Sources</a>
+  <a href="irregularities.html">Irregularities</a>
+</div></nav>
+
+<div class="wrap">
+<table>
+  <tr><th>id</th><th>source</th><th>role here</th><th>status</th></tr>
+  <tr><td>competition</td>
+      <td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">DOE GEMS Prize Challenge — overview</a></td>
+      <td>problem definition</td><td>verified 2026-10-06</td></tr>
+  <tr><td>problem</td>
+      <td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">Problem description, metric &amp; submission format</a></td>
+      <td>verbatim source of <span class="mono">src/gemsdoe48/metric.py</span> (distance-weighted Tversky α=0.2 β=0.8, R=300 m; worked example TPw=3.00 FPw=1.89 FNw=2.00 → 0.60)</td>
+      <td>verified 2026-10-06 (fetched twice)</td></tr>
+  <tr><td>about</td>
+      <td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/">About / additional resources</a></td>
+      <td>context</td><td>listed</td></tr>
+  <tr><td>leaderboard</td>
+      <td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">Public leaderboard</a></td>
+      <td>target scores are point-in-time reads only; DrivenData ToS forbids scraping/monitoring, so this repo never polls it. Brief's claim: top = 0.3195 (2026-10-06). GEMSDOE32 read 2026-10-04: #1 0.3262, #2 0.3195, #3 0.3042.</td>
+      <td>policy-set</td></tr>
+  <tr><td>reference-solution</td>
+      <td><a href="https://github.com/drivendataorg/gems-prize-reference-solution">Official reference solution</a></td>
+      <td>cloned (shallow) to <span class="mono">external_ref/</span>; U-Net + TverskyLoss(0.2, 0.8) confirmed in the notebook</td>
+      <td>verified 2026-10-06</td></tr>
+  <tr><td>rules-pdf</td>
+      <td><a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">GEMS rules (NLR document 96647)</a> · Dropbox mirror linked from the brief</td>
+      <td>prize structure (Initial $50K private-set; Final $250K expanded labels)</td>
+      <td>listed — docs.nlr.gov not fetched in-sandbox; brief-provided</td></tr>
+  <tr><td>gdr1391</td>
+      <td><a href="https://gdr.openei.org/submissions/1391">GDR submission 1391 — INGENIOUS Great Basin regional dataset</a> (DOI <a href="https://doi.org/10.15121/1881483">10.15121/1881483</a>, CC BY 4.0)</td>
+      <td>official free source of QFaults-INGENIOUS v2, 2-m temperature probes, paleogeothermal features, Quaternary volcanics, geodetics, seismicity</td>
+      <td>verified 2026-10-06</td></tr>
+  <tr><td>geodawn</td>
+      <td><a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS GeoDAWN airborne magnetic &amp; radiometric surveys</a> · <a href="https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7">study-area item</a></td>
+      <td>survey provenance of the feature bands</td><td>listed (linked by the problem page)</td></tr>
+  <tr><td>sgmc</td>
+      <td><a href="https://mrdata.usgs.gov/geology/state/">USGS State Geologic Map Compilation</a> (NV.zip / CA.zip; US Government work, public domain)</td>
+      <td>off-catalogue proxy truth (61,664 px &gt;300 m from catalogue), derived per the GEMSDOE30 receipt <span class="mono">data/external/external_receipt.json</span> (sha256-pinned)</td>
+      <td>derivation hash-verified 2026-10-06</td></tr>
+  <tr><td>ingenious</td>
+      <td><a href="https://gbcge.org/current-projects/ingenious/">Great Basin Center for Geothermal Energy — INGENIOUS project</a></td>
+      <td>catalogue provenance</td><td>listed</td></tr>
+  <tr><td>input-dotted</td>
+      <td><a href="https://buffedlizard55-lab.github.io/GEMSDOE32/docs/index.html">GEMSDOE32 site</a> — h33-h33-2-b2 zeros TIF</td>
+      <td>fusor input 1 (owner-reported live 0.2778)</td>
+      <td>downloaded; sha256 <span class="mono">c55bafc4…</span> = published receipt ✅</td></tr>
+  <tr><td>input-tip</td>
+      <td><a href="https://buffedlizard55-lab.github.io/GEMSDOE33/">GEMSDOE33 site</a> — h33d analog tip-stepover TIF</td>
+      <td>fusor input 2 (owner-reported live 0.2632)</td>
+      <td>downloaded; sha256 <span class="mono">87f857d5…</span> = published receipt ✅</td></tr>
+  <tr><td>grid-template</td>
+      <td>official <span class="mono">sample_submission.tif</span> / <span class="mono">labels.tif</span> via GEMSDOE24 owner mirror (pinned commit 07345ea)</td>
+      <td>grid identity (5,167,373 footprint cells) &amp; catalogue truth (60,988 px)</td>
+      <td>sha256 <span class="mono">2176d08e…</span> / <span class="mono">7ba308cc…</span> = GEMSDOE32 manifest of the official files ✅</td></tr>
+  <tr><td>demshafer-lit</td>
+      <td>Dempster, A.P. (1967) JRSS-B 30(2):205–247 · Shafer, G. (1976) <em>A Mathematical Theory of Evidence</em>, Princeton UP</td>
+      <td>combination rule used here</td><td>standard references</td></tr>
+</table>
+
+<h2 class="sec">In-repo evidence receipts</h2>
+<ul class="small">
+  <li><span class="mono">evidence/build_submission.json</span> — artifact hashes, format audits, not-the-naive-mean check</li>
+  <li><span class="mono">evidence/holdout_validation.json</span> — blocked holdout, both proxies, gate</li>
+  <li><span class="mono">evidence/round2_tier_sweep.json</span> — tier sweep, union variants, leakage audit</li>
+  <li><span class="mono">data/raw/external_receipt_g30.json</span> — GEMSDOE30 external-data derivation receipt (mirrored)</li>
+</ul>
+
+<footer>GEMSDOE48 · if any link above is unreachable from your network, the mirrored bytes and
+hashes in this repo are the auditable record.</footer>
+</div>
+</body>
+</html>
