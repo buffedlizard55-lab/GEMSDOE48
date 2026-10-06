@@ -66,9 +66,9 @@ def fmt(x, nd=4):
 
 def page(title: str, subtitle: str, body: str, active: str = "") -> str:
     nav = [
-        ("index.html", "Submission"),
-        ("executive-summary.html", "How to submit"),
-        ("research.html", "Why 0.2778 won"),
+        ("index.html", "Historical fusion"),
+        ("executive-summary.html", "Archived instructions"),
+        ("research.html", "Archived 0.2778 analysis"),
         ("hypotheses.html", "Hypotheses"),
         ("sources.html", "Sources"),
         ("irregularities.html", "Irregularities"),
@@ -90,10 +90,10 @@ def page(title: str, subtitle: str, body: str, active: str = "") -> str:
   <nav>{links}</nav>
 </div></header>
 <div class="namestrip"><div class="wrap">
-  <span class="ns-label">Unique submission name</span>
+  <span class="ns-label">Historical research artifact — NOT slot-cleared</span>
   <code class="ns-name">{esc(BUILD.get('unique_name','—'))}</code>
   <a class="ns-dl" download href="downloads/{esc(BUILD.get('files',{}).get('emission',{}).get('file',''))}">
-    ↓ Download the .tif</a>
+    ↓ Download for audit only — do not submit</a>
 </div></div>
 <div class="xlink"><div class="wrap">
   This is the <b>DS48 fusion</b> sub-site. The repository landing page is
@@ -105,8 +105,8 @@ def page(title: str, subtitle: str, body: str, active: str = "") -> str:
 <main class="wrap">
   <div class="hero"><h1>{esc(title)}</h1><p class="lead">{subtitle}</p></div>
   {body}
-  <footer><p>Built from <code>registry/</code> and <code>evidence/</code> by
-  <code>scripts/build_site.py</code>. Owner-reported scores are labelled
+  <footer><p>Historical sub-site rebuilt from <code>registry/</code> and <code>evidence/</code> by
+  <code>scripts/build_site_ds48.py</code>. Owner-reported scores are labelled
   <span class="badge amber">OWNER-REPORT</span>; local measurements are labelled
   <span class="badge blue">PROXY</span> or <span class="badge">DERIVED</span>.
   No organizer score exists for any artifact in this repository.</p></footer>
@@ -753,12 +753,12 @@ SOURCES = [
     ("DD-TEST", "Hidden test-source disclosure", "Organizer staff clarification", TESTSRC_THREAD,
      "Fault types and source coverage are not disclosed; expert assessment matters.",
      "Therefore do not assume the test faults are all Quaternary scarps or geothermal conduits."),
-    ("DD-LB", "Leaderboard snapshot", "Official page read (2026-10-02)",
+    ("DD-LB", "Leaderboard snapshot", "Official page reads (2026-10-02 and 2026-10-06)",
      DD_LEADERBOARD,
-     "#1 nchuzhoy 0.3262; #2 kinghorton42 0.3222; #3 DARD 0.3195. The brief's current top score "
-     "is 0.3195.",
-     "A snapshot is not permanent. Leaderboard reads are human snapshots: DrivenData's Terms of "
-     "Use prohibit automated access, so this repository never fetches it."),
+     "The 2026-10-02 snapshot listed #1 at 0.3195; the separate 2026-10-06 read listed "
+     "xiaofanhu at 0.3774 (#1) and DARD at 0.3195 (#7).",
+     "These are dated human snapshots, not permanent rankings. No artifact in this repository is "
+     "linked to a public row by TIFF hash, and this repository does not automate leaderboard access."),
     ("GDR-1391", "INGENIOUS / GDR submission 1391", "Official data portal", GDR,
      "The competition's feature stack originates here; TC means thermal conductivity.",
      "Not fetchable from this sandbox (HTTP 000)."),
@@ -923,12 +923,12 @@ IRREG = [
      "footprint boundary has a kernel that extends past it, and m(Θ) = (1−a₁)(1−a₂)/(1−K) is "
      "positive everywhere for reliabilities below 1. Only the <b>emission</b> is required to be "
      "empty outside the footprint, and it is (0 pixels)."),
-    ("IR-48-09", "open",
-     "The public leaderboard moved between reads: 0.3262 (nchuzhoy, 2026-10-04) and 0.3195 "
-     "(DARD, 2026-10-02) both appear as “top”.",
-     "Snapshots are dated, not authoritative. No artifact in this repository has an organizer "
-     "score, and this repository cannot fetch the leaderboard itself without breaching the "
-     "Terms of Use."),
+    ("IR-48-09", "disclosed, historical",
+     "Dated leaderboard reads differ: a 2026-10-06 snapshot showed xiaofanhu at 0.3774 (#1) "
+     "and DARD at 0.3195 (#7), while an earlier 2026-10-02 snapshot showed a different top row.",
+     "Snapshots are not permanent. No artifact in this repository is linked to a public row by "
+     "TIFF hash, no local artifact has an organizer score, and this repository does not automate "
+     "leaderboard access."),
 ]
 
 
