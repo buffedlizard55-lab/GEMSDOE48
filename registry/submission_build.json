@@ -1,5 +1,5 @@
 {
-  "generated_unix": 1791320648,
+  "generated_unix": 1791320899,
   "unique_name": "GEMSDOE48-DS48-FUSION",
   "portal_note": "GEMSDOE48-DS48-FUSION | base mass 37,654 px ranked by Dempster-Shafer combined belief, off-flank (>=200 m from the published catalogue); all-finite [0,1]; UNSCORED",
   "reliability": {
@@ -164,12 +164,12 @@
     "base_live_02778": {
       "n": 37654,
       "catalogue_all": {
-        "dti": 0.006709118968955161,
+        "dti": 0.00670911896895528,
         "tpw": 377.999896771064,
         "coverage": 0.006197938885863842
       },
       "sgmc_off_catalogue": {
-        "dti": 0.0961324559851701,
+        "dti": 0.09613245598517174,
         "tpw": 5639.032457275527,
         "coverage": 0.08933686819403253
       }
@@ -177,12 +177,12 @@
     "ds_emission": {
       "n": 37654,
       "catalogue_all": {
-        "dti": 0.024126177348963728,
+        "dti": 0.024126177348964155,
         "tpw": 1362.0691853673661,
         "coverage": 0.022333396493857252
       },
       "sgmc_off_catalogue": {
-        "dti": 0.09068290227117388,
+        "dti": 0.09068290227117543,
         "tpw": 5313.851344974791,
         "coverage": 0.08418515779177754
       }
@@ -290,5 +290,5 @@
     ],
     "evidence_class": "PROXY + DERIVED"
   },
-  "elapsed_s": 12.665966987609863
+  "elapsed_s": 13.549606323242188
 }
