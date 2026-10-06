@@ -1,118 +1,129 @@
-# GEMSDOE48 — auditable, conflict-aware GEMS research candidate
+# GEMSDOE48 — auditable Dempster-Shafer fault-surface research
 
-> **Current decision: research artifact only — not scored, not organizer-validated, and not cleared for a weekly submission slot.** The public-owner-mirror blocked diagnostic is not the competition's private expert-label validation. Do not submit this TIFF unless it later beats the current spatially blocked best under the leakage-aware gate documented below.
+> **Decision: no weekly submission slot is cleared.** Under one consistent four-block/core-plus-halo evaluator, the `rho=0.5` candidate improves over dotted-only on the catalogue proxy but loses to tip/stepover, the arithmetic mean, and the prior full-union decision. On SGMC off-catalogue faults it loses to both parents, the mean, and the prior union in every block. The old main-branch report used different quadrant semantics; the prior union is rescored alongside the candidate below. No result is private-label or organizer score.
 
-## Executive summary and download
+## Executive summary and downloads
 
-**Executive project page:** [`docs/index.html`](docs/index.html).
+GEMSDOE48 combines the public owner-mirror dotted and tip/step-over candidate families with reliability-discounted Dempster-Shafer mass assignments. It exports a graded belief raster plus separate residual-ignorance and raw-conflict diagnostics. A prior main-branch implementation also explored a full-confidence union decision surface; that historical result is retained and discussed below, not silently treated as a cleared submission.
 
-GEMSDOE48 tests whether two distinct sparse fault-candidate families can be combined without deleting one-family detections or hiding where they disagree. It discounts each binary source opinion by a preregistered symmetric reliability factor `rho = 0.5`, applies normalized Dempster combination, and exports the raw conflict `K` and residual unassigned mass as separate diagnostic rasters.
+- **Current research artifact:** `GEMSDOE48-DS-FUSION-20261006`
+- **One-click candidate:** [`GEMSDOE48-DS-conflict-aware-fusion-20261006.tif`](docs/downloads/GEMSDOE48-DS-conflict-aware-fusion-20261006.tif)
+- **Current diagnostics:** [`unassigned mass m(Theta)`](docs/downloads/GEMSDOE48-unassigned-mass-20261006.tif) · [`raw conflict K`](docs/downloads/GEMSDOE48-raw-conflict-K-20261006.tif)
+- **Executive site:** [`docs/index.html`](docs/index.html)
+- **Build receipt / SHA-256s:** [`evidence/build_receipt_20261006.json`](evidence/build_receipt_20261006.json)
+- **Independent local format audit:** [`evidence/submission_validation_20261006.json`](evidence/submission_validation_20261006.json)
+- **Catalogue + SGMC-proxy blocked diagnostics, with identical fold semantics:** [`evidence/holdout_20261006.json`](evidence/holdout_20261006.json)
+- **Previous main-branch union artifact:** linked from the [historical result record](docs/validation.html); it is not the current candidate.
 
-- **Candidate name:** `GEMSDOE48-DS-FUSION-20261006`
-- **Download candidate GeoTIFF:** [`GEMSDOE48-DS-conflict-aware-fusion-20261006.tif`](docs/downloads/GEMSDOE48-DS-conflict-aware-fusion-20261006.tif)
-- **Paste-ready competition note (129 characters):**
+**Paste-ready note (129 characters):**
 
-  `GEMSDOE48 DS fusion | H33-2-B2 dotted + H33-D tip/step-over; rho=0.5; conflict/ignorance diagnostic; unscored research candidate.`
+`GEMSDOE48 DS fusion | H33-2-B2 dotted + H33-D tip/step-over; rho=0.5; conflict/ignorance diagnostic; unscored research candidate.`
 
-- **Separate diagnostics:** [`unassigned mass m(Theta)`](docs/downloads/GEMSDOE48-unassigned-mass-20261006.tif) · [`raw conflict K`](docs/downloads/GEMSDOE48-raw-conflict-K-20261006.tif)
-- **Build receipt / file hashes:** [`evidence/build_receipt_20261006.json`](evidence/build_receipt_20261006.json)
-- **Local format audit:** [`evidence/submission_validation_20261006.json`](evidence/submission_validation_20261006.json)
-- **Holdout diagnostic:** [`evidence/holdout_20261006.json`](evidence/holdout_20261006.json)
+The current TIFF uses one `float32` band, EPSG:32611, 100 m pixels, the documented 3,730 × 3,292 grid, finite in-footprint values in `[0,1]`, and NaN/nodata outside the valid footprint. The output was re-opened and audited locally; organizer portal acceptance has not been tested. The earlier alpha=.99 decision file encodes zeros outside, which is all-finite but does not follow the challenge page's explicit null/NaN-outside wording as closely as this file.
 
-The GeoTIFF follows the official template convention: one `float32` band, EPSG:32611, 100 m pixels, the documented competition grid, finite in-footprint values in `[0,1]`, and `NaN`/NaN-nodata outside the valid footprint. This is a local file audit—not proof that the organizer's upload service will accept it. The in-footprint fault layer is not min–max stretched; its values retain their Dempster-belief interpretation under the stated assumptions.
+## Starting prompt and project requirements
 
-## User's project prompt — faithful restatement
+The starting brief is to autonomously build an auditable GEMS competition project; review the repository and prior work; combine the dotted-family and fault-tip/stepover surfaces with an evidence method that preserves disagreement; and generate a unique, downloadable competition-grid GeoTIFF plus separate uncertainty/disagreement diagnostics. Before any weekly submission, preregister three to five geological hypotheses with layers, physical signatures, off-catalogue rationale, differences from prior methods, ranked expected DTI/cost, verified free-data availability, and spatially blocked validation of the leading candidate. Include a project brief and repeat-use instructions, executive summary and one-click download, a unique name and paste-ready note, cited sources/limitations, at least three review passes, and a PR merged to `main` if feasible. Do not use a weekly submission slot unless a candidate beats the current spatially blocked best. Work autonomously, verify carefully, flag irregularities, and do not overstate uncertain evidence.
 
-The starting brief for this repository is to autonomously build an auditable GEMS competition project from the repository and prior work; combine the dotted-family and fault-tip/stepover candidate surfaces with an evidence method that preserves disagreement; and produce a unique, downloadable, competition-format GeoTIFF plus a separate uncertainty/disagreement diagnostic. Before using a submission slot, preregister three to five geological hypotheses, their data layers and physical signatures, why each could find off-catalogue faults, how it differs from prior methods, a ranked expected DTI/cost assessment, verified free-data availability, and spatially blocked holdout validation of the leading candidate. Include a project brief and repeat-use instructions, an executive summary and one-click download, a unique name and paste-ready note, cited sources and limitations, and at least three review passes. Do not use a weekly slot unless the new candidate beats the current spatially blocked best. Work autonomously, prioritize the chance of winning and ownership of the result, verify claims carefully, and flag irregularities. Merge a PR to `main` if feasible.
+This is a faithful restatement of the requirements retained in this session, not a claim that the paragraph reproduces the original prompt word-for-word. The frozen H48 slate is in [`docs/research/hypotheses-20261006.md`](docs/research/hypotheses-20261006.md) and [`evidence/hypothesis_slate_20261006.json`](evidence/hypothesis_slate_20261006.json). The earlier main branch also contained a separate H49 agenda, preserved in [`docs/archive-main-pages/hypotheses-main-20261006.html`](docs/archive-main-pages/hypotheses-main-20261006.html); those candidates remain proposals, not validated results.
 
-This is a faithful restatement of the requirements retained in the working session, not a claim that this paragraph reproduces the original prompt verbatim. The ranked slate was frozen before implementation and holdout scoring in [`docs/research/hypotheses-20261006.md`](docs/research/hypotheses-20261006.md) and [`evidence/hypothesis_slate_20261006.json`](evidence/hypothesis_slate_20261006.json).
+## Validation results and slot decision
 
-## Decision gate and evidence status
+### Current `rho=0.5` candidate (four fixed quadrants, catalogue-label proxy)
 
-**No submission slot is cleared.** The input surfaces and labels currently available here came from public third-party owner mirrors, not the competition organizer. The two source surfaces are frozen upstream artifacts; they were not rebuilt independently for each spatial fold, and their generation has used catalogue information or prior catalogue-derived artifacts. A score on these fixed surfaces against mirrored public labels would therefore be conditional and potentially leaky. The label raster is a catalogue proxy, not the private faults manually identified by competition experts. The owner mirrors' reusable license terms were not verified; hash pinning is not permission. Confirm applicable rights before any external submission or redistribution. No holdout result is a leaderboard estimate.
+| Candidate | NW | NE | SW | SE | Mean DTI |
+|---|---:|---:|---:|---:|---:|
+| Dotted input | 0.006140 | 0.008567 | 0.007524 | 0.005091 | 0.006831 |
+| Tip/stepover input | 0.082720 | 0.102030 | 0.089601 | 0.072930 | **0.086820** |
+| Arithmetic mean | 0.0439999 | 0.054671 | 0.048245 | 0.038710 | 0.046406 |
+| Discounted Dempster belief | 0.030871 | 0.038664 | 0.033773 | 0.027043 | 0.032588 |
 
-The official leaderboard was read once on 2026-10-06 UTC. That snapshot showed `xiaofanhu` at 0.3774 (#1), `alexoktaba` at 0.3345 (#2), `nchuzhoy` at 0.3262 (#3), and DARD at 0.3195 (#7); it did **not** show 0.3195 as the highest. The displayed 0.2778 row was `extradr19` (#13, 10 submissions). The local H33-2-B2 receipt says “UNSCORED”; no organizer evidence links it to the 0.2778 row. See [`docs/irregularities.md`](docs/irregularities.md). No automatic leaderboard monitor was built.
+The fusion improves on dotted-only (+0.025757 mean, 4/4 folds) but loses to tip/stepover (−0.054232, 0/4) and arithmetic mean (−0.013819, 0/4). It **fails the preregistered gate**.
 
-A numeric proxy pass, if any, is necessary but not sufficient. Promotion requires positive paired mean DTI and improvement on at least 3 of 4 fixed blocks versus **each** source input, plus a leakage-free, fold-independent source rebuild and a validation target appropriate to the competition. If that cannot be done, retain this as an unscored research artifact and do not spend a weekly slot.
+### Second proxy: SGMC off-catalogue faults under the same blocked protocol
 
-The preregistered four-quadrant diagnostic **failed**: mean DTI was 0.032588 for fusion versus 0.086820 for tip/stepover and 0.046406 for arithmetic mean. Fusion lost to both comparators in all four blocks (deltas −0.054232 and −0.013819 respectively); it improved over dotted-only by +0.025757 in 4/4 blocks. This is a conditional, potentially leaky catalogue-proxy measurement, not a competition score. **Do not use a weekly slot for this candidate.** Full fold-by-fold results and caveats: [`docs/research/holdout-results-20261006.md`](docs/research/holdout-results-20261006.md).
+The SGMC owner-mirror raster supplies 61,664 positive cells after excluding SGMC cells within 300 m of a positive public-catalogue cell. The very same quadrants, 300 m score halo, core-only truth, metric, and frozen candidate surfaces are used for each method:
 
-## Geological research slate
+| Candidate | NW | NE | SW | SE | Mean DTI |
+|---|---:|---:|---:|---:|---:|
+| Dotted input | 0.101822 | 0.095184 | 0.107461 | 0.073546 | 0.094503 |
+| Tip/stepover input | 0.101429 | 0.096184 | 0.106455 | 0.073898 | 0.094491 |
+| Arithmetic mean | 0.096056 | 0.088763 | 0.097484 | 0.069061 | 0.087841 |
+| Prior full-union decision | 0.102528 | 0.098529 | 0.106520 | 0.076252 | **0.095957** |
+| `rho=0.5` discounted Dempster belief | 0.074815 | 0.067592 | 0.079382 | 0.052506 | 0.068574 |
 
-The five hypotheses below were preregistered; expected DTI is qualitative or explicitly unknown, not fabricated. Full layer descriptions, signatures, rationales, costs, source checks, distinctions from prior methods, and the frozen gate are in the slate.
+The fusion's paired mean delta is −0.025929 vs dotted (0/4 positive), −0.025918 vs tip/stepover (0/4), −0.019267 vs arithmetic mean (0/4), and −0.027383 vs the prior union decision (0/4). This second conditional proxy also rejects the fusion for promotion. The SGMC surface is a public-map proxy, not private expert truth; the candidate source rasters remain frozen upstream products and were not independently reconstructed per fold.
 
-| Rank | Candidate hypothesis | Expected DTI / cost | Verified-data status |
-|---:|---|---|---|
-| 1 | H48-1: discounted conflict-aware fusion of dotted and tip/stepover candidate surfaces | Unknown; low implementation cost | Two owner-mirror inputs hash-verified; neither organizer-authenticated |
-| 2 | H48-2: stratigraphic-contact topology and geophysical-break coincidence | Potentially moderate; medium-high cost | Official USGS GeMS/SGMC metadata listed; data payload and exact coverage not yet audited |
-| 3 | H48-3: persistent OPERA InSAR displacement-gradient discontinuities | Low-moderate public-label DTI potential; high cost | NASA catalog/access metadata checked; no granules or footprint counts downloaded; Earthdata Login required |
-| 4 | H48-4: 3D hydrography channel-profile breaks and offsets | Low-moderate, terrain-dependent; medium cost | Official USGS NHDPlus HR/3DEP product pages checked; footprint coverage not audited |
-| 5 | H48-5: Great Basin favorability plus ensemble spread as a structural search prior | Unknown, likely low-moderate public DTI; high cost | Official USGS release metadata checked; ~1.22 GB package not downloaded; favorability is not fault truth |
+See [`docs/research/holdout-results-20261006.md`](docs/research/holdout-results-20261006.md) for exact fold semantics, the full candidate set, and limitations.
 
-The external hypotheses are research candidates, not production layers. Availability was checked at official catalog/product pages, but exact overlap with the competition grid remains unverified. See [`docs/sources.md`](docs/sources.md) and the cited links in the hypothesis slate.
+### Previously merged `alpha=0.99` work (historical pooled experiment)
 
-## Method, outputs, and assumptions
+The previous main-branch experiment tested an `alpha=0.99` normalized DS belief and a binary full-union decision on SGMC faults more than 300 m from the catalogue. Its pooled tier sweep reported 0.096047 for the union/full-confidence tier versus 0.093965 dotted and 0.094245 tip; its normalized-belief gate is explicitly `PASS_offcat_blocked: false`. The earlier quadrant evaluator masked truth to one quadrant but retained full-grid predictions, so its fold scores are not comparable to the current core-plus-halo scores and must not be used as an independent holdout. This implementation rescored the same union decision, its normalized alpha=.99 belief, both parents, the arithmetic mean, and the rho=.5 candidate with identical current fold semantics. On SGMC off-catalogue truth, union mean DTI is 0.095957; the rho=.5 candidate is 0.068574 and loses to union in all four folds (mean paired delta −0.027383). The previous tier sweep and outputs remain preserved in [`evidence/round2_tier_sweep.json`](evidence/round2_tier_sweep.json), [`evidence/holdout_validation.json`](evidence/holdout_validation.json), and [`evidence/build_submission.json`](evidence/build_submission.json). No weekly slot is cleared.
 
-For each source surface `p_i`, the fixed binary-frame mass assignment is:
+### Interpretation limits
+
+- The current holdout uses two public-map proxies: a third-party mirror of existing public catalogue labels and the SGMC raster filtered to cells more than 300 m from that catalogue. Neither is the private expert-labelled competition target.
+- Both source families are frozen upstream artifacts and were not rebuilt independently per fold. The H33-2-B2 owner audit describes a full-catalogue proximity prune; spatial-block results are therefore conditional and potentially leaky.
+- The owner mirrors are not organizer-authenticated and their reusable license terms have not been verified. Hash pinning establishes byte identity only; confirm rights before external submission or redistribution.
+- No organizer score, hidden-test score, or projected leaderboard score is claimed.
+
+## Leaderboard and attribution irregularities
+
+The official page was read once on **2026-10-06 UTC**. It showed `xiaofanhu` at 0.3774 (#1), `alexoktaba` at 0.3345 (#2), `nchuzhoy` at 0.3262 (#3), and DARD at 0.3195 (#7)—not 0.3195 as the highest. The displayed 0.2778 row belonged to `extradr19` (#13, 10 submissions). The local H33-2-B2 receipt says “UNSCORED”; no organizer evidence links it to that 0.2778 row. The H33-D 0.2632 value is an owner-reported claim, not an authenticated file-level score. See [`docs/irregularities.md`](docs/irregularities.md). No leaderboard monitor or scraping job is included.
+
+## Method and assumptions
+
+For source value `p_i`, the current preregistered symmetric discount is `rho=0.5`:
 
 - `m_i(F) = rho * p_i`
 - `m_i(not F) = rho * (1 - p_i)`
-- `m_i(Theta) = 1 - rho`, with `rho = 0.5`
+- `m_i(Theta) = 1 - rho`
 
-The discounted source masses are combined with the normalized Dempster rule. Raw conjunctive conflict is separately recorded as `K = m1(F)m2(not F) + m1(not F)m2(F)`. It is a diagnostic **before** normalization, not mass retained by canonical Dempster combination. The unassigned `m(Theta)` after normalization is the uncertainty layer. For the binary source masks at `rho=0.5`, positive agreement yields fault belief `0.75`; a one-source-only detection yields `1/3` fault belief, `1/3` residual ignorance, and `K=0.25`; negative agreement yields zero fault belief and `0.25` ignorance.
+The normalized Dempster result carries `m(F)`, `m(not F)`, and residual `m(Theta)`. Raw conjunctive conflict `K = m1(F)m2(not_F) + m1(not_F)m2(F)` is exported separately; it is conflict before normalization, not mass retained as ignorance by the canonical normalized rule. Positive agreement gives `m(F)=0.75`; one-source-only support gives `m(F)=1/3`, `m(Theta)=1/3`, `K=0.25`; negative agreement gives zero fault belief and 0.25 ignorance.
 
-Material assumptions and limitations:
+The previous main-branch model used alpha=.99 and max-normalized belief, then separately tested full-union emission. It is retained as prior work, not conflated with the `rho=.5` candidate. The two surfaces share 31,614 positive cells (Jaccard 0.659931); dependence is possible. Both are sparse binary emissions rather than calibrated probabilities, so treating zero as counter-evidence is an assumption. `rho=0.5` is fixed before holdout, not estimated reliability. Full formulas and diagnostics are in `src/gemsdoe48/evidence.py` and `scripts/build_submission.py`.
 
-1. The inputs are treated as operational opinions even though they are sparse binary emissions, not calibrated probabilities. A zero may mean “not emitted”, not evidence of no fault.
-2. `rho=0.5` is a disclosed symmetric discount chosen to avoid singular total conflict—not an empirically estimated reliability.
-3. The sources share 31,614 positive cells (Jaccard 0.6599) and may share a backbone; statistical independence is not assumed.
-4. The surface is a fusion of existing candidate artifacts, not a new independently validated geology model. It may fail to improve DTI or discover novel faults.
-5. `K` does not remain unassigned under the normalized Dempster rule. It is reported in its own raster so disagreement remains inspectable.
+## Preregistered geological hypotheses
 
-The exact implementation and formulas live in `src/gemsdoe48/evidence.py`; the challenge metric is reproduced in `src/gemsdoe48/metric.py`. Metric equations and file requirements were checked against the [official challenge page](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/).
+The ranked H48 list was frozen before this branch's implementation and scoring; expected DTI is qualitative/unknown where data do not support a number.
 
-## Reproduce the project
+| Rank | Hypothesis | Expected DTI / cost | Data availability checked |
+|---:|---|---|---|
+| 1 | H48-1: conflict-aware fusion of existing candidate surfaces | Unknown; low cost | Two owner-mirror surfaces hash-verified; not organizer-authenticated |
+| 2 | H48-2: stratigraphic contact topology plus magnetic/gravity breaks | Potentially moderate; medium-high cost | Official USGS GeMS/SGMC catalog metadata checked; payload/coverage not audited |
+| 3 | H48-3: OPERA InSAR displacement-gradient discontinuities | Low-moderate potential; high cost | NASA catalog checked; Earthdata Login required; no granules downloaded |
+| 4 | H48-4: hydrography channel-profile breaks plus 3DEP | Terrain-dependent; medium cost | Official USGS pages checked; footprint coverage unaudited |
+| 5 | H48-5: geothermal favorability plus ensemble spread | Unknown; high cost | Official USGS release metadata checked; large package not downloaded; favorability is not fault truth |
 
-Requires Python 3.10+ and GDAL-compatible Rasterio wheels. The scripts use only public, hash-pinned GitHub owner-mirror files for the conditional catalogue-proxy diagnostic; they do not log into or download from DrivenData.
+The archived H49 agenda is in `docs/archive-main-pages/hypotheses-main-20261006.html`; it is prior art for this project, not a second preregistration for H48. Full source and limitation details are in [`docs/sources.md`](docs/sources.md).
+
+## Reproduce
+
+Requires Python 3.11+ and Rasterio-compatible GDAL wheels. The repository contains small, hash-pinned owner-mirror inputs under `data/raw/`; these are not organizer-authenticated. The build scripts verify the expected hashes.
 
 ```bash
 python -m venv .venv
 . .venv/bin/activate
 python -m pip install -e '.[test]'
 
-# Restore public owner-mirror labels/template; every downloaded file is SHA-256 checked.
-python scripts/restore_proxy_labels.py
-
-# Only the template's finite mask is used. The sample pixel values are never labels.
-# The mask is compared cell-by-cell against the mirrored labels' nodata mask.
-python scripts/build_footprint_mask.py
-
-# Unit tests, then build the unique submission and its two diagnostics.
-pytest
-python scripts/build_submission.py
-python scripts/validate_submission.py \
-  --receipt evidence/submission_validation_20261006.json
-
-# Conditional diagnostic against existing public catalogue labels. This does not clear a slot.
-python scripts/run_spatial_holdout.py
+python scripts/restore_candidate_surfaces.py  # hash-pinned public owner mirrors
+python scripts/restore_proxy_labels.py        # public labels/template mirrors only
+python scripts/build_footprint_mask.py        # template mask; compares label footprint
+python -m pytest -q                           # unit tests, no hidden labels required
+python scripts/build_submission.py             # rho=.5 candidate + diagnostics
+python scripts/validate_submission.py --receipt evidence/submission_validation_20261006.json
+python scripts/run_spatial_holdout.py          # catalogue + SGMC proxy blocks; no slot decision
 ```
 
-The hash-pinned source surfaces are restored into `data/source_mirrors/`; public proxy labels/template live in the ignored `data/proxy/`; and the derived footprint mask is reproducible and ignored. The small requested submission and diagnostic TIFFs are shipped in `docs/downloads/`, with their hashes and provenance in the tracked receipts. The mirror files are not silently bundled or redistributed by this repository. Re-running with the same pinned inputs, mask, parameters, Python numerical stack, and script version reproduces the same pixel values; file bytes may differ with GeoTIFF/GDAL versions.
-
-## Review record
-
-Review passes, including formula, provenance, leakage, and output-format checks, are recorded in [`evidence/review_passes_20261006.md`](evidence/review_passes_20261006.md). The project requires a new review if input hashes, fusion parameters, mask, metric implementation, output format, or slot decision changes.
+The historical alpha=.99 builder is preserved separately as `scripts/previous_build_submission.py`; it is not the default. Build and holdout receipts are dated and hash-pinned. Four review passes—including compatibility and like-for-like SGMC re-evaluation after main advanced—are recorded in [`evidence/review_passes_20261006.md`](evidence/review_passes_20261006.md).
 
 ## Sources
 
-- Official competition brief, metric, and required GeoTIFF format: <https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/>
-- Official leaderboard, one read on 2026-10-06 UTC: <https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/>
-- DrivenData Terms of Use: <https://www.drivendata.org/termsofuse/> (no automated leaderboard monitoring; no further data scraping is implemented)
-- Official USGS GeMS/SGMC catalog: <https://doi.org/10.5066/P1A3DQZK>
-- NASA OPERA DISP-S1 catalog: <https://www.earthdata.nasa.gov/data/catalog/asf-opera-l3-disp-s1-v1-1>
-- USGS NHD product access: <https://www.usgs.gov/national-hydrography/access-national-hydrography-products>
-- USGS 3DEP: <https://www.usgs.gov/3d-elevation-program/about-3dep-products-services>
-- USGS Great Basin geothermal favorability: <https://www.usgs.gov/data/geothermal-resource-favorability-select-features-and-predictions-united-states-great-basin>
-- USGS Great Basin heat-flow catalog: <https://www.sciencebase.gov/catalog/item/6297d2fad34ec53d276c5b28>
-- Official forum topic on hidden-label interpretation: <https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516>
-- Third-party owner mirrors (not organizer-authenticated): <https://github.com/buffedlizard55-lab/GEMSDOE32>, <https://github.com/buffedlizard55-lab/GEMSDOE33>, pinned label/template mirror commit [`07345ea`](https://github.com/buffedlizard55-lab/GEMSDOE24/tree/07345ea0604953d7efb858d9cfbc21e20c7aca0b).
+- [Official challenge page: metric, labels, and submission format](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/)
+- [Official leaderboard](https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/) (single read 2026-10-06 UTC; no monitor)
+- [DrivenData Terms of Use](https://www.drivendata.org/termsofuse/)
+- [USGS GeMS/SGMC DOI 10.5066/P1A3DQZK](https://doi.org/10.5066/P1A3DQZK)
+- [NASA OPERA DISP-S1](https://www.earthdata.nasa.gov/data/catalog/asf-opera-l3-disp-s1-v1-1)
+- [USGS NHD product access](https://www.usgs.gov/national-hydrography/access-national-hydrography-products) · [USGS 3DEP](https://www.usgs.gov/3d-elevation-program/about-3dep-products-services)
+- [USGS Great Basin favorability DOI 10.5066/P14EET2C](https://www.usgs.gov/data/geothermal-resource-favorability-select-features-and-predictions-united-states-great-basin)
+- Third-party owner mirrors and file hashes: [`docs/sources.md`](docs/sources.md)

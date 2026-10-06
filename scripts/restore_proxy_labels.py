@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Restore hash-pinned public owner mirrors for a catalogue-proxy holdout.
+"""Restore hash-pinned public owner-mirror catalogue labels and sample template.
 
-This script does NOT contact DrivenData. The mirrors below are not organizer-
-authenticated; hashes establish equality with the named public GitHub commit only.
+This script does NOT contact DrivenData. The mirrors are not organizer-authenticated;
+hashes establish equality with the named public GitHub commit only.
 """
 from __future__ import annotations
 
@@ -17,12 +17,12 @@ ROOT = Path(__file__).resolve().parents[1]
 REPO = "buffedlizard55-lab/GEMSDOE24"
 REF = "07345ea0604953d7efb858d9cfbc21e20c7aca0b"
 FILES = {
-    "labels.tif": {
+    "labels_catalogue.tif": {
         "path": "data/bridge/labels.tif",
         "bytes": 425830,
         "sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
     },
-    "sample_submission.tif": {
+    "sample_submission_template.tif": {
         "path": "data/bridge/sample_submission.tif",
         "bytes": 1599597,
         "sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
@@ -68,7 +68,7 @@ def fetch(path: str, destination: Path) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--data-dir", type=Path, default=ROOT / "data" / "proxy")
+    parser.add_argument("--data-dir", type=Path, default=ROOT / "data/raw")
     args = parser.parse_args()
     args.data_dir.mkdir(parents=True, exist_ok=True)
     for name, record in FILES.items():

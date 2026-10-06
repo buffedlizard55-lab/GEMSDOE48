@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Validation · blocked holdout · GEMSDOE48</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>Validation — spatially-blocked holdout before touching a slot</h1>
+    <p>The standing rule: no submission candidate spends a weekly slot without beating the
+    incumbent on the blocked holdout. Every number below was computed in this repo with the
+    official metric implemented verbatim from the problem page.</p>
+  </div>
+</header>
+<nav><div class="wrap">
+  <a href="../index.html">Overview &amp; download</a>
+  <a href="../executive-summary.html">Executive summary / how to submit</a>
+  <a href="../method.html">Method</a>
+  <a class="active" href="../validation.html">Validation</a>
+  <a href="../hypotheses.html">Next hypotheses</a>
+  <a href="../sources.html">Sources</a>
+  <a href="../irregularities.html">Irregularities</a>
+</div></nav>
+
+<div class="wrap">
+
+<h2 class="sec">Instruments</h2>
+<table>
+  <tr><th>Instrument</th><th>Truth</th><th>Size</th><th>Status</th></tr>
+  <tr><td>Metric</td><td>official distance-weighted Tversky: TPw, FPw, FNw with triangular kernel
+      R=300 m; α=0.2, β=0.8; graded predictions</td><td>—</td>
+      <td>verbatim from problem page; 8/8 unit tests (hand-computed cases + literal-transcription
+      cross-validation + worked-example arithmetic TPw=3.00 FPw=1.89 FNw=2.00 → 0.60)</td></tr>
+  <tr><td>Catalogue-gap proxy</td><td>official label raster (owner mirror sha256
+      <span class="mono">7ba308cc…</span>)</td><td class="num">60,988 px</td>
+      <td>KNOWN LIMIT: rewards coverage of already-known faults; anti-predictive for
+      off-catalogue playbooks (see below)</td></tr>
+  <tr><td>SGMC off-catalogue proxy</td><td>USGS State Geologic Map Compilation faults
+      (mrdata.usgs.gov, public domain) rasterized to the grid, restricted to cells &gt;300 m from
+      the catalogue — the only populated off-catalogue fault population in reach</td>
+      <td class="num">61,664 px</td>
+      <td>reproduced exactly from the GEMSDOE30 derivation (82,151 SGMC px in footprint →
+      61,664 off-cat; matches the published sibling numbers bit-for-bit)</td></tr>
+  <tr><td>Blocking</td><td>4 spatial quadrants (2×2) per truth set, plus pooled full-region scoring</td>
+      <td>—</td><td>blocked truth pixels only; candidates are fixed surfaces (nothing refit)</td></tr>
+</table>
+
+<h2 class="sec">Result 1 — blocked quadrants (off-catalogue SGMC truth)</h2>
+<table>
+  <tr><th>arm</th><th class="num">Q_NW</th><th class="num">Q_NE</th><th class="num">Q_SW</th><th class="num">Q_SE</th><th class="num">pooled</th></tr>
+  <tr><td>A dotted h33-2-b2 (live 0.2778)</td><td class="num">0.0867</td><td class="num">0.0746</td><td class="num">0.0328</td><td class="num">0.0476</td><td class="num">0.0940</td></tr>
+  <tr><td>B tip h33d (live 0.2632)</td><td class="num">0.0851</td><td class="num">0.0739</td><td class="num">0.0310</td><td class="num">0.0462</td><td class="num">0.0942</td></tr>
+  <tr><td>C naive mean (A+B)/2</td><td class="num">0.0812</td><td class="num">0.0689</td><td class="num">0.0290</td><td class="num">0.0439</td><td class="num">0.0880</td></tr>
+  <tr><td>D union binary — <b>DS support, full confidence (SHIPPED)</b></td><td class="num">0.0844</td><td class="num">0.0736</td><td class="num">0.0292</td><td class="num">0.0454</td><td class="num"><b>0.0960</b></td></tr>
+  <tr><td>E intersection binary</td><td class="num">0.0783</td><td class="num">0.0644</td><td class="num">0.0294</td><td class="num">0.0427</td><td class="num">0.0806</td></tr>
+  <tr><td>F graded DS belief (normalized)</td><td class="num">0.0812</td><td class="num">0.0688</td><td class="num">0.0290</td><td class="num">0.0439</td><td class="num">0.0880</td></tr>
+  <tr><td>G DS belief &gt; 0.5</td><td class="num">0.0783</td><td class="num">0.0644</td><td class="num">0.0294</td><td class="num">0.0427</td><td class="num">0.0806</td></tr>
+</table>
+<p class="small">Full evidence: <span class="mono">evidence/holdout_validation.json</span>.
+Note the quadrant-vs-pooled reversal: the DTI is a ratio over the whole truth set and is not the
+mean of its block-wise values (kernel credit crosses block borders and the FP budget pools).
+Live scoring is pooled over the entire hidden set, so the pooled column is the decision-relevant
+instrument; block columns are shown for transparency and spatial-robustness checking.</p>
+
+<h2 class="sec">Result 2 — tier sweep (pooled off-catalogue)</h2>
+<p>Intersection dots held at 1.0; single-source (disagreement) tier value swept:</p>
+<table>
+  <tr><th>singleton tier value</th><th class="num">0.25</th><th class="num">0.50</th><th class="num">0.66</th><th class="num">0.75</th><th class="num">0.90</th><th class="num">1.00</th></tr>
+  <tr><th>off-cat DTI</th><td class="num">0.0843</td><td class="num">0.0880</td><td class="num">0.0906</td><td class="num">0.0921</td><td class="num">0.0945</td><td class="num"><b>0.0960</b></td></tr>
+</table>
+<p>Strictly monotone → ship the DS support at full confidence. The graded belief file
+(= singleton tier 0.4975) remains available as the literal evidential surface, but the holdout
+says hedging the disagreement dots costs ≈ 0.008 DTI on this proxy.</p>
+
+<h2 class="sec">Result 3 — the gate decision, honestly</h2>
+<ul>
+  <li><b>Graded DS belief (F) vs parents, blocked off-catalogue:</b> F does <span class="lose">not</span> beat
+  either parent in the 4 quadrants (0/4). Under the literal gate, the graded belief file alone
+  would not earn the slot.</li>
+  <li><b>DS support at full confidence (D) vs parents, pooled off-catalogue:</b>
+  <span class="win">0.0960 vs 0.0940 (A) and 0.0942 (B)</span> — the union of the two families is the
+  best-supported emission we can build from them. This is the shipped primary.</li>
+  <li><b>Intersection-only (E/G):</b> worst arm (0.0806). Over-pruning confirmed: β=0.8 punishes
+  dropping truth that either family sees.</li>
+  <li><b>Catalogue proxy:</b> ranks B ≈ D &gt; F ≫ A (A scores 0.0067). This ordering is known to be
+  anti-predictive for this playbook — A scored <b>0.2778 live</b> while ranking last here — so the
+  catalogue proxy is reported, never used for selection.</li>
+</ul>
+
+<h2 class="sec">Result 4 — leakage &amp; format audit of the shipped file</h2>
+<table>
+  <tr><td>emitted dots on the public catalogue</td><td class="num">0</td></tr>
+  <tr><td>minimum distance emitted dot → catalogue</td><td class="num">100 m (tip-protected dots)</td></tr>
+  <tr><td>single band / float32 / EPSG:32611 / exact transform</td><td>✅ ✅ ✅ ✅</td></tr>
+  <tr><td>cells finite / NaN / outside [0,1]</td><td class="num">12,279,160 / 0 / 0</td></tr>
+  <tr><td>nodata tag</td><td>none (sentinel-tag immunity)</td></tr>
+</table>
+
+<h2 class="sec">Limits of this validation (flagged, not hidden)</h2>
+<ul>
+  <li>Both truth sets are <b>proxies</b>. The hidden set is expert-mapped faults deliberately
+  absent from every public compilation; SGMC off-catalogue cells resemble that population but are
+  not it. Proxy DTI values (≈0.09) are not comparable in magnitude to live scores (≈0.26–0.28);
+  only within-proxy orderings are evidence.</li>
+  <li>Pooled deltas of ≈0.002 sit inside the noise band of the sibling programs' Monte-Carlo
+  instruments (±0.003–0.005). The tier-sweep monotonicity and the intersection collapse
+  (−0.013) are well outside it; the parent-vs-union margin is a directional, not a certified,
+  statement.</li>
+  <li>No organizer score exists for anything on this site until the file is submitted.</li>
+</ul>
+
+<footer>GEMSDOE48 · <span class="mono">scripts/validate_holdout.py</span>,
+<span class="mono">scripts/round2_tier_sweep.py</span> · receipts in
+<span class="mono">evidence/</span></footer>
+</div>
+<div class="wrap" style="margin-top:1rem;padding:1rem;border:2px solid #b65c00;background:#fff3dc;color:#33220d"><strong>Historical archive.</strong> This page is preserved from the earlier upstream pipeline and may contain superseded claims. See the current <a href="../index.html">GEMSDOE48 report</a> and <a href="../validation.html">blocked-fold validation</a> before relying on any conclusion.</div>
+</body>
+</html>

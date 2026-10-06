@@ -22,7 +22,7 @@ These sources were checked at the catalog/product-page level. They are candidate
 
 ## Local source surfaces and public label/template mirrors
 
-All three source TIFF assets below were obtained from public GitHub repositories maintained by a third party. They are **not organizer-authenticated**. The pinned commits/hashes ensure byte identity only; they do not establish accuracy, a license grant, or permission to submit/share the content with the sponsor. Reusable data licensing must be separately confirmed before external distribution.
+The candidate surfaces, catalogue labels, sample template, and SGMC raster below are local public-owner-mirror assets, not organizer-authenticated. Hashes and pinned commits establish byte identity only; they do not establish accuracy, a license grant, or permission to submit/share the content with the sponsor. Reusable data licensing must be separately confirmed before external distribution.
 
 | Asset | Pinned source | SHA-256 | Use in this project |
 |---|---|---|---|
@@ -30,6 +30,7 @@ All three source TIFF assets below were obtained from public GitHub repositories
 | H33-D tip/stepover surface | [`GEMSDOE33` pinned TIFF](https://github.com/buffedlizard55-lab/GEMSDOE33/blob/f52533110fe62cd03e77f1228e9e5ecac412c463/docs/downloads/GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e.tif) | `87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757` | Fusion source B |
 | Public catalogue label raster (`labels.tif`) | [`GEMSDOE24` commit `07345ea0604953d7efb858d9cfbc21e20c7aca0b`](https://github.com/buffedlizard55-lab/GEMSDOE24/tree/07345ea0604953d7efb858d9cfbc21e20c7aca0b), `data/bridge/labels.tif` | `7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093` | Existing mapped catalogue faults only; proxy diagnostic labels, not private expert truth |
 | Sample-submission template | same pinned [`GEMSDOE24` commit](https://github.com/buffedlizard55-lab/GEMSDOE24/tree/07345ea0604953d7efb858d9cfbc21e20c7aca0b), `data/bridge/sample_submission.tif` | `2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc` | Derive finite footprint only; its pixel values are never used as labels |
+| SGMC faults raster | [`USGS State Geologic Map Compilation`](https://mrdata.usgs.gov/geology/state/) is the underlying public map; local grid raster is a prior owner-mirror derivation at `data/raw/sgmc_faults_100m.tif` | `26d142c4c93282cd94f6950ab96f22aeff59fbbea523d43d662e76fa1b161b5c` | Secondary public-map proxy only; positive SGMC cells >300 m from catalogue are tested. Original vector derivation was not rebuilt in this session. |
 
 The sample finite mask and the mirrored labels' GDAL/nodata footprint were compared by the footprint-build script before the diagnostic. The exact counts and equality result are written to `evidence/footprint_mask_receipt.json`. The `sample_submission.tif` pixel values are not treated as label truth.
 

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_utc": "2026-10-06T20:27:13.191171+00:00",
+  "generated_utc": "2026-10-06T20:38:55.254878+00:00",
   "submission_status": "UNSCORED_RESEARCH_CANDIDATE_NOT_SLOT_CLEARED",
   "submission_name": "GEMSDOE48-DS-FUSION-20261006",
   "submission_note": "GEMSDOE48 DS fusion | H33-2-B2 dotted + H33-D tip/step-over; rho=0.5; conflict/ignorance diagnostic; unscored research candidate.",
@@ -81,12 +81,12 @@
   },
   "inputs": {
     "dotted": {
-      "path": "data/source_mirrors/gemsdoe32-h33-h33-2-b2.tif",
+      "path": "data/raw/dotted_h33_2_b2_zeros.tif",
       "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
       "positive_pixels_inside_footprint": 37654
     },
     "tip_stepover": {
-      "path": "data/source_mirrors/GEMSDOE33-h33d-tip-stepover.tif",
+      "path": "data/raw/tip_h33d_stepover.tif",
       "sha256": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757",
       "positive_pixels_inside_footprint": 41865
     },

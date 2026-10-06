@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Executive summary · how to submit · GEMSDOE48</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>Executive summary — exactly how to make a submission</h1>
+    <p>Five steps from this page to a filed entry in the DOE GEMS Prize Challenge,
+    plus every fact the portal checks.</p>
+  </div>
+</header>
+<nav><div class="wrap">
+  <a href="../index.html">Overview &amp; download</a>
+  <a class="active" href="../executive-summary.html">Executive summary / how to submit</a>
+  <a href="../method.html">Method</a>
+  <a href="../validation.html">Validation</a>
+  <a href="../hypotheses.html">Next hypotheses</a>
+  <a href="../sources.html">Sources</a>
+  <a href="../irregularities.html">Irregularities</a>
+</div></nav>
+
+<div class="wrap">
+
+<div class="hero">
+  <h2>⬇ Step 0 — get the file</h2>
+  <a class="btn" href="../downloads/gemsdoe48-ds-dotted-x-tipstepover-20261006T201749Z-95897e3f8125-decision-zeros.tif">⬇ Download submission GeoTIFF</a>
+  <p class="mono">gemsdoe48-ds-dotted-x-tipstepover-20261006T201749Z-95897e3f8125-decision-zeros.tif</p>
+</div>
+
+<h2 class="sec">The five steps</h2>
+<table>
+  <tr><th>#</th><th>Step</th><th>Detail</th></tr>
+  <tr><td>1</td><td>Sign in to DrivenData</td>
+      <td>Create/use an account at <a href="https://www.drivendata.org/">drivendata.org</a> and join the
+      <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">GEMS Prize Challenge (#306)</a>
+      (you must accept the rules before the submit tab unlocks).</td></tr>
+  <tr><td>2</td><td>Open the submission form</td>
+      <td>Competition page → <b>Submit</b> tab → “New submission”.</td></tr>
+  <tr><td>3</td><td>Choose the file</td>
+      <td>Upload the <span class="mono">.tif</span> above directly (a <span class="mono">.zip</span>
+      containing the single GeoTIFF is also accepted — zip it as-is, no folders).</td></tr>
+  <tr><td>4</td><td>Paste the note</td>
+      <td class="mono">GEMSDOE48 Dempster-Shafer fusion dotted 0.2778 x tip-stepover 0.2632; union support 47905 dots full confidence per holdout tier sweep; unassigned-mass layer; id 95897e3f8125<br><span class="small">(173/200 characters)</span></td></tr>
+  <tr><td>5</td><td>Submit and record</td>
+      <td>After the portal accepts the file, record the submission id and the public-LB score
+      in <span class="mono">evidence/</span>. One selected submission scores in <b>both</b> the
+      Initial Prize Round (private expert-labeled faults) and the Final Prize Round
+      (expanded labels after expert review of all submissions).</td></tr>
+</table>
+
+<h2 class="sec">What the portal validates — and why this file passes</h2>
+<table>
+  <tr><th>Requirement (from the problem page)</th><th>This file</th></tr>
+  <tr><td>Single-band GeoTIFF</td><td>✅ 1 band</td></tr>
+  <tr><td>float32, values between 0 and 1</td><td>✅ float32, min 0.0, max 1.0, all 12,279,160 cells finite, 0 NaN</td></tr>
+  <tr><td>EPSG:32611 (UTM 11N)</td><td>✅</td></tr>
+  <tr><td>Same bounds/shape/geotransform as the training data (100 m)</td>
+      <td>✅ 3730×3292, transform (100, 0, 243350, 0, −100, 4508550) — byte-pinned to the official sample_submission mirror (sha256 <span class="mono">2176d08e…</span>)</td></tr>
+  <tr><td>Data outside bounds null/nan or compliant</td><td>✅ written all-finite with 0.0 outside the survey footprint (the “range-hardened” encoding; immune to the <span class="mono">Predicted values must be in range [0, 1]</span> rejection, whose second known cause is a nodata sentinel tag — this file has no nodata tag)</td></tr>
+</table>
+
+<h2 class="sec">Reproducing everything on this site</h2>
+<pre class="mono" style="background:#0e1720;color:#d7e5f0;border-radius:10px;padding:16px;overflow:auto">pip install rasterio scipy numpy
+python3 tests/test_metric.py          # 8/8 metric unit tests
+python3 scripts/build_submission.py   # rebuild artifacts + evidence receipts
+python3 scripts/validate_holdout.py   # blocked holdout gate (~1–2 min)
+python3 scripts/round2_tier_sweep.py  # tier sweep + leakage audit</pre>
+
+<footer>GEMSDOE48 · the file above is a candidate, not a proven improvement —
+no organizer score exists until it is submitted.</footer>
+</div>
+<div class="wrap" style="margin-top:1rem;padding:1rem;border:2px solid #b65c00;background:#fff3dc;color:#33220d"><strong>Historical archive.</strong> This page is preserved from the earlier upstream pipeline and may contain superseded claims. See the current <a href="../index.html">GEMSDOE48 report</a> and <a href="../validation.html">blocked-fold validation</a> before relying on any conclusion.</div>
+</body>
+</html>

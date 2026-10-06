@@ -1,4 +1,4 @@
-# Python environment and test artefacts
+# Python environments, build artefacts, and test caches
 .venv/
 venv/
 __pycache__/
@@ -7,12 +7,20 @@ __pycache__/
 .coverage
 htmlcov/
 *.egg-info/
+build/
+dist/
 
-# Public mirror data are restored by hash-pinned scripts; do not redistribute implicitly.
+# Existing project data mirrors are tracked only when explicitly added; do not
+# accidentally add future large or private downloads.
+data/raw/
 data/proxy/*
 !data/proxy/.gitkeep
 data/source_mirrors/*.tif
 !data/source_mirrors/.gitkeep
+
+external_ref/
+scratch/
+nohup.out
 
 docs/downloads/*.partial
 *.partial

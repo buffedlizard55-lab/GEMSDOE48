@@ -22,11 +22,32 @@
       "read_count": 1,
       "read_date_utc": "2026-10-06",
       "displayed_rows": [
-        {"rank": 1, "participant": "xiaofanhu", "score": 0.3774},
-        {"rank": 2, "participant": "alexoktaba", "score": 0.3345},
-        {"rank": 3, "participant": "nchuzhoy", "score": 0.3262},
-        {"rank": 7, "participant": "DARD", "score": 0.3195},
-        {"rank": 13, "participant": "extradr19", "score": 0.2778, "submissions_displayed": 10}
+        {
+          "rank": 1,
+          "participant": "xiaofanhu",
+          "score": 0.3774
+        },
+        {
+          "rank": 2,
+          "participant": "alexoktaba",
+          "score": 0.3345
+        },
+        {
+          "rank": 3,
+          "participant": "nchuzhoy",
+          "score": 0.3262
+        },
+        {
+          "rank": 7,
+          "participant": "DARD",
+          "score": 0.3195
+        },
+        {
+          "rank": 13,
+          "participant": "extradr19",
+          "score": 0.2778,
+          "submissions_displayed": 10
+        }
       ],
       "attribution_limit": "Participant-level rows only; no exact TIFF or owner-mirror artifact is linked to these scores.",
       "automated_monitoring": false
@@ -73,6 +94,17 @@
       "bytes": 1599597,
       "use": "finite footprint mask only; pixel values never used as labels",
       "license_verified": false
+    },
+    {
+      "id": "sgmc_offcat_proxy",
+      "path": "data/raw/sgmc_faults_100m.tif",
+      "url": "https://mrdata.usgs.gov/geology/state/",
+      "authority": "USGS State Geologic Map Compilation is the source dataset; the on-grid raster is a third-party owner-mirror derivation",
+      "sha256": "26d142c4c93282cd94f6950ab96f22aeff59fbbea523d43d662e76fa1b161b5c",
+      "use": "public-map off-catalogue proxy: positive SGMC cells >300 m from public catalogue raster",
+      "organizer_authenticated": false,
+      "derivation_rebuilt_in_this_session": false,
+      "license_note": "USGS source map is public federal data; the owner-mirror raster derivation and its reuse terms were not independently verified."
     },
     {
       "id": "usgs_gems_sgmc",

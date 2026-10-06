@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Executive summary · GEMSDOE48</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><div class="wrap">
+  <h1>Executive summary</h1>
+  <p>A reproducible, conflict-aware research candidate with an explicit no-slot decision.</p>
+</div></header>
+<nav><div class="wrap">
+  <a href="index.html">Overview</a><a class="active" href="executive-summary.html">Summary</a>
+  <a href="method.html">Method</a><a href="validation.html">Validation</a>
+  <a href="hypotheses.html">Hypotheses</a><a href="sources.html">Sources</a><a href="irregularities.html">Irregularities</a>
+</div></nav>
+<div class="wrap">
+  <section class="hero">
+    <h2>Weekly slot decision: do not submit this candidate</h2>
+    <p>The fixed <code>rho=0.5</code> discounted-Dempster surface loses to tip/stepover and the arithmetic-mean baseline on all four spatial blocks for both public-map proxy targets. It also loses to the prior union decision on all eight comparisons. These are conditional proxy diagnostics, not private-label validation, but they are sufficient to fail the preregistered promotion gate.</p>
+    <a class="btn" href="downloads/GEMSDOE48-DS-conflict-aware-fusion-20261006.tif" download>Download candidate GeoTIFF</a>
+    <a class="btn alt" href="validation.html">Read blocked-fold results</a>
+    <p class="small">The file is supplied for inspection and reproducibility, not as a recommendation to spend a submission slot.</p>
+  </section>
+
+  <h2 class="sec">Candidate at a glance</h2>
+  <table>
+    <tr><th>Artifact</th><th>Purpose</th><th>SHA-256</th></tr>
+    <tr><td><a href="downloads/GEMSDOE48-DS-conflict-aware-fusion-20261006.tif">Dempster fault belief</a></td><td>Research candidate; one-band competition-grid GeoTIFF</td><td class="mono">818957c0cb69caf360d445c7f7a684578c37528f363b5d84f5ae3be832e7413f</td></tr>
+    <tr><td><a href="downloads/GEMSDOE48-unassigned-mass-20261006.tif">Unassigned mass</a></td><td>Separate normalized residual <code>m(Theta)</code> diagnostic</td><td class="mono">975c217ef803a45041077a219ba460134a8c84c8ea9f7ffc0414ddb47cb54ccd</td></tr>
+    <tr><td><a href="downloads/GEMSDOE48-raw-conflict-K-20261006.tif">Raw conflict K</a></td><td>Separate pre-normalization conflict diagnostic</td><td class="mono">5daa6eaf7ce78603896b0696df5be67d9a71971da936e030161c3157944b576b</td></tr>
+  </table>
+  <p>The primary output is not an arithmetic mean: 47,905 in-footprint cells differ; footprint MAE is 0.00205494, and MAE restricted to the union of source positives is 0.22166091. A high correlation is expected from the large shared zero background and does not imply equality.</p>
+
+  <h2 class="sec">Local format audit</h2>
+  <table>
+    <tr><th>Check</th><th>Observed</th></tr>
+    <tr><td>Band and dtype</td><td>One band, float32</td></tr>
+    <tr><td>Grid</td><td>3,730 × 3,292; EPSG:32611; 100 m; template transform matched</td></tr>
+    <tr><td>Values in footprint</td><td>Finite, min 0, max 0.75; all in [0,1]</td></tr>
+    <tr><td>Outside footprint</td><td>NaN/nodata at all 7,111,787 outside cells; finite mask exactly matches the derived 5,167,373-cell sample-template footprint</td></tr>
+    <tr><td>Audit status</td><td>PASS local checks only; not organizer acceptance</td></tr>
+  </table>
+  <p>Receipts: <a href="../evidence/submission_validation_20261006.json">submission validation</a>, <a href="../evidence/build_receipt_20261006.json">build and distinction checks</a>, and <a href="../evidence/footprint_mask_receipt.json">footprint/template comparison</a>.</p>
+
+  <h2 class="sec">Reproduction</h2>
+  <pre class="mono">python -m pip install -e '.[dev]'
+python scripts/restore_candidate_surfaces.py
+python scripts/restore_proxy_labels.py
+python scripts/build_footprint_mask.py
+python scripts/build_submission.py
+python scripts/validate_submission.py
+python scripts/run_spatial_holdout.py
+pytest -q</pre>
+  <p>Restore scripts verify pinned public owner-mirror hashes; they do not establish organizer provenance or licensing. For full source/data caveats, review <a href="sources.html">sources</a> and <a href="irregularities.html">irregularities</a>.</p>
+  <footer>GEMSDOE48 · no organizer score is recorded for this artifact; no weekly submission slot is cleared.</footer>
+</div>
+</body>
+</html>

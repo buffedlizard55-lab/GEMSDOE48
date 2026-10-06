@@ -1,5 +1,5 @@
 {
-  "source": "data/proxy/sample_submission.tif",
+  "source": "data/raw/sample_submission_template.tif",
   "source_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
   "source_provenance": "Public owner-mirror of the sample template; not organizer-authenticated.",
   "usage": "Only finite mask used; sample pixel values are not used as labels.",

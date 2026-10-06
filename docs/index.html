@@ -129,6 +129,31 @@
     </section>
 
     <section class="card">
+      <h2>Second proxy: SGMC faults away from catalogue traces</h2>
+      <p class="small">The on-grid USGS SGMC owner-mirror raster contributes 61,664 positive cells after removing every SGMC positive within 300 m of the public catalogue. The same four quadrants, core-truth rule, 300 m score halo, metric, and candidate surfaces are used as in the table above. This is a second public-map proxy—not private expert truth—and does not remove source-surface leakage.</p>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>Candidate</th><th>NW</th><th>NE</th><th>SW</th><th>SE</th><th>Mean DTI</th></tr></thead>
+          <tbody>
+            <tr><td>Dotted input</td><td>0.101822</td><td>0.095184</td><td>0.107461</td><td>0.073546</td><td>0.094503</td></tr>
+            <tr><td>Tip/stepover input</td><td>0.101429</td><td>0.096184</td><td>0.106455</td><td>0.073898</td><td>0.094491</td></tr>
+            <tr><td>Arithmetic mean</td><td>0.096056</td><td>0.088763</td><td>0.097484</td><td>0.069061</td><td>0.087841</td></tr>
+            <tr><td>Prior full-union decision</td><td>0.102528</td><td>0.098529</td><td>0.106520</td><td>0.076252</td><td>0.095957</td></tr>
+            <tr><td>Discounted Dempster fusion, rho=.5</td><td>0.074815</td><td>0.067592</td><td>0.079382</td><td>0.052506</td><td>0.068574</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:14px"><b>Paired mean delta for rho=.5 fusion:</b> vs dotted <span class="negative">−0.025929 (0/4 positive)</span>; vs tip/stepover <span class="negative">−0.025918 (0/4)</span>; vs arithmetic mean <span class="negative">−0.019267 (0/4)</span>; vs full-union decision <span class="negative">−0.027383 (0/4)</span>. The candidate fails all paired comparisons on this target.</p>
+      <p class="small">The exact fold results and report semantics are in <a href="../evidence/holdout_20261006.json">the versioned evidence JSON</a> and <a href="research/holdout-results-20261006.md">the holdout report</a>.</p>
+    </section>
+
+    <section class="card">
+      <h2>Prior main-branch alpha=.99 union result — historical, not slot-cleared</h2>
+      <p>The earlier main-branch sweep selected full-union support at confidence 1.0 using pooled SGMC off-catalogue DTI (0.096047 vs 0.093965 dotted and 0.094245 tip). Its stored per-quadrant full-union values were below both parents in each block (NW 0.084409, NE 0.073554, SW 0.029226, SE 0.045439), and the normalized-belief gate is recorded as false. That earlier evaluator scored full-grid predictions against quadrant truth, so those fold values are not directly comparable to this page's core-plus-halo semantics. The prior union is rescored above under the same current protocol as rho=.5 fusion. Pooled tier selection is not a substitute for the spatial-block promotion gate.</p>
+      <p><a href="downloads/gemsdoe48-ds-dotted-x-tipstepover-20261006T201749Z-95897e3f8125-decision-zeros.tif">Download that historical full-union TIFF</a> (for comparison only; not the current recommended file), with its source receipt in <a href="../evidence/build_submission.json">evidence/build_submission.json</a> and block metrics in <a href="../evidence/holdout_validation.json">evidence/holdout_validation.json</a>.</p>
+    </section>
+
+    <section class="card">
       <h2>What the fusion does—and does not say</h2>
       <p>Each binary source value is treated as an operational opinion: <code>m(F)=0.5p</code>, <code>m(not F)=0.5(1−p)</code>, <code>m(Θ)=0.5</code>. After normalized Dempster combination, source agreement at a positive pixel yields fault belief 0.75; a one-source-only pixel yields belief 1/3, residual ignorance 1/3, and raw pre-normalization conflict <code>K=0.25</code>. The disagreement remains visible instead of being deleted by a consensus rule.</p>
       <p><b>Important:</b> the inputs are sparse binary emissions, not calibrated probabilities; interpreting zero as counter-evidence is an assumption. The `rho=0.5` discount is preregistered, not estimated. The two surfaces share 31,614 positive cells (Jaccard 0.6599), so they are not treated as independent.</p>

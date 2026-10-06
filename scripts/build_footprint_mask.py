@@ -34,8 +34,8 @@ def sha256_file(path: Path) -> str:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--sample", type=Path, default=ROOT / "data/proxy/sample_submission.tif")
-    parser.add_argument("--labels", type=Path, default=ROOT / "data/proxy/labels.tif")
+    parser.add_argument("--sample", type=Path, default=ROOT / "data/raw/sample_submission_template.tif")
+    parser.add_argument("--labels", type=Path, default=ROOT / "data/raw/labels_catalogue.tif")
     parser.add_argument("--output", type=Path, default=ROOT / "data/source_mirrors/footprint-mask.tif")
     parser.add_argument("--allow-unpinned-sample", action="store_true")
     parser.add_argument("--allow-unpinned-labels", action="store_true")

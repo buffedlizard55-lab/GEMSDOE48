@@ -15,8 +15,8 @@ from gemsdoe48.evidence import arithmetic_mean, combine_dempster
 from gemsdoe48.geotiff import assert_competition_grid, assert_same_grid, display_path, read_band, write_float32
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_DOTTED = ROOT / "data/source_mirrors/gemsdoe32-h33-h33-2-b2.tif"
-DEFAULT_TIP = ROOT / "data/source_mirrors/GEMSDOE33-h33d-tip-stepover.tif"
+DEFAULT_DOTTED = ROOT / "data/raw/dotted_h33_2_b2_zeros.tif"
+DEFAULT_TIP = ROOT / "data/raw/tip_h33d_stepover.tif"
 DEFAULT_FOOTPRINT = ROOT / "data/source_mirrors/footprint-mask.tif"
 DEFAULT_OUTPUT = ROOT / "docs/downloads/GEMSDOE48-DS-conflict-aware-fusion-20261006.tif"
 DEFAULT_UNCERTAINTY = ROOT / "docs/downloads/GEMSDOE48-unassigned-mass-20261006.tif"

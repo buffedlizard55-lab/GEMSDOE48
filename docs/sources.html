@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sources and provenance · GEMSDOE48</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><div class="wrap">
+  <h1>Sources and provenance</h1>
+  <p>Official references, mirrored inputs, and explicit limits on what is authenticated.</p>
+</div></header>
+<nav><div class="wrap">
+  <a href="index.html">Overview</a><a href="executive-summary.html">Summary</a>
+  <a href="method.html">Method</a><a href="validation.html">Validation</a>
+  <a href="hypotheses.html">Hypotheses</a><a class="active" href="sources.html">Sources</a><a href="irregularities.html">Irregularities</a>
+</div></nav>
+<div class="wrap">
+  <div class="note"><b>Provenance boundary:</b> a USGS or NASA page can be official while a local third-party raster derived from it is not. Hashes show byte identity, not accuracy, license, organizer endorsement, or permission to submit/redistribute. See the machine-readable <code>evidence/source_audit.json</code>.</div>
+
+  <h2 class="sec">Challenge references</h2>
+  <ul>
+    <li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">Official DOE GEMS problem page</a> — metric, labels, grid and submission format. It specifies one-band float32 predictions, the 100 m EPSG:32611 grid, in-footprint [0,1] values, and null/NaN outside.</li>
+    <li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">Official public leaderboard</a> — read once on 2026-10-06 UTC; no automated polling or scraping is implemented.</li>
+    <li><a href="https://www.drivendata.org/termsofuse/">DrivenData Terms of Use</a> — checked when deciding not to implement leaderboard monitoring.</li>
+    <li><a href="https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516">Official interpretation forum thread</a> — revisit directly before relying on an interpretation of known faults in hidden scoring.</li>
+  </ul>
+
+  <h2 class="sec">Research-data sources checked for H48</h2>
+  <table>
+    <tr><th>Source</th><th>Intended use</th><th>What was and was not verified</th></tr>
+    <tr><td><a href="https://doi.org/10.5066/P1A3DQZK">USGS GeMS / SGMC</a></td><td>H48-2 mapped contact topology; underlying public SGMC map is also referenced by the proxy raster.</td><td>Catalog metadata checked. H48 contact payload, map scale, vector lineage, and exact competition-footprint coverage were not audited. The local SGMC TIFF is a prior owner-mirror derivation; it was hash-verified but not regenerated from original vectors in this session.</td></tr>
+    <tr><td><a href="https://www.earthdata.nasa.gov/data/catalog/asf-opera-l3-disp-s1-v1-1">NASA/JPL OPERA DISP-S1</a></td><td>H48-3 time-series LOS deformation gradients.</td><td>Product metadata and access requirement checked; Earthdata Login required. No granules downloaded or coverage counts measured.</td></tr>
+    <tr><td><a href="https://www.usgs.gov/national-hydrography/access-national-hydrography-products">USGS NHDPlus HR / hydrography</a></td><td>H48-4 channel-profile discontinuities.</td><td>Product page checked; exact local product, completeness and footprint coverage unaudited.</td></tr>
+    <tr><td><a href="https://www.usgs.gov/3d-elevation-program/about-3dep-products-services">USGS 3DEP</a></td><td>H48-4 elevation profiles and terrain conditioning.</td><td>Program/product and free-use statement checked; exact footprint coverage not measured.</td></tr>
+    <tr><td><a href="https://www.usgs.gov/data/geothermal-resource-favorability-select-features-and-predictions-united-states-great-basin">USGS Great Basin geothermal favorability, DOI 10.5066/P14EET2C</a></td><td>H48-5 search prior and ensemble-spread signal.</td><td>Release metadata checked; ~1.22 GB package not downloaded; no feature/target overlap audit.</td></tr>
+    <tr><td><a href="https://doi.org/10.5066/P9BZPVUC">USGS Great Basin heat-flow data, DOI 10.5066/P9BZPVUC</a></td><td>Potential contextual feature source.</td><td>Catalog metadata checked; no package downloaded or used.</td></tr>
+  </table>
+
+  <h2 class="sec">Local candidate and proxy assets</h2>
+  <p>The local candidate inputs and label mirrors below came from third-party public GitHub repositories. They are not provided or authenticated by the competition organizer. Exact pinned sources and restore instructions are in <a href="sources.md">the detailed sources record</a>.</p>
+  <table>
+    <tr><th>Asset</th><th>SHA-256</th><th>Role and caution</th></tr>
+    <tr><td>H33-2-B2 dotted candidate surface (`data/raw/dotted_h33_2_b2_zeros.tif`)</td><td class="mono">c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9</td><td>Fusion source A; sparse owner-mirror output, not calibrated probability; owner audit describes full-catalogue proximity pruning.</td></tr>
+    <tr><td>H33-D tip/stepover candidate surface (`data/raw/tip_h33d_stepover.tif`)</td><td class="mono">87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757</td><td>Fusion source B; owner-mirror output; not independently rebuilt per fold.</td></tr>
+    <tr><td>Public catalogue labels (`data/raw/labels_catalogue.tif`)</td><td class="mono">7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093</td><td>Proxy truth only; visible catalogue labels, not private expert truth.</td></tr>
+    <tr><td>Sample submission template (`data/raw/sample_submission_template.tif`)</td><td class="mono">2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc</td><td>Only its finite footprint is used; pixel values are not labels.</td></tr>
+    <tr><td>SGMC on-grid fault raster (`data/raw/sgmc_faults_100m.tif`)</td><td class="mono">26d142c4c93282cd94f6950ab96f22aeff59fbbea523d43d662e76fa1b161b5c</td><td>Public USGS map proxy, but local processed raster lineage is owner-mirror and was not rebuilt; >300 m catalogue-filtered cells form the second proxy target.</td></tr>
+  </table>
+  <p>Source-mirror reuse/licensing was not verified. The underlying USGS source data are public federal products; that alone does not certify the processing or redistribution terms of these local mirror files.</p>
+
+  <h2 class="sec">Citations and receipt links</h2>
+  <p>The exact citation URLs, pinned commits, source paths, SHA-256s, caveats, and availability checks are in <a href="sources.md">docs/sources.md</a> and <code>evidence/source_audit.json</code>. Footprint and format evidence are in <code>evidence/footprint_mask_receipt.json</code> and <code>evidence/submission_validation_20261006.json</code>. No hidden label, private expert truth, or competition score was accessed.</p>
+  <footer>Checked 2026-10-06 UTC unless noted. Catalog availability does not establish suitability, coverage, or target independence.</footer>
+</div>
+</body>
+</html>
