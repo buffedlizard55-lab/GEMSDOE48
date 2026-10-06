@@ -1,0 +1,35 @@
+[ok] truth sizes: {"catalogue": 60988, "sgmc_in_footprint": 82151, "sgmc_offcat_gt_300m": 61664}
+     (published reference: 60988 / 82151 / 61664)
+[catalogue_Q_NW      ] A_dotte=0.0054 | B_tip=0.0715 | C_naive=0.0382 | D_union=0.0692 | E_inter=0.0044 | F_DS_be=0.0381 | G_DS_be=0.0044
+[sgmcoffcat_Q_NW     ] A_dotte=0.0867 | B_tip=0.0851 | C_naive=0.0812 | D_union=0.0844 | E_inter=0.0783 | F_DS_be=0.0812 | G_DS_be=0.0783
+[catalogue_Q_NE      ] A_dotte=0.0058 | B_tip=0.0679 | C_naive=0.0368 | D_union=0.0645 | E_inter=0.0043 | F_DS_be=0.0367 | G_DS_be=0.0043
+[sgmcoffcat_Q_NE     ] A_dotte=0.0746 | B_tip=0.0739 | C_naive=0.0689 | D_union=0.0736 | E_inter=0.0644 | F_DS_be=0.0688 | G_DS_be=0.0644
+[catalogue_Q_SW      ] A_dotte=0.0043 | B_tip=0.0489 | C_naive=0.0268 | D_union=0.0456 | E_inter=0.0039 | F_DS_be=0.0267 | G_DS_be=0.0039
+[sgmcoffcat_Q_SW     ] A_dotte=0.0328 | B_tip=0.0310 | C_naive=0.0290 | D_union=0.0292 | E_inter=0.0294 | F_DS_be=0.0290 | G_DS_be=0.0294
+[catalogue_Q_SE      ] A_dotte=0.0029 | B_tip=0.0403 | C_naive=0.0218 | D_union=0.0377 | E_inter=0.0025 | F_DS_be=0.0217 | G_DS_be=0.0025
+[sgmcoffcat_Q_SE     ] A_dotte=0.0476 | B_tip=0.0462 | C_naive=0.0439 | D_union=0.0454 | E_inter=0.0427 | F_DS_be=0.0439 | G_DS_be=0.0427
+[catalogue_full      ] A_dotte=0.0067 | B_tip=0.0865 | C_naive=0.0461 | D_union=0.0852 | E_inter=0.0052 | F_DS_be=0.0459 | G_DS_be=0.0052
+[sgmcoffcat_full     ] A_dotte=0.0940 | B_tip=0.0942 | C_naive=0.0880 | D_union=0.0960 | E_inter=0.0806 | F_DS_be=0.0880 | G_DS_be=0.0806
+
+GATE: {
+ "sgmcoffcat": {
+  "F_beats_A_folds": 0,
+  "F_beats_B_folds": 0,
+  "F_geq_D_folds": 0
+ },
+ "catalogue": {
+  "F_beats_A_folds": 4,
+  "F_beats_B_folds": 0,
+  "F_geq_D_folds": 0
+ },
+ "sgmcoffcat_full": {
+  "A_dotted": 0.09396541728952715,
+  "B_tip": 0.09424537701961515,
+  "C_naive_mean": 0.08804385796217332,
+  "D_union_binary": 0.0960465528601686,
+  "E_intersection_binary": 0.08059661061389296,
+  "F_DS_bel": 0.08800492036866188,
+  "G_DS_bel_gt_half": 0.08059661061389296
+ },
+ "PASS_offcat_blocked": false
+}
