@@ -1,1 +1,108 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Sources · GEMSDOE48</title><link rel="stylesheet" href="assets/style.css"></head><body><header><h1>Verified source register</h1><nav><a href="index.html">Executive summary</a><a href="hypotheses.html">Hypotheses</a><a href="method.html">Method & evidence</a><a href="sources.html">Sources</a></nav></header><main class="wrap"><table><thead><tr><th>Claim used</th><th>Source / evidence class</th><th>Verification note</th></tr></thead><tbody><tr><td>Task, feature layers, metric, α=.2, β=.8, 300 m kernel, GeoTIFF requirements</td><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">DrivenData official problem description</a></td><td>Primary organizer source, reviewed 2026-10-06.</td></tr><tr><td>Current public leader 0.3774</td><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">Official leaderboard</a></td><td>Point-in-time observation on 2026-10-06; mutable.</td></tr><tr><td>GeoDAWN acquisition and products</td><td><a href="https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7">USGS ScienceBase release</a>, DOI 10.5066/P93LGLVQ</td><td>Official .gov data release. Survey resolution/flight-height differences are documented there.</td></tr><tr><td>Horizontal-gradient maxima identify edges such as faults, intrusions, contacts</td><td><a href="https://www.usgs.gov/software/pymaxspots-computing-and-connecting-horizontal-gradient-maxima-potential-field-geophysics">USGS pymaxspots</a>, DOI 10.5066/P13FSKEM</td><td>Official 2025 CC0 software release; makes H48-A obtainable and implementable.</td></tr><tr><td>3DEP products are free, no use restrictions</td><td><a href="https://www.usgs.gov/3d-elevation-program/about-3dep-products-services">USGS 3DEP products</a></td><td>Official availability/licensing statement; competition separately supplies 1 m DEM links.</td></tr><tr><td>Step-overs, terminations and discontinuities favor permeability/fluid flow</td><td><a href="https://pubs.usgs.gov/publication/70196066">USGS publication record: Siler, Hinz & Faulds (2018)</a>, DOI 10.1130/B31729.1; <a href="https://www.osti.gov/servlets/purl/1724082">DOE/OSTI Faulds & Hinz (2015)</a></td><td>Official USGS and DOE-hosted records.</td></tr><tr><td>Dempster-Shafer definitions; Dempster vs Yager conflict handling</td><td><a href="https://www.stat.berkeley.edu/~aldous/Real_World/dempster_shafer.pdf">Sentz & Ferson (2002), SAND2002-0835</a></td><td>DOE/Sandia report; sections 2.1–2.2.3. Supports the correction that classical normalization does not retain K.</td></tr><tr><td>Dotted parent bytes</td><td><a href="https://buffedlizard55-lab.github.io/GEMSDOE32/docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif">GEMSDOE32 owner artifact</a></td><td>SHA-256 pinned c55b…; owner source, not organizer-authenticated.</td></tr><tr><td>Tip parent bytes</td><td><a href="https://buffedlizard55-lab.github.io/GEMSDOE33/docs/downloads/GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e.tif">GEMSDOE33 owner artifact</a></td><td>SHA-256 pinned 87f8…; owner source, not organizer-authenticated.</td></tr><tr><td>Template / labels / SGMC proxy bytes</td><td>Hash-pinned owner mirror derived from competition/USGS data; hashes in build script and audit</td><td>Not organizer-authenticated. Dropbox failed TLS in this environment; GitHub mirrors were fetched and hash checked. Flagged rather than presented as official bytes.</td></tr></tbody></table><h2>Source policy</h2><p>Official organizer or .gov sources establish competition/science claims. Owner pages establish only artifact bytes and owner reports. A hash proves byte identity, not geological validity or score attribution.</p></main><footer>Manual review links are intentionally direct and visible.</footer></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Verified sources · GEMSDOE48</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header>
+  <h1>Verified source register</h1>
+  <nav aria-label="Main navigation">
+    <a href="index.html">Executive summary</a>
+    <a href="hypotheses.html">Research hypotheses</a>
+    <a href="method.html">Method and audit</a>
+    <a href="sources.html">Verified sources</a>
+  </nav>
+</header>
+<main class="wrap">
+  <p>Primary organizers and government data sources support factual competition, metric, science, and availability claims. Owner sites establish only their own artifacts and reported scores. A source listing is not the same as downloading, hash-checking, licensing, or validating a data file.</p>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Claim or data needed</th><th>Primary/manual-review source</th><th>What was verified and what remains unverified</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Task, input feature names, target, metric, CRS, grid, bounds, null/outside rule</td>
+          <td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">DrivenData official problem description</a></td>
+          <td>The page states that experts identified new faults absent from the public USGS database; lists gravity, magnetic, strain, earthquake-density, conductivity and terrain inputs; defines α=0.2, β=0.8 and a 300 m triangular distance kernel; and specifies EPSG:32611, 100 m, float32, single band, null/NaN outside bounds. Competition data download requires login here.</td>
+        </tr>
+        <tr>
+          <td>Current public score standings</td>
+          <td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">Official DrivenData leaderboard</a> · <a href="data/leaderboard.json">dated/refreshable feed JSON</a></td>
+          <td>Page observed 2026-10-06: #1=0.3774 (xiaofanhu), #7=0.3195 (DARD), #13=0.2778 (extradr19). Participant rows cannot be tied to local TIFF hashes. GitHub Actions is configured for six-hour refresh/deploy, but repository Pages settings have not been switched to Actions. A live fetch attempt on 2026-10-06 failed when the sandbox’s TLS connection closed before HTML arrived, so the parser remains fixture-tested only. Until Pages is switched and a live parse succeeds, the JSON is a manual dated snapshot; future refreshes remain best-effort if the source layout or action changes.</td>
+        </tr>
+        <tr>
+          <td>Scoring mask for existing known USGS/INGENIOUS faults</td>
+          <td><a href="https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516">DrivenData staff forum response (2026-09-16)</a></td>
+          <td>Staff state that pixels corresponding to known USGS/INGENIOUS faults are masked/excluded and do not count toward penalties. The proxy scorer masks exact labels==1 pixels. It separately excludes SGMC proxy truth within 300 m when constructing the off-catalogue proxy—this is a local proxy choice, not staff guidance.</td>
+        </tr>
+        <tr>
+          <td>GeoDAWN magnetic and radiometric data for H48-A/H48-D</td>
+          <td><a href="https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7">USGS ScienceBase GeoDAWN data release</a>, DOI <a href="https://doi.org/10.5066/P93LGLVQ">10.5066/P93LGLVQ</a></td>
+          <td>Official listing includes GeoDAWN magnetic/radiometric products and TIF archives: Area 1 43.57 MB and Area 2 230.54 MB. Record metadata was read. Direct .gov binary transfer failed TLS from this shell, so file bytes, checksums, and exact grid alignment were not checked here. Survey areas have different acquisition specifications.</td>
+        </tr>
+        <tr>
+          <td>Potential-field horizontal-gradient maxima method</td>
+          <td><a href="https://www.usgs.gov/software/pymaxspots-computing-and-connecting-horizontal-gradient-maxima-potential-field-geophysics">USGS pymaxspots software release</a>, DOI <a href="https://doi.org/10.5066/P13FSKEM">10.5066/P13FSKEM</a></td>
+          <td>USGS describes local horizontal-gradient maxima as abrupt potential-field boundaries that may mark faults, intrusions, or lithologic contacts. This supports a candidate transform, not the claim that every maxspot is a fault. It is distinct from the failed H47-B TMI-only persistence strategy only when cross-property geometry/control is added.</td>
+        </tr>
+        <tr>
+          <td>Independent Nevada gravity data for H48-A</td>
+          <td><a href="https://pubs.usgs.gov/dds/dds-42/">USGS Gravity Map/Data Series 42</a>, DOI <a href="https://doi.org/10.3133/ds42">10.3133/ds42</a></td>
+          <td>Official page says data cover Nevada plus neighboring parts of California, Utah and Arizona, reports about 80,000 stations, and lists <a href="https://pubs.usgs.gov/dds/dds-42/DDS_42_DATA.zip">a 4.2 MB data ZIP</a>. The page/link were verified; bytes were not downloaded here. Station data require gridding/reprojection and uncertainty checks.</td>
+        </tr>
+        <tr>
+          <td>Event/focal mechanism source for H48-B</td>
+          <td><a href="https://earthquake.usgs.gov/fdsnws/event/1/">USGS FDSN Event Web Service documentation</a></td>
+          <td>Official live count queries over the approximate GeoDAWN bbox, 2000 onward, M≥2, returned 16,919 events, 5,292 with focal-mechanism products, and 474 with moment-tensor products on 2026-10-06. Counts establish endpoint/data availability for that query only; no event-level features were downloaded, cleaned, or validated.</td>
+        </tr>
+        <tr>
+          <td>3DEP coverage/licensing for H48-C</td>
+          <td><a href="https://www.usgs.gov/3d-elevation-program/about-3dep-products-services">USGS 3DEP products &amp; services</a></td>
+          <td>USGS states 3DEP products are free and without use restrictions. The competition page lists 1 m DEM links. Coverage by 1 m tile within each holdout block, seam quality and exact availability were not inventoried; no DEM was downloaded.</td>
+        </tr>
+        <tr>
+          <td>SGMC compilation used as an off-catalogue proxy source</td>
+          <td><a href="https://mrdata.usgs.gov/geology/state/">USGS State Geologic Map Compilation</a>, DOI <a href="https://doi.org/10.5066/F7WH2N65">10.5066/F7WH2N65</a></td>
+          <td>USGS describes a national geodatabase with structural lines, mostly faults in some states. The raster used here is an owner-derived 100 m mirror, not an official USGS GeoTIFF; its derivation is not independently reconstructed. It is proxy truth only, not hidden expert truth.</td>
+        </tr>
+        <tr>
+          <td>Geological rationale for stepovers/terminations</td>
+          <td><a href="https://www.usgs.gov/publications/structural-discontinuities-and-their-control-hydrothermal-systems-great-basin-usa">USGS record, Siler (2023)</a>, DOI <a href="https://doi.org/10.1144/geoenergy2023-009">10.1144/geoenergy2023-009</a></td>
+          <td>The publication reports that stepovers and terminations have strong localized stress/strain effects and are common settings for Great Basin hydrothermal systems. This supports physical plausibility, not a score forecast for these rasters.</td>
+        </tr>
+        <tr>
+          <td>Dempster–Shafer vs. Yager conflict handling</td>
+          <td><a href="https://www.stat.berkeley.edu/~aldous/Real_World/dempster_shafer.pdf">Sentz &amp; Ferson (2002), SAND2002-0835</a></td>
+          <td>DOE/Sandia report surveys Dempster’s normalized rule and Yager’s modified rule. Classical normalization removes conflict from the normalized masses; Yager transfers conflict to Θ. The implementation uses Yager because this task explicitly asks to expose unassigned conflict.</td>
+        </tr>
+        <tr>
+          <td>Dotted and tip parent raster bytes</td>
+          <td><a href="https://buffedlizard55-lab.github.io/GEMSDOE32/docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif">GEMSDOE32 parent</a> · <a href="https://buffedlizard55-lab.github.io/GEMSDOE33/docs/downloads/GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e.tif">GEMSDOE33 parent</a></td>
+          <td>Exact bytes were restored via GitHub API and SHA-256 checked against pinned values in the build script. Owner-site raster/scores are not organizer-authenticated or tied to public leaderboard hashes.</td>
+        </tr>
+        <tr>
+          <td>Prior TMI persistence trial and novelty check (owner-reported experiment)</td>
+          <td><a href="https://github.com/buffedlizard55-lab/GEMSDOE47/blob/main/docs/validation-h47b-20261006.md">GEMSDOE47 H47-B validation report</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE47/blob/main/docs/h47b-screen-report-20261006.json">machine-readable screen</a></td>
+          <td>The owner report describes a TMI_up150 multi-scale edge-persistence candidate; its pooled locked-block proxy DTI was 0.02755 versus 0.03716 for a fixed-seed random control, so the owner did not promote it. These are owner-run public-catalogue proxy results—not official scores, private-truth results, or independent replication. This history motivates making H48-A cross-property rather than TMI-only.</td>
+        </tr>
+        <tr>
+          <td>Historical candidate uniqueness screen</td>
+          <td><a href="https://github.com/buffedlizard55-lab/GEMSDOE47/blob/main/docs/h47b-uniqueness-audit-20261006.json">GEMSDOE47 visible-artifact inventory</a> · <a href="data/uniqueness-audit.json">GEMSDOE48 comparison receipt</a></td>
+          <td>336 unique blobs listed by the owner’s 2026-10-06 inventory were fetched and checked against Git blob SHA-1. 334 matched the exact grid; two did not. There were zero exact prediction and positive-mask matches; max positive-support Jaccard was 0.87392 against the tip parent. This is bounded owner-repository evidence, not a global uniqueness guarantee.</td>
+        </tr>
+        <tr>
+          <td>Contest rules for external data and sharing</td>
+          <td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/rules/">DrivenData rules entry</a> · <a href="https://www.herox.com/GEMSPrize/resource/2274">GEMS Prize Rules (HeroX)</a></td>
+          <td>The organizer’s problem page states external data need a license permitting challenge use and sharing with the sponsor. Check rights for each source and derivative before training/submission; this page does not constitute legal advice.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <h2>Evidence policy</h2>
+  <p>USGS/DOE/DrivenData pages establish the referenced public facts. GitHub owner sites establish owner artifact bytes, derived proxies and owner-reported experimental scores only. A hash proves byte identity—not source truth, geology, accuracy, score attribution, submission acceptance, or scientific validity. Full source-availability notes are in <a href="data/source-checks.json">source-checks.json</a>.</p>
+</main>
+<footer>Manual-review links are direct. Unknowns and failed transfers are labeled rather than inferred.</footer>
+</body>
+</html>

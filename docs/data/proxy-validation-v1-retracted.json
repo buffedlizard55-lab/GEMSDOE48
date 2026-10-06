@@ -1,0 +1,137 @@
+{
+  "schema": "GEMSDOE48-proxy-v1",
+  "protocol": "four fixed spatial quadrants; USGS SGMC-derived faults >=300 m from public catalogue",
+  "warning": "Proxy only. Not private expert truth; SGMC provenance and source dependence prevent a slot-clearance claim.",
+  "folds": [
+    {
+      "fold": 0,
+      "truth_pixels": 23570,
+      "dotted": {
+        "dti": 0.10283087961466006,
+        "tp": 2336.3019888183835,
+        "fp": 16982.939677364408,
+        "truth": 23570
+      },
+      "tip": {
+        "dti": 0.10317949406871053,
+        "tp": 2384.583134142315,
+        "fp": 18890.506356524522,
+        "truth": 23570
+      },
+      "fusion": {
+        "dti": 0.11030274597868317,
+        "tp": 2467.52887232015,
+        "fp": 15105.029757408729,
+        "truth": 23570
+      },
+      "naive_mean": {
+        "dti": 0.10757923741363877,
+        "tp": 2467.52887232015,
+        "fp": 17936.723016944467,
+        "truth": 23570
+      },
+      "fusion_minus_dotted": 0.007471866364023111
+    },
+    {
+      "fold": 1,
+      "truth_pixels": 23522,
+      "dotted": {
+        "dti": 0.09931783125979113,
+        "tp": 2082.934678264642,
+        "fp": 8691.13549804615,
+        "truth": 23522
+      },
+      "tip": {
+        "dti": 0.10104262164896766,
+        "tp": 2142.5443712496826,
+        "fp": 9791.267824652125,
+        "truth": 23522
+      },
+      "fusion": {
+        "dti": 0.10721747571318478,
+        "tp": 2229.5791185291046,
+        "fp": 7657.034334104552,
+        "truth": 23522
+      },
+      "naive_mean": {
+        "dti": 0.1056084156171928,
+        "tp": 2229.5791185291046,
+        "fp": 9241.201661349136,
+        "truth": 23522
+      },
+      "fusion_minus_dotted": 0.007899644453393653
+    },
+    {
+      "fold": 2,
+      "truth_pixels": 2454,
+      "dotted": {
+        "dti": 0.11053442062565616,
+        "tp": 326.6835000377195,
+        "fp": 4634.772164387814,
+        "truth": 2454
+      },
+      "tip": {
+        "dti": 0.11126581807715075,
+        "tp": 341.6797495721669,
+        "fp": 5196.530351828833,
+        "truth": 2454
+      },
+      "fusion": {
+        "dti": 0.12556707296546638,
+        "tp": 358.45902131653173,
+        "fp": 4099.148416164926,
+        "truth": 2454
+      },
+      "naive_mean": {
+        "dti": 0.11877283024408551,
+        "tp": 358.45902131653173,
+        "fp": 4915.6512581083225,
+        "truth": 2454
+      },
+      "fusion_minus_dotted": 0.015032652339810215
+    },
+    {
+      "fold": 3,
+      "truth_pixels": 13575,
+      "dotted": {
+        "dti": 0.07411592417203908,
+        "tp": 890.1960927212358,
+        "fp": 4864.110904442975,
+        "truth": 13575
+      },
+      "tip": {
+        "dti": 0.07475638457717783,
+        "tp": 906.1847241411346,
+        "fp": 5403.00131839662,
+        "truth": 13575
+      },
+      "fusion": {
+        "dti": 0.07941236531769767,
+        "tp": 946.3698598991153,
+        "fp": 4339.429915303479,
+        "truth": 13575
+      },
+      "naive_mean": {
+        "dti": 0.07836792151324022,
+        "tp": 946.3698598991153,
+        "fp": 5133.556111419798,
+        "truth": 13575
+      },
+      "fusion_minus_dotted": 0.005296441145658595
+    }
+  ],
+  "mean_dti": {
+    "dotted": 0.09669976391803661,
+    "tip": 0.09756107959300168,
+    "fusion": 0.105624914993758,
+    "naive_mean": 0.10258210119703932
+  },
+  "fusion_minus_dotted_mean": 0.008925151075721394,
+  "positive_folds_vs_dotted": 4,
+  "gate_rule": "fusion mean > dotted mean and >=3/4 folds positive",
+  "gate_pass": true,
+  "submission_slot_recommendation": "DO NOT SPEND",
+  "status": "RETRACTED \u2014 do not use these DTI scores or gate result",
+  "retraction_reason": "The v1 TP implementation used the distance to any positive prediction but did not multiply by the candidate confidence p(x); it also cropped each quadrant before distance evaluation, truncating cross-block neighborhoods. Both differ from the organizer-defined metric. Replaced by docs/data/proxy-validation.json (v2).",
+  "superseded_by": "docs/data/proxy-validation.json"
+}

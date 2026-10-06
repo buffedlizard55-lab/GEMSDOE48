@@ -1,8 +1,88 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Method · GEMSDOE48</title><link rel="stylesheet" href="assets/style.css"></head><body><header><h1>Method, audit, limitations</h1><nav><a href="index.html">Executive summary</a><a href="hypotheses.html">Hypotheses</a><a href="method.html">Method & evidence</a><a href="sources.html">Sources</a></nav></header><main class="wrap"><h2>Evidence model</h2><p>For source confidence <em>x</em> and reliability discount <em>r</em>:</p><pre>m(F) = r x
-m(not F) = r (1-x)
-m(Θ) = 1-r</pre><p>The two basic assignments are multiplied conjunctively. Conflict is <code>K = m1(F)m2(not F) + m1(not F)m2(F)</code>. Yager's rule assigns <code>K</code> to Θ. The submission is min–max-normalized <code>Bel(F)=m(F)</code>; the diagnostic stores <code>m(Θ)</code>. Discounts 0.90 (dotted) and 0.85 (tip) were fixed before proxy scoring and encode only family ordering—not calibrated probabilities.</p><p>The binary source cases produce submission values 0 (neither), about 0.0863 (tip only), 0.1371 (dotted only), and 1 (agreement). This strongly protects agreement while retaining weaker exclusive evidence. A naïve mean would emit 0, 0.5, and 1.</p><h2>Three verification passes</h2><ol><li><strong>Implementation:</strong> SHA-256-pin parents/template; assert equal CRS, transform, and shape; combine; write all-finite float32; independently re-open.</li><li><strong>Bug/edge review:</strong> test mass conservation, no conflict under agreement, invalid-range rejection, footprint handling, and no nodata sentinel.</li><li><strong>Request re-check:</strong> verify unique hash, not-a-mean check, four spatial proxy blocks, diagnostic layer, one-click primary download, name/note, and source register.</li></ol><h2>Reproduce</h2><pre>python -m venv .venv
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Method and audit · GEMSDOE48</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header>
+  <h1>Method, audit, and limitations</h1>
+  <nav aria-label="Main navigation">
+    <a href="index.html">Executive summary</a>
+    <a href="hypotheses.html">Research hypotheses</a>
+    <a href="method.html">Method and audit</a>
+    <a href="sources.html">Verified sources</a>
+  </nav>
+</header>
+<main class="wrap">
+  <div class="warn"><strong>Decision:</strong> the bounded-screen-distinct GeoTIFF candidate is available for inspection, but the current version is <strong>not slot-cleared</strong>. Corrected DTI evaluation is lower than the best parent and naïve mean on the public SGMC proxy. No DrivenData submission was made.</div>
+
+  <h2>Conflict-preserving evidence fusion</h2>
+  <p>For a binary frame Θ={fault F, not-fault N}, the current implementation discounts each parent confidence <em>x</em> by reliability <em>r</em>:</p>
+  <pre>m(F) = r x
+m(N) = r (1 − x)
+m(Θ) = 1 − r</pre>
+  <p>The conjunctive product gives:</p>
+  <pre>m₁₂(F) = m₁(F)m₂(F) + m₁(F)m₂(Θ) + m₁(Θ)m₂(F)
+m₁₂(N) = m₁(N)m₂(N) + m₁(N)m₂(Θ) + m₁(Θ)m₂(N)
+K      = m₁(F)m₂(N) + m₁(N)m₂(F)
+Yager: m₁₂(Θ) = m₁(Θ)m₂(Θ) + K</pre>
+  <p>The unassigned diagnostic stores Yager’s <code>m(Θ)</code>. <strong>Scientific terminology matters:</strong> classical normalized Dempster combination divides non-empty masses by 1−K and removes the conflict from the normalized result. Yager’s modified Dempster rule transfers K to Θ. Sentz &amp; Ferson (2002) describe both variants.</p>
+  <p>Reliability discounts 0.90 (dotted) and 0.85 (tip) were fixed before the original proxy evaluation; they are heuristic family-level values, not calibrated probabilities. Crucially, this transform interprets a zero in a sparse detector raster as evidence for N. That may be wrong: a zero may simply mean “this detector did not emit a candidate,” i.e. ignorance. The corrected proxy loss makes this semantic assumption a primary reason not to submit. Any redesigned evidence assignment must state whether a silent detector contributes negative evidence or unassigned mass and validate that design without reusing a submission slot.</p>
+
+  <h2>Correct organizer metric implementation</h2>
+  <p>The organizer’s published metric uses α=0.2, β=0.8 and a 300 m triangular kernel, k(d)=max(1−d/300 m,0). For each truth pixel, the true-positive term is the <em>maximum nearby prediction confidence times kernel weight</em>, not just whether any positive cell is nearby:</p>
+  <pre>TPw = Σg maxx [ p(x) k(d(x,g)) ]
+FPw = Σx p(x) [ 1 − maxg k(d(x,g)) ]
+FNw = Σg [ 1 − maxx (p(x) k(d(x,g))) ]
+DTI = TPw / (TPw + 0.2 FPw + 0.8 FNw)</pre>
+  <p><code>src/gems48/validation.py</code> implements these terms using local weighted maxima and full-scene Euclidean distances. The spatial proxy partitions TP/FP/FN contributions into four quadrants but computes neighborhoods on the full raster, avoiding artificial truncation at block borders. Exact known-catalogue fault pixels (labels=1) are excluded following the <a href="https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516">DrivenData staff clarification</a>. SGMC proxy targets within 300 m of known faults are excluded only as a conservative proxy-truth construction choice.</p>
+
+  <h2>Validation correction and retraction</h2>
+  <p>The inherited v1 proxy score was invalid for fractional predictions. It replaced the fusion values with a positive-support mask when calculating TP (<code>distance_transform_edt(pred &lt;= 0)</code> followed by the distance kernel), omitting the required <code>p(x)</code> factor. It also cropped each quadrant before computing distance transforms. That falsely made the v1 fusion appear to beat the dotted parent in all four folds. The v1 result and gate pass have been explicitly <a href="data/proxy-validation-v1-retracted.json">retracted</a>.</p>
+  <p>The v2 exact-metric result is:</p>
+  <table>
+    <thead><tr><th>Surface</th><th>Overall proxy DTI</th><th>Interpretation</th></tr></thead>
+    <tbody>
+      <tr><td>Tip parent</td><td>0.09709</td><td>Best holdout baseline</td></tr>
+      <tr><td>Dotted parent</td><td>0.09613</td><td>Owner-reported public score anchor, not private truth</td></tr>
+      <tr><td>Naïve mean</td><td>0.09030</td><td>Simple fusion comparator</td></tr>
+      <tr><td>Yager fusion</td><td>0.08407</td><td>−0.01302 vs best baseline; loses all 4 quadrants</td></tr>
+    </tbody>
+  </table>
+  <p><strong>Gate: fail. Slot: do not spend.</strong> These are proxy DTI values, not DrivenData scores or a private-test estimate. See <a href="data/proxy-validation.json">the complete hash-pinned fold receipt</a>.</p>
+
+  <h2>Artifact audit and known format conflict</h2>
+  <ul>
+    <li>The primary hash is <code>fe68ae6f57be013e26d20006551b43cd84bb5fe4a0b07d1d10ce4725c90fd16c</code>. It is single-band float32, EPSG:32611, 100 m, 3730×3292, and every value is finite in [0,1].</li>
+    <li>The official problem description says outside-bounds cells should be null/NaN. This candidate writes finite zero outside because the owner encountered a portal “[0,1]” error and NaN fails a naïve range comparison. This is an explicit documented deviation; portal acceptance is not verified.</li>
+    <li>A historical-artifact scan retrieved and blob-hash-verified 336 unique TIFF blobs listed by the owner’s 2026-10-06 inventory. 334 matched the exact prediction grid; two did not. There were no exact raster-value or positive-support-mask matches. The closest positive-support Jaccard was 0.87392 (the tip parent). This bounded owner-repository scan is not global uniqueness proof.</li>
+    <li>The Pearson correlation with the naïve mean is 0.96359, which is high because the parents share 31,614 positive cells. Non-averaging is established by exact comparison: 16,291 cells differ; max absolute difference is 0.41371; pixel equality is false. Correlation alone would not establish non-equivalence.</li>
+    <li>The separate unassigned-belief GeoTIFF is diagnostic only. Do not submit it.</li>
+  </ul>
+  <p>Full receipts: <a href="downloads/gemsdoe48-h48-ds-yager-conflict-20261006-audit.json">build audit</a> · <a href="data/uniqueness-audit.json">historical uniqueness screen</a>.</p>
+
+  <h2>Reproduce</h2>
+  <pre>python -m venv .venv
 .venv/bin/pip install -e . pytest
 bash scripts/fetch_inputs.sh
 .venv/bin/python scripts/build_submission.py
 .venv/bin/python scripts/validate_proxy.py
-.venv/bin/pytest -q</pre><h2>Irregularities and hard limits</h2><ul><li><strong>Rule mismatch:</strong> official text requests null/NaN outside bounds, but the owner reports the portal rejected NaNs as outside [0,1]. The primary is all-finite zero outside, following the observed validator behavior. Portal acceptance is not tested here.</li><li><strong>Score attribution:</strong> 0.2778 and 0.2632 are owner-supplied score-to-family associations. Public leaderboard rows do not reveal file hashes. Treat exact artifact attribution as unverified.</li><li><strong>Validation:</strong> SGMC off-catalogue faults are not hidden expert labels. Spatial blocking reduces geographic leakage but does not remove shared compilation/source bias.</li><li><strong>Evidence independence:</strong> the two families are independently built but overlap 31,614 cells and may share upstream features. Dempster-style combination assumes evidence independence more strongly than can be demonstrated.</li><li><strong>Current target:</strong> official leaderboard was 0.3774 at review, not 0.3195. It can change.</li><li><strong>Access:</strong> this environment can research public sources and build/test files. It has no user's DrivenData session and cannot spend a weekly submission slot or observe a private score. GPU training was not needed for this fusion.</li></ul><h2>What should happen next</h2><ol><li>Run H48-A maxspot persistence from raw potential fields with fold-specific construction.</li><li>Use grouped fault-system holdouts and SGMC only as a secondary proxy; preregister thresholds.</li><li>Compare equal-mass candidates, not only thresholded surfaces.</li><li>Spend a slot only after H48-A beats this fusion and dotted anchor under the frozen gate.</li></ol></main><footer>Every number on this page is backed by the downloadable audit or source register.</footer></body></html>
+.venv/bin/pytest -q</pre>
+  <p>The leaderboard parser passes fixture tests. A live raw-page fetch attempted on 2026-10-06 failed when the sandbox TLS connection closed before HTML arrived. The six-hour GitHub Actions workflow is configured, but Pages deployment settings are not enabled; do not describe the static JSON as an active live feed yet.</p>
+
+  <h2>Limitations and next decisions</h2>
+  <ol>
+    <li>No DrivenData account/session is available; no submission was uploaded, no private score observed, and no portal acceptance verified.</li>
+    <li>The parent scores and exact parent-to-leaderboard attribution are owner-reported; public leaderboard rows do not publish TIFF hashes.</li>
+    <li>The SGMC raster is an owner-derived proxy from a public compilation, not the hidden expert labels. It can share source/compiler bias with known fault data.</li>
+    <li>The two parents overlap heavily (31,614 common positives) and are not demonstrably independent. Dempster–Shafer combination assumptions are therefore weak.</li>
+    <li>The next geological candidate requires gravity/magnetic feature grids not present in this checkout. The official competition data tab is login-gated; GeoDAWN official grids are listed publicly, but the sandbox’s direct USGS transfer failed TLS. No top geological candidate is validated or slot-cleared.</li>
+    <li>The public leader observed 2026-10-06 was 0.3774, not 0.3195. The automatic feed is best-effort and can become stale if GitHub Actions or the source page changes.</li>
+  </ol>
+</main>
+<footer>Own the Outcome: a corrected failing test supersedes an attractive but invalid pass.</footer>
+</body>
+</html>

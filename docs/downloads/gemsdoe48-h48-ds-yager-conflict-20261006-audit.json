@@ -1,9 +1,10 @@
 {
-  "schema": "GEMSDOE48-audit-v1",
-  "generated_utc": "2026-10-06T20:03:26.080217+00:00",
-  "method": "reliability-discounted binary masses; conjunctive rule; Yager transfer of conflict K to Theta; min-max normalized Bel(F)",
-  "scientific_correction": "Classical normalized Dempster's rule renormalizes conflict away. Yager's modified Dempster rule is used because the requested output must preserve disagreement as unassigned mass.",
-  "reliability_discounts_preregistered": {
+  "schema": "GEMSDOE48-audit-v2",
+  "generated_utc": "2026-10-06T20:31:15.483402+00:00",
+  "candidate_status": "RESEARCH CANDIDATE \u2014 NOT CLEARED FOR A COMPETITION SLOT; corrected public-proxy DTI gate failed",
+  "method": "reliability-discounted binary masses; conjunctive combination; Yager transfer of conflict K to Theta; min-max normalized Bel(F)",
+  "scientific_correction": "Classical normalized Dempster's rule divides non-empty masses by 1-K and removes conflict from the normalized result. Yager's modified rule transfers K to Theta. Zero-valued parents are treated here as evidence for not-fault; because these sparse detector rasters may encode silence rather than affirmative negative evidence, that semantic assumption is a major limitation.",
+  "reliability_discounts_fixed_before_proxy_scoring": {
     "dotted": 0.9,
     "tip": 0.85
   },
@@ -21,11 +22,12 @@
       "sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc"
     }
   },
-  "input_counts": {
+  "input_counts_within_footprint": {
     "dotted_positive": 37654,
     "tip_positive": 41865,
     "overlap": 31614,
-    "union": 47905
+    "union": 47905,
+    "exclusive_disagreement": 16291
   },
   "output": {
     "file": "docs/downloads/gemsdoe48-h48-ds-yager-conflict-20261006.tif",
@@ -52,24 +54,39 @@
       100.0
     ],
     "nodata": null,
-    "all_finite": true,
+    "grid_matches_template": true,
     "min": 0.0,
     "max": 1.0,
-    "outside_footprint_all_zero": true,
-    "out_of_range_count": 0,
-    "positive_pixels": 47905
+    "positive_pixels": 47905,
+    "format_checks": {
+      "single_band_float32": true,
+      "epsg_32611": true,
+      "sample_shape_transform_and_crs_match": true,
+      "all_finite": true,
+      "range_0_to_1_including_outside_footprint": true,
+      "outside_footprint_zero_filled": true,
+      "official_null_or_nan_outside_requirement_met": false,
+      "diagnostic_grid_matches_template": true,
+      "diagnostic_all_finite_in_range": true
+    },
+    "portal_range_checks_pass": true,
+    "format_note": "All cells are finite and in [0,1], with zero outside the footprint. The published competition format says null/NaN outside; this all-finite choice is a range-validator workaround, not confirmed portal acceptance."
   },
   "unassigned_diagnostic": {
     "file": "docs/downloads/gemsdoe48-h48-ds-yager-conflict-20261006-unassigned-diagnostic.tif",
     "sha256": "86a470fc184989040e9bfc7a52be70285b9cc3189e620ee777aee1ed49744c4f",
     "min": 0.0,
     "max": 0.7799999713897705,
-    "conflict_positive_pixels": 16291
+    "conflict_positive_pixels": 16291,
+    "positive_diagnostic_pixels": 5167373
   },
   "naive_mean_check": {
     "pearson_correlation": 0.9635867365390772,
+    "mean_absolute_difference": 0.0012449418066261336,
+    "root_mean_square_difference": 0.02221496305914466,
     "max_absolute_difference": 0.41370558738708496,
     "pixel_identical": false,
+    "different_pixels": 16291,
     "pass_not_naive_mean": true
   },
   "mass_checks": {
@@ -79,5 +96,25 @@
     "unassigned_max": 0.78,
     "sum_max_abs_error": 0.0
   },
-  "format_pass": true
+  "historical_uniqueness": {
+    "audit_file": "docs/data/uniqueness-audit.json",
+    "candidate_sha256_matches_audit": true,
+    "artifacts_compared": 334,
+    "exact_prediction_matches": 0,
+    "exact_positive_support_matches": 0,
+    "maximum_positive_support_jaccard": 0.873917127648471,
+    "closest_artifact": {
+      "ok": true,
+      "blob": "c6e73d35a5ee8a36abdd06b7314bf79646c5d7f9",
+      "repo": "GEMSDOE33",
+      "path": "docs/downloads/GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e-nanoutside.tif",
+      "bytes": 966684,
+      "positive_pixels": 41865,
+      "intersection": 41865,
+      "union": 47905,
+      "positive_support_jaccard": 0.873917127648471,
+      "exact_positive_support": false,
+      "exact_prediction_values": false
+    }
+  }
 }

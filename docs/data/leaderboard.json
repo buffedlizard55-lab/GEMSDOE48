@@ -1,0 +1,31 @@
+{
+  "schema": "GEMSDOE48-leaderboard-v1",
+  "observed_at_utc": "2026-10-06",
+  "source_url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+  "refresh_mode": "manual-page-reader-snapshot",
+  "count": 15,
+  "leader": {
+    "rank": 1,
+    "participant": "xiaofanhu",
+    "score": 0.3774
+  },
+  "entries": [
+    {"rank": 1, "participant": "xiaofanhu", "score": 0.3774},
+    {"rank": 2, "participant": "alexoktaba", "score": 0.3345},
+    {"rank": 3, "participant": "nchuzhoy", "score": 0.3262},
+    {"rank": 4, "participant": "kinghorton42", "score": 0.3222},
+    {"rank": 5, "participant": "joeyfezster", "score": 0.3220},
+    {"rank": 6, "participant": "Batik Shirt Brothers", "score": 0.3218},
+    {"rank": 7, "participant": "DARD", "score": 0.3195},
+    {"rank": 8, "participant": "ndavis7", "score": 0.2888},
+    {"rank": 9, "participant": "mzoorob", "score": 0.2884},
+    {"rank": 10, "participant": "GrigorSargsyan", "score": 0.2876},
+    {"rank": 11, "participant": "HardcoreTechGod", "score": 0.2854},
+    {"rank": 12, "participant": "op01", "score": 0.2792},
+    {"rank": 13, "participant": "extradr19", "score": 0.2778},
+    {"rank": 14, "participant": "wbg1", "score": 0.2750},
+    {"rank": 15, "participant": "smashi34", "score": 0.2710}
+  ],
+  "attribution_warning": "Public leaderboard scores are participant scores and are not linked to any local TIFF hash or owner-site artifact.",
+  "refresh_policy": "This manually recorded page-reader snapshot is not a local HTTP fetch. A local live-fetch attempt on 2026-10-06 failed on TLS; fixture tests pass, but live parsing is unverified. The six-hour GitHub Actions workflow is configured, while repository Pages remains on legacy branch deployment; retain this snapshot until Pages is switched and a live workflow succeeds."
+}

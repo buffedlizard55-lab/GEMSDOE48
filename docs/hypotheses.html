@@ -1,1 +1,71 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Hypotheses · GEMSDOE48</title><link rel="stylesheet" href="assets/style.css"></head><body><header><h1>Ranked geological hypotheses</h1><nav><a href="index.html">Executive summary</a><a href="hypotheses.html">Hypotheses</a><a href="method.html">Method & evidence</a><a href="sources.html">Sources</a></nav></header><main class="wrap"><p>These were specified before any new weekly slot. “Not in this repo” means absent from the initial GEMSDOE48 checkout, which contained only a one-line README—not a claim about all prior repositories.</p><table><thead><tr><th>Rank</th><th>Hypothesis / layers</th><th>Physical signature and off-catalogue rationale</th><th>Expected DTI / cost / status</th></tr></thead><tbody><tr><td>1</td><td><strong>H48-A: cross-scale potential-field maxspots</strong><br>RTP magnetics, TMI horizontal/vertical gradients, isostatic gravity and slope</td><td>Connect persistent local maxima of horizontal-gradient magnitude across upward-continuation scales, then require gravity–magnetic edge agreement. Abrupt density/magnetization boundaries can reveal concealed basin faults beneath alluvium, where a surface-trace catalogue is least complete. Unlike prior thresholded Euler/ridge outputs, this targets <em>scale persistence and connected maxspot topology</em> using the 2025 USGS pymaxspots method.</td><td><strong>High</strong> / medium. Data are obtainable: the competition feature stack and official GeoDAWN release. Not implemented; therefore no slot.</td></tr><tr><td>2</td><td><strong>H48-B: radiometric alteration-edge asymmetry</strong><br>K, eU, eTh, K/eTh plus detrended slope</td><td>Oriented phase congruency on K/eTh boundaries, retained only where opposite fault flanks show asymmetric alteration and no topographic ridge artifact. Fluid-rock alteration may make previously unmapped permeable structures visible even without scarps. Prior work used radiometric corroboration/population, not directional cross-fault asymmetry.</td><td><strong>Medium-high</strong> / medium. GeoDAWN radiometrics are officially obtainable.</td></tr><tr><td>3</td><td><strong>H48-C: strain–seismicity corridor breaks</strong><br>dilatation, shear strain, second invariant, earthquake density</td><td>Tensor-invariant ridge intersections and change points along aseismic gaps. Distributed strain aligned across a low-earthquake segment can indicate a locked or blind continuation omitted from surface inventories. Differs from scalar strain weighting by using orientation coherence and along-strike changepoints.</td><td><strong>Medium</strong> / low-medium. Provided layers suffice.</td></tr><tr><td>4</td><td><strong>H48-D: alluvial scarp curvature polarity pairs</strong><br>official 1 m 3DEP DEM, multi-azimuth openness, profile curvature</td><td>Paired positive/negative curvature at consistent offset across fan surfaces, robust across illumination azimuths. Subtle young scarps in alluvium are precisely where small traces may be absent from regional catalogues. Differs from ridge/openness detectors by requiring signed curvature-pair geometry and fan-surface context.</td><td><strong>Medium</strong> / high. USGS says 3DEP is free and without use restrictions; competition provides tile URLs.</td></tr><tr><td>5</td><td><strong>H48-E: conductivity-base rupture concordance</strong><br>surface conductivity, depth to conductive base, gravity edge</td><td>Co-located lateral conductivity gradient and conductive-base curvature break along a gravity edge. A buried permeable fault may juxtapose basin fill and alter fluids without a mapped surface trace. Differs from prior clay-cap breach ideas by requiring depth-surface rupture geometry rather than low conductivity alone.</td><td><strong>Medium-low</strong> / low. Provided feature stack suffices.</td></tr></tbody></table><h2>Validation decision</h2><p>H48-A is the best new geological detector but has not been trained or spatially held out, so it is <strong>not slot-cleared</strong>. The urgent H48 fusion requested in the brief is a separate, frozen meta-hypothesis over two existing families. It passed the four-block SGMC proxy (+0.00893 mean DTI, 4/4 positive) but remains proxy-only. No automated competition submission was made.</p><p class="warn">The free-source availability check is documented on the <a href="sources.html">source register</a>. External-data use must still satisfy the competition rules and sponsor-sharing requirement.</p></main><footer>GEMSDOE48 research registry</footer></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ranked geological hypotheses · GEMSDOE48</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header>
+  <h1>Ranked next geological hypotheses</h1>
+  <nav aria-label="Main navigation">
+    <a href="index.html">Executive summary</a>
+    <a href="hypotheses.html">Research hypotheses</a>
+    <a href="method.html">Method and audit</a>
+    <a href="sources.html">Verified sources</a>
+  </nav>
+</header>
+<main class="wrap">
+  <div class="warn"><strong>Important chronology note:</strong> this checkout arrived with the H48 fusion already implemented and an H48-A–E idea list. That list was not a verifiable preregistration. During review, the proxy scorer was corrected, the fusion failed, and the former claim that H48-A (TMI scale-persistence) was new was withdrawn: GEMSDOE47 already tested a TMI-up150 cross-scale persistence arm and reported it losing to a random control. The following are prospective, falsifiable ideas; none is validated or slot-cleared.</div>
+
+  <h2>Completed gate for the urgent fusion</h2>
+  <p>The requested dotted+tip Yager fusion was checked against a fixed spatially partitioned SGMC proxy using the official DTI equation, including fractional confidence. It scored 0.08407 vs the strongest baseline tip surface at 0.09709, with no wins in four quadrants. The previous apparent pass was retracted. <strong>Do not spend a slot on this fusion.</strong> Detailed inputs, folds, and code are linked in the <a href="data/proxy-validation.json">v2 receipt</a>.</p>
+
+  <h2>Prospective candidate ranking</h2>
+  <p>Ranking is qualitative expected upside relative to the corrected proxy anchor. No numerical expected ΔDTI is justified before spatial validation; every candidate could be neutral or negative. “Novel” below means distinct from the named experiments reviewed, not proof that no participant has ever tried it.</p>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Rank / relative upside</th><th>Layers and physical signature</th><th>Why it may find an uncatalogued fault; distinction from prior work</th><th>Cost / official data check / status</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>1 · highest relative potential</strong><br>H48-A: co-located gravity–magnetic edge geometry</td>
+          <td><strong>Layers:</strong> isostatic gravity anomaly and slope; reduced-to-pole magnetics; TMI horizontal/vertical gradients; detrended-elevation slope as a nuisance-control layer.<br><strong>Signature:</strong> compute oriented horizontal-gradient maxima; retain line segments where gravity and magnetic edges are co-located and strike-coherent, then downweight edges explained by topographic slope or survey seams.</td>
+          <td>A buried fault/contact may juxtapose density and magnetization contrasts beneath alluvium without a surface scarp in USGS/INGENIOUS. Non-fault mimics include lithologic contacts, intrusions, and survey-processing seams; therefore agreement and seam controls are essential. Distinct from <a href="https://github.com/buffedlizard55-lab/GEMSDOE47/blob/main/docs/validation-h47b-20261006.md">GEMSDOE47 H47-B’s single TMI_up150 scale-persistence detector</a> (an owner-reported public-proxy trial that lost to a random control) and from generic ridge stacking: this hypothesis requires cross-physical-property edge geometry and a topographic nuisance test.</td>
+          <td><strong>Cost:</strong> medium.<br><strong>Expected gain:</strong> highest qualitative upside in this list, not numerically forecast.<br><strong>Sources:</strong> official competition <code>training_features.tif</code> lists gravity and magnetic layers but requires DrivenData login; USGS GeoDAWN lists public area TIF archives; USGS Nevada gravity Data Series 42 lists an accessible 4.2 MB data ZIP. Metadata/link presence was verified; direct USGS byte transfer failed TLS in this sandbox, and no matching layers are in this checkout.<br><strong>Status:</strong> hypothesis only; blocked pending verified local rasters and spatial holdout.</td>
+        </tr>
+        <tr>
+          <td><strong>2 · medium-high relative potential</strong><br>H48-B: 3-D hypocenter planes with focal-mechanism consistency</td>
+          <td><strong>Layers:</strong> USGS ComCat event latitude/longitude/depth/time, focal mechanisms (strike/dip/rake), with provided strain invariants as optional context.<br><strong>Signature:</strong> robust 3-D plane/line clustering of hypocenters, requiring consistent focal-mechanism nodal-plane orientations; project supported planes to the surface with uncertainty footprints.</td>
+          <td>A buried active structure can host a plane of seismicity without a surface trace. Non-fault mimics include volcanic/hydrothermal swarms, quarry blasts, and poorly located events. This differs from the competition’s 2-D earthquake-density layer and the prior H47-GSA strain/thermal association: the feature is event-level 3-D geometry and mechanism coherence. It remains a hypothesis, not evidence that seismicity marks geothermal vents.</td>
+          <td><strong>Cost:</strong> medium-high.<br><strong>Expected gain:</strong> medium-high qualitative upside; magnitude unknown.<br><strong>Source check:</strong> official USGS FDSN ComCat API is public. For the approximate GeoDAWN bounding box and M≥2 since 2000, live count requests returned 16,919 events, 5,292 with focal-mechanism products, and 474 with moment-tensor products on 2026-10-06. The API is obtainable; the point-level response has not been ingested into this repo.<br><strong>Status:</strong> source available; model and blocked validation not run.</td>
+        </tr>
+        <tr>
+          <td><strong>3 · medium relative potential</strong><br>H48-C: fault-related drainage deflection on lidar terrain</td>
+          <td><strong>Layers:</strong> competition 1 m DEM tile list or USGS 3DEP bare-earth DEMs.<br><strong>Signature:</strong> extract channels from multi-scale flow accumulation; score abrupt lateral offsets, paired channel bends, and aligned knickpoints on alluvial fans, with stream-order and fan-surface controls.</td>
+          <td>Young blind or subtle faults can deform drainage and fan surfaces where relief is too small or eroded for a continuous scarp. Non-fault mimics include lithologic changes, fan avulsion, landslides, roads, and incision. Prior H20/H25/H28/H47 methods focused on scarps, ridges, or persistence; this targets channel-network displacement geometry rather than a scarp line.</td>
+          <td><strong>Cost:</strong> high (terrain tiling, flow routing, edge harmonization).<br><strong>Expected gain:</strong> medium qualitative upside.<br><strong>Source check:</strong> USGS states 3DEP products are free and without use restrictions, and the competition lists 1 m DEM links. Exact 1 m coverage for every holdout block was not inventoried here.<br><strong>Status:</strong> not viable for scoring until coverage and tile seams are audited.</td>
+        </tr>
+        <tr>
+          <td><strong>4 · lower relative potential</strong><br>H48-D: signed radiometric alteration asymmetry across candidate structures</td>
+          <td><strong>Layers:</strong> GeoDAWN potassium, equivalent uranium, equivalent thorium and K/eTh or K/eU ratios; survey block/flight-height metadata; detrended slope for confound control.<br><strong>Signature:</strong> oriented cross-strike paired-flank ratio contrast and phase-consistent boundaries after within-survey normalization.</td>
+          <td>Hydrothermal fluid-rock interaction may alter near-surface radiometric composition adjacent to permeable structures that are not mapped. Non-fault mimics include lithologic boundaries, soil moisture, vegetation/cover, and survey seams. GEMSDOE46 already explored scarp/radiometric concordance; this tests signed cross-fault asymmetry rather than simply requiring a radiometric/scarp overlap.</td>
+          <td><strong>Cost:</strong> medium.<br><strong>Expected gain:</strong> low-medium qualitative upside because related radiometric fusion was already tried.<br><strong>Source check:</strong> USGS GeoDAWN release lists radiometric products and TIF archives; the files are public by catalog listing, but direct bytes were not retrieved in this environment.<br><strong>Status:</strong> exploratory; not validated.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Slot rule and next action</h2>
+  <ol>
+    <li>Restore raw rasters from official source; verify DOI/license, coverage, CRS, grid, survey seams, and a content hash.</li>
+    <li>Pre-register one detector, its physical rationale, non-fault confounds, thresholds, and a single promotion rule before scoring.</li>
+    <li>Build fold-specific predictions without consulting held-out proxy labels; score with <code>src/gems48/validation.py</code>, exact catalogue masking, and at least four geographically blocked folds.</li>
+    <li>Require improvement over the corrected tip/dotted holdout best and stability across blocks. Proxy improvement is necessary here, not proof of a higher private score.</li>
+    <li>Do not use a weekly slot until the gate passes. No DrivenData upload was made in this session.</li>
+  </ol>
+  <p class="small">Official links and availability classifications are in the <a href="sources.html">source register</a>. The USGS/ScienceBase records were accessible through the page reader; direct shell downloads of .gov hosts failed TLS in this sandbox, so no binary retrieval is claimed.</p>
+</main>
+<footer>Contrarian hypotheses are useful only when they are falsifiable, source-grounded, and blocked-tested.</footer>
+</body>
+</html>

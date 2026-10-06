@@ -1,134 +1,259 @@
 {
-  "schema": "GEMSDOE48-proxy-v1",
-  "protocol": "four fixed spatial quadrants; USGS SGMC-derived faults >=300 m from public catalogue",
-  "warning": "Proxy only. Not private expert truth; SGMC provenance and source dependence prevent a slot-clearance claim.",
-  "folds": [
-    {
-      "fold": 0,
-      "truth_pixels": 23570,
-      "dotted": {
-        "dti": 0.10283087961466006,
-        "tp": 2336.3019888183835,
-        "fp": 16982.939677364408,
-        "truth": 23570
-      },
-      "tip": {
-        "dti": 0.10317949406871053,
-        "tp": 2384.583134142315,
-        "fp": 18890.506356524522,
-        "truth": 23570
-      },
-      "fusion": {
-        "dti": 0.11030274597868317,
-        "tp": 2467.52887232015,
-        "fp": 15105.029757408729,
-        "truth": 23570
-      },
-      "naive_mean": {
-        "dti": 0.10757923741363877,
-        "tp": 2467.52887232015,
-        "fp": 17936.723016944467,
-        "truth": 23570
-      },
-      "fusion_minus_dotted": 0.007471866364023111
-    },
-    {
-      "fold": 1,
-      "truth_pixels": 23522,
-      "dotted": {
-        "dti": 0.09931783125979113,
-        "tp": 2082.934678264642,
-        "fp": 8691.13549804615,
-        "truth": 23522
-      },
-      "tip": {
-        "dti": 0.10104262164896766,
-        "tp": 2142.5443712496826,
-        "fp": 9791.267824652125,
-        "truth": 23522
-      },
-      "fusion": {
-        "dti": 0.10721747571318478,
-        "tp": 2229.5791185291046,
-        "fp": 7657.034334104552,
-        "truth": 23522
-      },
-      "naive_mean": {
-        "dti": 0.1056084156171928,
-        "tp": 2229.5791185291046,
-        "fp": 9241.201661349136,
-        "truth": 23522
-      },
-      "fusion_minus_dotted": 0.007899644453393653
-    },
-    {
-      "fold": 2,
-      "truth_pixels": 2454,
-      "dotted": {
-        "dti": 0.11053442062565616,
-        "tp": 326.6835000377195,
-        "fp": 4634.772164387814,
-        "truth": 2454
-      },
-      "tip": {
-        "dti": 0.11126581807715075,
-        "tp": 341.6797495721669,
-        "fp": 5196.530351828833,
-        "truth": 2454
-      },
-      "fusion": {
-        "dti": 0.12556707296546638,
-        "tp": 358.45902131653173,
-        "fp": 4099.148416164926,
-        "truth": 2454
-      },
-      "naive_mean": {
-        "dti": 0.11877283024408551,
-        "tp": 358.45902131653173,
-        "fp": 4915.6512581083225,
-        "truth": 2454
-      },
-      "fusion_minus_dotted": 0.015032652339810215
-    },
-    {
-      "fold": 3,
-      "truth_pixels": 13575,
-      "dotted": {
-        "dti": 0.07411592417203908,
-        "tp": 890.1960927212358,
-        "fp": 4864.110904442975,
-        "truth": 13575
-      },
-      "tip": {
-        "dti": 0.07475638457717783,
-        "tp": 906.1847241411346,
-        "fp": 5403.00131839662,
-        "truth": 13575
-      },
-      "fusion": {
-        "dti": 0.07941236531769767,
-        "tp": 946.3698598991153,
-        "fp": 4339.429915303479,
-        "truth": 13575
-      },
-      "naive_mean": {
-        "dti": 0.07836792151324022,
-        "tp": 946.3698598991153,
-        "fp": 5133.556111419798,
-        "truth": 13575
-      },
-      "fusion_minus_dotted": 0.005296441145658595
-    }
-  ],
-  "mean_dti": {
-    "dotted": 0.09669976391803661,
-    "tip": 0.09756107959300168,
-    "fusion": 0.105624914993758,
-    "naive_mean": 0.10258210119703932
+  "schema": "GEMSDOE48-proxy-v2",
+  "generated_utc": "2026-10-06T20:31:22.484931+00:00",
+  "validation_type": "fixed-prediction spatial proxy assessment; no fitting or threshold selection on proxy labels",
+  "protocol": {
+    "blocks": "four fixed full-scene quadrants; full-scene distance neighborhoods are used, then TP/FP/FN terms are accumulated by block",
+    "truth": "owner-mirrored USGS State Geologic Map Compilation-derived binary raster; SGMC-positive pixels at least 300 m from known-catalogue positive pixels",
+    "evaluation_mask": "finite sample-submission footprint excluding exact known-fault pixels (labels == 1), in accordance with the organizer staff clarification",
+    "metric": "official distance-weighted Tversky index: TP=sum_g max_x[p(x)k(d)], FP=sum_x[p(x)(1-max_g k(d))], FN=sum_g[1-max_x(p(x)k(d))], alpha=0.2, beta=0.8, triangular radius=300 m",
+    "kernel": "k(d)=max(1-d/300 m, 0); prediction confidence is included in the TP maximum"
   },
-  "fusion_minus_dotted_mean": 0.008925151075721394,
-  "positive_folds_vs_dotted": 4,
-  "gate_rule": "fusion mean > dotted mean and >=3/4 folds positive",
-  "gate_pass": true,
-  "submission_slot_recommendation": "DO NOT SPEND"
+  "warning": "Proxy only, not private expert truth or an organizer score. SGMC compilation/source bias remains; no claim that this is a model-training holdout or a leaderboard forecast.",
+  "inputs": {
+    "dotted": {
+      "file": "data/raw/dotted.tif",
+      "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9"
+    },
+    "tip": {
+      "file": "data/raw/tip.tif",
+      "sha256": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757"
+    },
+    "template": {
+      "file": "data/raw/sample_submission.tif",
+      "sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc"
+    },
+    "labels": {
+      "file": "data/raw/labels.tif",
+      "sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093"
+    },
+    "sgmc_proxy": {
+      "file": "data/raw/external/derived_sgmc_faults_100m_u8.tif",
+      "sha256": "643cbe992ef4ba37588fb469163ed8291e3ceb23d6c1f78a3cfaa462430c2da0"
+    }
+  },
+  "counts": {
+    "grid_pixels": 12279160,
+    "valid_footprint_pixels": 5167373,
+    "known_fault_pixels_excluded_exactly": 60988,
+    "raw_sgmc_proxy_pixels": 83593,
+    "off_catalogue_proxy_truth_pixels": 63121,
+    "pixel_size_yx_m": [
+      100.0,
+      100.0
+    ],
+    "radius_m": 300.0
+  },
+  "scores": {
+    "dotted": {
+      "overall": {
+        "dti": 0.09613245848105109,
+        "tp": 5639.032604727894,
+        "fp": 35171.90096026659,
+        "fn": 57481.967395272106,
+        "truth_pixels": 63121,
+        "prediction_mass": 37654.0,
+        "evaluated_pixels": 5106385
+      },
+      "northwest": {
+        "dti": 0.10283178750430862,
+        "tp": 2336.302050013095,
+        "fp": 16981.93963742256,
+        "fn": 21233.697949986905,
+        "truth_pixels": 23570,
+        "prediction_mass": 18028.0,
+        "evaluated_pixels": 2419711
+      },
+      "northeast": {
+        "dti": 0.09944221720315752,
+        "tp": 2085.596286367625,
+        "fp": 8691.135465681553,
+        "fn": 21436.403713632375,
+        "truth_pixels": 23522,
+        "prediction_mass": 9588.0,
+        "evaluated_pixels": 1353835
+      },
+      "southwest": {
+        "dti": 0.11061867701436451,
+        "tp": 326.9381527751684,
+        "fp": 4634.772157967091,
+        "fn": 2127.0618472248316,
+        "truth_pixels": 2454,
+        "prediction_mass": 4795.0,
+        "evaluated_pixels": 554662
+      },
+      "southeast": {
+        "dti": 0.07411599664617786,
+        "tp": 890.1961155720055,
+        "fp": 4864.053699195385,
+        "fn": 12684.803884427994,
+        "truth_pixels": 13575,
+        "prediction_mass": 5243.0,
+        "evaluated_pixels": 778177
+      }
+    },
+    "tip": {
+      "overall": {
+        "dti": 0.09709394440334579,
+        "tp": 5777.908327706158,
+        "fp": 39280.248560249805,
+        "fn": 57343.09167229384,
+        "truth_pixels": 63121,
+        "prediction_mass": 41865.0,
+        "evaluated_pixels": 5106385
+      },
+      "northwest": {
+        "dti": 0.10318038965691156,
+        "tp": 2384.5831964053214,
+        "fp": 18889.506312966347,
+        "fn": 21185.41680359468,
+        "truth_pixels": 23570,
+        "prediction_mass": 19978.0,
+        "evaluated_pixels": 2419711
+      },
+      "northeast": {
+        "dti": 0.10116560378647525,
+        "tp": 2145.2059810347855,
+        "fp": 9791.267789840698,
+        "fn": 21376.794018965214,
+        "truth_pixels": 23522,
+        "prediction_mass": 10727.0,
+        "evaluated_pixels": 1353835
+      },
+      "southwest": {
+        "dti": 0.11134689754179411,
+        "tp": 341.93440260738134,
+        "fp": 5196.53034478426,
+        "fn": 2112.0655973926187,
+        "truth_pixels": 2454,
+        "prediction_mass": 5367.0,
+        "evaluated_pixels": 554662
+      },
+      "southeast": {
+        "dti": 0.07475645704685087,
+        "tp": 906.18474765867,
+        "fp": 5402.944112658501,
+        "fn": 12668.81525234133,
+        "truth_pixels": 13575,
+        "prediction_mass": 5793.0,
+        "evaluated_pixels": 778177
+      }
+    },
+    "fusion": {
+      "overall": {
+        "dti": 0.08407041763275669,
+        "tp": 4851.45221870672,
+        "fp": 31199.585153132677,
+        "fn": 58269.54778129328,
+        "truth_pixels": 63121,
+        "prediction_mass": 33326.4213218689,
+        "evaluated_pixels": 5106385
+      },
+      "northwest": {
+        "dti": 0.09223002089872559,
+        "tp": 2055.616173999384,
+        "fp": 15104.029722675681,
+        "fn": 21514.383826000616,
+        "truth_pixels": 23570,
+        "prediction_mass": 16020.878173559904,
+        "evaluated_pixels": 2419711
+      },
+      "northeast": {
+        "dti": 0.08516450963408863,
+        "tp": 1763.0429281834513,
+        "fp": 7657.034307181835,
+        "fn": 21758.95707181655,
+        "truth_pixels": 23522,
+        "prediction_mass": 8410.25380769372,
+        "evaluated_pixels": 1353835
+      },
+      "southwest": {
+        "dti": 0.09386760245116489,
+        "tp": 266.23448232840747,
+        "fp": 4099.148411035538,
+        "fn": 2187.7655176715925,
+        "truth_pixels": 2454,
+        "prediction_mass": 4229.25380730629,
+        "evaluated_pixels": 554662
+      },
+      "southeast": {
+        "dti": 0.06451869508830428,
+        "tp": 766.5586341954768,
+        "fp": 4339.372712239623,
+        "fn": 12808.441365804523,
+        "truth_pixels": 13575,
+        "prediction_mass": 4666.035533308983,
+        "evaluated_pixels": 778177
+      }
+    },
+    "naive_mean": {
+      "overall": {
+        "dti": 0.09030297006896629,
+        "tp": 5328.573239909485,
+        "fp": 37226.0747602582,
+        "fn": 57792.426760090515,
+        "truth_pixels": 63121,
+        "prediction_mass": 39759.5,
+        "evaluated_pixels": 5106385
+      },
+      "northwest": {
+        "dti": 0.09725855786917116,
+        "tp": 2226.0891208797693,
+        "fp": 17935.722975194454,
+        "fn": 21343.91087912023,
+        "truth_pixels": 23570,
+        "prediction_mass": 19003.0,
+        "evaluated_pixels": 2419711
+      },
+      "northeast": {
+        "dti": 0.09294825604759019,
+        "tp": 1957.2381933666766,
+        "fp": 9241.201627761126,
+        "fn": 21564.761806633323,
+        "truth_pixels": 23522,
+        "prediction_mass": 10157.5,
+        "evaluated_pixels": 1353835
+      },
+      "southwest": {
+        "dti": 0.10114953448513152,
+        "tp": 304.17333143018186,
+        "fp": 4915.651251375675,
+        "fn": 2149.826668569818,
+        "truth_pixels": 2454,
+        "prediction_mass": 5081.0,
+        "evaluated_pixels": 554662
+      },
+      "southeast": {
+        "dti": 0.06977010149550605,
+        "tp": 841.0725942328572,
+        "fp": 5133.498905926943,
+        "fn": 12733.927405767143,
+        "truth_pixels": 13575,
+        "prediction_mass": 5518.0,
+        "evaluated_pixels": 778177
+      }
+    }
+  },
+  "blocked_comparison": {
+    "anchor_selected_by_overall_proxy_dti": "tip",
+    "pooled_dti_deltas_fusion_minus_each_baseline": {
+      "dotted": -0.012062040848294403,
+      "tip": -0.0130235267705891,
+      "naive_mean": -0.0062325524362095985
+    },
+    "fold_deltas_fusion_minus_selected_anchor": {
+      "northwest": -0.010950368758185974,
+      "northeast": -0.016001094152386625,
+      "southwest": -0.01747929509062922,
+      "southeast": -0.010237761958546587
+    },
+    "positive_folds_vs_selected_anchor": 0,
+    "gate_rule": "fusion overall DTI must exceed the best of dotted, tip, and naive mean and beat that selected anchor in at least 3 of 4 quadrants",
+    "gate_pass": false,
+    "submission_slot_recommendation": "DO NOT SPEND: this public proxy cannot clear a private-label slot gate; no DrivenData submission was made"
+  },
+  "fusion_artifact": {
+    "file": "docs/downloads/gemsdoe48-h48-ds-yager-conflict-20261006.tif",
+    "sha256": "fe68ae6f57be013e26d20006551b43cd84bb5fe4a0b07d1d10ce4725c90fd16c"
+  }
 }

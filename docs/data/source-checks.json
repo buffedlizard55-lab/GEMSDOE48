@@ -1,0 +1,91 @@
+{
+  "schema": "GEMSDOE48-source-checks-v1",
+  "checked_date_utc": "2026-10-06",
+  "checks": [
+    {
+      "topic": "Competition task and feature list",
+      "source": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+      "verified_from_page": [
+        "task is fault prediction for previously unmapped structures indicative of geothermal resources",
+        "training_features.tif includes isostatic gravity anomaly/slope, magnetic anomaly and gradients, strain layers, earthquake density, conductivity/depth, and terrain features",
+        "the official metric is distance-weighted Tversky with alpha=0.2, beta=0.8, and 300 m triangular support",
+        "submissions are single-band float32 GeoTIFF in EPSG:32611 at 100 m with bounds matching the template and null/NaN outside"
+      ],
+      "limitation": "The official competition data download page requires login in this environment; training_features.tif is not present in this checkout."
+    },
+    {
+      "topic": "USGS GeoDAWN magnetic/radiometric products",
+      "source": "https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7",
+      "doi": "10.5066/P93LGLVQ",
+      "catalog_listing_verified": true,
+      "public_tiff_archives_listed": [
+        {"file": "22103_area1_tiffs.zip", "catalog_size": "43.57 MB"},
+        {"file": "22103_area2_tiffs.zip", "catalog_size": "230.54 MB"}
+      ],
+      "transfer_test": "The item page and attached-file listing were readable. A direct shell HTTPS request to the ScienceBase download URL failed TLS in this sandbox; file bytes were not downloaded or hashed here.",
+      "scope_caution": "GeoDAWN raw survey products are not automatically equivalent to the competition-aligned feature stack; flight blocks/resolution and gridding must be reconciled."
+    },
+    {
+      "topic": "DrivenData public leaderboard scraper connectivity",
+      "source": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+      "check_date_utc": "2026-10-06",
+      "attempt": "Ran scripts/refresh_leaderboard.py with its standard-library urllib live-fetch path.",
+      "result": "TLS/SSL connection closed by peer (EOF) in this sandbox before HTML was returned; therefore the parser was not tested against live raw HTML and no refresh JSON was written.",
+      "implication": "Fixture tests pass. The scheduled Ubuntu-hosted Action may have different network access, but live parse success is not established. Retain the dated snapshot until the workflow is observed succeeding."
+    },
+    {
+      "topic": "GitHub Pages deployment source",
+      "endpoint": "https://api.github.com/repos/buffedlizard55-lab/GEMSDOE48/pages",
+      "check_date_utc": "2026-10-06",
+      "observed_settings": {"build_type": "legacy", "source_branch": "main", "source_path": "/"},
+      "consequence": "The scheduled workflow is present in this branch but the currently published Pages site still uses legacy branch deployment. No repository setting was changed; switching requires Pages and Administration write permissions."
+    },
+    {
+      "topic": "USGS Nevada gravity data",
+      "source": "https://pubs.usgs.gov/dds/dds-42/",
+      "doi": "10.3133/ds42",
+      "page_verified": true,
+      "published_coverage": "Nevada and adjacent parts of California, Utah, and Arizona; the USGS page reports about 80,000 gravity stations and describes processed complete Bouguer/isostatic anomalies.",
+      "public_archive_listed": "https://pubs.usgs.gov/dds/dds-42/DDS_42_DATA.zip (USGS page lists a 4.2 MB ZIP)",
+      "transfer_test": "The official page and direct download link were readable through the page tool; direct shell HTTPS transfer failed TLS, so bytes were not downloaded or hashed here.",
+      "usage_caution": "Station data must be gridded/reprojected and uncertainty/coverage assessed before combining with 100 m competition rasters. External-data terms must still be checked against contest rules."
+    },
+    {
+      "topic": "USGS ComCat/FDSN earthquake service availability for the GeoDAWN area",
+      "documentation": "https://earthquake.usgs.gov/fdsnws/event/1/",
+      "query_bbox_wgs84": {"min_latitude": 37.3641, "max_latitude": 40.7247, "min_longitude": -120.0024, "max_longitude": -116.1415},
+      "query_parameters": {"starttime": "2000-01-01", "minmagnitude": 2.0},
+      "observed_count_queries_2026_10_06": {
+        "all_events": {"count": 16919, "url": "https://earthquake.usgs.gov/fdsnws/event/1/count?format=text&starttime=2000-01-01&minlatitude=37.3641&maxlatitude=40.7247&minlongitude=-120.0024&maxlongitude=-116.1415&minmagnitude=2.0"},
+        "focal_mechanism_products": {"count": 5292, "url": "https://earthquake.usgs.gov/fdsnws/event/1/count?format=text&starttime=2000-01-01&minlatitude=37.3641&maxlatitude=40.7247&minlongitude=-120.0024&maxlongitude=-116.1415&minmagnitude=2.0&producttype=focal-mechanism"},
+        "moment_tensor_products": {"count": 474, "url": "https://earthquake.usgs.gov/fdsnws/event/1/count?format=text&starttime=2000-01-01&minlatitude=37.3641&maxlatitude=40.7247&minlongitude=-120.0024&maxlongitude=-116.1415&minmagnitude=2.0&producttype=moment-tensor"}
+      },
+      "availability_status": "Official count endpoint responded to live queries; no event-level payload was downloaded into the repository.",
+      "caution": "Counts depend on the query and catalog revision; focal mechanisms are concentrated among larger events and can be spatially/temporally biased."
+    },
+    {
+      "topic": "USGS 3DEP data and DEM coverage",
+      "source": "https://www.usgs.gov/3d-elevation-program/about-3dep-products-services",
+      "verified_statement": "USGS says 3DEP products are free of charge and without use restrictions.",
+      "competition_source": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/ (1m_DEM_links.csv is listed on the competition data page)",
+      "coverage_status": "The 3DEP service/catalog is available, but per-tile 1 m coverage for every spatial block was not inventoried; no new DEM was downloaded."
+    },
+    {
+      "topic": "Official known-fault scoring mask clarification",
+      "source": "https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516",
+      "verified_statement": "DrivenData staff state that pixels corresponding to known USGS/INGENIOUS faults are masked/excluded from evaluation and do not count toward penalty terms.",
+      "implementation": "Proxy evaluator excludes exact labels==1 pixels from all DTI terms; it separately uses a 300 m distance buffer only to define an off-catalogue SGMC proxy truth."
+    },
+    {
+      "topic": "SGMC proxy provenance",
+      "official_source": "https://mrdata.usgs.gov/geology/state/",
+      "official_dataset_note": "USGS describes a national State Geologic Map Compilation containing structural line features (mostly faults for some states); the project raster in this repo is an owner-derived mirror, not an official USGS raster.",
+      "limitation": "The derived 100 m SGMC raster is not private expert truth; exact owner derivation is not independently reconstructed in this repository."
+    }
+  ],
+  "global_limitations": [
+    "Source page or API response availability does not prove full spatial coverage, correct licensing for every derived product, or predictive value.",
+    "DrivenData contest rules allow external data only when the entrant has a license permitting use in the challenge and sharing with the sponsor; verify this before using third-party data.",
+    "The shell sandbox could not directly download USGS .gov binary files because TLS handshakes failed; metadata/API count checks are not binary checksum verification."
+  ]
+}

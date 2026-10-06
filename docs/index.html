@@ -1,1 +1,116 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>GEMSDOE48 · Conflict-preserving fault evidence</title><link rel="stylesheet" href="assets/style.css"></head><body><header><p>DOE GEMS Prize · auditable research submission</p><h1>Two fault families.<br>Disagreement preserved.</h1><p>GEMSDOE48 fuses the strongest dotted-spacing and fault-tip/step-over families with reliability-discounted evidence masses. Conflict is transferred to unassigned belief—not silently averaged away.</p><nav><a href="index.html">Executive summary</a><a href="hypotheses.html">Hypotheses</a><a href="method.html">Method & evidence</a><a href="sources.html">Verified sources</a></nav></header><main class="wrap"><section class="download"><h2 style="margin-top:0">Download the competition GeoTIFF</h2><p><a class="button" href="downloads/gemsdoe48-h48-ds-yager-conflict-20261006.tif" download>⬇ Submission .tif</a><a class="button alt" href="downloads/gemsdoe48-h48-ds-yager-conflict-20261006.zip" download>⬇ Single-file .zip</a></p><p><strong>Submission name:</strong> <code>GEMSDOE48-H48-DS-CONFLICT</code><br><strong>Note to paste:</strong> <code>H48 conflict-preserving dotted+tip evidence fusion; Yager transfer of DS conflict to uncertainty; 4/4 SGMC proxy folds positive; all-finite [0,1]</code></p><p class="small">Primary SHA-256: <code>fe68ae6f57be013e26d20006551b43cd84bb5fe4a0b07d1d10ce4725c90fd16c</code></p></section><h2>Independent format receipt</h2><div class="grid"><div class="stat"><strong>1 band</strong>float32 GeoTIFF</div><div class="stat"><strong>EPSG:32611</strong>100 m pixels</div><div class="stat"><strong>3730 × 3292</strong>exact template grid</div><div class="stat"><strong>0.0–1.0</strong>all 12,279,160 cells finite</div><div class="stat"><strong>47,905</strong>positive cells</div><div class="stat"><strong>0</strong>out-of-range cells / NaNs</div></div><p><a href="downloads/gemsdoe48-h48-ds-yager-conflict-20261006-audit.json">Machine-readable byte audit</a>. The file has no nodata tag and uses finite zero outside the footprint to avoid the owner-reported portal range failure.</p><h2>What is unique</h2><p>The output is generated from two independently constructed binary surfaces: 37,654 dotted-family cells and 41,865 tip-family cells, with 31,614 in common. A reliability-discounted evidence rule produces three confidence levels rather than the naïve mean's two levels. The result is byte-distinct from both parents and not pixel-identical to their mean.</p><div class="grid"><div class="stat"><strong>0.96359</strong>Pearson r vs naïve mean</div><div class="stat"><strong>0.41371</strong>maximum absolute difference</div><div class="stat"><strong>16,291</strong>conflicting/disagreeing cells</div></div><p><a class="button alt" href="downloads/gemsdoe48-h48-ds-yager-conflict-20261006-unassigned-diagnostic.tif" download>Download unassigned-belief diagnostic</a></p><div class="warn"><strong>Scientific correction:</strong> classical normalized Dempster's rule divides by <em>1−K</em>, thereby normalizing conflict away. The brief asks to retain disagreement. This implementation therefore uses Yager's published modified Dempster rule, which transfers conflict <em>K</em> to the unassigned frame Θ. Calling that behavior “classical Dempster's rule” would be inaccurate.</div><h2>Blocked proxy result</h2><p>The frozen fusion beat the dotted parent on a four-quadrant, off-catalogue SGMC proxy: mean DTI 0.10562 versus 0.09670, Δ +0.00893, positive in 4/4 blocks. It also exceeded the naïve mean proxy (0.10258). <a href="data/proxy-validation.json">Full fold receipt</a>.</p><div class="warn"><strong>Not a leaderboard prediction.</strong> SGMC is a public compilation proxy, not the hidden expert labels. The parents may inherit source dependence, and no organizer receipt links every owner-reported score to a particular byte hash. This numerical pass supports providing the candidate; it cannot prove a score above 0.2778 or the current leader.</div><h2>Why 0.2778 likely worked—and can this beat it?</h2><p>The official DTI penalizes false-positive mass by 0.2 but false-negative mass by 0.8 and gives distance credit only inside 300 m. Sparse dot spacing can retain near-fault coverage while deleting redundant mass, increasing credit density. The H33-2-B2 artifact also removes near-catalogue flank cells, leaving a compact 37,654-cell field. This mechanism is consistent with the metric and the family's score progression, but hidden labels prevent a causal proof.</p><p>This fusion can beat 0.2778 only if tip-only cells recover enough hidden truth to offset their added mass and if downweighted dotted-only cells are mostly false positives. The proxy supports that hypothesis, not the stronger claim. The official leaderboard observed on 2026-10-06 is led by <strong>0.3774</strong>, so the brief's “0.3195 highest” statement is stale. No honest analysis can promise >0.3774 before organizer scoring.</p><h2>Submit in four steps</h2><ol><li>Download the primary <code>.tif</code> above (or the ZIP containing exactly that one TIFF).</li><li>On DrivenData, choose the file under <em>New submission</em>.</li><li>Paste the unique name and note shown above.</li><li>Do not upload the diagnostic TIFF; it is for geological review only.</li></ol><p>See the <a href="method.html">method, limitations, and reproducibility guide</a> before spending a weekly slot.</p></main><footer>GEMSDOE48 · Maximize P(Win) by measuring uncertainty. Own the Outcome by publishing failures and limits.</footer></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Auditable DOE GEMS fault-discovery research, a bounded-screen-distinct conflict-preserving GeoTIFF candidate, and a configured public-leaderboard refresh workflow.">
+  <title>GEMSDOE48 · GEMS fault evidence</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header>
+  <p>DOE GEMS Prize · auditable research and submission workflow</p>
+  <h1>Two fault families.<br>Disagreement preserved.</h1>
+  <p>GEMSDOE48 combines the dotted-spacing and fault-tip/step-over rasters with a Yager conflict-transfer rule. The candidate has no exact match in the checked historical owner artifacts, is reproducible, and is range-checked—but the corrected public-proxy test says <strong>do not spend a competition slot on it</strong>.</p>
+  <nav aria-label="Main navigation">
+    <a href="index.html">Executive summary</a>
+    <a href="hypotheses.html">Research hypotheses</a>
+    <a href="method.html">Method and audit</a>
+    <a href="sources.html">Verified sources</a>
+  </nav>
+</header>
+<main class="wrap">
+  <section class="download" id="download">
+    <p class="eyebrow">No exact historical match found · no slot clearance</p>
+    <h2 style="margin-top:0">Download the GeoTIFF</h2>
+    <p><a class="button" href="downloads/gemsdoe48-h48-ds-yager-conflict-20261006.tif" download>⬇ Download candidate .tif</a>
+       <a class="button alt" href="downloads/gemsdoe48-h48-ds-yager-conflict-20261006.zip" download>⬇ Download single-file .zip</a></p>
+    <div class="warn"><strong>Decision: DO NOT USE A WEEKLY SUBMISSION SLOT.</strong> After correcting the DTI implementation to weight fractional prediction confidence and preserve full-scene distance neighborhoods, this fusion scored 0.08407 on the SGMC proxy versus 0.09709 for the best baseline. It lost in all four spatial quadrants. This is a proxy result—not a private-label score—but it fails our preregistered promotion gate.</div>
+    <p><strong>Submission name:</strong> <code>GEMSDOE48-H48-DS-CONFLICT</code><br>
+       <strong>Suggested note (if retained for research):</strong> <code>H48 dotted+tip Yager fusion; distinct in bounded scan; SGMC proxy gate failed; do not spend slot</code></p>
+    <p class="small">SHA-256: <code>fe68ae6f57be013e26d20006551b43cd84bb5fe4a0b07d1d10ce4725c90fd16c</code>. The portal has not been tested; see the format warning below.</p>
+  </section>
+
+  <h2>Decision receipt</h2>
+  <div class="grid">
+    <div class="stat"><strong>0.08407</strong>fusion corrected proxy DTI</div>
+    <div class="stat"><strong>0.09709</strong>best baseline proxy DTI (tip)</div>
+    <div class="stat"><strong>−0.01302</strong>fusion minus best baseline</div>
+    <div class="stat"><strong>0 / 4</strong>quadrants won vs selected anchor</div>
+  </div>
+  <p><a href="data/proxy-validation.json">Open the full v2 fold-level receipt</a>. The v1 proxy scores and “gate pass” are <strong>retracted</strong>: its TP calculation ignored the fusion's fractional confidence, and quadrant crops truncated distance neighborhoods. The corrected v2 code matches the organizer's published metric. <a href="data/proxy-validation-v1-retracted.json">Retraction record</a>.</p>
+
+  <h2>Public leaderboard snapshot and refresh workflow</h2>
+  <p>A six-hour GitHub Actions fetch/deploy workflow is configured, but the repository’s Pages source has not been switched to Actions and the parser has not passed a live raw-HTML fetch in this sandbox. Until both are verified, this is a dated snapshot—not a live feed. Scores are public only and cannot be tied to a local artifact hash.</p>
+  <p id="feed-status" class="small" aria-live="polite">Showing the manually recorded 2026-10-06 snapshot; scheduled refresh is not yet enabled.</p>
+  <div class="table-scroll">
+    <table id="leaderboard-table">
+      <thead><tr><th>Rank</th><th>Participant</th><th>Best public DW-Tversky</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>xiaofanhu</td><td>0.3774</td></tr>
+        <tr><td>2</td><td>alexoktaba</td><td>0.3345</td></tr>
+        <tr><td>3</td><td>nchuzhoy</td><td>0.3262</td></tr>
+        <tr><td>7</td><td>DARD</td><td>0.3195</td></tr>
+        <tr><td>13</td><td>extradr19</td><td>0.2778</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">Open official leaderboard</a> · <a href="data/leaderboard.json">View feed JSON</a>. Values remain a dated snapshot until Pages Actions deployment is enabled and the live parser is verified.</p>
+
+  <h2>Artifact and format checks</h2>
+  <div class="grid">
+    <div class="stat"><strong>1 band</strong>float32 GeoTIFF</div>
+    <div class="stat"><strong>EPSG:32611</strong>100 m grid</div>
+    <div class="stat"><strong>3730 × 3292</strong>exact template grid</div>
+    <div class="stat"><strong>0–1</strong>all 12,279,160 cells finite</div>
+    <div class="stat"><strong>47,905</strong>positive cells</div>
+    <div class="stat"><strong>334</strong>historical exact-grid rasters compared</div>
+  </div>
+  <p><a href="downloads/gemsdoe48-h48-ds-yager-conflict-20261006-audit.json">Machine-readable build audit</a> · <a href="data/uniqueness-audit.json">336-blob historical uniqueness comparison</a>.</p>
+  <p>The output is not an average: within the valid footprint its Pearson correlation with the parent mean is 0.96359, but 16,291 pixels differ, maximum absolute difference is 0.41371, and no exact prediction or positive-support mask match was found among 334 matching-grid historical rasters. The closest positive-support Jaccard is 0.87392 (the tip parent); this is a bounded uniqueness screen, not proof against every possible submission.</p>
+  <p><a class="button alt" href="downloads/gemsdoe48-h48-ds-yager-conflict-20261006-unassigned-diagnostic.tif" download>Download unassigned-belief diagnostic (do not submit)</a></p>
+  <div class="warn"><strong>Published-format irregularity:</strong> the DrivenData problem page says pixels outside the study bounds should be null/NaN. This primary file instead stores finite zero outside so every value passes [0,1] checks; the user previously encountered a range error, and NaN values can fail a naive range comparison. The official portal has not been tested here. Grid/range checks pass; exact outside-mask compliance is not claimed.</div>
+
+  <h2>Why the historical 0.2778 is plausible—and what is not proven</h2>
+  <p>The official distance-weighted Tversky index uses α=0.2 for false positives and β=0.8 for false negatives, with a 300 m triangular tolerance. A sparse, spaced fault proposal can gain credit density by removing redundant off-target mass while preserving near-trace recall. That is a <em>mechanistic explanation consistent with the metric</em>, not a causal proof of why a particular upload scored 0.2778. Owner-reported artifact/score attribution is not tied to a public TIFF hash.</p>
+  <p>The public leaderboard snapshot observed 2026-10-06 has a leader at <strong>0.3774</strong>; 0.3195 is rank 7 in that snapshot, so it is not the current top score. Public scores can change. This project makes no promise that the candidate—or any next method—will exceed 0.2778 or 0.3774.</p>
+
+  <h2>Submit workflow (only after a candidate clears validation)</h2>
+  <ol>
+    <li>Download the primary <code>.tif</code> above, or the ZIP containing exactly that one TIFF.</li>
+    <li>Open DrivenData’s <em>New submission</em> form and choose one file.</li>
+    <li>Enter the unique submission name and short note shown above.</li>
+    <li>Do not submit the unassigned-belief diagnostic. Do not spend a slot on this candidate: its corrected proxy gate failed.</li>
+  </ol>
+  <p>For equations, reproducibility, limitations, and the ranked next hypotheses, see <a href="method.html">Method &amp; audit</a> and <a href="hypotheses.html">Research hypotheses</a>.</p>
+</main>
+<footer>GEMSDOE48 · Maximize P(Win) by rejecting a failed proxy. Own the Outcome by correcting the metric, recording the retraction, and publishing the uncertainty.</footer>
+<script>
+(() => {
+  const status = document.getElementById("feed-status");
+  const body = document.querySelector("#leaderboard-table tbody");
+  fetch("data/leaderboard.json", {cache: "no-store"})
+    .then(response => { if (!response.ok) throw new Error(`HTTP ${response.status}`); return response.json(); })
+    .then(feed => {
+      const entries = Array.isArray(feed.entries) ? feed.entries : [];
+      if (!entries.length) throw new Error("feed contains no entries");
+      body.replaceChildren();
+      for (const entry of entries) {
+        const row = document.createElement("tr");
+        for (const value of [entry.rank, entry.participant, Number(entry.score).toFixed(4)]) {
+          const cell = document.createElement("td");
+          cell.textContent = String(value);
+          row.appendChild(cell);
+        }
+        body.appendChild(row);
+      }
+      const mode = feed.refresh_mode === "live-http-fetch" ? "Live HTTP refresh" : "Dated/manual snapshot";
+      status.textContent = `${mode} observed at ${feed.observed_at_utc}. ${feed.count} public leaderboard entries. Scores do not identify local TIFF hashes.`;
+    })
+    .catch(error => {
+      status.textContent = `Live feed unavailable (${error.message}); the dated snapshot remains visible. See the official leaderboard link below.`;
+    });
+})();
+</script>
+</body>
+</html>

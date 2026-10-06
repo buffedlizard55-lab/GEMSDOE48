@@ -1,24 +1,40 @@
 import numpy as np
-from gems48.evidence import discounted_binary_mass, combine_yager, minmax_unit
+import pytest
 
-def test_yager_mass_conservation_and_conflict():
-    a=discounted_binary_mass(np.array([[1.,0.]]),.9)
-    b=discounted_binary_mass(np.array([[0.,1.]]),.8)
-    f,n,u,k=combine_yager(a,b)
-    assert np.allclose(f+n+u,1)
-    assert np.all(k>0)
-    assert np.all(u>=k)
+from gems48.evidence import combine_yager, discounted_binary_mass, minmax_unit
+
+
+def test_yager_preserves_conflict_as_unassigned_mass():
+    dotted = discounted_binary_mass(np.array([[1.0, 0.0]]), 0.9)
+    tip = discounted_binary_mass(np.array([[0.0, 1.0]]), 0.85)
+    belief, disbelief, unassigned, conflict = combine_yager(dotted, tip)
+    assert np.allclose(belief, [[0.135, 0.085]])
+    assert np.allclose(disbelief, [[0.085, 0.135]])
+    assert np.allclose(conflict, [[0.765, 0.765]])
+    assert np.allclose(unassigned, [[0.78, 0.78]])
+    assert np.allclose(belief + disbelief + unassigned, 1.0)
+
 
 def test_agreement_has_no_conflict():
-    x=np.array([[0.,1.]])
-    *_,k=combine_yager(discounted_binary_mass(x,.9),discounted_binary_mass(x,.8))
-    assert np.array_equal(k,np.zeros_like(k))
+    confidence = np.array([[0.0, 1.0]])
+    *_, conflict = combine_yager(
+        discounted_binary_mass(confidence, 0.9),
+        discounted_binary_mass(confidence, 0.8),
+    )
+    assert np.array_equal(conflict, np.zeros_like(conflict))
 
-def test_normalization_range():
-    out=minmax_unit(np.array([[2.,4.],[3.,99.]]),np.array([[1,1],[1,0]],bool))
-    assert out.min()==0 and out.max()==1 and out[1,1]==0
+
+def test_normalization_respects_valid_footprint():
+    values = np.array([[2.0, 4.0], [3.0, 99.0]])
+    valid = np.array([[True, True], [True, False]])
+    normalized = minmax_unit(values, valid)
+    assert normalized.min() == 0.0
+    assert normalized.max() == 1.0
+    assert normalized[1, 1] == 0.0
+
 
 def test_rejects_invalid_confidence_and_reliability():
-    import pytest
-    with pytest.raises(ValueError): discounted_binary_mass(np.array([1.1]), .8)
-    with pytest.raises(ValueError): discounted_binary_mass(np.array([.5]), 1.1)
+    with pytest.raises(ValueError, match="confidence"):
+        discounted_binary_mass(np.array([1.1]), 0.8)
+    with pytest.raises(ValueError, match="reliability"):
+        discounted_binary_mass(np.array([0.5]), 1.1)
