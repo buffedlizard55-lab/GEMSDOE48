@@ -9,7 +9,7 @@ pre{background:#f0f2f7;padding:.7rem;overflow:auto}img{max-width:100%;border:1px
 .btn{display:inline-block;background:#fca311;color:#14213d;font-weight:700;padding:.55rem 1rem;border-radius:6px;text-decoration:none;word-break:break-all}
 blockquote{border-left:4px solid #fca311;margin:.8rem 0;padding:.2rem .9rem;background:#fafafa}</style></head><body><nav><a href="index.html" class="">Home</a><a href="executive-summary.html" class="on">How to submit</a><a href="method.html" class="">Method & 0.2778 autopsy</a><a href="hypotheses.html" class="">Hypotheses</a><a href="irregularities.html" class="">Irregularities</a><a href="next-steps.html" class="">Next steps</a><a href="leaderboard.html" class="">Leaderboard</a><a href="sources.html" class="">Sources</a></nav><main><h1>Executive summary — downloads, decision, and submission procedure</h1>
 <h2>Current decision: no weekly slot is cleared</h2>
-<p>The requested Yager conflict-transfer candidate is available for research, but the corrected spatial SGMC proxy gate failed. The H48-1 Dempster candidate from the prior session also did not beat its corrected holdout best; its owner-built LSI estimate cannot resolve this difference. <strong>Do not upload either file now.</strong> No private score or portal acceptance was observed.</p>
+<p>The requested Yager conflict-transfer candidate is available for research, but the corrected spatial SGMC proxy gate failed. The H48-1 Dempster candidate from the prior session also did not beat its corrected holdout best; its owner-built LSI estimate cannot resolve this difference. PR #6 added an unscored DS48 re-emission, whose SGMC off-catalogue proxy is below the dotted baseline; its separate catalogue-based proxy is anti-monotone with the known live ladder. <strong>Do not upload any of these files now.</strong> No private score or portal acceptance was observed.</p>
 <h3>Requested Yager candidate</h3>
 <p><strong><a href="downloads/gemsdoe48-h48-ds-yager-conflict-20261006.tif">Download Yager TIFF</a></strong> ·
 <a href="downloads/gemsdoe48-h48-ds-yager-conflict-20261006.zip">download single-file ZIP</a> ·
@@ -20,7 +20,7 @@ blockquote{border-left:4px solid #fca311;margin:.8rem 0;padding:.2rem .9rem;back
 <li><strong>Suggested short note:</strong> <code>H48 dotted+tip Yager fusion; distinct in bounded scan; SGMC proxy gate failed; do not spend slot</code></li>
 <li><strong>SHA-256:</strong> <code>fe68ae6f57be013e26d20006551b43cd84bb5fe4a0b07d1d10ce4725c90fd16c</code></li>
 <li><strong>Corrected public proxy DTI:</strong> Yager 0.08407; tip 0.09709; dotted 0.09613; naïve mean 0.09030. Yager loses in all four quadrants.</li>
-<li><strong>Format caveat:</strong> the candidate is one-band float32, EPSG:32611, 100 m, 3730×3292, and every pixel is finite in [0,1]. Finite zeros outside the footprint avoid a range-check failure but do not meet the official null/NaN-outside wording. The portal was not tested.</li>
+<li><strong>Format caveat:</strong> the candidate is one-band float32, EPSG:32611, 100 m, 3730×3292, and every pixel is finite in [0,1] by local byte audit. This does not establish the cause of the earlier portal error or demonstrate acceptance. Finite zeros outside the footprint do not meet the official null/NaN-outside wording; the portal was not tested.</li>
 </ul>
 <h3>Prior H48-1 Dempster candidate (comparison only)</h3>
 <p><strong><a href="downloads/gemsdoe48-h48-1-ds-fusion-b2xh32tip-20261006-407bb7f4-zeros.tif">Download H48-1 TIFF</a></strong> ·
@@ -55,6 +55,10 @@ blockquote{border-left:4px solid #fca311;margin:.8rem 0;padding:.2rem .9rem;back
 </tr>
 </tbody>
 </table>
+<h3>PR #6 DS48 emission (comparison only; not cleared)</h3>
+<p><a href="downloads/gemsdoe48-ds48-emission.tif">Download <code>gemsdoe48-ds48-emission.tif</code></a> ·
+<a href="../registry/submission_build.json">build receipt</a> · <a href="ds48-fusion/index.html">research subsite</a></p>
+<p>The main-branch PR #6 emission has 37,654 positive pixels and passes that builder's single-band, grid, finite, and [0,1] checks. Its recorded SGMC off-catalogue DTI is 0.09068 versus 0.09613 for the dotted baseline (about 5.7% lower). A separate catalogue-proximity proxy is anti-monotone with the four known live anchors (Spearman −1, n=4) and cannot clear a slot. The emission is all-finite with zeros outside, so the official null/NaN-outside caveat remains; no portal acceptance or organizer score exists. <strong>Research artifact only—do not upload.</strong></p>
 <h2>Why the proxy result and 0.2778 are not organizer scores</h2>
 <p>The correction multiplies prediction confidence into each TP maximum and computes full-scene distance neighborhoods before fold accumulation. The earlier v1 apparent pass is <strong>retracted</strong> because it omitted confidence and cropped each quadrant before calculating distances. See the <a href="data/proxy-validation.json">v2 fold receipt</a> and <a href="data/proxy-validation-v1-retracted.json">v1 retraction</a>.</p>
 <p>The official metric weights false negatives four times as heavily as false positives (α=0.2, β=0.8), within a 300 m triangular kernel. Removing redundant off-target mass can plausibly improve DTI while preserving near-trace coverage, but that does not prove why a particular participant received 0.2778 or that a local file is the scored artifact. In the observed 2026-10-06 public snapshot, 0.2778 was rank 13; leaderboard rows are not linked to local TIFF hashes.</p>

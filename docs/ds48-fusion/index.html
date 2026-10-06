@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dempster–Shafer diagnostics for two overlapping fault-detector families · GEMSDOE48</title>
+<link rel="stylesheet" href="../assets/ds48-fusion/site.css">
+</head><body>
+<header class="top"><div class="wrap">
+  <div class="brand"><span class="dot"></span><b>GEMSDOE48</b>
+    <span class="tag">Dempster&ndash;Shafer disagreement-preserving fusion</span></div>
+  <nav><a href="index.html" class="on">DS48 research</a><a href="executive-summary.html">Form procedure</a><a href="research.html">Interpreting reported 0.2778</a><a href="hypotheses.html">Hypotheses</a><a href="sources.html">Sources</a><a href="irregularities.html">Irregularities</a></nav>
+</div></header>
+<div class="namestrip"><div class="wrap">
+  <span class="ns-label">Research-artifact label — not slot-cleared</span>
+  <code class="ns-name">GEMSDOE48-DS48-FUSION</code>
+  <a class="ns-dl" download href="../downloads/gemsdoe48-ds48-emission.tif">
+    ↓ Download for audit only — do not submit</a>
+</div></div>
+<div class="xlink"><div class="wrap">
+  This is the <b>DS48 fusion</b> sub-site. The repository landing page is
+  <a href="../index.html">docs/index.html</a>, and its
+  <a href="../leaderboard.html">leaderboard page</a> carries a <b>newer snapshot</b> than the
+  2026-10-02 figure quoted here — a later session measured the leader at 0.3774, not 0.3195.
+  Treat both numbers as dated, and the landing page as the newer one.
+</div></div>
+<main class="wrap">
+  <div class="hero"><h1>Dempster–Shafer diagnostics for two overlapping fault-detector families</h1><p class="lead">DOE GEMS Prize · DrivenData competition 306 · the disagreement-preserving combination of the spacing-tuned dotted family and the tip / step-over family, with the unassigned-belief mass shipped as its own diagnostic layer.</p></div>
+
+<section class="callout warn">
+  <h2>Read this before uploading anything</h2>
+  <p>Every file on this page is <b>UNSCORED</b>; no organizer score or portal acceptance exists.
+  <b>Do not upload the DS48 emission.</b> Its receipt reports SGMC off-catalogue DTI 0.09068 versus 0.09613 for the dotted baseline. The separate catalogue-based proxy ranks four owner-reported live anchors in the exact reverse order (Spearman &rho; = -1.0, n = 4), so that apparent catalogue gain cannot clear a slot. These proxies are not hidden truth. The two source masks also overlap substantially, so the Dempster distinctness/independence assumption is unsupported; treat the combination as a research diagnostic, not calibrated probabilities.</p>
+</section>
+
+<section>
+<h2>⬇ One-click downloads</h2>
+<div class="grid2">
+  <article class="card feature">
+    <span class="badge amber">Artifact the brief asked for</span>
+    <h3>Dempster&ndash;Shafer combined belief Bel(F)</h3>
+    <p class="fileline">gemsdoe48-ds48-belief.tif</p>
+    <p>1,238,649 bytes · sha256 <code>f7e5645f…</code> ·
+    single band float32 · EPSG:32611 · 100 m · 3730 × 3292 · all finite ·
+    <b>PASS</b> all format checks</p>
+    <p><a class="button primary" download href="../downloads/gemsdoe48-ds48-belief.tif">
+      ↓ Download combined belief .tif</a></p>
+    <p class="micro"><b>Diagnostic.</b> A graded belief surface is <i>strictly worse</i> than its
+    own binarisation on this metric: the score's derivative in a pixel value <i>v</i> is
+    <code>(k − 0.2·DTI)·D₀/(D₀ + 0.2v)²</code>, independent of <i>v</i>. Do not upload this one
+    as a prediction.</p>
+  </article>
+  <article class="card feature">
+    <span class="badge amber">Research-only · no-go</span>
+    <h3>DS-ranked off-flank emission (not slot-cleared)</h3>
+    <p class="fileline">gemsdoe48-ds48-emission.tif</p>
+    <p>282,876 bytes · sha256 <code>a579081d…</code> ·
+    37,654 positive px · values in {0.0, 1.0} ·
+    <b>PASS</b> all format checks</p>
+    <p><a class="button primary" download href="../downloads/gemsdoe48-ds48-emission.tif">
+      ↓ Download emission for audit only (do not submit)</a></p>
+    <p class="micro">Mass-neutral: exactly 37,654 px, matching the live-best mass.
+    On the owner-derived SGMC off-catalogue proxy its DTI is 0.09068
+    versus 0.09613 for the dotted baseline; its
+    SGMC TP credit falls 5.8 %.
+    A catalogue-proximity proxy gain is not reliable promotion evidence because that proxy is
+    anti-monotone with the live anchors.</p>
+  </article>
+</div>
+<div class="grid2">
+  <article class="card">
+    <span class="badge">Disagreement layer 1</span>
+    <h3>Unassigned belief <code>m₁₂(&Theta;)</code></h3>
+    <p class="fileline">gemsdoe48-ds48-mtheta.tif</p>
+    <p>The mass Dempster's rule leaves on the frame itself.
+    0.1600 where the two families agree,
+    0.2500 where they disagree.
+    1,189,415 B · sha256 <code>0a7f1d02…</code> ·
+    observed range <code>[0.1600, 0.2500]</code></p>
+    <p><a class="button" download href="../downloads/gemsdoe48-ds48-mtheta.tif">
+      ↓ Download m<sub>12</sub>(&Theta;) .tif</a></p>
+  </article>
+  <article class="card">
+    <span class="badge">Disagreement layer 2</span>
+    <h3>Conflict mass <code>K</code> (Shafer)</h3>
+    <p class="fileline">gemsdoe48-ds48-conflict.tif</p>
+    <p>Shafer's conflict, equal to Smets' mass on the empty set before normalisation. This is the
+    layer that shows <i>where</i> the two approaches actively contradict each other; Dempster's
+    renormalisation removes it from <code>m₁₂(&Theta;)</code>, which is why both are shipped.
+    1,211,081 B · sha256 <code>b7e39108…</code> ·
+    observed range <code>[0.0000, 0.3600]</code></p>
+    <p><a class="button" download href="../downloads/gemsdoe48-ds48-conflict.tif">
+      ↓ Download conflict K .tif</a></p>
+  </article>
+</div>
+</section>
+
+<section>
+<h2>The owner-reported 0.2778 result, with its limits</h2>
+<p>The table records owner-reported scores from the project's history; they are not independently
+verified organizer receipts, and no local TIFF hash is tied to a leaderboard row here. A dated
+2026-10-06 public leaderboard snapshot placed 0.2778 at rank 13, not at the top. The reported
+sequence is consistent with useful removals in that specific family, but it does not establish
+causation or generalize to a new detector.</p>
+<table>
+<tr><th>artifact</th><th>emitted px</th><th>owner-reported live</th><th>what changed</th></tr>
+<tr><td><code>gems25-dotted-h19-5-d2-8</code></td><td>44,090</td><td>0.2600</td>
+    <td>spacing-tuned dotting of the H19-5 habitat field</td></tr>
+<tr><td><code>gems28-h27-4-r1-solo-d2-8</code></td><td>40,199</td><td>0.2708</td>
+    <td>remove every dot within 100 m of the catalogue (B = 1)</td></tr>
+<tr><td><code>gems32-h33-2-b2</code></td><td>37,654</td><td><b>0.2778</b></td>
+    <td>take the catalogue-flank buffer to B = 2 (200 m)</td></tr>
+<tr><td>B = 3 (300 m) — rejected</td><td>35,483</td><td>not shipped</td>
+    <td>safety 1.27 &lt; 2.0; wins only 3 of 4 blocks</td></tr>
+</table>
+<p><b>The mechanism, arithmetically.</b> With the official identity <code>FNw = |G| − TPw</code>,
+the metric is <code>DTI = TPw / (0.2·TPw + 0.2·FPw + 0.8·|G|)</code>. Deleting one unit of mass
+lowers the denominator by <code>0.2·(1 − k)</code> and the numerator by the credit it was
+earning. So <b>a dot is worth emitting iff its realised kernel weight exceeds
+<code>0.2·DTI</code></b> — 0.0556 using the owner-reported 0.2778. The
+0.05416 value is a
+model-derived break-even conditional on the reported anchor pair and metric assumptions, not a
+verified per-dot measurement. Full derivation: <a href="research.html">Interpreting reported 0.2778</a>.</p>
+</section>
+
+<section>
+<h2>What the historical experiment built and measured</h2>
+<div class="grid3">
+  <article class="card"><h3>Dempster&amp;ndash;Shafer fusion <span class="badge blue">DERIVED</span></h3><p>The dotted family and the tip / step-over family agree on 69.6 % of the grid and disagree on 14,724 pixels. They overlap substantially: 31,614 of b2&rsquo;s 37,654 positive cells are also in the tip mask, so statistical independence/distinctness is not supported. Dempster&rsquo;s rule is shown here as a research diagnostic, not as a calibrated fusion. On the frame {F, &not;F}, with Shafer reliability discounts a = 0.60. Belief is 0.8400 at agreement and 0.3750 where only one family supports a pixel.</p></article><article class="card"><h3>Not the naive mean &amp;mdash; measured <span class="badge blue">MEASURED</span></h3><p>Pearson r = 0.991085 and Spearman rho = 1.000000 on the union. Values differ (mean |delta| = 0.1423) but the <b>ranking is identical</b>, because a union pixel has belief 1 in its own family, so both statistics are monotone in the other family&rsquo;s belief alone. Reproduced honestly rather than claimed as a win.</p></article><article class="card"><h3>Audited arms — none slot-cleared <span class="badge blue">RESEARCH · NO-GO</span></h3><ul><li>DS corroboration removal at 9 radii: the historical gate fails everywhere (best safety 0.64 &lt; 2.0).</li><li>Hexagonal covering-optimal re-emission at 11 spacings: the old falsification claim was incorrect. At matched mass the best arm (spacing 5.6 px, 37,499 dots) is x1.019 on the owner-derived SGMC off-catalogue layer; that small change is within re-sampling noise. Its catalogue-side gain is not useful because the proxy is anti-monotone. This arm is <b>UNVALIDATED and not slot-cleared</b>; do not spend a slot.</li><li>DS-ranked re-emission at matched mass: owner-derived SGMC DTI is 5.7 % lower than the dotted baseline; not a promotion.</li></ul><p>Conclusion: <b>no tested arm here clears a slot gate</b>. The available public proxies do not establish an organizer-score gain. PROXY + DERIVED</p></article></div>
+</section>
+
+<section>
+<h2>Independent truth layers, and what each one says</h2>
+<table>
+<tr><th>truth layer</th><th>pixels</th><th>base TPw on local proxy</th><th>DS emission TPw</th><th>usable as a gate?</th></tr>
+<tr><td>published catalogue (organizer labels == existing faults)</td>
+    <td>60,988</td>
+    <td>378.0</td>
+    <td>1,362.1</td>
+    <td><b>No</b> — anti-monotone with the live ladder</td></tr>
+<tr><td>USGS SGMC faults &ge; 300 m from the catalogue</td>
+    <td>63,121</td>
+    <td>5,639.0</td>
+    <td>5,313.9</td>
+    <td>Partially — but the pure-SGMC arm scored 0.0512 live, near random</td></tr>
+</table>
+<p>A model inversion of two owner-reported score anchors, under the assumptions listed on the
+research page, estimates about 12,632 hidden new-fault pixels and TPw =
+4,914. The estimates agree
+internally to 0.13 %;
+this is <b>not an observation of hidden truth</b> and is not independently verified.</p>
+</section>
+
+  <footer><p>Built from <code>registry/</code> and <code>evidence/</code> by
+  <code>scripts/build_site_ds48.py</code>. Owner-reported scores are labelled
+  <span class="badge amber">OWNER-REPORT</span>; local measurements are labelled
+  <span class="badge blue">PROXY</span> or <span class="badge">DERIVED</span>.
+  No organizer score exists for any artifact in this repository.</p></footer>
+</main></body></html>

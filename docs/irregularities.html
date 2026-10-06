@@ -138,6 +138,13 @@ blockquote{border-left:4px solid #fca311;margin:.8rem 0;padding:.2rem .9rem;back
 <td><a href="data/source-checks.json"><code>data/source-checks.json</code></a> · <code>.github/workflows/feed.yml</code></td>
 <td>Monitor a successful workflow run; do not call the current manually recorded snapshot an active live fetch</td>
 </tr>
+<tr>
+<td>IR-48-18</td>
+<td>High</td>
+<td><strong>PR #6 DS48 emission remains unscored and not slot-cleared.</strong> Its registry receipt reports 0.09068 SGMC off-catalogue DTI vs 0.09613 for the dotted baseline (≈5.7% lower); the separate catalogue-proximity proxy is anti-monotone with the known live ladder (ρ=−1, n=4), so its apparent catalogue gain is not promotion evidence. Emission format checks pass, but finite zeros outside conflict with official null/NaN wording</td>
+<td><a href="../registry/submission_build.json"><code>registry/submission_build.json</code></a> · <a href="../evidence/holdout_antimonotone.json"><code>evidence/holdout_antimonotone.json</code></a> · <a href="ds48-fusion/index.html">PR #6 subsite</a></td>
+<td>Preserve as a research artifact only; no organizer score or portal acceptance; do not spend a weekly slot</td>
+</tr>
 </tbody>
 </table>
 <hr><p style="font-size:.8rem;color:#667">GEMSDOE48 · built from <code>docs/md/irregularities.md</code> by <code>scripts/build_site.py</code></p></main></body></html>

@@ -399,4 +399,42 @@ it conflicts with the published null/NaN-outside requirement. The portal was not
 bounded uniqueness scan found no exact value or support match among 334 same-grid artifacts, but
 that is not a global uniqueness guarantee. The machine-readable output audit is
 <a href="downloads/gemsdoe48-h48-ds-yager-conflict-20261006-audit.json">Yager build audit</a>.</p>
+<h2>8. Later-main PR #6 DS48 re-emission — no-go</h2>
+<p>The subsequent main-branch PR #6 added a separate Dempster-ranked, off-flank emission with the
+same 37,654-pixel mass as b2. Its builder uses Dempster combination of dotted-02708 and h33-d
+tip credit surfaces (both reliability discounts 0.60), excludes pixels within the chosen 200 m
+catalogue flank, and selects the top Bel(F) values at matched mass. The emission raster passes
+the builder's one-band float32, EPSG:32611, 100 m, finite [0,1], and outside-footprint-zero checks.
+That is an artifact/format check, not a portal acceptance.</p>
+<table>
+<thead>
+<tr>
+<th>proxy in the PR #6 receipt</th>
+<th style="text-align: right;">b2 baseline</th>
+<th style="text-align: right;">DS48 emission</th>
+<th>reading</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>owner-derived SGMC faults ≥300 m from known catalogue</td>
+<td style="text-align: right;">0.09613</td>
+<td style="text-align: right;">0.09068</td>
+<td>emission is about 5.7% lower</td>
+</tr>
+<tr>
+<td>published catalogue</td>
+<td style="text-align: right;">0.00671</td>
+<td style="text-align: right;">0.02413</td>
+<td>not a promotion metric: staff say exact known-fault pixels are masked from scoring</td>
+</tr>
+</tbody>
+</table>
+<p>The catalogue-proximity proxy reverses the known live-score ladder for its four anchors (Spearman
+ρ=−1, n=4), so it cannot rescue the candidate. SGMC is an owner-derived proxy and has poor/uncertain
+live ranking power. <strong>The DS48 emission is unscored and not slot-cleared.</strong> The detailed receipt
+and subsite are <a href="../registry/submission_build.json"><code>registry/submission_build.json</code></a>,
+<a href="../evidence/holdout_antimonotone.json"><code>evidence/holdout_antimonotone.json</code></a>, and
+<a href="ds48-fusion/index.html">the PR #6 DS48 subsite</a>. The emitted TIFF uses finite zeros outside,
+contrary to the official null/NaN-outside text; no portal test or organizer score was observed.</p>
 <hr><p style="font-size:.8rem;color:#667">GEMSDOE48 · built from <code>docs/md/method.md</code> by <code>scripts/build_site.py</code></p></main></body></html>

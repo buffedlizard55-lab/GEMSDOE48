@@ -1,11 +1,24 @@
 .venv/
 __pycache__/
+*.py[cod]
+*.egg-info/
 .pytest_cache/
-*.pyc
+.mypy_cache/
+.ruff_cache/
+
+# Regenerable intermediate arrays; JSON receipts remain tracked.
+evidence/ds_layers/*.npy
+evidence/**/*.npy
+
+# Local scratch and downloaded cache/input copies.
 external_ref/
 scratch/
 nohup.out
+*.log
+/tmp/
 data/raw/
 data/cache/
 
-*.egg-info/
+# OS files.
+.DS_Store
+Thumbs.db

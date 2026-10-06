@@ -12,6 +12,10 @@
 <p><b>Format caveat:</b> finite zeros are stored outside the footprint to keep every value in [0,1]; this conflicts with the official null/NaN-outside wording. Portal acceptance was not tested.</p>
 </div>
 
+## Later-main DS48 re-emission — also not slot-cleared
+
+A separate Dempster-ranked, mass-matched emission was added by PR #6. Its receipt reports SGMC off-catalogue DTI 0.09068 versus 0.09613 for the dotted baseline (about 5.7% lower); its catalogue-based proxy is anti-monotone with the known live ladder. It is **unscored and not cleared for a slot**. The [PR #6 research subsite](ds48-fusion/index.html) preserves its method and diagnostic layers; it is not an upload recommendation.
+
 ## Previous H48-1 file — available for comparison, not a slot recommendation
 
 <div class="dl">

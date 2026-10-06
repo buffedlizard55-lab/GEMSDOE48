@@ -202,3 +202,25 @@ it conflicts with the published null/NaN-outside requirement. The portal was not
 bounded uniqueness scan found no exact value or support match among 334 same-grid artifacts, but
 that is not a global uniqueness guarantee. The machine-readable output audit is
 [Yager build audit](downloads/gemsdoe48-h48-ds-yager-conflict-20261006-audit.json).
+
+## 8. Later-main PR #6 DS48 re-emission — no-go
+
+The subsequent main-branch PR #6 added a separate Dempster-ranked, off-flank emission with the
+same 37,654-pixel mass as b2. Its builder uses Dempster combination of dotted-02708 and h33-d
+tip credit surfaces (both reliability discounts 0.60), excludes pixels within the chosen 200 m
+catalogue flank, and selects the top Bel(F) values at matched mass. The emission raster passes
+the builder's one-band float32, EPSG:32611, 100 m, finite [0,1], and outside-footprint-zero checks.
+That is an artifact/format check, not a portal acceptance.
+
+| proxy in the PR #6 receipt | b2 baseline | DS48 emission | reading |
+|---|---:|---:|---|
+| owner-derived SGMC faults ≥300 m from known catalogue | 0.09613 | 0.09068 | emission is about 5.7% lower |
+| published catalogue | 0.00671 | 0.02413 | not a promotion metric: staff say exact known-fault pixels are masked from scoring |
+
+The catalogue-proximity proxy reverses the known live-score ladder for its four anchors (Spearman
+ρ=−1, n=4), so it cannot rescue the candidate. SGMC is an owner-derived proxy and has poor/uncertain
+live ranking power. **The DS48 emission is unscored and not slot-cleared.** The detailed receipt
+and subsite are [`registry/submission_build.json`](../registry/submission_build.json),
+[`evidence/holdout_antimonotone.json`](../evidence/holdout_antimonotone.json), and
+[the PR #6 DS48 subsite](ds48-fusion/index.html). The emitted TIFF uses finite zeros outside,
+contrary to the official null/NaN-outside text; no portal test or organizer score was observed.

@@ -2,7 +2,7 @@
 
 ## Current decision: no weekly slot is cleared
 
-The requested Yager conflict-transfer candidate is available for research, but the corrected spatial SGMC proxy gate failed. The H48-1 Dempster candidate from the prior session also did not beat its corrected holdout best; its owner-built LSI estimate cannot resolve this difference. **Do not upload either file now.** No private score or portal acceptance was observed.
+The requested Yager conflict-transfer candidate is available for research, but the corrected spatial SGMC proxy gate failed. The H48-1 Dempster candidate from the prior session also did not beat its corrected holdout best; its owner-built LSI estimate cannot resolve this difference. PR #6 added an unscored DS48 re-emission, whose SGMC off-catalogue proxy is below the dotted baseline; its separate catalogue-based proxy is anti-monotone with the known live ladder. **Do not upload any of these files now.** No private score or portal acceptance was observed.
 
 ### Requested Yager candidate
 
@@ -15,7 +15,7 @@ The requested Yager conflict-transfer candidate is available for research, but t
 - **Suggested short note:** `H48 dotted+tip Yager fusion; distinct in bounded scan; SGMC proxy gate failed; do not spend slot`
 - **SHA-256:** `fe68ae6f57be013e26d20006551b43cd84bb5fe4a0b07d1d10ce4725c90fd16c`
 - **Corrected public proxy DTI:** Yager 0.08407; tip 0.09709; dotted 0.09613; naïve mean 0.09030. Yager loses in all four quadrants.
-- **Format caveat:** the candidate is one-band float32, EPSG:32611, 100 m, 3730×3292, and every pixel is finite in [0,1]. Finite zeros outside the footprint avoid a range-check failure but do not meet the official null/NaN-outside wording. The portal was not tested.
+- **Format caveat:** the candidate is one-band float32, EPSG:32611, 100 m, 3730×3292, and every pixel is finite in [0,1] by local byte audit. This does not establish the cause of the earlier portal error or demonstrate acceptance. Finite zeros outside the footprint do not meet the official null/NaN-outside wording; the portal was not tested.
 
 ### Prior H48-1 Dempster candidate (comparison only)
 
@@ -29,6 +29,13 @@ The requested Yager conflict-transfer candidate is available for research, but t
 | note | `{{NOTE}}` |
 | SHA-256 prefix / bytes | `{{SHA16}}…` / {{BYTES}} |
 | result | did not beat b2 on the reported SGMC quadrants (2/4); LSI’s 0.26336 vs 0.26351 is too close for that instrument’s top-family rank power |
+
+### PR #6 DS48 emission (comparison only; not cleared)
+
+[Download `gemsdoe48-ds48-emission.tif`](downloads/gemsdoe48-ds48-emission.tif) ·
+[build receipt](../registry/submission_build.json) · [research subsite](ds48-fusion/index.html)
+
+The main-branch PR #6 emission has 37,654 positive pixels and passes that builder's single-band, grid, finite, and [0,1] checks. Its recorded SGMC off-catalogue DTI is 0.09068 versus 0.09613 for the dotted baseline (about 5.7% lower). A separate catalogue-proximity proxy is anti-monotone with the four known live anchors (Spearman −1, n=4) and cannot clear a slot. The emission is all-finite with zeros outside, so the official null/NaN-outside caveat remains; no portal acceptance or organizer score exists. **Research artifact only—do not upload.**
 
 ## Why the proxy result and 0.2778 are not organizer scores
 
