@@ -1,96 +1,152 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sources · GEMSDOE48</title>
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
-<header>
-  <div class="wrap">
-    <h1>Sources — official links for manual review</h1>
-    <p>Every external claim on this site traces to one of these. “Verified 2026-10-06” means
-    fetched and read in this session; “mirrored, hash-pinned” means the bytes were fetched via
-    the GitHub API and their SHA-256 matches the published receipt.</p>
-  </div>
-</header>
-<nav><div class="wrap">
-  <a href="index.html">Overview &amp; download</a>
-  <a href="executive-summary.html">Executive summary / how to submit</a>
-  <a href="method.html">Method</a>
-  <a href="validation.html">Validation</a>
-  <a href="hypotheses.html">Next hypotheses</a>
-  <a class="active" href="sources.html">Sources</a>
-  <a href="irregularities.html">Irregularities</a>
-</div></nav>
-
-<div class="wrap">
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GEMSDOE48 · sources</title><style>body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;margin:0;color:#1d2330;background:#f6f7fb;line-height:1.55}
+nav{background:#14213d;padding:.6rem 1rem;position:sticky;top:0}nav a{color:#fff;margin-right:1.1rem;text-decoration:none;font-size:.95rem}
+nav a.on{border-bottom:2px solid #fca311}main{max-width:1050px;margin:auto;padding:1.2rem 1.4rem;background:#fff}
+table{border-collapse:collapse;width:100%;font-size:.9rem;margin:.6rem 0}th,td{border:1px solid #dde;padding:.35rem .5rem;vertical-align:top}
+th{background:#eef1f8}code{background:#f0f2f7;padding:.05rem .3rem;border-radius:3px;font-size:.88em;word-break:break-all}
+pre{background:#f0f2f7;padding:.7rem;overflow:auto}img{max-width:100%;border:1px solid #dde;margin:.5rem 0}
+.dl{background:#fff8e6;border:2px solid #fca311;border-radius:8px;padding:.6rem 1.1rem;margin-bottom:1rem}
+.btn{display:inline-block;background:#fca311;color:#14213d;font-weight:700;padding:.55rem 1rem;border-radius:6px;text-decoration:none;word-break:break-all}
+blockquote{border-left:4px solid #fca311;margin:.8rem 0;padding:.2rem .9rem;background:#fafafa}</style></head><body><nav><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">How to submit</a><a href="method.html" class="">Method & 0.2778 autopsy</a><a href="hypotheses.html" class="">Hypotheses</a><a href="irregularities.html" class="">Irregularities</a><a href="next-steps.html" class="">Next steps</a><a href="leaderboard.html" class="">Leaderboard</a><a href="sources.html" class="on">Sources</a></nav><main><h1>Sources (each link opened or resolved in this session unless marked)</h1>
+<h2>Competition (official)</h2>
 <table>
-  <tr><th>id</th><th>source</th><th>role here</th><th>status</th></tr>
-  <tr><td>competition</td>
-      <td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">DOE GEMS Prize Challenge — overview</a></td>
-      <td>problem definition</td><td>verified 2026-10-06</td></tr>
-  <tr><td>problem</td>
-      <td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">Problem description, metric &amp; submission format</a></td>
-      <td>verbatim source of <span class="mono">src/gemsdoe48/metric.py</span> (distance-weighted Tversky α=0.2 β=0.8, R=300 m; worked example TPw=3.00 FPw=1.89 FNw=2.00 → 0.60)</td>
-      <td>verified 2026-10-06 (fetched twice)</td></tr>
-  <tr><td>about</td>
-      <td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/">About / additional resources</a></td>
-      <td>context</td><td>listed</td></tr>
-  <tr><td>leaderboard</td>
-      <td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">Public leaderboard</a></td>
-      <td>target scores are point-in-time reads only; DrivenData ToS forbids scraping/monitoring, so this repo never polls it. Brief's claim: top = 0.3195 (2026-10-06). GEMSDOE32 read 2026-10-04: #1 0.3262, #2 0.3195, #3 0.3042.</td>
-      <td>policy-set</td></tr>
-  <tr><td>reference-solution</td>
-      <td><a href="https://github.com/drivendataorg/gems-prize-reference-solution">Official reference solution</a></td>
-      <td>cloned (shallow) to <span class="mono">external_ref/</span>; U-Net + TverskyLoss(0.2, 0.8) confirmed in the notebook</td>
-      <td>verified 2026-10-06</td></tr>
-  <tr><td>rules-pdf</td>
-      <td><a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">GEMS rules (NLR document 96647)</a> · Dropbox mirror linked from the brief</td>
-      <td>prize structure (Initial $50K private-set; Final $250K expanded labels)</td>
-      <td>listed — docs.nlr.gov not fetched in-sandbox; brief-provided</td></tr>
-  <tr><td>gdr1391</td>
-      <td><a href="https://gdr.openei.org/submissions/1391">GDR submission 1391 — INGENIOUS Great Basin regional dataset</a> (DOI <a href="https://doi.org/10.15121/1881483">10.15121/1881483</a>, CC BY 4.0)</td>
-      <td>official free source of QFaults-INGENIOUS v2, 2-m temperature probes, paleogeothermal features, Quaternary volcanics, geodetics, seismicity</td>
-      <td>verified 2026-10-06</td></tr>
-  <tr><td>geodawn</td>
-      <td><a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS GeoDAWN airborne magnetic &amp; radiometric surveys</a> · <a href="https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7">study-area item</a></td>
-      <td>survey provenance of the feature bands</td><td>listed (linked by the problem page)</td></tr>
-  <tr><td>sgmc</td>
-      <td><a href="https://mrdata.usgs.gov/geology/state/">USGS State Geologic Map Compilation</a> (NV.zip / CA.zip; US Government work, public domain)</td>
-      <td>off-catalogue proxy truth (61,664 px &gt;300 m from catalogue), derived per the GEMSDOE30 receipt <span class="mono">data/external/external_receipt.json</span> (sha256-pinned)</td>
-      <td>derivation hash-verified 2026-10-06</td></tr>
-  <tr><td>ingenious</td>
-      <td><a href="https://gbcge.org/current-projects/ingenious/">Great Basin Center for Geothermal Energy — INGENIOUS project</a></td>
-      <td>catalogue provenance</td><td>listed</td></tr>
-  <tr><td>input-dotted</td>
-      <td><a href="https://buffedlizard55-lab.github.io/GEMSDOE32/docs/index.html">GEMSDOE32 site</a> — h33-h33-2-b2 zeros TIF</td>
-      <td>fusor input 1 (owner-reported live 0.2778)</td>
-      <td>downloaded; sha256 <span class="mono">c55bafc4…</span> = published receipt ✅</td></tr>
-  <tr><td>input-tip</td>
-      <td><a href="https://buffedlizard55-lab.github.io/GEMSDOE33/">GEMSDOE33 site</a> — h33d analog tip-stepover TIF</td>
-      <td>fusor input 2 (owner-reported live 0.2632)</td>
-      <td>downloaded; sha256 <span class="mono">87f857d5…</span> = published receipt ✅</td></tr>
-  <tr><td>grid-template</td>
-      <td>official <span class="mono">sample_submission.tif</span> / <span class="mono">labels.tif</span> via GEMSDOE24 owner mirror (pinned commit 07345ea)</td>
-      <td>grid identity (5,167,373 footprint cells) &amp; catalogue truth (60,988 px)</td>
-      <td>sha256 <span class="mono">2176d08e…</span> / <span class="mono">7ba308cc…</span> = GEMSDOE32 manifest of the official files ✅</td></tr>
-  <tr><td>demshafer-lit</td>
-      <td>Dempster, A.P. (1967) JRSS-B 30(2):205–247 · Shafer, G. (1976) <em>A Mathematical Theory of Evidence</em>, Princeton UP</td>
-      <td>combination rule used here</td><td>standard references</td></tr>
+<thead>
+<tr>
+<th>what</th>
+<th>link</th>
+<th>checked</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Competition home</td>
+<td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">https://www.drivendata.org/competitions/306/competition-doe-gems/</a></td>
+<td>brief</td>
+</tr>
+<tr>
+<td>Problem description, metric, format</td>
+<td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/</a></td>
+<td><strong>fetched, metric transcribed</strong></td>
+</tr>
+<tr>
+<td>About / resources</td>
+<td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/">https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/</a></td>
+<td>brief</td>
+</tr>
+<tr>
+<td>Data (login required)</td>
+<td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/data/">https://www.drivendata.org/competitions/306/competition-doe-gems/data/</a></td>
+<td>login wall (prior sessions)</td>
+</tr>
+<tr>
+<td>Leaderboard</td>
+<td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/</a></td>
+<td><strong>fetched 2026-10-06</strong></td>
+</tr>
+<tr>
+<td>Rules PDF</td>
+<td><a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">https://docs.nlr.gov/docs/fy26osti/96647.pdf</a></td>
+<td>brief</td>
+</tr>
+<tr>
+<td>Reference solution</td>
+<td><a href="https://github.com/drivendataorg/gems-prize-reference-solution">https://github.com/drivendataorg/gems-prize-reference-solution</a></td>
+<td>brief</td>
+</tr>
+<tr>
+<td>Staff: masked pixels</td>
+<td><a href="https://community.drivendata.org/t/scoring-clarification-masked-pixels-and-re-evaluation/11516">https://community.drivendata.org/t/scoring-clarification-masked-pixels-and-re-evaluation/11516</a></td>
+<td>quoted via GEMSDOE47 (not reachable from sandbox)</td>
+</tr>
+<tr>
+<td>Staff: what "new fault" means</td>
+<td><a href="https://community.drivendata.org/t/where-do-you-draw-the-line/11536">https://community.drivendata.org/t/where-do-you-draw-the-line/11536</a></td>
+<td>quoted via GEMSDOE47</td>
+</tr>
+<tr>
+<td>GDR submission 1391</td>
+<td><a href="https://gdr.openei.org/submissions/1391">https://gdr.openei.org/submissions/1391</a></td>
+<td>brief</td>
+</tr>
+<tr>
+<td>GeoDAWN (USGS)</td>
+<td><a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and</a></td>
+<td>linked from page 967</td>
+</tr>
+</tbody>
 </table>
-
-<h2 class="sec">In-repo evidence receipts</h2>
-<ul class="small">
-  <li><span class="mono">evidence/build_submission.json</span> — artifact hashes, format audits, not-the-naive-mean check</li>
-  <li><span class="mono">evidence/holdout_validation.json</span> — blocked holdout, both proxies, gate</li>
-  <li><span class="mono">evidence/round2_tier_sweep.json</span> — tier sweep, union variants, leakage audit</li>
-  <li><span class="mono">data/raw/external_receipt_g30.json</span> — GEMSDOE30 external-data derivation receipt (mirrored)</li>
-</ul>
-
-<footer>GEMSDOE48 · if any link above is unreachable from your network, the mirrored bytes and
-hashes in this repo are the auditable record.</footer>
-</div>
-</body>
-</html>
+<h2>Data used (hash-pinned)</h2>
+<p><code>registry/data_manifest_gemsdoe32.json</code> lists every mirror with its repo, commit and sha256.
+Live-scored files and their hashes are in <code>registry/live_scores.json</code>.</p>
+<h2>External data — obtainability checks</h2>
+<table>
+<thead>
+<tr>
+<th>source</th>
+<th>check</th>
+<th>result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>USGS 3DEP 1 m DEM via TNM API</td>
+<td><a href="https://tnmaccess.nationalmap.gov/api/v1/products?datasets=Digital%20Elevation%20Model%20(DEM)%201%20meter&amp;bbox=-118.5,39.5,-118.4,39.6&amp;max=2">query</a></td>
+<td>2 tiles returned, public domain</td>
+</tr>
+<tr>
+<td>USGS ComCat FDSN</td>
+<td><a href="https://earthquake.usgs.gov/fdsnws/event/1/count?starttime=2000-01-01&amp;minlatitude=37.3&amp;maxlatitude=40.7&amp;minlongitude=-120.0&amp;maxlongitude=-116.0">count</a></td>
+<td>267,774</td>
+</tr>
+<tr>
+<td>Sentinel-2 L2A (Element84 Earth Search)</td>
+<td><a href="https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a">collection</a></td>
+<td>resolved, license = Copernicus legal notice</td>
+</tr>
+</tbody>
+</table>
+<h2>Science</h2>
+<table>
+<thead>
+<tr>
+<th>reference</th>
+<th>link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dempster, A.P. (1967) Upper and lower probabilities induced by a multivalued mapping. <em>Ann. Math. Statist.</em> 38(2):325–339</td>
+<td><a href="https://doi.org/10.1214/aoms/1177698950">https://doi.org/10.1214/aoms/1177698950</a></td>
+</tr>
+<tr>
+<td>Shafer, G. (1976) <em>A Mathematical Theory of Evidence</em>. Princeton University Press</td>
+<td>(book)</td>
+</tr>
+<tr>
+<td>Yager, R.R. (1987) On the Dempster–Shafer framework and new combination rules. <em>Inf. Sci.</em> 41:93–137</td>
+<td>cited in <a href="https://www.nature.com/articles/s41598-023-35195-4">https://www.nature.com/articles/s41598-023-35195-4</a></td>
+</tr>
+<tr>
+<td>Denœux, T. (2008) Conjunctive and disjunctive combination of belief functions induced by nondistinct bodies of evidence. <em>Artif. Intell.</em> 172:234–264</td>
+<td><a href="https://doi.org/10.1016/j.artint.2007.05.008">https://doi.org/10.1016/j.artint.2007.05.008</a></td>
+</tr>
+<tr>
+<td>Evidential belief functions in GIS prospectivity mapping (Carranza &amp; Hale 2003 lineage)</td>
+<td><a href="https://www.tandfonline.com/doi/full/10.1080/27669645.2022.2129132">https://www.tandfonline.com/doi/full/10.1080/27669645.2022.2129132</a></td>
+</tr>
+<tr>
+<td>Mathie et al. (2011) Phreatophytic land-cover map, Great Basin. USGS SIM 3169</td>
+<td><a href="https://pubs.usgs.gov/sim/3169/sim3169_pamphlet.pdf">https://pubs.usgs.gov/sim/3169/sim3169_pamphlet.pdf</a></td>
+</tr>
+<tr>
+<td>Phreatophyte patches vs faults (61 % within 50 m)</td>
+<td><a href="https://www.researchgate.net/publication/321756798_Remote_sensing-derived_fractures_and_shrub_patterns_to_identify_groundwater_dependence">https://www.researchgate.net/publication/321756798_Remote_sensing-derived_fractures_and_shrub_patterns_to_identify_groundwater_dependence</a></td>
+</tr>
+</tbody>
+</table>
+<h2>Sibling repositories studied</h2>
+<p>GEMSDOE32 (0.2778 source): <a href="https://github.com/buffedlizard55-lab/GEMSDOE32">https://github.com/buffedlizard55-lab/GEMSDOE32</a> ·
+GEMSDOE28 (r1, h32-1, h36-1): <a href="https://github.com/buffedlizard55-lab/GEMSDOE28">https://github.com/buffedlizard55-lab/GEMSDOE28</a> ·
+GEMSDOE33 (h33-d): <a href="https://github.com/buffedlizard55-lab/GEMSDOE33">https://github.com/buffedlizard55-lab/GEMSDOE33</a> ·
+GEMSDOE47 (metric algebra): <a href="https://github.com/buffedlizard55-lab/GEMSDOE47">https://github.com/buffedlizard55-lab/GEMSDOE47</a></p>
+<hr><p style="font-size:.8rem;color:#667">GEMSDOE48 · built from <code>docs/md/sources.md</code> by <code>scripts/build_site.py</code></p></main></body></html>

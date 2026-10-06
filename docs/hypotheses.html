@@ -1,129 +1,158 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Next hypotheses · GEMSDOE48</title>
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
-<header>
-  <div class="wrap">
-    <h1>Next hypotheses — ranked research agenda</h1>
-    <p>Standing requirement: every session proposes 3–5 geological hypotheses not yet tried,
-    names the layers and transforms, explains why each should catch a fault <em>missing from the
-    USGS/INGENIOUS catalogue</em>, and differs from everything already implemented in the program.
-    The top candidate must pass the blocked holdout before spending a submission slot.</p>
-  </div>
-</header>
-<nav><div class="wrap">
-  <a href="index.html">Overview &amp; download</a>
-  <a href="executive-summary.html">Executive summary / how to submit</a>
-  <a href="method.html">Method</a>
-  <a href="validation.html">Validation</a>
-  <a class="active" href="hypotheses.html">Next hypotheses</a>
-  <a href="sources.html">Sources</a>
-  <a href="irregularities.html">Irregularities</a>
-</div></nav>
-
-<div class="wrap">
-
-<p class="small"><b>What has already been tried</b> (from the GEMSDOE series): LiDAR scarp/ridge
-detection, openness/terrain curvature, DTI tilt &amp; wing-crack, Euler deconvolution (SI=0/SI=1),
-heat-flow residuals × Euler, gravity gradients, MT conductance / clay-cap breach, strain-rate
-dilatation/shear, seismicity density, radiometric totals, worm persistence, Poisson off-catalogue
-emission, spacing-tuned dot-thinning, catalogue-flank pruning, fault-tip/stepover protection,
-analog-field domain transfer. New ideas must clear that list.</p>
-
-<h2 class="sec">Ranked candidates (expected DTI improvement vs implementation cost)</h2>
-
-<div class="card" style="margin:14px 0">
-<h3>#1 · H49-2 — Paleo-discharge ascent nodes: sinter/tufa × dilational stepover jogs</h3>
-<p><b>Layers:</b> GDR paleogeothermal features (spring deposits: sinter, tufa, travertine — 244 px
-already rasterized on-grid in the GEMSDOE30 mirror) × dilatation-rate band of the official feature
-stack × the fused family dot set.
-<b>Signature:</b> within 300 m of each paleo-deposit, relocate/seed dots at local maxima of
-dilatation rate and at stepover dilational jogs of nearby family traces (classic fluid-upflow loci;
-Faulds &amp; Hinz 2015 stepover-relay geometry).
-<b>Why off-catalogue:</b> Quaternary spring deposits are direct sedimentary evidence of past
-geothermal upflow; many sit on structures too small, buried, or eroded to appear in QFaults/INGENIOUS.
-<b>Differs from prior art:</b> the paleo layer has been derived (GEMSDOE30 external receipt) but no
-shipped arm ever used it; prior “addition arms” used heat flow, Euler, LiDAR — never paleo-discharge.
-<b>Cost:</b> low (layers already mirrored; pure numpy). <b>Expected gain:</b> low-to-moderate on the
-Initial Round metric (small mass), but <b>high for the Final Prize Round</b>, where expert-verified
-new faults expand the label set — corroborated candidate upflow nodes are exactly what experts can confirm.</p>
-</div>
-
-<div class="card" style="margin:14px 0">
-<h3>#2 · H49-1 — 2-m temperature probe advection anomalies along off-catalogue lineaments</h3>
-<p><b>Layers:</b> GDR 2-m temperature probe surveys (3,439 probes in-grid; derived raster mirrored in
-GEMSDOE30) × detrended elevation × RTP magnetics.
-<b>Signature:</b> probe-temperature residuals after removing the elevation + latitude conductive
-trend; warm residual clusters (&gt;+2σ) collinear with magnetics/DTI lineament segments; emit along the
-connecting segments.
-<b>Why off-catalogue:</b> probes sample actual shallow heat advection — blind, fluid-conducting
-faults leave a thermal footprint with no required surface expression, so they are structurally
-absent from a morphologically-compiled catalogue.
-<b>Differs from prior art:</b> H38-1 used conductive heat-flow residuals (DeAngelo et al. 2022);
-GEMSDOE36 used well geothermal gradients. Shallow <em>advective</em> probe residuals with lineament
-collinearity have never been built.
-<b>Cost:</b> moderate (trend fit + collinearity statistics). <b>Expected gain:</b> moderate-to-high
-(direct thermal evidence), coverage clustered near access roads — must be blocked-out in validation.</p>
-</div>
-
-<div class="card" style="margin:14px 0">
-<h3>#3 · H49-3 — Hydrothermal alteration index (K/Th) at lineament intersections</h3>
-<p><b>Layers:</b> GeoDAWN radiometrics (K%, Th% — available via the GDR/GeoDAWN release and mirrored
-in the sibling public layers) × two lineament fields (DTI dots &amp; magnetic-gradient ridges).
-<b>Signature:</b> hydrothermal alteration depletes K relative to Th (argillic/sericitic zones);
-low K/Th ratio localized at lineament–lineament intersections = permeable conduit + altered wall rock.
-<b>Why off-catalogue:</b> alteration halos persist under alluvium where surface traces vanish —
-precisely the covered-basin regime where the catalogue is sparsest.
-<b>Differs from prior art:</b> GEMSDOE46 tried scarp × radiometric-total fusion; the K/Th
-<em>ratio</em> transform restricted to intersection nodes is new.
-<b>Cost:</b> moderate. <b>Expected gain:</b> moderate.</p>
-</div>
-
-<div class="card" style="margin:14px 0">
-<h3>#4 · H49-4 — Magnetic damage-zone texture (rolling variance of RTP)</h3>
-<p><b>Layers:</b> reduced-to-pole magnetic anomaly (feature band 2) × Quaternary volcanics mask
-(GEMSDOE30 mirror).
-<b>Signature:</b> fault damage zones hydrothermally alter/destroy magnetic carriers → elevated
-local variance and entropy of RTP in 300–500 m bands along buried traces; skeletonize the
-variance field, NMS-thin to dots.
-<b>Why off-catalogue:</b> damage-zone width is detectable without any surface trace; the catalogue
-misses buried segments systematically.
-<b>Differs from prior art:</b> all prior magnetic families used gradients, Euler depths, or
-source-depth estimates — never texture statistics.
-<b>Cost:</b> moderate. <b>Expected gain:</b> moderate; <b>risk:</b> volcanic edifices produce similar
-texture — the volcanics mask is mandatory, which is why it ranks below #3.</p>
-</div>
-
-<div class="card" style="margin:14px 0">
-<h3>#5 · H49-5 — Drainage-network fault offsets on the 1-m DEM</h3>
-<p><b>Layers:</b> 1-m DEMs from the competition's own <span class="mono">1m_DEM_links.csv</span>
-(official USGS 3DEP items).
-<b>Signature:</b> stream longitudinal-profile knickpoint index + offset/beheaded channel detection
-along range fronts (network-level transform, not local scarp kernels).
-<b>Why off-catalogue:</b> range-front faults are digitized incompletely; drainage anomalies expose
-unmapped strands and stepovers between digitized segments.
-<b>Differs from prior art:</b> prior LiDAR arms (7GEMSDOE, r7-nms3-dem10-scarp) detected local
-scarps only; network hydrography analysis has not been attempted.
-<b>Cost:</b> high (DEM volumes; the sandbox cannot fetch them — needs an unrestricted machine).
-<b>Expected gain:</b> moderate-to-high; ranked last purely on cost.</p>
-</div>
-
-<h2 class="sec">Validation-before-slot protocol for the top candidate</h2>
-<ol>
-  <li>Build the candidate layer from the mirrored data (already fetchable here via GitHub API).</li>
-  <li>Blocked off-catalogue SGMC holdout: candidate emission vs same-dot-count random control
-  and vs the shipped DS support (this page's arms), exact official metric.</li>
-  <li>LOSFO-style far-field falsification (remove whole fault systems with a 600 m buffer): a
-  candidate whose gain vanishes in the far field is catalogue-adjacency leakage, not discovery.</li>
-  <li>Only a candidate passing ≥3/4 folds on both instruments may occupy a weekly slot.</li>
-</ol>
-
-<footer>GEMSDOE48 · hypotheses are proposals, not results — none of H49-1…H49-5 has been validated yet.</footer>
-</div>
-</body>
-</html>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GEMSDOE48 · hypotheses</title><style>body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;margin:0;color:#1d2330;background:#f6f7fb;line-height:1.55}
+nav{background:#14213d;padding:.6rem 1rem;position:sticky;top:0}nav a{color:#fff;margin-right:1.1rem;text-decoration:none;font-size:.95rem}
+nav a.on{border-bottom:2px solid #fca311}main{max-width:1050px;margin:auto;padding:1.2rem 1.4rem;background:#fff}
+table{border-collapse:collapse;width:100%;font-size:.9rem;margin:.6rem 0}th,td{border:1px solid #dde;padding:.35rem .5rem;vertical-align:top}
+th{background:#eef1f8}code{background:#f0f2f7;padding:.05rem .3rem;border-radius:3px;font-size:.88em;word-break:break-all}
+pre{background:#f0f2f7;padding:.7rem;overflow:auto}img{max-width:100%;border:1px solid #dde;margin:.5rem 0}
+.dl{background:#fff8e6;border:2px solid #fca311;border-radius:8px;padding:.6rem 1.1rem;margin-bottom:1rem}
+.btn{display:inline-block;background:#fca311;color:#14213d;font-weight:700;padding:.55rem 1rem;border-radius:6px;text-decoration:none;word-break:break-all}
+blockquote{border-left:4px solid #fca311;margin:.8rem 0;padding:.2rem .9rem;background:#fafafa}</style></head><body><nav><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">How to submit</a><a href="method.html" class="">Method & 0.2778 autopsy</a><a href="hypotheses.html" class="on">Hypotheses</a><a href="irregularities.html" class="">Irregularities</a><a href="next-steps.html" class="">Next steps</a><a href="leaderboard.html" class="">Leaderboard</a><a href="sources.html" class="">Sources</a></nav><main><h1>Hypotheses H48-1 … H48-5: untried here, ranked</h1>
+<p>Ranking = expected ΔDTI on the public board ÷ implementation cost. Every "obtainable" claim was
+checked in this session (method stated). Every "not in this repo family" claim was checked by
+<code>grep</code> across the four sibling repos cloned this session (GEMSDOE28, 32, 33, 47). The other ~43
+sibling repos were <strong>not</strong> grepped, so that claim is limited to those four (see IR-48-08).</p>
+<table>
+<thead>
+<tr>
+<th>Rank</th>
+<th>ID</th>
+<th>Hypothesis</th>
+<th>Expected ΔDTI</th>
+<th>Cost</th>
+<th>Data obtainable?</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 (value)</td>
+<td><strong>H48-2</strong></td>
+<td>Native-resolution 1 m LiDAR scarp detection</td>
+<td><strong>+0.01 to +0.05</strong> (the only idea big enough to reach 0.32+)</td>
+<td>High (~517 tiles, ~120 GB streamed)</td>
+<td><strong>Yes.</strong> TNM API returned tiles for the footprint (USGS 3DEP, public domain)</td>
+<td>Specified. Needs GitHub Actions; this sandbox can't reach USGS</td>
+</tr>
+<tr>
+<td>2 (cost)</td>
+<td><strong>H48-1</strong></td>
+<td>Dempster–Shafer fusion of dotted × tip families</td>
+<td>−0.0003 to +0.003</td>
+<td>Low</td>
+<td>Yes (in repo)</td>
+<td><strong>Built and validated: TIE.</strong> Shipped as the requested unique file</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>H48-5</strong></td>
+<td>Phreatophyte / vegetation lineaments in late-summer Sentinel-2 NDVI</td>
+<td>+0.003 to +0.015 (basin-floor faults that have no scarp)</td>
+<td>Medium</td>
+<td><strong>Yes.</strong> Element84 STAC <code>sentinel-2-l2a</code> collection resolved</td>
+<td>Specified</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>H48-3</strong></td>
+<td>ComCat microseismicity alignments</td>
+<td>≈0 to +0.003</td>
+<td>Medium</td>
+<td><strong>Yes.</strong> FDSN count = 267,774 events since 2000 in bbox</td>
+<td>Specified. Probably weak (see below)</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>H48-4</strong></td>
+<td>Truth-intensity map from the live-score inversion, used to emit</td>
+<td>Unknown</td>
+<td>Low</td>
+<td>Yes</td>
+<td><strong>Not viable yet.</strong> The instrument has negative top-8 rank power</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>H48-1 · Dempster–Shafer fusion that keeps disagreement (implemented)</h2>
+<ul>
+<li><strong>Layers:</strong> <code>h33-2-b2</code> (live 0.2778, dotted family) and <code>h32-1-prethin-tip</code> (live 0.2649, tip
+  family). Both derive from the H19-5 ridge backbone, which is built from the official
+  <code>training_features.tif</code> topo/geophysics bands.</li>
+<li><strong>Signature:</strong> the 300 m kernel support of each family's dots becomes a basic probability
+  assignment (BPA). Dempster's rule gives <code>m(F)</code>. Conflict <code>K</code> and Yager's <code>m(Θ)</code> are kept as
+  diagnostic layers.</li>
+<li><strong>Why it targets off-catalogue faults:</strong> the tip family deliberately protects fault-tip and
+  step-over continuations. These are "newly mapped geometry of an existing fault system", which
+  DrivenData staff explicitly count as new faults (thread 11536). The dotted family's
+  catalogue-flank veto is carried as explicit <code>m(¬F)</code>, so nothing is emitted within 200 m of the
+  catalogue.</li>
+<li><strong>How it differs:</strong> no sibling repo checked uses belief functions (<code>grep dempster|belief
+  function</code> returned 0 hits). Prior unions or averages blended surfaces. This rule takes sides,
+  measured in the disagreement region: Pearson against the naive mean is 0.71 there, vs 0.96
+  overall.</li>
+<li><strong>Validation:</strong> see <a href="method.html">method</a>. LSI instrument: 0.26336 vs b2 0.26351, a tie.
+  SGMC 4-quadrant blocked holdout: better in 2 of 4 folds. <strong>Did not beat the holdout best.</strong>
+  Downside bounded at ≥ 0.2773.</li>
+</ul>
+<h2>H48-2 · 1 m LiDAR scarp detection at native resolution (top expected value)</h2>
+<ul>
+<li><strong>Layer:</strong> USGS 3DEP 1 m bare-earth DEM. The competition's <code>1m_DEM_links.csv</code> lists the tiles,
+  and the TNM API independently returned e.g.
+  <code>USGS_1M_11_x37y438_NV_WestCentral_EarthMRI_2020_D20.tif</code> (262 MB, public domain).</li>
+<li><strong>Signature:</strong> paired profile curvature, a convex crest above a concave toe 2–20 m apart,
+  computed perpendicular to the local strike at metre scale. Then scarp height and facet slope,
+  with a template-matching scarp-likelihood. Detections are aggregated to 100 m. Elevations are
+  not resampled first.</li>
+<li><strong>Why off-catalogue:</strong> of the 376 USGS Qfault traces whose centroid is in the footprint,
+  <strong>359 (95.5 %) carry <code>map_scale = 250</code></strong> and 17 carry <code>100</code> (re-counted this session from
+  <code>gdr_qfaults_traces.csv</code>). We read "250" as a 1:250,000 compilation scale. That reading is an
+  interpretation of the field name, flagged as IR-48-09. Short, low-relief (&lt; 2 m) scarps fall
+  below that compilation's resolution. At 100 m a 1 m scarp is a ~1 % perturbation, which is why
+  every 100 m layer in the family plateaued at 0.26–0.28.</li>
+<li><strong>How it differs:</strong> no Python code in the four checked repos reads 3DEP 1 m tiles (<code>grep
+  "3DEP|1m_DEM"</code> in <code>*.py</code>: 0 hits). The family's DEM work used 100 m pre-derived rasters
+  (<code>lidar_scarp_features_u8.tif</code>) or a 10 m product (12GEMSDOE "dem10-scarp", live 0.1294, judging
+  by its submission name). GEMSDOE47 lists native 1 m processing as its #1 next step but did not
+  run it.</li>
+<li><strong>Blocker:</strong> this sandbox has no USGS/AWS egress (HTTP 000). Runnable path: a GitHub Actions
+  matrix job (runners have internet) streams one tile, derives the 100 m detection raster,
+  commits only that, and discards the tile.</li>
+</ul>
+<h2>H48-5 · Vegetation (phreatophyte) lineaments in late-summer NDVI</h2>
+<ul>
+<li><strong>Layer:</strong> Sentinel-2 L2A B04/B08 at 10 m, late July–September composites (Element84 Earth
+  Search STAC, collection <code>sentinel-2-l2a</code>, resolved this session). Landsat C2 L2 is the
+  fallback.</li>
+<li><strong>Signature:</strong> linear, strike-coherent positive anomalies of dry-season NDVI on basin floors,
+  where groundwater ponds against a fault barrier and feeds phreatophytes. The transform is a
+  directional ridge filter (oriented second derivative) on the NDVI anomaly.</li>
+<li><strong>Why off-catalogue:</strong> basin-floor faults with eroded or buried scarps have little
+  topographic signal, which makes them the class a topography-driven catalogue misses. The USGS
+  mapped Great Basin phreatophyte cover (<a href="https://pubs.usgs.gov/sim/3169/sim3169_pamphlet.pdf">SIM 3169</a>).
+  A peer-reviewed semi-arid case found 61 % of phreatophyte patches within 50 m of faults
+  (<a href="https://www.researchgate.net/publication/321756798_Remote_sensing-derived_fractures_and_shrub_patterns_to_identify_groundwater_dependence">Ecohydrology study</a>).</li>
+<li><strong>How it differs:</strong> no NDVI/phreatophyte work in the repos checked. Judging only by its submission name
+  (<code>conj_alteration_mag</code>, live 0.0782), 15GEMSDOE's spectral work targeted alteration, not
+  vegetation water access. Not verified in its code.</li>
+<li><strong>Risk:</strong> irrigation and riparian corridors cause false positives. They need masking (USGS
+  NLCD cultivated class).</li>
+</ul>
+<h2>H48-3 · ComCat microseismicity alignments</h2>
+<ul>
+<li><strong>Layer:</strong> USGS ComCat FDSN event catalogue (267,774 events since 2000 in the region bbox,
+  verified).</li>
+<li><strong>Signature:</strong> planar clustering of hypocentres (3-D PCA per cluster), projected up-dip to a
+  surface trace.</li>
+<li><strong>Why off-catalogue:</strong> these would be blind faults without surface scarps.</li>
+<li><strong>Differs:</strong> the supplied <code>ieq</code> band is a smooth density (GEMSDOE32 measured autocorrelation
+  0.9986 at 1 km).</li>
+<li><strong>Why ranked low:</strong> routine ComCat epicentral uncertainty in Nevada is typically of order
+  1 km. That is larger than the 300 m kernel, so most projected traces would earn ~0 credit. It
+  only pays where relocated catalogues exist.</li>
+</ul>
+<h2>H48-4 · Emit from the LSI truth-intensity map</h2>
+<p>The live-score inversion fits a truth intensity per (distance-to-catalogue × backbone) bin. It
+would be attractive to emit into high-intensity bins. <strong>Not viable:</strong> the leave-one-out rank
+correlation within the top-8 family is −0.69, so the fine structure is not trustworthy. Revisit
+after the λ-probe (see <a href="next-steps.html">next steps</a>) supplies exact <code>T</code>, <code>F</code>, <code>K</code> for one file.</p>
+<hr><p style="font-size:.8rem;color:#667">GEMSDOE48 · built from <code>docs/md/hypotheses.md</code> by <code>scripts/build_site.py</code></p></main></body></html>
