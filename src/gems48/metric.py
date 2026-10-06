@@ -115,9 +115,12 @@ class DTIResult:
         }
 
 
-def dti(pred: np.ndarray, truth: np.ndarray, alpha: float = ALPHA, beta: float = BETA,
-        radius: float = RADIUS_CELLS, eps: float = 1e-12) -> DTIResult:
-    """Distance-weighted Tversky index for a (possibly continuous) prediction."""
+def dti_result(pred: np.ndarray, truth: np.ndarray, alpha: float = ALPHA, beta: float = BETA,
+               radius: float = RADIUS_CELLS, eps: float = 1e-12) -> DTIResult:
+    """Full DTI breakdown for a (possibly continuous) prediction.
+
+    ``dti()`` returns the scalar; this returns the TP/FP/FN/mass breakdown too.
+    """
     pred = np.asarray(pred, dtype=np.float64)
     truth = np.asarray(truth, dtype=bool)
     if pred.shape != truth.shape:
@@ -152,3 +155,68 @@ def credit_per_dot(pred: np.ndarray, truth: np.ndarray, radius: float = RADIUS_C
     tot = np.bincount(idx, weights=val, minlength=n).reshape(pred.shape)
     cnt = np.bincount(idx, minlength=n).reshape(pred.shape).astype(np.int64)
     return tot, cnt, credit_map
+
+# --------------------------------------------------------------------------
+# API contributed by the parallel DS48 session: a scalar ``dti``, the
+# ``components`` dictionary, the raw ``OFFSETS`` table and a brute-force
+# reference.  Both this module and ``gemsdoe48.metric`` implement the same
+# published formulas; cross-checking them is deliberate.
+# --------------------------------------------------------------------------
+R_PX = RADIUS_CELLS
+_EPS = 1e-12
+OFFSETS = [(dy, dx, float(k)) for (dy, dx), k in zip(*kernel_offsets(RADIUS_CELLS)) if k > 0]
+
+
+def kernel(d):
+    """k(d) = max(1 - d/R, 0), R = 3 cells (300 m)."""
+    return np.clip(1.0 - np.asarray(d, dtype=np.float64) / R_PX, 0.0, None)
+
+
+def components(p, g, mask=None):
+    """Return dict(TP, FP, FN, S, K, DTI) for prediction p in [0,1], boolean truth g.
+
+    ``mask`` (bool) marks pixels excluded from evaluation (catalogue and the area
+    outside the study footprint); both p and g are zeroed on it before every sum.
+    """
+    p = np.nan_to_num(np.asarray(p, dtype=np.float64), nan=0.0)
+    g = np.asarray(g, dtype=bool)
+    if mask is not None:
+        mask = np.asarray(mask, dtype=bool)
+        p = np.where(mask, 0.0, p)
+        g = g & ~mask
+    r = dti_result(p, g, radius=R_PX)
+    return dict(TP=r.tp, FP=r.fp, FN=r.fn, S=r.mass, K=float(g.sum()),
+                DTI=(r.tp / (r.tp + ALPHA * r.fp + BETA * r.fn) if (r.tp + ALPHA * r.fp + BETA * r.fn) > 0 else 0.0))
+
+
+def dti(p, g, mask=None):
+    """Scalar distance-weighted Tversky index (convenience wrapper)."""
+    return components(p, g, mask)["DTI"]
+
+
+def dti_bruteforce(p, g):
+    """O(N*M) literal transcription of the published formulas; tiny grids only.
+
+    Independent of the shift-based fast path above, so agreement between the two
+    is evidence that the vectorised implementation is the published metric.
+    """
+    p = np.asarray(p, dtype=np.float64)
+    g = np.asarray(g, dtype=bool)
+    G = np.argwhere(g)
+    X = np.argwhere(p > 0)
+    TP = 0.0
+    FN = 0.0
+    for gy, gx in G:
+        m = 0.0
+        for xy, xx in X:
+            d = float(np.hypot(gy - xy, gx - xx))
+            if d <= R_PX:
+                m = max(m, p[xy, xx] * float(kernel(d)))
+        TP += m
+        FN += 1.0 - m
+    FP = 0.0
+    for xy, xx in X:
+        kk = max([float(kernel(float(np.hypot(gy - xy, gx - xx)))) for gy, gx in G] or [0.0])
+        FP += p[xy, xx] * (1.0 - kk)
+    den = TP + ALPHA * FP + BETA * FN
+    return TP / den if den > 0 else 0.0

@@ -23,7 +23,7 @@ from scipy.ndimage import distance_transform_edt
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 from gems48.evidence import kernel_support  # noqa: E402
-from gems48.metric import ALPHA, BETA, credit_per_dot, dti  # noqa: E402
+from gems48.metric import ALPHA, BETA, credit_per_dot, dti_result as dti  # noqa: E402
 
 # ---------------------------------------------------------------- inputs
 DOTTED = ROOT / "data/raw/dotted.tif"          # GEMSDOE32 H33-2-B2  (owner-reported 0.2778)

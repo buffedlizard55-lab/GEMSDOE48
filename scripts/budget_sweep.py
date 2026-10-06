@@ -32,7 +32,7 @@ from gems48.evidence import (  # noqa: E402
     pignistic,
 )
 from gems48.emission import poisson_sample  # noqa: E402
-from gems48.metric import ALPHA, dti  # noqa: E402
+from gems48.metric import ALPHA, dti_result as dti  # noqa: E402
 
 R_DOTTED = 0.90
 R_TIP = 0.90 * (0.11987588720357811 / 0.13446190223260976)

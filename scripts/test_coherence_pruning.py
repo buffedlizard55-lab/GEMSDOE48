@@ -36,7 +36,7 @@ from scipy.ndimage import distance_transform_edt, gaussian_filter, label, unifor
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 from gems48.evidence import kernel_support  # noqa: E402
-from gems48.metric import ALPHA, credit_per_dot, dti  # noqa: E402
+from gems48.metric import ALPHA, credit_per_dot, dti_result as dti  # noqa: E402
 
 DOTTED = ROOT / "data/raw/dotted.tif"
 TEMPLATE = ROOT / "data/raw/sample_submission.tif"

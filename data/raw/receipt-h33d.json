@@ -1,0 +1,54 @@
+{
+  "submission_name": "GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e",
+  "content_id": "cb490425926e",
+  "created_utc": "2026-10-04T18:55:13+00:00",
+  "primary_file": "GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e.tif",
+  "primary_zip": "GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e.zip",
+  "primary_sha256": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757",
+  "primary_bytes": 917544,
+  "primary_encoding": "all-finite float32 in [0, 1]; zero outside footprint; immune to DrivenData range error",
+  "nan_outside_twin": "GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e-nanoutside.tif",
+  "nan_outside_sha256": "bc3af2a5fcb4b49bc5845a2d7dc3da23daf41ce75e4c64da3337c0c8c93cc12c",
+  "nan_outside_bytes": 966684,
+  "note": "GEMSDOE33 H33-D tip-protected analog xfer | Ben-David bounded transfer + Euler corroboration + flank prune | range-hardened all-finite [0,1] | id cb490425926e",
+  "note_length": 158,
+  "dots_emitted": 41865,
+  "footprint_cells": 5167373,
+  "emitted_fraction": 0.008101795631939092,
+  "grid": {
+    "crs": "EPSG:32611",
+    "height": 3730,
+    "width": 3292,
+    "res_m": 100.0,
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ]
+  },
+  "range_check": {
+    "all_finite": true,
+    "nan_count": 0,
+    "min_val": 0.0,
+    "max_val": 1.0,
+    "outside_val": 0.0,
+    "portal_range_error_immune": true
+  },
+  "science": {
+    "hypothesis": "H33-D: Kinematic Fault-Tip Preservation & Asymmetric Flank Pruning + Euler/Analog Corroboration",
+    "base": "H19-5 6-expert ridge backbone (121,131 px)",
+    "spacing": "Poisson-disk d=2.8284 px",
+    "pruned_mid_flank_dots": 2539,
+    "protected_tip_dots": 1377,
+    "added_euler_clusters": 133,
+    "expected_dti_range": "0.2725 - 0.2760",
+    "reference_comparison": {
+      "H27-4 (scored 0.2708)": 40199,
+      "H36-1 (37,660 px)": 37660,
+      "GEMSDOE33": 41865
+    }
+  }
+}

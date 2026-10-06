@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Method · Dempster-Shafer fusion · GEMSDOE48</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>Method — combining two families while preserving their disagreement</h1>
+    <p>Dempster-Shafer evidence theory (Dempster 1967; Shafer 1976), long established in GIS
+    favorability mapping as an alternative to weights-of-evidence, applied to the two strongest
+    independently-built fault surfaces this program has produced.</p>
+  </div>
+</header>
+<nav><div class="wrap">
+  <a href="index.html">Overview &amp; download</a>
+  <a href="executive-summary.html">Executive summary / how to submit</a>
+  <a class="active" href="method.html">Method</a>
+  <a href="validation.html">Validation</a>
+  <a href="hypotheses.html">Next hypotheses</a>
+  <a href="sources.html">Sources</a>
+  <a href="irregularities.html">Irregularities</a>
+</div></nav>
+
+<div class="wrap">
+
+<h2 class="sec">1 · Why not average the two surfaces?</h2>
+<p>The dotted family (spacing-tuned dot-thin of a detector field; best live 0.2778) and the
+tip/step-over family (fault-tip kinematic protection, Euler SI=0 corroboration, analog-field
+transfer; live 0.2632) were built by different pipelines with different physics. A weighted
+average of the two rasters would force every pixel into a single blended number and destroy
+exactly the information that matters for discovery: <em>where the two approaches disagree</em>.
+Under a naive mean, a dot present in only one family becomes 0.5 — numerically indistinguishable
+in spirit from weak agreement, and with no record of <em>which</em> family believed it.</p>
+<p>Dempster-Shafer theory instead assigns each source a mass function over the frame
+Θ&nbsp;=&nbsp;{F,&nbsp;N} (fault / no-fault) with an explicit ignorance component, and combines them
+with Dempster's rule, which carries forward an <b>unassigned mass</b> wherever the sources do not
+force a decision and quarantines direct contradiction as <b>conflict</b>.</p>
+
+<h2 class="sec">2 · Mass assignment (discounted, per pixel)</h2>
+<p>Each family surface s<sub>i</sub>(x) ∈ {0,1} (both artifacts emit binary dots) becomes a
+discounted Bayesian mass function with source reliability α<sub>i</sub> = 0.99:</p>
+<table>
+  <tr><th>mass</th><th>formula</th><th>meaning</th></tr>
+  <tr><td>m<sub>i</sub>({F})</td><td class="mono">α<sub>i</sub>·s<sub>i</sub></td><td>committed belief “fault here”</td></tr>
+  <tr><td>m<sub>i</sub>({N})</td><td class="mono">α<sub>i</sub>·(1−s<sub>i</sub>)</td><td>committed belief “no fault” (the pipeline looked and rejected)</td></tr>
+  <tr><td>m<sub>i</sub>(Θ)</td><td class="mono">1−α<sub>i</sub></td><td>uncommitted / ignorance</td></tr>
+</table>
+<p class="small">Committed negative evidence is deliberate: both pipelines are tuned detectors whose
+zeros are rejections, not missing data. (The alternative simple-support construction with no
+negative evidence produces zero conflict everywhere and no disagreement layer — it was considered
+and rejected for exactly that reason.)</p>
+
+<h2 class="sec">3 · Dempster's rule of combination</h2>
+<p>For m<sub>1</sub> = (f<sub>1</sub>, n<sub>1</sub>, u<sub>1</sub>), m<sub>2</sub> = (f<sub>2</sub>, n<sub>2</sub>, u<sub>2</sub>),
+with conflict K = f<sub>1</sub>n<sub>2</sub> + n<sub>1</sub>f<sub>2</sub> :</p>
+<table>
+  <tr><th>quantity</th><th>formula</th><th>this fusion, α=0.99</th></tr>
+  <tr><td>combined belief Bel(F) = m<sub>12</sub>(F)</td>
+      <td class="mono">(f<sub>1</sub>f<sub>2</sub> + f<sub>1</sub>u<sub>2</sub> + u<sub>1</sub>f<sub>2</sub>)/(1−K)</td>
+      <td>both families: 0.9999 · one family: α/(1+α) = 0.49749 · neither: 0</td></tr>
+  <tr><td>unassigned mass m<sub>12</sub>(Θ)</td><td class="mono">u<sub>1</sub>u<sub>2</sub>/(1−K)</td>
+      <td>both: 0.0001 · one: 0.00503 · neither: 1.0 — the diagnostic layer shipped as
+      <span class="mono">…ds-unassigned-mass….tif</span></td></tr>
+  <tr><td>conflict K</td><td class="mono">f<sub>1</sub>n<sub>2</sub> + n<sub>1</sub>f<sub>2</sub></td>
+      <td>0.9801 at every single-source dot — the disagreement map, shipped as
+      <span class="mono">…ds-conflict….tif</span></td></tr>
+  <tr><td>plausibility Pl(F)</td><td class="mono">Bel(F) + m<sub>12</sub>(Θ)</td>
+      <td>upper bound of warranted belief</td></tr>
+</table>
+<p>The resulting tier structure is intrinsic to Dempster's rule: <b>single-source evidence can
+never reach belief 0.5</b> under symmetric discounting (α/(1+α) &lt; 0.5 for α &lt; 1) — corroboration
+is required for conviction. The belief surface is normalized to [0,1] by dividing by its maximum
+(the intersection tier), giving tiers {1.0, 0.49754, 0}.</p>
+
+<h2 class="sec">4 · From belief to submission: the decision rule</h2>
+<p>The competition metric is the distance-weighted Tversky index with α=0.2 (FP), β=0.8 (FN),
+triangular kernel R=300 m, and — critically — <b>graded predictions p(x) enter the formula
+directly</b> (no binarization). Marginal analysis: a dot of value v that is the best cover of a
+truth pixel improves DTI iff its geometric credit clears ≈ 0.2·DTI ≈ 0.055, <em>independent of
+v</em>; value scales upside and downside together. The only decision the metric forces is the
+support set — and how much confidence each tier should carry is then a risk question answered
+empirically by the holdout:</p>
+<table>
+  <tr><th>singleton tier value</th><th>off-catalogue holdout DTI</th></tr>
+  <tr><td class="num">0.25</td><td class="num">0.0843</td></tr>
+  <tr><td class="num">0.50 (= graded DS belief / naive mean)</td><td class="num">0.0880</td></tr>
+  <tr><td class="num">0.66</td><td class="num">0.0906</td></tr>
+  <tr><td class="num">0.75</td><td class="num">0.0921</td></tr>
+  <tr><td class="num">0.90</td><td class="num">0.0945</td></tr>
+  <tr><td class="num"><b>1.00 (shipped)</b></td><td class="num"><b>0.0960</b></td></tr>
+</table>
+<p>Strictly monotone: the disagreement dots are net-positive evidence, so the DS decision rule
+emits its full support {m<sub>12</sub>(F) &gt; 0} at value 1.0 — the <b>primary submission</b> —
+while the graded belief, unassigned mass, conflict and plausibility layers are shipped alongside
+as the readable evidence system.</p>
+
+<h2 class="sec">5 · The fusion arithmetic</h2>
+<table>
+  <tr><th>set</th><th>dots</th><th>interpretation</th></tr>
+  <tr><td>dotted ∩ tip (corroborated)</td><td class="num">31,614</td><td>both families independently detect — emitted at belief 1.0</td></tr>
+  <tr><td>dotted only</td><td class="num">6,040</td><td>disagreement — preserved, conflict 0.9801, emitted (holdout-selected)</td></tr>
+  <tr><td>tip only</td><td class="num">10,251</td><td>disagreement — preserved (incl. tip-protected stepover relays), emitted</td></tr>
+  <tr><td><b>union (support emitted)</b></td><td class="num"><b>47,905</b></td><td>0.93% of the footprint; 0 dots on the public catalogue</td></tr>
+</table>
+
+<footer>GEMSDOE48 · implementation: <span class="mono">src/gemsdoe48/dempster_shafer.py</span> ·
+receipts: <span class="mono">evidence/build_submission.json</span></footer>
+</div>
+</body>
+</html>

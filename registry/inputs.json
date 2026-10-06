@@ -1,0 +1,249 @@
+{
+  "generated_utc": "2026-10-06T22:15:45Z",
+  "generated_by": "scripts/hash_inputs.py",
+  "hash_algorithm": "sha256",
+  "expected_grid": {
+    "shape_hw": [
+      3730,
+      3292
+    ],
+    "crs": "EPSG:32611",
+    "res_m": 100.0
+  },
+  "note": "Hashes are of the exact bytes in this repository. Any artifact built by scripts/build_submission.py must reproduce from these inputs alone.",
+  "inputs": [
+    {
+      "path": "data/official/labels.tif",
+      "role": "truth-layer",
+      "sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+      "bytes": 425830,
+      "provenance": "Organizer-supplied training labels (known-truth mask). Identical to the mask per the 2026-09-16 / 2026-09-21 staff clarification.",
+      "grid": {
+        "width": 3292,
+        "height": 3730,
+        "count": 1,
+        "dtype": "int8",
+        "crs": "EPSG:32611",
+        "transform": [
+          100.0,
+          0.0,
+          243350.0,
+          0.0,
+          -100.0,
+          4508550.0
+        ],
+        "nodata": -1.0,
+        "res_m": 100.0
+      },
+      "values": {
+        "min": 0.0,
+        "max": 1.0,
+        "n_positive": 60988,
+        "n_nan": 7111787,
+        "n_outside_0_1": 0,
+        "n_cells": 12279160,
+        "unique_values": 2
+      }
+    },
+    {
+      "path": "data/official/existing_faults.tif",
+      "role": "truth-layer",
+      "sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+      "bytes": 425830,
+      "provenance": "Published fault catalogue raster distributed with the training data.",
+      "grid": {
+        "width": 3292,
+        "height": 3730,
+        "count": 1,
+        "dtype": "int8",
+        "crs": "EPSG:32611",
+        "transform": [
+          100.0,
+          0.0,
+          243350.0,
+          0.0,
+          -100.0,
+          4508550.0
+        ],
+        "nodata": -1.0,
+        "res_m": 100.0
+      },
+      "values": {
+        "min": 0.0,
+        "max": 1.0,
+        "n_positive": 60988,
+        "n_nan": 7111787,
+        "n_outside_0_1": 0,
+        "n_cells": 12279160,
+        "unique_values": 2
+      }
+    },
+    {
+      "path": "data/official/derived_sgmc_faults_100m.tif",
+      "role": "truth-layer",
+      "sha256": "643cbe992ef4ba37588fb469163ed8291e3ceb23d6c1f78a3cfaa462430c2da0",
+      "bytes": 198602,
+      "provenance": "USGS State Geologic Map Compilation (SGMC) faults rasterised to the official 100 m grid; an independent non-catalogue truth layer. Derived from the SGMC GeoPackage via the sibling repositories' data/external/derived_sgmc_faults_100m_u8.tif.",
+      "grid": {
+        "width": 3292,
+        "height": 3730,
+        "count": 1,
+        "dtype": "uint8",
+        "crs": "EPSG:32611",
+        "transform": [
+          100.0,
+          0.0,
+          243350.0,
+          0.0,
+          -100.0,
+          4508550.0
+        ],
+        "nodata": null,
+        "res_m": 100.0
+      },
+      "values": {
+        "min": 0.0,
+        "max": 1.0,
+        "n_positive": 83593,
+        "n_nan": 0,
+        "n_outside_0_1": 0,
+        "n_cells": 12279160,
+        "unique_values": 2
+      }
+    },
+    {
+      "path": "data/families/dotted_d2_8_02600.tif",
+      "role": "family",
+      "sha256": "3e78737f0da8dd2ca66cc6caac0ce8eeefcd6715707f8d1bd3091845cd9bcc30",
+      "bytes": 836982,
+      "provenance": "Spacing-tuned dotted family, owner-reported live 0.2600 (GEMSDOE25, artifact e56ea318af89). Upstream of the 0.2708 and 0.2778 rungs.",
+      "grid": {
+        "width": 3292,
+        "height": 3730,
+        "count": 1,
+        "dtype": "float32",
+        "crs": "EPSG:32611",
+        "transform": [
+          100.0,
+          0.0,
+          243350.0,
+          0.0,
+          -100.0,
+          4508550.0
+        ],
+        "nodata": null,
+        "res_m": 100.0
+      },
+      "values": {
+        "min": 0.0,
+        "max": 1.0,
+        "n_positive": 44090,
+        "n_nan": 0,
+        "n_outside_0_1": 0,
+        "n_cells": 12279160,
+        "unique_values": 2
+      }
+    },
+    {
+      "path": "data/families/dotted_d2_8_02708.tif",
+      "role": "family",
+      "sha256": "ab02300152248fdda04e988e2cd2a0c13f35eec42fcf670a15e8b76b19e24a73",
+      "bytes": 1595850,
+      "provenance": "Spacing-tuned dotted family, owner-reported live 0.2708 (GEMSDOE28, artifact 8acb75e1f2cc, catalogue-flank buffer B = 1).",
+      "grid": {
+        "width": 3292,
+        "height": 3730,
+        "count": 1,
+        "dtype": "float32",
+        "crs": "EPSG:32611",
+        "transform": [
+          100.0,
+          0.0,
+          243350.0,
+          0.0,
+          -100.0,
+          4508550.0
+        ],
+        "nodata": null,
+        "res_m": 100.0
+      },
+      "values": {
+        "min": 0.0,
+        "max": 1.0,
+        "n_positive": 40199,
+        "n_nan": 7111787,
+        "n_outside_0_1": 0,
+        "n_cells": 12279160,
+        "unique_values": 2
+      }
+    },
+    {
+      "path": "data/families/dotted_b2_prune_02778.tif",
+      "role": "family",
+      "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+      "bytes": 219065,
+      "provenance": "LIVE-BEST artifact, owner-reported live 0.2778 (GEMSDOE32 H33-2-B2, artifact e5eb6e7e). 37,654 positive pixels. This is the mass target the submission reproduces.",
+      "grid": {
+        "width": 3292,
+        "height": 3730,
+        "count": 1,
+        "dtype": "float32",
+        "crs": "EPSG:32611",
+        "transform": [
+          100.0,
+          0.0,
+          243350.0,
+          0.0,
+          -100.0,
+          4508550.0
+        ],
+        "nodata": null,
+        "res_m": 100.0
+      },
+      "values": {
+        "min": 0.0,
+        "max": 1.0,
+        "n_positive": 37654,
+        "n_nan": 0,
+        "n_outside_0_1": 0,
+        "n_cells": 12279160,
+        "unique_values": 2
+      }
+    },
+    {
+      "path": "data/families/tip_stepover_r30_02632.tif",
+      "role": "family",
+      "sha256": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757",
+      "bytes": 917544,
+      "provenance": "Tip / step-over family, owner-reported live 0.2632 (GEMSDOE33, artifact cb490425926e). The second family combined by Dempster's rule.",
+      "grid": {
+        "width": 3292,
+        "height": 3730,
+        "count": 1,
+        "dtype": "float32",
+        "crs": "EPSG:32611",
+        "transform": [
+          100.0,
+          0.0,
+          243350.0,
+          0.0,
+          -100.0,
+          4508550.0
+        ],
+        "nodata": null,
+        "res_m": 100.0
+      },
+      "values": {
+        "min": 0.0,
+        "max": 1.0,
+        "n_positive": 41865,
+        "n_nan": 0,
+        "n_outside_0_1": 0,
+        "n_cells": 12279160,
+        "unique_values": 2
+      }
+    }
+  ],
+  "grid_consistent": true,
+  "problems": []
+}

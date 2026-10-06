@@ -1,0 +1,44 @@
+{
+  "generated": "2026-10-06",
+  "instrument": "holdout.evaluate_pair, 4 spatial quadrants x 2 draws, common random numbers, emission over the whole map (protocol P)",
+  "question": "does the catalogue-blocked proxy rank the four artifacts in the same order as the organizer's live leaderboard?",
+  "rows": [
+    {
+      "artifact": "gems25_dotted_d2_8",
+      "px": 44090,
+      "owner_reported_live": 0.26,
+      "proxy_sparse": 0.041792,
+      "proxy_dense": 0.108712
+    },
+    {
+      "artifact": "gems33_tip_stepover_r30",
+      "px": 41865,
+      "owner_reported_live": 0.2632,
+      "proxy_sparse": 0.022866,
+      "proxy_dense": 0.057158
+    },
+    {
+      "artifact": "gems28_dotted_d2_8_solo",
+      "px": 40199,
+      "owner_reported_live": 0.2708,
+      "proxy_sparse": 0.013599,
+      "proxy_dense": 0.033381
+    },
+    {
+      "artifact": "gems32_h33_2_b2",
+      "px": 37654,
+      "owner_reported_live": 0.2778,
+      "proxy_sparse": 0.001947,
+      "proxy_dense": 0.004598
+    }
+  ],
+  "spearman_rho_proxy_dense_vs_live": -1.0,
+  "spearman_rho_proxy_sparse_vs_live": -1.0,
+  "verdict": "ANTI-MONOTONE. The proxy ranks the four artifacts in exactly the reverse of the live ladder (rho = -1.0, n = 4).",
+  "mechanism": "The proxy's truth is the published catalogue. The B=2 flank buffer and the spacing sweep deliberately remove mass from the neighbourhood of the catalogue, which is precisely what the live scorer rewards (staff clarification DD-MASK: the mask is pixel-exact and identical to the training labels). So the proxy rewards catalogue proximity and the organizer rewards the opposite.",
+  "consequence": "This proxy is UNUSABLE as a promotion gate for questions about which support to emit. It is used in this repository only for geometry questions at a fixed claim region, and every such use is labelled PROXY.",
+  "independent_corroboration": [
+    "GEMSDOE32 IR-32-PROXY-01 and GEMSDOE24 IR-H19-HARNESS-LEAK record the same defect in sibling repositories.",
+    "GEMSDOE29 candidate_scoreboard.json: the sgmc-off-catalogue artifact scores 0.0446 on the catalogue-hidden proxy but 0.0512 live, while the same file scores 0.5616 against SGMC truth."
+  ]
+}

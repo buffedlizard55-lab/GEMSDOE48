@@ -142,7 +142,7 @@ def test_yager_conserves_mass_and_keeps_conflict():
 
 @needs_raw
 def test_h49_beats_the_dotted_parent_on_the_blocked_holdout():
-    from gems48.metric import dti
+    from gems48.metric import dti_result as dti
     from gems48.evidence import combine_yager, discounted_binary_mass, kernel_support, minmax_unit, pignistic
 
     with rasterio.open(RAW / "dotted.tif") as ds:

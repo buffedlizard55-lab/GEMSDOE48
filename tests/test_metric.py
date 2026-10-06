@@ -1,206 +1,376 @@
+"""The metric is tested against its own naive transcription, not against itself.
+
+The fast implementation in ``gemsdoe48.metric`` collapses the two ``max``
+operators of the official equations onto 25 shifted-array operations.  These
+tests prove that collapse is exact by comparing against an independent O(|G| * N)
+loop written straight from the published equations, on random rasters where the
+``max`` is genuinely contested (many candidates inside the 300 m reach).
+"""
+from __future__ import annotations
+
+import unittest
+
 import numpy as np
-import pytest
 
-from gems48.metric import (
-    ALPHA,
-    BETA,
-    credit_per_dot,
-    dti,
-    kernel_offsets,
-    truth_kernel_max,
-    weighted_tp_credit,
-)
+import conftest  # noqa: F401  (path bootstrap)
+from gemsdoe48 import metric
 
 
-def _brute(pred, truth, alpha=ALPHA, beta=BETA, radius=3.0):
-    """Literal transcription of the published formulas, loops and all."""
-    import math
+class TestKernel(unittest.TestCase):
+    def test_offset_count_and_weights(self):
+        # 300 m reach on a 100 m grid => integer offsets with hypot < 3.
+        self.assertEqual(len(metric.OFFSETS), 25)
+        ks = sorted(k for _, _, k in metric.OFFSETS)
+        self.assertAlmostEqual(ks[0], 1.0 - 2.0 * np.sqrt(2.0) / 3.0)  # (2,2)
+        self.assertAlmostEqual(ks[-1], 1.0)  # (0,0)
+        for dr, dc, k in metric.OFFSETS:
+            self.assertGreater(k, 0.0)
+            self.assertLessEqual(k, 1.0)
+            self.assertLess(np.hypot(dr, dc), 3.0)
 
-    pred = np.asarray(pred, dtype=np.float64)
-    truth = np.asarray(truth, dtype=bool)
-    h, w = pred.shape
-    gs = [(y, x) for y in range(h) for x in range(w) if truth[y, x]]
-    offs = [
-        (dy, dx)
-        for dy in range(-int(radius), int(radius) + 1)
-        for dx in range(-int(radius), int(radius) + 1)
-        if math.hypot(dy, dx) <= radius + 1e-12
-    ]
-    tp = 0.0
-    fn = 0.0
-    for gy, gx in gs:
-        best = 0.0
-        for dy, dx in offs:
-            y, x = gy + dy, gx + dx
-            if 0 <= y < h and 0 <= x < w:
-                k = max(1.0 - math.hypot(dy, dx) / radius, 0.0)
-                best = max(best, pred[y, x] * k)
-        tp += best
-        fn += 1.0 - best
-    fp = 0.0
-    for y in range(h):
-        for x in range(w):
-            if pred[y, x] > 0:
-                kbest = 0.0
-                for gy, gx in gs:
-                    k = max(1.0 - math.hypot(y - gy, x - gx) / radius, 0.0)
-                    kbest = max(kbest, k)
-                fp += pred[y, x] * (1.0 - kbest)
-    return tp / (tp + alpha * fp + beta * fn + 1e-12), tp, fp, fn
+    def test_no_duplicate_offsets(self):
+        seen = {(dr, dc) for dr, dc, _ in metric.OFFSETS}
+        self.assertEqual(len(seen), 25)
+
+    def test_kernel_is_symmetric(self):
+        d = {(dr, dc): k for dr, dc, k in metric.OFFSETS}
+        for (dr, dc), k in d.items():
+            self.assertAlmostEqual(d[(-dr, -dc)], k)
+
+    def test_max_credit_at_own_pixel_is_the_value(self):
+        f = np.zeros((9, 9))
+        f[4, 4] = 0.7
+        out = metric.max_credit_field(f)
+        self.assertAlmostEqual(out[4, 4], 0.7)  # k = 1 on the diagonal
+        self.assertAlmostEqual(out[4, 7], 0.0)  # exactly at the reach
+        self.assertAlmostEqual(out[4, 6], 0.7 * (1.0 - 2.0 / 3.0))
 
 
-def test_kernel_offsets_metric_properties():
-    offs, w = kernel_offsets(3.0)
-    assert (0, 0) in offs
-    assert len(offs) == 29  # closed Euclidean disc of radius 3
-    d = {o: k for o, k in zip(offs, w)}
-    assert d[(0, 0)] == pytest.approx(1.0)
-    assert d[(1, 0)] == pytest.approx(2.0 / 3.0)
-    assert d[(2, 0)] == pytest.approx(1.0 / 3.0)
-    assert d[(3, 0)] == pytest.approx(0.0)
-    assert d[(2, 2)] == pytest.approx(1.0 - np.hypot(2, 2) / 3.0)
+class TestIdentities(unittest.TestCase):
+    def test_fpw_identity_and_mass(self):
+        rng = np.random.default_rng(11)
+        p = (rng.random((80, 90)) < 0.02).astype(np.float64)
+        t = rng.random((80, 90)) < 0.01
+        r = metric.dti(p, t)
+        # FPw = S - M exactly, by construction of the arrays
+        self.assertAlmostEqual(r.fpw, r.mass - r.self_credit, places=9)
+        # FNw = |G| - TPw exactly, because p <= 1 and k <= 1
+        self.assertAlmostEqual(r.fnw, r.n_truth - r.tpw, places=9)
+
+    def test_dti_formula_is_the_published_one(self):
+        rng = np.random.default_rng(3)
+        p = rng.random((60, 60)) * (rng.random((60, 60)) < 0.05)
+        t = rng.random((60, 60)) < 0.02
+        r = metric.dti(p, t)
+        manual = r.tpw / (r.tpw + 0.2 * r.fpw + 0.8 * r.fnw + metric.EPS)
+        self.assertAlmostEqual(r.dti, manual, places=12)
 
 
-def test_matches_bruteforce_on_random_fields():
-    rng = np.random.default_rng(20261006)
-    for trial in range(6):
-        h, w = 22, 25
-        truth = rng.random((h, w)) < 0.08
-        if not truth.any():
-            continue
-        pred = (rng.random((h, w)) < 0.25) * rng.random((h, w))
-        got = dti(pred, truth)
-        exp_dti, exp_tp, exp_fp, exp_fn = _brute(pred, truth)
-        assert got.tp == pytest.approx(exp_tp, abs=1e-9)
-        assert got.fp == pytest.approx(exp_fp, abs=1e-9)
-        assert got.fn == pytest.approx(exp_fn, abs=1e-9)
-        assert got.dti == pytest.approx(exp_dti, abs=1e-9)
+class TestExactness(unittest.TestCase):
+    """Fast path vs the deliberately naive transcription."""
+
+    def _case(self, seed, shape=(40, 45), density=0.03, ndots=90):
+        rng = np.random.default_rng(seed)
+        p = np.zeros(shape)
+        idx = rng.choice(shape[0] * shape[1], size=ndots, replace=False)
+        p.flat[idx] = rng.random(ndots)
+        t = rng.random(shape) < density
+        return p, t
+
+    def test_fast_equals_bruteforce_random(self):
+        for seed in (1, 2, 3, 4, 5):
+            with self.subTest(seed=seed):
+                p, t = self._case(seed)
+                fast = metric.dti(p, t, validate=True)
+                slow = metric.dti_bruteforce(p, t)
+                self.assertAlmostEqual(fast.tpw, slow.tpw, places=8)
+                self.assertAlmostEqual(fast.fpw, slow.fpw, places=6)
+                self.assertAlmostEqual(fast.fnw, slow.fnw, places=8)
+                self.assertAlmostEqual(fast.dti, slow.dti, places=9)
+
+    def test_fast_equals_bruteforce_with_a_cluster(self):
+        # A dense cluster makes the argmax of several truth pixels contestable
+        # at several kernel offsets -- the case where an off-by-one shift bug
+        # would show up.
+        p = np.zeros((40, 45))
+        p[20:24, 20:25] = 1.0
+        p[20, 24] = 0.5
+        t = np.zeros((40, 45), dtype=bool)
+        t[21:23, 21:24] = True
+        fast = metric.dti(p, t)
+        slow = metric.dti_bruteforce(p, t)
+        self.assertAlmostEqual(fast.tpw, slow.tpw, places=10)
+        self.assertAlmostEqual(fast.dti, slow.dti, places=10)
+
+    def test_fast_equals_bruteforce_binary(self):
+        rng = np.random.default_rng(77)
+        p = (rng.random((50, 50)) < 0.06).astype(float)
+        t = rng.random((50, 50)) < 0.03
+        self.assertAlmostEqual(
+            metric.dti(p, t).dti, metric.dti_bruteforce(p, t).dti, places=10
+        )
+
+    def test_shift_convention_is_pinned(self):
+        """The shift moves `a` by (+dr, +dc): `out[r, c] = a[r - dr, c - dc]`.
+
+        The sign is immaterial to the metric (the offset set and the kernel are
+        both symmetric), but it must not drift silently, so it is pinned here.
+        """
+        a = np.zeros((7, 7))
+        a[3, 3] = 1.0
+        for dr, dc in ((0, 0), (2, 0), (-2, 0), (0, 3), (0, -3), (2, -2)):
+            got = metric._shift(a, dr, dc)
+            want = np.zeros_like(a)
+            rr, cc = 3 + dr, 3 + dc
+            if 0 <= rr < 7 and 0 <= cc < 7:
+                want[rr, cc] = 1.0
+            np.testing.assert_allclose(got, want, err_msg=f"dr={dr} dc={dc}")
+
+    def test_shift_matches_an_explicit_o_n2_loop(self):
+        a = np.arange(20, dtype=float).reshape(4, 5)
+        for dr, dc in ((0, 0), (1, 0), (-1, 0), (0, 1), (0, -1), (2, -2), (-3, 4)):
+            got = metric._shift(a, dr, dc)
+            want = np.zeros_like(a)
+            for r in range(a.shape[0]):
+                for c in range(a.shape[1]):
+                    if 0 <= r - dr < a.shape[0] and 0 <= c - dc < a.shape[1]:
+                        want[r, c] = a[r - dr, c - dc]
+            np.testing.assert_allclose(got, want)
+
+    @staticmethod
+    def _shift_plus(a, dr, dc):
+        """`out[r, c] = a[r + dr, c + dc]`, zero-filled (NOT circular)."""
+        out = np.zeros_like(a)
+        h, w = a.shape
+        r0, r1 = max(-dr, 0), min(h, h - dr)
+        c0, c1 = max(-dc, 0), min(w, w - dc)
+        if r0 < r1 and c0 < c1:
+            out[r0:r1, c0:c1] = a[r0 + dr : r1 + dr, c0 + dc : c1 + dc]
+        return out
+
+    def test_sign_convention_cannot_change_the_result(self):
+        """Because OFFSETS and k are both symmetric, either sign gives the same
+        `max` -- so the fast path is exact whichever convention is used."""
+        rng = np.random.default_rng(5)
+        f = rng.random((30, 30))
+        plus = np.zeros_like(f)
+        for dr, dc, k in metric.OFFSETS:  # out[r,c] = a[r+dr, c+dc]
+            plus = np.maximum(plus, self._shift_plus(f, dr, dc) * k)
+        np.testing.assert_allclose(metric.max_credit_field(f), plus, atol=1e-12)
 
 
-def test_official_worked_example_is_reproducible_when_fully_specified():
-    """The published example (TP=3.00, FP=1.89, FN=2.00 -> 0.60) is a figure.
+class TestMetricProperties(unittest.TestCase):
+    def test_perfect_prediction_is_one(self):
+        t = np.zeros((30, 30), dtype=bool)
+        t[10, 10] = True
+        t[20, 20] = True
+        p = t.astype(float)
+        # DTI = T/(T + eps) for a perfect prediction, so 1 - 1e-9 with |G| = 2.
+        T = float(t.sum())
+        self.assertAlmostEqual(metric.dti(p, t).dti, T / (T + metric.EPS), places=15)
 
-    The page does not publish the pixel values behind the figure, so the exact
-    triple cannot be reconstructed from the official text alone.  What *is*
-    checkable is the arithmetic: with those three components the published
-    index follows from the published formula.
-    """
-    tp, fp, fn = 3.00, 1.89, 2.00
-    assert tp / (tp + ALPHA * fp + BETA * fn) == pytest.approx(0.60, abs=0.005)
+    def test_empty_prediction_is_zero(self):
+        t = np.zeros((30, 30), dtype=bool)
+        t[10, 10] = True
+        r = metric.dti(np.zeros((30, 30)), t)
+        self.assertAlmostEqual(r.dti, 0.0, places=12)
+        self.assertEqual(r.n_emitted, 0)
 
+    def test_nan_is_treated_as_absent(self):
+        t = np.zeros((20, 20), dtype=bool)
+        t[5, 5] = True
+        p = np.full((20, 20), np.nan)
+        p[5, 5] = 1.0
+        r = metric.dti(p, t)
+        # T/(T + eps) exactly: the official denominator carries a "+ eps".  A
+        # perfect prediction therefore scores 1 - 1e-9, not 1.  This is a
+        # property of the published formula, not a bug in the implementation.
+        self.assertAlmostEqual(r.dti, 1.0 / (1.0 + metric.EPS), places=15)
+        self.assertLess(r.dti, 1.0)
+        self.assertEqual(r.mass, 1.0)
 
-def test_tp_plus_fn_equals_truth_count():
-    rng = np.random.default_rng(7)
-    truth = rng.random((30, 30)) < 0.1
-    pred = (rng.random((30, 30)) < 0.3).astype(np.float64)
-    r = dti(pred, truth)
-    assert r.tp + r.fn == pytest.approx(r.truth_pixels, abs=1e-9)
+    def test_out_of_range_is_rejected(self):
+        t = np.zeros((10, 10), dtype=bool)
+        t[1, 1] = True
+        p = np.zeros((10, 10))
+        p[1, 1] = 1.5
+        with self.assertRaises(ValueError):
+            metric.dti(p, t)
+        p[1, 1] = -0.5
+        with self.assertRaises(ValueError):
+            metric.dti(p, t)
+        # the guard can be switched off explicitly
+        p2 = np.zeros((10, 10))
+        p2[1, 1] = 1.5
+        self.assertEqual(metric.dti(p2, t, validate=False).n_emitted, 1)
 
+    def test_shape_mismatch_is_rejected(self):
+        with self.assertRaises(ValueError):
+            metric.dti(np.zeros((5, 5)), np.zeros((5, 6), dtype=bool))
 
-def test_continuous_magnitude_matters_in_tp():
-    """Halving every value halves TP (the previous proxy treated TP as binary)."""
-    truth = np.zeros((21, 21), bool)
-    truth[10, :] = True
-    pred = np.zeros((21, 21))
-    pred[10, :] = 1.0
-    full = dti(pred, truth)
-    half = dti(pred * 0.5, truth)
-    assert half.tp == pytest.approx(0.5 * full.tp, rel=1e-9)
-    assert half.dti < full.dti
+    def test_score_is_monotone_in_extra_true_positive_mass(self):
+        t = np.zeros((40, 40), dtype=bool)
+        t[20, 20] = True
+        base = metric.dti(np.zeros((40, 40)), t).dti
+        p = np.zeros((40, 40))
+        p[20, 20] = 1.0
+        self.assertGreater(metric.dti(p, t).dti, base)
 
-
-def test_perfect_overlap_scores_one_and_isolated_prediction_scores_zero():
-    truth = np.zeros((21, 21), bool)
-    truth[10, :] = True
-    pred = np.zeros((21, 21))
-    pred[10, :] = 1.0
-    assert dti(pred, truth).dti == pytest.approx(1.0, abs=1e-9)
-    far = np.zeros((21, 21))
-    far[0, 0] = 1.0
-    assert dti(far, truth).dti == pytest.approx(0.0, abs=1e-12)
-
-
-def test_offset_prediction_loses_kernel_weight():
-    truth = np.zeros((41, 41), bool)
-    truth[20, :] = True
-    pred = np.zeros((41, 41))
-    pred[20, :] = 1.0
-    on_line = dti(pred, truth).dti
-    off1 = np.zeros((41, 41))
-    off1[21, :] = 1.0
-    assert dti(off1, truth).dti == pytest.approx(2.0 / 3.0, abs=1e-9)
-    assert on_line == pytest.approx(1.0, abs=1e-9)
-
-
-def test_credit_per_dot_sums_to_tp():
-    rng = np.random.default_rng(11)
-    truth = rng.random((40, 40)) < 0.05
-    pred = (rng.random((40, 40)) < 0.2).astype(np.float64)
-    res = dti(pred, truth)
-    tot, cnt, _ = credit_per_dot(pred, truth)
-    assert tot.sum() == pytest.approx(res.tp, abs=1e-9)
-    # every credit is assigned to a predicted cell
-    assert np.all((tot == 0) | (pred > 0))
-
-
-def test_mass_scaling_identity_used_by_live_anchor_inversions():
-    """Scaling every prediction by lambda leaves only the beta*K/T term changed.
-
-    1/DTI(lambda p) = alpha + alpha (F/T) + (beta/lambda)(K/T),  with alpha = 1 - beta = 0.2.
-    Hence  1/DTI(p/2) - 1/DTI(p) = beta K / T,
-    which is exactly the identity the GEMSDOE32 three-slot identification
-    experiment uses to recover the hidden truth-pixel count K.
-    """
-    rng = np.random.default_rng(3)
-    truth = rng.random((35, 35)) < 0.08
-    pred = (rng.random((35, 35)) < 0.3).astype(np.float64)
-    base = dti(pred, truth)
-    half = dti(pred * 0.5, truth)
-    assert half.tp == pytest.approx(0.5 * base.tp, rel=1e-12)
-    lhs = 1.0 / half.dti - 1.0 / base.dti
-    rhs = BETA * base.truth_pixels / base.tp
-    assert lhs == pytest.approx(rhs, rel=1e-9)
+    def test_a_far_dot_is_pure_cost(self):
+        """A dot with no truth within 300 m only adds FPw."""
+        t = np.zeros((40, 40), dtype=bool)
+        t[2, 2] = True
+        p0 = np.zeros((40, 40))
+        p0[2, 2] = 1.0
+        r0 = metric.dti(p0, t)
+        p1 = p0.copy()
+        p1[35, 35] = 1.0
+        r1 = metric.dti(p1, t)
+        self.assertAlmostEqual(r1.tpw, r0.tpw, places=12)
+        self.assertEqual(r1.n_emitted, r0.n_emitted + 1)
+        self.assertAlmostEqual(r1.mass - r0.mass, 1.0, places=12)
+        self.assertLess(r1.dti, r0.dti)
 
 
-def test_added_mass_raises_denominator_by_alpha_regardless_of_place():
-    """A prediction unit that earns zero credit costs exactly alpha per unit."""
-    truth = np.zeros((41, 41), bool)
-    truth[20, :] = True
-    pred = np.zeros((41, 41))
-    pred[20, :] = 1.0
-    base = dti(pred, truth)
-    junk = pred.copy()
-    junk[40, 40] = 1.0  # > 300 m from any truth pixel
-    with_junk = dti(junk, truth)
-    assert with_junk.tp == pytest.approx(base.tp, abs=1e-12)
-    assert with_junk.fp == pytest.approx(base.fp + 1.0, abs=1e-12)
-    delta = 1.0 / with_junk.dti - 1.0 / base.dti
-    assert delta == pytest.approx(ALPHA * 1.0 / base.tp, rel=1e-9)
+def cur_tpw(p, t):
+    """Total weighted true-positive credit of `p` against `t`."""
+    return metric.dti(p, t).tpw
 
 
-def test_rejects_out_of_range_prediction():
-    with pytest.raises(ValueError):
-        dti(np.full((5, 5), 1.2), np.zeros((5, 5), bool))
-    with pytest.raises(ValueError):
-        dti(np.full((5, 5), -0.1), np.zeros((5, 5), bool))
+class TestCreditBar(unittest.TestCase):
+    """The marginal-value rule: emit a dot iff its realised weight > 0.2 * DTI."""
+
+    def test_bar_is_alpha_times_dti(self):
+        for v in (0.0, 0.1, 0.2778, 0.3195, 1.0):
+            self.assertAlmostEqual(metric.credit_bar(v), 0.2 * v)
+
+    def test_bar_matches_measured_break_even(self):
+        # The live-anchored bar at DTI = 0.2708 is 0.05416 (registry).
+        self.assertAlmostEqual(metric.credit_bar(0.2708), 0.05416, places=9)
+
+    def test_adding_a_dot_above_the_bar_raises_the_score(self):
+        """The decision rule, in the geometry where it actually applies.
+
+        A second dot next to an *already perfectly covered* truth pixel adds no
+        TPw at all (TPw is a `max`), so it is pure cost and is not the case under
+        test here.  The rule applies to a dot that becomes the argmax of a truth
+        pixel that had no coverage: it adds `k` to TPw and 1 to the mass.
+        """
+        t = np.zeros((60, 60), dtype=bool)
+        t[10, 10] = True  # covered perfectly
+        t[40, 40] = True  # left uncovered
+        p = np.zeros((60, 60))
+        p[10, 10] = 1.0
+        cur = metric.dti(p, t).dti
+        # k at 2 px offset = 1 - 200/300 = 1/3, above the bar 0.2 * DTI
+        k = 1.0 - 2.0 / 3.0
+        self.assertGreater(k, metric.credit_bar(cur))
+        p2 = p.copy()
+        p2[40, 42] = 1.0
+        self.assertGreater(metric.dti(p2, t).dti, cur)
+
+    def test_adding_a_dot_below_the_bar_lowers_the_score(self):
+        """Same construction, but the bar is raised above the available weight.
+
+        With one truth pixel perfectly covered, DTI ~= 1 and the bar is 0.2.  A
+        candidate dot 3 px from a second, uncovered truth pixel has k = 0 reading
+        (the reach is 3 px, so k = 1 - 300/300 = 0) and is a pure loss.
+        """
+        t = np.zeros((60, 60), dtype=bool)
+        t[10, 10] = True
+        p = np.zeros((60, 60))
+        p[10, 10] = 1.0
+        cur = metric.dti(p, t).dti
+        self.assertAlmostEqual(cur, 1.0, places=8)
+        # a dot 3 px from the truth pixel earns exactly zero credit
+        far = p.copy()
+        far[10, 13] = 1.0
+        r_far = metric.dti(far, t)
+        self.assertAlmostEqual(r_far.tpw, cur_tpw(p, t), places=12)
+        self.assertLess(r_far.dti, cur)
+
+    def test_worked_credit_bar_arithmetic(self):
+        """A single dot 2 px from a single truth pixel: DTI == k == 1/3.
+
+        Algebra, all of it checked below: TPw = k = 1/3; S = 1; M = k = 1/3;
+        FPw = S - M = 2/3; FNw = |G| - TPw = 2/3;
+        denominator = 1/3 + 0.2*(2/3) + 0.8*(2/3) = 1  =>  DTI = 1/3.
+        The bar is 0.2 * (1/3) = 1/15, and the perfect dot earns k = 1, so it
+        clears the bar by a wide margin.
+        """
+        t = np.zeros((60, 60), dtype=bool)
+        t[30, 30] = True
+        p = np.zeros((60, 60))
+        p[30, 32] = 1.0
+        r = metric.dti(p, t)
+        k = 1.0 - 2.0 / 3.0
+        self.assertAlmostEqual(r.tpw, k, places=12)
+        self.assertAlmostEqual(r.mass, 1.0, places=12)
+        self.assertAlmostEqual(r.self_credit, k, places=12)
+        self.assertAlmostEqual(r.fpw, 2.0 / 3.0, places=12)
+        self.assertAlmostEqual(r.fnw, 2.0 / 3.0, places=12)
+        # DTI = k/(1 + eps) -- the official denominator's "+ eps" again
+        self.assertAlmostEqual(r.dti, k / (1.0 + metric.EPS), places=15)
+        self.assertAlmostEqual(metric.credit_bar(r.dti), 0.2 * k / (1.0 + metric.EPS), places=15)
+        self.assertGreater(1.0, metric.credit_bar(r.dti))
+
+        better = p.copy()
+        better[30, 30] = 1.0
+        self.assertGreater(metric.dti(better, t).dti, r.dti)
+
+    def test_a_dot_that_earns_nothing_is_refused_by_the_bar(self):
+        """At 3 px the kernel weight is exactly 0, and the bar is positive."""
+        t = np.zeros((60, 60), dtype=bool)
+        t[30, 30] = True
+        p = np.zeros((60, 60))
+        p[30, 30] = 1.0
+        cur = metric.dti(p, t).dti
+        self.assertGreater(metric.credit_bar(cur), 0.0)
+        k_available = max(1.0 - 300.0 / 300.0, 0.0)
+        self.assertLessEqual(k_available, metric.credit_bar(cur))
+        worse = p.copy()
+        worse[30, 33] = 1.0
+        self.assertLess(metric.dti(worse, t).dti, cur)
+
+    def test_binary_optimality_derivative_sign(self):
+        """d/dv of (T0 + v k)/(D0 + 0.2 v) has the sign of k - 0.2 DTI."""
+        T0, D0, k = 3.0, 9.0, 0.5
+        dti_val = T0 / D0
+        for v in (0.0, 0.25, 0.5, 1.0):
+            # numeric derivative of the exact rational expression
+            h = 1e-6
+            f = lambda x: (T0 + x * k) / (D0 + 0.2 * x)  # noqa: E731
+            num = (f(v + h) - f(v - h)) / (2 * h)
+            expected_sign = np.sign(k - metric.ALPHA * dti_val)
+            self.assertEqual(np.sign(num), expected_sign)
+        self.assertEqual(
+            metric.optimal_value_is_binary(), "binary {0,1} is DTI-optimal; graded surfaces lose"
+        )
 
 
-def test_truth_kernel_max_is_a_dilation():
-    truth = np.zeros((15, 15), bool)
-    truth[7, 7] = True
-    g = truth_kernel_max(truth)
-    assert g[7, 7] == pytest.approx(1.0)
-    assert g[7, 9] == pytest.approx(1.0 / 3.0)
-    assert g[7, 11] == pytest.approx(0.0)
+class TestFootprintHandling(unittest.TestCase):
+    def test_outside_footprint_mass_is_ignored(self):
+        t = np.zeros((20, 20), dtype=bool)
+        t[5, 5] = True
+        fp = np.zeros((20, 20), dtype=bool)
+        fp[0:10, 0:10] = True
+        p = np.zeros((20, 20))
+        p[5, 5] = 1.0
+        p[15, 15] = 1.0  # outside the footprint
+        r_in = metric.dti(p, t, footprint=fp)
+        r_all = metric.dti(p, t)
+        self.assertAlmostEqual(r_in.mass, 1.0)
+        self.assertAlmostEqual(r_all.mass, 2.0)
+        self.assertGreater(r_in.dti, r_all.dti)
+
+    def test_footprint_is_used_for_truth_too(self):
+        t = np.zeros((20, 20), dtype=bool)
+        t[15, 15] = True  # outside the footprint
+        fp = np.zeros((20, 20), dtype=bool)
+        fp[0:10, 0:10] = True
+        r = metric.dti(np.ones((20, 20)), t, footprint=fp)
+        self.assertEqual(r.n_truth, 0)
 
 
-def test_weighted_tp_credit_uses_max_not_nearest():
-    """A weak near prediction must not beat a strong slightly further one."""
-    truth = np.zeros((11, 11), bool)
-    truth[5, 5] = True
-    pred = np.zeros((11, 11))
-    pred[5, 6] = 0.10   # distance 1, k = 2/3 -> 0.0667
-    pred[5, 8] = 1.00   # distance 3, k = 0    -> excluded
-    pred[3, 5] = 1.00   # distance 2, k = 1/3  -> 0.3333
-    credit, _ = weighted_tp_credit(pred, truth)
-    assert credit[5, 5] == pytest.approx(1.0 / 3.0, abs=1e-9)
+if __name__ == "__main__":
+    unittest.main()

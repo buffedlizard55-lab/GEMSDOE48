@@ -1,0 +1,70 @@
+{
+ "name": "gemsdoe48-h48-1-ds-fusion-b2xh32tip-20261006-407bb7f4-zeros",
+ "file": "gemsdoe48-h48-1-ds-fusion-b2xh32tip-20261006-407bb7f4-zeros.tif",
+ "zip": "gemsdoe48-h48-1-ds-fusion-b2xh32tip-20261006-407bb7f4-zeros.zip",
+ "sha256": "6cb2aab8dbd71335152dea7e2fa442126abffc609b426286f5a171f14353b454",
+ "bytes": 226886,
+ "emitted_px": 37754,
+ "in_footprint_px": 5167373,
+ "checks": {
+  "single_band": true,
+  "dtype_float32": true,
+  "shape_3730x3292": true,
+  "crs_epsg_32611": true,
+  "transform_equals_sample": true,
+  "all_finite": true,
+  "min_ge_0": true,
+  "max_le_1": true,
+  "zero_outside_footprint": true,
+  "zero_on_catalogue": true,
+  "zero_within_200m_of_catalogue": true,
+  "bytes_equal_in_memory": true,
+  "layout_matches_scored_02778_file": true
+ },
+ "all_checks_passed": true,
+ "uniqueness_top5": [
+  {
+   "file": "b2_02778.tif",
+   "identical_support": false,
+   "jaccard": 0.99735
+  },
+  {
+   "file": "gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-nan.tif",
+   "identical_support": false,
+   "jaccard": 0.99735
+  },
+  {
+   "file": "gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
+   "identical_support": false,
+   "jaccard": 0.99735
+  },
+  {
+   "file": "gemsdoe32-h33-h33-2b2-plus-h33-1-20261004T220000Z-31588dc7-nan.tif",
+   "identical_support": false,
+   "jaccard": 0.97413
+  },
+  {
+   "file": "gemsdoe32-h33-h33-2b2-plus-h33-1-20261004T220000Z-31588dc7-zeros.tif",
+   "identical_support": false,
+   "jaccard": 0.97413
+  }
+ ],
+ "n_files_compared": 80,
+ "any_identical": false,
+ "not_an_average": {
+  "region_support_px": 769098,
+  "region_disagree_px": 44626,
+  "pearson_all_support": 0.9621094465255737,
+  "pearson_disagreement_region": 0.714981734752655,
+  "spearman_disagreement_region": 0.6289498509723334,
+  "mean_conflict_K_disagreement": 0.37194666266441345,
+  "mean_conflict_K_agreement": 0.1033485010266304,
+  "flank_disagreement_px": 30304,
+  "mean_bel_where_dotted_stronger": 0.619688868522644,
+  "mean_bel_where_tip_stronger": 0.22916504740715027,
+  "mean_naive_where_dotted_stronger": 0.4667419195175171,
+  "mean_naive_where_tip_stronger": 0.31257516145706177
+ },
+ "portal_note": "GEMSDOE48 H48-1 Dempster-Shafer fusion b2(0.2778) x h32-1 tip(0.2649); pignistic>0.5, NMS 2.8px; 37754 dots, 0 within 200m of catalogue",
+ "portal_unique_name": "GEMSDOE48-H48-1-DS-fusion"
+}

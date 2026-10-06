@@ -1,0 +1,17 @@
+name: leaderboard-feed
+on:
+  schedule: [{cron: "17 */6 * * *"}]
+  workflow_dispatch:
+permissions: {contents: write}
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.11"}
+      - run: pip install markdown && python scripts/refresh_leaderboard.py && python scripts/build_site.py
+      - run: |
+          git config user.name "gems48-feed"; git config user.email "actions@users.noreply.github.com"
+          git add docs/data/leaderboard.json docs/*.html
+          git diff --cached --quiet || (git commit -m "feed: leaderboard snapshot" && git push)

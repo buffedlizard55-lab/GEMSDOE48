@@ -1,6 +1,6 @@
 {
   "schema": "GEMSDOE48-audit-v2",
-  "generated_utc": "2026-10-06T21:52:10.501545+00:00",
+  "generated_utc": "2026-10-06T22:15:31.910133+00:00",
   "submission_name": "GEMSDOE48-H49-DS-CONFLICT-BALANCED-e6f08013888b",
   "method": "kernel-support evidence fields; Shafer reliability discounting; conjunctive combination; Yager transfer of conflict K to Theta; pignistic ranking; mass-budgeted spatially balanced emission at p=1 on the admitted support",
   "scientific_note": "Classical normalised Dempster's rule renormalises conflict away by dividing by 1-K. Yager's modified Dempster rule is used because the deliverable must keep the two families' disagreement visible as unassigned mass.",

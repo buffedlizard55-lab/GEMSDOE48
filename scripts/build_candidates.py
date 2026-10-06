@@ -24,7 +24,7 @@ from gems48.evidence import (  # noqa: E402
     kernel_support,
     pignistic,
 )
-from gems48.metric import ALPHA, BETA, credit_per_dot, dti  # noqa: E402
+from gems48.metric import ALPHA, BETA, credit_per_dot, dti_result as dti  # noqa: E402
 
 DOTTED = ROOT / "data/raw/dotted.tif"
 TIP = ROOT / "data/raw/tip.tif"

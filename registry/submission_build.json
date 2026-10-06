@@ -1,0 +1,294 @@
+{
+  "generated_unix": 1791320899,
+  "unique_name": "GEMSDOE48-DS48-FUSION",
+  "portal_note": "GEMSDOE48-DS48-FUSION | research audit only; 37,654 px DS-ranked off-flank emission; UNSCORED and NOT slot-cleared; do not upload",
+  "reliability": {
+    "a_dotted": 0.6,
+    "a_tip": 0.6
+  },
+  "family_agreement": {
+    "n_a": 40199,
+    "n_b": 41865,
+    "intersection": 33670,
+    "union": 48394,
+    "a_only": 6529,
+    "b_only": 8195,
+    "jaccard": 0.6957474067033104
+  },
+  "flank_exclusion_m": 200.0,
+  "files": {
+    "belief": {
+      "file": "gemsdoe48-ds48-belief.tif",
+      "bytes": 1238649,
+      "sha256": "f7e5645f"
+    },
+    "emission": {
+      "file": "gemsdoe48-ds48-emission.tif",
+      "bytes": 282876,
+      "sha256": "a579081d"
+    },
+    "mtheta": {
+      "file": "gemsdoe48-ds48-mtheta.tif",
+      "bytes": 1189415,
+      "sha256": "0a7f1d02"
+    },
+    "conflict": {
+      "file": "gemsdoe48-ds48-conflict.tif",
+      "bytes": 1211081,
+      "sha256": "b7e39108"
+    }
+  },
+  "format_checks": {
+    "belief": {
+      "count": 1,
+      "dtype": "float32",
+      "width": 3292,
+      "height": 3730,
+      "crs": "EPSG:32611",
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "res": [
+        100.0,
+        100.0
+      ],
+      "nodata": null,
+      "min": 0.0,
+      "max": 0.8399999737739563,
+      "n_nan": 0,
+      "n_inf": 0,
+      "n_below_0": 0,
+      "n_above_1": 0,
+      "n_positive": 794250,
+      "outside_footprint_positive": 893,
+      "raster_legal": true,
+      "verdict": "PASS"
+    },
+    "emission": {
+      "count": 1,
+      "dtype": "float32",
+      "width": 3292,
+      "height": 3730,
+      "crs": "EPSG:32611",
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "res": [
+        100.0,
+        100.0
+      ],
+      "nodata": null,
+      "min": 0.0,
+      "max": 1.0,
+      "n_nan": 0,
+      "n_inf": 0,
+      "n_below_0": 0,
+      "n_above_1": 0,
+      "n_positive": 37654,
+      "outside_footprint_positive": 0,
+      "raster_legal": true,
+      "verdict": "PASS"
+    },
+    "mtheta": {
+      "count": 1,
+      "dtype": "float32",
+      "width": 3292,
+      "height": 3730,
+      "crs": "EPSG:32611",
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "res": [
+        100.0,
+        100.0
+      ],
+      "nodata": null,
+      "min": 0.1599999964237213,
+      "max": 0.25,
+      "n_nan": 0,
+      "n_inf": 0,
+      "n_below_0": 0,
+      "n_above_1": 0,
+      "n_positive": 12279160,
+      "outside_footprint_positive": 7111787,
+      "raster_legal": true,
+      "verdict": "PASS"
+    },
+    "conflict": {
+      "count": 1,
+      "dtype": "float32",
+      "width": 3292,
+      "height": 3730,
+      "crs": "EPSG:32611",
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "res": [
+        100.0,
+        100.0
+      ],
+      "nodata": null,
+      "min": 0.0,
+      "max": 0.36000001430511475,
+      "n_nan": 0,
+      "n_inf": 0,
+      "n_below_0": 0,
+      "n_above_1": 0,
+      "n_positive": 760580,
+      "outside_footprint_positive": 893,
+      "raster_legal": true,
+      "verdict": "PASS"
+    }
+  },
+  "measurements": {
+    "base_live_02778": {
+      "n": 37654,
+      "catalogue_all": {
+        "dti": 0.00670911896895528,
+        "tpw": 377.999896771064,
+        "coverage": 0.006197938885863842
+      },
+      "sgmc_off_catalogue": {
+        "dti": 0.09613245598517174,
+        "tpw": 5639.032457275527,
+        "coverage": 0.08933686819403253
+      }
+    },
+    "ds_emission": {
+      "n": 37654,
+      "catalogue_all": {
+        "dti": 0.024126177348964155,
+        "tpw": 1362.0691853673661,
+        "coverage": 0.022333396493857252
+      },
+      "sgmc_off_catalogue": {
+        "dti": 0.09068290227117543,
+        "tpw": 5313.851344974791,
+        "coverage": 0.08418515779177754
+      }
+    }
+  },
+  "not_the_mean": {
+    "pearson_r_belief_vs_naive_mean_on_union": 0.9910853654442219,
+    "spearman_rho_belief_vs_naive_mean_on_union": 0.9999999281563248,
+    "mean_abs_difference_on_union": 0.14225480808116275,
+    "share_of_union_differing_by_over_0_05": 1.0,
+    "bel_at_full_agreement": 0.84,
+    "bel_at_single_source_only": 0.375,
+    "m_theta_at_full_agreement": 0.16000000000000003,
+    "m_theta_at_disagreement": 0.25000000000000006,
+    "verdict": "The values differ (mean |Bel - mean| = 0.1423 on the union) but the two are MONOTONE in each other on this support (Spearman rho = 1.000000), because a union pixel has belief exactly 1 in its own family, so both statistics are monotone functions of the other family's belief alone.  Dempster-Shafer therefore does NOT change the ranking used for emission selection on the union, and this repository does not claim that it does.  What it adds is the calibrated belief value, the conflict mass K and the unassigned mass m(Theta), none of which has a counterpart in an average."
+  },
+  "normalisation": {
+    "applied": "none beyond Dempster's normalisation",
+    "why": "Dempster's rule of combination IS a normalisation: it divides the unnormalised combination by (1 - K(x)).  The result obeys the mass-function axioms at every pixel -- m(F) + m(notF) + m(Theta) = 1 -- so Bel(F), m(Theta) and K all lie in [0, 1] by construction.  That is the [0, 1] normalisation the brief asks for, and it is exact rather than cosmetic.  No affine rescale is applied to any layer, because rescaling a belief or a mass surface destroys the calibration that is the only reason to ship it, and a rescaled mass is not a mass.  The min-max affine map that would take each layer to [0, 1] is recorded below so a reader who wants that instead can apply it.",
+    "per_layer": {
+      "belief": {
+        "natural_min": 0.0,
+        "natural_max": 0.84,
+        "minmax_rescale_bounds": {
+          "a": 1.1904761904761905,
+          "b": -0.0,
+          "formula": "x_normalised = a * x + b",
+          "degenerate": false
+        }
+      },
+      "mtheta": {
+        "natural_min": 0.16000000000000003,
+        "natural_max": 0.25000000000000006,
+        "minmax_rescale_bounds": {
+          "a": 11.111111111111109,
+          "b": -1.7777777777777777,
+          "formula": "x_normalised = a * x + b",
+          "degenerate": false
+        }
+      },
+      "conflict": {
+        "natural_min": 0.0,
+        "natural_max": 0.36,
+        "minmax_rescale_bounds": {
+          "a": 2.7777777777777777,
+          "b": -0.0,
+          "formula": "x_normalised = a * x + b",
+          "degenerate": false
+        }
+      },
+      "emission": {
+        "natural_min": 0.0,
+        "natural_max": 1.0,
+        "minmax_rescale_bounds": {
+          "a": 1.0,
+          "b": -0.0,
+          "formula": "x_normalised = a * x + b",
+          "degenerate": false
+        }
+      }
+    }
+  },
+  "live_anchor_inversion": {
+    "dn_removed": 3891,
+    "implied_tpw_from_small": 4913.77432,
+    "implied_tpw_from_big": 4920.1359999999995,
+    "tpw_consistency_rel": 0.0012946626331831756,
+    "implied_credit_per_dot": 0.12223623274210803,
+    "break_even_bar_tau_live": 0.05416,
+    "credit_loss_budget_numerator_units": 210.73656,
+    "source": "owner-reported live scores 0.2600 (44,090 px) and 0.2708 (40,199 px); evidence class OWNER-REPORT"
+  },
+  "layer_stats": {
+    "belief": {
+      "min": 0.0,
+      "max": 0.84,
+      "mean": 0.02113633538305234,
+      "n_positive": 794250
+    },
+    "mtheta": {
+      "min": 0.16000000000000003,
+      "max": 0.25000000000000006,
+      "mean": 0.16170743733763215,
+      "n_positive": 12279160
+    },
+    "conflict": {
+      "min": 0.0,
+      "max": 0.36,
+      "mean": 0.008960306518927447,
+      "n_positive": 760580
+    },
+    "emission": {
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0030664964052915674,
+      "n_positive": 37654
+    }
+  },
+  "headline_negative_result": {
+    "claim": "No candidate here has a verified organizer-score gain over the owner-reported 0.2778 anchor; available public proxies do not establish private-score performance.",
+    "arms_reviewed": [
+      "Dempster-Shafer corroboration removal at r in {300,283,250,224,200,173,141,100,0} m: the frozen gate fails at every radius (best safety 0.64 < 2.0).",
+      "Hexagonal covering-optimal re-emission at 11 spacings: NOT a clean falsification, contrary to an earlier reading of this receipt.  At matched mass the best arm (spacing 5.6 px, 37,499 dots) has higher TPw per unit mass than the b2 base on three local proxy layers -- x1.019 on owner-derived SGMC off-catalogue, x12.5 on catalogue-in-corridor, and x14.6 on the whole catalogue. The catalogue-side gains are NOT evidence of a live gain, because that instrument is anti-monotone with the live ladder (Spearman -1.0, n = 4, DS48-IR-04).  The SGMC-side gain is +1.9 %, which is inside the noise of a point set that merely re-samples the same 48,394-pixel union corridor at a similar mass; it is not a better detector and it emits 37,499 dots of the SAME two families.  Status: UNVALIDATED and NOT slot-cleared. Do not spend a weekly slot on this arm; the +1.9% SGMC signal is within re-sampling noise.",
+      "Dempster-Shafer ranked re-emission at matched mass: SGMC off-catalogue credit falls 5.8 % (off-flank) to 7.1 % (full union) while catalogue credit rises."
+    ],
+    "evidence_class": "PROXY + DERIVED"
+  },
+  "elapsed_s": 13.549606323242188
+}
