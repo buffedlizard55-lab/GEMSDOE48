@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Candidate hypotheses, ranked · GEMSDOE48</title>
+<link rel="stylesheet" href="../assets/ds48-fusion/site.css">
+</head><body>
+<header class="top"><div class="wrap">
+  <div class="brand"><span class="dot"></span><b>GEMSDOE48</b>
+    <span class="tag">Dempster&ndash;Shafer disagreement-preserving fusion</span></div>
+  <nav><a href="index.html">Submission</a><a href="executive-summary.html">How to submit</a><a href="research.html">Why 0.2778 won</a><a href="hypotheses.html" class="on">Hypotheses</a><a href="sources.html">Sources</a><a href="irregularities.html">Irregularities</a></nav>
+</div></header>
+<div class="namestrip"><div class="wrap">
+  <span class="ns-label">Unique submission name</span>
+  <code class="ns-name">GEMSDOE48-DS48-FUSION</code>
+  <a class="ns-dl" download href="../downloads/gemsdoe48-ds48-emission.tif">
+    ↓ Download the .tif</a>
+</div></div>
+<div class="xlink"><div class="wrap">
+  This is the <b>DS48 fusion</b> sub-site. The repository landing page is
+  <a href="../index.html">docs/index.html</a>, and its
+  <a href="../leaderboard.html">leaderboard page</a> carries a <b>newer snapshot</b> than the
+  2026-10-02 figure quoted here — a later session measured the leader at 0.3774, not 0.3195.
+  Treat both numbers as dated, and the landing page as the newer one.
+</div></div>
+<main class="wrap">
+  <div class="hero"><h1>Candidate hypotheses, ranked</h1><p class="lead">What to build next, each with its layers, its physical signature, its novelty, its expected gain, its cost, and a data obtainability check.</p></div>
+  
+<section class="callout">
+  <h2>The validation gate these must clear before a slot is spent</h2>
+  <p>A candidate is promotable only if it clears <b>all four</b>:</p>
+  <ol>
+    <li>mass ≤ the 37,654 px of the current live-best artifact;</li>
+    <li>&ge; 99 % of the live-best artifact's weighted true-positive credit retained on the SGMC
+        off-catalogue layer — the only non-catalogue truth available;</li>
+    <li>live-anchored safety factor &ge; 2.0 (budget ÷ measured credit destroyed); and</li>
+    <li>the improvement reproduces in &ge; 3 of 4 spatial blocks.</li>
+  </ol>
+  <p><b>Rank 1 was validated and it FAILED</b> — not the hypothesis itself, but the first
+  mechanism built on it: the Dempster–Shafer corroboration filter, which deletes the pixels where
+  the two families disagree, spends its budget at safety 0.64 (needs 2.0) at its best operating
+  point and is worse at every other radius. The measurement is in
+  <a href="index.html">the results table</a>. That is why the hypotheses below, not the filter,
+  are the recommendation for the next session.</p>
+</section>
+<section>
+  <h2>Five hypotheses, ranked by expected DTI improvement over implementation cost</h2>
+  <div class="tablewrap"><table>
+<tr><th>rank</th><th>id</th><th>candidate</th><th>expected &Delta;DTI</th><th>implementation cost</th><th>data obtainable from here?</th></tr>
+<tr><td>1</td><td><code>H48-A</code></td><td>200&ndash;300 m catalogue-companion band</td><td>+0.003 at c=0.07; +0.010 at c=0.10 (DERIVED from the live anchor)</td><td>Medium &mdash; one band, one curvature gate, four-block holdout</td><td>Yes &mdash; already materialised</td></tr>
+<tr><td>2</td><td><code>H48-B</code></td><td>closing-direction morphological filter on the 12-band lidar stack</td><td>Not quantified; bounded above by the lidar arm&rsquo;s own ceiling</td><td>Medium &mdash; one directional opening, one sweep</td><td>Yes &mdash; already materialised</td></tr>
+<tr><td>3</td><td><code>H48-C</code></td><td>multiscale vesselness on the K/Th ratio</td><td>+0.002 to +0.008</td><td>Low &mdash; one filter, one width sweep</td><td>Yes &mdash; same ScienceBase release</td></tr>
+<tr><td>4</td><td><code>H48-D</code></td><td>&chi;-anomaly and knickpoint clustering on 1 m DEM</td><td>Unknown; potentially the largest, targets the new-truth population</td><td>High &mdash; 2&ndash;3 sessions, mosaicking + flow routing</td><td><b>NOT verified</b> &mdash; every science host returns HTTP 000 here</td></tr>
+<tr><td>5</td><td><code>H48-E</code></td><td>strike-coherent skeleton of upward-continued TMI</td><td>+0.001 to +0.004</td><td>Low &mdash; one gradient, one skeleton, one gate</td><td>Yes &mdash; already materialised</td></tr>
+</table></div>
+
+  
+<article class="card hyp">
+  <h3>1. H48-A · the 200–300 m catalogue-companion band</h3>
+  <table class="kv">
+    <tr><th>layers</th><td>organizer band <code>det_elev</code> (detrended elevation) and its slope; the published catalogue geometry itself; any DEM-derived curvature</td></tr>
+    <tr><th>physical signature</th><td>a parallel companion trace at 200–300 m from a mapped fault, emitted only where an independent curvature/edge transform is locally maximal — a directional maximum of the second-derivative ridge, not a buffer</td></tr>
+    <tr><th>why it catches a fault the catalogue lacks</th><td>The staff clarification says a new-truth pixel <i>can</i> lie within 300 m of a known trace, and explicitly names &ldquo;corrections or modifications to existing fault traces&rdquo;. The live ladder is the evidence: removing the 0–100 m band helped (B = 1), removing the 100–200 m band helped (B = 2), and removing the <b>200–300 m</b> band <b>hurt</b> — the B = 3 arm spent its budget down to safety 1.27 and won only 3 of 4 blocks. A band that is expensive to delete is a band that holds credit. No mapped fault exists there, which is exactly why it is not already in the catalogue.</td></tr>
+    <tr><th>how it differs from anything already implemented</th><td>Everything shipped in the sibling repositories <i>removes</i> mass near the catalogue (B = 1, B = 2, and the flank policies of GEMSDOE27/28/32). Nothing in any repository has ever <i>emitted</i> a thin, physically gated companion band in the 200–300 m annulus.</td></tr>
+    <tr><th>expected DTI improvement</th><td>ΔDTI ≈ (c − 0.2·DTI)·Δn / D. With D = 18,734 from the live anchor and 4,000 dots at the marginal credit one would need (c ≈ 0.07 to beat the 0.0556 bar), ΔDTI ≈ +0.003. The same arithmetic says c ≈ 0.10 would give ≈ +0.010.</td></tr>
+    <tr><th>implementation cost</th><td>Low — one annulus, one curvature gate, no new data. Half a session.</td></tr>
+    <tr><th>data obtainability check</th><td>No external data needed. All layers are organizer bands plus <code>existing_faults.tif</code>.</td></tr>
+  </table>
+</article>
+<article class="card hyp">
+  <h3>2. H48-B · Curie-depth lateral gradient from the GeoDAWN magnetic grids</h3>
+  <table class="kv">
+    <tr><th>layers</th><td>GeoDAWN contractor grids <code>22103_rtp_a1/a2</code> and <code>22103_tmi_a1/a2</code> (official, free, already mirrored locally); cross-checked against <code>geod_2ndinv</code></td></tr>
+    <tr><th>physical signature</th><td>spectral depth estimation: windowed radial power spectrum of the reduced-to-pole grid → depth to the bottom of magnetic sources (Curie isotherm) → the <b>lateral gradient</b> of that depth surface, a curvature/edge transform in the depth domain, not in the field domain</td></tr>
+    <tr><th>why it catches a fault the catalogue lacks</th><td>A Curie-depth step is a subsurface thermal boundary. It marks basement structure under alluvial cover, where no surface trace exists to be mapped into the catalogue. Because the catalogue was built from surface and near-surface mapping, a buried thermal boundary is systematically absent from it.</td></tr>
+    <tr><th>how it differs from anything already implemented</th><td>GEMSDOE40's <code>h8-euler-lineament-depthcluster</code> and <code>h45-eulerdepthreadcluster</code> used Euler deconvolution — a single-window structural-index method that returns a source <i>depth per cluster</i>. Spectral depth-to-bottom inversion returns a continuous depth <i>surface</i> whose derivative is the detection statistic. Different estimator, different observable.</td></tr>
+    <tr><th>expected DTI improvement</th><td>Unmeasured until built. On the same marginal arithmetic, a field whose marginal credit per dot reaches 0.07–0.10 yields ΔDTI ≈ +0.003 to +0.010 over 4,000–6,000 dots.</td></tr>
+    <tr><th>implementation cost</th><td>Medium — spectral windows, an inverse problem, and a stability check on the long-wavelength limit. One to two sessions.</td></tr>
+    <tr><th>data obtainability check</th><td>Obtainable and already materialised: <a href="https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7" target="_blank" rel="noopener">ScienceBase item 657e1d85d34e23d3533209f7</a>, <a href="https://doi.org/10.5066/P93LGLVQ" target="_blank" rel="noopener">DOI 10.5066/P93LGLVQ</a>, free and official. Verified present: the file listing in <code>GEMSDOE24/data/external/observed_files.json</code>.</td></tr>
+  </table>
+</article>
+<article class="card hyp">
+  <h3>3. H48-C · Frangi vesselness on the radiometric ratio grids</h3>
+  <table class="kv">
+    <tr><th>layers</th><td>GeoDAWN contractor ratio grids <code>ThK</code>, <code>UK</code>, <code>UTh</code> (bands of <code>geodawn_extensions_u8.tif</code>, official)</td></tr>
+    <tr><th>physical signature</th><td>a Hessian-based multiscale vesselness filter (Frangi et al. 1998) applied to the potassium/thorium ratio, tuned to the width of an alteration halo, rather than a threshold on the ratio itself</td></tr>
+    <tr><th>why it catches a fault the catalogue lacks</th><td>Hydrothermal alteration halos along a fault survive burial and erosion of the fault scarp, so they persist where the surface trace cannot be mapped. A halo is a <i>chemical</i> anomaly; the catalogue is a <i>structural</i> map, so an alteration-only structure is absent from it.</td></tr>
+    <tr><th>how it differs from anything already implemented</th><td>GEMSDOE46 fused scarp and radiometric evidence (<code>r11f-scarp-radiometric-fusion</code>, <code>r12-scarp-rad-concordance</code>). A vesselness transform is a ridge detector with an explicit width scale — it finds <i>linear</i> structures at a chosen halo width, which no concordance/fusion arm does.</td></tr>
+    <tr><th>expected DTI improvement</th><td>Estimated low-to-moderate: +0.002 to +0.008, because the radiometric grid is 800 m line spacing and only partially covers the footprint.</td></tr>
+    <tr><th>implementation cost</th><td>Low — one filter, one width sweep, thresholds already in <code>geodawn_rad.json</code>, <code>geodawn_extensions.json</code>.</td></tr>
+    <tr><th>data obtainability check</th><td>Obtainable and already materialised (same ScienceBase release, <a href="https://doi.org/10.5066/P93LGLVQ" target="_blank" rel="noopener">DOI 10.5066/P93LGLVQ</a>).</td></tr>
+  </table>
+</article>
+<article class="card hyp">
+  <h3>4. H48-D · χ-anomaly and knickpoint-cluster analysis on the 1 m DEM</h3>
+  <table class="kv">
+    <tr><th>layers</th><td>the organizer-supplied <code>1m_DEM_links.csv</code> tile list, mosaicked; USGS 3DEP is the free official source behind it</td></tr>
+    <tr><th>physical signature</th><td>fluvial-network extraction, then (i) a χ (chi) transform of the channel elevation profile and (ii) clustering of knickpoints along straight lines — a topological/network transform, not a local filter</td></tr>
+    <tr><th>why it catches a fault the catalogue lacks</th><td>A channel that crosses an active fault develops a knickpoint at the crossing; a row of aligned knickpoints marks a fault whose surface expression is too subdued to map. The catalogue records what a geologist could trace; a chi-anomaly is a <i>drainage-response</i> observable, and it can survive where the trace cannot be seen.</td></tr>
+    <tr><th>how it differs from anything already implemented</th><td>The repository's lidar work used <code>lidar_scarp_features_u8.tif</code>, a 12-band field of local 2 m scarp filters (<code>ex_max</code>, <code>step_max</code>, <code>lapneg_max</code>, <code>downface_max</code>, …). Those are pointwise morphological filters; chi and knickpoint clustering are network-topological and require flow routing, which nothing in the repositories does.</td></tr>
+    <tr><th>expected DTI improvement</th><td>Unknown; potentially the largest of the five, because it targets the <i>population the truth set is drawn from</i> — newly identified faults — rather than re-scoring known structure.</td></tr>
+    <tr><th>implementation cost</th><td>High — DEM mosaicking, hydrologic conditioning, flow routing, and profile analysis is at least two to three sessions and needs 10s of GB of tiles.</td></tr>
+    <tr><th>data obtainability check</th><td>The free official source is <a href="https://www.usgs.gov/3d-elevation-program/data-tools" target="_blank" rel="noopener">USGS 3DEP</a>. <b>Obtainability is NOT claimed from this sandbox:</b> every science-data host tested here returns HTTP 000 (<code>prd-tnm.s3.amazonaws.com</code>, <code>earthexplorer.usgs.gov</code>, <code>portal.opentopography.org</code>, <code>earthquake.usgs.gov</code>). A ready-to-run fetcher is the correct deliverable, and this idea must not be proposed as viable until the tiles are actually in <code>data/</code>.</td></tr>
+  </table>
+</article>
+<article class="card hyp">
+  <h3>5. H48-E · strike-coherent skeleton of the upward-continued TMI grid</h3>
+  <table class="kv">
+    <tr><th>layers</th><td><code>TMI_up150</code> (contractor total magnetic intensity upward-continued to 150 m, a band of <code>geodawn_extensions_u8.tif</code>) and the organizer <code>tc</code> band (band 6, “a magnetic field derivative for edge detection”)</td></tr>
+    <tr><th>physical signature</th><td>the maximum of the horizontal gradient magnitude of the continued field, skeletonised and then <b>gated on strike coherence with the regional stress field</b> (<code>geod_shearrate</code>, <code>geod_2ndinv</code>)</td></tr>
+    <tr><th>why it catches a fault the catalogue lacks</th><td>Upward continuation suppresses shallow sources and passes the deeper basement edges that control fluid pathways. A deep, strike-coherent edge with no surface trace is not in a surface catalogue.</td></tr>
+    <tr><th>how it differs from anything already implemented</th><td>GEMSDOE32 measured <code>tc</code> transforms and FALSIFIED its rank-1 tilt-angle candidate (10 variants, 0 of 4 blocks beaten), and its own general law is “transform only the layers that are <i>raw fields</i>; the organizers have already differentiated the derivative products”. This hypothesis deliberately breaks that law on a <i>third-party</i> grid that the organizers did not differentiate, and adds a stress-coherence gate that no prior arm used.</td></tr>
+    <tr><th>expected DTI improvement</th><td>Expected low (+0.001 to +0.004) precisely because the sibling falsification is good evidence against transform-of-a-derivative arms. Ranked last for that reason.</td></tr>
+    <tr><th>implementation cost</th><td>Low — one gradient, one skeleton, one coherence gate.</td></tr>
+    <tr><th>data obtainability check</th><td>Already materialised (same GeoDAWN release).</td></tr>
+  </table>
+</article>
+</section>
+<section>
+  <h2>Not proposed, and why</h2>
+  <ul>
+    <li><b>Adding mass anywhere.</b> Every live gain in this project has been a removal, and the
+    addition arms measured 0.0022–0.0077 credit per dot against a τ<sub>live</sub> of
+    0.05416 —
+    ten to twenty-five times too expensive.</li>
+    <li><b>Anything needing the dropped seismic bands.</b> The supplied
+    <code>ieq_n100a15</code> has an autocorrelation of 0.9986 at 1 km: it carries no
+    fault-scale information, and no transform can recover it.</li>
+    <li><b>Hyperspectral or InSAR.</b> No free, official, footprint-covering source has been
+    verified, and the competition's own feature stack already includes the relevant derivatives.</li>
+  </ul>
+</section>
+
+  <footer><p>Built from <code>registry/</code> and <code>evidence/</code> by
+  <code>scripts/build_site.py</code>. Owner-reported scores are labelled
+  <span class="badge amber">OWNER-REPORT</span>; local measurements are labelled
+  <span class="badge blue">PROXY</span> or <span class="badge">DERIVED</span>.
+  No organizer score exists for any artifact in this repository.</p></footer>
+</main></body></html>
