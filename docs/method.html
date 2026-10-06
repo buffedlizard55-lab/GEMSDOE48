@@ -1,8 +1,91 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Method · GEMSDOE48</title><link rel="stylesheet" href="assets/style.css"></head><body><header><h1>Method, audit, limitations</h1><nav><a href="index.html">Executive summary</a><a href="hypotheses.html">Hypotheses</a><a href="method.html">Method & evidence</a><a href="sources.html">Sources</a></nav></header><main class="wrap"><h2>Evidence model</h2><p>For source confidence <em>x</em> and reliability discount <em>r</em>:</p><pre>m(F) = r x
-m(not F) = r (1-x)
-m(Θ) = 1-r</pre><p>The two basic assignments are multiplied conjunctively. Conflict is <code>K = m1(F)m2(not F) + m1(not F)m2(F)</code>. Yager's rule assigns <code>K</code> to Θ. The submission is min–max-normalized <code>Bel(F)=m(F)</code>; the diagnostic stores <code>m(Θ)</code>. Discounts 0.90 (dotted) and 0.85 (tip) were fixed before proxy scoring and encode only family ordering—not calibrated probabilities.</p><p>The binary source cases produce submission values 0 (neither), about 0.0863 (tip only), 0.1371 (dotted only), and 1 (agreement). This strongly protects agreement while retaining weaker exclusive evidence. A naïve mean would emit 0, 0.5, and 1.</p><h2>Three verification passes</h2><ol><li><strong>Implementation:</strong> SHA-256-pin parents/template; assert equal CRS, transform, and shape; combine; write all-finite float32; independently re-open.</li><li><strong>Bug/edge review:</strong> test mass conservation, no conflict under agreement, invalid-range rejection, footprint handling, and no nodata sentinel.</li><li><strong>Request re-check:</strong> verify unique hash, not-a-mean check, four spatial proxy blocks, diagnostic layer, one-click primary download, name/note, and source register.</li></ol><h2>Reproduce</h2><pre>python -m venv .venv
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>GEMSDOE48 · Method, calibration and evidence</title><link rel="stylesheet" href="assets/style.css"></head><body><header><p>DOE GEMS Prize · DrivenData #306</p><h1>Method &amp; evidence</h1><p>Every constant is preregistered, every input is SHA-256 pinned, and every claim on this page is tagged <code>[MEASURED]</code>, <code>[ANCHOR]</code> (owner-reported leaderboard input) or <code>[MODEL]</code> (stated assumption with a swept sensitivity).</p><nav><a href="index.html">Executive summary</a><a href="hypotheses.html">Hypotheses</a><a href="method.html">Method &amp; evidence</a><a href="sources.html">Verified sources</a></nav></header><main class="wrap">
+
+<h2>0 · The metric, implemented literally</h2>
+<p>From the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">official problem description</a>:</p>
+<pre>k(d)  = max(1 - d/R, 0)                                   R = 300 m = 3 cells
+TP_w  = Σ_{g∈G}      max_{x: d(x,g) ≤ R}  p(x)·k(d(x,g))
+FP_w  = Σ_{x: p(x)>0} p(x)·[1 - max_{g∈G} k(d(x,g))]
+FN_w  = Σ_{g∈G}      [1 - max_{x: d(x,g) ≤ R} p(x)·k(d(x,g))]
+DTI   = TP_w / (TP_w + 0.2·FP_w + 0.8·FN_w)</pre>
+<p><code>src/gems48/metric.py</code> implements exactly that, and <code>tests/test_metric.py</code> checks it cell-for-cell against a brute-force loop transcription on random fields. Three properties matter for everything below and are asserted in tests:</p>
+<ul>
+<li><strong>TP takes a MAX over the kernel support, weighted by p</strong> — not “nearest positive cell”, and not a binary indicator. This is where the previous session's proxy approximation was wrong: it discarded the magnitude of <em>p</em> in TP, so it could not see that halving a value halves the credit.</li>
+<li><strong>TP + FN = |G| exactly</strong>, so the metric collapses to <code>1/DTI = α + α·(F/T) + β·(K/T)</code>.</li>
+<li><strong>Scaling every prediction by λ gives 1/DTI(λp) = α + α(F/T) + (β/λ)(K/T)</strong> — the identity used to invert live scores into <em>T</em> and <em>K</em>.</li>
+</ul>
+<p>The published worked example (TP = 3.00, FP = 1.89, FN = 2.00 → 0.60) cannot be reproduced pixel-for-pixel because the page does not publish the pixel values behind its figure; the test asserts the arithmetic, and flags this as an unreproducible figure rather than claiming verification.</p>
+
+<h2>1 · Parents</h2>
+<table><thead><tr><th>Family</th><th>File (SHA-256 pinned)</th><th>Cells</th><th>Owner-reported live DTI</th></tr></thead><tbody>
+<tr><td>Dotted / spacing-tuned</td><td>GEMSDOE32 <code>h33-h33-2-b2</code> <code>c55bafc4…6fa9</code></td><td>37,654</td><td>0.2778 <code>[ANCHOR]</code></td></tr>
+<tr><td>Tip / step-over</td><td>GEMSDOE33 <code>h33d-analog-tip-stepover-r30</code> <code>87f857d5…0757</code></td><td>41,865</td><td>0.2632 <code>[ANCHOR]</code></td></tr>
+</tbody></table>
+<p>Set relation <code>[MEASURED]</code>: intersection 31,614, dotted-only 6,040, tip-only 10,251, union 47,905, Jaccard 0.660. The two families share <strong>84 %</strong> of the dotted family's cells — the independence assumption behind evidence combination is only partially satisfied, and this is recorded as a limitation rather than assumed away.</p>
+
+<h2>2 · Evidence fields</h2>
+<p>Both parents are sparse binary emissions, which cannot be compared cell-by-cell (their cells rarely coincide). Each is therefore converted into a graded field using the competition's own kernel:</p>
+<pre>s(x) = max over the family's cells y of k(d(x, y))        s ∈ [0,1]</pre>
+<p><code>s(x)</code> reads as “the credit this cell would realise if a truth pixel sat on it” — the natural currency of the published metric. It also carries each family's positional uncertainty, which is what lets the combination disagree <em>in position</em> rather than only in presence.</p>
+
+<h2>3 · Masses, combination, and why Yager</h2>
+<p>Frame Θ = {F, N}. Each source is discounted by reliability (Shafer's discounting of a categorical opinion):</p>
+<pre>m_s(F) = r_s·s_s        m_s(N) = r_s·(1 - s_s)        m_s(Θ) = 1 - r_s</pre>
+<p>Reliabilities are preregistered: <code>r_dotted = 0.90</code> for the stronger parent and <code>r_tip = 0.90 × 0.8915 = 0.802</code>, where 0.8915 is the ratio of the two parents' measured live credit-per-dot efficiencies (0.1199 / 0.1345) from the live-anchor inversion. Conjunctive combination then gives</p>
+<pre>m(F)   = a_F b_F + a_F b_Θ + a_Θ b_F
+m(N)   = a_N b_N + a_N b_Θ + a_Θ b_N
+m(Θ)   = a_Θ b_Θ
+K      = a_F b_N + a_N b_F          (empty-set mass = conflict)</pre>
+<div class="warn"><strong>Scientific correction, retained from the previous session and re-verified here.</strong> Classical normalised Dempster's rule divides the non-empty masses by 1 − K, which <em>deletes</em> the conflict: two sources that flatly contradict each other still return a crisp answer. Because the deliverable must keep the disagreement visible, the combination uses <strong>Yager's modified Dempster rule</strong>, which transfers K to m(Θ). For a binary frame Yager's rule and the Dubois–Pradé disjunctive rule coincide. The classical rule is still computed and published, so the difference is shown rather than asserted: at total contradiction with r = 0.9, Dempster returns 0.474/0.474 with a 0.053 residue on Θ, while Yager returns 0.178/0.080 with <strong>0.742 unassigned</strong>. Mass conservation error: 2.2 × 10⁻¹⁶.</div>
+<p>Decision score: the pignistic probability <code>BetP(F) = Bel(F) + m(Θ)/2</code> (Smets' betting transform), the standard way to turn a belief function into a single number for action.</p>
+
+<h2>4 · Emission: mass-budgeted and spatially balanced</h2>
+<p>Two facts set the design:</p>
+<ul>
+<li><strong>p = 1 is optimal on the admitted support.</strong> Both credit (p·k) and cost (α·p) are linear in p, so the decision to admit a cell is independent of p; given admission, credit is capped at 1 per truth pixel, so a lower p only throws credit away. This is why the graded “belief-as-value” emission of the previous session loses: it halves the value of exactly the cells that carry the credit.</li>
+<li><strong>Coverage beats peak score.</strong> The metric takes the MAX over the kernel support, so two cells 1 cell apart on the same structure compete for the same truth pixels. A plain “top-N by belief” emission clusters and loses; the live record agrees (Poisson-disk spacing d = 2.8 px beat d = 1.5 px).</li>
+</ul>
+<p>The emission therefore walks cells in descending pignistic order and admits one only if no already-admitted cell lies within <strong>2.5 cells</strong>, until the budget is reached. The budget is <strong>47,905 = |dotted ∪ tip|</strong>: the smallest budget at which both families are fully represented, which is the point of a two-family fusion.</p>
+<p>Result <code>[MEASURED]</code>: 31,614 agreement cells + 6,040 dotted-only + 3,842 tip-only + 6,409 fused compromise cells; Jaccard 0.786 with the dotted parent.</p>
+
+<h2 id="calibration">5 · Instrument calibration — the check that decides everything</h2>
+<p>A proxy is only useful if it predicts a live outcome. This emission lineage is exactly nested and two of its removals have known live results:</p>
+<pre>d28 (44,090 cells, 0.2600)  ──remove A=3,891──▶  h27-4 (40,199, 0.2708)  ──remove B=2,545──▶  h33-2-b2 (37,654, 0.2778)</pre>
+<table><thead><tr><th>Group</th><th>Cells</th><th>Marginal proxy credit/cell</th><th>Live credit/cell</th><th>Live outcome</th></tr></thead><tbody>
+<tr><td>A (100 m catalogue flank)</td><td>3,891</td><td>0.00734</td><td>≈ 0 <code>[MODEL]</code></td><td>removal gained +0.0108</td></tr>
+<tr><td>B (200 m catalogue flank)</td><td>2,545</td><td>0.03046</td><td>0.0037 – 0.0245 <code>[MODEL]</code></td><td>removal gained +0.0049</td></tr>
+<tr><td>tip-only, all</td><td>10,251</td><td>0.03569</td><td>—</td><td>decided here</td></tr>
+<tr><td>tip-only, ≥300 m from catalogue</td><td>6,001</td><td>0.04635</td><td>—</td><td>decided here</td></tr>
+</tbody></table>
+<p>The proxy ranks both known-removed groups below the bar, in the same order — the instrument is calibrated. B's live/proxy ratio (0.12 – 0.80, central ≈ 0.76) reproduces GEMSDOE32's independently measured safety factor of 2.08 to within 3 %, which is a genuine cross-check of the whole chain. <a href="data/h49-instrument-calibration.json">Receipt</a>.</p>
+<p>Applying that calibration: the raw union's tip-only cells sit at 0.58 of the acceptance bar (reject), while the <em>fused, balanced</em> placement of the same 10,251 cells returns 0.0599 proxy credit per cell — <strong>1.08 × the bar</strong> under the optimistic transfer and 0.81 × under the conservative one. That is why the submission is the fused allocation and not the union.</p>
+
+<h2>6 · Three-pass review record</h2>
+<table><thead><tr><th>Pass</th><th>Found</th><th>Fixed</th></tr></thead><tbody>
+<tr><td>1 — implement and verify</td><td>Metric, evidence, sampler, audit, ZIP, docs</td><td>—</td></tr>
+<tr><td>2 — bugs, assumptions, edge cases</td><td>Previous proxy used nearest-cell TP and ignored p in TP; <code>credit_per_dot</code> returned flattened arrays; soft-emission bisection could not reach small budgets; component-size feature degenerate at 2.8 px spacing; <code>bel_dem</code> NaN at K = 1.</td><td>Official metric implemented and brute-force verified; shapes fixed; soft emission removed as non-viable; degenerate features dropped and reported; NaN handled and tested.</td></tr>
+<tr><td>3 — re-check against the brief</td><td>Brief's 0.3195 “highest score” stale (leaderboard leads at 0.3774); bridged template is not the organiser's sample submission; external hosts unreachable; hypothesis H-A falsified.</td><td>All four flagged on the summary page; H-A reported as falsified with its measurement; hypotheses re-ranked with explicit obtainability checks.</td></tr>
+</tbody></table>
+
+<h2>7 · Reproduce</h2>
+<pre>python -m venv .venv
 .venv/bin/pip install -e . pytest
-bash scripts/fetch_inputs.sh
-.venv/bin/python scripts/build_submission.py
-.venv/bin/python scripts/validate_proxy.py
-.venv/bin/pytest -q</pre><h2>Irregularities and hard limits</h2><ul><li><strong>Rule mismatch:</strong> official text requests null/NaN outside bounds, but the owner reports the portal rejected NaNs as outside [0,1]. The primary is all-finite zero outside, following the observed validator behavior. Portal acceptance is not tested here.</li><li><strong>Score attribution:</strong> 0.2778 and 0.2632 are owner-supplied score-to-family associations. Public leaderboard rows do not reveal file hashes. Treat exact artifact attribution as unverified.</li><li><strong>Validation:</strong> SGMC off-catalogue faults are not hidden expert labels. Spatial blocking reduces geographic leakage but does not remove shared compilation/source bias.</li><li><strong>Evidence independence:</strong> the two families are independently built but overlap 31,614 cells and may share upstream features. Dempster-style combination assumes evidence independence more strongly than can be demonstrated.</li><li><strong>Current target:</strong> official leaderboard was 0.3774 at review, not 0.3195. It can change.</li><li><strong>Access:</strong> this environment can research public sources and build/test files. It has no user's DrivenData session and cannot spend a weekly submission slot or observe a private score. GPU training was not needed for this fusion.</li></ul><h2>What should happen next</h2><ol><li>Run H48-A maxspot persistence from raw potential fields with fold-specific construction.</li><li>Use grouped fault-system holdouts and SGMC only as a secondary proxy; preregister thresholds.</li><li>Compare equal-mass candidates, not only thresholded surfaces.</li><li>Spend a slot only after H48-A beats this fusion and dotted anchor under the frozen gate.</li></ol></main><footer>Every number on this page is backed by the downloadable audit or source register.</footer></body></html>
+bash scripts/fetch_inputs.sh                 # gh-authenticated, SHA-256 pinned
+.venv/bin/python scripts/analyze_parents.py   # decomposition + live-anchored inversion
+.venv/bin/python scripts/calibrate_instrument.py
+.venv/bin/python scripts/test_coherence_pruning.py
+.venv/bin/python scripts/test_budget_neutral.py
+.venv/bin/python scripts/budget_sweep.py
+.venv/bin/python scripts/build_submission.py  # emits, re-reads and audits the deliverable
+.venv/bin/pytest -q</pre>
+
+<h2>8 · Limitations</h2>
+<ul>
+<li>No DrivenData session: the agent cannot spend a slot, and portal acceptance is unverified by us.</li>
+<li>The SGMC proxy is not the hidden expert label set and is 5.7× denser, which biases it toward adding mass; all addition decisions are therefore taken against the <em>live</em> bar converted into proxy units, never against the proxy's own bar.</li>
+<li>The two parents are 84 % co-located, so “independent evidence sources” is an approximation; the combination is therefore conservative (no source is given more weight than its measured efficiency justifies).</li>
+<li>Live anchors are owner-reported; no organiser receipt ties 0.2778 or 0.2632 to specific bytes.</li>
+<li><strong>The proxy mis-orders the two parents.</strong> Both proxy protocols place the tip family ~0.001 proxy DTI above the dotted family, while the live board has the dotted family ahead by 0.0146. Proxy gaps below roughly 0.005 therefore carry no information; that is why the submission decision rests on the live-anchored calibration of section 5 and not on the proxy ranking.</li>
+<li>The 419 MB official feature stack and every external geothermal/seismic source are unreachable from this sandbox, so no new detector could be built or validated here.</li>
+</ul>
+
+</main><footer>GEMSDOE48 · measured, not asserted.</footer></body></html>

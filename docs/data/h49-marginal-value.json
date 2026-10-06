@@ -1,0 +1,357 @@
+{
+  "schema": "GEMSDOE48-marginal-value-v1",
+  "generated_utc": "2026-10-06T21:01:31.313849+00:00",
+  "base": "dotted parent (GEMSDOE32 H33-2-B2)",
+  "proxy_truth_pixels": 63121,
+  "proxy_dti_of_base": 0.09613245598517173,
+  "proxy_credit_per_dot_of_base": 0.14975918779613126,
+  "live_to_proxy_credit_scale": 0.8978541097301765,
+  "acceptance_bars": {
+    "live_bar_live_units": 0.05556,
+    "live_bar_in_proxy_units": 0.061880877302769054,
+    "proxy_native_bar": 0.019226491197034346,
+    "note": "[MODEL] the proxy's own bar is 3x more permissive than the live bar because the proxy truth set is ~5x denser than the hidden set; additions must be judged against the live bar expressed in proxy units."
+  },
+  "dotted_dot_quality_vs_feature": {
+    "note": "[MEASURED] realised proxy credit per dot when the whole dotted parent is emitted, binned by a per-dot feature. Dots shadowed by a neighbour show zero realised credit and are the candidates for removal.",
+    "features": {
+      "neighbour_count_7x7": [
+        {
+          "range": [
+            -7.771561172376096e-16,
+            0.9999999999999996
+          ],
+          "dots": 7211,
+          "realised_credit_per_dot": 0.15593577384706742,
+          "fraction_earning": 0.10830675357093329
+        },
+        {
+          "range": [
+            0.9999999999999996,
+            0.9999999999999998
+          ],
+          "dots": 330,
+          "realised_credit_per_dot": 0.16176703046840915,
+          "fraction_earning": 0.10303030303030303
+        },
+        {
+          "range": [
+            0.9999999999999998,
+            2.0
+          ],
+          "dots": 12529,
+          "realised_credit_per_dot": 0.14771358661828454,
+          "fraction_earning": 0.10862798307925613
+        },
+        {
+          "range": [
+            2.0,
+            2.0
+          ],
+          "dots": 0,
+          "realised_credit_per_dot": 0.0,
+          "fraction_earning": 0.0
+        },
+        {
+          "range": [
+            2.0,
+            6.0
+          ],
+          "dots": 17584,
+          "realised_credit_per_dot": 0.14845842500393888,
+          "fraction_earning": 0.11021383075523203
+        }
+      ],
+      "dotted_support_neighbourhood": [
+        {
+          "range": [
+            1.0,
+            2.0
+          ],
+          "dots": 6040,
+          "realised_credit_per_dot": 0.16344508328264093,
+          "fraction_earning": 0.12466887417218543
+        },
+        {
+          "range": [
+            2.0,
+            2.0
+          ],
+          "dots": 0,
+          "realised_credit_per_dot": 0.0,
+          "fraction_earning": 0.0
+        },
+        {
+          "range": [
+            2.0,
+            2.0
+          ],
+          "dots": 0,
+          "realised_credit_per_dot": 0.0,
+          "fraction_earning": 0.0
+        },
+        {
+          "range": [
+            2.0,
+            2.0
+          ],
+          "dots": 0,
+          "realised_credit_per_dot": 0.0,
+          "fraction_earning": 0.0
+        },
+        {
+          "range": [
+            2.0,
+            2.0
+          ],
+          "dots": 31614,
+          "realised_credit_per_dot": 0.1471444345621679,
+          "fraction_earning": 0.10631365850572531
+        }
+      ],
+      "betp": [
+        {
+          "range": [
+            0.5488146207519025,
+            0.9901185379248097
+          ],
+          "dots": 6040,
+          "realised_credit_per_dot": 0.16344508328264093,
+          "fraction_earning": 0.12466887417218543
+        },
+        {
+          "range": [
+            0.9901185379248097,
+            0.9901185379248097
+          ],
+          "dots": 0,
+          "realised_credit_per_dot": 0.0,
+          "fraction_earning": 0.0
+        },
+        {
+          "range": [
+            0.9901185379248097,
+            0.9901185379248097
+          ],
+          "dots": 0,
+          "realised_credit_per_dot": 0.0,
+          "fraction_earning": 0.0
+        },
+        {
+          "range": [
+            0.9901185379248097,
+            0.9901185379248097
+          ],
+          "dots": 0,
+          "realised_credit_per_dot": 0.0,
+          "fraction_earning": 0.0
+        },
+        {
+          "range": [
+            0.9901185379248097,
+            0.9901185379248097
+          ],
+          "dots": 31614,
+          "realised_credit_per_dot": 0.1471444345621679,
+          "fraction_earning": 0.10631365850572531
+        }
+      ],
+      "dist_to_catalogue": [
+        {
+          "range": [
+            2.23606797749979,
+            6.708203932499369
+          ],
+          "dots": 7447,
+          "realised_credit_per_dot": 0.16251389645200304,
+          "fraction_earning": 0.13119376930307505
+        },
+        {
+          "range": [
+            6.708203932499369,
+            14.212670403551895
+          ],
+          "dots": 7610,
+          "realised_credit_per_dot": 0.14716218402750597,
+          "fraction_earning": 0.10433639947437583
+        },
+        {
+          "range": [
+            14.212670403551895,
+            26.40075756488817
+          ],
+          "dots": 7521,
+          "realised_credit_per_dot": 0.15868086259653577,
+          "fraction_earning": 0.11301688605238665
+        },
+        {
+          "range": [
+            26.40075756488817,
+            49.9799959983992
+          ],
+          "dots": 7538,
+          "realised_credit_per_dot": 0.15368031634026158,
+          "fraction_earning": 0.11249668347041655
+        },
+        {
+          "range": [
+            49.9799959983992,
+            219.27152117865194
+          ],
+          "dots": 7538,
+          "realised_credit_per_dot": 0.1269575826196209,
+          "fraction_earning": 0.08556646325285222
+        }
+      ]
+    }
+  },
+  "marginal_groups": {
+    "tip_only__no_dotted_support_within_300m": {
+      "added_cells": 0.0,
+      "base_tp": 5639.032457275526,
+      "with_group_tp": 5639.032457275526,
+      "marginal_tp": 0.0,
+      "marginal_per_cell": 0.0,
+      "base_dti": 0.09613245598517173,
+      "with_group_dti": 0.09613245598517173,
+      "delta_dti": 0.0,
+      "above_live_bar": false,
+      "safety_factor": 0.0
+    },
+    "tip_only__dotted_support_0_to_033": {
+      "added_cells": 4678.0,
+      "base_tp": 5639.032457275526,
+      "with_group_tp": 5791.315824190435,
+      "marginal_tp": 152.28336691490858,
+      "marginal_per_cell": 0.03255309254273377,
+      "base_dti": 0.09613245598517173,
+      "with_group_dti": 0.09717209532055361,
+      "delta_dti": 0.001039639335381884,
+      "above_live_bar": false,
+      "safety_factor": 0.5260606177811425
+    },
+    "tip_only__dotted_support_033_to_066": {
+      "added_cells": 2359.0,
+      "base_tp": 5639.032457275526,
+      "with_group_tp": 5748.882289473178,
+      "marginal_tp": 109.84983219765218,
+      "marginal_per_cell": 0.04656627053736845,
+      "base_dti": 0.09613245598517173,
+      "with_group_dti": 0.0972471020737032,
+      "delta_dti": 0.0011146460885314707,
+      "above_live_bar": false,
+      "safety_factor": 0.7525147116051746
+    },
+    "tip_only__dotted_support_066_to_1": {
+      "added_cells": 3214.0,
+      "base_tp": 5639.032457275526,
+      "with_group_tp": 5745.632417447226,
+      "marginal_tp": 106.59996017169942,
+      "marginal_per_cell": 0.03316738026499671,
+      "base_dti": 0.09613245598517173,
+      "with_group_dti": 0.09693698647326858,
+      "delta_dti": 0.0008045304880968523,
+      "above_live_bar": false,
+      "safety_factor": 0.5359875572338165
+    },
+    "tip_only__all": {
+      "added_cells": 10251.0,
+      "base_tp": 5639.032457275526,
+      "with_group_tp": 6004.8530694984465,
+      "marginal_tp": 365.8206122229203,
+      "marginal_per_cell": 0.03568633423304266,
+      "base_dti": 0.09613245598517173,
+      "with_group_dti": 0.09897883241130949,
+      "delta_dti": 0.0028463764261377617,
+      "above_live_bar": false,
+      "safety_factor": 0.5766940578175314
+    },
+    "tip_only__dcat_lt_1px": {
+      "added_cells": 0.0,
+      "base_tp": 5639.032457275526,
+      "with_group_tp": 5639.032457275526,
+      "marginal_tp": 0.0,
+      "marginal_per_cell": 0.0,
+      "base_dti": 0.09613245598517173,
+      "with_group_dti": 0.09613245598517173,
+      "delta_dti": 0.0,
+      "above_live_bar": false,
+      "safety_factor": 0.0
+    },
+    "tip_only__dcat_1_2px": {
+      "added_cells": 2539.0,
+      "base_tp": 5639.032457275526,
+      "with_group_tp": 5668.7619559893255,
+      "marginal_tp": 29.72949871379933,
+      "marginal_per_cell": 0.01170913694911356,
+      "base_dti": 0.09613245598517173,
+      "with_group_dti": 0.09581240070902051,
+      "delta_dti": -0.00032005527615121265,
+      "above_live_bar": false,
+      "safety_factor": 0.1892206035125103
+    },
+    "tip_only__dcat_2_3px": {
+      "added_cells": 1711.0,
+      "base_tp": 5639.032457275526,
+      "with_group_tp": 5699.406399653206,
+      "marginal_tp": 60.37394237767967,
+      "marginal_per_cell": 0.035285764101507695,
+      "base_dti": 0.09613245598517173,
+      "with_group_dti": 0.0966001208095866,
+      "delta_dti": 0.0004676648244148762,
+      "above_live_bar": false,
+      "safety_factor": 0.5702208119781896
+    },
+    "tip_only__dcat_ge_3px": {
+      "added_cells": 5903.0,
+      "base_tp": 5639.032457275526,
+      "with_group_tp": 5917.187848610102,
+      "marginal_tp": 278.15539133457605,
+      "marginal_per_cell": 0.047121021740568536,
+      "base_dti": 0.09613245598517173,
+      "with_group_dti": 0.09894681703589232,
+      "delta_dti": 0.0028143610507205957,
+      "above_live_bar": false,
+      "safety_factor": 0.7614795360772941
+    },
+    "bridge_cells__sum_1.2_1.5": {
+      "added_cells": 132414.0,
+      "base_tp": 5639.032457275526,
+      "with_group_tp": 9323.90333250333,
+      "marginal_tp": 3684.8708752278044,
+      "marginal_per_cell": 0.027828408440405128,
+      "base_dti": 0.09613245598517173,
+      "with_group_dti": 0.11073980160966973,
+      "delta_dti": 0.014607345624498003,
+      "above_live_bar": false,
+      "safety_factor": 0.4497093391912829
+    },
+    "bridge_cells__sum_1.5_2.1": {
+      "added_cells": 0.0,
+      "base_tp": 5639.032457275526,
+      "with_group_tp": 5639.032457275526,
+      "marginal_tp": 0.0,
+      "marginal_per_cell": 0.0,
+      "base_dti": 0.09613245598517173,
+      "with_group_dti": 0.09613245598517173,
+      "delta_dti": 0.0,
+      "above_live_bar": false,
+      "safety_factor": 0.0
+    },
+    "dotted_remove__betp_lt_040": {
+      "cells": 0.0,
+      "dti_without_group": 0.09613245598517173,
+      "delta_dti_if_removed": 0.0
+    },
+    "dotted_remove__betp_040_080": {
+      "cells": 2826.0,
+      "dti_without_group": 0.0904234736845685,
+      "delta_dti_if_removed": -0.005708982300603224
+    },
+    "dotted_remove__betp_080_099": {
+      "cells": 3214.0,
+      "dti_without_group": 0.08927711346104297,
+      "delta_dti_if_removed": -0.006855342524128755
+    }
+  }
+}

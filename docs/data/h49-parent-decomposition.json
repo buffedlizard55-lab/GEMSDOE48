@@ -1,0 +1,288 @@
+{
+  "schema": "GEMSDOE48-parent-decomposition-v1",
+  "generated_utc": "2026-10-06T20:41:17.489677+00:00",
+  "classes": {
+    "intersection": 31614,
+    "dotted_only": 6040,
+    "tip_only": 10251,
+    "union": 47905,
+    "dotted": 37654,
+    "tip": 41865,
+    "jaccard": 0.6599311136624569
+  },
+  "proxy_truth": {
+    "name": "USGS SGMC-derived faults, >=300 m from the public catalogue, inside the template footprint",
+    "pixels_off_catalogue": 63121,
+    "pixels_all_sgmc": 83593,
+    "public_catalogue_pixels": 60988,
+    "warning": "[MODEL] the SGMC compilation is a stand-in for the hidden expert labels; it is not the test set."
+  },
+  "proxy_off_catalogue_dti": {
+    "dotted": {
+      "tp_w": 5639.032457275526,
+      "fp_w": 35171.90105328293,
+      "fn_w": 57481.96754272447,
+      "dti": 0.09613245598517173,
+      "truth_pixels": 63121,
+      "emitted_mass": 37654.0,
+      "emitted_dots": 37654
+    },
+    "tip": {
+      "tp_w": 5777.908176538844,
+      "fp_w": 39280.248660443685,
+      "fn_w": 57343.09182346116,
+      "dti": 0.09709394187971228,
+      "truth_pixels": 63121,
+      "emitted_mass": 41865.0,
+      "emitted_dots": 41865
+    },
+    "union_binary": {
+      "tp_w": 6004.8530694984465,
+      "fp_w": 44851.412884796664,
+      "fn_w": 57116.146930501556,
+      "dti": 0.09897883241130949,
+      "truth_pixels": 63121,
+      "emitted_mass": 47905.0,
+      "emitted_dots": 47905
+    },
+    "intersection": {
+      "tp_w": 4716.929682750294,
+      "fp_w": 29600.73682892995,
+      "fn_w": 58404.07031724971,
+      "dti": 0.08223330324613354,
+      "truth_pixels": 63121,
+      "emitted_mass": 31614.0,
+      "emitted_dots": 31614
+    },
+    "naive_mean": {
+      "tp_w": 5328.573103244969,
+      "fp_w": 37226.074856863306,
+      "fn_w": 57792.42689675503,
+      "dti": 0.09030296776518304,
+      "truth_pixels": 63121,
+      "emitted_mass": 39759.5,
+      "emitted_dots": 47905
+    }
+  },
+  "proxy_credit_by_class": {
+    "dotted_file": {
+      "intersection": {
+        "dots": 31614,
+        "credit": 4651.824154248376,
+        "credit_per_dot": 0.1471444345621679
+      },
+      "dotted_only": {
+        "dots": 6040,
+        "credit": 987.2083030271513,
+        "credit_per_dot": 0.16344508328264093
+      },
+      "tip_only": {
+        "dots": 0,
+        "credit": 0.0,
+        "credit_per_dot": 0.0
+      }
+    },
+    "tip_file": {
+      "intersection": {
+        "dots": 31614,
+        "credit": 4645.578691317189,
+        "credit_per_dot": 0.14694688085396307
+      },
+      "dotted_only": {
+        "dots": 0,
+        "credit": 0.0,
+        "credit_per_dot": 0.0
+      },
+      "tip_only": {
+        "dots": 10251,
+        "credit": 1132.329485221655,
+        "credit_per_dot": 0.1104603926662428
+      }
+    },
+    "union_file": {
+      "intersection": {
+        "dots": 31614,
+        "credit": 4618.618869207372,
+        "credit_per_dot": 0.14609409974085444
+      },
+      "dotted_only": {
+        "dots": 6040,
+        "credit": 600.9427499272624,
+        "credit_per_dot": 0.0994938327694143
+      },
+      "tip_only": {
+        "dots": 10251,
+        "credit": 785.2914503638124,
+        "credit_per_dot": 0.0766063262475673
+      }
+    },
+    "note": "[MEASURED] TP_w attributed to the predicted cell that realised each truth pixel's maximum; totals equal TP_w exactly.",
+    "coverage": {
+      "dotted": {
+        "dots": 37654,
+        "dots_with_credit": 4114,
+        "fraction_with_credit": 0.10925798055983428
+      },
+      "tip": {
+        "dots": 41865,
+        "dots_with_credit": 4338,
+        "fraction_with_credit": 0.10361877463274811
+      },
+      "union": {
+        "dots": 47905,
+        "dots_with_credit": 4750,
+        "fraction_with_credit": 0.09915457676651707
+      }
+    }
+  },
+  "live_anchor_inversion": {
+    "inputs": {
+      "pair_before": {
+        "mass": 44090,
+        "dti": 0.26
+      },
+      "pair_after": {
+        "mass": 40199,
+        "dti": 0.2708
+      },
+      "removed_dots": 3891,
+      "zero_credit_assumption": "[MODEL] owner-reported; the removed dots sat within 100 m of the masked public catalogue"
+    },
+    "weighted_tp_of_pair": 5073.287555555577,
+    "regimes": {
+      "A_no_sharing": {
+        "assumption": "F = M - T",
+        "hidden_truth_pixels_K": 13368.305555555653,
+        "weighted_tp_T": {
+          "dotted": 5063.028466666688,
+          "tip": 5018.604017777798
+        },
+        "credit_per_dot": {
+          "dotted": 0.13446190223260976,
+          "tip": 0.11987588720357811
+        },
+        "weighted_recall": {
+          "dotted": 0.37873374794029707,
+          "tip": 0.3754106305336615
+        }
+      },
+      "B_all_wasted": {
+        "assumption": "F = M",
+        "hidden_truth_pixels_K": 12099.983666666758,
+        "weighted_tp_T": {
+          "dotted": 5062.4249397315025,
+          "tip": 5015.565530372142
+        },
+        "credit_per_dot": {
+          "dotted": 0.13444587400359861,
+          "tip": 0.1198033089781952
+        },
+        "weighted_recall": {
+          "dotted": 0.4183827911832276,
+          "tip": 0.4145101074961868
+        }
+      }
+    },
+    "provenance": "[ANCHOR] owner-reported leaderboard scores; [MODEL] regime assumptions; not organizer-confirmed."
+  },
+  "live_projection_by_class": {
+    "method": "[MODEL] proxy-measured *relative* credit split between the three dot classes, rescaled so each parent reproduces its owner-reported live score; both extreme regimes are reported.",
+    "regimes": {
+      "A_no_sharing": {
+        "proxy_credit_fraction_in_intersection": 0.8144786769227774,
+        "credit_per_dot": {
+          "intersection": 0.1304399546641691,
+          "dotted_only": 0.15551320197245783,
+          "tip_only": 0.08729638972049125
+        },
+        "marginal_bar_alpha_times_dti": 0.05556,
+        "tip_only_above_bar": true,
+        "candidates": {
+          "dotted_parent": {
+            "weighted_tp": 5063.028466666687,
+            "mass": 37654,
+            "projected_dti": 0.27779999999999994,
+            "delta_vs_dotted_parent": -5.551115123125783e-17
+          },
+          "tip_parent": {
+            "weighted_tp": 5018.604017777798,
+            "mass": 41865,
+            "projected_dti": 0.2632,
+            "delta_vs_dotted_parent": -0.014600000000000002
+          },
+          "union": {
+            "weighted_tp": 5957.9037576914425,
+            "mass": 47905,
+            "projected_dti": 0.2938453460266657,
+            "delta_vs_dotted_parent": 0.016045346026665686
+          },
+          "intersection_only": {
+            "weighted_tp": 4123.728726753042,
+            "mass": 31614,
+            "projected_dti": 0.24232361916711093,
+            "delta_vs_dotted_parent": -0.035476380832889065
+          },
+          "dotted_plus_tip_only": {
+            "weighted_tp": 5957.9037576914425,
+            "mass": 47905,
+            "projected_dti": 0.2938453460266657,
+            "delta_vs_dotted_parent": 0.016045346026665686
+          }
+        }
+      },
+      "B_all_wasted": {
+        "proxy_credit_fraction_in_intersection": 0.8144786769227774,
+        "credit_per_dot": {
+          "intersection": 0.1304244058623833,
+          "dotted_only": 0.15549466437054918,
+          "tip_only": 0.0870479332200524
+        },
+        "marginal_bar_alpha_times_dti": 0.05556,
+        "tip_only_above_bar": true,
+        "candidates": {
+          "dotted_parent": {
+            "weighted_tp": 5062.4249397315025,
+            "mass": 37654,
+            "projected_dti": 0.27779999999999994,
+            "delta_vs_dotted_parent": -5.551115123125783e-17
+          },
+          "tip_parent": {
+            "weighted_tp": 5015.565530372142,
+            "mass": 41865,
+            "projected_dti": 0.2632,
+            "delta_vs_dotted_parent": -0.014600000000000002
+          },
+          "union": {
+            "weighted_tp": 5954.75330317026,
+            "mass": 47905,
+            "projected_dti": 0.2911583939570931,
+            "delta_vs_dotted_parent": 0.013358393957093095
+          },
+          "intersection_only": {
+            "weighted_tp": 4123.237166933385,
+            "mass": 31614,
+            "projected_dti": 0.24503064918131456,
+            "delta_vs_dotted_parent": -0.03276935081868543
+          },
+          "dotted_plus_tip_only": {
+            "weighted_tp": 5954.75330317026,
+            "mass": 47905,
+            "projected_dti": 0.2911583939570931,
+            "delta_vs_dotted_parent": 0.013358393957093095
+          }
+        }
+      }
+    }
+  },
+  "kernel_support_fields": {
+    "dotted": {
+      "cells_gt0": 708357,
+      "mean": 0.024680236704985613
+    },
+    "tip": {
+      "cells_gt0": 781831,
+      "mean": 0.027399618169853174
+    },
+    "correlation_on_union": -0.16855839004382833
+  }
+}

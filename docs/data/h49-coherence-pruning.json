@@ -1,0 +1,692 @@
+{
+  "schema": "GEMSDOE48-coherence-pruning-v1",
+  "generated_utc": "2026-10-06T21:13:37.777619+00:00",
+  "hypothesis": "H-A: dots whose neighbourhood is not a laterally persistent, elongated lineament carry less credit than coherent ones and may be pruned.",
+  "removal_rule": {
+    "live_bar": 0.05556,
+    "safety_required": 2.0,
+    "live_over_proxy_transfer": 0.7560057154680643,
+    "remove_if_realised_proxy_credit_per_dot_below": 0.03674575394287942,
+    "calibration": "group B (2,545 flank dots known to have gained live when removed) has realised proxy credit 0.03046 -> safety 2.03, matching GEMSDOE32's independently reported 2.08."
+  },
+  "base": {
+    "dots": 37654,
+    "proxy_dti": 0.09613245598517173,
+    "proxy_tp": 5639.032457275526,
+    "realised_credit_per_dot": 0.14975918779613126
+  },
+  "features": {
+    "dot_density_r3": {
+      "quintiles": [
+        {
+          "bin": 1,
+          "range": [
+            -8.881784197001252e-16,
+            0.9999999999999996
+          ],
+          "dots": 7211,
+          "realised_proxy_credit_per_dot": 0.15593577384706742,
+          "fraction_earning": 0.10830675357093329,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "bin": 2,
+          "range": [
+            0.9999999999999996,
+            1.0
+          ],
+          "dots": 330,
+          "realised_proxy_credit_per_dot": 0.16176703046840915,
+          "fraction_earning": 0.10303030303030303,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "bin": 3,
+          "range": [
+            1.0,
+            2.0
+          ],
+          "dots": 12529,
+          "realised_proxy_credit_per_dot": 0.14771358661828454,
+          "fraction_earning": 0.10862798307925613,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "bin": 5,
+          "range": [
+            2.0,
+            6.0
+          ],
+          "dots": 17584,
+          "realised_proxy_credit_per_dot": 0.14845842500393888,
+          "fraction_earning": 0.11021383075523203,
+          "eligible_for_removal_safety2": false
+        }
+      ],
+      "cumulative_from_lowest": [
+        {
+          "up_to_bin": 1,
+          "dots": 7211,
+          "realised_proxy_credit_per_dot": 0.15593577384706742,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "up_to_bin": 2,
+          "dots": 7541,
+          "realised_proxy_credit_per_dot": 0.15619095415273546,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "up_to_bin": 3,
+          "dots": 20070,
+          "realised_proxy_credit_per_dot": 0.15089882969637594,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "up_to_bin": 4,
+          "dots": 20070,
+          "realised_proxy_credit_per_dot": 0.15089882969637594,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "up_to_bin": 5,
+          "dots": 37654,
+          "realised_proxy_credit_per_dot": 0.1497591877961313,
+          "eligible_for_removal_safety2": false
+        }
+      ]
+    },
+    "dot_density_r5": {
+      "quintiles": [
+        {
+          "bin": 1,
+          "range": [
+            -8.881784197001252e-15,
+            1.0000000000000009
+          ],
+          "dots": 7114,
+          "realised_proxy_credit_per_dot": 0.16842192555676896,
+          "fraction_earning": 0.11695248805172899,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "bin": 2,
+          "range": [
+            1.0000000000000009,
+            2.000000000000001
+          ],
+          "dots": 7427,
+          "realised_proxy_credit_per_dot": 0.15276660817427917,
+          "fraction_earning": 0.11202369732058705,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "bin": 3,
+          "range": [
+            2.000000000000001,
+            3.0
+          ],
+          "dots": 4750,
+          "realised_proxy_credit_per_dot": 0.15624156585423066,
+          "fraction_earning": 0.1128421052631579,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "bin": 4,
+          "range": [
+            3.0,
+            4.000000000000002
+          ],
+          "dots": 10356,
+          "realised_proxy_credit_per_dot": 0.13924962671034016,
+          "fraction_earning": 0.10544611819235226,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "bin": 5,
+          "range": [
+            4.000000000000002,
+            10.000000000000002
+          ],
+          "dots": 8007,
+          "realised_proxy_credit_per_dot": 0.14013546995559165,
+          "fraction_earning": 0.10266017234919446,
+          "eligible_for_removal_safety2": false
+        }
+      ],
+      "cumulative_from_lowest": [
+        {
+          "up_to_bin": 1,
+          "dots": 7114,
+          "realised_proxy_credit_per_dot": 0.16842192555676896,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "up_to_bin": 2,
+          "dots": 14541,
+          "realised_proxy_credit_per_dot": 0.16042577383407097,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "up_to_bin": 3,
+          "dots": 19291,
+          "realised_proxy_credit_per_dot": 0.1593955012767001,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "up_to_bin": 4,
+          "dots": 29647,
+          "realised_proxy_credit_per_dot": 0.15235834146257982,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "up_to_bin": 5,
+          "dots": 37654,
+          "realised_proxy_credit_per_dot": 0.1497591877961313,
+          "eligible_for_removal_safety2": false
+        }
+      ]
+    },
+    "dot_density_r8": {
+      "quintiles": [
+        {
+          "bin": 1,
+          "range": [
+            -6.106226635438361e-15,
+            2.9999999999999996
+          ],
+          "dots": 7468,
+          "realised_proxy_credit_per_dot": 0.17483993226695776,
+          "fraction_earning": 0.12158543117300483,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "bin": 2,
+          "range": [
+            2.9999999999999996,
+            4.999999999999999
+          ],
+          "dots": 6056,
+          "realised_proxy_credit_per_dot": 0.17090304619294808,
+          "fraction_earning": 0.1238441215323646,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "bin": 3,
+          "range": [
+            4.999999999999999,
+            7.0
+          ],
+          "dots": 8716,
+          "realised_proxy_credit_per_dot": 0.13660481826716006,
+          "fraction_earning": 0.1031436438733364,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "bin": 4,
+          "range": [
+            7.0,
+            9.0
+          ],
+          "dots": 7299,
+          "realised_proxy_credit_per_dot": 0.1348016914050886,
+          "fraction_earning": 0.10110974106041924,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "bin": 5,
+          "range": [
+            9.0,
+            20.0
+          ],
+          "dots": 8115,
+          "realised_proxy_credit_per_dot": 0.1384810663929863,
+          "fraction_earning": 0.10092421441774492,
+          "eligible_for_removal_safety2": false
+        }
+      ],
+      "cumulative_from_lowest": [
+        {
+          "up_to_bin": 1,
+          "dots": 7468,
+          "realised_proxy_credit_per_dot": 0.17483993226695776,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "up_to_bin": 2,
+          "dots": 13524,
+          "realised_proxy_credit_per_dot": 0.17307700842310958,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "up_to_bin": 3,
+          "dots": 22240,
+          "realised_proxy_credit_per_dot": 0.15878332095012146,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "up_to_bin": 4,
+          "dots": 29539,
+          "realised_proxy_credit_per_dot": 0.1528575308404632,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "up_to_bin": 5,
+          "dots": 37654,
+          "realised_proxy_credit_per_dot": 0.1497591877961313,
+          "eligible_for_removal_safety2": false
+        }
+      ]
+    },
+    "component_size_5x5": {
+      "quintiles": [
+        {
+          "bin": 5,
+          "range": [
+            1.0,
+            1.0
+          ],
+          "dots": 37654,
+          "realised_proxy_credit_per_dot": 0.1497591877961313,
+          "fraction_earning": 0.10925798055983428,
+          "eligible_for_removal_safety2": false
+        }
+      ],
+      "cumulative_from_lowest": [
+        {
+          "up_to_bin": 5,
+          "dots": 37654,
+          "realised_proxy_credit_per_dot": 0.1497591877961313,
+          "eligible_for_removal_safety2": false
+        }
+      ]
+    },
+    "support_persistence_2px": {
+      "quintiles": [
+        {
+          "bin": 5,
+          "range": [
+            1.0,
+            1.0
+          ],
+          "dots": 37654,
+          "realised_proxy_credit_per_dot": 0.1497591877961313,
+          "fraction_earning": 0.10925798055983428,
+          "eligible_for_removal_safety2": false
+        }
+      ],
+      "cumulative_from_lowest": [
+        {
+          "up_to_bin": 5,
+          "dots": 37654,
+          "realised_proxy_credit_per_dot": 0.1497591877961313,
+          "eligible_for_removal_safety2": false
+        }
+      ]
+    },
+    "coherence_sigma2": {
+      "quintiles": [
+        {
+          "bin": 1,
+          "range": [
+            0.0,
+            0.27415764241460827
+          ],
+          "dots": 7531,
+          "realised_proxy_credit_per_dot": 0.15536605008315868,
+          "fraction_earning": 0.10967998937724074,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "bin": 2,
+          "range": [
+            0.27415764241460827,
+            0.4891571647948965
+          ],
+          "dots": 7531,
+          "realised_proxy_credit_per_dot": 0.14344306195554624,
+          "fraction_earning": 0.10636037710795379,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "bin": 3,
+          "range": [
+            0.4891571647948965,
+            0.6994672840409609
+          ],
+          "dots": 7530,
+          "realised_proxy_credit_per_dot": 0.15033184112276698,
+          "fraction_earning": 0.10730411686586985,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "bin": 4,
+          "range": [
+            0.6994672840409609,
+            0.83596578222016
+          ],
+          "dots": 7531,
+          "realised_proxy_credit_per_dot": 0.139843465006488,
+          "fraction_earning": 0.10237684238480946,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "bin": 5,
+          "range": [
+            0.83596578222016,
+            0.9999978869109301
+          ],
+          "dots": 7531,
+          "realised_proxy_credit_per_dot": 0.1598115968521768,
+          "fraction_earning": 0.12056831762050192,
+          "eligible_for_removal_safety2": false
+        }
+      ],
+      "cumulative_from_lowest": [
+        {
+          "up_to_bin": 1,
+          "dots": 7531,
+          "realised_proxy_credit_per_dot": 0.15536605008315868,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "up_to_bin": 2,
+          "dots": 15062,
+          "realised_proxy_credit_per_dot": 0.14940455601935243,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "up_to_bin": 3,
+          "dots": 22592,
+          "realised_proxy_credit_per_dot": 0.149713623690595,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "up_to_bin": 4,
+          "dots": 30123,
+          "realised_proxy_credit_per_dot": 0.14724600210409927,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "up_to_bin": 5,
+          "dots": 37654,
+          "realised_proxy_credit_per_dot": 0.1497591877961313,
+          "eligible_for_removal_safety2": false
+        }
+      ]
+    },
+    "coherence_sigma4": {
+      "quintiles": [
+        {
+          "bin": 1,
+          "range": [
+            0.0,
+            0.3141305893355961
+          ],
+          "dots": 7531,
+          "realised_proxy_credit_per_dot": 0.15812957977261566,
+          "fraction_earning": 0.11153897224804143,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "bin": 2,
+          "range": [
+            0.3141305893355961,
+            0.5021623382308155
+          ],
+          "dots": 7531,
+          "realised_proxy_credit_per_dot": 0.15514063817532925,
+          "fraction_earning": 0.11313238613729916,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "bin": 3,
+          "range": [
+            0.5021623382308155,
+            0.6590681310925821
+          ],
+          "dots": 7530,
+          "realised_proxy_credit_per_dot": 0.14670145955203864,
+          "fraction_earning": 0.1098273572377158,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "bin": 4,
+          "range": [
+            0.6590681310925821,
+            0.794651482701888
+          ],
+          "dots": 7531,
+          "realised_proxy_credit_per_dot": 0.14331256265432632,
+          "fraction_earning": 0.10237684238480946,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "bin": 5,
+          "range": [
+            0.794651482701888,
+            0.9991976326213285
+          ],
+          "dots": 7531,
+          "realised_proxy_credit_per_dot": 0.14551129280745864,
+          "fraction_earning": 0.10941442039569778,
+          "eligible_for_removal_safety2": false
+        }
+      ],
+      "cumulative_from_lowest": [
+        {
+          "up_to_bin": 1,
+          "dots": 7531,
+          "realised_proxy_credit_per_dot": 0.15812957977261566,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "up_to_bin": 2,
+          "dots": 15062,
+          "realised_proxy_credit_per_dot": 0.15663510897397243,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "up_to_bin": 3,
+          "dots": 22592,
+          "realised_proxy_credit_per_dot": 0.1533241856317645,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "up_to_bin": 4,
+          "dots": 30123,
+          "realised_proxy_credit_per_dot": 0.15082119679788053,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "up_to_bin": 5,
+          "dots": 37654,
+          "realised_proxy_credit_per_dot": 0.1497591877961313,
+          "eligible_for_removal_safety2": false
+        }
+      ]
+    },
+    "dist_to_catalogue": {
+      "quintiles": [
+        {
+          "bin": 1,
+          "range": [
+            2.23606797749979,
+            6.708203932499369
+          ],
+          "dots": 7447,
+          "realised_proxy_credit_per_dot": 0.16251389645200304,
+          "fraction_earning": 0.13119376930307505,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "bin": 2,
+          "range": [
+            6.708203932499369,
+            14.212670403551895
+          ],
+          "dots": 7610,
+          "realised_proxy_credit_per_dot": 0.14716218402750597,
+          "fraction_earning": 0.10433639947437583,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "bin": 3,
+          "range": [
+            14.212670403551895,
+            26.40075756488817
+          ],
+          "dots": 7521,
+          "realised_proxy_credit_per_dot": 0.15868086259653577,
+          "fraction_earning": 0.11301688605238665,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "bin": 4,
+          "range": [
+            26.40075756488817,
+            49.9799959983992
+          ],
+          "dots": 7538,
+          "realised_proxy_credit_per_dot": 0.15368031634026158,
+          "fraction_earning": 0.11249668347041655,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "bin": 5,
+          "range": [
+            49.9799959983992,
+            219.27152117865194
+          ],
+          "dots": 7538,
+          "realised_proxy_credit_per_dot": 0.1269575826196209,
+          "fraction_earning": 0.08556646325285222,
+          "eligible_for_removal_safety2": false
+        }
+      ],
+      "cumulative_from_lowest": [
+        {
+          "up_to_bin": 1,
+          "dots": 7447,
+          "realised_proxy_credit_per_dot": 0.16251389645200304,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "up_to_bin": 2,
+          "dots": 15057,
+          "realised_proxy_credit_per_dot": 0.1547549450307091,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "up_to_bin": 3,
+          "dots": 22578,
+          "realised_proxy_credit_per_dot": 0.15606271480715442,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "up_to_bin": 4,
+          "dots": 30116,
+          "realised_proxy_credit_per_dot": 0.15546640322382868,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "up_to_bin": 5,
+          "dots": 37654,
+          "realised_proxy_credit_per_dot": 0.1497591877961313,
+          "eligible_for_removal_safety2": false
+        }
+      ]
+    },
+    "local_support_sum_r3": {
+      "quintiles": [
+        {
+          "bin": 1,
+          "range": [
+            9.380297810508136,
+            13.713631143841534
+          ],
+          "dots": 7531,
+          "realised_proxy_credit_per_dot": 0.16392941689731594,
+          "fraction_earning": 0.11459301553578542,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "bin": 2,
+          "range": [
+            13.713631143841534,
+            15.754353482768108
+          ],
+          "dots": 7531,
+          "realised_proxy_credit_per_dot": 0.14976124812573663,
+          "fraction_earning": 0.10901606692338335,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "bin": 3,
+          "range": [
+            15.754353482768108,
+            18.3016084846749
+          ],
+          "dots": 7529,
+          "realised_proxy_credit_per_dot": 0.15271428662389455,
+          "fraction_earning": 0.11196706069863195,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "bin": 4,
+          "range": [
+            18.3016084846749,
+            20.299417581468408
+          ],
+          "dots": 7531,
+          "realised_proxy_credit_per_dot": 0.1407983156814064,
+          "fraction_earning": 0.10675873058026822,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "bin": 5,
+          "range": [
+            20.299417581468408,
+            30.104886869801337
+          ],
+          "dots": 7532,
+          "realised_proxy_credit_per_dot": 0.14159454057341261,
+          "fraction_earning": 0.10395645246946363,
+          "eligible_for_removal_safety2": false
+        }
+      ],
+      "cumulative_from_lowest": [
+        {
+          "up_to_bin": 1,
+          "dots": 7531,
+          "realised_proxy_credit_per_dot": 0.16392941689731594,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "up_to_bin": 2,
+          "dots": 15062,
+          "realised_proxy_credit_per_dot": 0.15684533251152627,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "up_to_bin": 3,
+          "dots": 22591,
+          "realised_proxy_credit_per_dot": 0.15546856103226556,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "up_to_bin": 4,
+          "dots": 30122,
+          "realised_proxy_credit_per_dot": 0.15180075618075103,
+          "eligible_for_removal_safety2": false
+        },
+        {
+          "up_to_bin": 5,
+          "dots": 37654,
+          "realised_proxy_credit_per_dot": 0.1497591877961313,
+          "eligible_for_removal_safety2": false
+        }
+      ]
+    }
+  }
+}

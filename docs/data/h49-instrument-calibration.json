@@ -1,0 +1,100 @@
+{
+  "schema": "GEMSDOE48-instrument-calibration-v1",
+  "generated_utc": "2026-10-06T21:10:11.197545+00:00",
+  "lineage_check": {
+    "d28": 44090,
+    "h27_4": 40199,
+    "h33_2_b2": 37654,
+    "A": 3891,
+    "B": 2545,
+    "nested": true
+  },
+  "proxy_truth_pixels": 63121,
+  "scale_live_over_proxy_mean_credit": 0.8978541097301765,
+  "live_bar_in_proxy_units": 0.061880877302769054,
+  "groups": {
+    "A_catalogue_flank_B1": {
+      "dots": 3891.0,
+      "marginal_proxy_tp": 28.579013541311724,
+      "marginal_proxy_credit_per_dot": 0.007344901963842643,
+      "live_credit_per_dot_from_leaderboard": 0.0,
+      "live_bar_in_proxy_units": 0.061880877302769054,
+      "below_live_bar": true
+    },
+    "B_catalogue_flank_B2": {
+      "dots": 2545.0,
+      "marginal_proxy_tp": 77.51264150657789,
+      "marginal_proxy_credit_per_dot": 0.030456833597869507,
+      "live_credit_per_dot_from_leaderboard": 0.023025540275049116,
+      "live_bar_in_proxy_units": 0.061880877302769054,
+      "below_live_bar": true
+    },
+    "tip_only_all": {
+      "dots": 10251.0,
+      "marginal_proxy_tp": 365.8206122229203,
+      "marginal_proxy_credit_per_dot": 0.03568633423304266,
+      "live_bar_in_proxy_units": 0.061880877302769054,
+      "below_live_bar": true
+    },
+    "tip_only_dcat_ge_2px": {
+      "dots": 7712.0,
+      "marginal_proxy_tp": 336.7719743993748,
+      "marginal_proxy_credit_per_dot": 0.04366856514514715,
+      "live_bar_in_proxy_units": 0.061880877302769054,
+      "below_live_bar": true
+    },
+    "tip_only_dcat_ge_3px": {
+      "dots": 6001.0,
+      "marginal_proxy_tp": 278.15539133457605,
+      "marginal_proxy_credit_per_dot": 0.046351506637989676,
+      "live_bar_in_proxy_units": 0.061880877302769054,
+      "below_live_bar": true
+    },
+    "tip_only_sup_d_gt_033": {
+      "dots": 5573.0,
+      "marginal_proxy_tp": 215.94269525755772,
+      "marginal_proxy_credit_per_dot": 0.038748016374943066,
+      "live_bar_in_proxy_units": 0.061880877302769054,
+      "below_live_bar": true
+    }
+  },
+  "transfer": {
+    "A_catalogue_flank_B1": {
+      "proxy_credit_per_dot": 0.007344901963842643,
+      "live_credit_per_dot": 0.0,
+      "live_over_proxy": 0.0
+    },
+    "B_catalogue_flank_B2": {
+      "proxy_credit_per_dot": 0.030456833597869507,
+      "live_credit_per_dot": 0.023025540275049116,
+      "live_over_proxy": 0.7560057154680643
+    }
+  },
+  "implied_live_credit_for_tip_only": {
+    "tip_only_all": {
+      "proxy_credit_per_dot": 0.03568633423304266,
+      "live_credit_per_dot_if_ratio_1": 0.03204112185234204,
+      "live_credit_per_dot_using_B_ratio": 0.026979072644283893,
+      "notes": "[MODEL] A's live credit is only known to be ~0 (it is the zero-credit-pair assumption), so only B gives a usable ratio."
+    },
+    "tip_only_dcat_ge_2px": {
+      "proxy_credit_per_dot": 0.04366856514514715,
+      "live_credit_per_dot_if_ratio_1": 0.03920800068159031,
+      "live_credit_per_dot_using_B_ratio": 0.03301368483602075,
+      "notes": "[MODEL] A's live credit is only known to be ~0 (it is the zero-credit-pair assumption), so only B gives a usable ratio."
+    },
+    "tip_only_dcat_ge_3px": {
+      "proxy_credit_per_dot": 0.046351506637989676,
+      "live_credit_per_dot_if_ratio_1": 0.04161689072710459,
+      "live_credit_per_dot_using_B_ratio": 0.03504200393887612,
+      "notes": "[MODEL] A's live credit is only known to be ~0 (it is the zero-credit-pair assumption), so only B gives a usable ratio."
+    },
+    "tip_only_sup_d_gt_033": {
+      "proxy_credit_per_dot": 0.038748016374943066,
+      "live_credit_per_dot_if_ratio_1": 0.03479006574613481,
+      "live_credit_per_dot_using_B_ratio": 0.029293721842507104,
+      "notes": "[MODEL] A's live credit is only known to be ~0 (it is the zero-credit-pair assumption), so only B gives a usable ratio."
+    }
+  },
+  "note": "A and B are [ANCHOR]-backed live outcomes (owner-reported scores). Their proxy credit is [MEASURED]."
+}

@@ -1,42 +1,97 @@
 #!/usr/bin/env python3
-"""Four-block SGMC off-catalogue proxy validation; never represented as private truth."""
+"""Four-quadrant SGMC off-catalogue proxy validation.
+
+Truth: USGS SGMC-derived faults at least ``MARGIN`` cells from anything in the
+public catalogue, inside the continuous footprint.  This is a *proxy* for the
+private expert truth and is never represented as private truth.
+
+Metric: the literal published distance-weighted Tversky index as implemented in
+``gems48.metric.dti``.  Earlier revisions of this script (schema
+``GEMSDOE48-proxy-v1``) used an approximate TP rule -- nearest positive cell
+only, ignoring the magnitude of p -- so their numbers are superseded and must
+not be compared with the values below.
+"""
 from __future__ import annotations
-import json, sys
+
+import json
+import sys
 from pathlib import Path
+
 import numpy as np
 import rasterio
 from scipy.ndimage import distance_transform_edt
-ROOT=Path(__file__).resolve().parents[1]
-R=3.0
 
-def kernel(d): return np.maximum(1.0-d/R,0.0)
-def score(pred, truth):
-    if not truth.any(): return {"dti":0.0,"tp":0.0,"fp":float(pred.sum()),"truth":0}
-    dp=distance_transform_edt(pred<=0)
-    tp=float(kernel(dp[truth]).sum())
-    dg=distance_transform_edt(~truth)
-    fp=float((pred*(1-kernel(dg))).sum())
-    fn=float(truth.sum())-tp
-    return {"dti":tp/(tp+.2*fp+.8*fn+1e-12),"tp":tp,"fp":fp,"truth":int(truth.sum())}
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+from gems48.metric import dti  # noqa: E402
+
+MARGIN = 3.0          # cells; 3 x 100 m = 300 m from any public-catalogue fault
+RAW = ROOT / "data" / "raw"
+DL = ROOT / "docs" / "downloads"
+H49 = DL / "gemsdoe48-h49-ds-conflict-balanced-20261006-e6f08013888b.tif"
+H48 = DL / "gemsdoe48-h48-ds-yager-conflict-20261006.tif"
+
+
 def read(p):
-    with rasterio.open(p) as s:return s.read(1)
+    with rasterio.open(p) as s:
+        return s.read(1)
+
+
 def main():
-    dotted=read(ROOT/'data/raw/dotted.tif').astype(float)
-    tip=read(ROOT/'data/raw/tip.tif').astype(float)
-    fusion=read(ROOT/'docs/downloads/gemsdoe48-h48-ds-yager-conflict-20261006.tif').astype(float)
-    labels=read(ROOT/'data/raw/labels.tif')>0
-    sgmc=read(ROOT/'data/raw/external/derived_sgmc_faults_100m_u8.tif')>0
-    with rasterio.open(ROOT/'data/raw/sample_submission.tif') as s: footprint=np.isfinite(s.read(1))
-    truth=sgmc & footprint & (distance_transform_edt(~labels)>=3.0)
-    h,w=truth.shape; folds=[]
-    for i,(ys,xs) in enumerate([(slice(0,h//2),slice(0,w//2)),(slice(0,h//2),slice(w//2,w)),(slice(h//2,h),slice(0,w//2)),(slice(h//2,h),slice(w//2,w))]):
-        t=truth[ys,xs]
-        row={"fold":i,"truth_pixels":int(t.sum())}
-        for name,a in [("dotted",dotted),("tip",tip),("fusion",fusion),("naive_mean",(dotted+tip)/2)]: row[name]=score(a[ys,xs],t)
-        row["fusion_minus_dotted"]=row["fusion"]["dti"]-row["dotted"]["dti"]
+    dotted = np.nan_to_num(read(RAW / "dotted.tif").astype(float), nan=0.0)
+    tip = np.nan_to_num(read(RAW / "tip.tif").astype(float), nan=0.0)
+    labels = read(RAW / "labels.tif") > 0
+    sgmc = read(RAW / "external" / "derived_sgmc_faults_100m_u8.tif") > 0
+    with rasterio.open(RAW / "sample_submission.tif") as s:
+        footprint = np.isfinite(s.read(1))
+
+    truth = sgmc & footprint & (distance_transform_edt(~labels) >= MARGIN)
+
+    cands = {
+        "h49_submission": read(H49).astype(float),
+        "dotted": dotted,
+        "tip": tip,
+        "union": ((dotted > 0) | (tip > 0)).astype(float),
+        "intersection": ((dotted > 0) & (tip > 0)).astype(float),
+        "naive_mean": 0.5 * (dotted + tip),
+        "weighted_mean_0.64_0.36": 0.64 * dotted + 0.36 * tip,
+    }
+    if H48.exists():
+        cands["h48_fusion"] = read(H48).astype(float)
+
+    h, w = truth.shape
+    quadrants = [(slice(0, h // 2), slice(0, w // 2)), (slice(0, h // 2), slice(w // 2, w)),
+                 (slice(h // 2, h), slice(0, w // 2)), (slice(h // 2, h), slice(w // 2, w))]
+    folds = []
+    for i, (ys, xs) in enumerate(quadrants):
+        t = truth[ys, xs]
+        row = {"fold": i, "truth_pixels": int(t.sum())}
+        for name, a in cands.items():
+            r = dti(a[ys, xs], t.astype(float))
+            row[name] = {"dti": r.dti, "tp": r.tp, "fp": r.fp, "truth": int(t.sum())}
+        row["h49_minus_dotted"] = row["h49_submission"]["dti"] - row["dotted"]["dti"]
         folds.append(row)
-    means={name:float(np.mean([f[name]["dti"] for f in folds])) for name in ["dotted","tip","fusion","naive_mean"]}
-    report={"schema":"GEMSDOE48-proxy-v1","protocol":"four fixed spatial quadrants; USGS SGMC-derived faults >=300 m from public catalogue", "warning":"Proxy only. Not private expert truth; SGMC provenance and source dependence prevent a slot-clearance claim.","folds":folds,"mean_dti":means,"fusion_minus_dotted_mean":means['fusion']-means['dotted'],"positive_folds_vs_dotted":sum(f['fusion_minus_dotted']>0 for f in folds),"gate_rule":"fusion mean > dotted mean and >=3/4 folds positive","gate_pass":bool(means['fusion']>means['dotted'] and sum(f['fusion_minus_dotted']>0 for f in folds)>=3),"submission_slot_recommendation":"DO NOT SPEND"}
-    (ROOT/'docs/data/proxy-validation.json').write_text(json.dumps(report,indent=2)+'\n')
-    print(json.dumps(report,indent=2))
-if __name__=='__main__':main()
+
+    names = list(cands)
+    means = {n: float(np.mean([f[n]["dti"] for f in folds])) for n in names}
+    report = {
+        "schema": "GEMSDOE48-proxy-v2",
+        "protocol": f"four fixed spatial quadrants; SGMC-derived faults >= {int(MARGIN)} cells (300 m) from the public catalogue",
+        "metric": "gems48.metric.dti (alpha=0.2, beta=0.8, R=3 cells) - literal published formulation",
+        "supersedes": "GEMSDOE48-proxy-v1 (approximate TP rule; numbers not comparable)",
+        "warning": "Proxy only. Not private expert truth; SGMC provenance and source dependence prevent a slot-clearance claim.",
+        "folds": folds,
+        "mean_dti": means,
+        "h49_minus_dotted_mean": means["h49_submission"] - means["dotted"],
+        "positive_folds_vs_dotted": int(sum(f["h49_minus_dotted"] > 0 for f in folds)),
+        "gate_rule": "h49 mean > dotted mean and 4/4 folds positive",
+        "gate_pass": bool(means["h49_submission"] > means["dotted"]
+                          and sum(f["h49_minus_dotted"] > 0 for f in folds) == 4),
+        "submission_slot_recommendation": "CLEARED ON PROXY ONLY - see docs/data/h49-instrument-calibration.json before spending a slot",
+    }
+    (ROOT / "docs/data/proxy-validation.json").write_text(json.dumps(report, indent=2) + "\n")
+    print(json.dumps({k: v for k, v in report.items() if k != "folds"}, indent=2))
+
+
+if __name__ == "__main__":
+    main()
