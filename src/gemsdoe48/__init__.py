@@ -1,17 +1,20 @@
-"""GEMSDOE48 — Dempster-Shafer disagreement-preserving fusion of two independently
-built fault-detector families for the DOE GEMS Prize (DrivenData competition 306).
+"""GEMSDOE48: auditable Dempster-Shafer fault-surface research.
 
-The package is deliberately dependency-light (numpy + rasterio) and every module is
-written to be auditable line by line.
+The package preserves both the H48 conflict-aware fusion APIs and the upstream
+metric/grid/holdout utilities. Proxy scores are not organizer or private-label scores.
 """
 
-__version__ = "1.0.0"
+__version__ = "0.1.0"
 
 __all__ = [
-    "metric",
-    "grid",
+    "dataio",
+    "dempster_shafer",
     "ds",
     "emit",
-    "holdout",
     "families",
+    "format_checks",
+    "grid",
+    "holdout",
+    "live_anchor",
+    "metric",
 ]

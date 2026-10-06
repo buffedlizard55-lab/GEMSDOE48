@@ -28,7 +28,7 @@ INPUTS = {
     "tip": (ROOT / "data/raw/tip_h33d_stepover.tif", "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757"),
     "template": (ROOT / "data/raw/sample_submission_template.tif", "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc"),
     "labels": (ROOT / "data/raw/labels_catalogue.tif", "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093"),
-    "sgmc_proxy": (ROOT / "data/raw/external/derived_sgmc_faults_100m_u8.tif", "643cbe992ef4ba37588fb469163ed8291e3ceb23d6c1f78a3cfaa462430c2da0"),
+    "sgmc_proxy": (ROOT / "data/official/derived_sgmc_faults_100m.tif", "643cbe992ef4ba37588fb469163ed8291e3ceb23d6c1f78a3cfaa462430c2da0"),
 }
 FUSION_PATH = ROOT / "docs/downloads/gemsdoe48-h48-ds-yager-conflict-20261006.tif"
 REPORT_PATH = ROOT / "docs/data/proxy-validation.json"
@@ -45,7 +45,7 @@ def sha256(path: Path) -> str:
 def read_checked(name: str) -> tuple[np.ndarray, dict, tuple[float, float]]:
     path, expected = INPUTS[name]
     if not path.exists():
-        raise SystemExit(f"missing {path}; run bash scripts/fetch_inputs.sh")
+        raise SystemExit(f"missing {path}; restore candidate surfaces and proxy inputs with the documented scripts in README.md")
     actual = sha256(path)
     if actual != expected:
         raise SystemExit(f"SHA-256 mismatch for {path}: {actual} != {expected}")

@@ -1,6 +1,6 @@
 {
   "schema": "GEMSDOE48-proxy-v2",
-  "generated_utc": "2026-10-06T20:49:32.828038+00:00",
+  "generated_utc": "2026-10-06T22:11:29.015471+00:00",
   "validation_type": "fixed-prediction spatial proxy assessment; no fitting or threshold selection on proxy labels",
   "protocol": {
     "blocks": "four fixed full-scene quadrants; full-scene distance neighborhoods are used, then TP/FP/FN terms are accumulated by block",
@@ -28,7 +28,7 @@
       "sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093"
     },
     "sgmc_proxy": {
-      "file": "data/raw/external/derived_sgmc_faults_100m_u8.tif",
+      "file": "data/official/derived_sgmc_faults_100m.tif",
       "sha256": "643cbe992ef4ba37588fb469163ed8291e3ceb23d6c1f78a3cfaa462430c2da0"
     }
   },

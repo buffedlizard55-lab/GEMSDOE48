@@ -1,20 +1,18 @@
 #!/usr/bin/env python3
-"""Fetch DrivenData's public leaderboard into the site's auditable JSON feed.
+"""Offline parser for archived public-leaderboard HTML fixtures.
 
-The parser uses only the standard library. It fails closed when the page
-structure is unrecognized or fewer than five ranked rows are found, so a
-challenge-page redesign cannot silently replace the stored snapshot.
+No retrieval, polling, or scraping is implemented. ``parse`` and
+``parse_leaderboard_html`` operate only on caller-supplied strings; ``refresh``
+requires an explicit local fixture. Direct execution exits with a disabled notice.
 """
+
 from __future__ import annotations
 
-import argparse
 from datetime import datetime, timezone
 from html.parser import HTMLParser
 import json
 from pathlib import Path
 import re
-from urllib.error import URLError
-from urllib.request import Request, urlopen
 
 LEADERBOARD_URL = "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/"
 DEFAULT_OUTPUT = Path(__file__).resolve().parents[1] / "docs/data/leaderboard.json"
@@ -229,30 +227,21 @@ def parse(html: str) -> list[dict[str, object]]:
     return parse_leaderboard_html(html)
 
 
-def fetch_html(url: str = LEADERBOARD_URL) -> str:
-    request = Request(url, headers={"User-Agent": "GEMSDOE48-public-leaderboard-feed/1.0"})
-    try:
-        with urlopen(request, timeout=45) as response:
-            if response.status != 200:
-                raise RuntimeError(f"leaderboard HTTP status {response.status}")
-            charset = response.headers.get_content_charset() or "utf-8"
-            return response.read().decode(charset, errors="replace")
-    except URLError as error:
-        raise RuntimeError(f"could not retrieve public leaderboard: {error}") from error
 
 
 def refresh(output: Path = DEFAULT_OUTPUT, html: str | None = None) -> dict[str, object]:
-    page = fetch_html() if html is None else html
-    rows = parse_leaderboard_html(page)
+    """Write a fixture-derived snapshot only; never retrieve a page."""
+    if html is None:
+        raise RuntimeError("leaderboard retrieval is disabled; supply a local HTML fixture")
+    rows = parse_leaderboard_html(html)
     if len(rows) < MIN_ROWS:
         raise ValueError(f"only {len(rows)} ranked rows parsed; refusing to replace the snapshot")
-    mode = "live-http-fetch" if html is None else "provided-html-fixture"
     payload: dict[str, object] = {
         "schema": "GEMSDOE48-leaderboard-v2",
         "source": LEADERBOARD_URL,
         "retrieved_utc": datetime.now(timezone.utc).isoformat(),
-        "method": "scripts/refresh_leaderboard.py (standard-library HTML parser; scheduled GitHub Actions)",
-        "refresh_mode": mode,
+        "method": "offline parser on caller-supplied HTML fixture; no network fetch",
+        "refresh_mode": "provided-html-fixture",
         "rows": rows,
         "attribution_warning": "Public leaderboard scores do not identify any local TIFF hash or owner-site artifact.",
     }
@@ -261,19 +250,11 @@ def refresh(output: Path = DEFAULT_OUTPUT, html: str | None = None) -> dict[str,
     return payload
 
 
-def main() -> None:
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
-    parser.add_argument("--html-file", type=Path, help="parse a saved page (for tests/offline verification)")
-    args = parser.parse_args()
-    html = args.html_file.read_text(encoding="utf-8") if args.html_file else None
-    payload = refresh(args.output, html)
-    print(json.dumps({
-        "output": str(args.output),
-        "retrieved_utc": payload["retrieved_utc"],
-        "rows": len(payload["rows"]),
-        "refresh_mode": payload["refresh_mode"],
-    }, indent=2))
+def main() -> int:
+    raise SystemExit(
+        "Leaderboard retrieval is disabled. This module only parses supplied fixtures; "
+        "no polling or scraping is implemented."
+    )
 
 
 if __name__ == "__main__":

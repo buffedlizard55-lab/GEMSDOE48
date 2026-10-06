@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-06T22:15:45Z",
+  "generated_utc": "2026-10-06T22:33:40Z",
   "generated_by": "scripts/hash_inputs.py",
   "hash_algorithm": "sha256",
   "expected_grid": {
@@ -17,7 +17,7 @@
       "role": "truth-layer",
       "sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
       "bytes": 425830,
-      "provenance": "Organizer-supplied training labels (known-truth mask). Identical to the mask per the 2026-09-16 / 2026-09-21 staff clarification.",
+      "provenance": "Third-party public owner-mirror of the competition training labels (known public faults), pinned by SHA-256; not organizer-authenticated in this repository and not private expert test truth. Its relation to the score-time mask follows the official staff clarification.",
       "grid": {
         "width": 3292,
         "height": 3730,
@@ -50,7 +50,7 @@
       "role": "truth-layer",
       "sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
       "bytes": 425830,
-      "provenance": "Published fault catalogue raster distributed with the training data.",
+      "provenance": "Third-party public owner-mirror of the public known-fault catalogue, pinned by SHA-256; not organizer-authenticated in this repository and not private expert test truth.",
       "grid": {
         "width": 3292,
         "height": 3730,
@@ -83,7 +83,7 @@
       "role": "truth-layer",
       "sha256": "643cbe992ef4ba37588fb469163ed8291e3ceb23d6c1f78a3cfaa462430c2da0",
       "bytes": 198602,
-      "provenance": "USGS State Geologic Map Compilation (SGMC) faults rasterised to the official 100 m grid; an independent non-catalogue truth layer. Derived from the SGMC GeoPackage via the sibling repositories' data/external/derived_sgmc_faults_100m_u8.tif.",
+      "provenance": "USGS State Geologic Map Compilation (SGMC) faults rasterized to the competition-aligned 100 m grid via a sibling-repository owner mirror. This repository did not independently rebuild the vector derivation. Public-map proxy only; not organizer-authenticated or private expert test truth.",
       "grid": {
         "width": 3292,
         "height": 3730,

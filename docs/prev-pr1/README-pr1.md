@@ -1,3 +1,7 @@
+> **Historical PR archive.** This earlier page is preserved for provenance; claims may be superseded. See the [current overview](../index.html) and [current validation](../validation.html).
+
+---
+
 # GEMSDOE48 — conflict-preserving DOE GEMS fault discovery
 
 > **Start every session here. Core values:** **Maximize P(Win)** by choosing measured, auditable experiments over hopeful slot spending. **Own the Outcome** end-to-end: diagnose failures, fix them, publish uncertainty, and never promote a proxy as truth.

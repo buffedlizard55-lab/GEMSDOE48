@@ -1,295 +1,212 @@
-"""Build the GEMSDOE48 deliverables.  Freeze the rule here, then run.
-
-Run:  python3 -u scripts/build_submission.py
-
-Produces, in docs/downloads/:
-
-  1. `gemsdoe48-ds48-belief.tif`    the Dempster-Shafer combined belief Bel(F) on
-        the official grid -- the artifact the brief asks for.  **Diagnostic**:
-        the metric's derivative in a pixel value is
-        (k - 0.2 DTI) * D0 / (D0 + 0.2 v)^2, independent of v, so a graded
-        surface is strictly worse than its own binarisation (see research/03).
-
-    "Normalised to [0, 1]" is satisfied by the mass-function construction itself,
-    which is what Dempster's rule *is*: Dempster's normalisation divides by
-    (1 - K), and the resulting belief obeys Bel(F) in [0, 1] and
-    m(F) + m(notF) + m(Theta) = 1 at every pixel.  No affine rescale is applied
-    to any layer, because rescaling a belief or a mass surface destroys the
-    calibration that is the only reason to ship it, and because a rescaled mass
-    is no longer a mass.  The natural range of each layer is recorded in
-    registry/submission_build.json, together with the min-max affine map that
-    would take it to [0, 1] if a reader wants that instead.
-  2. `gemsdoe48-ds48-emission.tif`  the DS-ranked, off-flank emission at exactly
-        the mass of the best live artifact (37,654 px).  Mass-neutral, so it
-        spends none of the live-anchored removal budget.  **Research artifact,
-        UNSCORED and not slot-cleared.**
-  3. `gemsdoe48-ds48-mtheta.tif`    the unassigned/uncertain belief mass m12(Theta)
-        -- the disagreement layer, shipped as its own raster as the brief asks.
-  4. `gemsdoe48-ds48-conflict.tif`  Shafer's conflict K (= Smets' m(empty set)).
-
-Every file is single-band float32, EPSG:32611, 100 m, 3730 x 3292, all-finite,
-inside [0, 1]. Nothing here is an organizer score or submission recommendation.
-
-The emission is a research artifact only: its owner-derived SGMC off-catalogue
-proxy DTI is about 5.7% lower than the dotted baseline. A separate catalogue-based
-proxy is anti-monotone with the known live ladder (rho = -1, n = 4), so it cannot
-rescue the candidate. No artifact from this script is cleared for a weekly slot;
-see the root README and the current decision receipt.
-"""
-
+#!/usr/bin/env python3
+"""Build the unique GEMSDOE48 discounted-Dempster research candidate and diagnostics."""
 from __future__ import annotations
 
+import argparse
 import hashlib
 import json
-import sys
-import time
+from datetime import datetime, timezone
 from pathlib import Path
 
 import numpy as np
 import rasterio
 
-REPO = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(REPO / "src"))
+from gemsdoe48.evidence import arithmetic_mean, combine_dempster
+from gemsdoe48.geotiff import assert_competition_grid, assert_same_grid, display_path, read_band, write_float32
 
-from gemsdoe48 import ds, families, grid as G, metric as M  # noqa: E402
-from gemsdoe48.live_anchor import LiveAnchor  # noqa: E402
+ROOT = Path(__file__).resolve().parents[1]
+DEFAULT_DOTTED = ROOT / "data/raw/dotted_h33_2_b2_zeros.tif"
+DEFAULT_TIP = ROOT / "data/raw/tip_h33d_stepover.tif"
+DEFAULT_FOOTPRINT = ROOT / "data/source_mirrors/footprint-mask.tif"
+DEFAULT_OUTPUT = ROOT / "docs/downloads/GEMSDOE48-DS-conflict-aware-fusion-20261006.tif"
+DEFAULT_UNCERTAINTY = ROOT / "docs/downloads/GEMSDOE48-unassigned-mass-20261006.tif"
+DEFAULT_CONFLICT = ROOT / "docs/downloads/GEMSDOE48-raw-conflict-K-20261006.tif"
+DEFAULT_RECEIPT = ROOT / "evidence/build_receipt_20261006.json"
+SUBMISSION_NAME = "GEMSDOE48-DS-FUSION-20261006"
+PREREGISTERED_RHO = 0.5
+EXPECTED_INPUTS = {
+    "dotted": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+    "tip_stepover": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757",
+}
+SUBMISSION_NOTE = (
+    "GEMSDOE48 DS fusion | H33-2-B2 dotted + H33-D tip/step-over; rho=0.5; "
+    "conflict/ignorance diagnostic; unscored research candidate."
+)
 
-A_DOTTED = 0.60
-A_TIP = 0.60
-BASE = "dotted_b2_prune_02778"
-FLANK_EXCLUSION_M = 200.0  # B = 2 condition in the owner-reported 0.2708/0.2778 sequence
-UNIQUE_NAME = "GEMSDOE48-DS48-FUSION"
-PREFIX = "gemsdoe48-ds48"
+
+def sha256_file(path: Path) -> str:
+    h = hashlib.sha256()
+    with path.open("rb") as f:
+        for chunk in iter(lambda: f.read(1 << 20), b""):
+            h.update(chunk)
+    return h.hexdigest()
 
 
-def _hash8(p: Path) -> str:
-    return hashlib.sha256(p.read_bytes()).hexdigest()[:8]
+def correlation(x: np.ndarray, y: np.ndarray) -> float | None:
+    x = np.asarray(x, dtype=np.float64).ravel()
+    y = np.asarray(y, dtype=np.float64).ravel()
+    if x.size < 2 or np.std(x) == 0 or np.std(y) == 0:
+        return None
+    return float(np.corrcoef(x, y)[0, 1])
 
 
 def main() -> int:
-    t0 = time.time()
-    truth, footprint = G.load_truth_and_footprint()
-    sgmc = G.read_mask(REPO / "data/official/derived_sgmc_faults_100m.tif")
-    k_to_cat = M.max_kernel_to_truth(truth)
-    sgmc_off = sgmc & (k_to_cat == 0.0)
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--dotted", type=Path, default=DEFAULT_DOTTED)
+    parser.add_argument("--tip", type=Path, default=DEFAULT_TIP)
+    parser.add_argument("--footprint", type=Path, default=DEFAULT_FOOTPRINT)
+    parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument("--uncertainty", type=Path, default=DEFAULT_UNCERTAINTY)
+    parser.add_argument("--conflict", type=Path, default=DEFAULT_CONFLICT)
+    parser.add_argument("--receipt", type=Path, default=DEFAULT_RECEIPT)
+    parser.add_argument("--allow-unpinned-sources", action="store_true")
+    args = parser.parse_args()
 
-    e_dot = families.load_family_mask("dotted_02708")
-    e_tip = families.load_family_mask("tip_02632")
-    union = e_dot | e_tip
-    base = families.load_family_mask(BASE)
-    n_target = int(base.sum())
+    dotted_hash = sha256_file(args.dotted)
+    tip_hash = sha256_file(args.tip)
+    if not args.allow_unpinned_sources:
+        if dotted_hash != EXPECTED_INPUTS["dotted"]:
+            raise SystemExit(f"Dotted input SHA-256 {dotted_hash} is not the preregistered source")
+        if tip_hash != EXPECTED_INPUTS["tip_stepover"]:
+            raise SystemExit(f"Tip/stepover input SHA-256 {tip_hash} is not the preregistered source")
 
-    b1 = families.kernel_credit_surface(e_dot)
-    b2 = families.kernel_credit_surface(e_tip)
-    res = ds.combine_pair(b1, b2, A_DOTTED, A_TIP)
-    bel = res.bel_F
-    m_theta = res.m_theta
-    conflict = res.conflict
-    mean = ds.naive_mean(b1, b2)
-    print(f"[{time.time()-t0:.0f}s] DS layers built", flush=True)
+    dotted, dotted_profile = read_band(args.dotted)
+    tip, tip_profile = read_band(args.tip)
+    assert_competition_grid(dotted_profile, path=args.dotted)
+    assert_competition_grid(tip_profile, path=args.tip)
+    assert_same_grid(dotted_profile, tip_profile, name_a=str(args.dotted), name_b=str(args.tip))
+    with rasterio.open(args.footprint) as fp_ds:
+        assert_competition_grid(fp_ds.profile, path=args.footprint)
+        footprint_raw = fp_ds.read(1)
+        footprint_profile = fp_ds.profile.copy()
+    if footprint_raw.dtype != np.uint8:
+        raise ValueError("footprint mask must be uint8")
+    if not np.isin(footprint_raw, (0, 1)).all():
+        raise ValueError("footprint mask must contain only 0/1")
+    if dotted.shape != tip.shape or dotted.shape != footprint_raw.shape:
+        raise ValueError("source surfaces and footprint mask have different dimensions")
+    if not np.isfinite(dotted).all() or not np.isfinite(tip).all():
+        raise ValueError("source surfaces must be all-finite")
+    if np.any((dotted < 0) | (dotted > 1)) or np.any((tip < 0) | (tip > 1)):
+        raise ValueError("source surfaces contain values outside [0, 1]")
 
-    # ---- 2. the emission: DS-ranked, off-flank, mass-matched to the live best --
-    flank_level = 1.0 - FLANK_EXCLUSION_M / M.KERNEL_REACH_M
-    pool = union & (k_to_cat <= flank_level)
-    order = np.argsort(bel[pool])[::-1][:n_target]
-    idx = np.flatnonzero(pool.ravel())[order]
-    emission = np.zeros(union.shape, dtype=bool)
-    emission.ravel()[idx] = True
-    print(f"[{time.time()-t0:.0f}s] emission n={int(emission.sum())} "
-          f"(pool {int(pool.sum())}, target {n_target})", flush=True)
+    footprint = footprint_raw == 1
+    dotted_inside = np.where(footprint, dotted, 0.0).astype(np.float32)
+    tip_inside = np.where(footprint, tip, 0.0).astype(np.float32)
+    result = combine_dempster(dotted_inside, tip_inside, reliability=PREREGISTERED_RHO)
+    mean = arithmetic_mean(dotted_inside, tip_inside)
 
-    # ---- the four layers, each at its natural (already normalised) values ------
-    # Bel(F) in [0, 1] by construction; m(Theta) and K are masses, so they are in
-    # [0, 1] too.  See the module docstring for why nothing is rescaled here.
-    belief_norm = bel
+    # Match the official template convention: all cells outside the valid survey
+    # footprint are NaN/nodata, not zero-valued predictions.
+    submission = np.where(footprint, result.fault, np.nan).astype(np.float32)
+    unassigned = np.where(footprint, result.ignorance, np.nan).astype(np.float32)
+    conflict = np.where(footprint, result.conflict, np.nan).astype(np.float32)
 
-    out = REPO / "docs" / "downloads"
-    out.mkdir(parents=True, exist_ok=True)
-    files = {}
-    for tag, arr in (
-        ("belief", belief_norm),
-        ("emission", emission.astype(np.float64)),
-        ("mtheta", m_theta),
-        ("conflict", conflict),
-    ):
-        p = G.write_submission(out / f"{PREFIX}-{tag}.tif", arr)
-        files[tag] = {"file": p.name, "bytes": p.stat().st_size, "sha256": _hash8(p)}
-    print(f"[{time.time()-t0:.0f}s] wrote {len(files)} GeoTIFFs", flush=True)
-
-    # ---- format + content checks on the bytes on disk -------------------------
-    def check(path: Path) -> dict:
-        with rasterio.open(path) as src:
-            a = src.read(1)
-            c = {
-                "count": src.count, "dtype": src.dtypes[0], "width": src.width,
-                "height": src.height, "crs": src.crs.to_string(),
-                "transform": [float(v) for v in tuple(src.transform)[:6]],
-                "res": [float(v) for v in src.res], "nodata": src.nodata,
-                "min": float(np.nanmin(a)), "max": float(np.nanmax(a)),
-                "n_nan": int(np.isnan(a).sum()), "n_inf": int(np.isinf(a).sum()),
-                "n_below_0": int((a < 0).sum()), "n_above_1": int((a > 1).sum()),
-                "n_positive": int((a > 0).sum()),
-                "outside_footprint_positive": int((a > 0)[~footprint].sum()),
-            }
-        # every deliverable must be a legal competition raster ...
-        c["raster_legal"] = bool(
-            c["count"] == 1 and c["dtype"] == "float32" and c["crs"] == "EPSG:32611"
-            and c["res"] == [100.0, 100.0] and c["n_nan"] == 0 and c["n_inf"] == 0
-            and c["n_below_0"] == 0 and c["n_above_1"] == 0
-            and abs(c["min"]) >= 0.0 and c["max"] <= 1.0
-        )
-        return c
-
-    def emission_legal(c: dict) -> bool:
-        """An emission must additionally be empty outside the study area."""
-        return bool(c["raster_legal"] and c["outside_footprint_positive"] == 0)
-
-
-    checks = {t: check(out / v["file"]) for t, v in files.items()}
-    for t, c in checks.items():
-        ok = emission_legal(c) if t == "emission" else c["raster_legal"]
-        c["verdict"] = "PASS" if ok else "FAIL"
-        print(f"   {t:<9} range=[{c['min']:.4f},{c['max']:.4f}] nan={c['n_nan']} "
-              f"oob={c['n_below_0'] + c['n_above_1']} "
-              f"pos={c['n_positive']} outside_pos={c['outside_footprint_positive']} "
-              f"-> {c['verdict']}", flush=True)
-    assert all(c["raster_legal"] for c in checks.values()), "a deliverable is not a legal raster"
-    assert emission_legal(checks["emission"]), "the emission is not footprint-clean"
-
-    # ---- measurement of the emission against both truth layers ---------------
-    kt = {"catalogue_all": M.max_kernel_to_truth(truth),
-          "sgmc_off_catalogue": M.max_kernel_to_truth(sgmc_off)}
-    measures = {}
-    for name, pts in (("base_live_02778", base), ("ds_emission", emission)):
-        p = pts.astype(np.float64)
-        measures[name] = {"n": int(pts.sum())}
-        for layer, tmask in (("catalogue_all", truth), ("sgmc_off_catalogue", sgmc_off)):
-            r = M.dti(p, tmask, footprint, precomputed_max_kernel=kt[layer])
-            measures[name][layer] = {"dti": r.dti, "tpw": r.tpw, "coverage": r.coverage}
-    print(f"[{time.time()-t0:.0f}s] base  catTPw={measures['base_live_02778']['catalogue_all']['tpw']:.1f} "
-          f"sgmcTPw={measures['base_live_02778']['sgmc_off_catalogue']['tpw']:.1f}")
-    print(f"          ds-EM catTPw={measures['ds_emission']['catalogue_all']['tpw']:.1f} "
-          f"sgmcTPw={measures['ds_emission']['sgmc_off_catalogue']['tpw']:.1f}")
-
-    # ---- is the fusion the naive mean? ---------------------------------------
-    sel = union
-    bel_v, mean_v = bel[sel], mean[sel]
-    diag = {
-        "pearson_r_belief_vs_naive_mean_on_union": float(np.corrcoef(bel_v, mean_v)[0, 1]),
-        "spearman_rho_belief_vs_naive_mean_on_union": float(
-            np.corrcoef(np.argsort(np.argsort(bel_v)), np.argsort(np.argsort(mean_v)))[0, 1]
+    tag_values = {
+        "model": "discounted Dempster combination",
+        "reliability_discount": str(PREREGISTERED_RHO),
+        "frame": "{fault, not_fault, Theta}",
+        "source_dotted_sha256": sha256_file(args.dotted),
+        "source_tip_sha256": sha256_file(args.tip),
+        "footprint_mask_sha256": sha256_file(args.footprint),
+        "submission_name": SUBMISSION_NAME,
+    }
+    out_receipts = {
+        "submission": write_float32(
+            args.output, submission, dotted_profile, valid_mask=footprint,
+            description="Dempster combined fault belief m(F); in-footprint values in [0,1]",
+            tags=tag_values,
         ),
-        "mean_abs_difference_on_union": float(np.abs(bel_v - mean_v).mean()),
-        "share_of_union_differing_by_over_0_05": float((np.abs(bel_v - mean_v) > 0.05).mean()),
-        "bel_at_full_agreement": float(
-            ds.combine_pair(np.ones((1, 1)), np.ones((1, 1)), A_DOTTED, A_TIP).bel_F[0, 0]),
-        "bel_at_single_source_only": float(
-            ds.combine_pair(np.ones((1, 1)), np.zeros((1, 1)), A_DOTTED, A_TIP).bel_F[0, 0]),
-        "m_theta_at_full_agreement": float(
-            ds.combine_pair(np.ones((1, 1)), np.ones((1, 1)), A_DOTTED, A_TIP).m_theta[0, 0]),
-        "m_theta_at_disagreement": float(
-            ds.combine_pair(np.ones((1, 1)), np.zeros((1, 1)), A_DOTTED, A_TIP).m_theta[0, 0]),
-        "verdict": (
-            "The values differ (mean |Bel - mean| = 0.1423 on the union) but the two are "
-            "MONOTONE in each other on this support (Spearman rho = 1.000000), because a "
-            "union pixel has belief exactly 1 in its own family, so both statistics are "
-            "monotone functions of the other family's belief alone.  Dempster-Shafer "
-            "therefore does NOT change the ranking used for emission selection on the "
-            "union, and this repository does not claim that it does.  What it adds is the "
-            "calibrated belief value, the conflict mass K and the unassigned mass m(Theta), "
-            "none of which has a counterpart in an average."
+        "unassigned": write_float32(
+            args.uncertainty, unassigned, dotted_profile, valid_mask=footprint,
+            description="Dempster residual unassigned mass m(Theta); NaN outside survey footprint",
+            tags=tag_values,
+        ),
+        "raw_conflict": write_float32(
+            args.conflict, conflict, dotted_profile, valid_mask=footprint,
+            description="Raw conjunctive Dempster conflict K before normalization; NaN outside footprint",
+            tags=tag_values,
         ),
     }
 
-    # ---- what "normalised to [0, 1]" means here, stated so it can be audited ---
-    normalisation = {
-        "applied": "none beyond Dempster's normalisation",
-        "why": (
-            "Dempster's rule of combination IS a normalisation: it divides the "
-            "unnormalised combination by (1 - K(x)).  The result obeys the "
-            "mass-function axioms at every pixel -- m(F) + m(notF) + m(Theta) = 1 "
-            "-- so Bel(F), m(Theta) and K all lie in [0, 1] by construction.  That "
-            "is the [0, 1] normalisation the brief asks for, and it is exact rather "
-            "than cosmetic.  No affine rescale is applied to any layer, because "
-            "rescaling a belief or a mass surface destroys the calibration that is "
-            "the only reason to ship it, and a rescaled mass is not a mass.  The "
-            "min-max affine map that would take each layer to [0, 1] is recorded "
-            "below so a reader who wants that instead can apply it."
-        ),
-        "per_layer": {},
-    }
-    for tag, arr in (("belief", bel), ("mtheta", m_theta), ("conflict", conflict),
-                     ("emission", emission.astype(np.float64))):
-        lo, hi = float(arr.min()), float(arr.max())
-        span = hi - lo
-        normalisation["per_layer"][tag] = {
-            "natural_min": lo,
-            "natural_max": hi,
-            "minmax_rescale_bounds": {
-                "a": (1.0 / span) if span > 0 else 0.0,
-                "b": (-lo / span) if span > 0 else 0.0,
-                "formula": "x_normalised = a * x + b",
-                "degenerate": bool(span == 0.0),
-            },
-        }
+    valid_mean = mean[footprint]
+    valid_combined = submission[footprint]
+    union = footprint & ((dotted_inside > 0) | (tip_inside > 0))
+    difference = np.abs(valid_combined - valid_mean)
+    union_difference = np.abs(submission[union] - mean[union])
+    overlap = footprint & (dotted_inside > 0) & (tip_inside > 0)
+    disagree = footprint & ((dotted_inside > 0) ^ (tip_inside > 0))
+    dotted_positive = int(np.count_nonzero(footprint & (dotted_inside > 0)))
+    tip_positive = int(np.count_nonzero(footprint & (tip_inside > 0)))
+    overlap_count = int(overlap.sum())
+    union_count = int(union.sum())
+    agreement_ratio = float(overlap_count / union_count) if union_count else 0.0
+    if len(SUBMISSION_NOTE) > 200:
+        raise ValueError("submission note exceeds the form's 200-character limit")
 
     receipt = {
-        "generated_unix": int(time.time()),
-        "unique_name": UNIQUE_NAME,
-        "portal_note": (
-            f"{UNIQUE_NAME} | research audit only; 37,654 px DS-ranked off-flank emission; "
-            f"UNSCORED and NOT slot-cleared; do not upload"
-        )[:200],
-        "reliability": {"a_dotted": A_DOTTED, "a_tip": A_TIP},
-        "family_agreement": families.family_agreement(e_dot, e_tip),
-        "flank_exclusion_m": FLANK_EXCLUSION_M,
-        "files": files,
-        "format_checks": checks,
-        "measurements": measures,
-        "not_the_mean": diag,
-        "normalisation": normalisation,
-        "live_anchor_inversion": {**LiveAnchor().invert(),
-                                  "source": "owner-reported live scores 0.2600 (44,090 px) and "
-                                            "0.2708 (40,199 px); evidence class OWNER-REPORT"},
-        "layer_stats": {
-            tag: {"min": float(arr.min()), "max": float(arr.max()),
-                  "mean": float(arr.mean()),
-                  "n_positive": int((arr > 0).sum())}
-            for tag, arr in (("belief", bel), ("mtheta", m_theta),
-                             ("conflict", conflict),
-                             ("emission", emission.astype(np.float64)))
+        "schema_version": 1,
+        "generated_utc": datetime.now(timezone.utc).isoformat(),
+        "submission_status": "UNSCORED_RESEARCH_CANDIDATE_NOT_SLOT_CLEARED",
+        "submission_name": SUBMISSION_NAME,
+        "submission_note": SUBMISSION_NOTE,
+        "submission_note_length": len(SUBMISSION_NOTE),
+        "submission_file": out_receipts["submission"],
+        "submission_sha256": sha256_file(args.output),
+        "diagnostic_files": {
+            "unassigned_mass": {**out_receipts["unassigned"], "sha256": sha256_file(args.uncertainty)},
+            "raw_conflict_K": {**out_receipts["raw_conflict"], "sha256": sha256_file(args.conflict)},
         },
-        "headline_negative_result": {
-            "claim": "No candidate here has a verified organizer-score gain over the "
-                     "owner-reported 0.2778 anchor; available public proxies do not establish "
-                     "private-score performance.",
-            "arms_reviewed": [
-                "Dempster-Shafer corroboration removal at r in {300,283,250,224,200,173,141,100,0} m: "
-                "the frozen gate fails at every radius (best safety 0.64 < 2.0).",
-                "Hexagonal covering-optimal re-emission at 11 spacings: NOT a clean "
-                "falsification, contrary to an earlier reading of this receipt.  At matched mass "
-                "the best arm (spacing 5.6 px, 37,499 dots) has higher TPw per unit mass than the "
-                "b2 base on three local proxy layers -- x1.019 on owner-derived SGMC off-catalogue, "
-                "x12.5 on catalogue-in-corridor, and x14.6 on the whole catalogue. "
-                "The catalogue-side gains are NOT evidence of a live gain, because that "
-                "instrument is anti-monotone with the live ladder (Spearman -1.0, n = 4, "
-                "DS48-IR-04).  The SGMC-side gain is +1.9 %, which is inside the noise of a point "
-                "set that merely re-samples the same 48,394-pixel union corridor at a similar "
-                "mass; it is not a better detector and it emits 37,499 dots of the SAME two "
-                "families.  Status: UNVALIDATED and NOT slot-cleared. Do not spend a weekly slot "
-                "on this arm; the +1.9% SGMC signal is within re-sampling noise.",
-                "Dempster-Shafer ranked re-emission at matched mass: SGMC off-catalogue credit "
-                "falls 5.8 % (off-flank) to 7.1 % (full union) while catalogue credit rises.",
+        "inputs": {
+            "dotted": {"path": display_path(args.dotted), "sha256": sha256_file(args.dotted), "positive_pixels_inside_footprint": dotted_positive},
+            "tip_stepover": {"path": display_path(args.tip), "sha256": sha256_file(args.tip), "positive_pixels_inside_footprint": tip_positive},
+            "footprint_mask": {"path": display_path(args.footprint), "sha256": sha256_file(args.footprint), "valid_cells": int(footprint.sum())},
+        },
+        "grid": {
+            "crs": "EPSG:32611",
+            "resolution_m": 100,
+            "height": int(submission.shape[0]),
+            "width": int(submission.shape[1]),
+            "transform": list(dotted_profile["transform"])[:6],
+        },
+        "evidence_combination": {
+            "rule": "Canonical Dempster combination after symmetric reliability discounting",
+            "reliability_discount_rho": PREREGISTERED_RHO,
+            "source_mass": {"m_fault": "rho*p", "m_not_fault": "rho*(1-p)", "m_Theta": "1-rho"},
+            "combined_fault": "m(F) after normalized Dempster rule",
+            "unassigned_layer": "normalized residual m(Theta) within footprint; NaN/nodata outside survey footprint",
+            "raw_conflict_layer": "K=m1(F)m2(not_F)+m1(not_F)m2(F), before Dempster normalization",
+            "assumptions": [
+                "The owner-mirror input surfaces are binary sparse emissions; interpreting zero as evidence for not-fault is a modeling assumption, not calibrated probability semantics.",
+                "rho=0.5 is a fixed symmetric discount chosen before holdout, not an empirically estimated source reliability.",
+                "The sources are not assumed statistically independent; shared-backbone risk remains.",
             ],
-            "evidence_class": "PROXY + DERIVED",
+            "range_normalization": "No min-max stretch; masses are already in [0,1] and are preserved.",
         },
-        "elapsed_s": time.time() - t0,
+        "anti_average_check": {
+            "arithmetic_mean_equal_to_combination": bool(np.array_equal(mean[footprint], submission[footprint])),
+            "different_cells_within_footprint": int(np.count_nonzero(mean[footprint] != submission[footprint])),
+            "pearson_full_footprint": correlation(valid_mean, valid_combined),
+            "pearson_on_union_only": correlation(mean[union], submission[union]),
+            "mae_full_footprint": float(difference.mean()) if difference.size else 0.0,
+            "mae_on_union_only": float(union_difference.mean()) if union_difference.size else 0.0,
+            "max_abs_difference": float(difference.max()) if difference.size else 0.0,
+            "note": "Because both source masks are binary and sparse, the union-only Pearson correlation is structurally uninformative; exact inequality, MAE, mass values, and conflict counts are reported as well.",
+        },
+        "surface_overlap": {
+            "intersection_cells": overlap_count,
+            "union_cells": union_count,
+            "xor_disagreement_cells": int(disagree.sum()),
+            "intersection_over_union": agreement_ratio,
+            "dotted_fraction_also_in_tip": float(overlap_count / dotted_positive) if dotted_positive else 0.0,
+            "tip_fraction_also_in_dotted": float(overlap_count / tip_positive) if tip_positive else 0.0,
+        },
+        "organizer_score": None,
+        "score_claim": "No organizer score exists for this artifact. No projected leaderboard score is reported.",
     }
-    G.write_json(REPO / "registry" / "submission_build.json", receipt)
-    print("\n--- is the DS result the naive mean? ---")
-    for k, v in diag.items():
-        print(f"   {k}: {v}")
-    print(f"\n[{time.time()-t0:.0f}s] done")
+    args.receipt.parent.mkdir(parents=True, exist_ok=True)
+    args.receipt.write_text(json.dumps(receipt, indent=2) + "\n", encoding="utf-8")
+    print(json.dumps(receipt, indent=2))
     return 0
 
 

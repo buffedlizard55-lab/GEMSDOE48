@@ -4,13 +4,14 @@
 <title>Candidate hypotheses, ranked · GEMSDOE48</title>
 <link rel="stylesheet" href="../assets/ds48-fusion/site.css">
 </head><body>
+<div style="background:#fff0d7;border:2px solid #b65c00;border-radius:8px;padding:1rem;margin:1rem auto;max-width:1100px;color:#3d270e"><strong>HISTORICAL SUB-SITE — NOT A CURRENT SUBMISSION RECOMMENDATION.</strong> The figures, candidate names, and slot suggestions below belong to an earlier upstream experiment and are superseded by the current rho=0.5 candidate and like-for-like blocked proxy results. No weekly slot is cleared. Use the <a href="../index.html">current overview</a> and <a href="../validation.html">current validation</a>.</div>
 <header class="top"><div class="wrap">
   <div class="brand"><span class="dot"></span><b>GEMSDOE48</b>
     <span class="tag">Dempster&ndash;Shafer disagreement-preserving fusion</span></div>
-  <nav><a href="index.html">DS48 research</a><a href="executive-summary.html">Form procedure</a><a href="research.html">Interpreting reported 0.2778</a><a href="hypotheses.html" class="on">Hypotheses</a><a href="sources.html">Sources</a><a href="irregularities.html">Irregularities</a></nav>
+  <nav><a href="index.html">Historical fusion</a><a href="executive-summary.html">Archived instructions</a><a href="research.html">Archived 0.2778 analysis</a><a href="hypotheses.html" class="on">Hypotheses</a><a href="sources.html">Sources</a><a href="irregularities.html">Irregularities</a></nav>
 </div></header>
 <div class="namestrip"><div class="wrap">
-  <span class="ns-label">Research-artifact label — not slot-cleared</span>
+  <span class="ns-label">Historical research artifact — NOT slot-cleared</span>
   <code class="ns-name">GEMSDOE48-DS48-FUSION</code>
   <a class="ns-dl" download href="../downloads/gemsdoe48-ds48-emission.tif">
     ↓ Download for audit only — do not submit</a>
@@ -25,13 +26,8 @@
 <main class="wrap">
   <div class="hero"><h1>Candidate hypotheses, ranked</h1><p class="lead">What to build next, each with its layers, its physical signature, its novelty, its expected gain, its cost, and a data obtainability check.</p></div>
 
-<section class="callout warn">
-  <h2>Historical PR #6 hypothesis list — not the current ranking</h2>
-  <p>The proposals below and their conditional arithmetic were recorded in PR #6; they are not
-  validated candidates or a current slot recommendation. The current checkout-scoped five-item
-  ranking, source checks, and promotion gate are on the <a href="../hypotheses.html">repository-level
-  hypotheses page</a>. No candidate from this list is slot-cleared.</p>
-  <h2>General promotion gate for future candidates</h2>
+<section class="callout">
+  <h2>The validation gate these must clear before a slot is spent</h2>
   <p>A candidate is promotable only if it clears <b>all four</b>:</p>
   <ol>
     <li>mass ≤ the 37,654 px of the current live-best artifact;</li>
@@ -40,9 +36,12 @@
     <li>live-anchored safety factor &ge; 2.0 (budget ÷ measured credit destroyed); and</li>
     <li>the improvement reproduces in &ge; 3 of 4 spatial blocks.</li>
   </ol>
-  <p>The PR #6 experiment found its Dempster–Shafer corroboration-removal filter failed the
-  historical 0.64 safety gate. That does not validate any hypothesis below. Use the current
-  repository-level ranking and source caveats instead; see the notice at the top of this page.</p>
+  <p><b>Rank 1 was validated and it FAILED</b> — not the hypothesis itself, but the first
+  mechanism built on it: the Dempster–Shafer corroboration filter, which deletes the pixels where
+  the two families disagree, spends its budget at safety 0.64 (needs 2.0) at its best operating
+  point and is worse at every other radius. The measurement is in
+  <a href="index.html">the results table</a>. That is why the hypotheses below, not the filter,
+  are the recommendation for the next session.</p>
 </section>
 <section>
   <h2>Five hypotheses, ranked by expected DTI improvement over implementation cost</h2>
@@ -132,7 +131,7 @@
   </ul>
 </section>
 
-  <footer><p>Built from <code>registry/</code> and <code>evidence/</code> by
+  <footer><p>Historical sub-site rebuilt from <code>registry/</code> and <code>evidence/</code> by
   <code>scripts/build_site_ds48.py</code>. Owner-reported scores are labelled
   <span class="badge amber">OWNER-REPORT</span>; local measurements are labelled
   <span class="badge blue">PROXY</span> or <span class="badge">DERIVED</span>.

@@ -1,0 +1,183 @@
+{
+ "generated_utc": "2026-10-06T20:17:47.772619+00:00",
+ "alpha_dotted": 0.99,
+ "alpha_tip": 0.99,
+ "inputs": {
+  "dotted_h33_2_b2": {
+   "path": "../../data/raw/dotted_h33_2_b2_zeros.tif",
+   "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+   "origin": "GEMSDOE32 h33-h33-2-b2 (spacing-tuned dotted family)",
+   "owner_reported_score": 0.2778,
+   "site": "https://buffedlizard55-lab.github.io/GEMSDOE32/docs/index.html",
+   "sha256_verified": true
+  },
+  "tip_h33d": {
+   "path": "../../data/raw/tip_h33d_stepover.tif",
+   "sha256": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757",
+   "origin": "GEMSDOE33 h33d analog tip-stepover r30 (tip/step-over family)",
+   "owner_reported_score": 0.2632,
+   "site": "https://buffedlizard55-lab.github.io/GEMSDOE33/",
+   "sha256_verified": true
+  }
+ },
+ "template": {
+  "path": "../../data/raw/sample_submission_template.tif",
+  "sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+  "sha256_verified": true
+ },
+ "counts": {
+  "footprint_cells": 5167373,
+  "dotted_positive": 37654,
+  "tip_positive": 41865,
+  "intersection": 31614,
+  "dotted_only": 6040,
+  "tip_only": 10251,
+  "union": 47905
+ },
+ "ds_tiers": {
+  "raw_belief_intersection": 0.9999,
+  "raw_belief_single_source": 0.4974874371859294,
+  "normalized_intersection": 1.0,
+  "normalized_single_source": 0.49753719568252563
+ },
+ "not_the_naive_mean": {
+  "naive_mean_definition": "(dotted + tip) / 2  (values 0, 0.5, 1)",
+  "pearson_r_on_support": 1.0,
+  "pearson_r_in_footprint": 0.999998762456944,
+  "mae_in_footprint": 7.764398880432065e-06,
+  "max_abs_diff": 0.0024628043174743652,
+  "cells_differing_gt_1e6": 16291,
+  "cells_differing_equals_single_source_dots": true,
+  "is_identical_to_naive_mean": false,
+  "interpretation": "Dempster's rule is nonlinear. For binary source surfaces with discount alpha, the combined belief has tiers {0, alpha/(1+alpha)=0.49749, alpha(2-alpha)=0.9999}, whereas the naive mean has tiers {0, 0.5, 1}. The two surfaces agree on which cells are positive (monotone relation -> Pearson r ~ 1 on support), but the values differ at exactly the 16,291 single-source disagreement dots (0.49754 vs 0.5), and the DS construction additionally carries unassigned-mass and conflict layers that no average possesses. We report r ~ 1 honestly rather than hiding it: the evidence-theoretic content of the fusion is in the tier structure, the preserved ignorance mass, and the holdout-measured decision to emit the disagreement dots at full confidence."
+ },
+ "decision_rule": {
+  "support": "m12(F) > 0 (combined committed fault evidence present)",
+  "value_policy": "full confidence 1.0; tier sweep in evidence/round2_tier_sweep.json shows monotone gain",
+  "emitted_pixels": 47905
+ },
+ "primary": {
+  "filename": "gemsdoe48-ds-dotted-x-tipstepover-20261006T201749Z-95897e3f8125-decision-zeros.tif",
+  "kind": "DS-DECISION emission (recommended submission)",
+  "file": "gemsdoe48-ds-dotted-x-tipstepover-20261006T201749Z-95897e3f8125-decision-zeros.tif",
+  "size_bytes": 169061,
+  "sha256": "a913f633925e9e683be150ec7826d8dad6cca44589bf832ec5d8e689ccda5c52",
+  "bands": 1,
+  "dtype": "float32",
+  "crs": "EPSG:32611",
+  "epsg": 32611,
+  "shape": [
+   3730,
+   3292
+  ],
+  "transform": [
+   100.0,
+   0.0,
+   243350.0,
+   0.0,
+   -100.0,
+   4508550.0
+  ],
+  "nodata": null,
+  "total_cells": 12279160,
+  "finite_cells": 12279160,
+  "nan_cells": 0,
+  "inf_cells": 0,
+  "min": 0.0,
+  "max": 1.0,
+  "positive_cells": 47905,
+  "positive_cells_in_footprint": 47905,
+  "outside_footprint_all_zero": true,
+  "footprint_min": 0.0,
+  "footprint_max": 1.0,
+  "checks": {
+   "single_band": true,
+   "dtype_float32": true,
+   "shape_3730x3292": true,
+   "crs_epsg32611": true,
+   "transform_matches_template": true,
+   "all_cells_finite": true,
+   "range_0_1": true,
+   "no_nodata_tag": true
+  },
+  "all_checks_passed": true
+ },
+ "belief": {
+  "filename": "gemsdoe48-ds-dotted-x-tipstepover-20261006T201749Z-95897e3f8125-belief-zeros.tif",
+  "kind": "normalized combined belief (graded)",
+  "file": "gemsdoe48-ds-dotted-x-tipstepover-20261006T201749Z-95897e3f8125-belief-zeros.tif",
+  "size_bytes": 179003,
+  "sha256": "1aef3f909aea5b6c792380f4498d834231fa8cc8f03cc677098bf9076e0edc73",
+  "bands": 1,
+  "dtype": "float32",
+  "crs": "EPSG:32611",
+  "epsg": 32611,
+  "shape": [
+   3730,
+   3292
+  ],
+  "transform": [
+   100.0,
+   0.0,
+   243350.0,
+   0.0,
+   -100.0,
+   4508550.0
+  ],
+  "nodata": null,
+  "total_cells": 12279160,
+  "finite_cells": 12279160,
+  "nan_cells": 0,
+  "inf_cells": 0,
+  "min": 0.0,
+  "max": 1.0,
+  "positive_cells": 47905,
+  "positive_cells_in_footprint": 47905,
+  "outside_footprint_all_zero": true,
+  "footprint_min": 0.0,
+  "footprint_max": 1.0,
+  "checks": {
+   "single_band": true,
+   "dtype_float32": true,
+   "shape_3730x3292": true,
+   "crs_epsg32611": true,
+   "transform_matches_template": true,
+   "all_cells_finite": true,
+   "range_0_1": true,
+   "no_nodata_tag": true
+  },
+  "all_checks_passed": true
+ },
+ "diagnostic_layers": {
+  "unc": {
+   "filename": "gemsdoe48-ds-unassigned-mass-20261006T201749Z-95897e3f8125.tif",
+   "sha256": "11c0e3b6569ef65ed2e311acfd37e6c91d0c325fc2ee803887cd6cebe06e031b",
+   "min": 0.0,
+   "max": 0.005025125574320555,
+   "positive_cells": 5167373
+  },
+  "conflict": {
+   "filename": "gemsdoe48-ds-conflict-20261006T201749Z-95897e3f8125.tif",
+   "sha256": "73b1e452ba18dcd56291652ad9b553cd85e7ca709778ebf1cee770e159d50fbf",
+   "min": 0.0,
+   "max": 0.9800999760627747,
+   "positive_cells": 16291
+  },
+  "pl": {
+   "filename": "gemsdoe48-ds-plausibility-20261006T201749Z-95897e3f8125.tif",
+   "sha256": "0707aea945e02d2eb601d7d25456bf624261ab583a8d49f9988fed2de04409a4",
+   "min": 0.0,
+   "max": 1.0,
+   "positive_cells": 5167373
+  },
+  "bel_raw": {
+   "filename": "gemsdoe48-ds-belief-raw-20261006T201749Z-95897e3f8125.tif",
+   "sha256": "0daeb871557e8c77264f26abab24e8d6aa2cef316efabb0c290869a2ccd63e70",
+   "min": 0.0,
+   "max": 0.9998999834060669,
+   "positive_cells": 47905
+  }
+ },
+ "content_id": "95897e3f8125",
+ "base_name": "gemsdoe48-ds-dotted-x-tipstepover-20261006T201749Z-95897e3f8125"
+}

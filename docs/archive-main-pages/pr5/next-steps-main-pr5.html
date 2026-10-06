@@ -1,0 +1,31 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GEMSDOE48 · next-steps</title><style>body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;margin:0;color:#1d2330;background:#f6f7fb;line-height:1.55}
+nav{background:#14213d;padding:.6rem 1rem;position:sticky;top:0}nav a{color:#fff;margin-right:1.1rem;text-decoration:none;font-size:.95rem}
+nav a.on{border-bottom:2px solid #fca311}main{max-width:1050px;margin:auto;padding:1.2rem 1.4rem;background:#fff}
+table{border-collapse:collapse;width:100%;font-size:.9rem;margin:.6rem 0}th,td{border:1px solid #dde;padding:.35rem .5rem;vertical-align:top}
+th{background:#eef1f8}code{background:#f0f2f7;padding:.05rem .3rem;border-radius:3px;font-size:.88em;word-break:break-all}
+pre{background:#f0f2f7;padding:.7rem;overflow:auto}img{max-width:100%;border:1px solid #dde;margin:.5rem 0}
+.dl{background:#fff8e6;border:2px solid #fca311;border-radius:8px;padding:.6rem 1.1rem;margin-bottom:1rem}
+.btn{display:inline-block;background:#fca311;color:#14213d;font-weight:700;padding:.55rem 1rem;border-radius:6px;text-decoration:none;word-break:break-all}
+blockquote{border-left:4px solid #fca311;margin:.8rem 0;padding:.2rem .9rem;background:#fafafa}</style></head><body>
+<div style="margin:1rem;padding:1rem;border:2px solid #b65c00;background:#fff0d7;color:#3d270e"><strong>Historical snapshot from the main branch after PR #5.</strong> Preserved for provenance; it is superseded by the current no-slot decision. Any six-hour leaderboard-feed instructions below are historical: the current branch disables that workflow under its Terms-of-Use review, and the retained parser has no network-fetch path. <a href="../../index.html">Current overview</a> · <a href="../../validation.html">Current validation</a>.</div>
+<nav><a href="../../index.html" class="">Home</a><a href="../../executive-summary.html" class="">How to submit</a><a href="../../method.html" class="">Method & 0.2778 autopsy</a><a href="../../hypotheses.html" class="">Hypotheses</a><a href="../../irregularities.html" class="">Irregularities</a><a href="../../next-steps.html" class="on">Next steps</a><a href="../../leaderboard.html" class="">Leaderboard</a><a href="../../sources.html" class="">Sources</a></nav><main><h1>Next steps, ranked by expected P(Win) and evidence value</h1>
+<ol>
+<li><strong>Keep the slot gate closed.</strong> The corrected H48-Yager proxy failed (0.08407 vs tip 0.09709, dotted 0.09613, naïve mean 0.09030; 0/4 quadrant wins). H48-1 did not beat its holdout best. PR #6's DS48 re-emission measures 0.09068 on its SGMC off-catalogue proxy vs 0.09613 for dotted; its catalogue-based proxy is anti-monotone with the known live ladder. All remain unscored research artifacts. Do not spend a competition slot on any of them or an unvalidated probe.</li>
+<li><strong>Validate N1 native-resolution 1 m DEM detection without using a slot.</strong> On a GitHub Actions runner with egress, inventory official 3DEP tiles over the exact spatial blocks, record tile IDs/checksums/CRS/seams, derive native-resolution scarp features, aggregate to the submission grid, and run the preregistered corrected spatial holdout. No numeric gain target is assumed; stop if full coverage/licensing or reproducible validation fails.</li>
+<li><strong>Stage N2 gravity–magnetic edge coherence</strong> only after the competition feature stack or official public GeoDAWN/gravity files are actually retrieved and aligned. Audit coverage, survey seams, geotransforms and contest terms before implementing a detector. Validate on fixed spatial blocks against the current best baselines.</li>
+<li><strong>Consider N3 ComCat planes or N4 drainage deflections</strong> only with uncertainty controls and a pre-registered holdout. ComCat counts establish availability, not usable geometry; 1 m DEM catalog listing establishes neither full coverage nor validation.</li>
+<li><strong>Treat N5 radiometric asymmetry as lower priority.</strong> Related scarp–radiometric concordance was previously explored; test only the distinct signed, cross-strike feature after source bytes and survey metadata are available.</li>
+<li><strong>Historical recommendation (superseded): monitor the six-hour leaderboard Action.</strong> The workflow references in this archive are obsolete: the current branch disables scheduled leaderboard access and the parser is offline-only. Never infer a leaderboard row's TIFF hash or score attribution.</li>
+<li><strong>Extend the bounded uniqueness/data audit</strong> only if it changes a decision: keep owner mirror hashes, CRS/bounds, external-data license checks, and exact candidate-to-score provenance explicit.</li>
+</ol>
+<h2>Limitations / access needed</h2>
+<ul>
+<li><strong>DrivenData login:</strong> unavailable; no private scores, portal acceptance, or organizer-input download is possible here.</li>
+<li><strong>Network:</strong> local TLS to DrivenData/USGS hosts failed for raw page/binary requests. The public ComCat count queries and catalog/page metadata were read, but they do not replace event/raster files. GitHub Actions runners may have egress; verify the run before relying on it.</li>
+<li><strong>Compute:</strong> sandbox is constrained; native 1 m processing should be tiled and audited. No GPU is needed for the current raster/metric work.</li>
+<li><strong>Truth:</strong> SGMC is an owner-derived public geologic-map proxy, not hidden expert truth. Its relationship with leaderboard performance is poor/uncertain; never call its DTI an organizer score.</li>
+<li><strong>Format:</strong> the present Yager file is all finite in [0,1] but stores zero outside, contrary to official null/NaN-outside text. Portal acceptance remains unknown.</li>
+</ul>
+<p>See <a href="../../hypotheses.html">hypotheses</a>, <a href="../../method.html">method</a>, <a href="../../irregularities.html">irregularities</a>, and <a href="../../data/source-checks.json">source checks</a>.</p>
+<hr><p style="font-size:.8rem;color:#667">GEMSDOE48 · built from <code>docs/md/next-steps.md</code> by <code>scripts/build_site.py</code></p></main></body></html>

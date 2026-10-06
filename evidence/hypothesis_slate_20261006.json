@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "status": "FROZEN_BEFORE_IMPLEMENTATION_AND_HOLDOUT_SCORING",
+  "frozen_date_utc": "2026-10-06",
+  "ranking_basis": "Expected value of information per implementation cost; qualitative only; no numerical DTI gain assumed.",
+  "prior_art_boundary": "This checkout initially contained only README.md. Prior campaign pages were reviewed as owner-reported evidence, not independently verified score provenance. Novelty claims are limited to this checkout and the reviewed links.",
+  "hypotheses": [
+    {
+      "rank": 1,
+      "id": "H48-1",
+      "title": "Conflict-aware evidence fusion of dotted and tip/step-over structures",
+      "layers": [
+        "GEMSDOE32 H33-2-B2 owner-mirror surface, SHA-256 c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+        "GEMSDOE33 H33-D owner-mirror surface, SHA-256 87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757"
+      ],
+      "physical_signature": "Pixelwise support for fault-compatible structure from two distinct generation rules; retain lower belief and report raw conflict where one family supports and the other does not.",
+      "off_catalogue_rationale": "The two families nominate candidate faults using different construction rules; disagreement is retained for expert review rather than treated as proof of absence.",
+      "difference_from_prior": "No fusion implementation in this checkout; not globally novel. Distinct from arithmetic mean and the reported GEMSDOE2 dual-family union.",
+      "expected_dti": "Unknown; no positive numeric delta assumed.",
+      "implementation_cost": "Low; no new external data.",
+      "data_status": "Two public owner mirrors retrieved and SHA-256 verified; neither organizer-authenticated.",
+      "preregistered_discount_rho": 0.5,
+      "bba": {
+        "fault": "rho * p_i",
+        "not_fault": "rho * (1 - p_i)",
+        "ignorance": "1 - rho"
+      },
+      "gate": "Compare fusion, each input and arithmetic mean on four fixed spatial blocks using official DTI; an improvement over stronger input on >=3/4 blocks is necessary, but leakage-free source rebuild is also required before any slot is cleared."
+    },
+    {
+      "rank": 2,
+      "id": "H48-2",
+      "title": "Stratigraphic-contact termination / offset detector",
+      "layers": ["USGS GeMS version of SGMC geologic-unit polygons and contacts", "GeoDAWN magnetic and gravity gradients"],
+      "physical_signature": "Contact graph terminations, kinks or juxtaposition coincident with geophysical breaks.",
+      "off_catalogue_rationale": "Unmapped or buried faulting may truncate/juxtapose geologic units without a Quaternary fault trace in the catalogue.",
+      "difference_from_prior": "Uses topology of unit-contact discontinuities, not SGMC fault lines as predictions and not a raw edge-ridge detector.",
+      "expected_dti": "Potentially moderate; high uncertainty.",
+      "implementation_cost": "Medium-high.",
+      "data_status": "Official USGS DOI 10.5066/P1A3DQZK is listed; metadata checked, payload and target-scale coverage not audited.",
+      "source": "https://doi.org/10.5066/P1A3DQZK"
+    },
+    {
+      "rank": 3,
+      "id": "H48-3",
+      "title": "OPERA InSAR line-of-sight displacement-gradient discontinuities",
+      "layers": ["NASA/JPL OPERA DISP-S1 LOS time series", "coherence/data-quality and viewing geometry layers"],
+      "physical_signature": "Persistent temporal LOS velocity/change-point gradient across a narrow, coherent boundary.",
+      "off_catalogue_rationale": "Active or creeping faults can deform without a mapped surface scarp; this does not detect locked/inactive faults and is not fault truth.",
+      "difference_from_prior": "Time-dependent 30 m interferometric deformation, unlike static 100 m geophysical/terrain predictors or event-density summaries.",
+      "expected_dti": "Low-moderate public DTI; potentially useful final-round review evidence.",
+      "implementation_cost": "High.",
+      "data_status": "Official free NASA catalog product with North American coverage; Earthdata Login required to download. Metadata checked; no granules/coverage counts downloaded.",
+      "source": "https://www.earthdata.nasa.gov/data/catalog/asf-opera-l3-disp-s1-v1-1"
+    },
+    {
+      "rank": 4,
+      "id": "H48-4",
+      "title": "3D hydrography knickpoint / channel-offset test",
+      "layers": ["USGS NHDPlus HR or 3DHP channel network", "USGS 3DEP elevation"],
+      "physical_signature": "Paired longitudinal-profile breaks and laterally deflected channels aligned to a structural trend.",
+      "off_catalogue_rationale": "Fault displacement can alter channels where fault scarps are subtle or eroded; multiple-channel coherence can reject isolated erosional noise.",
+      "difference_from_prior": "Targets channel profile discontinuities/paired responses, not valley-lineament continuity or scarp amplitude.",
+      "expected_dti": "Low-moderate, terrain-dependent.",
+      "implementation_cost": "Medium.",
+      "data_status": "Official USGS NHDPlus HR/map-service and free 3DEP product pages checked; exact footprint coverage still needs audit.",
+      "sources": [
+        "https://www.usgs.gov/national-hydrography/access-national-hydrography-products",
+        "https://www.usgs.gov/3d-elevation-program/about-3dep-products-services"
+      ]
+    },
+    {
+      "rank": 5,
+      "id": "H48-5",
+      "title": "High geothermal favorability plus ensemble spread as a structural search prior",
+      "layers": ["USGS Great Basin favorability percentiles P05/P25/P50/P75/P95 from 1,200 model realizations", "existing catalogue distance"],
+      "physical_signature": "High published median favorability and high between-realization spread outside/away from catalogue traces.",
+      "off_catalogue_rationale": "May identify geothermal pathways not represented by mapped faults; favorability is not fault truth and requires separate fault validation.",
+      "difference_from_prior": "Uses uncertainty from an independent published regional model output rather than reweighting the same raw GeoDAWN layers.",
+      "expected_dti": "Unknown; probably low-moderate for public fault DTI.",
+      "implementation_cost": "High; official package listed at about 1.22 GB.",
+      "data_status": "Official USGS release DOI 10.5066/P14EET2C, CC0 1.0; .gov page checked, package not downloaded.",
+      "source": "https://www.usgs.gov/data/geothermal-resource-favorability-select-features-and-predictions-united-states-great-basin"
+    }
+  ],
+  "validation_protocol": {
+    "metric_source": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/#performance-metric",
+    "spatial_folds": "Four fixed geographic quadrants on the 3292 x 3730 EPSG:32611 100 m grid, with a 300 m evaluation halo; holdout label raster used only as catalogue-proxy truth.",
+    "comparators": ["dotted input", "tip/step-over input", "arithmetic mean", "discounted Dempster belief"],
+    "promotion_rule": "No slot promotion without positive paired mean and >=3/4 positive folds versus each individual input, plus fold-independent source rebuild. A proxy pass alone is not a competition score.",
+    "known_risks": [
+      "Owner-mirror labels are not organizer-authenticated.",
+      "Source TIF construction used catalogue information or prior model artifacts; a frozen-surface blocked score can be conditional/leaky.",
+      "Sparse raster zeros may mean no emission rather than evidence of no fault.",
+      "The two source rasters may share a common backbone and are not assumed statistically independent."
+    ]
+  }
+}

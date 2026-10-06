@@ -19,8 +19,14 @@
       "doi": "10.5066/P93LGLVQ",
       "catalog_listing_verified": true,
       "public_tiff_archives_listed": [
-        {"file": "22103_area1_tiffs.zip", "catalog_size": "43.57 MB"},
-        {"file": "22103_area2_tiffs.zip", "catalog_size": "230.54 MB"}
+        {
+          "file": "22103_area1_tiffs.zip",
+          "catalog_size": "43.57 MB"
+        },
+        {
+          "file": "22103_area2_tiffs.zip",
+          "catalog_size": "230.54 MB"
+        }
       ],
       "transfer_test": "The item page and attached-file listing were readable. A direct shell HTTPS request to the ScienceBase download URL failed TLS in this sandbox; file bytes were not downloaded or hashed here.",
       "scope_caution": "GeoDAWN raw survey products are not automatically equivalent to the competition-aligned feature stack; flight blocks/resolution and gridding must be reconciled."
@@ -30,15 +36,19 @@
       "source": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
       "check_date_utc": "2026-10-06",
       "attempt": "Ran scripts/refresh_leaderboard.py with its standard-library urllib live-fetch path.",
-      "result": "TLS/SSL connection closed by peer (EOF) in this sandbox before HTML was returned; therefore the parser was not tested against live raw HTML and no refresh JSON was written.",
-      "implication": "Fixture tests pass. The scheduled Ubuntu-hosted Action may have different network access, but live parse success is not established. Retain the dated snapshot until the workflow is observed succeeding."
+      "result": "Historical pre-retirement connectivity attempt: TLS/SSL connection closed by peer (EOF) before HTML was returned; no live scrape result was written.",
+      "implication": "Superseded by the parser-only implementation in scripts/refresh_leaderboard.py, which has no network retrieval path. No automated leaderboard monitor is active."
     },
     {
       "topic": "GitHub Pages deployment source",
       "endpoint": "https://api.github.com/repos/buffedlizard55-lab/GEMSDOE48/pages",
       "check_date_utc": "2026-10-06",
-      "observed_settings": {"build_type": "legacy", "source_branch": "main", "source_path": "/"},
-      "consequence": "The scheduled workflow is present in this branch but the currently published Pages site still uses legacy branch deployment. No repository setting was changed; switching requires Pages and Administration write permissions."
+      "observed_settings": {
+        "build_type": "legacy",
+        "source_branch": "main",
+        "source_path": "/"
+      },
+      "consequence": "The scheduled workflow was later disabled as .github/workflows/feed.yml.disabled before push. Pages remains on the legacy branch deployment source; no repository setting was changed."
     },
     {
       "topic": "USGS Nevada gravity data",
@@ -53,12 +63,29 @@
     {
       "topic": "USGS ComCat/FDSN earthquake service availability for the GeoDAWN area",
       "documentation": "https://earthquake.usgs.gov/fdsnws/event/1/",
-      "query_bbox_wgs84": {"min_latitude": 37.3641, "max_latitude": 40.7247, "min_longitude": -120.0024, "max_longitude": -116.1415},
-      "query_parameters": {"starttime": "2000-01-01", "minmagnitude": 2.0},
+      "query_bbox_wgs84": {
+        "min_latitude": 37.3641,
+        "max_latitude": 40.7247,
+        "min_longitude": -120.0024,
+        "max_longitude": -116.1415
+      },
+      "query_parameters": {
+        "starttime": "2000-01-01",
+        "minmagnitude": 2.0
+      },
       "observed_count_queries_2026_10_06": {
-        "all_events": {"count": 16919, "url": "https://earthquake.usgs.gov/fdsnws/event/1/count?format=text&starttime=2000-01-01&minlatitude=37.3641&maxlatitude=40.7247&minlongitude=-120.0024&maxlongitude=-116.1415&minmagnitude=2.0"},
-        "focal_mechanism_products": {"count": 5292, "url": "https://earthquake.usgs.gov/fdsnws/event/1/count?format=text&starttime=2000-01-01&minlatitude=37.3641&maxlatitude=40.7247&minlongitude=-120.0024&maxlongitude=-116.1415&minmagnitude=2.0&producttype=focal-mechanism"},
-        "moment_tensor_products": {"count": 474, "url": "https://earthquake.usgs.gov/fdsnws/event/1/count?format=text&starttime=2000-01-01&minlatitude=37.3641&maxlatitude=40.7247&minlongitude=-120.0024&maxlongitude=-116.1415&minmagnitude=2.0&producttype=moment-tensor"}
+        "all_events": {
+          "count": 16919,
+          "url": "https://earthquake.usgs.gov/fdsnws/event/1/count?format=text&starttime=2000-01-01&minlatitude=37.3641&maxlatitude=40.7247&minlongitude=-120.0024&maxlongitude=-116.1415&minmagnitude=2.0"
+        },
+        "focal_mechanism_products": {
+          "count": 5292,
+          "url": "https://earthquake.usgs.gov/fdsnws/event/1/count?format=text&starttime=2000-01-01&minlatitude=37.3641&maxlatitude=40.7247&minlongitude=-120.0024&maxlongitude=-116.1415&minmagnitude=2.0&producttype=focal-mechanism"
+        },
+        "moment_tensor_products": {
+          "count": 474,
+          "url": "https://earthquake.usgs.gov/fdsnws/event/1/count?format=text&starttime=2000-01-01&minlatitude=37.3641&maxlatitude=40.7247&minlongitude=-120.0024&maxlongitude=-116.1415&minmagnitude=2.0&producttype=moment-tensor"
+        }
       },
       "availability_status": "Official count endpoint responded to live queries; no event-level payload was downloaded into the repository.",
       "caution": "Counts depend on the query and catalog revision; focal mechanisms are concentrated among larger events and can be spatially/temporally biased."
@@ -87,5 +114,18 @@
     "Source page or API response availability does not prove full spatial coverage, correct licensing for every derived product, or predictive value.",
     "DrivenData contest rules allow external data only when the entrant has a license permitting use in the challenge and sharing with the sponsor; verify this before using third-party data.",
     "The shell sandbox could not directly download USGS .gov binary files because TLS handshakes failed; metadata/API count checks are not binary checksum verification."
-  ]
+  ],
+  "sgmc_raster_discrepancy": {
+    "primary_path": "data/official/derived_sgmc_faults_100m.tif",
+    "primary_sha256": "643cbe992ef4ba37588fb469163ed8291e3ceb23d6c1f78a3cfaa462430c2da0",
+    "prior_path": "data/raw/sgmc_faults_100m.tif",
+    "prior_sha256": "26d142c4c93282cd94f6950ab96f22aeff59fbbea523d43d662e76fa1b161b5c",
+    "same_spatial_grid": true,
+    "nodata_metadata_differs": true,
+    "mismatched_binary_positive_cells": 1450,
+    "newer_only": 1446,
+    "prior_only": 4,
+    "status": "unresolved; both are owner-mirror public-map proxies, neither is organizer-authenticated",
+    "receipt": "evidence/sgmc_raster_comparison_20261006.json"
+  }
 }

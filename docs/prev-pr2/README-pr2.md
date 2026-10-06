@@ -1,3 +1,7 @@
+> **Historical PR archive.** This earlier page is preserved for provenance; claims may be superseded. See the [current overview](../index.html) and [current validation](../validation.html).
+
+---
+
 # GEMSDOE48 — Dempster-Shafer Family Fusion for the DOE GEMS Prize
 
 > **Read this file first, every session.** It is the project charter and the

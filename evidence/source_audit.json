@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "audited_date_utc": "2026-10-06",
+  "sources": [
+    {
+      "id": "official_challenge_page",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+      "authority": "competition organizer",
+      "observed": [
+        "100 m EPSG:32611 training grid",
+        "single-band float32 prediction",
+        "in-footprint prediction scores between 0 and 1",
+        "outside-bounds cells must be null or NaN",
+        "distance-weighted Tversky triangular kernel with 300 m support, alpha=0.2, beta=0.8"
+      ],
+      "scope_limit": "Challenge instructions only; does not establish upload portal acceptance for this local file."
+    },
+    {
+      "id": "official_leaderboard_snapshot",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+      "authority": "competition organizer display",
+      "read_count": 1,
+      "read_date_utc": "2026-10-06",
+      "displayed_rows": [
+        {
+          "rank": 1,
+          "participant": "xiaofanhu",
+          "score": 0.3774
+        },
+        {
+          "rank": 2,
+          "participant": "alexoktaba",
+          "score": 0.3345
+        },
+        {
+          "rank": 3,
+          "participant": "nchuzhoy",
+          "score": 0.3262
+        },
+        {
+          "rank": 7,
+          "participant": "DARD",
+          "score": 0.3195
+        },
+        {
+          "rank": 13,
+          "participant": "extradr19",
+          "score": 0.2778,
+          "submissions_displayed": 10
+        }
+      ],
+      "attribution_limit": "Participant-level rows only; no exact TIFF or owner-mirror artifact is linked to these scores.",
+      "automated_monitoring": false
+    },
+    {
+      "id": "terms_of_use",
+      "url": "https://www.drivendata.org/termsofuse/",
+      "authority": "DrivenData terms",
+      "observed": "Restrictions on automated and unauthorized manual site monitoring/copying were noted.",
+      "implementation": "No feed, polling, or scraping loop is included."
+    },
+    {
+      "id": "source_dotted",
+      "url": "https://github.com/buffedlizard55-lab/GEMSDOE32/blob/b983924b57781edd29b8e249c4923bf33d9902f6/docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
+      "authority": "third-party public owner mirror; not organizer-authenticated",
+      "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+      "bytes": 219065,
+      "use": "fusion source A",
+      "license_verified": false
+    },
+    {
+      "id": "source_tip_stepover",
+      "url": "https://github.com/buffedlizard55-lab/GEMSDOE33/blob/f52533110fe62cd03e77f1228e9e5ecac412c463/docs/downloads/GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e.tif",
+      "authority": "third-party public owner mirror; not organizer-authenticated",
+      "sha256": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757",
+      "bytes": 917544,
+      "use": "fusion source B",
+      "license_verified": false
+    },
+    {
+      "id": "proxy_labels",
+      "url": "https://github.com/buffedlizard55-lab/GEMSDOE24/blob/07345ea0604953d7efb858d9cfbc21e20c7aca0b/data/bridge/labels.tif",
+      "authority": "third-party public owner mirror; not organizer-authenticated",
+      "sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+      "bytes": 425830,
+      "use": "public catalogue proxy labels only; never described as private expert test truth",
+      "license_verified": false
+    },
+    {
+      "id": "sample_template",
+      "url": "https://github.com/buffedlizard55-lab/GEMSDOE24/blob/07345ea0604953d7efb858d9cfbc21e20c7aca0b/data/bridge/sample_submission.tif",
+      "authority": "third-party public owner mirror; not organizer-authenticated",
+      "sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+      "bytes": 1599597,
+      "use": "finite footprint mask only; pixel values never used as labels",
+      "license_verified": false
+    },
+    {
+      "id": "sgmc_offcat_proxy",
+      "path": "data/official/derived_sgmc_faults_100m.tif",
+      "url": "https://github.com/buffedlizard55-lab/GEMSDOE24/blob/07345ea0604953d7efb858d9cfbc21e20c7aca0b/data/external/derived_sgmc_faults_100m_u8.tif",
+      "underlying_source": "https://mrdata.usgs.gov/geology/state/",
+      "authority": "underlying USGS SGMC is an official public map; the on-grid raster is a third-party owner-mirror derivative, not organizer-authenticated",
+      "sha256": "643cbe992ef4ba37588fb469163ed8291e3ceb23d6c1f78a3cfaa462430c2da0",
+      "bytes": 198602,
+      "use": "primary public-map off-catalogue holdout proxy; positive cells >300 m from public catalogue labels",
+      "positive_cells_in_footprint": 83593,
+      "off_catalogue_gt_300m_cells": 62122,
+      "organizer_authenticated": false,
+      "derivation_rebuilt_in_this_session": false,
+      "license_note": "USGS source map is public federal data; the owner-mirror raster derivation and its reuse terms were not independently verified.",
+      "comparison_receipt": "evidence/sgmc_raster_comparison_20261006.json"
+    },
+    {
+      "id": "sgmc_prior_raw_proxy",
+      "path": "data/raw/sgmc_faults_100m.tif",
+      "url": "https://mrdata.usgs.gov/geology/state/",
+      "authority": "USGS State Geologic Map Compilation is the source dataset; the on-grid raster is a third-party owner-mirror derivation",
+      "sha256": "26d142c4c93282cd94f6950ab96f22aeff59fbbea523d43d662e76fa1b161b5c",
+      "use": "separate prior-raster sensitivity only; not pooled with newer derivative results",
+      "organizer_authenticated": false,
+      "derivation_rebuilt_in_this_session": false,
+      "license_note": "USGS source map is public federal data; the owner-mirror raster derivation and its reuse terms were not independently verified.",
+      "positive_cells_in_footprint": 82151,
+      "off_catalogue_gt_300m_cells": 61664
+    },
+    {
+      "id": "usgs_gems_sgmc",
+      "url": "https://doi.org/10.5066/P1A3DQZK",
+      "authority": "USGS",
+      "observed": "Official catalog metadata checked; payload and exact grid overlap not audited.",
+      "downloaded": false
+    },
+    {
+      "id": "nasa_opera_disp_s1",
+      "url": "https://www.earthdata.nasa.gov/data/catalog/asf-opera-l3-disp-s1-v1-1",
+      "authority": "NASA/JPL/ASF catalog",
+      "observed": "Catalog metadata checked; Earthdata Login required; no granules or coverage counts downloaded.",
+      "downloaded": false
+    },
+    {
+      "id": "usgs_nhdplus_hr",
+      "url": "https://www.usgs.gov/national-hydrography/access-national-hydrography-products",
+      "authority": "USGS",
+      "observed": "Product access metadata checked; exact grid coverage not audited.",
+      "downloaded": false
+    },
+    {
+      "id": "usgs_3dep",
+      "url": "https://www.usgs.gov/3d-elevation-program/about-3dep-products-services",
+      "authority": "USGS",
+      "observed": "Product page checked; exact in-footprint availability not audited.",
+      "downloaded": false
+    },
+    {
+      "id": "usgs_great_basin_favorability",
+      "url": "https://www.usgs.gov/data/geothermal-resource-favorability-select-features-and-predictions-united-states-great-basin",
+      "authority": "USGS",
+      "observed": "Release metadata checked; favorability is not fault truth; large package not downloaded.",
+      "downloaded": false
+    },
+    {
+      "id": "usgs_great_basin_heat_flow",
+      "url": "https://doi.org/10.5066/P9BZPVUC",
+      "authority": "USGS",
+      "observed": "Catalog metadata only.",
+      "downloaded": false
+    }
+  ],
+  "score_provenance": {
+    "h33_2_b2_local_receipt": "UNSCORED",
+    "organizer_artifact_receipt_for_0_2778": false,
+    "claim": "No verified association between the local H33-2-B2 artifact and the official 0.2778 row."
+  },
+  "sgmc_raster_comparison": {
+    "receipt": "evidence/sgmc_raster_comparison_20261006.json",
+    "spatial_grid_equal": true,
+    "nodata_metadata_equal": false,
+    "positive_mask_mismatched_cells": 1450,
+    "newer_derived_only_positive_cells": 1446,
+    "prior_raw_only_positive_cells": 4,
+    "provenance_discrepancy_resolved": false,
+    "sensitivity_holdout": "evidence/holdout_raw_sgmc_20261006.json"
+  }
+}

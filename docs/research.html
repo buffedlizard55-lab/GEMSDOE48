@@ -1,51 +1,10 @@
 <!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Interpreting the owner-reported 0.2778 · GEMSDOE48</title>
-  <link rel="stylesheet" href="assets/site.css">
-</head>
-<body>
-<header class="top"><div class="wrap">
-  <div class="brand"><span class="dot"></span><b>GEMSDOE48</b>
-    <span class="tag">Historical score interpretation · not a submission recommendation</span></div>
-  <nav>
-    <a href="index.html">Current decision</a>
-    <a href="method.html">Method &amp; evidence</a>
-    <a href="hypotheses.html">Current hypotheses</a>
-    <a href="ds48-fusion/research.html">PR #6 score analysis</a>
-  </nav>
-</div></header>
-<main class="wrap">
-  <div class="hero">
-    <h1>The owner-reported 0.2778 result, with uncertainty</h1>
-    <p class="lead">A historical interpretation of a reported score—not an independently verified organizer receipt, not a TIFF-to-leaderboard attribution, and not evidence that a new candidate will improve.</p>
-  </div>
-
-  <section class="callout warn">
-    <h2>Current decision: no file is slot-cleared</h2>
-    <p>The 0.2778 value is owner-reported for the b2 dotted artifact. A dated public leaderboard snapshot on 2026-10-06 placed a row at 0.2778, rank 13; whether that row belongs to the owner or corresponds to the local TIFF is unverified. The public leader was 0.3774 in that snapshot. The local project has no organizer receipt or uploaded-file hash tying its raster to a leaderboard row.</p>
-    <p>The corrected Yager proxy gate fails, and the later PR #6 DS48 re-emission also fails its recorded SGMC comparison. Do not upload either: <a href="index.html">current decision and download instructions</a>.</p>
-  </section>
-
-  <section>
-    <h2>What the reported sequence suggests—and what it cannot prove</h2>
-    <p>The project history records an owner-reported sequence of 44,090 pixels at 0.2600, 40,199 at 0.2708, and 37,654 at 0.2778. This is consistent with the particular catalogue-flank removals increasing average credit per emitted pixel in that reported family. The mapping between reported scores, uploaded bytes, and the named local files has not been independently established, so the sequence does not prove causation or a general rule that removing pixels will help.</p>
-    <p>Under the published DTI identity, a prediction pixel with realized kernel credit <code>k</code> has positive marginal value when <code>k &gt; 0.2 × DTI</code>. Substituting the owner-reported 0.2778 gives a nominal threshold of 0.05556. A separate 0.05416 threshold comes from a model inversion of two owner-reported anchors; it is conditional on comparable score/metric versions and truth populations, not a direct measurement of each pixel's value.</p>
-  </section>
-
-  <section>
-    <h2>Conditional inversion is not observation of hidden truth</h2>
-    <p>Inverting the two reported anchors under the stated metric assumptions yields an internally consistent estimate of roughly 12,632 hidden new-fault pixels. Those labels are not available in this repository, the score-to-file mapping is not independently verified, and the estimate depends on the official metric and artifact assumptions holding. Treat it as a model-derived scenario, not a known truth-set size, verified recall, or forecast.</p>
-  </section>
-
-  <section>
-    <h2>Why this does not clear a new fusion</h2>
-    <p>The catalogue-proximity proxy reverses the four known owner-reported live anchors (Spearman ρ = −1, n = 4), so it is not a promotion gate. The corrected SGMC proxy is public-derived and does not establish private-label performance. The Yager candidate loses to the dotted, tip, and naïve-mean baselines; the DS48 re-emission's owner-derived SGMC DTI is 0.09068 versus 0.09613 for dotted. Neither has an organizer score or observed portal acceptance.</p>
-    <p>See the <a href="method.html">current method and no-go receipts</a>, the <a href="ds48-fusion/research.html">historical PR #6 analysis</a>, and the <a href="hypotheses.html">current ranked geological hypotheses</a>.</p>
-  </section>
-</main>
-<footer class="wrap"><p>GEMSDOE48 research record. Owner reports, proxy measurements, and model-derived quantities are kept distinct; no score gain is claimed.</p></footer>
-</body>
-</html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Current research status · GEMSDOE48</title><link rel="stylesheet" href="style.css"></head>
+<body><header><div class="wrap"><h1>Current research status</h1><p>The earlier alpha=.99/DS48 narrative is archived; the current evidence uses one comparable spatial-block protocol.</p></div></header>
+<nav><div class="wrap"><a href="index.html">Overview</a><a href="validation.html">Validation</a><a href="hypotheses.html">Hypotheses</a><a href="sources.html">Sources</a><a href="irregularities.html">Irregularities</a></div></nav>
+<div class="wrap">
+  <section class="hero"><h2>No submission slot is cleared</h2><p>The rho=.5 candidate loses to tip/stepover, arithmetic mean, and the prior union on the catalogue proxy; it also loses to both parents, the mean, and union on the newer manifest-pinned SGMC derivative under the same core-plus-halo folds. A distinct Yager candidate improves over Dempster but still loses to both parents and the mean. Two SGMC rasters differ at 1,450 cells; the older raster has a separate sensitivity report, and the discrepancy is unresolved.</p><p><a class="btn" href="research/holdout-results-20261006.md">Read full paired holdout results</a></p></section>
+  <h2 class="sec">Retired pages</h2><p>The older “why 0.2778 won” and DS48 analysis pages contain owner-reported attribution and older proxy/selection claims. They are preserved under <code>docs/archive-main-pages/</code> with an archival warning and are not current evidence.</p>
+  <p>Current point of entry: <a href="index.html">GEMSDOE48 overview</a>. Current local format audit is not organizer acceptance; public proxies are not private expert truth.</p>
+  <footer>Updated 2026-10-06 UTC.</footer>
+</div></body></html>

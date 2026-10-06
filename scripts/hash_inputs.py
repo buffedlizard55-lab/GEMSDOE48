@@ -32,14 +32,17 @@ REPO = pathlib.Path(__file__).resolve().parents[1]
 # docs/sources.html for the upstream URLs.
 INPUTS = [
     ("data/official/labels.tif", "truth-layer",
-     "Organizer-supplied training labels (known-truth mask). Identical to the mask "
-     "per the 2026-09-16 / 2026-09-21 staff clarification."),
+     "Third-party public owner-mirror of the competition training labels (known public faults), "
+     "pinned by SHA-256; not organizer-authenticated in this repository and not private expert "
+     "test truth. Its relation to the score-time mask follows the official staff clarification."),
     ("data/official/existing_faults.tif", "truth-layer",
-     "Published fault catalogue raster distributed with the training data."),
+     "Third-party public owner-mirror of the public known-fault catalogue, pinned by SHA-256; "
+     "not organizer-authenticated in this repository and not private expert test truth."),
     ("data/official/derived_sgmc_faults_100m.tif", "truth-layer",
-     "USGS State Geologic Map Compilation (SGMC) faults rasterised to the official 100 m "
-     "grid; an independent non-catalogue truth layer. Derived from the SGMC GeoPackage "
-     "via the sibling repositories' data/external/derived_sgmc_faults_100m_u8.tif."),
+     "USGS State Geologic Map Compilation (SGMC) faults rasterized to the competition-aligned "
+     "100 m grid via a sibling-repository owner mirror. This repository did not independently "
+     "rebuild the vector derivation. Public-map proxy only; not organizer-authenticated or "
+     "private expert test truth."),
     ("data/families/dotted_d2_8_02600.tif", "family",
      "Spacing-tuned dotted family, owner-reported live 0.2600 (GEMSDOE25, artifact "
      "e56ea318af89). Upstream of the 0.2708 and 0.2778 rungs."),

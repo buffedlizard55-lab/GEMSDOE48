@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How to make a submission, step by step · GEMSDOE48</title>
+<link rel="stylesheet" href="../../assets/ds48-fusion/site.css">
+</head><body>
+<header class="top"><div class="wrap">
+  <div class="brand"><span class="dot"></span><b>GEMSDOE48</b>
+    <span class="tag">Dempster&ndash;Shafer disagreement-preserving fusion</span></div>
+  <nav><a href="../../ds48-fusion/index.html">Submission</a><a href="../../ds48-fusion/executive-summary.html" class="on">How to submit</a><a href="../../ds48-fusion/research.html">Why 0.2778 won</a><a href="../../ds48-fusion/hypotheses.html">Hypotheses</a><a href="../../ds48-fusion/sources.html">Sources</a><a href="../../ds48-fusion/irregularities.html">Irregularities</a></nav>
+</div></header>
+<div class="namestrip"><div class="wrap">
+  <span class="ns-label">Unique submission name</span>
+  <code class="ns-name">GEMSDOE48-DS48-FUSION</code>
+  <a class="ns-dl" download href="../../downloads/gemsdoe48-ds48-emission.tif">
+    ↓ Download the .tif</a>
+</div></div>
+<div class="xlink"><div class="wrap">
+  This is the <b>DS48 fusion</b> sub-site. The repository landing page is
+  <a href="../../index.html">docs/index.html</a>, and its
+  <a href="../../leaderboard.html">leaderboard page</a> carries a <b>newer snapshot</b> than the
+  2026-10-02 figure quoted here — a later session measured the leader at 0.3774, not 0.3195.
+  Treat both numbers as dated, and the landing page as the newer one.
+</div></div>
+<main class="wrap">
+  <div class="hero"><h1>How to make a submission, step by step</h1><p class="lead">Everything needed to go from this page to a scored leaderboard row, with the format claims verified against the bytes on disk.</p></div>
+
+<section class="callout">
+  <h2>Executive summary: exactly how to enter a submission</h2>
+  <ol class="steps">
+    <li><b>Open the submission page.</b>
+        <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/" target="_blank" rel="noopener">competition-doe-gems</a> → the
+        <i>Submissions</i> tab → <i>New submission</i>.</li>
+    <li><b>Choose the file.</b> Click the download button below. The browser saves one
+        <code>.tif</code>. A <code>.zip</code> is also accepted, and is unnecessary.</li>
+    <li><b>Upload it</b> into <i>“File to submit”</i>. The competition accepts a single-band
+        GeoTIFF or a <code>.zip</code> containing one. It must match the submission format's CRS,
+        shape and geotransform — this file does, and the table at the bottom proves it from the
+        bytes on disk.</li>
+    <li><b>Name it.</b> Put the unique name in the note field so you can tell submissions apart:
+        <br><code class="block">GEMSDOE48-DS48-FUSION</code></li>
+    <li><b>Note (optional), ≤ 200 characters.</b> Paste this:
+        <br><code class="block">GEMSDOE48-DS48-FUSION | base mass 37,654 px ranked by Dempster-Shafer combined belief, off-flank (&gt;=200 m from the published catalogue); all-finite [0,1]; UNSCORED</code></li>
+    <li><b>Click Submit.</b> The score appears on the leaderboard shortly afterwards.
+        Three submissions per week.</li>
+  </ol>
+  <p class="big"><a class="button primary" download href="../../downloads/gemsdoe48-ds48-emission.tif">
+     ↓ Download the submission file</a>
+     <span class="micro">gemsdoe48-ds48-emission.tif · 282,876 bytes ·
+     sha256 <code>a579081d…</code></span></p>
+</section>
+
+<section>
+  <h2>Why your earlier upload was rejected</h2>
+  <p>The portal said <i>“Predicted values must be in range [0, 1]”</i>. Two things produce that
+  message and both are avoided here, verifiably:</p>
+  <ul>
+    <li><b>NaN written as a nodata value.</b> Several shipped artifacts in this project use
+    <code>NaN</code> outside the study area. Some validators treat a NaN as an out-of-range
+    value. Every file here is <b>all-finite</b>: NaN count and infinity count are both
+    <b>0</b>, read back from the bytes on disk.</li>
+    <li><b>A value outside [0, 1].</b> The minimum is 0.0 and the maximum is 1.0 exactly;
+    the count of values below 0 and above 1 is <b>0</b>.</li>
+  </ul>
+  <p>This is registered as <code>IR-48-03</code>; the siblings reported the same portal message
+  and could not establish its cause, but an all-finite in-range raster cannot trigger either of
+  the two known causes.</p>
+</section>
+
+<section>
+  <h2>Format verification, read back from disk</h2>
+  <table>
+    <tr><th>file</th><th>dtype</th><th>CRS</th><th>size</th><th>bands</th><th>range</th>
+        <th>NaN</th><th>out of [0,1]</th><th>verdict</th></tr>
+    <tr><td><code>gemsdoe48-ds48-belief.tif</code></td><td>float32</td><td>EPSG:32611</td><td>3292 × 3730</td><td>1</td><td>[0.0000, 0.8400]</td><td>0</td><td>0</td><td><b>PASS</b></td></tr><tr><td><code>gemsdoe48-ds48-emission.tif</code></td><td>float32</td><td>EPSG:32611</td><td>3292 × 3730</td><td>1</td><td>[0.0000, 1.0000]</td><td>0</td><td>0</td><td><b>PASS</b></td></tr><tr><td><code>gemsdoe48-ds48-mtheta.tif</code></td><td>float32</td><td>EPSG:32611</td><td>3292 × 3730</td><td>1</td><td>[0.1600, 0.2500]</td><td>0</td><td>0</td><td><b>PASS</b></td></tr><tr><td><code>gemsdoe48-ds48-conflict.tif</code></td><td>float32</td><td>EPSG:32611</td><td>3292 × 3730</td><td>1</td><td>[0.0000, 0.3600]</td><td>0</td><td>0</td><td><b>PASS</b></td></tr>
+  </table>
+  <p>The grid is the organizers' own: <code>EPSG:32611</code>, 100 m pixels,
+  <code>3292 × 3730</code>, transform <code>(100, 0, 243350, 0, −100, 4508550)</code>, identical to
+  the supplied <code>labels.tif</code>. Predictions are required on the whole grid, and the
+  study-area footprint is the 5,167,373 pixels that are not <code>−1</code> in
+  <code>labels.tif</code>; the emission has <b>0</b>
+  positive pixels outside it.</p>
+</section>
+
+  <footer><p>Built from <code>registry/</code> and <code>evidence/</code> by
+  <code>scripts/build_site.py</code>. Owner-reported scores are labelled
+  <span class="badge amber">OWNER-REPORT</span>; local measurements are labelled
+  <span class="badge blue">PROXY</span> or <span class="badge">DERIVED</span>.
+  No organizer score exists for any artifact in this repository.</p></footer>
+</main><div style="margin:1rem auto;max-width:1050px;padding:1rem;border:2px solid #b65c00;background:#fff0d7;color:#3d270e"><strong>Historical archive.</strong> This page is preserved from earlier upstream work and may contain superseded claims. It is not the current candidate or slot recommendation. See the <a href="../../index.html">current GEMSDOE48 overview</a> and current blocked-fold <a href="../../validation.html">validation</a>.</div>
+</body></html>

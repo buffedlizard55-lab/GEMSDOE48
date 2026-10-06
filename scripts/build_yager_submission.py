@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
-"""Build and audit the GEMSDOE48 conflict-preserving GeoTIFF candidate."""
+"""Rebuild the historical PR #5 Yager-rule research candidate.
+
+This is a separate, non-default experiment; its primary TIFF has finite zeros
+outside the footprint and fails the published null/NaN-outside requirement.
+It did not clear the spatial-proxy gate, has no organizer acceptance, and must not
+be treated as the current rho=0.5 candidate or a submission recommendation.
+"""
 from __future__ import annotations
 
 import hashlib
@@ -41,7 +47,7 @@ def sha256(path: Path) -> str:
 
 def read_checked(path: Path, expected_sha256: str):
     if not path.exists():
-        raise SystemExit(f"missing input {path}; run bash scripts/fetch_inputs.sh")
+        raise SystemExit(f"missing input {path}; restore candidate surfaces and template with the documented scripts in README.md")
     actual = sha256(path)
     if actual != expected_sha256:
         raise SystemExit(f"SHA-256 mismatch for {path}: {actual} != {expected_sha256}")

@@ -1,0 +1,44 @@
+# Sources and provenance boundaries
+
+Checked or retrieved on **2026-10-06 UTC** unless noted. “Official” describes the cited catalog/page, not the provenance of locally downloaded mirrors. Metadata-level availability is not the same as coverage confirmation.
+
+## Competition and data format
+
+- **Official challenge problem, label description, metric, and submission format:** [DrivenData GEMS page 967](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/). The current source says predictions are pixelwise scores in `[0,1]`, on the 100 m EPSG:32611 grid, one float32 band, and “data outside the bounds is null or nan.” The sample template has NaN nodata outside the finite footprint. Local output matches that template convention; only the organizer can establish portal acceptance.
+- **Official public leaderboard:** [leaderboard](https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/), read once on 2026-10-06 UTC. Values are participant-level display rows, not artifact-to-score links; see [`irregularities.md`](irregularities.md). The site is not polled or scraped by this project.
+- **Terms:** [DrivenData Terms of Use](https://www.drivendata.org/termsofuse/). The checked terms restrict automated site monitoring/copying and also manual monitoring/copying without prior written consent. This repository implements no leaderboard feed.
+- **Official interpretation forum topic:** [known USGS/INGENIOUS faults and final-round labels](https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516). Revisit the source directly before basing hidden-label methodology on a forum interpretation; the present tests use only public mirror labels as catalogue proxies.
+
+## Preregistered external geology hypotheses
+
+These sources were checked at the catalog/product-page level. They are candidates, not downloaded layers or verified in-footprint inputs.
+
+- **USGS GeMS / SGMC, DOI [10.5066/P1A3DQZK](https://doi.org/10.5066/P1A3DQZK):** official release catalog checked for H48-2 (contact-network topology and geophysical-break coincidence). The payload, map scale, and exact competition footprint coverage were not audited.
+- **NASA/JPL OPERA DISP-S1:** [Earthdata catalog](https://www.earthdata.nasa.gov/data/catalog/asf-opera-l3-disp-s1-v1-1). Catalog metadata indicate 30 m North American LOS displacement; Earthdata Login is required to download. No granules or coverage counts were downloaded for H48-3.
+- **USGS hydrography / NHDPlus HR:** [product access](https://www.usgs.gov/national-hydrography/access-national-hydrography-products), checked for H48-4. Exact channel-product coverage, completeness, and grid alignment remain unaudited.
+- **USGS 3DEP:** [program/product page](https://www.usgs.gov/3d-elevation-program/about-3dep-products-services), which states free availability without use restrictions. Exact H48-4 footprint availability was not measured.
+- **USGS Great Basin geothermal favorability, DOI [10.5066/P14EET2C](https://www.usgs.gov/data/geothermal-resource-favorability-select-features-and-predictions-united-states-great-basin):** release metadata checked for H48-5. It is a favorability product, not fault truth. The roughly 1.22 GB package was not downloaded and lineage/target overlap is unaudited.
+- **USGS Great Basin heat-flow data, DOI [10.5066/P9BZPVUC](https://doi.org/10.5066/P9BZPVUC):** catalog metadata checked; no package downloaded or data layer used.
+
+## Local source surfaces and public label/template mirrors
+
+The candidate surfaces, catalogue labels, sample template, and SGMC raster below are local public-owner-mirror assets, not organizer-authenticated. Hashes and pinned commits establish byte identity only; they do not establish accuracy, a license grant, or permission to submit/share the content with the sponsor. Reusable data licensing must be separately confirmed before external distribution.
+
+| Asset | Pinned source | SHA-256 | Use in this project |
+|---|---|---|---|
+| H33-2-B2 sparse dotted surface | [`GEMSDOE32` pinned TIFF](https://github.com/buffedlizard55-lab/GEMSDOE32/blob/b983924b57781edd29b8e249c4923bf33d9902f6/docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif) | `c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9` | Fusion source A |
+| H33-D tip/stepover surface | [`GEMSDOE33` pinned TIFF](https://github.com/buffedlizard55-lab/GEMSDOE33/blob/f52533110fe62cd03e77f1228e9e5ecac412c463/docs/downloads/GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e.tif) | `87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757` | Fusion source B |
+| Public catalogue label raster (`labels.tif`) | [`GEMSDOE24` commit `07345ea0604953d7efb858d9cfbc21e20c7aca0b`](https://github.com/buffedlizard55-lab/GEMSDOE24/tree/07345ea0604953d7efb858d9cfbc21e20c7aca0b), `data/bridge/labels.tif` | `7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093` | Existing mapped catalogue faults only; proxy diagnostic labels, not private expert truth |
+| Sample-submission template | same pinned [`GEMSDOE24` commit](https://github.com/buffedlizard55-lab/GEMSDOE24/tree/07345ea0604953d7efb858d9cfbc21e20c7aca0b), `data/bridge/sample_submission.tif` | `2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc` | Derive finite footprint only; its pixel values are never used as labels |
+| SGMC faults raster, newer derived mirror | Underlying public [`USGS State Geologic Map Compilation`](https://mrdata.usgs.gov/geology/state/); pinned owner-mirror derivative from [`GEMSDOE24` commit `07345ea0604953d7efb858d9cfbc21e20c7aca0b`](https://github.com/buffedlizard55-lab/GEMSDOE24/blob/07345ea0604953d7efb858d9cfbc21e20c7aca0b/data/external/derived_sgmc_faults_100m_u8.tif), stored as `data/official/derived_sgmc_faults_100m.tif` | `643cbe992ef4ba37588fb469163ed8291e3ceb23d6c1f78a3cfaa462430c2da0` | Primary SGMC proxy for the current like-for-like holdout; 83,593 positive cells total and 62,122 cells >300 m from catalogue. Public-map proxy, not private truth; source-vector derivation was not independently reconstructed here. |
+| SGMC faults raster, prior raw mirror | Underlying public [`USGS State Geologic Map Compilation`](https://mrdata.usgs.gov/geology/state/); pre-existing owner-mirror derivative at `data/raw/sgmc_faults_100m.tif` | `26d142c4c93282cd94f6950ab96f22aeff59fbbea523d43d662e76fa1b161b5c` | Retained as sensitivity evidence, not pooled with the primary raster; 82,151 positive cells total and 61,664 cells >300 m from catalogue. Its vector lineage is unresolved. |
+
+A byte- and pixel-level comparison found the two SGMC rasters are not interchangeable: they share dimensions, CRS, and affine transform, but differ in nodata metadata, SHA-256, and 1,450 positive-mask cells (1,446 positive only in the newer derivative; 4 only in the prior raw raster). The discrepancy is unresolved; both are retained, with the newer manifest-pinned derivative used for the primary holdout and the prior raster's separate results in `evidence/holdout_raw_sgmc_20261006.json`. Details are in `evidence/sgmc_raster_comparison_20261006.json`. The main-branch PR #5 evaluator also reported 63,121 cells using a `>=300 m` rule and full-scene quadrant scoring; that report is preserved at `docs/data/proxy-validation.json`, but its semantics differ from the current `>300 m` core-plus-halo evaluation and its fold scores are not compared numerically.
+
+The sample finite mask and the mirrored labels' GDAL/nodata footprint were compared by the footprint-build script before the diagnostic. The exact counts and equality result are written to `evidence/footprint_mask_receipt.json`. The `sample_submission.tif` pixel values are not treated as label truth.
+
+## Mathematical and implementation sources
+
+- Dempster's normalized rule and the metric are implemented in the repository and checked against the published formulas, not calibrated from the private test set. The official metric page specifies a triangular 300 m kernel and `alpha=0.2`, `beta=0.8`; see `src/gemsdoe48/metric.py` and its brute-force test.
+- Reliability discount `rho=0.5` and the zero-as-counter-evidence mapping are explicit preregistered modeling assumptions. Neither is an official method or empirically estimated probability calibration.
+- No external geospatial catalogues beyond the sources above were downloaded. The exact hypothesis slate and availability caveats are in [`research/hypotheses-20261006.md`](research/hypotheses-20261006.md).

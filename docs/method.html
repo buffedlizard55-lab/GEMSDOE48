@@ -1,440 +1,67 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>GEMSDOE48 · method</title><style>body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;margin:0;color:#1d2330;background:#f6f7fb;line-height:1.55}
-nav{background:#14213d;padding:.6rem 1rem;position:sticky;top:0}nav a{color:#fff;margin-right:1.1rem;text-decoration:none;font-size:.95rem}
-nav a.on{border-bottom:2px solid #fca311}main{max-width:1050px;margin:auto;padding:1.2rem 1.4rem;background:#fff}
-table{border-collapse:collapse;width:100%;font-size:.9rem;margin:.6rem 0}th,td{border:1px solid #dde;padding:.35rem .5rem;vertical-align:top}
-th{background:#eef1f8}code{background:#f0f2f7;padding:.05rem .3rem;border-radius:3px;font-size:.88em;word-break:break-all}
-pre{background:#f0f2f7;padding:.7rem;overflow:auto}img{max-width:100%;border:1px solid #dde;margin:.5rem 0}
-.dl{background:#fff8e6;border:2px solid #fca311;border-radius:8px;padding:.6rem 1.1rem;margin-bottom:1rem}
-.btn{display:inline-block;background:#fca311;color:#14213d;font-weight:700;padding:.55rem 1rem;border-radius:6px;text-decoration:none;word-break:break-all}
-blockquote{border-left:4px solid #fca311;margin:.8rem 0;padding:.2rem .9rem;background:#fafafa}</style></head><body><nav><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">How to submit</a><a href="method.html" class="on">Method & 0.2778 autopsy</a><a href="hypotheses.html" class="">Hypotheses</a><a href="irregularities.html" class="">Irregularities</a><a href="next-steps.html" class="">Next steps</a><a href="leaderboard.html" class="">Leaderboard</a><a href="sources.html" class="">Sources</a></nav><main><h1>Method, the 0.2778 autopsy, and validation</h1>
-<p>Evidence classes used on this page: <strong>[MEASURED]</strong> = computed this session by code in this repo
-from hash-pinned bytes. <strong>[OWNER-REPORT]</strong> = live score pasted by the project owner (DrivenData
-history needs a login, so we cannot re-verify it). <strong>[OFFICIAL]</strong> = quoted from a DrivenData or
-USGS page, linked.</p>
-<blockquote>
-<p><strong>Current status:</strong> this page preserves the historical H48-1 Dempster analysis and separately records the corrected H48-Yager proxy gate. Neither fusion is cleared for a competition slot. Historical words such as “shipped” refer to a retained project artifact, not an organizer-accepted or currently recommended submission.</p>
-</blockquote>
-<h2>1. The metric [OFFICIAL]</h2>
-<p>From <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/#performance-metric">page 967</a>:
-<code>k(d) = max(1 − d/300 m, 0)</code>, <code>DTI = TP_w / (TP_w + 0.2·FP_w + 0.8·FN_w)</code>. It is implemented in
-<code>src/gems48/metric.py</code> and tested against a literal O(N²) transcription and the organiser's
-worked example (3.00 / 1.89 / 2.00 → 0.60) in <code>tests/test_metric.py</code>.</p>
-<p>Two consequences, both algebraic:</p>
-<ul>
-<li><strong>Scale identity.</strong> <code>T</code> and <code>F</code> are degree-1 in <code>p</code>, so for a fixed support <code>DTI(λp)</code> increases
-  with λ. Binary 0/1 values beat graded values on the same support. The historical H48-1 decision
-  artifact was binary; that algebra alone does not clear it for a slot. Its normalised belief is
-  retained as a <em>diagnostic layer</em>, not a current emission recommendation.</li>
-<li><strong>Marginal rule.</strong> A unit dot with kernel credit <code>k</code> pays only if <code>k &gt; α·DTI</code> = 0.0556 at
-  0.2778.</li>
-</ul>
-<h2>2. Why h33-2-b2 scored 0.2778 — the highest in the GEMSDOE family [MEASURED + OWNER-REPORT]</h2>
-<p>Re-measured from the bytes (<code>b2_02778.tif</code>, sha256 <code>c55bafc4…</code>):</p>
-<table>
-<thead>
-<tr>
-<th>raster</th>
-<th style="text-align: right;">dots</th>
-<th style="text-align: right;">live</th>
-<th>relation (exact set algebra, measured)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>h19-5 backbone</td>
-<td style="text-align: right;">121,131</td>
-<td style="text-align: right;">0.1922</td>
-<td>ridge backbone</td>
-</tr>
-<tr>
-<td>d2.8</td>
-<td style="text-align: right;">44,090</td>
-<td style="text-align: right;">0.2600</td>
-<td>⊂ h19-5 (Poisson-disk thin, min spacing √8 px)</td>
-</tr>
-<tr>
-<td>h27-4-r1-solo</td>
-<td style="text-align: right;">40,199</td>
-<td style="text-align: right;">0.2708</td>
-<td>⊂ d2.8 (3,891 dots removed)</td>
-</tr>
-<tr>
-<td><strong>h33-2-b2</strong></td>
-<td style="text-align: right;"><strong>37,654</strong></td>
-<td style="text-align: right;"><strong>0.2778</strong></td>
-<td>⊂ r1 (the 2,545 dots with d(catalogue) ≤ 2 px removed)</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Why:</strong> every step from 0.1922 to 0.2778 <em>removed</em> mass. No step added a newly discovered fault.
-In <code>1/DTI = 1 + α·F/T + β·(K−T)/T</code> the only term that moved is <code>F/T</code>, the wasted mass per unit
-credit. The last step deleted dots 100–200 m from mapped faults. The scorer masks the catalogue
-itself (DrivenData staff, <a href="https://community.drivendata.org/t/scoring-clarification-masked-pixels-and-re-evaluation/11516">thread 11516</a>).
-Dots hugging it therefore mostly earn credit only against already-masked pixels, while still
-paying α. The tip family carries 3,894–4,637 such flank dots and scored lower (0.2632–0.2649).
-That is consistent with this explanation.</p>
-<p><strong>Can this family beat 0.2778? Marginally at best.</strong> It is ~98 % one dot pattern. The h32-1 tip
-raster shares 36,874 of b2's 37,654 dots <em>at exactly the same pixels</em>. Any recombination moves a
-few hundred dots, and §5 bounds that effect at roughly ±0.003. The leaderboard moved on: <strong>#1 is
-0.3774</strong> (<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">leaderboard</a>,
-read 2026-10-06), not the 0.3195 quoted in the brief. Beating 0.32–0.38 needs new information,
-most plausibly new, independently validated information such as native 1 m LiDAR (prospective
-N1 in <a href="hypotheses.html">hypotheses</a>), not another recombination of the same 100 m layers.</p>
-<h2>3. H48-1 Dempster–Shafer fusion</h2>
-<p>Frame <code>{F, N}</code>. For source <code>i</code> with dots <code>D_i</code>, <code>s_i(x) = k(d(x, D_i))</code>:</p>
-<pre><code>m_i(F) = r_i · s_i(x)
-m_i(N) = r_i · (1 − s_i(x)) · a_i(x)
-m_i(Θ) = 1 − m_i(F) − m_i(N)
-</code></pre>
-<table>
-<thead>
-<tr>
-<th>parameter</th>
-<th>value</th>
-<th>justification (fixed before any instrument reading)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>r_b2</code></td>
-<td>0.900</td>
-<td>reliability of the best live source</td>
-</tr>
-<tr>
-<td><code>r_tip</code></td>
-<td>0.858</td>
-<td><code>0.9 × 0.2649/0.2778</code>, proportional to live score</td>
-</tr>
-<tr>
-<td><code>a</code> off / on backbone</td>
-<td>0.2 / 0.5</td>
-<td>absence is weak evidence off the backbone (low recall) and stronger where the source examined the ridge and declined</td>
-</tr>
-<tr>
-<td><code>a_b2</code> on flank (d ≤ 2 px)</td>
-<td>1.0</td>
-<td>the dotted family's explicit, live-validated rejection (+0.0070)</td>
-</tr>
-<tr>
-<td>decision</td>
-<td><code>BetP(F) = m(F) + m(Θ)/2 &gt; 0.5</code></td>
-<td>Smets' pignistic rule, no tuned threshold</td>
-</tr>
-<tr>
-<td>candidates</td>
-<td>pixels where ≥ 1 source placed a dot</td>
-<td>no invented positions</td>
-</tr>
-<tr>
-<td>NMS radius</td>
-<td>2.8 px</td>
-<td>the families' own minimum spacing is √8 = 2.83 px</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Dempster's rule:</strong> <code>K = f1·n2 + n1·f2</code>, <code>m(F) = (f1f2 + f1u2 + u1f2)/(1−K)</code>,
-<code>m(N) = (n1n2 + n1u2 + u1n2)/(1−K)</code>, <code>m(Θ) = u1u2/(1−K)</code>.</p>
-<blockquote>
-<p><strong>Correction to the brief (IR-48-04).</strong> Dempster's normalised rule does <strong>not</strong> carry the
-disagreement forward as unassigned mass. It divides the conflict <code>K</code> out and redistributes it.
-That is Zadeh's classic criticism. Yager (1987) is the rule that assigns <code>K</code> to Θ. We therefore
-publish <strong>both</strong>: <code>conflict_K.tif</code> (where the families disagree) and
-<code>unassigned_yager_mTheta_incl_conflict.tif</code>. Dempster's <code>m(Θ)</code> is also published for
-completeness.</p>
-<p><strong>Dependence (IR-48-03).</strong> Dempster's rule assumes distinct evidence. b2 ⊂ r1 ⊂ d2.8 ⊂ h19-5,
-and h32-1 shares 97.9 % of b2's pixels, so agreement is double-counted. Denœux's (2008)
-cautious rule is the principled fix. Double counting inflates belief on <em>agreed</em> dots, which
-are kept anyway. It does not change the ordering of the <em>disagreement</em> dots, which are the only
-decisions the rule actually makes here.</p>
-</blockquote>
-<h3>Not an average [MEASURED]</h3>
-<table>
-<thead>
-<tr>
-<th>statistic</th>
-<th style="text-align: right;">value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Pearson(belief, naive mean of supports), all supported px (769,098)</td>
-<td style="text-align: right;">0.962</td>
-</tr>
-<tr>
-<td><strong>Pearson, disagreement region</strong> <code>|s1 − s2| ≥ 1/3</code> (44,626 px)</td>
-<td style="text-align: right;"><strong>0.715</strong></td>
-</tr>
-<tr>
-<td>Spearman, disagreement region</td>
-<td style="text-align: right;">0.629</td>
-</tr>
-<tr>
-<td>mean conflict K: disagreement / agreement</td>
-<td style="text-align: right;">0.372 / 0.103</td>
-</tr>
-<tr>
-<td>mean belief where the dotted source is stronger (naive mean)</td>
-<td style="text-align: right;">0.620 (0.467)</td>
-</tr>
-<tr>
-<td>mean belief where the tip source is stronger (naive mean)</td>
-<td style="text-align: right;">0.229 (0.313)</td>
-</tr>
-<tr>
-<td>emission Jaccard vs naive-mean emission at equal count (V1 / V2)</td>
-<td style="text-align: right;">0.982 / 0.818</td>
-</tr>
-</tbody>
-</table>
-<p>Averaging is symmetric. The fusion is not: it raises belief where the more reliable source
-speaks and lowers it on the 30,304 disagreement pixels inside the catalogue flank, where the
-dotted family has an explicit veto.</p>
-<h2>4. Validation — two instruments, both reported</h2>
-<h3>4a. SGMC spatially-blocked 4-quadrant holdout — <em>computed, but not predictive</em></h3>
-<p>Truth = SGMC geologic-map faults more than 3 px from the catalogue (62,122 px), scored per
-footprint quadrant. <strong>Calibration against 17 live-scored files: Spearman −0.17 (p = 0.53)</strong>, and
-−0.20 within the family. The r13-lattice file scores 0.250 on it but 0.0904 live. The proxy is
-reported for transparency and <strong>cannot forecast or clear a candidate for a slot</strong> (IR-48-05).
-The corrected v2 protocol may expose a gross loss, but even a proxy pass is not sufficient to
-clear a private-label slot.</p>
-<table>
-<thead>
-<tr>
-<th>quadrant</th>
-<th style="text-align: right;">b2</th>
-<th style="text-align: right;">H48-1 (historical)</th>
-<th style="text-align: right;">Δ</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Q0</td>
-<td style="text-align: right;">0.09798</td>
-<td style="text-align: right;">0.09815</td>
-<td style="text-align: right;">+0.00016</td>
-</tr>
-<tr>
-<td>Q1</td>
-<td style="text-align: right;">0.09753</td>
-<td style="text-align: right;">0.09750</td>
-<td style="text-align: right;">−0.00003</td>
-</tr>
-<tr>
-<td>Q2</td>
-<td style="text-align: right;">0.11840</td>
-<td style="text-align: right;">0.11848</td>
-<td style="text-align: right;">+0.00008</td>
-</tr>
-<tr>
-<td>Q3</td>
-<td style="text-align: right;">0.07396</td>
-<td style="text-align: right;">0.07394</td>
-<td style="text-align: right;">−0.00002</td>
-</tr>
-</tbody>
-</table>
-<h3>4b. LSI — Live-Score Inversion (new here)</h3>
-<p><code>TP_w</code> is linear in the truth. Model the hidden truth as a Bernoulli field with intensity <code>q_b</code>
-per bin (7 distance-to-catalogue bands × on/off the backbone). <code>Φ = T/ρ</code> is estimated with the
-dot pattern's measured geometric ratio. <code>q ≥ 0</code> is fit to the 17 live scores
-(<code>src/gems48/lsi.py</code>).</p>
-<table>
-<thead>
-<tr>
-<th>ridge</th>
-<th style="text-align: right;">LOO MAE</th>
-<th style="text-align: right;">LOO Spearman (17)</th>
-<th style="text-align: right;">LOO Spearman (top 8)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1e-4</td>
-<td style="text-align: right;">0.0216</td>
-<td style="text-align: right;">0.760</td>
-<td style="text-align: right;">−0.738</td>
-</tr>
-<tr>
-<td><strong>1e-3</strong></td>
-<td style="text-align: right;"><strong>0.0183</strong></td>
-<td style="text-align: right;"><strong>0.806</strong></td>
-<td style="text-align: right;"><strong>−0.690</strong></td>
-</tr>
-<tr>
-<td>1e-2</td>
-<td style="text-align: right;">0.0189</td>
-<td style="text-align: right;">0.804</td>
-<td style="text-align: right;">−0.714</td>
-</tr>
-</tbody>
-</table>
-<p>LSI ranks coarse quality well but <strong>cannot rank within the family</strong>. Predictions: b2 0.26351,
-V1 0.26336, V2 0.26305, V3 0.26295. Every difference is far below the instrument's resolution.</p>
-<h3>4c. Verdict</h3>
-<p><strong>H48-1 did not beat the holdout best (b2).</strong> Under the project rule it must not take a slot
-from a candidate that has. It is retained as a research artifact because the brief requires a
-genuinely new TIFF, but artifact existence is not slot clearance. Every one of its 37,754 dots is
-a dot of a live-scored file, and it is a strict superset of the 0.2778 file plus 100 dots; the
-owner-built LSI estimate remains too weak to call this a tie or score forecast.</p>
-<h2>5. Historical H48-1 risk bound [MEASURED, algebra]</h2>
-<p><code>den = T/0.2778</code>. 100 added dots, 0 removed. If all 100 earn nothing: DTI ≥ <strong>0.2773–0.2776</strong>,
-across the LSI-estimated <code>T</code> of 5,763 ×0.5…×1.5. If each sits on a straight 1-px truth line it
-alone credits (credit 3.0): DTI ≤ 0.287–0.305. A dot is break-even at a mean credit of 0.0556.
-Receipt: <code>evidence/risk_bound.json</code>.</p>
-<h2>6. Three DS artifacts from earlier GEMSDOE48 sessions [MEASURED; historical comparison]</h2>
-<p>Three sessions produced Dempster–Shafer files for this repo. Same instruments, same bytes logic
-(<code>scripts/compare_ds_files.py</code> → <code>evidence/ds_file_comparison.json</code>):</p>
-<table>
-<thead>
-<tr>
-<th>file</th>
-<th style="text-align: right;">px</th>
-<th style="text-align: right;">mass</th>
-<th>values</th>
-<th style="text-align: right;">b2 dots kept at 1.0</th>
-<th style="text-align: right;">within 200 m of catalogue</th>
-<th style="text-align: right;">LSI pred.</th>
-<th style="text-align: right;">SGMC mean</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>b2 (live 0.2778, reference)</td>
-<td style="text-align: right;">37,654</td>
-<td style="text-align: right;">37,654</td>
-<td>{1}</td>
-<td style="text-align: right;">37,654</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0.26351</td>
-<td style="text-align: right;">0.09697</td>
-</tr>
-<tr>
-<td><strong>H48-1 (historical research artifact)</strong></td>
-<td style="text-align: right;">37,754</td>
-<td style="text-align: right;">37,754</td>
-<td>{1}</td>
-<td style="text-align: right;"><strong>37,654</strong></td>
-<td style="text-align: right;"><strong>0</strong></td>
-<td style="text-align: right;"><strong>0.26336</strong></td>
-<td style="text-align: right;">0.09702</td>
-</tr>
-<tr>
-<td>PR #1 on main (Yager, graded)</td>
-<td style="text-align: right;">47,905</td>
-<td style="text-align: right;">33,326</td>
-<td>{0.086, 0.137, 1}</td>
-<td style="text-align: right;">31,614</td>
-<td style="text-align: right;">3,894</td>
-<td style="text-align: right;">0.23826</td>
-<td style="text-align: right;">0.08539</td>
-</tr>
-<tr>
-<td>PR #2 on main (b2 × h33-d decision)</td>
-<td style="text-align: right;">47,905</td>
-<td style="text-align: right;">47,905</td>
-<td>{1}</td>
-<td style="text-align: right;">37,654</td>
-<td style="text-align: right;">3,894</td>
-<td style="text-align: right;">0.25903</td>
-<td style="text-align: right;">0.09863</td>
-</tr>
-</tbody>
-</table>
-<p>LSI cannot rank within ±0.003. Its historical PR #1 estimate gap vs b2 (−0.025) is coarse-scale,
-but remains an owner-built, unverified instrument. The mechanism is visible in the raster:
-down-weighted validated dots plus re-added flank mass; this is not a current submission recommendation.</p>
-<h2>7. Corrected Yager conflict-transfer candidate — no-go</h2>
-<p>The separate research TIFF <code>gemsdoe48-h48-ds-yager-conflict-20261006.tif</code> combines the hash-pinned
-b2 dotted parent with the h33-d tip/step-over parent. Reliability-discounted binary masses are
-combined conjunctively, and Yager's modified rule transfers conflict <code>K</code> to unassigned mass
-<code>m(Θ)</code>. The diagnostic <code>...-unassigned-diagnostic.tif</code> stores that mass; it is not the submission
-raster. Reliability values (0.90 dotted, 0.85 tip) are heuristic, not calibrated. The conversion
-<code>m(N)=r(1−x)</code> interprets every sparse-parent zero as negative evidence; zero may instead mean the
-detector did not emit a candidate. This semantic assumption is unvalidated.</p>
-<p>The corrected evaluator in <code>src/gems48/validation.py</code> includes prediction confidence in the TP
-maximum and computes distance neighborhoods over the full scene before accumulating quadrants.
-Its public SGMC proxy comparison is:</p>
-<table>
-<thead>
-<tr>
-<th>surface</th>
-<th style="text-align: right;">corrected proxy DTI</th>
-<th style="text-align: right;">delta vs Yager</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>tip parent</td>
-<td style="text-align: right;"><strong>0.09709</strong></td>
-<td style="text-align: right;">+0.01302</td>
-</tr>
-<tr>
-<td>dotted parent</td>
-<td style="text-align: right;">0.09613</td>
-<td style="text-align: right;">+0.01206</td>
-</tr>
-<tr>
-<td>naïve mean</td>
-<td style="text-align: right;">0.09030</td>
-<td style="text-align: right;">+0.00623</td>
-</tr>
-<tr>
-<td>Yager fusion</td>
-<td style="text-align: right;"><strong>0.08407</strong></td>
-<td style="text-align: right;">—</td>
-</tr>
-</tbody>
-</table>
-<p>The Yager candidate loses to the selected best baseline in all four quadrants (0/4 wins). <strong>Gate:
-fail; do not spend a slot.</strong> This is an owner-derived SGMC proxy, not the hidden expert labels, an
-organizer score, or a leaderboard forecast. The v1 result that appeared to pass was invalid:
-its TP term omitted prediction confidence and its per-quadrant crops truncated distance
-neighborhoods. The retracted v1 and corrected v2 receipts are linked in
-<a href="data/proxy-validation-v1-retracted.json"><code>data/proxy-validation-v1-retracted.json</code></a> and
-<a href="data/proxy-validation.json"><code>data/proxy-validation.json</code></a>.</p>
-<p>The candidate TIFF is single-band float32, EPSG:32611, 100 m, 3730×3292, and independently
-reopened with every value finite in [0,1]. It uses finite zeros outside the study footprint, so
-it conflicts with the published null/NaN-outside requirement. The portal was not tested. Its
-bounded uniqueness scan found no exact value or support match among 334 same-grid artifacts, but
-that is not a global uniqueness guarantee. The machine-readable output audit is
-<a href="downloads/gemsdoe48-h48-ds-yager-conflict-20261006-audit.json">Yager build audit</a>.</p>
-<h2>8. Later-main PR #6 DS48 re-emission — no-go</h2>
-<p>The subsequent main-branch PR #6 added a separate Dempster-ranked, off-flank emission with the
-same 37,654-pixel mass as b2. Its builder uses Dempster combination of dotted-02708 and h33-d
-tip credit surfaces (both reliability discounts 0.60), excludes pixels within the chosen 200 m
-catalogue flank, and selects the top Bel(F) values at matched mass. The emission raster passes
-the builder's one-band float32, EPSG:32611, 100 m, finite [0,1], and outside-footprint-zero checks.
-That is an artifact/format check, not a portal acceptance.</p>
-<table>
-<thead>
-<tr>
-<th>proxy in the PR #6 receipt</th>
-<th style="text-align: right;">b2 baseline</th>
-<th style="text-align: right;">DS48 emission</th>
-<th>reading</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>owner-derived SGMC faults ≥300 m from known catalogue</td>
-<td style="text-align: right;">0.09613</td>
-<td style="text-align: right;">0.09068</td>
-<td>emission is about 5.7% lower</td>
-</tr>
-<tr>
-<td>published catalogue</td>
-<td style="text-align: right;">0.00671</td>
-<td style="text-align: right;">0.02413</td>
-<td>not a promotion metric: staff say exact known-fault pixels are masked from scoring</td>
-</tr>
-</tbody>
-</table>
-<p>The catalogue-proximity proxy reverses the known live-score ladder for its four anchors (Spearman
-ρ=−1, n=4), so it cannot rescue the candidate. SGMC is an owner-derived proxy and has poor/uncertain
-live ranking power. <strong>The DS48 emission is unscored and not slot-cleared.</strong> The detailed receipt
-and subsite are <a href="../registry/submission_build.json"><code>registry/submission_build.json</code></a>,
-<a href="../evidence/holdout_antimonotone.json"><code>evidence/holdout_antimonotone.json</code></a>, and
-<a href="ds48-fusion/index.html">the PR #6 DS48 subsite</a>. The emitted TIFF uses finite zeros outside,
-contrary to the official null/NaN-outside text; no portal test or organizer score was observed.</p>
-<hr><p style="font-size:.8rem;color:#667">GEMSDOE48 · built from <code>docs/md/method.md</code> by <code>scripts/build_site.py</code></p></main></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Method and diagnostics · GEMSDOE48</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><div class="wrap">
+  <h1>Method and diagnostics</h1>
+  <p>Discounted Dempster-Shafer combination of two sparse candidate surfaces.</p>
+</div></header>
+<nav><div class="wrap">
+  <a href="index.html">Overview</a><a href="executive-summary.html">Summary</a>
+  <a class="active" href="method.html">Method</a><a href="validation.html">Validation</a>
+  <a href="hypotheses.html">Hypotheses</a><a href="sources.html">Sources</a><a href="irregularities.html">Irregularities</a>
+</div></nav>
+<div class="wrap">
+  <div class="note"><b>Research status:</b> ρ=.5 was frozen before scoring, not calibrated or selected from holdout. The resulting raster is distinct from a mean, but loses the stronger source, the arithmetic mean, and the previous union decision in the blocked comparisons. No submission slot is cleared.</div>
+
+  <h2 class="sec">Inputs and frame</h2>
+  <p>Inputs are the public-owner-mirror H33-2-B2 dotted surface and H33-D tip/stepover surface. Their full-file SHA-256 values, byte counts, attribution limitations, and restore locations are in <a href="sources.html">sources and provenance</a>. Both are sparse binary emissions. They are not organizer-authenticated, and zero may mean “no candidate emitted” rather than an observation against a fault.</p>
+  <p>For each pixel, the model operationally treats an input value <code>p</code> as a binary opinion over the frame <code>{F, not-F}</code>, discounted by a fixed symmetric reliability ρ=0.5:</p>
+  <pre>m(F)       = ρ p
+m(not-F)   = ρ (1 − p)
+m(Θ)       = 1 − ρ</pre>
+  <p>This is an explicit modeling convention—not a learned probability, calibrated accuracy, or official competition model.</p>
+
+  <h2 class="sec">Combination and disagreement</h2>
+  <p>For source masses <code>m₁</code> and <code>m₂</code>, raw conjunctive conflict is</p>
+  <pre>K = m₁(F)m₂(not-F) + m₁(not-F)m₂(F).</pre>
+  <p>The normalized Dempster combination divides the non-conflicting conjunctive masses by <code>1−K</code>. The submitted research candidate is the resulting <code>m(F)</code>. We separately export:</p>
+  <ul>
+    <li><b>Unassigned mass</b> <code>m(Θ)</code> after normalization. This records residual ignorance; it is not the raw conflict.</li>
+    <li><b>Raw conflict K</b> before normalization. Canonical Dempster normalization redistributes conflict, so K is a diagnostic layer—not mass retained by the normalized rule.</li>
+  </ul>
+  <table>
+    <tr><th>Input pattern</th><th>Combined fault m(F)</th><th>Unassigned m(Θ)</th><th>Raw K</th><th>Interpretation</th></tr>
+    <tr><td>Both sources positive</td><td>0.75</td><td>0.25</td><td>0</td><td>Concordant candidate support</td></tr>
+    <tr><td>Exactly one source positive</td><td>1/3</td><td>1/3</td><td>0.25</td><td>Support remains, discounted, with visible ignorance/conflict</td></tr>
+    <tr><td>Neither source positive</td><td>0</td><td>0.25</td><td>0</td><td>No fault belief under this operational zero-as-not-F interpretation</td></tr>
+  </table>
+  <p>At total conflict the normalized rule is undefined; the implementation fails closed. The fixed discount prevents binary 1-vs-0 pixels from reaching total conflict.</p>
+
+  <h2 class="sec">Not an arithmetic mean</h2>
+  <p>The independent build receipt verifies that the primary output and simple 0.5 arithmetic mean are not equal. There are 47,905 differing in-footprint cells; full-footprint MAE is 0.00205494 and MAE on the positive union is 0.22166091. The maximum absolute difference is 0.25. Full-footprint Pearson correlation is 0.999355 because both surfaces are sparse with many shared zeros; union-only correlation is also structurally uninformative. Pixelwise inequality, mass values, and errors—not correlation alone—establish distinction.</p>
+
+  <h2 class="sec">Do not conflate the historical main-branch model</h2>
+  <p>The upstream main branch included an <code>alpha=.99</code> normalized-belief experiment and a full-confidence binary union decision. They are retained as distinct comparators. On the newer pinned SGMC derivative, the prior union mean DTI is 0.096992 and the current ρ=.5 belief mean is 0.069261; on catalogue labels they are 0.085538 and 0.032588. The older raw SGMC raster produces a separate sensitivity pair of 0.095957 and 0.068574. The union is rescored from the two pinned candidate inputs in the same fold domains. Earlier upstream quadrant numbers used full-grid predictions and are not directly comparable.</p>
+  <p>A separate Yager-rule evidence module and candidate TIFF are preserved as historical/alternative work; they are not used to build this Dempster candidate and are not slot-cleared. Same-protocol comparisons, the two-raster discrepancy, and the separate older-raster report are linked from <a href="validation.html">validation</a>. The earlier alpha=.99 builder snapshot remains at <code>scripts/previous_build_submission.py</code>, and the exact builder from the merged main branch is preserved at <code>scripts/previous_main_build_submission.py</code>. Neither is the default.</p>
+
+  <h2 class="sec">Grid and outside-footprint encoding</h2>
+  <p>The candidate is one-band float32 on the 3,730 × 3,292, 100 m EPSG:32611 competition grid. The primary file is finite and bounded by [0,1] inside the derived survey footprint. Every outside cell is NaN and the GeoTIFF nodata tag is NaN, matching the public sample-template convention. The sample pixel values are never used as labels. The local validator confirms the finite mask exactly equals the derived footprint; this is not organizer acceptance.</p>
+
+  <h2 class="sec">Implementation and rerun</h2>
+  <p>Core combination: <code>src/gemsdoe48/evidence.py</code>. Independent GeoTIFF writer/format checks: <code>src/gemsdoe48/geotiff.py</code> and <code>scripts/validate_submission.py</code>. The official DTI equations are in <code>src/gemsdoe48/metric.py</code> and are checked against a brute-force reference by tests.</p>
+  <pre>python scripts/restore_candidate_surfaces.py
+python scripts/restore_proxy_labels.py
+python scripts/build_footprint_mask.py
+python scripts/build_submission.py
+python scripts/validate_submission.py
+python scripts/run_spatial_holdout.py --yager docs/downloads/gemsdoe48-h48-ds-yager-conflict-20261006.tif
+pytest -q</pre>
+  <p>Full formulas, limitations, source lineage and the blocked-gate outcomes are in <a href="validation.html">validation</a>, <a href="sources.html">sources</a>, and the root README.</p>
+  <footer>Method is an auditable hypothesis. Its proxy evaluation failed the current promotion gate.</footer>
+</div>
+</body>
+</html>

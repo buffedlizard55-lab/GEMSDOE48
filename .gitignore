@@ -1,24 +1,39 @@
+# Python environments, caches, and build outputs
 .venv/
+venv/
 __pycache__/
 *.py[cod]
-*.egg-info/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
+.coverage
+htmlcov/
+*.egg-info/
+build/
+dist/
 
-# Regenerable intermediate arrays; JSON receipts remain tracked.
+# Reproducible heavy intermediates; JSON receipts stay tracked.
 evidence/ds_layers/*.npy
 evidence/**/*.npy
 
-# Local scratch and downloaded cache/input copies.
-external_ref/
-scratch/
-nohup.out
+# Local logs and scratch
 *.log
+nohup.out
+scratch/
+external_ref/
 /tmp/
+
+# Raw and downloaded input copies. Existing project inputs remain tracked when
+# explicitly added; do not accidentally add future local/private downloads.
 data/raw/
 data/cache/
+data/proxy/*
+!data/proxy/.gitkeep
+data/source_mirrors/*.tif
+!data/source_mirrors/.gitkeep
 
-# OS files.
+# Partial downloads and OS files
+docs/downloads/*.partial
+*.partial
 .DS_Store
 Thumbs.db

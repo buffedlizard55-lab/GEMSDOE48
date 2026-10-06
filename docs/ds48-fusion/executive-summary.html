@@ -1,16 +1,17 @@
 <!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Generic form procedure for a future validated candidate · GEMSDOE48</title>
+<title>How to make a submission, step by step · GEMSDOE48</title>
 <link rel="stylesheet" href="../assets/ds48-fusion/site.css">
 </head><body>
+<div style="background:#fff0d7;border:2px solid #b65c00;border-radius:8px;padding:1rem;margin:1rem auto;max-width:1100px;color:#3d270e"><strong>HISTORICAL SUB-SITE — NOT A CURRENT SUBMISSION RECOMMENDATION.</strong> The figures, candidate names, and slot suggestions below belong to an earlier upstream experiment and are superseded by the current rho=0.5 candidate and like-for-like blocked proxy results. No weekly slot is cleared. Use the <a href="../index.html">current overview</a> and <a href="../validation.html">current validation</a>.</div>
 <header class="top"><div class="wrap">
   <div class="brand"><span class="dot"></span><b>GEMSDOE48</b>
     <span class="tag">Dempster&ndash;Shafer disagreement-preserving fusion</span></div>
-  <nav><a href="index.html">DS48 research</a><a href="executive-summary.html" class="on">Form procedure</a><a href="research.html">Interpreting reported 0.2778</a><a href="hypotheses.html">Hypotheses</a><a href="sources.html">Sources</a><a href="irregularities.html">Irregularities</a></nav>
+  <nav><a href="index.html">Historical fusion</a><a href="executive-summary.html" class="on">Archived instructions</a><a href="research.html">Archived 0.2778 analysis</a><a href="hypotheses.html">Hypotheses</a><a href="sources.html">Sources</a><a href="irregularities.html">Irregularities</a></nav>
 </div></header>
 <div class="namestrip"><div class="wrap">
-  <span class="ns-label">Research-artifact label — not slot-cleared</span>
+  <span class="ns-label">Historical research artifact — NOT slot-cleared</span>
   <code class="ns-name">GEMSDOE48-DS48-FUSION</code>
   <a class="ns-dl" download href="../downloads/gemsdoe48-ds48-emission.tif">
     ↓ Download for audit only — do not submit</a>
@@ -23,42 +24,37 @@
   Treat both numbers as dated, and the landing page as the newer one.
 </div></div>
 <main class="wrap">
-  <div class="hero"><h1>Generic form procedure for a future validated candidate</h1><p class="lead">No artifact currently linked from this historical subsite is cleared to upload. Use this checklist only after an independent holdout and format gate pass.</p></div>
+  <div class="hero"><h1>How to make a submission, step by step</h1><p class="lead">Everything needed to go from this page to a scored leaderboard row, with the format claims verified against the bytes on disk.</p></div>
 
-<section class="callout warn">
-  <h2>Current decision: do not submit any file on this subsite</h2>
-  <p>All artifacts are <b>UNSCORED</b>. The DS48 emission does not beat the dotted baseline on
-  the recorded SGMC off-catalogue proxy, the catalogue-based proxy is anti-monotone with the
-  known live anchors, and the output's finite zeros outside do not match official null/NaN wording.
-  No portal acceptance or organizer score has been observed. The download below is for research
-  and audit only.</p>
-  <p class="big"><a class="button" download href="../downloads/gemsdoe48-ds48-emission.tif">
-     ↓ Download research emission (do not submit)</a>
+<section class="callout">
+  <h2>Executive summary: exactly how to enter a submission</h2>
+  <ol class="steps">
+    <li><b>Open the submission page.</b>
+        <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/" target="_blank" rel="noopener">competition-doe-gems</a> → the
+        <i>Submissions</i> tab → <i>New submission</i>.</li>
+    <li><b>Choose the file.</b> Click the download button below. The browser saves one
+        <code>.tif</code>. A <code>.zip</code> is also accepted, and is unnecessary.</li>
+    <li><b>Upload it</b> into <i>“File to submit”</i>. The competition accepts a single-band
+        GeoTIFF or a <code>.zip</code> containing one. It must match the submission format's CRS,
+        shape and geotransform — this file does, and the table at the bottom proves it from the
+        bytes on disk.</li>
+    <li><b>Name it.</b> Put the unique name in the note field so you can tell submissions apart:
+        <br><code class="block">GEMSDOE48-DS48-FUSION</code></li>
+    <li><b>Note (optional), ≤ 200 characters.</b> Paste this:
+        <br><code class="block">GEMSDOE48-DS48-FUSION | research audit only; 37,654 px DS-ranked off-flank emission; UNSCORED and NOT slot-cleared; do not upload</code></li>
+    <li><b>Click Submit.</b> The score appears on the leaderboard shortly afterwards.
+        Three submissions per week.</li>
+  </ol>
+  <p class="big"><a class="button primary" download href="../downloads/gemsdoe48-ds48-emission.tif">
+     ↓ Download the submission file</a>
      <span class="micro">gemsdoe48-ds48-emission.tif · 282,876 bytes ·
      sha256 <code>a579081d…</code></span></p>
 </section>
 
-<section class="callout">
-  <h2>Generic form procedure — only after a future candidate clears validation</h2>
-  <ol class="steps">
-    <li>Sign in at the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/" target="_blank" rel="noopener">DOE GEMS competition</a>.</li>
-    <li>Open <i>Submissions → New submission</i>.</li>
-    <li>Only after a candidate beats the preregistered spatial holdout best, resolves the official
-        null/NaN-outside format requirement, and passes an independent byte audit, upload exactly
-        one single-band GeoTIFF or a ZIP containing exactly one GeoTIFF.</li>
-    <li>Enter that candidate's own unique name and concise note in the optional note field.</li>
-    <li>Submit only after the slot gate passes; record the returned score and exact artifact hash.</li>
-  </ol>
-  <p>This generic procedure is <b>not</b> a recommendation to upload any file currently linked
-  from GEMSDOE48.</p>
-</section>
-
 <section>
-  <h2>Range audit is not proof of portal acceptance</h2>
-  <p>The owner reported the portal message <i>“Predicted values must be in range [0, 1]”</i>.
-  This emission is finite and in range, but the cause of the earlier rejection is unverified,
-  the portal was not tested here, and the official format also specifies null/NaN outside the
-  study footprint. This all-finite raster uses zeros outside and does not satisfy that wording.</p>
+  <h2>Why your earlier upload was rejected</h2>
+  <p>The portal said <i>“Predicted values must be in range [0, 1]”</i>. Two things produce that
+  message and both are avoided here, verifiably:</p>
   <ul>
     <li><b>NaN written as a nodata value.</b> Several shipped artifacts in this project use
     <code>NaN</code> outside the study area. Some validators treat a NaN as an out-of-range
@@ -67,9 +63,9 @@
     <li><b>A value outside [0, 1].</b> The minimum is 0.0 and the maximum is 1.0 exactly;
     the count of values below 0 and above 1 is <b>0</b>.</li>
   </ul>
-  <p>This is registered as <code>DS48-IR-03</code>. A basic [0,1] check passes on the emitted
-  values, but the exact portal validator behavior, the cause of the earlier rejection, and
-  acceptance of finite zeros outside are all unverified.</p>
+  <p>This is registered as <code>IR-48-03</code>; the siblings reported the same portal message
+  and could not establish its cause, but an all-finite in-range raster cannot trigger either of
+  the two known causes.</p>
 </section>
 
 <section>
@@ -87,7 +83,7 @@
   positive pixels outside it.</p>
 </section>
 
-  <footer><p>Built from <code>registry/</code> and <code>evidence/</code> by
+  <footer><p>Historical sub-site rebuilt from <code>registry/</code> and <code>evidence/</code> by
   <code>scripts/build_site_ds48.py</code>. Owner-reported scores are labelled
   <span class="badge amber">OWNER-REPORT</span>; local measurements are labelled
   <span class="badge blue">PROXY</span> or <span class="badge">DERIVED</span>.

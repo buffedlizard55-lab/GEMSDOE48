@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GEMSDOE48 · Dempster-Shafer family fusion · DOE GEMS Prize</title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="../style.css">
 </head>
 <body>
 <header>
@@ -20,7 +20,7 @@
   <a class="active" href="index.html">Overview &amp; download</a>
   <a href="executive-summary.html">Executive summary / how to submit</a>
   <a href="method.html">Method</a>
-  <a href="validation.html">Validation</a>
+  <a href="../validation.html">Validation</a>
   <a href="hypotheses.html">Next hypotheses</a>
   <a href="sources.html">Sources</a>
   <a href="irregularities.html">Irregularities</a>
@@ -31,12 +31,12 @@
 <div class="hero">
   <h2>⬇ ONE-CLICK SUBMISSION FILE</h2>
   <p><span class="badge ok">format-audited</span><span class="badge ok">holdout-gated</span><span class="badge claim">UNSCORED — no organizer score exists yet</span></p>
-  <a class="btn" href="downloads/gemsdoe48-ds-dotted-x-tipstepover-20261006T201749Z-95897e3f8125-decision-zeros.tif">⬇ Download submission GeoTIFF (.tif)</a>
+  <a class="btn" href="../downloads/gemsdoe48-ds-dotted-x-tipstepover-20261006T201749Z-95897e3f8125-decision-zeros.tif">⬇ Download submission GeoTIFF (.tif)</a>
   <p class="mono">gemsdoe48-ds-dotted-x-tipstepover-20261006T201749Z-95897e3f8125-decision-zeros.tif · 169,061 bytes</p>
   <table>
     <tr><th>Unique submission name</th><td class="mono">GEMSDOE48-DS-DOTTED-x-TIPSTEPOVER-95897e3f8125</td></tr>
     <tr><th>Paste-ready note (173/200 chars)</th><td class="mono">GEMSDOE48 Dempster-Shafer fusion dotted 0.2778 x tip-stepover 0.2632; union support 47905 dots full confidence per holdout tier sweep; unassigned-mass layer; id 95897e3f8125</td></tr>
-    <tr><th>SHA-256</th><td class="mono">a913f633925e9e683be150ec7826d8dad6cca44589bf832ec5d8e689ccda5c52 (receipt: <a href="../evidence/build_submission.json">evidence/build_submission.json</a>)</td></tr>
+    <tr><th>SHA-256</th><td class="mono">a913f633925e9e683be150ec7826d8dad6cca44589bf832ec5d8e689ccda5c52 (receipt: <a href="../data/build_submission-pr2-20261006.json">evidence/build_submission.json</a>)</td></tr>
     <tr><th>Grid &amp; format</th><td>single band · float32 · EPSG:32611 · 100 m · 3730×3292 · all 12,279,160 cells finite · values in [0,1] · 0 NaN · no nodata tag · 47,905 emitted dots · 0 dots on the public catalogue</td></tr>
   </table>
   <div class="note"><b>Portal error “Predicted values must be in range [0, 1]”:</b> this file is immune.
@@ -49,10 +49,10 @@
     <h3>Also downloadable: the graded DS belief + diagnostics</h3>
     <p class="small">The literal normalized combined belief and the disagreement layers a geologist reads:</p>
     <ul class="small">
-      <li><a href="downloads/gemsdoe48-ds-dotted-x-tipstepover-20261006T201749Z-95897e3f8125-belief-zeros.tif">normalized combined belief Bel(F) ∈ [0,1]</a> — tiers {1.0 both-family, 0.4975 single-family}</li>
-      <li><a href="downloads/gemsdoe48-ds-unassigned-mass-20261006T201749Z-95897e3f8125.tif">unassigned mass m<sub>12</sub>(Θ)</a> — preserved ignorance after combination</li>
-      <li><a href="downloads/gemsdoe48-ds-conflict-20261006T201749Z-95897e3f8125.tif">conflict K</a> — where the families actively contradict</li>
-      <li><a href="downloads/gemsdoe48-ds-plausibility-20261006T201749Z-95897e3f8125.tif">plausibility Pl(F)</a> · <a href="downloads/gemsdoe48-ds-belief-raw-20261006T201749Z-95897e3f8125.tif">raw belief</a></li>
+      <li><a href="../downloads/gemsdoe48-ds-dotted-x-tipstepover-20261006T201749Z-95897e3f8125-belief-zeros.tif">normalized combined belief Bel(F) ∈ [0,1]</a> — tiers {1.0 both-family, 0.4975 single-family}</li>
+      <li><a href="../downloads/gemsdoe48-ds-unassigned-mass-20261006T201749Z-95897e3f8125.tif">unassigned mass m<sub>12</sub>(Θ)</a> — preserved ignorance after combination</li>
+      <li><a href="../downloads/gemsdoe48-ds-conflict-20261006T201749Z-95897e3f8125.tif">conflict K</a> — where the families actively contradict</li>
+      <li><a href="../downloads/gemsdoe48-ds-plausibility-20261006T201749Z-95897e3f8125.tif">plausibility Pl(F)</a> · <a href="../downloads/gemsdoe48-ds-belief-raw-20261006T201749Z-95897e3f8125.tif">raw belief</a></li>
     </ul>
   </div>
   <div class="card">
@@ -61,7 +61,7 @@
     evidence commits, where it abstains. The <b>decision file</b> (primary) is what the
     spatially-blocked off-catalogue holdout selected for submission: the DS support
     (combined belief &gt; 0) emitted at full confidence, because the tier sweep measured
-    full confidence as optimal (see <a href="validation.html">validation</a>). Same evidence,
+    full confidence as optimal (see <a href="../validation.html">validation</a>). Same evidence,
     two representations — submit the decision file.</p>
   </div>
 </div>
@@ -137,5 +137,6 @@ better budgeting. The ranked research agenda for that is on the
   <a href="irregularities.html">irregularity register</a>
 </footer>
 </div>
+<div style="margin:1rem;padding:1rem;border:2px solid #b65c00;background:#fff0d7;color:#3d270e"><strong>Historical PR archive.</strong> This earlier page is preserved for provenance and may contain superseded claims. See the <a href="../index.html">current overview</a> and <a href="../validation.html">current validation</a>.</div>
 </body>
 </html>

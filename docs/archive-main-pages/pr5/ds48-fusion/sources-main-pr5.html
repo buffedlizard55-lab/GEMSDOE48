@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sources · GEMSDOE48</title>
+<link rel="stylesheet" href="../assets/ds48-fusion/site.css">
+</head><body>
+<div style="margin:1rem;padding:1rem;border:2px solid #b65c00;background:#fff0d7;color:#3d270e"><strong>Historical snapshot from the main branch after PR #5.</strong> Preserved for provenance; it is superseded by the current no-slot decision. Any six-hour leaderboard-feed instructions below are historical: the current branch disables that workflow under its Terms-of-Use review, and the retained parser has no network-fetch path. <a href="../../../index.html">Current overview</a> · <a href="../../../validation.html">Current validation</a>.</div>
+
+<header class="top"><div class="wrap">
+  <div class="brand"><span class="dot"></span><b>GEMSDOE48</b>
+    <span class="tag">Dempster&ndash;Shafer disagreement-preserving fusion</span></div>
+  <nav><a href="../../../index.html">DS48 research</a><a href="../../../executive-summary.html">Form procedure</a><a href="../../../research.html">Interpreting reported 0.2778</a><a href="../../../hypotheses.html">Hypotheses</a><a href="../../../sources.html" class="on">Sources</a><a href="../../../irregularities.html">Irregularities</a></nav>
+</div></header>
+<div class="namestrip"><div class="wrap">
+  <span class="ns-label">Research-artifact label — not slot-cleared</span>
+  <code class="ns-name">GEMSDOE48-DS48-FUSION</code>
+  <a class="ns-dl" download href="../downloads/gemsdoe48-ds48-emission.tif">
+    ↓ Download for audit only — do not submit</a>
+</div></div>
+<div class="xlink"><div class="wrap">
+  This is the <b>DS48 fusion</b> sub-site. The repository landing page is
+  <a href="../index.html">docs/index.html</a>, and its
+  <a href="../leaderboard.html">leaderboard page</a> carries a <b>newer snapshot</b> than the
+  2026-10-02 figure quoted here — a later session measured the leader at 0.3774, not 0.3195.
+  Treat both numbers as dated, and the landing page as the newer one.
+</div></div>
+<main class="wrap">
+  <div class="hero"><h1>Sources</h1><p class="lead">Every claim, its official source, and the limit of what that source supports.</p></div>
+
+<section>
+  <h2>Source table</h2>
+  <p>Every claim on this site resolves to a row here. <b>Verified</b> means the source was read
+  and the statement is a faithful restatement; <b>limit</b> says what the source cannot support.</p>
+  <table class="sources">
+    <tr><th>id</th><th>source</th><th>kind</th><th>verified statement</th><th>limit</th></tr>
+    <tr><td><code>DD-SPEC</code></td><td>Organizer problem description and metric</td><td>Official source read</td><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/" target="_blank" rel="noopener">Single-band float32 confidence raster, UTM 11N, 100 m, values in [0, 1]; 300 m triangular DTI with α = 0.2 and β = 0.8.</a></td><td>Re-read here 2026-10-06 from the sibling repositories&#x27; verbatim transcriptions; the competition host itself is not reachable from this sandbox (HTTP 000).</td></tr><tr><td><code>REF-LOSS</code></td><td>Organizers&#x27; reference solution</td><td>Official repository, cloned and read</td><td><a href="https://github.com/drivendataorg/gems-prize-reference-solution" target="_blank" rel="noopener">Code cell 16 sets alpha = 0.2 (“weight for false positives in Tversky loss”) and beta = 0.8 (“weight for false negatives”) — the metric&#x27;s own weights. Independently corroborates DD-SPEC.</a></td><td>Cloned at HEAD on 2026-10-06; data/ is empty and the training data is not distributed with it.</td></tr><tr><td><code>DD-MASK</code></td><td>Known-pixel masking</td><td>Organizer staff clarification (2026-09-16, 2026-09-21)</td><td><a href="https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516/4" target="_blank" rel="noopener">The mask is pixel-exact and identical to the provided training labels. A predicted pixel near a known trace but far from NEW truth is fully penalised, with no buffer. A new-truth pixel CAN lie within 300 m of a known trace — “corrections or modifications to existing fault traces”.</a></td><td>Read from the sibling repositories&#x27; recorded transcription.</td></tr><tr><td><code>DD-POOL</code></td><td>Leaderboard aggregation</td><td>Organizer staff clarification (2026-10-01)</td><td><a href="https://community.drivendata.org/t/leaderboard-aggregation-pooled-over-public-test-pixels-or-mean-of-per-chunk-scores/11550" target="_blank" rel="noopener">Public and private scores pool all subset pixels into one Tversky index.</a></td><td>Recorded transcription.</td></tr><tr><td><code>DD-TEST</code></td><td>Hidden test-source disclosure</td><td>Organizer staff clarification</td><td><a href="https://community.drivendata.org/t/how-were-the-new-test-faults-identified-data-sources-and-fault-types/11527/7" target="_blank" rel="noopener">Fault types and source coverage are not disclosed; expert assessment matters.</a></td><td>Therefore do not assume the test faults are all Quaternary scarps or geothermal conduits.</td></tr><tr><td><code>DD-LB</code></td><td>Leaderboard snapshot</td><td>Official page read (2026-10-02)</td><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/" target="_blank" rel="noopener">The 2026-10-02 snapshot listed #1 at 0.3195; a later 2026-10-06 page-reader snapshot found #1 at 0.3774.</a></td><td>Dated human snapshots, not permanent/current feed values. No artifact in this repository is linked to a public row by TIFF hash; this repository does not automate leaderboard fetches.</td></tr><tr><td><code>GDR-1391</code></td><td>INGENIOUS / GDR submission 1391</td><td>Official data portal</td><td><a href="https://gdr.openei.org/submissions/1391" target="_blank" rel="noopener">The competition&#x27;s feature stack originates here; TC means thermal conductivity.</a></td><td>Not fetchable from this sandbox (HTTP 000).</td></tr><tr><td><code>GEODAWN</code></td><td>GeoDAWN Nevada West-Central geophysical release</td><td>Official USGS release</td><td><a href="https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7" target="_blank" rel="noopener">Four acquisition blocks (Winnemucca, Fallon, Hawthorne, Tonopah); contractor grids for DEM, K, Th, U, TC, RTP, TMI, ternary ratios and TMI upward-continued to 150 m.</a></td><td>Archives and their SHA-256 digests are already mirrored in &lt;code&gt;GEMSDOE24/data/external/&lt;/code&gt;, so H48-B and H48-C are implementable offline.</td></tr><tr><td><code>GEODAWN-DOI</code></td><td>GeoDAWN DOI</td><td>Persistent identifier</td><td><a href="https://doi.org/10.5066/P93LGLVQ" target="_blank" rel="noopener">10.5066/P93LGLVQ — the citable form of GEODAWN.</a></td><td>Resolves to the ScienceBase item.</td></tr><tr><td><code>RULES</code></td><td>DOE GEMS Prize rules</td><td>Official rules document</td><td><a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf" target="_blank" rel="noopener">Three submissions per week; one final submission is evaluated across both prize rounds.</a></td><td>The brief gives this URL; it is not reachable from this sandbox.</td></tr><tr><td><code>T50</code></td><td>Hexagonal lattice is the optimal plane covering</td><td>Peer-reviewed result</td><td><a href="https://doi.org/10.1007/978-1-4757-6568-7" target="_blank" rel="noopener">Covering density 2π/(3√3) = 1.2091996 for the hexagonal lattice versus π/2 = 1.5707963 for the square lattice: 23.0 % fewer points at equal covering radius.</a></td><td>Conway &amp;amp; Sloane, &lt;i&gt;Sphere Packings, Lattices and Groups&lt;/i&gt;, 3rd ed., ch. 2. Used by H48&#x27;s hex re-emission arm, which was then measured and falsified.</td></tr><tr><td><code>DS-1976</code></td><td>A Mathematical Theory of Evidence</td><td>Book (primary source)</td><td><a href="https://press.princeton.edu/books/paperback/9780691100425/a-mathematical-theory-of-evidence" target="_blank" rel="noopener">Shafer 1976: Dempster&#x27;s rule of combination, ch. 3; reliability discounting, §11.2.</a></td><td>The two-sided simple support function and the discounting operator implemented in &lt;code&gt;src/gemsdoe48/ds.py&lt;/code&gt; follow this construction.</td></tr><tr><td><code>DS-1967</code></td><td>Upper and lower probabilities induced by a multivalued mapping</td><td>Peer-reviewed (primary source)</td><td><a href="https://doi.org/10.1214/aoms/1177698950" target="_blank" rel="noopener">Dempster 1967, &lt;i&gt;Annals of Mathematical Statistics&lt;/i&gt; 38(2), 325–339 — the origin of the combination rule.</a></td><td>Cited by Shafer 1976 as the rule&#x27;s source.</td></tr><tr><td><code>SMETS-1994</code></td><td>The transferable belief model</td><td>Peer-reviewed</td><td><a href="https://doi.org/10.1016/0004-3702(94)90026-4" target="_blank" rel="noopener">Smets &amp;amp; Kennes 1994, &lt;i&gt;Artificial Intelligence&lt;/i&gt; 66(2), 191–234. Under the unnormalised TBM the conflict mass is kept explicitly on the empty set; this is why the conflict raster is shipped alongside m(Θ).</a></td><td></td></tr><tr><td><code>SENTZ-2002</code></td><td>Combination of evidence in Dempster–Shafer theory</td><td>Sandia technical report</td><td><a href="https://www.osti.gov/biblio/800792" target="_blank" rel="noopener">Sentz &amp;amp; Ferson, SAND2002-0835: the normalisation step in Dempster&#x27;s rule is the origin of Zadeh&#x27;s (1984) paradox, so conflict must be reported, not hidden.</a></td><td></td></tr><tr><td><code>STAFF-CLARIFICATION</code></td><td>New-fault truth can lie within 300 m of a known trace</td><td>Organizer staff clarification</td><td><a href="https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516/4" target="_blank" rel="noopener">The single most load-bearing sentence in this project: it makes hypothesis H48-A possible and explains why the B = 3 removal hurt the live score.</a></td><td></td></tr>
+  </table>
+</section>
+<section class="callout warn">
+  <h2>What could not be read from this sandbox</h2>
+  <p>Network egress here is restricted to <code>github.com</code> and <code>pypi.org</code>. Every
+  request to a science-data host returned HTTP 000, tested 2026-10-06:
+  <code>www.drivendata.org</code>, <code>gdr.openei.org</code>, <code>www.dropbox.com</code>,
+  <code>www.sciencebase.gov</code>, <code>prd-tnm.s3.amazonaws.com</code>,
+  <code>earthexplorer.usgs.gov</code>, <code>portal.opentopography.org</code>,
+  <code>earthquake.usgs.gov</code>, <code>www.usgs.gov</code>,
+  <code>buffedlizard55-lab.github.io</code>.</p>
+  <p>Consequences, stated plainly rather than papered over:</p>
+  <ul>
+    <li>The competition data tab cannot be downloaded here. The official rasters used by this
+    repository were obtained from the account's own earlier mirror
+    (<code>GEMSDOE24/data/bridge/</code>) and are SHA-256 identified in
+    <code>registry/inputs.json</code>.</li>
+    <li>New external data cannot be fetched. Any hypothesis that needs new data is registered with
+    an explicit <b>obtainability not verified</b> flag, and a fetcher rather than a claim.</li>
+    <li>Leaderboard and forum threads are recorded as human snapshots only, which is also what
+    the Terms of Use require.</li>
+  </ul>
+</section>
+
+  <footer><p>Built from <code>registry/</code> and <code>evidence/</code> by
+  <code>scripts/build_site_ds48.py</code>. Owner-reported scores are labelled
+  <span class="badge amber">OWNER-REPORT</span>; local measurements are labelled
+  <span class="badge blue">PROXY</span> or <span class="badge">DERIVED</span>.
+  No organizer score exists for any artifact in this repository.</p></footer>
+</main></body></html>

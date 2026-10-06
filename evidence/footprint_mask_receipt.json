@@ -1,0 +1,20 @@
+{
+  "source": "data/raw/sample_submission_template.tif",
+  "source_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+  "source_provenance": "Public owner-mirror of the sample template; not organizer-authenticated.",
+  "usage": "Only finite mask used; sample pixel values are not used as labels.",
+  "footprint_cells": 5167373,
+  "outside_cells": 7111787,
+  "sample_label_mask_comparison": {
+    "checked": true,
+    "label_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+    "label_provenance": "public owner-mirror; not organizer-authenticated",
+    "equal_cell_count": 5167373,
+    "difference_cells": 0,
+    "label_value_nodata_difference_cells": 0,
+    "positive_labels_inside_footprint": 60988
+  },
+  "output": "data/source_mirrors/footprint-mask.tif",
+  "output_sha256": "ddadb8c96cda673b91ddaa0bbed2aa955c358a8f6196c4c4e8fa70d454dd429f",
+  "mask_is_binary": true
+}
