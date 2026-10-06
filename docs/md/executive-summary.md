@@ -11,8 +11,9 @@
 | **Unique name** (start of the note) | `{{UNIQUE}}` |
 | **Note (optional)** | `{{NOTE}}` |
 
-> **Upload the file above, not** `gemsdoe48-h48-ds-yager-conflict-20261006.tif` (an earlier
-> session's file still in `downloads/`). See IR-48-13 in [irregularities](irregularities.html).
+> **Upload the file above.** Do **not** upload the earlier sessions' files still in `downloads/`:
+> `gemsdoe48-h48-ds-yager-conflict-20261006.tif` (IR-48-13) or
+> `gemsdoe48-ds-dotted-x-tipstepover-…-decision-zeros.tif` (IR-48-14). See [irregularities](irregularities.html).
 
 ## Steps
 

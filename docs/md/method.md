@@ -155,7 +155,7 @@ Three sessions produced Dempster–Shafer files for this repo. Same instruments,
 | b2 (live 0.2778, reference) | 37,654 | 37,654 | {1} | 37,654 | 0 | 0.26351 | 0.09697 |
 | **H48-1, this file (primary)** | 37,754 | 37,754 | {1} | **37,654** | **0** | **0.26336** | 0.09702 |
 | PR #1 on main (Yager, graded) | 47,905 | 33,326 | {0.086, 0.137, 1} | 31,614 | 3,894 | 0.23826 | 0.08539 |
-| PR #2 (b2 × h33-d decision) | 47,905 | 47,905 | {1} | 37,654 | 3,894 | 0.25903 | 0.09863 |
+| PR #2 on main (b2 × h33-d decision) | 47,905 | 47,905 | {1} | 37,654 | 3,894 | 0.25903 | 0.09863 |
 
 LSI cannot rank within ±0.003, but the PR #1 gap (−0.025) is coarse-scale, the kind of
 difference LSI does resolve (LOO MAE 0.018 across 17 files). The mechanism is also explicit:

@@ -2,5 +2,8 @@
 __pycache__/
 .pytest_cache/
 *.pyc
+external_ref/
+scratch/
+nohup.out
 data/raw/
 data/cache/

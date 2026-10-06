@@ -48,9 +48,9 @@ Dempster m(Θ).
 |---|---|
 | **`gemsdoe48-h48-1-ds-fusion-b2xh32tip-20261006-407bb7f4-zeros.tif` (this file)** | **Upload this one.** Strict superset of the live 0.2778 file plus 100 dots, 0 flank dots, downside ≥ 0.2773 |
 | `gemsdoe48-h48-ds-yager-conflict-20261006.tif` (PR #1, earlier session) | **Not recommended** (IR-48-13): 6,040 validated b2 dots down-weighted to 0.137, plus 3,894 re-added flank dots. LSI 0.2383 |
-| PR #2 decision file (b2 × h33-d) | Not merged. Re-adds the same 3,894 flank dots. LSI 0.2590 |
+| `gemsdoe48-ds-dotted-x-tipstepover-20261006T201749Z-95897e3f8125-decision-zeros.tif` (PR #2, merged by a parallel session) | **Not recommended** (IR-48-14): re-adds the same 3,894 flank dots. LSI 0.2590 |
 
-Earlier session's README and pages are preserved in [`docs/prev-pr1/`](docs/prev-pr1/).
+Earlier sessions' READMEs and pages are preserved in [`docs/prev-pr1/`](docs/prev-pr1/) and [`docs/prev-pr2/`](docs/prev-pr2/). Their files remain in `docs/downloads/` for audit.
 
 ## Key findings of this session (all measured; see [method](docs/md/method.md))
 
