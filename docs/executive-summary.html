@@ -43,6 +43,9 @@
   </table>
   <p>Receipts: <a href="../evidence/submission_validation_20261006.json">submission validation</a>, <a href="../evidence/build_receipt_20261006.json">build and distinction checks</a>, and <a href="../evidence/footprint_mask_receipt.json">footprint/template comparison</a>.</p>
 
+  <h2 class="sec">SGMC input discrepancy</h2>
+  <p>The current primary holdout uses the newer manifest-pinned derivative (83,593 positives; 62,122 at &gt;300 m from catalogue). A prior raw mirror has 82,151 positives and differs at 1,450 positive-mask cells despite matching the spatial grid. The cause is unresolved; the older raster was evaluated separately and retained as a sensitivity report. Neither raster is organizer-authenticated. See <a href="../evidence/sgmc_raster_comparison_20261006.json">comparison receipt</a>, <a href="../evidence/holdout_20261006.json">newer-raster holdout</a>, and <a href="../evidence/holdout_raw_sgmc_20261006.json">older-raster holdout</a>.</p>
+
   <h2 class="sec">Reproduction</h2>
   <pre class="mono">python -m pip install -e '.[dev]'
 python scripts/restore_candidate_surfaces.py
@@ -50,7 +53,7 @@ python scripts/restore_proxy_labels.py
 python scripts/build_footprint_mask.py
 python scripts/build_submission.py
 python scripts/validate_submission.py
-python scripts/run_spatial_holdout.py
+python scripts/run_spatial_holdout.py --yager docs/downloads/gemsdoe48-h48-ds-yager-conflict-20261006.tif
 pytest -q</pre>
   <p>Restore scripts verify pinned public owner-mirror hashes; they do not establish organizer provenance or licensing. For full source/data caveats, review <a href="sources.html">sources</a> and <a href="irregularities.html">irregularities</a>.</p>
   <footer>GEMSDOE48 · no organizer score is recorded for this artifact; no weekly submission slot is cleared.</footer>

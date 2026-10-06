@@ -1,7 +1,7 @@
 {
   "generated_unix": 1791320899,
   "unique_name": "GEMSDOE48-DS48-FUSION",
-  "portal_note": "GEMSDOE48-DS48-FUSION | base mass 37,654 px ranked by Dempster-Shafer combined belief, off-flank (>=200 m from the published catalogue); all-finite [0,1]; UNSCORED",
+  "portal_note": "GEMSDOE48-DS48-FUSION | research audit only; 37,654 px DS-ranked off-flank emission; UNSCORED and NOT slot-cleared; do not upload",
   "reliability": {
     "a_dotted": 0.6,
     "a_tip": 0.6
@@ -282,10 +282,10 @@
     }
   },
   "headline_negative_result": {
-    "claim": "No arm tested in this repository beats the 0.2778 artifact on any instrument that has been validated against the live leaderboard.",
-    "falsified_arms": [
+    "claim": "No candidate here has a verified organizer-score gain over the owner-reported 0.2778 anchor; available public proxies do not establish private-score performance.",
+    "arms_reviewed": [
       "Dempster-Shafer corroboration removal at r in {300,283,250,224,200,173,141,100,0} m: the frozen gate fails at every radius (best safety 0.64 < 2.0).",
-      "Hexagonal covering-optimal re-emission at 11 spacings: NOT a clean falsification, contrary to an earlier reading of this receipt.  At matched mass the best arm (spacing 5.6 px, 37,499 dots) scores ABOVE the live-best base on all three local truth layers per unit mass -- x1.019 on the SGMC off-catalogue layer, x12.5 on the catalogue-in-corridor layer, x14.6 on the whole catalogue. The catalogue-side gains are NOT evidence of a live gain, because that instrument is anti-monotone with the live ladder (Spearman -1.0, n = 4, IR-48-04).  The SGMC-side gain is +1.9 %, which is inside the noise of a point set that merely re-samples the same 48,394-pixel union corridor at a similar mass; it is not a better detector and it emits 37,499 dots of the SAME two families.  Recorded as a live-candidate worth ONE slot if the owner wants to test it, and as UNVALIDATED here.",
+      "Hexagonal covering-optimal re-emission at 11 spacings: NOT a clean falsification, contrary to an earlier reading of this receipt.  At matched mass the best arm (spacing 5.6 px, 37,499 dots) has higher TPw per unit mass than the b2 base on three local proxy layers -- x1.019 on owner-derived SGMC off-catalogue, x12.5 on catalogue-in-corridor, and x14.6 on the whole catalogue. The catalogue-side gains are NOT evidence of a live gain, because that instrument is anti-monotone with the live ladder (Spearman -1.0, n = 4, DS48-IR-04).  The SGMC-side gain is +1.9 %, which is inside the noise of a point set that merely re-samples the same 48,394-pixel union corridor at a similar mass; it is not a better detector and it emits 37,499 dots of the SAME two families.  Status: UNVALIDATED and NOT slot-cleared. Do not spend a weekly slot on this arm; the +1.9% SGMC signal is within re-sampling noise.",
       "Dempster-Shafer ranked re-emission at matched mass: SGMC off-catalogue credit falls 5.8 % (off-flank) to 7.1 % (full union) while catalogue credit rises."
     ],
     "evidence_class": "PROXY + DERIVED"

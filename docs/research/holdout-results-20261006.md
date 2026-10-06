@@ -13,7 +13,9 @@
 ## Proxy truth definitions
 
 1. **Catalogue labels:** 60,988 positive cells from the public owner-mirror label raster (SHA-256 `7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093`). It represents known public catalogue faults, not the private expert-labelled competition target.
-2. **SGMC off-catalogue faults:** 61,664 positive cells in the on-grid SGMC owner-mirror raster (SHA-256 `26d142c4c93282cd94f6950ab96f22aeff59fbbea523d43d662e76fa1b161b5c`), inside the footprint and more than 300 m from every positive catalogue-label cell. This remains a public-map proxy, and its original vector derivation was not rebuilt in this session.
+2. **SGMC off-catalogue faults (primary):** 62,122 positive cells in the newer pinned derivative (SHA-256 `643cbe992ef4ba37588fb469163ed8291e3ceb23d6c1f78a3cfaa462430c2da0`), inside the footprint and more than 300 m from every positive catalogue-label cell. This is still an owner-mirror public-map proxy; its source-vector derivation was not independently rebuilt.
+
+A prior raw SGMC raster (SHA-256 `26d142c4c93282cd94f6950ab96f22aeff59fbbea523d43d662e76fa1b161b5c`) yields 61,664 target cells under the same distance rule. Though dimensions, CRS, and affine transform match, the rasters differ in nodata metadata and 1,450 positive-mask cells (1,446 newer-only; 4 raw-only). The discrepancy is unresolved. The newer derivative is primary because it is pinned in `registry/inputs.json`; the old raster's separate sensitivity run is preserved in `evidence/holdout_raw_sgmc_20261006.json` and the comparison receipt is `evidence/sgmc_raster_comparison_20261006.json`.
 
 Neither mirror is organizer-authenticated. Filtering SGMC by catalogue distance does not undo candidate-model leakage or turn the proxy into private expert truth.
 
@@ -43,23 +45,31 @@ The fusion improves over the weak dotted baseline but loses to tip/stepover, ari
 
 | Candidate | NW | NE | SW | SE | Mean DTI |
 |---|---:|---:|---:|---:|---:|
-| Dotted input | 0.10182207 | 0.09518365 | 0.10746082 | 0.07354616 | 0.09450317 |
-| Tip/stepover input | 0.10142873 | 0.09618400 | 0.10645547 | 0.07389755 | 0.09449144 |
-| Arithmetic mean | 0.09605623 | 0.08876348 | 0.09748449 | 0.06906061 | 0.08784120 |
-| Prior alpha=.99 normalized belief | 0.09602486 | 0.08871599 | 0.09744063 | 0.06902551 | 0.08780175 |
-| Prior full-union decision | 0.10252838 | 0.09852885 | 0.10651998 | 0.07625185 | **0.09595726** |
-| **Current rho=.5 Dempster fusion** | **0.07481534** | **0.06759239** | **0.07938167** | **0.05250613** | **0.06857388** |
+| Dotted input | 0.10182207 | 0.09912465 | 0.10746082 | 0.07355714 | 0.09549117 |
+| Tip/stepover input | 0.10142873 | 0.10017174 | 0.10645547 | 0.07390835 | 0.09549107 |
+| Arithmetic mean | 0.09605623 | 0.09240516 | 0.09748449 | 0.06907247 | 0.08875458 |
+| Prior alpha=.99 normalized belief | 0.09602486 | 0.09235530 | 0.09744063 | 0.06903737 | 0.08871454 |
+| Prior full-union decision | 0.10252838 | 0.10265624 | 0.10651998 | 0.07626204 | **0.09699166** |
+| Historical Yager alternative (not slot-cleared) | 0.09147422 | 0.08502775 | 0.09113135 | 0.06393249 | 0.08289145 |
+| **Current rho=.5 Dempster fusion** | **0.07481534** | **0.07033302** | **0.07938167** | **0.05251519** | **0.06926131** |
 
 ### Paired deltas: current fusion minus comparator
 
 | Comparator | NW | NE | SW | SE | Mean delta | Positive folds |
 |---|---:|---:|---:|---:|---:|---:|
-| Dotted input | −0.02700673 | −0.02759126 | −0.02807914 | −0.02104003 | −0.02592929 | 0/4 |
-| Tip/stepover input | −0.02661339 | −0.02859161 | −0.02707379 | −0.02139142 | −0.02591755 | 0/4 |
-| Arithmetic mean | −0.02124089 | −0.02117109 | −0.01810281 | −0.01655447 | −0.01926732 | 0/4 |
-| Prior full-union decision | −0.02771303 | −0.03093646 | −0.02713830 | −0.02374572 | −0.02738338 | 0/4 |
+| Dotted input | −0.02700673 | −0.02879163 | −0.02807914 | −0.02104195 | −0.02622986 | 0/4 |
+| Tip/stepover input | −0.02661339 | −0.02983873 | −0.02707379 | −0.02139316 | −0.02622977 | 0/4 |
+| Arithmetic mean | −0.02124089 | −0.02207214 | −0.01810281 | −0.01655728 | −0.01949328 | 0/4 |
+| Prior alpha=.99 normalized belief | −0.02120952 | −0.02202228 | −0.01805896 | −0.01652218 | −0.01945324 | 0/4 |
+| Prior full-union decision | −0.02771303 | −0.03232322 | −0.02713830 | −0.02374685 | −0.02773035 | 0/4 |
 
-The fusion fails every paired SGMC-proxy comparison. The prior union performs best by mean DTI on this proxy under this scoring protocol; this is not a claim that the union wins on private labels or should be submitted.
+The current rho=.5 candidate fails every paired SGMC-proxy comparison. Yager improves over that Dempster candidate by +0.01363015 (4/4), but its mean delta versus dotted is −0.01259971 (0/4), versus tip/stepover −0.01259962 (0/4), versus arithmetic mean −0.00586313 (0/4), and versus prior union −0.01410020 (0/4). The prior union has the highest comparator mean on this proxy, not evidence that it wins on private labels or should be submitted.
+
+## Older raw-raster sensitivity and PR #5 protocol distinction
+
+The same blocked-fold script was also run against `data/raw/sgmc_faults_100m.tif`; the complete paired report is separate at [`evidence/holdout_raw_sgmc_20261006.json`](../../evidence/holdout_raw_sgmc_20261006.json). Its mean DTI values were dotted 0.09450317, tip/stepover 0.09449144, arithmetic mean 0.08784120, prior union 0.09595726, Yager 0.08206068, and rho=.5 Dempster 0.06857388. The fusion still loses to each parent, arithmetic mean, and prior union in all four folds; Yager improves over Dempster but loses to the parents and mean in all four. Do not pool these scores with the newer-raster results.
+
+The archived PR #5 proxy evaluator also used the newer derived raster but counted cells at `>=300 m` (63,121 cells) and used full-scene quadrant domains. It reported Yager 0.08407042, dotted 0.09613246, tip/stepover 0.09709394, and arithmetic mean 0.09030297. Those results are historical, are not comparable to this core-plus-halo protocol, and do not clear a slot gate.
 
 ## Reconciliation with the previous main-branch experiment
 

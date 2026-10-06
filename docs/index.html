@@ -130,21 +130,28 @@
 
     <section class="card">
       <h2>Second proxy: SGMC faults away from catalogue traces</h2>
-      <p class="small">The on-grid USGS SGMC owner-mirror raster contributes 61,664 positive cells after removing every SGMC positive within 300 m of the public catalogue. The same four quadrants, core-truth rule, 300 m score halo, metric, and candidate surfaces are used as in the table above. This is a second public-map proxy—not private expert truth—and does not remove source-surface leakage.</p>
+      <p class="small">The newer manifest-pinned SGMC-derived raster contributes 62,122 positive cells more than 300 m from the public catalogue. The same four quadrants, core-truth rule, 300 m score halo, metric, and candidate surfaces are used as in the table above. This is a second public-map proxy—not private expert truth—and does not remove source-surface leakage.</p>
       <div class="table-scroll">
         <table>
           <thead><tr><th>Candidate</th><th>NW</th><th>NE</th><th>SW</th><th>SE</th><th>Mean DTI</th></tr></thead>
           <tbody>
-            <tr><td>Dotted input</td><td>0.101822</td><td>0.095184</td><td>0.107461</td><td>0.073546</td><td>0.094503</td></tr>
-            <tr><td>Tip/stepover input</td><td>0.101429</td><td>0.096184</td><td>0.106455</td><td>0.073898</td><td>0.094491</td></tr>
-            <tr><td>Arithmetic mean</td><td>0.096056</td><td>0.088763</td><td>0.097484</td><td>0.069061</td><td>0.087841</td></tr>
-            <tr><td>Prior full-union decision</td><td>0.102528</td><td>0.098529</td><td>0.106520</td><td>0.076252</td><td>0.095957</td></tr>
-            <tr><td>Discounted Dempster fusion, rho=.5</td><td>0.074815</td><td>0.067592</td><td>0.079382</td><td>0.052506</td><td>0.068574</td></tr>
+            <tr><td>Dotted input</td><td>0.101822</td><td>0.099125</td><td>0.107461</td><td>0.073557</td><td>0.095491</td></tr>
+            <tr><td>Tip/stepover input</td><td>0.101429</td><td>0.100172</td><td>0.106455</td><td>0.073908</td><td>0.095491</td></tr>
+            <tr><td>Arithmetic mean</td><td>0.096056</td><td>0.092405</td><td>0.097484</td><td>0.069072</td><td>0.088755</td></tr>
+            <tr><td>Prior full-union decision</td><td>0.102528</td><td>0.102656</td><td>0.106520</td><td>0.076262</td><td>0.096992</td></tr>
+            <tr><td>Historical Yager conflict-transfer alternative</td><td>0.091474</td><td>0.085028</td><td>0.091131</td><td>0.063932</td><td>0.082891</td></tr>
+            <tr><td>Discounted Dempster fusion, rho=.5</td><td>0.074815</td><td>0.070333</td><td>0.079382</td><td>0.052515</td><td>0.069261</td></tr>
           </tbody>
         </table>
       </div>
-      <p style="margin-top:14px"><b>Paired mean delta for rho=.5 fusion:</b> vs dotted <span class="negative">−0.025929 (0/4 positive)</span>; vs tip/stepover <span class="negative">−0.025918 (0/4)</span>; vs arithmetic mean <span class="negative">−0.019267 (0/4)</span>; vs full-union decision <span class="negative">−0.027383 (0/4)</span>. The candidate fails all paired comparisons on this target.</p>
+      <p style="margin-top:14px"><b>Paired mean delta for rho=.5 fusion:</b> vs dotted <span class="negative">−0.026230 (0/4 positive)</span>; vs tip/stepover <span class="negative">−0.026230 (0/4)</span>; vs arithmetic mean <span class="negative">−0.019493 (0/4)</span>; vs full-union decision <span class="negative">−0.027730 (0/4)</span>. The Yager alternative beats Dempster by +0.013630 (4/4) but loses to dotted, tip, arithmetic mean, and the prior union in all folds. Neither fusion is slot-cleared.</p>
       <p class="small">The exact fold results and report semantics are in <a href="../evidence/holdout_20261006.json">the versioned evidence JSON</a> and <a href="research/holdout-results-20261006.md">the holdout report</a>.</p>
+    </section>
+
+    <section class="card">
+      <h2>SGMC provenance discrepancy and sensitivity</h2>
+      <p>The primary newer derivative (<code>643cbe…</code>, 83,593 positives) and the prior raw raster (<code>26d142…</code>, 82,151 positives) share dimensions, CRS, and transform but differ in nodata metadata and 1,450 positive-mask cells (1,446 newer-only, 4 older-only). The source difference is unresolved; neither raster is organizer-authenticated. The older raster was separately evaluated using identical blocked-fold semantics: dotted 0.094503, tip 0.094491, mean 0.087841, prior union 0.095957, Yager 0.082061, and rho=.5 Dempster 0.068574. Do not pool the two reports.</p>
+      <p class="small">See the <a href="../evidence/sgmc_raster_comparison_20261006.json">pixel/hash comparison</a> and <a href="../evidence/holdout_raw_sgmc_20261006.json">older-raster sensitivity report</a>. The preserved PR #5 proxy report uses >=300 m and full-scene quadrants (63,121 positives), so it is not directly comparable.</p>
     </section>
 
     <section class="card">
@@ -186,6 +193,8 @@
         <a href="../evidence/build_receipt_20261006.json">Build receipt and input hashes</a>
         <a href="../evidence/submission_validation_20261006.json">Local format audit</a>
         <a href="../evidence/holdout_20261006.json">Full fold-by-fold JSON</a>
+        <a href="../evidence/holdout_raw_sgmc_20261006.json">Prior SGMC sensitivity report</a>
+        <a href="../evidence/sgmc_raster_comparison_20261006.json">SGMC raster discrepancy audit</a>
         <a href="irregularities.md">Leaderboard / attribution irregularities</a>
         <a href="sources.md">Sources and provenance</a>
       </div>

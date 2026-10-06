@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "audited_utc": "2026-10-06T21:48:56.042435+00:00",
+  "comparison": "Two locally available owner-mirror SGMC rasters on the same 100 m spatial grid",
+  "rasters": {
+    "prior_raw": {
+      "path": "data/raw/sgmc_faults_100m.tif",
+      "sha256": "26d142c4c93282cd94f6950ab96f22aeff59fbbea523d43d662e76fa1b161b5c",
+      "bytes": 213034,
+      "metadata": {
+        "width": 3292,
+        "height": 3730,
+        "count": 1,
+        "crs": "EPSG:32611",
+        "transform": [
+          100.0,
+          0.0,
+          243350.0,
+          0.0,
+          -100.0,
+          4508550.0
+        ],
+        "dtype": "uint8",
+        "nodata": 255.0
+      },
+      "positive_cells_in_footprint": 82151,
+      "sgmc_positive_cells_gt_300m_from_catalogue": 61664,
+      "sgmc_positive_cells_gte_300m_from_catalogue": 62649
+    },
+    "newer_derived": {
+      "path": "data/official/derived_sgmc_faults_100m.tif",
+      "sha256": "643cbe992ef4ba37588fb469163ed8291e3ceb23d6c1f78a3cfaa462430c2da0",
+      "bytes": 198602,
+      "metadata": {
+        "width": 3292,
+        "height": 3730,
+        "count": 1,
+        "crs": "EPSG:32611",
+        "transform": [
+          100.0,
+          0.0,
+          243350.0,
+          0.0,
+          -100.0,
+          4508550.0
+        ],
+        "dtype": "uint8",
+        "nodata": null
+      },
+      "positive_cells_in_footprint": 83593,
+      "sgmc_positive_cells_gt_300m_from_catalogue": 62122,
+      "sgmc_positive_cells_gte_300m_from_catalogue": 63121
+    }
+  },
+  "spatial_grid_equal": true,
+  "nodata_metadata_equal": false,
+  "pixelwise": {
+    "mismatched_cells": 1450,
+    "prior_raw_only_positive_cells": 4,
+    "newer_derived_only_positive_cells": 1446,
+    "arrays_identical": false
+  },
+  "interpretation": "The spatial grids match, but byte hashes, nodata metadata, positive counts, and pixel masks differ. The source/derivation discrepancy is unresolved. The newer derived raster is the primary SGMC proxy for the current holdout because it is the later pinned input in registry/inputs.json; the older raw raster is retained as a sensitivity result. Neither raster is organizer-authenticated or private expert truth."
+}

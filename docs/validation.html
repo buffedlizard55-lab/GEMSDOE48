@@ -33,7 +33,7 @@
   <table>
     <tr><th>Proxy target</th><th>Positives</th><th>Construction and limitation</th></tr>
     <tr><td>Public catalogue labels</td><td>60,988</td><td>Public owner-mirror catalogue raster clipped to the sample-template footprint. Not private expert labels; source mirrors are not organizer-authenticated.</td></tr>
-    <tr><td>SGMC off-catalogue faults</td><td>61,664</td><td>Positive cells in the on-grid SGMC owner-mirror raster, inside footprint, with Euclidean distance &gt;300 m from any positive catalogue cell. This is another public-map proxy; the original vector derivation was not rebuilt in this session.</td></tr>
+    <tr><td>SGMC off-catalogue faults (newer pinned derivative)</td><td>62,122</td><td>Positive cells in <code>data/official/derived_sgmc_faults_100m.tif</code>, inside footprint and &gt;300 m from catalogue positives. It is an owner-mirror public-map proxy, not organizer-authenticated or private truth.</td></tr>
   </table>
 
   <h2 class="sec">Catalogue-proxy folds</h2>
@@ -51,14 +51,19 @@
   <h2 class="sec">SGMC off-catalogue folds</h2>
   <table>
     <tr><th>Candidate</th><th>NW</th><th>NE</th><th>SW</th><th>SE</th><th>Mean DTI</th></tr>
-    <tr><td>Dotted input</td><td>0.10182207</td><td>0.09518365</td><td>0.10746082</td><td>0.07354616</td><td>0.09450317</td></tr>
-    <tr><td>Tip/stepover input</td><td>0.10142873</td><td>0.09618400</td><td>0.10645547</td><td>0.07389755</td><td>0.09449144</td></tr>
-    <tr><td>Arithmetic mean</td><td>0.09605623</td><td>0.08876348</td><td>0.09748449</td><td>0.06906061</td><td>0.08784120</td></tr>
-    <tr><td>Prior α=.99 normalized belief</td><td>0.09602486</td><td>0.08871599</td><td>0.09744063</td><td>0.06902551</td><td>0.08780175</td></tr>
-    <tr><td>Prior full-union decision</td><td>0.10252838</td><td>0.09852885</td><td>0.10651998</td><td>0.07625185</td><td>0.09595726</td></tr>
-    <tr><td><b>Current ρ=.5 fusion</b></td><td>0.07481534</td><td>0.06759239</td><td>0.07938167</td><td>0.05250613</td><td>0.06857388</td></tr>
+    <tr><td>Dotted input</td><td>0.10182207</td><td>0.09912465</td><td>0.10746082</td><td>0.07355714</td><td>0.09549117</td></tr>
+    <tr><td>Tip/stepover input</td><td>0.10142873</td><td>0.10017174</td><td>0.10645547</td><td>0.07390835</td><td>0.09549107</td></tr>
+    <tr><td>Arithmetic mean</td><td>0.09605623</td><td>0.09240516</td><td>0.09748449</td><td>0.06907247</td><td>0.08875458</td></tr>
+    <tr><td>Prior α=.99 normalized belief</td><td>0.09602486</td><td>0.09235530</td><td>0.09744063</td><td>0.06903737</td><td>0.08871454</td></tr>
+    <tr><td>Prior full-union decision</td><td>0.10252838</td><td>0.10265624</td><td>0.10651998</td><td>0.07626204</td><td>0.09699166</td></tr>
+    <tr><td>Historical Yager alternative (not slot-cleared)</td><td>0.09147422</td><td>0.08502775</td><td>0.09113135</td><td>0.06393249</td><td>0.08289145</td></tr>
+    <tr><td><b>Current ρ=.5 Dempster fusion</b></td><td>0.07481534</td><td>0.07033302</td><td>0.07938167</td><td>0.05251519</td><td>0.06926131</td></tr>
   </table>
-  <p>The current fusion's mean paired deltas are <b>−0.02592929</b> vs dotted (0/4), <b>−0.02591755</b> vs tip/stepover (0/4), <b>−0.01926732</b> vs the arithmetic mean (0/4), and <b>−0.02738338</b> vs the prior full-union decision (0/4). It fails every paired comparison on this proxy.</p>
+  <p>The current ρ=.5 fusion's mean paired deltas are <b>−0.02622986</b> vs dotted (0/4), <b>−0.02622977</b> vs tip/stepover (0/4), <b>−0.01949328</b> vs the arithmetic mean (0/4), and <b>−0.02773035</b> vs the prior full-union decision (0/4). It fails every paired comparison on this proxy. The Yager alternative improves over the current Dempster candidate by +0.01363015 (4/4), but still loses to dotted (−0.01259971), tip/stepover (−0.01259962), arithmetic mean (−0.00586313), and prior union (−0.01410020), each 0/4. Neither fusion is slot-cleared.</p>
+
+  <h2 class="sec">SGMC raster discrepancy and older-raster sensitivity</h2>
+  <p>The newer manifest-pinned derivative used above and the prior raw raster share dimensions, CRS, and transform, but differ in nodata metadata and 1,450 positive-mask cells (1,446 only in the newer raster; 4 only in the older). The lineage difference is unresolved. Full details are in <code>evidence/sgmc_raster_comparison_20261006.json</code>. The older raw raster produced a distinct same-protocol sensitivity report (<code>evidence/holdout_raw_sgmc_20261006.json</code>; 61,664 target cells): dotted 0.09450317, tip/stepover 0.09449144, arithmetic mean 0.08784120, prior union 0.09595726, Yager 0.08206068, and ρ=.5 Dempster 0.06857388. Do not combine or pool these scores with the newer-raster results above.</p>
+  <p>The archived PR #5 proxy report also used the newer raster but defined off-catalogue truth with a ≥300 m rule (63,121 cells) and full-scene quadrants. Its Yager/dotted/tip/arithmetic means were 0.08407042/0.09613246/0.09709394/0.09030297. Those scores are historical and not numerically comparable to the blocked core-plus-halo folds here.</p>
 
   <h2 class="sec">Historical upstream protocol—do not compare its folds directly</h2>
   <p>The merged main branch's earlier quadrant evaluator used full-grid predictions while masking truth to one quadrant. Thus predictions outside the scored quadrant could contribute false positives; this differs from the core-plus-halo domain used above. Its stored old union quadrants were below both parents in all four blocks, while its pooled SGMC tier sweep selected full union at 0.096047 (dotted 0.093965, tip 0.094245). The tier was selected from pooled off-catalogue pixels, not an independent blocked holdout; the normalized-belief gate is explicitly false. The union and α=.99 belief are now recomputed/scored above using the current semantics for a fair paired comparison against ρ=.5.</p>
@@ -73,10 +78,11 @@
 
   <h2 class="sec">Receipts and rerun</h2>
   <ul>
-    <li>Machine-readable paired results: <code>evidence/holdout_20261006.json</code>.</li>
+    <li>Primary newer-raster paired results: <code>evidence/holdout_20261006.json</code>; older raw-raster sensitivity: <code>evidence/holdout_raw_sgmc_20261006.json</code>.</li>
+    <li>SGMC pixel/hash comparison receipt: <code>evidence/sgmc_raster_comparison_20261006.json</code>.</li>
     <li>Protocol preregistration: <code>docs/research/hypotheses-20261006.md</code>.</li>
     <li>Source hashes and citations: <a href="sources.html">sources and provenance</a>.</li>
-    <li>Re-run after hash-verified restore/build: <code>python scripts/run_spatial_holdout.py</code>.</li>
+    <li>Re-run after hash-verified restore/build: <code>python scripts/run_spatial_holdout.py --yager docs/downloads/gemsdoe48-h48-ds-yager-conflict-20261006.tif</code>. The pinned newer derivative is the default SGMC target.</li>
   </ul>
   <footer>GEMSDOE48 · no submission slot is cleared. Public proxy evidence is not a substitute for private, organizer-provided expert truth.</footer>
 </div>

@@ -15,6 +15,7 @@ from __future__ import annotations
 import hashlib
 import json
 import pathlib
+import sys
 import unittest
 
 import numpy as np
@@ -156,7 +157,7 @@ class TestOfficialRasters(unittest.TestCase):
             self.skipTest("scripts/hash_inputs.py absent")
         before = (conftest.REGISTRY / "inputs.json").read_text()
         subprocess.run(
-            ["python3", str(script)], cwd=str(conftest.repo_path(".")),
+            [sys.executable, str(script)], cwd=str(conftest.repo_path(".")),
             check=True, capture_output=True,
         )
         after = (conftest.REGISTRY / "inputs.json").read_text()

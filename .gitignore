@@ -16,19 +16,21 @@ dist/
 evidence/ds_layers/*.npy
 evidence/**/*.npy
 
-# Existing raw/source mirror data are tracked in the upstream project, but do not
-# accidentally add future local/private downloads or generated masks.
+# Local logs and scratch
+*.log
+nohup.out
+scratch/
+external_ref/
+/tmp/
+
+# Raw and downloaded input copies. Existing project inputs remain tracked when
+# explicitly added; do not accidentally add future local/private downloads.
 data/raw/
+data/cache/
 data/proxy/*
 !data/proxy/.gitkeep
 data/source_mirrors/*.tif
 !data/source_mirrors/.gitkeep
-
-# Local scratch and external references
-scratch/
-external_ref/
-nohup.out
-/tmp/
 
 # Partial downloads and OS files
 docs/downloads/*.partial

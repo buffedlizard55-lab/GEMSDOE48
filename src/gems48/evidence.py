@@ -16,7 +16,14 @@ import numpy as np
 
 
 def discounted_binary_mass(confidence: np.ndarray, reliability: float):
-    """Return (m_fault, m_not_fault, m_theta) for confidence in [0,1]."""
+    """Return (m_fault, m_not_fault, m_theta) for confidence in [0,1].
+
+    This Bayesian-assignment conversion treats confidence zero as positive
+    support for ``not-fault``. That is a substantive assumption, not a neutral
+    default. It may be inappropriate for sparse detectors where zero means
+    "not emitted" rather than "evidence of absence"; callers must document
+    and validate that interpretation.
+    """
     x = np.asarray(confidence, dtype=np.float64)
     if not np.isfinite(x).all() or np.any((x < 0) | (x > 1)):
         raise ValueError("confidence must be finite and in [0,1]")

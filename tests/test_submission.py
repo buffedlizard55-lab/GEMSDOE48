@@ -1,10 +1,9 @@
-"""The four shipped deliverables are checked from the bytes on disk.
+"""The four research deliverables are checked from the bytes on disk.
 
 Nothing here trusts `registry/submission_build.json`: the receipt is read only to
-find the filenames, and every claim it makes is re-derived from the GeoTIFFs.
-The properties asserted are exactly the ones the competition portal enforces plus
-the two the repository adds (never place mass outside the study area; never ship
-a file whose own receipt says it failed).
+find the filenames, and local content/format claims are re-derived from the GeoTIFFs.
+Passing these checks is not portal acceptance or slot clearance; the output uses
+finite zeros outside and differs from the published null/NaN-outside wording.
 """
 from __future__ import annotations
 
@@ -46,8 +45,9 @@ class TestReceiptIsWellFormed(unittest.TestCase):
         note = self.rec["portal_note"]
         self.assertIn(EXPECTED_NAME, note)
         self.assertIn("UNSCORED", note)  # the honest label: no organizer score
-        self.assertLessEqual(len(note), 500, "portal comment fields are short")
-        self.assertIn("all-finite [0,1]", note)
+        self.assertLessEqual(len(note), 500, "the optional portal note is short")
+        self.assertIn("NOT slot-cleared", note)
+        self.assertIn("do not upload", note)
 
     def test_four_files_declared_and_present(self):
         want = {"belief", "emission", "mtheta", "conflict"}

@@ -45,8 +45,8 @@ m(Θ)       = 1 − ρ</pre>
   <p>The independent build receipt verifies that the primary output and simple 0.5 arithmetic mean are not equal. There are 47,905 differing in-footprint cells; full-footprint MAE is 0.00205494 and MAE on the positive union is 0.22166091. The maximum absolute difference is 0.25. Full-footprint Pearson correlation is 0.999355 because both surfaces are sparse with many shared zeros; union-only correlation is also structurally uninformative. Pixelwise inequality, mass values, and errors—not correlation alone—establish distinction.</p>
 
   <h2 class="sec">Do not conflate the historical main-branch model</h2>
-  <p>The upstream main branch included an <code>alpha=.99</code> normalized-belief experiment and a full-confidence binary union decision. They are retained as distinct comparators. In this repository's uniform fold protocol, the prior union mean DTI is 0.085538 on catalogue labels and 0.095957 on SGMC off-catalogue cells; the current ρ=.5 belief means are 0.032588 and 0.068574. The union is rescored from the two pinned inputs in the same fold domains. Earlier upstream quadrant numbers used full-grid predictions and are not directly comparable.</p>
-  <p>A separate Yager-rule evidence module and its tests are preserved as historical/alternative code; it is not the method used to build this candidate. The earlier alpha=.99 builder snapshot remains at <code>scripts/previous_build_submission.py</code>, and the exact builder from the merged main branch is preserved at <code>scripts/previous_main_build_submission.py</code>. Neither is the default.</p>
+  <p>The upstream main branch included an <code>alpha=.99</code> normalized-belief experiment and a full-confidence binary union decision. They are retained as distinct comparators. On the newer pinned SGMC derivative, the prior union mean DTI is 0.096992 and the current ρ=.5 belief mean is 0.069261; on catalogue labels they are 0.085538 and 0.032588. The older raw SGMC raster produces a separate sensitivity pair of 0.095957 and 0.068574. The union is rescored from the two pinned candidate inputs in the same fold domains. Earlier upstream quadrant numbers used full-grid predictions and are not directly comparable.</p>
+  <p>A separate Yager-rule evidence module and candidate TIFF are preserved as historical/alternative work; they are not used to build this Dempster candidate and are not slot-cleared. Same-protocol comparisons, the two-raster discrepancy, and the separate older-raster report are linked from <a href="validation.html">validation</a>. The earlier alpha=.99 builder snapshot remains at <code>scripts/previous_build_submission.py</code>, and the exact builder from the merged main branch is preserved at <code>scripts/previous_main_build_submission.py</code>. Neither is the default.</p>
 
   <h2 class="sec">Grid and outside-footprint encoding</h2>
   <p>The candidate is one-band float32 on the 3,730 × 3,292, 100 m EPSG:32611 competition grid. The primary file is finite and bounded by [0,1] inside the derived survey footprint. Every outside cell is NaN and the GeoTIFF nodata tag is NaN, matching the public sample-template convention. The sample pixel values are never used as labels. The local validator confirms the finite mask exactly equals the derived footprint; this is not organizer acceptance.</p>
@@ -58,7 +58,7 @@ python scripts/restore_proxy_labels.py
 python scripts/build_footprint_mask.py
 python scripts/build_submission.py
 python scripts/validate_submission.py
-python scripts/run_spatial_holdout.py
+python scripts/run_spatial_holdout.py --yager docs/downloads/gemsdoe48-h48-ds-yager-conflict-20261006.tif
 pytest -q</pre>
   <p>Full formulas, limitations, source lineage and the blocked-gate outcomes are in <a href="validation.html">validation</a>, <a href="sources.html">sources</a>, and the root README.</p>
   <footer>Method is an auditable hypothesis. Its proxy evaluation failed the current promotion gate.</footer>

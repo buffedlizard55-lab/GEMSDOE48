@@ -1,6 +1,6 @@
 # Independent review passes — 2026-10-06 UTC
 
-Four review passes were completed across the original candidate and the later main-branch reconciliation. These are documented engineering reviews, not organizer sign-off.
+Five review passes were completed across the original candidate, main-branch reconciliation, and SGMC input follow-up. These are documented engineering reviews, not organizer sign-off.
 
 ## Pass 1 — scope, provenance, and official format
 
@@ -31,14 +31,25 @@ Four review passes were completed across the original candidate and the later ma
 
 ## Pass 4 — main-branch reconciliation and SGMC paired re-evaluation
 
-- Reviewed main's newer alpha=.99/union work, retained its receipts, source assets, scripts, and older site pages in an archive with a warning. Kept the branch's rho=.5 builder as the default, retained an earlier historical builder snapshot, and copied the exact latest main builder to `scripts/previous_main_build_submission.py`.
-- Preserved the upstream metric APIs in the combined metric module and added the exact current main metric tests as `tests/test_metric_main.py`; kept the previous metric and Yager tests in separate compatibility files. The complete suite now has 162 tests and passed after the reconciliation.
-- Recomputed the prior alpha=.99 belief and binary union alongside dotted, tip, mean, and rho=.5 using the same four quadrants, held-out core, 300 m halo, and metric for both targets. SGMC off-catalogue truth is 61,664 raster cells, defined as SGMC positives more than 300 m from catalogue positives.
-- On SGMC folds the rho=.5 fusion mean is 0.06857388, below dotted 0.09450317, tip 0.09449144, arithmetic mean 0.08784120, and prior union 0.09595726; it loses to each comparator in 0/4 folds. The historical pooled alpha=.99 tier sweep and its incompatible full-grid quadrant scores are not treated as the promotion gate.
+- Reviewed main's newer alpha=.99/union work, retained its receipts, source assets, scripts, and older site pages in an archive with a warning. Kept the branch's rho=.5 builder as the default, retained the earlier historical builder at `scripts/previous_main_build_submission.py`, and preserved the later PR #5 Dempster builder as `scripts/previous_main_build_submission_pr5.py.disabled`.
+- Preserved the upstream metric APIs in the combined metric module and added the exact current main metric tests as `tests/test_metric_main.py`; kept the previous metric and Yager tests in separate compatibility files. The PR-head CI run passed its then-current 162-test suite; after the follow-up regression test and provenance changes, the complete local suite has 178 tests and passed (see Pass 5).
+- Recomputed the prior alpha=.99 belief and binary union alongside dotted, tip, mean, and rho=.5 using the same four quadrants, held-out core, 300 m halo, and metric. The first run used the prior raw SGMC raster: 61,664 off-catalogue cells; rho=.5 mean 0.06857388 versus dotted 0.09450317, tip 0.09449144, arithmetic mean 0.08784120, and prior union 0.09595726, losing to each in 0/4 folds. This remains the separately reported raw-raster sensitivity.
+- The historical pooled alpha=.99 tier sweep and its incompatible full-grid quadrant scores were not treated as the promotion gate.
 - Updated current HTML/Markdown pages to remove stale slot-clear language; earlier pages are preserved in `docs/archive-main-pages/` and marked historical. Disabled the upstream six-hour leaderboard workflow (`.github/workflows/feed.yml.disabled`); its parser helper no longer has a network-fetch path. The stale root Markdown site builder is a no-op, and the DS48 sub-site builder inserts an explicit retirement banner. No weekly slot was used and no private-label or organizer score is claimed.
 - After the workflow/page retirement and link repairs, reran `compileall` and all 162 tests successfully; a local-link audit found zero missing links across 41 HTML pages. Direct execution of the retired site builder is a no-op, and the parser exits with its disabled notice without making a request.
 
 **Artifacts:** `evidence/holdout_20261006.json`, `docs/research/holdout-results-20261006.md`, `docs/validation.html`, `docs/archive-main-pages/`, `scripts/previous_main_build_submission.py`, `tests/test_metric_main.py`.
+
+## Pass 5 — newer SGMC derivative and sensitivity review
+
+- Compared the prior raw SGMC raster with the newer manifest-pinned derived raster (`643cbe…`). Spatial dimensions, CRS, and affine transform match; nodata metadata differs, and the positive masks differ at 1,450 cells (1,446 newer-only and 4 raw-only). The derivation discrepancy remains unresolved; neither raster is organizer-authenticated. The audit is `evidence/sgmc_raster_comparison_20261006.json`.
+- Re-ran `scripts/run_spatial_holdout.py` against the newer derivative with the same >300 m target filter, fixed folds, held-out cores, 300 m halos, and official metric; the registered off-catalogue target has 62,122 cells. On this target, rho=.5 Dempster mean DTI is 0.06926131 and loses to dotted, tip, arithmetic mean, and prior union in 0/4 paired folds. The historical Yager alternative scores 0.08289145, beats Dempster in 4/4, but loses to dotted, tip, arithmetic mean, and prior union in 0/4. Neither clears a slot.
+- Preserved the older raw-raster holdout separately (61,664 cells; Dempster 0.06857388; Yager 0.08206068) rather than pooling it with the primary derivative. The older PR #5 full-scene/≥300 m evaluator (63,121 cells) remains a separate historical protocol.
+- Updated the README and current validation, source, method, executive-summary, and irregularities pages; synchronized `evidence/holdout_run.log` with the primary JSON report. The full-scene PR #5 proxy report was regenerated against the newer derivative (63,121 cells at >=300 m; gate false) and remains explicitly separate from the current fold protocol.
+- Final checks passed: 178 pytest tests, Python compileall, local GeoTIFF format audit, and JSON/hash/log-sync checks. A link audit found zero missing local references across 300 HTML and 45 Markdown links. Direct leaderboard-script execution exits with its explicit no-network/disabled notice.
+- Results remain public-map proxy diagnostics, not private-label or organizer scores.
+
+**Artifacts:** `evidence/sgmc_raster_comparison_20261006.json`, `evidence/holdout_20261006.json`, `evidence/holdout_raw_sgmc_20261006.json`, `docs/research/holdout-results-20261006.md`.
 
 ## Re-review triggers
 

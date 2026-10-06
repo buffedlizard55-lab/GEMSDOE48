@@ -26,8 +26,9 @@ EXPECTED_LABEL_SHA256 = "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7e
 EXPECTED_LABEL_POSITIVES = 60_988
 EXPECTED_DOTTED_SHA256 = "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9"
 EXPECTED_TIP_SHA256 = "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757"
-EXPECTED_SGMC_SHA256 = "26d142c4c93282cd94f6950ab96f22aeff59fbbea523d43d662e76fa1b161b5c"
-EXPECTED_SGMC_OFFCAT_POSITIVES = 61_664
+EXPECTED_SGMC_SHA256 = "643cbe992ef4ba37588fb469163ed8291e3ceb23d6c1f78a3cfaa462430c2da0"
+EXPECTED_SGMC_OFFCAT_POSITIVES = 62_122
+EXPECTED_YAGER_SHA256 = "fe68ae6f57be013e26d20006551b43cd84bb5fe4a0b07d1d10ce4725c90fd16c"
 
 
 def sha256_file(path: Path) -> str:
@@ -134,26 +135,35 @@ def paired_delta(
     }
 
 
-def paired_comparisons(results: dict[str, dict], blocks: dict[str, np.ndarray]) -> tuple[dict, dict]:
+def paired_comparisons(
+    results: dict[str, dict],
+    blocks: dict[str, np.ndarray],
+    candidate: str = "dempster_combined",
+) -> tuple[dict, dict]:
     gate = {
-        comparator: paired_delta(results, "dempster_combined", comparator, blocks)
+        comparator: paired_delta(results, candidate, comparator, blocks)
         for comparator in ("dotted", "tip_stepover")
     }
-    return gate, paired_delta(results, "dempster_combined", "arithmetic_mean", blocks)
+    return gate, paired_delta(results, candidate, "arithmetic_mean", blocks)
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--labels", type=Path, default=ROOT / "data/raw/labels_catalogue.tif")
-    parser.add_argument("--sgmc", type=Path, default=ROOT / "data/raw/sgmc_faults_100m.tif")
+    parser.add_argument("--sgmc", type=Path, default=ROOT / "data/official/derived_sgmc_faults_100m.tif")
     parser.add_argument("--footprint", type=Path, default=ROOT / "data/source_mirrors/footprint-mask.tif")
     parser.add_argument("--dotted", type=Path, default=ROOT / "data/raw/dotted_h33_2_b2_zeros.tif")
     parser.add_argument("--tip", type=Path, default=ROOT / "data/raw/tip_h33d_stepover.tif")
     parser.add_argument("--combined", type=Path, default=ROOT / "docs/downloads/GEMSDOE48-DS-conflict-aware-fusion-20261006.tif")
+    parser.add_argument(
+        "--yager", type=Path, default=None,
+        help="optional historical Yager-rule raster; if supplied, it is scored on the identical folds",
+    )
     parser.add_argument("--output", type=Path, default=ROOT / "evidence/holdout_20261006.json")
     parser.add_argument("--allow-unpinned-labels", action="store_true")
     parser.add_argument("--allow-unpinned-sgmc", action="store_true")
     parser.add_argument("--allow-unpinned-sources", action="store_true")
+    parser.add_argument("--allow-unpinned-yager", action="store_true")
     args = parser.parse_args()
 
     dotted_hash = sha256_file(args.dotted)
@@ -175,10 +185,20 @@ def main() -> int:
     dotted, dotted_profile = read(args.dotted)
     tip, tip_profile = read(args.tip)
     combined, combined_profile = read(args.combined)
-    profiles_and_paths = (
+    yager = None
+    yager_profile = None
+    yager_hash = None
+    if args.yager is not None:
+        yager_hash = sha256_file(args.yager)
+        if yager_hash != EXPECTED_YAGER_SHA256 and not args.allow_unpinned_yager:
+            raise SystemExit(f"Yager raster SHA-256 {yager_hash} is not the registered historical candidate")
+        yager, yager_profile = read(args.yager)
+    profiles_and_paths = [
         (sgmc_profile, args.sgmc), (dotted_profile, args.dotted),
         (tip_profile, args.tip), (combined_profile, args.combined),
-    )
+    ]
+    if yager_profile is not None:
+        profiles_and_paths.append((yager_profile, args.yager))
     for profile, path in profiles_and_paths:
         assert_same_grid(label_profile, profile, name_a=str(args.labels), name_b=str(path))
     with rasterio.open(args.footprint) as ds:
@@ -215,6 +235,9 @@ def main() -> int:
         "prior_union_decision": prior_union,
         "dempster_combined": combined,
     }
+    if yager is not None:
+        candidates["yager_conflict_transfer"] = np.where(footprint, yager, 0.0).astype(np.float64)
+
     blocks = quadrants(*labels.shape)
     results = score_surface_set(candidates, catalogue_truth, footprint, blocks)
     gate, comparison_to_mean = paired_comparisons(results, blocks)
@@ -224,6 +247,43 @@ def main() -> int:
     sgmc_gate, sgmc_comparison_to_mean = paired_comparisons(sgmc_results, blocks)
     sgmc_comparison_to_prior_union = paired_delta(sgmc_results, "dempster_combined", "prior_union_decision", blocks)
     sgmc_comparison_to_prior_belief = paired_delta(sgmc_results, "dempster_combined", "prior_alpha_099_belief", blocks)
+
+    alternative_comparisons = {}
+    if yager is not None:
+        yager_gate, yager_comparison_to_mean = paired_comparisons(
+            results, blocks, candidate="yager_conflict_transfer"
+        )
+        yager_sgmc_gate, yager_sgmc_comparison_to_mean = paired_comparisons(
+            sgmc_results, blocks, candidate="yager_conflict_transfer"
+        )
+        alternative_comparisons["yager_conflict_transfer"] = {
+            "paired_gate_vs_each_input": yager_gate,
+            "paired_comparison_vs_arithmetic_mean": yager_comparison_to_mean,
+            "paired_comparison_vs_prior_alpha_099_belief": paired_delta(
+                results, "yager_conflict_transfer", "prior_alpha_099_belief", blocks
+            ),
+            "paired_comparison_vs_prior_union_decision": paired_delta(
+                results, "yager_conflict_transfer", "prior_union_decision", blocks
+            ),
+            "paired_comparison_vs_rho_0_5_dempster": paired_delta(
+                results, "yager_conflict_transfer", "dempster_combined", blocks
+            ),
+            "sgmc_paired_gate_vs_each_input": yager_sgmc_gate,
+            "sgmc_paired_comparison_vs_arithmetic_mean": yager_sgmc_comparison_to_mean,
+            "sgmc_paired_comparison_vs_prior_alpha_099_belief": paired_delta(
+                sgmc_results, "yager_conflict_transfer", "prior_alpha_099_belief", blocks
+            ),
+            "sgmc_paired_comparison_vs_prior_union_decision": paired_delta(
+                sgmc_results, "yager_conflict_transfer", "prior_union_decision", blocks
+            ),
+            "sgmc_paired_comparison_vs_rho_0_5_dempster": paired_delta(
+                sgmc_results, "yager_conflict_transfer", "dempster_combined", blocks
+            ),
+            "slot_decision": {
+                "cleared": False,
+                "reason": "A public-map proxy result cannot clear a private-label slot gate; the Yager alternative is included only as a same-protocol research comparator.",
+            },
+        }
 
     source_leakage = (
         "These surfaces are frozen upstream owner mirrors and are not reconstructed inside each fold. "
@@ -240,6 +300,7 @@ def main() -> int:
             "dotted": {"path": display_path(args.dotted), "sha256": dotted_hash},
             "tip_stepover": {"path": display_path(args.tip), "sha256": tip_hash},
             "combined": {"path": display_path(args.combined), "sha256": sha256_file(args.combined)},
+            **({"yager": {"path": display_path(args.yager), "sha256": yager_hash}} if args.yager is not None else {}),
         },
         "truth_sources": {
             "catalogue": {
@@ -257,6 +318,8 @@ def main() -> int:
                 "organizer_authenticated": False,
                 "positive_pixels": sgmc_offcat_count,
                 "definition": "SGMC raster positive and within footprint, with Euclidean distance >300 m from a positive catalogue-label cell.",
+                "source_comparison_receipt": "evidence/sgmc_raster_comparison_20261006.json",
+                "prior_raw_raster_sensitivity_receipt": "evidence/holdout_raw_sgmc_20261006.json",
                 "is_private_expert_test_truth": False,
             },
         },
@@ -277,6 +340,7 @@ def main() -> int:
         "sgmc_paired_comparison_vs_arithmetic_mean": sgmc_comparison_to_mean,
         "sgmc_paired_comparison_vs_prior_alpha_099_belief": sgmc_comparison_to_prior_belief,
         "sgmc_paired_comparison_vs_prior_union_decision": sgmc_comparison_to_prior_union,
+        "alternative_candidate_comparisons": alternative_comparisons,
         "slot_decision": {
             "cleared": False,
             "reason": "The current rho=0.5 candidate does not improve over both parents on either proxy under the preregistered >=3/4-fold rule; source surfaces are frozen and a proxy pass would still not establish private-label performance.",
@@ -285,6 +349,7 @@ def main() -> int:
             "The catalogue and SGMC labels are public map proxies, not the private expert-labelled competition target.",
             "Owner mirrors are not organizer-authenticated; their applicable reuse licenses were not verified.",
             "Source surfaces were not rebuilt independently within folds; results are conditional and potentially leaky.",
+            "Two pinned SGMC rasters share the spatial grid but differ in hash, nodata metadata, and 1,450 positive-mask cells; the newer derived raster is primary and the older raw raster has a separate sensitivity report.",
             "Sample submission values were not used as truth; only its derived finite footprint mask is used.",
             "No leaderboard or competition score is estimated by this holdout.",
         ],
