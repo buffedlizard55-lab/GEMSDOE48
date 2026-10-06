@@ -160,6 +160,14 @@ def main():
     out["results"] = results
     print("\nGATE:", json.dumps(gate, indent=1))
 
+    # persist the core receipt before the extra sensitivity pass
+    dump_json(out, os.path.join(EVIDENCE, "holdout_validation.json"))
+
+    # free the per-arm coverage caches before allocating more
+    cover_cache.clear()
+    import gc
+    gc.collect()
+
     # ---- alpha sensitivity on full off-catalogue truth -----------------------
     sens = {}
     for a1 in (0.80, 0.90, 0.95, 0.99):
