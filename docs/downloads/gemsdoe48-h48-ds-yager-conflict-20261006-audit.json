@@ -1,0 +1,83 @@
+{
+  "schema": "GEMSDOE48-audit-v1",
+  "generated_utc": "2026-10-06T20:03:26.080217+00:00",
+  "method": "reliability-discounted binary masses; conjunctive rule; Yager transfer of conflict K to Theta; min-max normalized Bel(F)",
+  "scientific_correction": "Classical normalized Dempster's rule renormalizes conflict away. Yager's modified Dempster rule is used because the requested output must preserve disagreement as unassigned mass.",
+  "reliability_discounts_preregistered": {
+    "dotted": 0.9,
+    "tip": 0.85
+  },
+  "inputs": {
+    "dotted": {
+      "file": "data/raw/dotted.tif",
+      "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9"
+    },
+    "tip": {
+      "file": "data/raw/tip.tif",
+      "sha256": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757"
+    },
+    "template": {
+      "file": "data/raw/sample_submission.tif",
+      "sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc"
+    }
+  },
+  "input_counts": {
+    "dotted_positive": 37654,
+    "tip_positive": 41865,
+    "overlap": 31614,
+    "union": 47905
+  },
+  "output": {
+    "file": "docs/downloads/gemsdoe48-h48-ds-yager-conflict-20261006.tif",
+    "sha256": "fe68ae6f57be013e26d20006551b43cd84bb5fe4a0b07d1d10ce4725c90fd16c",
+    "bytes": 364121,
+    "bands": 1,
+    "dtype": "float32",
+    "crs": "EPSG:32611",
+    "epsg": 32611,
+    "shape": [
+      3730,
+      3292
+    ],
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    "resolution": [
+      100.0,
+      100.0
+    ],
+    "nodata": null,
+    "all_finite": true,
+    "min": 0.0,
+    "max": 1.0,
+    "outside_footprint_all_zero": true,
+    "out_of_range_count": 0,
+    "positive_pixels": 47905
+  },
+  "unassigned_diagnostic": {
+    "file": "docs/downloads/gemsdoe48-h48-ds-yager-conflict-20261006-unassigned-diagnostic.tif",
+    "sha256": "86a470fc184989040e9bfc7a52be70285b9cc3189e620ee777aee1ed49744c4f",
+    "min": 0.0,
+    "max": 0.7799999713897705,
+    "conflict_positive_pixels": 16291
+  },
+  "naive_mean_check": {
+    "pearson_correlation": 0.9635867365390772,
+    "max_absolute_difference": 0.41370558738708496,
+    "pixel_identical": false,
+    "pass_not_naive_mean": true
+  },
+  "mass_checks": {
+    "belief_min": 0.0,
+    "belief_max": 0.985,
+    "unassigned_min": 0.015,
+    "unassigned_max": 0.78,
+    "sum_max_abs_error": 0.0
+  },
+  "format_pass": true
+}
