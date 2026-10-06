@@ -1,0 +1,43 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GEMSDOE48 · index</title><style>body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;margin:0;color:#1d2330;background:#f6f7fb;line-height:1.55}
+nav{background:#14213d;padding:.6rem 1rem;position:sticky;top:0}nav a{color:#fff;margin-right:1.1rem;text-decoration:none;font-size:.95rem}
+nav a.on{border-bottom:2px solid #fca311}main{max-width:1050px;margin:auto;padding:1.2rem 1.4rem;background:#fff}
+table{border-collapse:collapse;width:100%;font-size:.9rem;margin:.6rem 0}th,td{border:1px solid #dde;padding:.35rem .5rem;vertical-align:top}
+th{background:#eef1f8}code{background:#f0f2f7;padding:.05rem .3rem;border-radius:3px;font-size:.88em;word-break:break-all}
+pre{background:#f0f2f7;padding:.7rem;overflow:auto}img{max-width:100%;border:1px solid #dde;margin:.5rem 0}
+.dl{background:#fff8e6;border:2px solid #fca311;border-radius:8px;padding:.6rem 1.1rem;margin-bottom:1rem}
+.btn{display:inline-block;background:#fca311;color:#14213d;font-weight:700;padding:.55rem 1rem;border-radius:6px;text-decoration:none;word-break:break-all}
+blockquote{border-left:4px solid #fca311;margin:.8rem 0;padding:.2rem .9rem;background:#fafafa}</style></head><body><nav><a href="index.html" class="on">Home</a><a href="executive-summary.html" class="">How to submit</a><a href="method.html" class="">Method & 0.2778 autopsy</a><a href="hypotheses.html" class="">Hypotheses</a><a href="irregularities.html" class="">Irregularities</a><a href="next-steps.html" class="">Next steps</a><a href="leaderboard.html" class="">Leaderboard</a><a href="sources.html" class="">Sources</a></nav><main><h1>GEMSDOE48 — DOE GEMS Prize fault-discovery system</h1>
+<div class="dl">
+<h2>⬇ Submission file (click to download)</h2>
+<p><a class="btn" href="downloads/gemsdoe48-h48-1-ds-fusion-b2xh32tip-20261006-407bb7f4-zeros.tif">Download gemsdoe48-h48-1-ds-fusion-b2xh32tip-20261006-407bb7f4-zeros.tif</a></p>
+<p>226,886 bytes · sha256 <code>6cb2aab8dbd71335…</code> · 37,754 dots · all-finite float32 in [0, 1] · EPSG:32611 · 3730 × 3292 · all 13 checks PASS · <a href="downloads/gemsdoe48-h48-1-ds-fusion-b2xh32tip-20261006-407bb7f4-zeros.zip">.zip</a> · <a href="downloads/receipt-gemsdoe48-h48-1-ds-fusion-b2xh32tip-20261006-407bb7f4-zeros.json">receipt</a></p>
+<p><b>Note to paste:</b> <code>GEMSDOE48 H48-1 Dempster-Shafer fusion b2(0.2778) x h32-1 tip(0.2649); pignistic>0.5, NMS 2.8px; 37754 dots, 0 within 200m of catalogue</code></p>
+<p><a href="executive-summary.html">→ Step-by-step: how to submit</a></p>
+</div>
+
+<h2>Executive summary</h2>
+<ul>
+<li><strong>What it is.</strong> A Dempster–Shafer fusion of the two strongest families: dotted <strong>h33-2-b2
+  (0.2778)</strong> × tip <strong>h32-1 (0.2649)</strong>. Disagreement is preserved as its own layer. Unique: no
+  identical support among the 80 sibling GeoTIFFs compared.</li>
+<li><strong>Why 0.2778 won.</strong> Precision, not discovery. Mass fell from 121,131 to 37,654 dots while the
+  score rose 0.1922 → 0.2778. The last step deleted the dots within 200 m of the catalogue
+  (<a href="method.html">method §2</a>).</li>
+<li><strong>Holdout verdict for this file: tie with 0.2778.</strong> The downside is bounded at ≥ 0.2773: it is
+  b2 plus 100 dots. No offline instrument can rank differences this small. The SGMC holdout does
+  not predict live scores at all (ρ = −0.17), and the new live-score inversion predicts coarse
+  quality (LOO ρ = 0.81) but not within-family order.</li>
+<li><strong>The board.</strong> #1 is <strong>0.3774</strong>, not 0.3195 (IR-48-01). The gap is ~0.10. The 100 m layers
+  plateau at 0.26–0.28 across 40+ repos, so the realistic route is <strong>native 1 m LiDAR scarp
+  detection</strong> (H48-2, data verified obtainable).</li>
+</ul>
+<p><img alt="DS layers" src="assets/fig1_ds_layers.png" />
+<img alt="zoom" src="assets/fig2_ds_zoom.png" />
+<img alt="LSI" src="assets/fig3_lsi_calibration.png" /></p>
+<blockquote>
+<p><strong>Our Core Values.</strong> <em>Maximize P(Win)</em>: every slot is an experiment, chosen by measured
+evidence. <em>Own the Outcome</em>: every number links to the code and receipt that produced it, and
+our own instruments' failures are published (<a href="irregularities.html">irregularities</a>).</p>
+</blockquote>
+<hr><p style="font-size:.8rem;color:#667">GEMSDOE48 · built from <code>docs/md/index.md</code> by <code>scripts/build_site.py</code></p></main></body></html>

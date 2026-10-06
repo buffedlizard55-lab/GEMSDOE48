@@ -1,0 +1,19 @@
+{
+ "n_added": 100,
+ "n_removed": 0,
+ "T_b2_lsi": 5762.564086343573,
+ "K_lsi": 17117.16906005549,
+ "T_lsi": {
+  "worst_case_dti": 0.27753,
+  "best_case_dti": 0.29142
+ },
+ "T_lsi_x0.5": {
+  "worst_case_dti": 0.27727,
+  "best_case_dti": 0.30496
+ },
+ "T_lsi_x1.5": {
+  "worst_case_dti": 0.27762,
+  "best_case_dti": 0.28689
+ },
+ "break_even_mean_credit_per_added_dot": 0.05556
+}

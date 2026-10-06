@@ -1,0 +1,104 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GEMSDOE48 · executive-summary</title><style>body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;margin:0;color:#1d2330;background:#f6f7fb;line-height:1.55}
+nav{background:#14213d;padding:.6rem 1rem;position:sticky;top:0}nav a{color:#fff;margin-right:1.1rem;text-decoration:none;font-size:.95rem}
+nav a.on{border-bottom:2px solid #fca311}main{max-width:1050px;margin:auto;padding:1.2rem 1.4rem;background:#fff}
+table{border-collapse:collapse;width:100%;font-size:.9rem;margin:.6rem 0}th,td{border:1px solid #dde;padding:.35rem .5rem;vertical-align:top}
+th{background:#eef1f8}code{background:#f0f2f7;padding:.05rem .3rem;border-radius:3px;font-size:.88em;word-break:break-all}
+pre{background:#f0f2f7;padding:.7rem;overflow:auto}img{max-width:100%;border:1px solid #dde;margin:.5rem 0}
+.dl{background:#fff8e6;border:2px solid #fca311;border-radius:8px;padding:.6rem 1.1rem;margin-bottom:1rem}
+.btn{display:inline-block;background:#fca311;color:#14213d;font-weight:700;padding:.55rem 1rem;border-radius:6px;text-decoration:none;word-break:break-all}
+blockquote{border-left:4px solid #fca311;margin:.8rem 0;padding:.2rem .9rem;background:#fafafa}</style></head><body><nav><a href="index.html" class="">Home</a><a href="executive-summary.html" class="on">How to submit</a><a href="method.html" class="">Method & 0.2778 autopsy</a><a href="hypotheses.html" class="">Hypotheses</a><a href="irregularities.html" class="">Irregularities</a><a href="next-steps.html" class="">Next steps</a><a href="leaderboard.html" class="">Leaderboard</a><a href="sources.html" class="">Sources</a></nav><main><h1>Executive summary — how to submit in 5 steps</h1>
+<h2>⬇ The file</h2>
+<p><strong><a href="downloads/gemsdoe48-h48-1-ds-fusion-b2xh32tip-20261006-407bb7f4-zeros.tif">Download gemsdoe48-h48-1-ds-fusion-b2xh32tip-20261006-407bb7f4-zeros.tif</a></strong> (226,886 bytes · sha256 <code>6cb2aab8dbd71335…</code>) ·
+<a href="downloads/gemsdoe48-h48-1-ds-fusion-b2xh32tip-20261006-407bb7f4-zeros.zip">.zip alternative</a> · <a href="downloads/receipt-gemsdoe48-h48-1-ds-fusion-b2xh32tip-20261006-407bb7f4-zeros.json">audit receipt</a></p>
+<table>
+<thead>
+<tr>
+<th>field on the DrivenData form</th>
+<th>paste this</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>File to submit</strong></td>
+<td><code>gemsdoe48-h48-1-ds-fusion-b2xh32tip-20261006-407bb7f4-zeros.tif</code> (or the <code>.zip</code>, which holds the same single GeoTIFF)</td>
+</tr>
+<tr>
+<td><strong>Unique name</strong> (start of the note)</td>
+<td><code>GEMSDOE48-H48-1-DS-fusion</code></td>
+</tr>
+<tr>
+<td><strong>Note (optional)</strong></td>
+<td><code>GEMSDOE48 H48-1 Dempster-Shafer fusion b2(0.2778) x h32-1 tip(0.2649); pignistic&gt;0.5, NMS 2.8px; 37754 dots, 0 within 200m of catalogue</code></td>
+</tr>
+</tbody>
+</table>
+<h2>Steps</h2>
+<ol>
+<li>Log in at <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">https://www.drivendata.org/competitions/306/competition-doe-gems/</a> (your account).</li>
+<li>Open <strong>Submissions → Submit</strong>
+   (<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/submissions/">page</a>).</li>
+<li><strong>File to submit:</strong> choose the downloaded <code>.tif</code>. A single-band GeoTIFF or a <code>.zip</code> holding
+   one GeoTIFF are both accepted, according to the form text the owner quoted.</li>
+<li><strong>Note:</strong> paste the note above. It carries the unique name and a short comment, as the form
+   asks ("e.g. clustering with k=25").</li>
+<li>Click <strong>Submit</strong> and record the score in <code>registry/live_scores.json</code> (the next session reads
+   it).</li>
+</ol>
+<h2>Why this file will not trigger "Predicted values must be in range [0, 1]"</h2>
+<p>That error happens when cells contain NaN, which fails a <code>0 ≤ p ≤ 1</code> check. This file is
+<strong>all-finite float32</strong>: 0 outside the footprint, no nodata tag, min 0.0, max 1.0. That is the
+same encoding as the 0.2778 file that scored. All 13 checks were re-run on the bytes on disk:</p>
+<ul>
+<li>✅ <code>single_band</code></li>
+<li>✅ <code>dtype_float32</code></li>
+<li>✅ <code>shape_3730x3292</code></li>
+<li>✅ <code>crs_epsg_32611</code></li>
+<li>✅ <code>transform_equals_sample</code></li>
+<li>✅ <code>all_finite</code></li>
+<li>✅ <code>min_ge_0</code></li>
+<li>✅ <code>max_le_1</code></li>
+<li>✅ <code>zero_outside_footprint</code></li>
+<li>✅ <code>zero_on_catalogue</code></li>
+<li>✅ <code>zero_within_200m_of_catalogue</code></li>
+<li>✅ <code>bytes_equal_in_memory</code></li>
+<li>✅ <code>layout_matches_scored_02778_file</code></li>
+</ul>
+<h2>What it is, in one paragraph</h2>
+<p>A Dempster–Shafer fusion of the group's best dotted file (h33-2-b2, live 0.2778) and best tip
+file (h32-1, live 0.2649). It emits <strong>37,754</strong> dots: all 37,654 of b2, plus 100 tip-family dots
+that the fusion accepted, with 0 dots within 200 m of the catalogue. The disagreement between
+the two families is published as its own layer. Verdict from the holdout: <strong>tie with 0.2778,
+downside bounded at ≥ 0.2773</strong> (<a href="method.html">method</a>). Leaderboard #1 is 0.3774. Reaching it
+needs new data (see <a href="hypotheses.html">hypotheses</a> and <a href="next-steps.html">next steps</a>).</p>
+<h2>Diagnostic layers (not for submission, for geologists)</h2>
+<table>
+<thead>
+<tr>
+<th>layer</th>
+<th>meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="downloads/diagnostics/gemsdoe48-h48-1-belief_dempster_mF_norm01.tif">belief m(F), normalised 0–1</a></td>
+<td>where the fused model believes there is a fault</td>
+</tr>
+<tr>
+<td><a href="downloads/diagnostics/gemsdoe48-h48-1-conflict_K.tif">conflict K</a></td>
+<td><strong>where the two strongest approaches actively disagree</strong></td>
+</tr>
+<tr>
+<td><a href="downloads/diagnostics/gemsdoe48-h48-1-unassigned_yager_mTheta_incl_conflict.tif">Yager m(Θ)</a></td>
+<td>unassigned belief including conflict</td>
+</tr>
+<tr>
+<td><a href="downloads/diagnostics/gemsdoe48-h48-1-unassigned_dempster_mTheta.tif">Dempster m(Θ)</a></td>
+<td>unassigned belief after normalisation</td>
+</tr>
+</tbody>
+</table>
+<p>The belief layer is technically in the submission format, but it spreads mass over ~770k pixels.
+By the scale identity and marginal rule that would score far below the binary file. Do not
+submit it.</p>
+<hr><p style="font-size:.8rem;color:#667">GEMSDOE48 · built from <code>docs/md/executive-summary.md</code> by <code>scripts/build_site.py</code></p></main></body></html>

@@ -1,0 +1,23 @@
+{
+ "_source": "Owner-reported public-leaderboard scores pasted in the session prompt (OWNER-REPORT class; not independently verifiable from this sandbox because DrivenData submission history requires login). Files are hash-pinned mirrors listed in registry/data_manifest_gemsdoe32.json or copied from the named sibling repos.",
+ "family_ids": ["h19-5","d1.5","d2.8","h27-4-r1-solo","h33-2-b2","h32-1-prethin-tip","h33d-tip-stepover","h36-1-rung30","h28-dotted-ridge","tgc-v2-d1.5"],
+ "rasters": [
+  {"id":"h33-2-b2","live":0.2778,"file":"b2_02778.tif","repo":"GEMSDOE32","sha256":"c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9"},
+  {"id":"h36-1-rung30","live":0.2710,"file":"h36_02710.tif","repo":"GEMSDOE28","sha256":"5556aa1438fd67376b60d5ffc99228ec09dcc11a8408298a743ccb88d6163641"},
+  {"id":"h27-4-r1-solo","live":0.2708,"file":"r1solo_02708.tif","repo":"GEMSDOE28","sha256":"ab02300152248fdda04e988e2cd2a0c13f35eec42fcf670a15e8b76b19e24a73"},
+  {"id":"h32-1-prethin-tip","live":0.2649,"file":"h32tip_02649.tif","repo":"GEMSDOE28","sha256":"04d31922f5c1ea4016984fc470ab2b0ff8e266c615792f0e86020da3b940d3ff"},
+  {"id":"h33d-tip-stepover","live":0.2632,"file":"h33d_tip_02632.tif","repo":"GEMSDOE33","sha256":"87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757"},
+  {"id":"d2.8","live":0.2600,"file":"gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif","repo":"GEMSDOE24","sha256":"91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8"},
+  {"id":"d1.5","live":0.2477,"file":"gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif","repo":"GEMSDOE24","sha256":"68d0e2e4fcc594f9a23f56c44b885fee733d026d39be55e18ad2a07289525310"},
+  {"id":"tgc-v2-d1.5","live":0.2449,"file":"gems27-topo-gap-closure-t-v2-on-d1-5-20261002-5512495c6bd1-nan.tif","repo":"GEMSDOE27","sha256":"33003374335d"},
+  {"id":"h19-5","live":0.1922,"file":"gems19-h19-5-powerlaw-budget-multiline-corroborated-20260930-e27054cf-nan.tif","repo":"GEMSDOE24","sha256":"ec1f9b56b83ce33cad781ceb9f104b18fb4f2ff785263a4e89616af4aabdee8d"},
+  {"id":"h19-4","live":0.1894,"file":"gems19-h19-4-multiline-corroborated-openness-thermal-pop-20260930-691e4dfa-nan.tif","repo":"GEMSDOE24","sha256":"89109a3bd2cd"},
+  {"id":"h16-1","live":0.1855,"file":"gems16-h16-1-topo-geophys-baseline-ridges-20260930-df20f65e-nan.tif","repo":"GEMSDOE24","sha256":"055309694ed4"},
+  {"id":"h28-dotted-ridge","live":0.1839,"file":"gems10-h28-dotted-ridge-20260928T020256236880Z-6452ae1d00.tif","repo":"GEMSDOE24","sha256":"7637b72d4c6c"},
+  {"id":"ens12-7f00890a","live":0.1563,"file":"gemsdoe-ens12-adopted-7f00890a.tif","repo":"GEMSDOE24","sha256":"7f00890a6287"},
+  {"id":"hedge-v2","live":0.1563,"file":"8GEMSDOE_Hedge-v2_submission.tif","repo":"GEMSDOE24","sha256":"052688eafbc7"},
+  {"id":"h25-ctx-ridge","live":0.1280,"file":"gems10-h25-ctx-ridge-20260927T232947704150Z-6452ae1d00.tif","repo":"GEMSDOE24","sha256":"1381e784fb8b"},
+  {"id":"r13-lattice","live":0.0904,"file":"13gems_20261001_r13-lattice-s5_v2_nan-outside.tif","repo":"GEMSDOE24","sha256":"b4570b406efe"},
+  {"id":"gemsdoe9-2314b599","live":0.0107,"file":"gemsdoe9-PLACEHOLDER-2314b599.tif","repo":"GEMSDOE24","sha256":"2314b59920bf"}
+ ]
+}
