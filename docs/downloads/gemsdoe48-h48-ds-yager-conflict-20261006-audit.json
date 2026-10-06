@@ -1,6 +1,6 @@
 {
   "schema": "GEMSDOE48-audit-v2",
-  "generated_utc": "2026-10-06T20:31:15.483402+00:00",
+  "generated_utc": "2026-10-06T20:49:21.892178+00:00",
   "candidate_status": "RESEARCH CANDIDATE \u2014 NOT CLEARED FOR A COMPETITION SLOT; corrected public-proxy DTI gate failed",
   "method": "reliability-discounted binary masses; conjunctive combination; Yager transfer of conflict K to Theta; min-max normalized Bel(F)",
   "scientific_correction": "Classical normalized Dempster's rule divides non-empty masses by 1-K and removes conflict from the normalized result. Yager's modified rule transfers K to Theta. Zero-valued parents are treated here as evidence for not-fault; because these sparse detector rasters may encode silence rather than affirmative negative evidence, that semantic assumption is a major limitation.",
@@ -10,15 +10,15 @@
   },
   "inputs": {
     "dotted": {
-      "file": "data/raw/dotted.tif",
+      "file": "data/raw/dotted_h33_2_b2_zeros.tif",
       "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9"
     },
     "tip": {
-      "file": "data/raw/tip.tif",
+      "file": "data/raw/tip_h33d_stepover.tif",
       "sha256": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757"
     },
     "template": {
-      "file": "data/raw/sample_submission.tif",
+      "file": "data/raw/sample_submission_template.tif",
       "sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc"
     }
   },

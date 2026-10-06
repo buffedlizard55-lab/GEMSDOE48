@@ -1,0 +1,143 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GEMSDOE48 · irregularities</title><style>body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;margin:0;color:#1d2330;background:#f6f7fb;line-height:1.55}
+nav{background:#14213d;padding:.6rem 1rem;position:sticky;top:0}nav a{color:#fff;margin-right:1.1rem;text-decoration:none;font-size:.95rem}
+nav a.on{border-bottom:2px solid #fca311}main{max-width:1050px;margin:auto;padding:1.2rem 1.4rem;background:#fff}
+table{border-collapse:collapse;width:100%;font-size:.9rem;margin:.6rem 0}th,td{border:1px solid #dde;padding:.35rem .5rem;vertical-align:top}
+th{background:#eef1f8}code{background:#f0f2f7;padding:.05rem .3rem;border-radius:3px;font-size:.88em;word-break:break-all}
+pre{background:#f0f2f7;padding:.7rem;overflow:auto}img{max-width:100%;border:1px solid #dde;margin:.5rem 0}
+.dl{background:#fff8e6;border:2px solid #fca311;border-radius:8px;padding:.6rem 1.1rem;margin-bottom:1rem}
+.btn{display:inline-block;background:#fca311;color:#14213d;font-weight:700;padding:.55rem 1rem;border-radius:6px;text-decoration:none;word-break:break-all}
+blockquote{border-left:4px solid #fca311;margin:.8rem 0;padding:.2rem .9rem;background:#fafafa}</style></head><body><nav><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">How to submit</a><a href="method.html" class="">Method & 0.2778 autopsy</a><a href="hypotheses.html" class="">Hypotheses</a><a href="irregularities.html" class="on">Irregularities</a><a href="next-steps.html" class="">Next steps</a><a href="leaderboard.html" class="">Leaderboard</a><a href="sources.html" class="">Sources</a></nav><main><h1>Irregularities flagged for manual review</h1>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Severity</th>
+<th>Finding</th>
+<th>Evidence</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IR-48-01</td>
+<td>High</td>
+<td><strong>The brief's "highest score 0.3195" is stale.</strong> The live board on 2026-10-06 shows #1 xiaofanhu 0.3774, #2 0.3345, #3 0.3262; 0.3195 is #7</td>
+<td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">leaderboard</a></td>
+<td>Target updated to &gt; 0.3774</td>
+</tr>
+<tr>
+<td>IR-48-02</td>
+<td>Info</td>
+<td>The board lists <strong>extradr19 at 0.2778 (#13)</strong>. That matches the owner-reported best, but whether this is the owner's account is not verified</td>
+<td>same</td>
+<td>Owner to confirm</td>
+</tr>
+<tr>
+<td>IR-48-03</td>
+<td>High</td>
+<td><strong>The "two independent families" are not independent.</strong> b2 ⊂ r1 ⊂ d2.8 ⊂ h19-5 exactly. h32-1 shares 36,874 of b2's 37,654 pixels (97.9 %), h33-d 31,614 (84.0 %). This violates Dempster's distinctness assumption</td>
+<td><code>scripts/build_ds.py</code> output</td>
+<td>Documented. The cautious rule is listed as a next step</td>
+</tr>
+<tr>
+<td>IR-48-04</td>
+<td>Medium</td>
+<td><strong>Theory correction.</strong> Dempster's rule normalises conflict away. Keeping conflict as unassigned mass is <strong>Yager's</strong> rule</td>
+<td>Dempster 1967; Yager 1987</td>
+<td>Both layers published</td>
+</tr>
+<tr>
+<td>IR-48-05</td>
+<td>High</td>
+<td><strong>The SGMC holdout does not predict live scores</strong> (Spearman −0.17, n = 17; r13-lattice 0.250 proxy vs 0.0904 live). Sibling repos used SGMC-based instruments for promotion</td>
+<td><code>evidence/proxy_calibration.json</code></td>
+<td>Not used for selection</td>
+</tr>
+<tr>
+<td>IR-48-06</td>
+<td>High</td>
+<td><strong>No available instrument ranks within the 0.245–0.278 family.</strong> LSI top-8 LOO Spearman is −0.69. "Beat the holdout" decisions at the ±0.003 scale are therefore not decidable offline</td>
+<td><code>evidence/lsi_validation.json</code></td>
+<td>Do not spend three submission slots on the λ-probe under the current no-losing-candidate rule; seek non-slot evidence first</td>
+</tr>
+<tr>
+<td>IR-48-07</td>
+<td>Medium</td>
+<td><strong>Sandbox egress is GitHub/PyPI only.</strong> USGS, AWS, ScienceBase, GDR and DrivenData community all return HTTP 000. Obtainability was checked through the web tool instead</td>
+<td><code>curl</code> log in session</td>
+<td>Data fetches must run in GitHub Actions</td>
+</tr>
+<tr>
+<td>IR-48-08</td>
+<td>Low</td>
+<td>The Yager artifact's bounded scan found 0 exact value or support matches among 334 same-grid artifacts (closest positive-support Jaccard 0.874); this is not an exhaustive/global uniqueness guarantee</td>
+<td><a href="data/uniqueness-audit.json"><code>uniqueness-audit.json</code></a> · Yager build audit</td>
+<td>Preserve the scan limits; recheck before reusing or submitting a future artifact</td>
+</tr>
+<tr>
+<td>IR-48-09</td>
+<td>Low</td>
+<td><code>map_scale = 250</code> read as 1:250,000 is an interpretation of the field</td>
+<td><code>gdr_qfaults_traces.csv</code></td>
+<td>Confirm with USGS Qfault metadata</td>
+</tr>
+<tr>
+<td>IR-48-10</td>
+<td>Info</td>
+<td><code>labels.tif</code> and <code>existing_faults.tif</code> mirrors are byte-identical (sha256 <code>7ba308cc…</code>)</td>
+<td><code>registry/data_manifest_gemsdoe32.json</code></td>
+<td>Expected (same label raster)</td>
+</tr>
+<tr>
+<td>IR-48-11</td>
+<td>Medium</td>
+<td><strong>Data are owner-supplied GitHub mirrors, not organiser bytes.</strong> No DrivenData login is available here. Integrity rests on the sha256 pins recorded by GEMSDOE32. The scored-file names do not prove which bytes were uploaded</td>
+<td>manifest</td>
+<td>Owner to confirm the uploaded hashes</td>
+</tr>
+<tr>
+<td>IR-48-12</td>
+<td>Info</td>
+<td>GEMSDOE47 notes that "x at ρ = 8.02" implies an 88 % recall for 0.2778. That conflicts with this repo's LSI estimate (T/K ≈ 0.34). Both are model-dependent</td>
+<td>GEMSDOE47 <code>knowledge/02</code></td>
+<td>Unresolved offline; do not infer private truth from either model</td>
+</tr>
+<tr>
+<td>IR-48-13</td>
+<td><strong>High</strong></td>
+<td><strong>The file merged to <code>main</code> by an earlier session (PR #1, <code>gemsdoe48-h48-ds-yager-conflict-20261006.tif</code>, sha256 <code>fe68ae6f…</code>) is not recommended.</strong> It down-weights <strong>6,040 of b2's 37,654 live-validated dots to 0.137</strong>, losing ~86 % of their credit by the scale identity. It also adds 10,251 px at 0.086, <strong>3,894 of them within 200 m of the catalogue</strong>, which re-adds the mass whose removal earned +0.0070 live. LSI predicts 0.2383 vs 0.2635 for b2, but this inherited instrument is not an organizer score</td>
+<td><code>evidence/ds_file_comparison.json</code></td>
+<td>Retained for audit. Corrected DTI v2 independently finds this Yager file loses to tip, dotted and naïve mean on the SGMC proxy; no slot cleared</td>
+</tr>
+<tr>
+<td>IR-48-14</td>
+<td>Medium</td>
+<td>A third session's PR #2 (b2 × h33-d, <code>gemsdoe48-ds-dotted-x-tipstepover-20261006T201749Z-95897e3f8125-decision-zeros.tif</code>, 47,905 px binary) was <strong>merged to main while this session was working</strong>. It carries the same 3,894 flank dots (LSI 0.2590 vs b2 0.2635). Its README called it PRIMARY</td>
+<td><code>evidence/ds_file_comparison.json</code></td>
+<td>Kept for audit. Neither it nor H48-1 clears the current no-losing-candidate slot gate</td>
+</tr>
+<tr>
+<td>IR-48-15</td>
+<td><strong>High</strong></td>
+<td><strong>Corrected H48-Yager proxy v2 fails:</strong> DTI 0.08407 vs tip 0.09709, dotted 0.09613, naïve mean 0.09030; loses in 0/4 quadrants. Previous v1 pass was invalid: it omitted confidence from TP and truncated quadrant neighborhoods</td>
+<td><a href="data/proxy-validation.json"><code>docs/data/proxy-validation.json</code></a> · <a href="data/proxy-validation-v1-retracted.json"><code>retraction</code></a> · <code>scripts/validate_proxy.py</code></td>
+<td>v2 supersedes v1; no submission slot; proxy is SGMC-derived, not private truth or organizer score</td>
+</tr>
+<tr>
+<td>IR-48-16</td>
+<td>High</td>
+<td><strong>Output-format ambiguity remains:</strong> finite zero outside passes the [0,1] check but the official problem page says null/NaN outside. The portal was not tested for the Yager or H48-1 TIFF</td>
+<td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">official format</a> · raster audits</td>
+<td>Keep deviation explicit; do not claim full format compliance or acceptance</td>
+</tr>
+<tr>
+<td>IR-48-17</td>
+<td>Medium</td>
+<td><strong>Leaderboard refresh is not live-verified locally:</strong> <code>urllib</code> fetch closed during TLS before returning HTML; fixture tests pass. The main-branch six-hour <code>feed.yml</code> workflow commits a refreshed JSON/HTML snapshot from GitHub Actions to the existing legacy Pages branch source</td>
+<td><a href="data/source-checks.json"><code>data/source-checks.json</code></a> · <code>.github/workflows/feed.yml</code></td>
+<td>Monitor a successful workflow run; do not call the current manually recorded snapshot an active live fetch</td>
+</tr>
+</tbody>
+</table>
+<hr><p style="font-size:.8rem;color:#667">GEMSDOE48 · built from <code>docs/md/irregularities.md</code> by <code>scripts/build_site.py</code></p></main></body></html>

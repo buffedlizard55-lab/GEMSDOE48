@@ -24,10 +24,10 @@ RADIUS_M = 300.0
 ALPHA = 0.2
 BETA = 0.8
 INPUTS = {
-    "dotted": (ROOT / "data/raw/dotted.tif", "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9"),
-    "tip": (ROOT / "data/raw/tip.tif", "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757"),
-    "template": (ROOT / "data/raw/sample_submission.tif", "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc"),
-    "labels": (ROOT / "data/raw/labels.tif", "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093"),
+    "dotted": (ROOT / "data/raw/dotted_h33_2_b2_zeros.tif", "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9"),
+    "tip": (ROOT / "data/raw/tip_h33d_stepover.tif", "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757"),
+    "template": (ROOT / "data/raw/sample_submission_template.tif", "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc"),
+    "labels": (ROOT / "data/raw/labels_catalogue.tif", "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093"),
     "sgmc_proxy": (ROOT / "data/raw/external/derived_sgmc_faults_100m_u8.tif", "643cbe992ef4ba37588fb469163ed8291e3ceb23d6c1f78a3cfaa462430c2da0"),
 }
 FUSION_PATH = ROOT / "docs/downloads/gemsdoe48-h48-ds-yager-conflict-20261006.tif"

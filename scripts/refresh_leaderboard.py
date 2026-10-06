@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""Fetch the public DrivenData leaderboard and write a small static JSON feed.
+"""Fetch DrivenData's public leaderboard into the site's auditable JSON feed.
 
-No login or cookies are used. A failed or unrecognized page is a hard error so
-an HTML redesign cannot silently publish a stale or fabricated leaderboard.
+The parser uses only the standard library. It fails closed when the page
+structure is unrecognized or fewer than five ranked rows are found, so a
+challenge-page redesign cannot silently replace the stored snapshot.
 """
 from __future__ import annotations
 
@@ -17,13 +18,16 @@ from urllib.request import Request, urlopen
 
 LEADERBOARD_URL = "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/"
 DEFAULT_OUTPUT = Path(__file__).resolve().parents[1] / "docs/data/leaderboard.json"
+MIN_ROWS = 5
 
 
 class TableParser(HTMLParser):
+    """Collect visible table rows, cell text, and anchor text/URLs."""
+
     def __init__(self) -> None:
         super().__init__(convert_charrefs=True)
-        self.tables: list[list[dict[str, object]]] = []
-        self._table: list[dict[str, object]] | None = None
+        self.tables: list[list[list[dict[str, object]]]] = []
+        self._table: list[list[dict[str, object]]] | None = None
         self._row: list[dict[str, object]] | None = None
         self._cell: dict[str, object] | None = None
         self._anchor: dict[str, object] | None = None
@@ -38,7 +42,7 @@ class TableParser(HTMLParser):
             self._cell = {"tag": tag, "parts": [], "links": []}
         elif tag == "a" and self._cell is not None:
             self._anchor = {"href": attributes.get("href"), "parts": []}
-        elif tag in {"br", "img"} and self._cell is not None:
+        elif tag == "br" and self._cell is not None:
             self._cell["parts"].append(" ")
 
     def handle_data(self, data: str) -> None:
@@ -71,47 +75,136 @@ def _clean(value: str) -> str:
     return re.sub(r"\s+", " ", value).strip()
 
 
-def _table_records(rows: list[list[dict[str, object]]]) -> list[dict[str, object]]:
-    if not rows:
-        return []
-    header = [_clean(str(cell.get("text", ""))).lower() for cell in rows[0]]
-    rank_col = next((i for i, value in enumerate(header) if value.startswith("rank")), None)
-    participant_col = next((i for i, value in enumerate(header) if value.startswith("participant")), None)
-    score_col = next((i for i, value in enumerate(header) if "dw-tversky" in value or "tversky" in value), None)
-    if rank_col is None or participant_col is None or score_col is None:
-        return []
+def _header_columns(
+    rows: list[list[dict[str, object]]],
+) -> tuple[int | None, int | None, int | None]:
+    """Return (header row, participant column, score column), when discoverable."""
+    for row_index, row in enumerate(rows):
+        if not any(cell.get("tag") == "th" for cell in row):
+            continue
+        header = [_clean(str(cell.get("text", ""))).lower() for cell in row]
+        if not any(value.startswith("rank") for value in header):
+            continue
+        participant_col = next(
+            (i for i, value in enumerate(header) if value.startswith("participant")), None
+        )
+        score_col = next(
+            (i for i, value in enumerate(header) if "dw-tversky" in value or "tversky" in value),
+            None,
+        )
+        return row_index, participant_col, score_col
+    return None, None, None
 
+
+def _participant_name(value: str) -> str:
+    # Activity timestamps and submission counts are metadata, not part of a team name.
+    value = re.split(r"\s*[·⸱•]\s*", value, maxsplit=1)[0]
+    value = re.split(
+        r"\s+\d+\s*(?:m|min|h|hr|d|day|w|week)s?(?:\s+\d+\s*(?:m|min|h|hr))?\s+ago\b",
+        value,
+        maxsplit=1,
+        flags=re.IGNORECASE,
+    )[0]
+    value = re.split(r"\s+\d+\s+submissions?\b", value, maxsplit=1, flags=re.IGNORECASE)[0]
+    return _clean(value)
+
+
+def _numeric_value(value: str) -> float | None:
+    if re.fullmatch(r"\s*[+-]?(?:\d+(?:\.\d*)?|\.\d+)\s*", value):
+        return float(value)
+    return None
+
+
+def _score_from_row(row: list[dict[str, object]], rank_index: int, score_col: int | None) -> float | None:
+    if score_col is not None and score_col < len(row):
+        score = _numeric_value(str(row[score_col].get("text", "")))
+        if score is not None:
+            return score
+    for index, cell in enumerate(row):
+        if index == rank_index:
+            continue
+        score = _numeric_value(str(cell.get("text", "")))
+        if score is not None:
+            return score
+    return None
+
+
+def _table_records(rows: list[list[dict[str, object]]]) -> list[dict[str, object]]:
+    header_row, participant_col, score_col = _header_columns(rows)
     records: list[dict[str, object]] = []
-    for row in rows[1:]:
-        if max(rank_col, participant_col, score_col) >= len(row):
+    for row_index, row in enumerate(rows):
+        if row_index == header_row:
             continue
-        rank_text = str(row[rank_col].get("text", ""))
-        rank_match = re.search(r"#?\s*(\d+)", rank_text)
-        if not rank_match:
+        texts = [str(cell.get("text", "")) for cell in row]
+        rank_index = next(
+            (i for i, text in enumerate(texts) if re.search(r"#\s*\d+", text)), None
+        )
+        if rank_index is None:
             continue
-        participant_cell = row[participant_col]
-        links = participant_cell.get("links", [])
-        first_link = next((link for link in links if link.get("text")), None) if isinstance(links, list) else None
-        participant_text = str(first_link["text"]) if first_link else str(participant_cell.get("text", ""))
-        # Public rows sometimes append activity/submission counts to the name.
-        participant = re.split(r"\s+(?:\d+\s*(?:m|min|h|hr|d|day|w|week)\b|\d+\s+submissions?\b|\u00b7)", participant_text, maxsplit=1, flags=re.I)[0].strip()
+        rank_match = re.search(r"#\s*(\d+)", texts[rank_index])
+        if rank_match is None:
+            continue
+        rank = int(rank_match.group(1))
+
+        score = _score_from_row(row, rank_index, score_col)
+        full_text = " ".join(texts)
+        submission_match = re.search(r"(\d+)\s+submissions?\b", full_text, flags=re.IGNORECASE)
+
+        participant_cell: dict[str, object] | None = None
+        if participant_col is not None and participant_col < len(row):
+            participant_cell = row[participant_col]
+        if participant_cell is None or not str(participant_cell.get("text", "")).strip():
+            linked = [
+                (cell, link)
+                for i, cell in enumerate(row)
+                if i != rank_index
+                for link in cell.get("links", [])
+                if isinstance(link, dict) and str(link.get("text", "")).strip()
+            ]
+            if linked:
+                participant_cell = linked[0][0]
+                participant_text = str(linked[0][1].get("text", ""))
+            else:
+                candidates = [
+                    cell for i, cell in enumerate(row)
+                    if i != rank_index
+                    and str(cell.get("text", "")).strip()
+                    and not re.fullmatch(r"\s*(?:0(?:\.\d+)?|1(?:\.0+)?)\s*", str(cell.get("text", "")))
+                ]
+                participant_cell = max(candidates, key=lambda cell: len(str(cell.get("text", ""))), default=None)
+                participant_text = str(participant_cell.get("text", "")) if participant_cell else ""
+        else:
+            links = participant_cell.get("links", [])
+            linked_text = next(
+                (str(link.get("text", "")) for link in links
+                 if isinstance(link, dict) and str(link.get("text", "")).strip()),
+                "",
+            ) if isinstance(links, list) else ""
+            participant_text = linked_text or str(participant_cell.get("text", ""))
+
+        participant = _participant_name(participant_text)
         if not participant:
             continue
-        score_text = str(row[score_col].get("text", ""))
-        score_match = re.search(r"(?<!\d)(\d+(?:\.\d+)?)(?!\d)", score_text)
-        if not score_match:
-            continue
+
+        if score is not None and not 0.0 <= score <= 1.0:
+            raise ValueError(f"score outside [0,1] at rank {rank}: {score}")
         record: dict[str, object] = {
-            "rank": int(rank_match.group(1)),
+            "rank": rank,
             "participant": participant,
-            "score": float(score_match.group(1)),
+            "best_public": score,
+            "submissions": int(submission_match.group(1)) if submission_match else None,
         }
-        if first_link and first_link.get("href"):
-            href = str(first_link["href"])
-            if href.startswith("/"):
-                href = "https://www.drivendata.org" + href
-            if href.startswith("https://www.drivendata.org/"):
-                record["participant_url"] = href
+        if participant_cell is not None:
+            links = participant_cell.get("links", [])
+            first_link = next(
+                (link for link in links if isinstance(link, dict) and link.get("href")), None
+            ) if isinstance(links, list) else None
+            if first_link:
+                href = str(first_link["href"])
+                if href.startswith("/"):
+                    href = "https://www.drivendata.org" + href
+                if href.startswith("https://www.drivendata.org/"):
+                    record["participant_url"] = href
         records.append(record)
     return records
 
@@ -119,16 +212,21 @@ def _table_records(rows: list[list[dict[str, object]]]) -> list[dict[str, object
 def parse_leaderboard_html(html: str) -> list[dict[str, object]]:
     parser = TableParser()
     parser.feed(html)
+    parser.close()
     candidates = [_table_records(table) for table in parser.tables]
     records = max(candidates, key=len, default=[])
     records.sort(key=lambda record: int(record["rank"]))
     if not records:
-        raise ValueError("no leaderboard records recognized; page structure may have changed")
-    if len({record["rank"] for record in records}) != len(records):
+        raise ValueError("no leaderboard rows recognized; page structure may have changed")
+    ranks = [int(record["rank"]) for record in records]
+    if len(set(ranks)) != len(ranks):
         raise ValueError("duplicate rank values found in leaderboard")
-    if any(not 0.0 <= float(record["score"]) <= 1.0 for record in records):
-        raise ValueError("leaderboard score outside [0,1]")
     return records
+
+
+def parse(html: str) -> list[dict[str, object]]:
+    """Backward-compatible entry point used by the main-branch parser tests."""
+    return parse_leaderboard_html(html)
 
 
 def fetch_html(url: str = LEADERBOARD_URL) -> str:
@@ -137,26 +235,29 @@ def fetch_html(url: str = LEADERBOARD_URL) -> str:
         with urlopen(request, timeout=45) as response:
             if response.status != 200:
                 raise RuntimeError(f"leaderboard HTTP status {response.status}")
-            return response.read().decode("utf-8", errors="replace")
+            charset = response.headers.get_content_charset() or "utf-8"
+            return response.read().decode(charset, errors="replace")
     except URLError as error:
         raise RuntimeError(f"could not retrieve public leaderboard: {error}") from error
 
 
 def refresh(output: Path = DEFAULT_OUTPUT, html: str | None = None) -> dict[str, object]:
     page = fetch_html() if html is None else html
-    records = parse_leaderboard_html(page)
+    rows = parse_leaderboard_html(page)
+    if len(rows) < MIN_ROWS:
+        raise ValueError(f"only {len(rows)} ranked rows parsed; refusing to replace the snapshot")
+    mode = "live-http-fetch" if html is None else "provided-html-fixture"
     payload: dict[str, object] = {
-        "schema": "GEMSDOE48-leaderboard-v1",
-        "observed_at_utc": datetime.now(timezone.utc).isoformat(),
-        "source_url": LEADERBOARD_URL,
-        "refresh_mode": "live-http-fetch" if html is None else "provided-html-fixture",
-        "count": len(records),
-        "leader": records[0],
-        "entries": records,
-        "attribution_warning": "Public leaderboard scores are participant scores and are not linked to any local TIFF hash or owner-site artifact.",
+        "schema": "GEMSDOE48-leaderboard-v2",
+        "source": LEADERBOARD_URL,
+        "retrieved_utc": datetime.now(timezone.utc).isoformat(),
+        "method": "scripts/refresh_leaderboard.py (standard-library HTML parser; scheduled GitHub Actions)",
+        "refresh_mode": mode,
+        "rows": rows,
+        "attribution_warning": "Public leaderboard scores do not identify any local TIFF hash or owner-site artifact.",
     }
     output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+    output.write_text(json.dumps(payload, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
     return payload
 
 
@@ -169,9 +270,9 @@ def main() -> None:
     payload = refresh(args.output, html)
     print(json.dumps({
         "output": str(args.output),
-        "observed_at_utc": payload["observed_at_utc"],
-        "entries": payload["count"],
-        "leader": payload["leader"],
+        "retrieved_utc": payload["retrieved_utc"],
+        "rows": len(payload["rows"]),
+        "refresh_mode": payload["refresh_mode"],
     }, indent=2))
 
 
