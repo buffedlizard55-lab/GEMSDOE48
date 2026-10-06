@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Irregularity register · GEMSDOE48</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>Irregularity register — flagged for review</h1>
+    <p>Working rule: anything odd gets logged, not papered over. This register is the pass-2/pass-3
+    audit trail for the session that built the Dempster-Shafer submission.</p>
+  </div>
+</header>
+<nav><div class="wrap">
+  <a href="index.html">Overview &amp; download</a>
+  <a href="executive-summary.html">Executive summary / how to submit</a>
+  <a href="method.html">Method</a>
+  <a href="validation.html">Validation</a>
+  <a href="hypotheses.html">Next hypotheses</a>
+  <a href="sources.html">Sources</a>
+  <a class="active" href="irregularities.html">Irregularities</a>
+</div></nav>
+
+<div class="wrap">
+<table>
+  <tr><th>id</th><th>irregularity</th><th>handling</th></tr>
+  <tr><td>IR-48-01</td>
+      <td>Sandbox network: Dropbox, raw.githubusercontent.com and Amazon S3 all fail TLS
+      (curl exit 35); only github.com / api.github.com are reachable. The organizer's Dropbox
+      links (<span class="mono">example_submission.tif</span>,
+      <span class="mono">existing_faults.tif</span>) could not be fetched directly.</td>
+      <td>Grid identity and catalogue truth were instead pinned byte-for-byte via the sha256-verified
+      GEMSDOE24 owner mirrors (hashes equal to the GEMSDOE32 manifest of the official files).
+      Flagged so a future session with unrestricted network can re-verify against Dropbox directly.</td></tr>
+  <tr><td>IR-48-02</td>
+      <td>All family scores (0.2778, 0.2632, 0.2708, 0.2710…) are <b>owner-reported claims</b>;
+      no organizer receipt exists anywhere in the sibling sites. GEMSDOE33 independently flagged the
+      0.2708 attribution to h27-4 as unsupported.</td>
+      <td>Every score on this site carries a CLAIM badge. Selection used only within-repo proxy
+      orderings plus the claims as provenance labels.</td></tr>
+  <tr><td>IR-48-03</td>
+      <td>Catalogue-gap truth is anti-predictive for off-catalogue playbooks: the dotted surface
+      that scored <b>0.2778 live</b> ranked <em>last</em> (0.0067) on catalogue truth.</td>
+      <td>Catalogue proxy is reported in evidence files but excluded from the selection gate;
+      SGMC off-catalogue is the gating instrument.</td></tr>
+  <tr><td>IR-48-04</td>
+      <td>Leaderboard figures conflict between brief and sites: brief says current top = 0.3195;
+      GEMSDOE32's 2026-10-04 read says #1 = 0.3262 with 0.3195 at #2. DrivenData ToS forbids
+      scraping, so no live re-check was performed from this repo.</td>
+      <td>Both numbers recorded with dates; treated as point-in-time reads. Target is stated as
+      “beat 0.2778 own / 0.3195+ public”.</td></tr>
+  <tr><td>IR-48-05</td>
+      <td>For binary inputs, the normalized DS belief is a monotone transform of the naive mean,
+      so their Pearson correlation is ≈ 1.000 on the support — a naive reading of “correlation
+      check against the mean” could falsely suggest the surfaces are the same.</td>
+      <td>Reported as-is with the exact mechanism: values differ at exactly the 16,291
+      single-source dots (0.49754 vs 0.5), tier structure and unassigned/conflict layers have no
+      average-based counterpart, and the shipped decision file differs from the mean's support
+      policy. The not-the-mean evidence block records
+      <span class="mono">is_identical_to_naive_mean: false</span>.</td></tr>
+  <tr><td>IR-48-06</td>
+      <td>The fused support contains 6,530 dots within 300 m of the public catalogue (minimum
+      distance 100 m), inherited from the tip family's tip-protection policy.</td>
+      <td>Measured and accepted: 0 dots are on the catalogue, so no false-positive mass is wasted;
+      near-catalogue dots still earn kernel credit if hidden-truth pixels lie nearby.</td></tr>
+  <tr><td>IR-48-07</td>
+      <td>GEMSDOE28's own header states “NO GEMSDOE28 SCORE”, while the brief assigns scores
+      0.2708 / 0.2649 / 0.2710 to GEMSDOE28 artifacts. Unresolved contradiction between owner
+      pages and the brief.</td>
+      <td>Recorded, not resolved (no organizer receipts exist to adjudicate). Does not affect this
+      submission, which uses only GEMSDOE32 and GEMSDOE33 artifacts.</td></tr>
+  <tr><td>IR-48-08</td>
+      <td>The quadrant-blocked DTI ordering differs from the pooled ordering (union loses every
+      individual quadrant yet wins pooled). This is intrinsic to the ratio metric, not a bug —
+      kernel credit and the FP budget cross block borders.</td>
+      <td>Documented on the validation page; pooled scoring matches the live setup and was used
+      for selection, with block columns published for transparency.</td></tr>
+  <tr><td>IR-48-09</td>
+      <td>DrivenData training data (419 MB feature stack, 1-m DEM links) is login-walled; detector
+      re-training is impossible from this sandbox.</td>
+      <td>Scope set accordingly: this repo fuses finished, byte-verified surfaces instead of
+      retraining. The scripts/README document the exact placement steps for an unrestricted
+      machine.</td></tr>
+</table>
+<footer>GEMSDOE48 · register maintained per the standing brief; add new rows, never delete old ones.</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Next hypotheses · GEMSDOE48</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>Next hypotheses — ranked research agenda</h1>
+    <p>Standing requirement: every session proposes 3–5 geological hypotheses not yet tried,
+    names the layers and transforms, explains why each should catch a fault <em>missing from the
+    USGS/INGENIOUS catalogue</em>, and differs from everything already implemented in the program.
+    The top candidate must pass the blocked holdout before spending a submission slot.</p>
+  </div>
+</header>
+<nav><div class="wrap">
+  <a href="index.html">Overview &amp; download</a>
+  <a href="executive-summary.html">Executive summary / how to submit</a>
+  <a href="method.html">Method</a>
+  <a href="validation.html">Validation</a>
+  <a class="active" href="hypotheses.html">Next hypotheses</a>
+  <a href="sources.html">Sources</a>
+  <a href="irregularities.html">Irregularities</a>
+</div></nav>
+
+<div class="wrap">
+
+<p class="small"><b>What has already been tried</b> (from the GEMSDOE series): LiDAR scarp/ridge
+detection, openness/terrain curvature, DTI tilt &amp; wing-crack, Euler deconvolution (SI=0/SI=1),
+heat-flow residuals × Euler, gravity gradients, MT conductance / clay-cap breach, strain-rate
+dilatation/shear, seismicity density, radiometric totals, worm persistence, Poisson off-catalogue
+emission, spacing-tuned dot-thinning, catalogue-flank pruning, fault-tip/stepover protection,
+analog-field domain transfer. New ideas must clear that list.</p>
+
+<h2 class="sec">Ranked candidates (expected DTI improvement vs implementation cost)</h2>
+
+<div class="card" style="margin:14px 0">
+<h3>#1 · H49-2 — Paleo-discharge ascent nodes: sinter/tufa × dilational stepover jogs</h3>
+<p><b>Layers:</b> GDR paleogeothermal features (spring deposits: sinter, tufa, travertine — 244 px
+already rasterized on-grid in the GEMSDOE30 mirror) × dilatation-rate band of the official feature
+stack × the fused family dot set.
+<b>Signature:</b> within 300 m of each paleo-deposit, relocate/seed dots at local maxima of
+dilatation rate and at stepover dilational jogs of nearby family traces (classic fluid-upflow loci;
+Faulds &amp; Hinz 2015 stepover-relay geometry).
+<b>Why off-catalogue:</b> Quaternary spring deposits are direct sedimentary evidence of past
+geothermal upflow; many sit on structures too small, buried, or eroded to appear in QFaults/INGENIOUS.
+<b>Differs from prior art:</b> the paleo layer has been derived (GEMSDOE30 external receipt) but no
+shipped arm ever used it; prior “addition arms” used heat flow, Euler, LiDAR — never paleo-discharge.
+<b>Cost:</b> low (layers already mirrored; pure numpy). <b>Expected gain:</b> low-to-moderate on the
+Initial Round metric (small mass), but <b>high for the Final Prize Round</b>, where expert-verified
+new faults expand the label set — corroborated candidate upflow nodes are exactly what experts can confirm.</p>
+</div>
+
+<div class="card" style="margin:14px 0">
+<h3>#2 · H49-1 — 2-m temperature probe advection anomalies along off-catalogue lineaments</h3>
+<p><b>Layers:</b> GDR 2-m temperature probe surveys (3,439 probes in-grid; derived raster mirrored in
+GEMSDOE30) × detrended elevation × RTP magnetics.
+<b>Signature:</b> probe-temperature residuals after removing the elevation + latitude conductive
+trend; warm residual clusters (&gt;+2σ) collinear with magnetics/DTI lineament segments; emit along the
+connecting segments.
+<b>Why off-catalogue:</b> probes sample actual shallow heat advection — blind, fluid-conducting
+faults leave a thermal footprint with no required surface expression, so they are structurally
+absent from a morphologically-compiled catalogue.
+<b>Differs from prior art:</b> H38-1 used conductive heat-flow residuals (DeAngelo et al. 2022);
+GEMSDOE36 used well geothermal gradients. Shallow <em>advective</em> probe residuals with lineament
+collinearity have never been built.
+<b>Cost:</b> moderate (trend fit + collinearity statistics). <b>Expected gain:</b> moderate-to-high
+(direct thermal evidence), coverage clustered near access roads — must be blocked-out in validation.</p>
+</div>
+
+<div class="card" style="margin:14px 0">
+<h3>#3 · H49-3 — Hydrothermal alteration index (K/Th) at lineament intersections</h3>
+<p><b>Layers:</b> GeoDAWN radiometrics (K%, Th% — available via the GDR/GeoDAWN release and mirrored
+in the sibling public layers) × two lineament fields (DTI dots &amp; magnetic-gradient ridges).
+<b>Signature:</b> hydrothermal alteration depletes K relative to Th (argillic/sericitic zones);
+low K/Th ratio localized at lineament–lineament intersections = permeable conduit + altered wall rock.
+<b>Why off-catalogue:</b> alteration halos persist under alluvium where surface traces vanish —
+precisely the covered-basin regime where the catalogue is sparsest.
+<b>Differs from prior art:</b> GEMSDOE46 tried scarp × radiometric-total fusion; the K/Th
+<em>ratio</em> transform restricted to intersection nodes is new.
+<b>Cost:</b> moderate. <b>Expected gain:</b> moderate.</p>
+</div>
+
+<div class="card" style="margin:14px 0">
+<h3>#4 · H49-4 — Magnetic damage-zone texture (rolling variance of RTP)</h3>
+<p><b>Layers:</b> reduced-to-pole magnetic anomaly (feature band 2) × Quaternary volcanics mask
+(GEMSDOE30 mirror).
+<b>Signature:</b> fault damage zones hydrothermally alter/destroy magnetic carriers → elevated
+local variance and entropy of RTP in 300–500 m bands along buried traces; skeletonize the
+variance field, NMS-thin to dots.
+<b>Why off-catalogue:</b> damage-zone width is detectable without any surface trace; the catalogue
+misses buried segments systematically.
+<b>Differs from prior art:</b> all prior magnetic families used gradients, Euler depths, or
+source-depth estimates — never texture statistics.
+<b>Cost:</b> moderate. <b>Expected gain:</b> moderate; <b>risk:</b> volcanic edifices produce similar
+texture — the volcanics mask is mandatory, which is why it ranks below #3.</p>
+</div>
+
+<div class="card" style="margin:14px 0">
+<h3>#5 · H49-5 — Drainage-network fault offsets on the 1-m DEM</h3>
+<p><b>Layers:</b> 1-m DEMs from the competition's own <span class="mono">1m_DEM_links.csv</span>
+(official USGS 3DEP items).
+<b>Signature:</b> stream longitudinal-profile knickpoint index + offset/beheaded channel detection
+along range fronts (network-level transform, not local scarp kernels).
+<b>Why off-catalogue:</b> range-front faults are digitized incompletely; drainage anomalies expose
+unmapped strands and stepovers between digitized segments.
+<b>Differs from prior art:</b> prior LiDAR arms (7GEMSDOE, r7-nms3-dem10-scarp) detected local
+scarps only; network hydrography analysis has not been attempted.
+<b>Cost:</b> high (DEM volumes; the sandbox cannot fetch them — needs an unrestricted machine).
+<b>Expected gain:</b> moderate-to-high; ranked last purely on cost.</p>
+</div>
+
+<h2 class="sec">Validation-before-slot protocol for the top candidate</h2>
+<ol>
+  <li>Build the candidate layer from the mirrored data (already fetchable here via GitHub API).</li>
+  <li>Blocked off-catalogue SGMC holdout: candidate emission vs same-dot-count random control
+  and vs the shipped DS support (this page's arms), exact official metric.</li>
+  <li>LOSFO-style far-field falsification (remove whole fault systems with a 600 m buffer): a
+  candidate whose gain vanishes in the far field is catalogue-adjacency leakage, not discovery.</li>
+  <li>Only a candidate passing ≥3/4 folds on both instruments may occupy a weekly slot.</li>
+</ol>
+
+<footer>GEMSDOE48 · hypotheses are proposals, not results — none of H49-1…H49-5 has been validated yet.</footer>
+</div>
+</body>
+</html>

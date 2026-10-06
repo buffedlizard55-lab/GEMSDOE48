@@ -1,23 +1,9 @@
-# --- Python -----------------------------------------------------------------
+.venv/
 __pycache__/
-*.py[cod]
-*.egg-info/
 .pytest_cache/
-.mypy_cache/
-.ruff_cache/
-
-# --- regenerable heavy intermediates ---------------------------------------
-# The hex/covering sweeps write one boolean (3730 x 3292) array per spacing.
-# They are pure functions of data/families/*.tif and scripts/run_selection.py, so
-# they are not tracked; the JSON receipts that quote their measurements are.
-evidence/ds_layers/*.npy
-evidence/**/*.npy
-
-# --- local scratch ----------------------------------------------------------
+*.pyc
+external_ref/
 scratch/
-*.log
-/tmp/
-
-# --- OS ---------------------------------------------------------------------
-.DS_Store
-Thumbs.db
+nohup.out
+data/raw/
+data/cache/
