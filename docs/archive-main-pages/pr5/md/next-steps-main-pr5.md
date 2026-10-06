@@ -1,4 +1,4 @@
-> **Historical snapshot from the main branch after PR #5.** Preserved for provenance; superseded by the current no-slot decision. See the [current overview](../../../../../index.html) and [current validation](../../../../../validation.html).
+> **Historical snapshot from the main branch after PR #5.** Preserved for provenance; superseded by the current no-slot decision. See the [current overview](../../../../../index.html) and [current validation](../../../../../validation.html). Any six-hour leaderboard-feed instructions are obsolete: the current branch disables the workflow under its Terms-of-Use review, and the retained parser has no network-fetch path.
 
 ---
 
@@ -9,7 +9,7 @@
 3. **Stage N2 gravity–magnetic edge coherence** only after the competition feature stack or official public GeoDAWN/gravity files are actually retrieved and aligned. Audit coverage, survey seams, geotransforms and contest terms before implementing a detector. Validate on fixed spatial blocks against the current best baselines.
 4. **Consider N3 ComCat planes or N4 drainage deflections** only with uncertainty controls and a pre-registered holdout. ComCat counts establish availability, not usable geometry; 1 m DEM catalog listing establishes neither full coverage nor validation.
 5. **Treat N5 radiometric asymmetry as lower priority.** Related scarp–radiometric concordance was previously explored; test only the distinct signed, cross-strike feature after source bytes and survey metadata are available.
-6. **Monitor the six-hour leaderboard Action.** It parses and commits a static JSON/HTML snapshot from GitHub-hosted runners. Our local live HTML request failed TLS, so confirm a successful workflow run before calling it active. Never infer a leaderboard row's TIFF hash or score attribution.
+6. **Historical recommendation (superseded): monitor the six-hour leaderboard Action.** The workflow references in this archive are obsolete: the current branch disables scheduled leaderboard access and the parser is offline-only. Never infer a leaderboard row's TIFF hash or score attribution.
 7. **Extend the bounded uniqueness/data audit** only if it changes a decision: keep owner mirror hashes, CRS/bounds, external-data license checks, and exact candidate-to-score provenance explicit.
 
 ## Limitations / access needed

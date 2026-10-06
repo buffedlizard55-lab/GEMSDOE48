@@ -1,14 +1,15 @@
 # GEMSDOE48 — auditable Dempster-Shafer fault-surface research
 
-> **Decision: no weekly submission slot is cleared.** Under one consistent four-block/core-plus-halo evaluator, the `rho=0.5` candidate improves over dotted-only on the catalogue proxy but loses to tip/stepover, the arithmetic mean, and the prior full-union decision. On SGMC off-catalogue faults it loses to both parents, the mean, and the prior union in every block. The old main-branch report used different quadrant semantics; the prior union is rescored alongside the candidate below. No result is private-label or organizer score.
+> **Decision: no weekly submission slot is cleared.** The H48 `rho=0.5` candidate loses to the prior union on the shared SGMC blocked diagnostic (0.069261 vs 0.096992). The newer-main H49 balanced emission now scores 0.100751 vs that 0.096992 prior-union baseline (+0.003760, 4/4 folds) on the same protocol, and the direction repeats on the separate older SGMC raster. This is a post-selection re-score on related public proxy evidence, below the live instrument's roughly 0.005 resolution, and its live-anchored change bracket is −0.010 to +0.005. A format-only NaN-outside H49 copy passes local checks; organizer acceptance remains untested. No private-label or organizer score exists, so H49 is not slot-cleared.
 
 ## Executive summary and downloads
 
 GEMSDOE48 combines the public owner-mirror dotted and tip/step-over candidate families with reliability-discounted Dempster-Shafer mass assignments. It exports a graded belief raster plus separate residual-ignorance and raw-conflict diagnostics. A prior main-branch implementation also explored a full-confidence union decision surface; that historical result is retained and discussed below, not silently treated as a cleared submission.
 
-- **Current research artifact:** `GEMSDOE48-DS-FUSION-20261006`
-- **One-click candidate:** [`GEMSDOE48-DS-conflict-aware-fusion-20261006.tif`](docs/downloads/GEMSDOE48-DS-conflict-aware-fusion-20261006.tif)
-- **Current diagnostics:** [`unassigned mass m(Theta)`](docs/downloads/GEMSDOE48-unassigned-mass-20261006.tif) · [`raw conflict K`](docs/downloads/GEMSDOE48-raw-conflict-K-20261006.tif)
+- **H48 `rho=.5` research artifact (fails the spatial promotion gate):** `GEMSDOE48-DS-FUSION-20261006` · [`GeoTIFF`](docs/downloads/GEMSDOE48-DS-conflict-aware-fusion-20261006.tif)
+- **Latest-main H49 proxy-best, still not slot-cleared:** `GEMSDOE48-H49-DS-CB-e6f08013888b-NAN` · [`NaN-outside format-audited GeoTIFF`](docs/downloads/GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif) · [`H49 same-protocol report`](docs/research/holdout-h49-results-20261006.md)
+- **H48 diagnostics:** [`unassigned mass m(Theta)`](docs/downloads/GEMSDOE48-unassigned-mass-20261006.tif) · [`raw conflict K`](docs/downloads/GEMSDOE48-raw-conflict-K-20261006.tif)
+- **H49 audit/format receipts:** [`upstream H49 audit`](docs/downloads/gemsdoe48-h49-ds-conflict-balanced-20261006-audit.json) · [`format conversion`](evidence/h49_format_audit_20261006.json) · [`independent local format validation`](evidence/h49_submission_validation_20261006.json)
 - **Executive site:** [`docs/index.html`](docs/index.html)
 - **Build receipt / SHA-256s:** [`evidence/build_receipt_20261006.json`](evidence/build_receipt_20261006.json)
 - **Independent local format audit:** [`evidence/submission_validation_20261006.json`](evidence/submission_validation_20261006.json)
@@ -20,13 +21,13 @@ GEMSDOE48 combines the public owner-mirror dotted and tip/step-over candidate fa
 
 `GEMSDOE48 DS fusion | H33-2-B2 dotted + H33-D tip/step-over; rho=0.5; conflict/ignorance diagnostic; unscored research candidate.`
 
-The current TIFF uses one `float32` band, EPSG:32611, 100 m pixels, the documented 3,730 × 3,292 grid, finite in-footprint values in `[0,1]`, and NaN/nodata outside the valid footprint. The output was re-opened and audited locally; organizer portal acceptance has not been tested. The earlier alpha=.99 decision file encodes zeros outside, which is all-finite but does not follow the challenge page's explicit null/NaN-outside wording as closely as this file.
+The H48 Dempster TIFF uses one `float32` band, EPSG:32611, 100 m pixels, the documented 3,730 × 3,292 grid, finite in-footprint values in `[0,1]`, and NaN/nodata outside. Its output was re-opened and audited locally; organizer portal acceptance has not been tested. The original H49 file stored zeros outside; [`prepare_h49_format_copy.py`](scripts/prepare_h49_format_copy.py) creates a separate H49 derivative with NaN/nodata outside while preserving every in-footprint value exactly. Its independent local format audit also passes, but organizer portal acceptance is untested. The earlier alpha=.99 decision file likewise encodes zeros outside and is not the format-preferred artifact.
 
 ## Starting prompt and project requirements
 
 The starting brief is to autonomously build an auditable GEMS competition project; review the repository and prior work; combine the dotted-family and fault-tip/stepover surfaces with an evidence method that preserves disagreement; and generate a unique, downloadable competition-grid GeoTIFF plus separate uncertainty/disagreement diagnostics. Before any weekly submission, preregister three to five geological hypotheses with layers, physical signatures, off-catalogue rationale, differences from prior methods, ranked expected DTI/cost, verified free-data availability, and spatially blocked validation of the leading candidate. Include a project brief and repeat-use instructions, executive summary and one-click download, a unique name and paste-ready note, cited sources/limitations, at least three review passes, and a PR merged to `main` if feasible. Do not use a weekly submission slot unless a candidate beats the current spatially blocked best. Work autonomously, verify carefully, flag irregularities, and do not overstate uncertain evidence.
 
-The original owner brief is reproduced verbatim in the final section below; this paragraph distills its acceptance requirements. The frozen H48 slate is in [`docs/research/hypotheses-20261006.md`](docs/research/hypotheses-20261006.md) and [`evidence/hypothesis_slate_20261006.json`](evidence/hypothesis_slate_20261006.json). The earlier main branch also contained a separate H49 agenda, preserved in [`docs/archive-main-pages/hypotheses-main-20261006.html`](docs/archive-main-pages/hypotheses-main-20261006.html); those candidates remain proposals, not validated results.
+The original owner brief is reproduced verbatim in the final section below; this paragraph distills its acceptance requirements. The frozen H48 slate is in [`docs/research/hypotheses-20261006.md`](docs/research/hypotheses-20261006.md) and [`evidence/hypothesis_slate_20261006.json`](evidence/hypothesis_slate_20261006.json). The separate mainline H49 program is retained under [`docs/h49/`](docs/h49/) with source receipts and a same-protocol H48-style re-score in [`docs/research/holdout-h49-results-20261006.md`](docs/research/holdout-h49-results-20261006.md). Its proxy gain is not an independent blind holdout or a slot clearance.
 
 ## Validation results and slot decision
 
@@ -55,6 +56,14 @@ The newer pinned SGMC-derived raster supplies 62,122 positive cells after exclud
 | `rho=0.5` discounted Dempster belief | 0.074815 | 0.070333 | 0.079382 | 0.052515 | 0.069261 |
 
 The fusion's paired mean delta is −0.026230 vs dotted (0/4 positive), −0.026230 vs tip/stepover (0/4), −0.019493 vs arithmetic mean (0/4), and −0.027730 vs the prior union decision (0/4). The Yager alternative improves over this Dempster fusion by +0.013630 (4/4), but loses to dotted (−0.012600), tip/stepover (−0.012600), arithmetic mean (−0.005863), and prior union (−0.014100), each 0/4. Neither fusion clears a slot gate. The SGMC surface is a public-map proxy, not private expert truth; the candidate source rasters remain frozen upstream products and were not independently reconstructed per fold.
+
+### Latest-main H49 candidate: re-scored, higher proxy result, still no slot
+
+Main added a distinct Yager conflict-transfer / pignistic-ranked / fixed-budget candidate with 47,905 cells. Its original TIFF is [`docs/downloads/gemsdoe48-h49-ds-conflict-balanced-20261006-e6f08013888b.tif`](docs/downloads/gemsdoe48-h49-ds-conflict-balanced-20261006-e6f08013888b.tif) (SHA-256 `e6f08013888b625db7d187d79bb75ba36c45d068081b77a3dd405ab7eec3d472`). The original uses finite zero outside the footprint. A format-only derivative, [`GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif`](docs/downloads/GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif), changes only outside pixels to NaN/nodata (SHA-256 `9f028289c364c071065245799d7ed131600e80e9f0d10602806b12ce34d7cae8`) and passes [`scripts/validate_submission.py`](scripts/validate_submission.py) locally; organizer acceptance is not tested. Its unique label is `GEMSDOE48-H49-DS-CB-e6f08013888b-NAN`.
+
+The H49 file was scored with the exact current four-quadrant/core-plus-300 m-halo evaluator, the same masks and >300 m off-catalogue rule, and the same official DTI parameters. On the newer SGMC derivative it reaches 0.100751188 versus 0.096991657 for the prior union best (paired +0.003759531, 4/4 folds); on the separate older raw raster it reaches 0.099768355 versus 0.095957265 (+0.003811091, 4/4). It also beats the two parents and arithmetic mean in these reported folds. See [`docs/research/holdout-h49-results-20261006.md`](docs/research/holdout-h49-results-20261006.md), the [newer-raster JSON](evidence/holdout_h49_spatial_comparison_20261006.json), and the separate [raw-raster sensitivity JSON](evidence/holdout_h49_raw_sgmc_sensitivity_20261006.json).
+
+This is not a fresh blind holdout: H49 was developed and compared using related SGMC public-proxy evidence, and the frozen upstream source rasters were not rebuilt independently within folds. Its +0.00376 gain over the former blocked best is below the roughly 0.005 resolution discussed by the live-anchored instrument, whose H49 change bracket is −0.010 to +0.005. **It beats the prior best numerically on these proxy folds, but remains not slot-cleared.** Do not submit on this result alone.
 
 ### SGMC raster discrepancy and prior-raster sensitivity
 
@@ -109,7 +118,7 @@ The ranked H48 list was frozen before this branch's implementation and scoring; 
 | 4 | H48-4: hydrography channel-profile breaks plus 3DEP | Terrain-dependent; medium cost | Official USGS pages checked; footprint coverage unaudited |
 | 5 | H48-5: geothermal favorability plus ensemble spread | Unknown; high cost | Official USGS release metadata checked; large package not downloaded; favorability is not fault truth |
 
-The archived H49 agenda is in `docs/archive-main-pages/hypotheses-main-20261006.html`; it is prior art for this project, not a second preregistration for H48. Full source and limitation details are in [`docs/sources.md`](docs/sources.md).
+The original H49 agenda is preserved in `docs/archive-main-pages/hypotheses-main-20261006.html`; the separate mainline H49 implementation and its receipts remain under `docs/h49/`. H49 is not a second preregistration for H48. Its post-selection re-score and the no-slot decision are documented in [`docs/research/holdout-h49-results-20261006.md`](docs/research/holdout-h49-results-20261006.md). Full source and limitation details are in [`docs/sources.md`](docs/sources.md).
 
 ## Reproduce
 
@@ -124,12 +133,16 @@ python scripts/restore_candidate_surfaces.py  # hash-pinned public owner mirrors
 python scripts/restore_proxy_labels.py        # public labels/template mirrors only
 python scripts/build_footprint_mask.py        # template mask; compares label footprint
 python -m pytest -q                           # unit tests, no hidden labels required
-python scripts/build_submission.py             # rho=.5 candidate + diagnostics
+python scripts/build_submission.py             # H48 rho=.5 candidate + diagnostics
 python scripts/validate_submission.py --receipt evidence/submission_validation_20261006.json
-python scripts/run_spatial_holdout.py --yager docs/downloads/gemsdoe48-h48-ds-yager-conflict-20261006.tif  # pinned SGMC derivative by default
+python scripts/run_spatial_holdout.py --yager docs/downloads/gemsdoe48-h48-ds-yager-conflict-20261006.tif  # H48 pinned SGMC derivative by default
+python scripts/prepare_h49_format_copy.py       # H49 format-only NaN-outside derivative
+python scripts/validate_submission.py docs/downloads/GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif --receipt evidence/h49_submission_validation_20261006.json
+python scripts/run_spatial_holdout.py --combined docs/downloads/GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif --candidate-name h49_yager_balanced --output evidence/holdout_h49_spatial_comparison_20261006.json
+python scripts/run_spatial_holdout.py --combined docs/downloads/GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif --candidate-name h49_yager_balanced --sgmc data/raw/sgmc_faults_100m.tif --allow-unpinned-sgmc --output evidence/holdout_h49_raw_sgmc_sensitivity_20261006.json
 ```
 
-The current rho=.5 builder remains `scripts/build_submission.py`. The earlier alpha=.99 builder snapshot is retained as `scripts/previous_build_submission.py`; the earlier main builder is `scripts/previous_main_build_submission.py`, and the later PR #5 main Dempster builder is preserved as `scripts/previous_main_build_submission_pr5.py.disabled`. None is the default. Build and holdout receipts are dated and hash-pinned. Five review passes—including API compatibility and the follow-up against the newer SGMC derivative—are recorded in [`evidence/review_passes_20261006.md`](evidence/review_passes_20261006.md).
+The H48 rho=.5 builder remains `scripts/build_submission.py`. H49's separate mainline generation pipeline is `scripts/build_submission_h49.py`; `scripts/prepare_h49_format_copy.py` only fixes its outside-footprint encoding and preserves all inside values. The earlier alpha=.99 builder snapshot is retained as `scripts/previous_build_submission.py`; the earlier main builder is `scripts/previous_main_build_submission.py`, and the later PR #5 main Dempster builder is preserved as `scripts/previous_main_build_submission_pr5.py.disabled`. Build and holdout receipts are dated and hash-pinned. Five review passes—including API compatibility and the follow-up against the newer SGMC derivative—are recorded in [`evidence/review_passes_20261006.md`](evidence/review_passes_20261006.md).
 
 ## Sources
 
@@ -381,8 +394,7 @@ substantially (31,614 of b2's 37,654 positive pixels), so the Dempster independe
 assumption is unsupported and its layers are diagnostics, not calibrated probabilities. It also
 does not re-rank union support (Spearman ρ≈1).
 
-**Current tests:** `./.venv/bin/python -m unittest discover -s tests -t tests` — 120 tests passed
-on the merged worktree. The suite reads local raster inputs; it does not require network access.
+**Current validation (2026-10-06):** `PYTHONPATH=src .venv/bin/python -m pytest -q` — 216 passed, 3 skipped (219 collected) after reconciling the H48 and H49 suites. The suite reads local raster inputs; it does not require network access. The 120-test count above belonged to the earlier PR #6 worktree and is historical, not current.
 
 **Correction.** `DS48-IR-07` in the subsite records the hexagonal covering arm as unvalidated and
 not slot-cleared; its +1.9% SGMC-side signal was within re-sampling noise.

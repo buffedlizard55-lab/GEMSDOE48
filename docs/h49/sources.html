@@ -1,0 +1,44 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>GEMSDOE48 · Sources and access</title><link rel="stylesheet" href="../assets/style.css"></head><body><header><p>DOE GEMS Prize · DrivenData #306</p><h1>Source &amp; evidence register</h1><p>Every statement on this site is tied to one of these sources. Retrieval status is what happened on 2026-10-06 from this sandbox, not a claim about the source itself.</p><nav><a href="index.html">H49 summary</a><a href="hypotheses.html">Hypotheses</a><a href="method.html">Method &amp; evidence</a><a href="sources.html">Sources &amp; access</a></nav></header><main class="wrap">
+
+<h2>Official competition sources</h2>
+<table><thead><tr><th>Source</th><th>Use</th><th>Status</th></tr></thead><tbody>
+<tr><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">Official problem description</a></td><td>Metric definition, α = 0.2, β = 0.8, R = 300 m, submission format</td><td>Retrieved 2026-10-06 · primary</td></tr>
+<tr><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/">Official about / resources</a></td><td>Background</td><td>In scope, referenced</td></tr>
+<tr><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">Official leaderboard</a></td><td>Leader 0.3774; rank 7 = 0.3195; rank 13 = 0.2778</td><td>Retrieved 2026-10-06 · primary</td></tr>
+<tr><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/data/">Official data tab</a></td><td><code>training_features.tif</code>, <code>labels.tif</code>, <code>sample_submission.tif</code>, <code>1m_DEM_links.csv</code></td><td>Login required — not obtainable here</td></tr>
+<tr><td><a href="https://github.com/drivendataorg/gems-prize-reference-solution">DrivenData reference solution</a></td><td>Baseline approach</td><td>Public</td></tr>
+<tr><td><a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">DOE/NLR 96647 PDF</a></td><td>Submission instructions supplied in the brief</td><td>Supplied by owner</td></tr>
+<tr><td><a href="https://gdr.openei.org/submissions/1391">OpenEI GDR 1391 — INGENIOUS Great Basin compilation</a></td><td>Thermal, spring/well, paleo-geothermal, seismicity, geodetic, Quaternary fault and volcanic layers</td><td>Prior session recorded page text and a page-reported CC BY 4.0 · DOI <a href="https://doi.org/10.15121/1881483">10.15121/1881483</a> · binary download blocked here; asset-level rights/coverage not independently verified</td></tr>
+</tbody></table>
+
+<h2>Data actually used (SHA-256 pinned)</h2>
+<table><thead><tr><th>File</th><th>SHA-256</th><th>Provenance</th></tr></thead><tbody>
+<tr><td><code>data/raw/dotted.tif</code> — GEMSDOE32 <code>h33-h33-2-b2</code></td><td><code>c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9</code></td><td>GitHub API, repo <code>buffedlizard55-lab/GEMSDOE32</code> @ <code>b983924b</code></td></tr>
+<tr><td><code>data/raw/tip.tif</code> — GEMSDOE33 <code>h33d-analog-tip-stepover-r30</code></td><td><code>87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757</code></td><td>GitHub API, repo <code>buffedlizard55-lab/GEMSDOE33</code> @ <code>f5253311</code></td></tr>
+<tr><td><code>data/raw/sample_submission.tif</code></td><td><code>2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc</code></td><td>GEMSDOE24 bridge @ <code>07345ea0</code>. <strong>Flagged:</strong> pixel-identical to <code>labels.tif</code> with NaN outside the footprint — not the organiser's all-zero sample submission</td></tr>
+<tr><td><code>data/raw/labels.tif</code></td><td><code>7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093</code></td><td>GEMSDOE24 bridge</td></tr>
+<tr><td><code>data/raw/external/derived_sgmc_faults_100m_u8.tif</code></td><td><code>643cbe992ef4ba37588fb469163ed8291e3ceb23d6c1f78a3cfaa462430c2da0</code></td><td>GEMSDOE24 bridge; SGMC-derived faults on the template grid</td></tr>
+<tr><td><code>data/raw/calib/h27_4.tif</code>, <code>data/raw/calib/d28.tif</code></td><td>—</td><td>GEMSDOE28 / GEMSDOE32 downloads, used only to reconstruct the two known-outcome removal sets</td></tr>
+<tr><td>Primary deliverable</td><td><code>e6f08013888b625db7d187d79bb75ba36c45d068081b77a3dd405ab7eec3d472</code></td><td>Generated here; re-read from disk and audited</td></tr>
+</tbody></table>
+
+<h2>Method references</h2>
+<ul>
+<li>Shafer, G. (1976) <em>A Mathematical Theory of Evidence</em> — frames of discernment, belief functions, discounting.</li>
+<li>Sentz, K. &amp; Ferson, S. (2002) <em>Combination of Evidence in Dempster–Shafer Theory</em>, SAND2002-0835 — Dempster's rule, Yager's modified rule, Dubois–Pradé, pignistic transform. <a href="https://www.osti.gov/biblio/800792">osti.gov/biblio/800792</a>.</li>
+<li>Dempster, A. P. (1967) upper and lower probabilities induced by a multivalued mapping.</li>
+<li>Smets, Ph. — pignistic (betting) probability transform used as the decision score.</li>
+<li>Tversky index and its distance-weighted variant as published on the official problem page.</li>
+</ul>
+
+<h2>Owner-reported campaign history (not organiser-authenticated)</h2>
+<p>The scores in the brief — 0.2778 (GEMSDOE32), 0.2632 (GEMSDOE33), 0.2710 / 0.2708 / 0.2649 (GEMSDOE28), 0.2600 (GEMSDOE25/29/30), 0.2477 (GEMSDOE24), 0.1922 (GEMSDOE19) — are used only as <code>[ANCHOR]</code> inputs to the inversion and as design history. No organiser receipt ties any of them to a specific byte hash, and the mapping from file to score is the owner's own record. Prior artefacts are used for learning and as fusion inputs, never as the deliverable.</p>
+
+<h2>Evidence classes used across the site</h2>
+<ul>
+<li><code>[MEASURED]</code> — computed in this repository from hash-pinned inputs; reproducible with the commands on the method page.</li>
+<li><code>[ANCHOR]</code> — an owner-reported leaderboard score used as an input.</li>
+<li><code>[MODEL]</code> — a stated assumption (regime, transfer ratio, zero-credit pair); always swept, never reported as a measurement.</li>
+</ul>
+
+</main><footer>GEMSDOE48 H49 sub-site · · if it is not here, it is not claimed.</footer></body></html>

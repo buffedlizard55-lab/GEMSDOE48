@@ -156,6 +156,11 @@ def main() -> int:
     parser.add_argument("--tip", type=Path, default=ROOT / "data/raw/tip_h33d_stepover.tif")
     parser.add_argument("--combined", type=Path, default=ROOT / "docs/downloads/GEMSDOE48-DS-conflict-aware-fusion-20261006.tif")
     parser.add_argument(
+        "--candidate-name",
+        default="dempster_combined",
+        help="label for --combined in the machine-readable report (default: %(default)s)",
+    )
+    parser.add_argument(
         "--yager", type=Path, default=None,
         help="optional historical Yager-rule raster; if supplied, it is scored on the identical folds",
     )
@@ -227,29 +232,46 @@ def main() -> int:
     prior_max = float(prior_ds_099[footprint].max())
     prior_belief_099 = np.where(footprint, prior_ds_099 / prior_max if prior_max > 0 else 0.0, 0.0)
     prior_union = np.where(footprint, (dotted > 0) | (tip > 0), 0.0).astype(np.float64)
+    candidate_name = args.candidate_name.strip()
+    reserved_names = {
+        "dotted", "tip_stepover", "arithmetic_mean",
+        "prior_alpha_099_belief", "prior_union_decision",
+        "yager_conflict_transfer",
+    }
+    if not candidate_name or candidate_name in reserved_names:
+        raise SystemExit(f"--candidate-name must be nonempty and not reserved: {sorted(reserved_names)}")
     candidates = {
         "dotted": dotted,
         "tip_stepover": tip,
         "arithmetic_mean": 0.5 * (dotted + tip),
         "prior_alpha_099_belief": prior_belief_099.astype(np.float64),
         "prior_union_decision": prior_union,
-        "dempster_combined": combined,
+        candidate_name: combined,
     }
     if yager is not None:
         candidates["yager_conflict_transfer"] = np.where(footprint, yager, 0.0).astype(np.float64)
 
     blocks = quadrants(*labels.shape)
     results = score_surface_set(candidates, catalogue_truth, footprint, blocks)
-    gate, comparison_to_mean = paired_comparisons(results, blocks)
-    comparison_to_prior_union = paired_delta(results, "dempster_combined", "prior_union_decision", blocks)
-    comparison_to_prior_belief = paired_delta(results, "dempster_combined", "prior_alpha_099_belief", blocks)
+    gate, comparison_to_mean = paired_comparisons(results, blocks, candidate=candidate_name)
+    comparison_to_prior_union = paired_delta(results, candidate_name, "prior_union_decision", blocks)
+    comparison_to_prior_belief = paired_delta(results, candidate_name, "prior_alpha_099_belief", blocks)
     sgmc_results = score_surface_set(candidates, sgmc_offcat_truth, footprint, blocks)
-    sgmc_gate, sgmc_comparison_to_mean = paired_comparisons(sgmc_results, blocks)
-    sgmc_comparison_to_prior_union = paired_delta(sgmc_results, "dempster_combined", "prior_union_decision", blocks)
-    sgmc_comparison_to_prior_belief = paired_delta(sgmc_results, "dempster_combined", "prior_alpha_099_belief", blocks)
+    sgmc_gate, sgmc_comparison_to_mean = paired_comparisons(
+        sgmc_results, blocks, candidate=candidate_name
+    )
+    sgmc_comparison_to_prior_union = paired_delta(
+        sgmc_results, candidate_name, "prior_union_decision", blocks
+    )
+    sgmc_comparison_to_prior_belief = paired_delta(
+        sgmc_results, candidate_name, "prior_alpha_099_belief", blocks
+    )
 
     alternative_comparisons = {}
     if yager is not None:
+        comparison_reference = (
+            "rho_0_5_dempster" if candidate_name == "dempster_combined" else candidate_name
+        )
         yager_gate, yager_comparison_to_mean = paired_comparisons(
             results, blocks, candidate="yager_conflict_transfer"
         )
@@ -265,8 +287,8 @@ def main() -> int:
             "paired_comparison_vs_prior_union_decision": paired_delta(
                 results, "yager_conflict_transfer", "prior_union_decision", blocks
             ),
-            "paired_comparison_vs_rho_0_5_dempster": paired_delta(
-                results, "yager_conflict_transfer", "dempster_combined", blocks
+            f"paired_comparison_vs_{comparison_reference}": paired_delta(
+                results, "yager_conflict_transfer", candidate_name, blocks
             ),
             "sgmc_paired_gate_vs_each_input": yager_sgmc_gate,
             "sgmc_paired_comparison_vs_arithmetic_mean": yager_sgmc_comparison_to_mean,
@@ -276,8 +298,8 @@ def main() -> int:
             "sgmc_paired_comparison_vs_prior_union_decision": paired_delta(
                 sgmc_results, "yager_conflict_transfer", "prior_union_decision", blocks
             ),
-            "sgmc_paired_comparison_vs_rho_0_5_dempster": paired_delta(
-                sgmc_results, "yager_conflict_transfer", "dempster_combined", blocks
+            f"sgmc_paired_comparison_vs_{comparison_reference}": paired_delta(
+                sgmc_results, "yager_conflict_transfer", candidate_name, blocks
             ),
             "slot_decision": {
                 "cleared": False,
@@ -296,6 +318,11 @@ def main() -> int:
         "schema_version": 2,
         "evaluated_utc": datetime.now(timezone.utc).isoformat(),
         "status": "CONDITIONAL_SPATIAL_BLOCK_DIAGNOSTIC_NOT_SLOT_CLEARED",
+        "candidate": {
+            "name": candidate_name,
+            "path": display_path(args.combined),
+            "sha256": sha256_file(args.combined),
+        },
         "source_inputs": {
             "dotted": {"path": display_path(args.dotted), "sha256": dotted_hash},
             "tip_stepover": {"path": display_path(args.tip), "sha256": tip_hash},
@@ -343,7 +370,11 @@ def main() -> int:
         "alternative_candidate_comparisons": alternative_comparisons,
         "slot_decision": {
             "cleared": False,
-            "reason": "The current rho=0.5 candidate does not improve over both parents on either proxy under the preregistered >=3/4-fold rule; source surfaces are frozen and a proxy pass would still not establish private-label performance.",
+            "reason": (
+                f"{candidate_name} is evaluated only against public-map proxy targets with frozen "
+                "upstream surfaces; even a numeric proxy pass is not private-label evidence or a "
+                "slot clearance and must also pass format, live-evidence, and review gates."
+            ),
         },
         "caveats": [
             "The catalogue and SGMC labels are public map proxies, not the private expert-labelled competition target.",

@@ -1,0 +1,152 @@
+{
+  "schema": "GEMSDOE48-fused-sampler-v1",
+  "generated_utc": "2026-10-06T21:20:16.949069+00:00",
+  "method": "greedy maximal Poisson-disk sample of the fused pignistic field (or Yager belief), descending score, minimum separation = spacing, budget = N",
+  "candidates": {
+    "dotted_parent": {
+      "tp_w": 5639.032457275526,
+      "fp_w": 35171.90105328293,
+      "fn_w": 57481.96754272447,
+      "dti": 0.09613245598517173,
+      "truth_pixels": 63121,
+      "emitted_mass": 37654.0,
+      "block_dti_mean": 0.09303613246740716,
+      "blocks": 11,
+      "dots": 37654.0,
+      "delta_vs_dotted_parent": 0.0
+    },
+    "tip_parent": {
+      "tp_w": 5777.908176538844,
+      "fp_w": 39280.248660443685,
+      "fn_w": 57343.09182346116,
+      "dti": 0.09709394187971228,
+      "truth_pixels": 63121,
+      "emitted_mass": 41865.0,
+      "block_dti_mean": 0.0931875273758766,
+      "blocks": 11,
+      "dots": 41865.0,
+      "delta_vs_dotted_parent": 0.0009614858945405508
+    },
+    "union_binary": {
+      "tp_w": 6004.8530694984465,
+      "fp_w": 44851.412884796664,
+      "fn_w": 57116.146930501556,
+      "dti": 0.09897883241130949,
+      "truth_pixels": 63121,
+      "emitted_mass": 47905.0,
+      "block_dti_mean": 0.0947423747293009,
+      "blocks": 11,
+      "dots": 47905.0,
+      "delta_vs_dotted_parent": 0.0028463764261377617
+    },
+    "betp_poisson_s2.0_n37654": {
+      "tp_w": 5639.032457275526,
+      "fp_w": 35172.42964876214,
+      "fn_w": 57481.96754272447,
+      "dti": 0.09613228272922951,
+      "truth_pixels": 63121,
+      "emitted_mass": 37654.0,
+      "block_dti_mean": 0.09303886664383065,
+      "blocks": 11,
+      "dots": 37654.0,
+      "delta_vs_dotted_parent": -1.732559422179536e-07
+    },
+    "betp_poisson_s2.5_n37654": {
+      "tp_w": 5639.032457275526,
+      "fp_w": 35171.90105328293,
+      "fn_w": 57481.96754272447,
+      "dti": 0.09613245598517173,
+      "truth_pixels": 63121,
+      "emitted_mass": 37654.0,
+      "block_dti_mean": 0.09303613246740716,
+      "blocks": 11,
+      "dots": 37654.0,
+      "delta_vs_dotted_parent": 0.0
+    },
+    "betp_poisson_s2.8_n37654": {
+      "tp_w": 5639.032457275526,
+      "fp_w": 35171.90105328293,
+      "fn_w": 57481.96754272447,
+      "dti": 0.09613245598517173,
+      "truth_pixels": 63121,
+      "emitted_mass": 37654.0,
+      "block_dti_mean": 0.09303613246740716,
+      "blocks": 11,
+      "dots": 37654.0,
+      "delta_vs_dotted_parent": 0.0
+    },
+    "betp_poisson_s3.2_n37654": {
+      "tp_w": 5590.180341066158,
+      "fp_w": 35379.52326714518,
+      "fn_w": 57530.81965893384,
+      "dti": 0.09524807954936532,
+      "truth_pixels": 63121,
+      "emitted_mass": 37654.0,
+      "block_dti_mean": 0.09100273078015092,
+      "blocks": 11,
+      "dots": 37654.0,
+      "delta_vs_dotted_parent": -0.000884376435806411
+    },
+    "betp_poisson_s3.6_n37654": {
+      "tp_w": 5590.180341066158,
+      "fp_w": 35379.52326714518,
+      "fn_w": 57530.81965893384,
+      "dti": 0.09524807954936532,
+      "truth_pixels": 63121,
+      "emitted_mass": 37654.0,
+      "block_dti_mean": 0.09100273078015092,
+      "blocks": 11,
+      "dots": 37654.0,
+      "delta_vs_dotted_parent": -0.000884376435806411
+    },
+    "betp_poisson_s2.5_n47905": {
+      "tp_w": 6253.419182185664,
+      "fp_w": 44998.70344207138,
+      "fn_w": 56867.580817814334,
+      "dti": 0.10294164434833428,
+      "truth_pixels": 63121,
+      "emitted_mass": 47905.0,
+      "block_dti_mean": 0.09840289633699605,
+      "blocks": 11,
+      "dots": 47905.0,
+      "delta_vs_dotted_parent": 0.006809188363162549
+    },
+    "bel_poisson_s2.5_n37654": {
+      "tp_w": 5645.488204704314,
+      "fp_w": 35171.661334933226,
+      "fn_w": 57475.511795295686,
+      "dti": 0.09624047184208813,
+      "truth_pixels": 63121,
+      "emitted_mass": 37654.0,
+      "block_dti_mean": 0.09318577962918483,
+      "blocks": 11,
+      "dots": 37654.0,
+      "delta_vs_dotted_parent": 0.00010801585691640192
+    },
+    "betp_poisson_s2.8_n47905": {
+      "tp_w": 6253.419182185664,
+      "fp_w": 44998.70344207138,
+      "fn_w": 56867.580817814334,
+      "dti": 0.10294164434833428,
+      "truth_pixels": 63121,
+      "emitted_mass": 47905.0,
+      "block_dti_mean": 0.09840289633699605,
+      "blocks": 11,
+      "dots": 47905.0,
+      "delta_vs_dotted_parent": 0.006809188363162549
+    },
+    "bel_poisson_s2.8_n37654": {
+      "tp_w": 5645.488204704314,
+      "fp_w": 35171.661334933226,
+      "fn_w": 57475.511795295686,
+      "dti": 0.09624047184208813,
+      "truth_pixels": 63121,
+      "emitted_mass": 37654.0,
+      "block_dti_mean": 0.09318577962918483,
+      "blocks": 11,
+      "dots": 37654.0,
+      "delta_vs_dotted_parent": 0.00010801585691640192
+    }
+  },
+  "live_bar": 0.05556
+}

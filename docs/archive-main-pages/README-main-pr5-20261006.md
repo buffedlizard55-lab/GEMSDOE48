@@ -1,4 +1,4 @@
-> **Historical main-branch README snapshot (after PR #5).** Preserved for provenance; its candidate recommendations and validation claims are superseded by the current README and [current validation](../validation.html).
+> **Historical main-branch README snapshot (after PR #5).** Preserved for provenance; its candidate recommendations and validation claims are superseded by the current README and [current validation](../validation.html). Any six-hour leaderboard-feed instructions in this archive are historical: the current branch disables that workflow under the Terms-of-Use review, and the retained parser has no network-fetch path.
 
 ---
 

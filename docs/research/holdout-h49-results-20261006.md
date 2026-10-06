@@ -1,0 +1,58 @@
+# H49 re-score on the shared spatial-block protocol — 2026-10-06
+
+## Decision
+
+The PR #7 H49 conflict-balanced emission is a **new numeric best on these public proxy rasters**, including the exact four-quadrant/core-plus-halo evaluator used for the H48-1 report. On the primary newer SGMC derivative, its mean DTI is 0.100751188 versus 0.096991657 for the previous best comparator (the prior full-union decision): **+0.003759531 in all four folds**. On the separate older raw-SGMC sensitivity, it is 0.099768355 versus 0.095957265 (**+0.003811091 in all four folds**).
+
+This does **not** clear a weekly slot. H49 was already explored using related SGMC proxy measurements, so this is a conditional post-selection re-score, not an independent blind test; the source surfaces are frozen and may carry catalogue/SGMC information. The gain is below the roughly 0.005 resolution limit discussed in the live-anchored instrument record, which brackets H49's expected live change at **−0.010 to +0.005**. No private expert truth, organizer score, or portal acceptance was observed. The updated artifact also fixes the upstream H49 file's finite-zero outside convention, but local format validation is not organizer acceptance.
+
+## Candidate and format-only derivative
+
+- Upstream H49 TIFF: `docs/downloads/gemsdoe48-h49-ds-conflict-balanced-20261006-e6f08013888b.tif`, SHA-256 `e6f08013888b625db7d187d79bb75ba36c45d068081b77a3dd405ab7eec3d472`.
+- Format-audited derivative: `docs/downloads/GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif`, SHA-256 `9f028289c364c071065245799d7ed131600e80e9f0d10602806b12ce34d7cae8`.
+- The derivative changes **only outside-footprint encoding**: it retains all 5,167,373 in-footprint pixel values exactly, and writes NaN with a NaN nodata tag to all 7,111,787 outside cells. It is one-band float32, EPSG:32611, 100 m, 3,730 × 3,292, with finite in-footprint values in `[0,1]` and 47,905 positive cells.
+- Reproduction: `PYTHONPATH=src .venv/bin/python scripts/prepare_h49_format_copy.py`.
+- Independent local format receipt: [`evidence/h49_submission_validation_20261006.json`](../../evidence/h49_submission_validation_20261006.json), status `PASS_LOCAL_FORMAT_AUDIT_NOT_ORGANIZER_ACCEPTANCE`. The conversion receipt is [`evidence/h49_format_audit_20261006.json`](../../evidence/h49_format_audit_20261006.json).
+
+## Shared evaluator
+
+The candidate was rescored with `scripts/run_spatial_holdout.py --candidate-name h49_yager_balanced --combined <format-audited H49 TIFF>`. The method is unchanged from the H48 holdout: four fixed quadrants on the full EPSG:32611 grid; each scored domain is the held-out quadrant plus a 300 m Euclidean halo; only core truth contributes; the published distance-weighted Tversky parameters are α=0.2 and β=0.8. The H49 raster is identical inside the footprint to its original version, so the outside-format correction does not change any score.
+
+The frozen input surfaces were not retrained inside folds. These public-map proxy results are conditional and potentially leaky, and must not be interpreted as private-test estimates.
+
+## Primary newer SGMC derivative
+
+The primary SGMC target is positive and in-footprint more than 300 m from public catalogue positives: 62,122 truth cells. These values are on the identical four core-plus-halo folds used in `evidence/holdout_20261006.json`.
+
+| Candidate | Mean DTI | NW | NE | SW | SE |
+|---|---:|---:|---:|---:|---:|
+| H49 balanced emission | **0.100751188** | 0.106053414 | 0.107901401 | 0.110413525 | 0.078636413 |
+| Prior full-union decision | 0.096991657 | 0.102528375 | 0.102656235 | 0.106519977 | 0.076262041 |
+| Dotted parent | 0.095491168 | 0.101822069 | 0.099124646 | 0.107460816 | 0.073557139 |
+| Tip/stepover parent | 0.095491074 | 0.101428732 | 0.100171744 | 0.106455468 | 0.073908351 |
+| Arithmetic mean | 0.088754585 | 0.096056231 | 0.092405155 | 0.097484488 | 0.069072465 |
+| Prior alpha=.99 belief | 0.088714542 | 0.096024863 | 0.092355302 | 0.097440630 | 0.069037373 |
+
+Paired H49-minus-union deltas are `+0.003525039`, `+0.005245166`, `+0.003893548`, and `+0.002374372` (mean `+0.003759531`, 4/4 positive). The machine-readable per-fold report is [`evidence/holdout_h49_spatial_comparison_20261006.json`](../../evidence/holdout_h49_spatial_comparison_20261006.json).
+
+## Older raw-SGMC sensitivity (reported separately)
+
+The older raw raster differs from the newer derivative in nodata metadata and in 1,450 positive-mask cells. Its >300 m off-catalogue target has 61,664 truth cells; results are **not pooled** with the primary report.
+
+| Candidate | Mean DTI | NW | NE | SW | SE |
+|---|---:|---:|---:|---:|---:|
+| H49 balanced emission | **0.099768355** | 0.106053414 | 0.103979798 | 0.110413525 | 0.078626684 |
+| Prior full-union decision | 0.095957265 | 0.102528375 | 0.098528852 | 0.106519977 | 0.076251853 |
+| Dotted parent | 0.094503175 | 0.101822069 | 0.095183649 | 0.107460816 | 0.073546164 |
+| Tip/stepover parent | 0.094491436 | 0.101428732 | 0.096183997 | 0.106455468 | 0.073897548 |
+| Arithmetic mean | 0.087841201 | 0.096056231 | 0.088763479 | 0.097484488 | 0.069060606 |
+
+Paired H49-minus-union deltas are `+0.003525039`, `+0.005450945`, `+0.003893548`, and `+0.002374831` (mean `+0.003811091`, 4/4 positive). The report is [`evidence/holdout_h49_raw_sgmc_sensitivity_20261006.json`](../../evidence/holdout_h49_raw_sgmc_sensitivity_20261006.json).
+
+## Catalogue-label proxy
+
+On the same four core-plus-halo folds, H49 mean DTI is 0.095353248, versus 0.086820186 for tip/stepover and 0.085538370 for the prior union. This remains a public catalogue proxy; it does not replace the off-catalogue comparison or establish private-label performance. Full folds and paired comparisons are in the primary JSON report.
+
+## Slot gate and next research action
+
+H49 **numerically beats the former blocked-proxy best** under the common four-fold protocol on both SGMC raster versions. It nevertheless remains **not slot-cleared**: the result is post-selection on correlated public proxy evidence, the gain is below the live instrument's stated resolution, and its live-anchored change range includes a meaningful loss. The next decision-quality work is an independent, pre-registered validation source/holdout plus improved live-anchored discrimination—not another score search on these same proxy pixels. Do not spend a weekly slot on this result alone.

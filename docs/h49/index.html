@@ -1,0 +1,96 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>GEMSDOE48 · H49 research artifact (not slot-cleared)</title><link rel="stylesheet" href="../assets/style.css"></head><body><header><p>DOE GEMS Prize · DrivenData #306 · H49 research artifact</p><h1>H49 is proxy-best measured.<br>It is not slot-cleared.</h1><p>GEMSDOE48 H49 fuses the two strongest independently built fault families with Dempster–Shafer evidence theory. Where the two families disagree, the conflict is <em>kept</em> as unassigned belief and published as its own layer instead of being averaged away.</p><nav><a href="index.html">H49 summary</a><a href="hypotheses.html">Hypotheses</a><a href="method.html">Method &amp; evidence</a><a href="sources.html">Sources &amp; access</a><a href="../index.html">Repository site ↗</a></nav></header><main class="wrap">
+
+<section class="download">
+<h2 style="margin-top:0">1 · H49 research TIFF — audit only, not submission-cleared</h2>
+<p><a class="button" href="../downloads/GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif" download>⬇ Download NaN-outside research TIFF (209,612 B)</a></p>
+<p><strong>Research label:</strong> <code>GEMSDOE48-H49-DS-CB-e6f08013888b-NAN</code><br>
+<strong>Short note (audit only):</strong> <code>H49 Yager-balanced emission; +0.00376 vs prior blocked proxy best; post-selection; live bracket −0.010 to +0.005; NOT slot-cleared</code></p>
+<p class="small">Format-adjusted SHA-256: <code>9f028289c364c071065245799d7ed131600e80e9f0d10602806b12ce34d7cae8</code> · <a href="../../evidence/h49_submission_validation_20261006.json">local validation receipt</a> · <a href="../../evidence/holdout_h49_spatial_comparison_20261006.json">shared-protocol holdout JSON</a></p>
+<p class="small">The original H49 file remains available for provenance in the <a href="../downloads/gemsdoe48-h49-ds-conflict-balanced-20261006-audit.json">upstream byte audit</a>; it stores finite zeros outside and is not the format-preferred copy.</p>
+</section>
+
+<h2>2 · Submission decision and general checklist (reference only)</h2>
+<div class="warn"><strong>Do not submit or spend a weekly slot on H49 from this evidence alone.</strong> H49 numerically exceeds the former blocked proxy best, but the +0.00376 difference is a post-selection result on related public proxies, below the live instrument's resolution; its live-anchored change bracket includes loss. The artifact has no organizer score or portal acceptance.</div>
+<ol>
+<li>Before any future upload, require a candidate to beat the current blocked-holdout best under a pre-registered, comparable protocol and review the live-evidence uncertainty.</li>
+<li>Re-open the exact GeoTIFF bytes and independently verify the one-band float32 CRS, transform, shape, in-footprint range, and outside-footprint representation against the current official rules.</li>
+<li>Only for a separately cleared candidate, open the official <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/submissions/">New submission</a> page, select its exact TIFF, and use that artifact's unique name and short note.</li>
+<li>Do <strong>not</strong> upload diagnostic TIFFs; they are for geological review, not scoring.</li>
+</ol>
+<div class="good"><strong>Local format audit passed; organizer acceptance is unknown.</strong> The original H49 file used finite zeros outside despite the official null/NaN-outside wording. The linked derivative changes only outside pixels to NaN/nodata, retains all 5,167,373 in-footprint values exactly, and passes <code>scripts/validate_submission.py</code> locally. This does not demonstrate portal acceptance.</div>
+
+<h2>3 · Independent format receipt (re-read from the written bytes)</h2>
+<div class="grid">
+<div class="stat"><strong>1 band</strong>float32 GeoTIFF, deflate, NaN nodata</div>
+<div class="stat"><strong>EPSG:32611</strong>UTM 11N, 100 m</div>
+<div class="stat"><strong>3730 × 3292</strong>exact template grid</div>
+<div class="stat"><strong>243350, 4508550</strong>origin, 100/−100 m transform</div>
+<div class="stat"><strong>47,905</strong>positive in-footprint cells</div>
+<div class="stat"><strong>7,111,787</strong>outside cells encoded as NaN</div>
+</div>
+<p><a href="../../evidence/h49_submission_validation_20261006.json">Independent local format-validation JSON</a> · <a href="../../evidence/h49_format_audit_20261006.json">format-conversion receipt</a> · <a href="method.html">full method, calibration and limits</a>.</p>
+
+<h2>4 · The diagnostic layer: where the two families disagree</h2>
+<p><a class="button alt" href="../downloads/gemsdoe48-h49-ds-conflict-balanced-20261006-unassigned-diagnostic.tif" download>⬇ Unassigned-belief diagnostic .tif</a><a class="button alt" href="../downloads/gemsdoe48-h49-ds-conflict-balanced-20261006-belief-field.tif" download>⬇ Normalised combined-belief field .tif</a></p>
+<p>The unassigned layer is <em>m</em>(Θ) + <em>K</em> under Yager's modified Dempster rule: it is high wherever one family says “fault” and the other says “no fault”, i.e. wherever the model's two strongest independent approaches actively contradict each other. Its maximum is <strong>0.742</strong> and it is non-zero on <strong>760,664</strong> cells. A geologist reading it sees not only where the model believes there is a fault, but where it does not know.</p>
+
+<h2>5 · Proven unique: not either parent, not their average</h2>
+<table><thead><tr><th>Comparison</th><th>Result</th><th>Verdict</th></tr></thead><tbody>
+<tr><td>Pearson r vs naïve 0.5/0.5 mean</td><td>0.8831 (max abs difference 1.0)</td><td>not the mean</td></tr>
+<tr><td>Pearson r vs dotted parent</td><td>0.8857</td><td>not the parent</td></tr>
+<tr><td>Pearson r vs tip parent</td><td>0.7899</td><td>not the parent</td></tr>
+<tr><td>Pixel-identical to dotted / tip / union / mean?</td><td>no / no / no / no</td><td>new bytes</td></tr>
+<tr><td>Jaccard with dotted parent</td><td>0.786</td><td>21 % of the union of cells differs</td></tr>
+</tbody></table>
+<p>Composition of the 47,905 emitted cells: <strong>31,614</strong> where both families agree, <strong>6,040</strong> dotted-family only, <strong>3,842</strong> tip/step-over only, and <strong>6,409</strong> cells that neither parent emitted but that the fused evidence ranks highest (compromise positions between two disagreeing detections).</p>
+
+<h2>6 · H49's original spatial proxy evaluation (16 blocks, 11 with ≥50 truth pixels)</h2>
+<p>Scored with a literal implementation of the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">official distance-weighted Tversky index</a> (verified against a brute-force transcription of the published formulas), against SGMC-derived faults that lie <strong>≥300 m outside the public catalogue</strong> — the closest available stand-in for “faults the catalogue does not have”.</p>
+<table><thead><tr><th>Emission</th><th>Cells</th><th>Proxy DTI</th><th>Δ vs dotted parent</th><th>Block mean</th><th>Blocks won</th></tr></thead><tbody>
+<tr><td><strong>H49 emission</strong></td><td>47,905</td><td><strong>0.102942</strong></td><td><strong>+0.006809</strong></td><td>0.098403</td><td>10 / 11</td></tr>
+<tr><td>Naïve union of both parents</td><td>47,905</td><td>0.098979</td><td>+0.002846</td><td>0.094742</td><td>9 / 11</td></tr>
+<tr><td>Tip / step-over parent</td><td>41,865</td><td>0.097094</td><td>+0.000961</td><td>0.093188</td><td>8 / 11</td></tr>
+<tr><td>Dotted parent (owner-reported 0.2778 live)</td><td>37,654</td><td>0.096132</td><td>0</td><td>0.093036</td><td>—</td></tr>
+<tr><td>Weighted mean 0.64/0.36</td><td>39,170</td><td>0.091067</td><td>−0.005065</td><td>0.087600</td><td>0 / 11</td></tr>
+<tr><td>Naïve mean 0.5/0.5</td><td>39,760</td><td>0.090303</td><td>−0.005829</td><td>0.086703</td><td>0 / 11</td></tr>
+<tr><td>Intersection only</td><td>31,614</td><td>0.082233</td><td>−0.013899</td><td>0.079188</td><td>0 / 11</td></tr>
+</tbody></table>
+<p>A second proxy that only excludes the 100 m catalogue core (<a href="../data/h49-budget-sweep.json">receipt</a>, <a href="../data/h49-instrument-calibration.json">calibration</a>) gives the same ordering: H49 0.123756 vs union 0.119095 vs tip 0.116779 vs dotted 0.092893.</p>
+<p>A third, independent protocol — four fixed spatial quadrants instead of sixteen blocks, same metric, same truth mask — also puts the submission first: <strong>H49 0.102791</strong> vs union 0.099052 vs tip 0.097561 vs dotted 0.096700 vs weighted mean 0.091064 vs naïve mean 0.090230 vs intersection 0.082002, positive in <strong>4 / 4</strong> quadrants (<a href="../data/h49-quadrant-proxy.json">receipt</a>).</p>
+<div class="warn"><strong>Resolution limit of the proxy, stated openly.</strong> Both proxy protocols rank the tip family marginally <em>above</em> the dotted family (+0.00096 and +0.00086 proxy DTI), while the live leaderboard has the dotted family ahead by 0.0146. So the proxy demonstrably mis-orders these two parents by about 0.001 proxy units, and gaps of that size carry no information. The original H49 proxy margin over the dotted parent (+0.0068) is roughly seven times that disagreement, but this does not establish a live gain; the later shared-protocol score and remaining uncertainty are summarized below. The decision was taken on the <a href="method.html#calibration">live-anchored instrument calibration</a>, not on the proxy ranking.</div>
+<div class="warn"><strong>These are proxy DTIs, not leaderboard scores.</strong> The SGMC compilation is a public stand-in for the hidden expert labels, not the labels themselves, and the two parent families are 84 % co-located, so the “independent sources” assumption behind evidence combination is only partly satisfied. <a href="../data/h49-parent-decomposition.json">Full decomposition</a>.</div>
+
+<h2>6b · Re-score against the shared H48 core-plus-halo holdout</h2>
+<p>The upstream H49 artifact has now also been scored with the H48 evaluator: four fixed quadrants on the full grid, each scored on the held-out core plus a 300 m Euclidean halo, core-only truth, the same official DTI, and the stricter SGMC distance rule &gt;300 m. The H49 in-footprint predictions are unchanged in the NaN-outside derivative linked above.</p>
+<table><thead><tr><th>Candidate</th><th>Mean DTI</th><th>NW</th><th>NE</th><th>SW</th><th>SE</th></tr></thead><tbody>
+<tr><td><strong>H49 balanced emission</strong></td><td><strong>0.100751188</strong></td><td>0.106053414</td><td>0.107901401</td><td>0.110413525</td><td>0.078636413</td></tr>
+<tr><td>Prior full-union decision</td><td>0.096991657</td><td>0.102528375</td><td>0.102656235</td><td>0.106519977</td><td>0.076262041</td></tr>
+<tr><td>Dotted parent</td><td>0.095491168</td><td>0.101822069</td><td>0.099124646</td><td>0.107460816</td><td>0.073557139</td></tr>
+<tr><td>Tip/stepover parent</td><td>0.095491074</td><td>0.101428732</td><td>0.100171744</td><td>0.106455468</td><td>0.073908351</td></tr>
+<tr><td>Arithmetic mean</td><td>0.088754585</td><td>0.096056231</td><td>0.092405155</td><td>0.097484488</td><td>0.069072465</td></tr>
+</tbody></table>
+<p>Against the prior union, H49's paired delta is +0.003759531, positive in all four folds. On the separate older raw-SGMC sensitivity, it is +0.003811091 vs the prior union, also 4/4; the two reports are not pooled. See the <a href="../research/holdout-h49-results-20261006.md">full re-score, exact fold semantics and limitations</a>, the <a href="../../evidence/holdout_h49_spatial_comparison_20261006.json">newer-raster JSON</a>, and the separate <a href="../../evidence/holdout_h49_raw_sgmc_sensitivity_20261006.json">raw-raster sensitivity JSON</a>.</p>
+<div class="warn"><strong>Still not slot-cleared.</strong> This is a post-selection re-score using related public SGMC proxy evidence, not an independent blind holdout; the source surfaces were frozen and not reconstructed inside folds. The +0.00376 change is below the approximately 0.005 live-instrument resolution, and the live-anchored change bracket remains −0.010 to +0.005. The format audit and proxy result do not establish a private score or organizer acceptance. Do not submit H49 on this result alone.</div>
+
+<h2>7 · Why 0.2778 worked, and whether we can beat it</h2>
+<p>With the published metric, and writing <em>T</em> for weighted true positives, <em>F</em> for wasted mass and <em>K</em> for hidden truth pixels:</p>
+<pre>1/DTI = α + α·(F/T) + β·(K/T)        α = 0.2, β = 0.8</pre>
+<p>Adding one unit of emitted mass raises the denominator by exactly α = 0.2 <em>wherever it lands</em>. A cell therefore pays for itself only if its expected credit exceeds α·DTI ≈ <strong>0.056</strong> at DTI 0.278 — i.e. it must sit within roughly 284 m of a <em>hidden</em> fault pixel. Every recorded live move in this campaign that gained score did it by deleting mass whose credit was below that bar (121k → 60k → 44k → 40k → 37.6k cells: 0.1922 → 0.2477 → 0.2600 → 0.2708 → 0.2778). That is a credit-density result, not a probability-calibration result, and it is why H33-2-B2 leads the family.</p>
+<p><strong>Can we beat 0.2778?</strong> Honestly: not with these two families alone. This session measured every reachable direction and found the dotted parent sits at a local optimum:</p>
+<ul>
+<li><strong>Additions.</strong> The tip family's extra cells return 0.0357 proxy credit per cell as a raw union but <strong>0.0599</strong> when the fused field is used to place them — 68 % better allocation at identical mass. Against the calibrated live bar the modeled point estimate is −0.003 with a bracket of −0.010 to +0.005; the sign is unresolved and does not justify a submission slot.</li>
+<li><strong>Removals.</strong> No tested subgroup of the dotted parent is free: every quintile of every geometric feature carries 0.13–0.17 proxy credit per cell, 3–4× the removal bar.</li>
+<li><strong>Hypothesis H-A (lineament coherence pruning) is falsified</strong> — see <a href="hypotheses.html">hypotheses</a>.</li>
+</ul>
+<p>The single largest remaining lever is knowledge, not method: to move from 0.278 toward the 0.3774 leading public score requires finding faults the two families never saw, which needs either the 419 MB official feature stack or new external geothermal/geophysical data. Both are blocked by this sandbox's network egress; the exact free official URLs and their obtainability are listed on the <a href="hypotheses.html">hypotheses page</a>.</p>
+
+<h2>8 · Irregularities flagged for review</h2>
+<ul>
+<li><strong>The brief's “0.3195 is the highest score right now” is stale.</strong> The official leaderboard retrieved 2026-10-06 is led by <strong>0.3774</strong>; 0.3195 is rank 7. All rank/score statements on this site come from that page.</li>
+<li><strong>Our own prior best (0.2778) corresponds to leaderboard rank 13</strong>, not to the top of the board.</li>
+<li><strong>The template in use is a bridged copy.</strong> <code>data/raw/sample_submission.tif</code> (GEMSDOE24 bridge, SHA-256 2176d08e…) is pixel-identical to <code>labels.tif</code> with NaN outside the footprint — it is not the organiser's all-zero sample submission. Its grid (3730×3292, EPSG:32611, 100 m, origin 243350/4508550) matches the published format and prior submissions built on it have scored, so it is used as the grid/footprint reference, but it is <em>not</em> an organiser-authenticated file.</li>
+<li><strong>External data hosts are unreachable from this sandbox</strong> (dropbox.com, usgs.gov, earthquake.usgs.gov, gdr.openei.org, sciencebase.gov all fail TLS at the socket). Page text is retrievable; binary downloads are not.</li>
+<li><strong>Owner-reported scores are not organiser receipts.</strong> No hash links the 0.2778 / 0.2632 numbers to particular bytes.</li>
+</ul>
+
+</main><footer>GEMSDOE48 H49 sub-site · · Maximize P(Win) by measuring uncertainty. Own the Outcome by publishing failures and limits.</footer></body></html>

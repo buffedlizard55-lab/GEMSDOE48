@@ -51,6 +51,17 @@ Five review passes were completed across the original candidate, main-branch rec
 
 **Artifacts:** `evidence/sgmc_raster_comparison_20261006.json`, `evidence/holdout_20261006.json`, `evidence/holdout_raw_sgmc_20261006.json`, `docs/research/holdout-results-20261006.md`.
 
+## Pass 6 — latest-main H49 integration and slot-gate re-review
+
+- Fetched and integrated the newer `origin/main` tip `0eaae0b` (PR #7) while staying on the Arena branch. Preserved its H49 code, tests, candidate outputs, audit receipts, and sub-site; kept H48 as a separate method/result rather than silently replacing its data or claims.
+- Added a candidate label to the existing spatial-holdout runner and evaluated H49 using the exact H48 four-quadrant/core-plus-300 m-halo protocol, >300 m SGMC target, and DTI parameters. On the newer SGMC derivative, H49 mean DTI is 0.100751188 vs 0.096991657 for the prior-union best (+0.003759531, 4/4); on the separate older raw raster it is 0.099768355 vs 0.095957265 (+0.003811091, 4/4). Reports are separate and machine-readable.
+- Explicitly reviewed the H49 result as post-selection on related public proxy evidence, not an independent blind holdout. Its +0.00376 delta is below the live instrument's roughly 0.005 resolution, and the live-anchored change bracket is −0.010 to +0.005. The slot gate remains closed despite the numeric proxy win.
+- Preserved the upstream H49 TIFF unchanged and created a separate format-only copy that sets outside-footprint cells to NaN/nodata, preserving all 5,167,373 in-footprint values exactly. Local validation passes (one-band float32, EPSG:32611, 100 m, 3,730 × 3,292, in-footprint `[0,1]`); organizer acceptance remains untested.
+- Reconciled root README, current landing/validation/executive/next-steps pages, H49 sub-site, and archived mainline pages. H49 sources/rights are described cautiously. Six-hour leaderboard references are clearly historical; the current workflow remains disabled and the parser remains offline-only.
+- Final local checks: 216 pytest tests passed, 3 skipped (219 collected); compileall passed; 252 active HTML references and 61 active Markdown links checked with zero missing; JSON receipts parsed; H48 holdout JSON/log remain byte-identical; no conflict markers or whitespace errors.
+
+**Artifacts:** `docs/research/holdout-h49-results-20261006.md`, `evidence/holdout_h49_spatial_comparison_20261006.json`, `evidence/holdout_h49_raw_sgmc_sensitivity_20261006.json`, `evidence/h49_submission_validation_20261006.json`, `docs/downloads/GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif`.
+
 ## Re-review triggers
 
 Repeat the affected reviews if an input or label hash changes, an official rule changes, the footprint is rebuilt from a different template, a fusion weight or mapping changes, the metric implementation changes, a new holdout target is introduced, a source is rebuilt within folds, or anyone proposes clearing a submission slot.

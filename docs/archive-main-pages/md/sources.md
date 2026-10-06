@@ -1,4 +1,4 @@
-> **Historical archive.** This earlier upstream page is preserved for provenance and may contain superseded claims. Do not treat it as the current submission or validation decision. See the [current overview](../../index.html) and [current validation](../../validation.html).
+> **Historical archive.** This earlier upstream page is preserved for provenance and may contain superseded claims. Do not treat it as the current submission or validation decision. See the [current overview](../../index.html) and [current validation](../../validation.html). Any six-hour leaderboard-feed instructions are obsolete: the current branch disables the workflow under its Terms-of-Use review, and the retained parser has no network-fetch path.
 
 ---
 

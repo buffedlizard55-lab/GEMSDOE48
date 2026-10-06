@@ -1,3 +1,3 @@
 # Current overview
 
-The earlier upstream Markdown site is retired and these files are no longer build inputs. Open the [current GEMSDOE48 overview](../index.html), or review the [current blocked-fold validation](../validation.html). The rho=.5 candidate is **not cleared for a submission slot**.
+The upstream Markdown site is retired and these files are no longer build inputs. Open the [current GEMSDOE48 overview](../index.html), the [H48 blocked-fold validation](../validation.html), or the [H49 same-protocol re-score](../research/holdout-h49-results-20261006.md). H49 beats the former proxy best on the reported blocked folds, but this is a post-selection result on related public SGMC evidence, below the live instrument's resolution, and **not cleared for a submission slot**. Its [format-audited NaN-outside TIFF](../downloads/GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif) has not been submitted to the organizer.

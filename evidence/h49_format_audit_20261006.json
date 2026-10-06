@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "generated_utc": "2026-10-06T22:33:31.583224+00:00",
+  "method": "format-only outside-footprint conversion; inside prediction pixels must be byte-value-identical",
+  "input": {
+    "path": "docs/downloads/gemsdoe48-h49-ds-conflict-balanced-20261006-e6f08013888b.tif",
+    "sha256": "e6f08013888b625db7d187d79bb75ba36c45d068081b77a3dd405ab7eec3d472"
+  },
+  "mask_reference": {
+    "path": "docs/downloads/GEMSDOE48-DS-conflict-aware-fusion-20261006.tif",
+    "sha256": "818957c0cb69caf360d445c7f7a684578c37528f363b5d84f5ae3be832e7413f",
+    "mask_rule": "finite values in the locally audited NaN-outside H48 TIFF define the valid footprint"
+  },
+  "output": {
+    "path": "docs/downloads/GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif",
+    "sha256": "9f028289c364c071065245799d7ed131600e80e9f0d10602806b12ce34d7cae8",
+    "bytes": 209612,
+    "bands": 1,
+    "dtype": "float32",
+    "crs": "EPSG:32611",
+    "shape": [
+      3730,
+      3292
+    ],
+    "resolution": [
+      100.0,
+      100.0
+    ],
+    "nodata": "NaN",
+    "all_inside_finite": true,
+    "all_outside_nan": true,
+    "inside_min": 0.0,
+    "inside_max": 1.0,
+    "positive_inside_cells": 47905,
+    "same_inside_pixels_as_input": true,
+    "organizer_portal_acceptance_tested": false
+  },
+  "decision": "format checks passed locally; this does not clear a weekly submission slot or establish organizer acceptance"
+}
