@@ -1,4 +1,7 @@
 {
+ "schema": "GEMSDOE48-leaderboard-v2",
+ "refresh_mode": "manual-page-reader-snapshot",
+ "attribution_warning": "Public leaderboard scores do not identify any local TIFF hash or owner-site artifact.",
  "source": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
  "retrieved_utc": "2026-10-06",
  "method": "fetched via agent web tool (sandbox has no DrivenData egress); first 25 rows; rank 25 score truncated in the fetch",

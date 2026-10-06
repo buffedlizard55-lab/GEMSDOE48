@@ -732,7 +732,7 @@
   "chosen": "R2_hex_5.6",
   "gate_caveat": {
     "status": "degenerate, not a promotion instrument",
-    "catalogue_term": "uninformative: divides by the base's own catalogue credit (378.0), and the catalogue layer is anti-monotone with the live ladder (IR-48-04)",
+    "catalogue_term": "uninformative: divides by the base's own catalogue credit (378.0), and the catalogue layer is anti-monotone with the live ladder (DS48-IR-04)",
     "safety_term": "saturates at the 99.0 ceiling whenever the measured SGMC credit loss is 0.0, so 'safety >= 2.0' cannot fail",
     "action": "treat `eligible` and `chosen` as descriptive only; no candidate is promoted by this script",
     "shipped_artifact_built_by": "scripts/build_submission.py"

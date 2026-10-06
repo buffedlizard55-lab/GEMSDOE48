@@ -1,4 +1,4 @@
-# GEMSDOE48 — Dempster–Shafer fault-discovery submission for the DOE GEMS Prize (DrivenData #306)
+# GEMSDOE48 — Dempster–Shafer fault-discovery research for the DOE GEMS Prize (DrivenData #306)
 
 **Live site:** <https://buffedlizard55-lab.github.io/GEMSDOE48/docs/index.html> ·
 **How to submit:** [docs/executive-summary.html](https://buffedlizard55-lab.github.io/GEMSDOE48/docs/executive-summary.html) ·
@@ -18,9 +18,26 @@
 > *Applied here:* our own validation instruments were measured against live scores before being
 > trusted, and their failures are published (IR-48-05, IR-48-06).
 
+## Current decision — 2026-10-06 (overrides older upload recommendations below)
+
+**No candidate is cleared for a weekly competition slot.** The Yager conflict-transfer raster
+requested in this work loses to the dotted parent, tip parent, and naïve mean on the corrected
+SGMC proxy, including every quadrant. The earlier v1 apparent pass is retracted. H48-1's binary
+Dempster candidate also did not beat its spatial holdout best; its owner-built LSI estimate is
+not reliable enough to call it a tie or a score forecast. No upload, portal acceptance, or private
+score has been observed.
+
+- **Yager research raster:** [`gemsdoe48-h48-ds-yager-conflict-20261006.tif`](docs/downloads/gemsdoe48-h48-ds-yager-conflict-20261006.tif), one-band float32, EPSG:32611, 100 m, 3730×3292, range [0,1], SHA-256 `fe68ae6f57be013e26d20006551b43cd84bb5fe4a0b07d1d10ce4725c90fd16c`. It is not the naïve mean. The separate unassigned-belief diagnostic is [`here`](docs/downloads/gemsdoe48-h48-ds-yager-conflict-20261006-unassigned-diagnostic.tif) (**do not submit**).
+- **Corrected SGMC proxy DTI:** Yager 0.08407; tip 0.09709; dotted 0.09613; naïve mean 0.09030. Proxy only—not private truth or organizer score. See [`v2 receipt`](docs/data/proxy-validation.json); [`v1 retraction`](docs/data/proxy-validation-v1-retracted.json).
+- **Format caveat:** all cells are finite and in [0,1], with zero outside. This passes a local range audit but does not establish the cause of the reported portal error or demonstrate portal acceptance; it also does **not** satisfy the official page's null/NaN-outside language. The portal was not tested.
+- **Suggested name:** `GEMSDOE48-H48-DS-CONFLICT` · **suggested short note:** `H48 dotted+tip Yager fusion; distinct in bounded scan; SGMC proxy gate failed; do not spend slot`.
+- **PR #6 DS48 emission (comparison only):** [`gemsdoe48-ds48-emission.tif`](docs/downloads/gemsdoe48-ds48-emission.tif), 37,654 px; byte-format checks passed. It scored 0.09068 on the owner-derived SGMC off-catalogue proxy versus 0.09613 for the dotted baseline (about 5.7% lower). The separate catalogue-proximity proxy is anti-monotone with the known live ladder (Spearman −1, n=4), so that apparent gain cannot clear it. No organizer score or portal acceptance exists. [PR #6 research site](docs/ds48-fusion/index.html).
+
+This result supersedes any prior page/README phrase that says to upload a fusion. H48-1, the PR #6 DS48 emission, and the Yager raster remain research artifacts only. **None is cleared for a weekly slot**; do not treat a download button or a format audit as a submission recommendation.
+
 ---
 
-## ⬇ Submission file
+## H48-1 Dempster file (historical research candidate; not slot-cleared)
 
 **[`docs/downloads/gemsdoe48-h48-1-ds-fusion-b2xh32tip-20261006-407bb7f4-zeros.tif`](docs/downloads/gemsdoe48-h48-1-ds-fusion-b2xh32tip-20261006-407bb7f4-zeros.tif)**
 · [.zip](docs/downloads/gemsdoe48-h48-1-ds-fusion-b2xh32tip-20261006-407bb7f4-zeros.zip)
@@ -31,42 +48,47 @@
 | sha256 | `6cb2aab8dbd71335152dea7e2fa442126abffc609b426286f5a171f14353b454` |
 | bytes | 226,886 |
 | format | single-band float32 GeoTIFF · EPSG:32611 · 100 m · 3730 × 3292 · transform identical to `sample_submission.tif` · same TIFF layout as the scored 0.2778 file |
-| range | **all finite, min 0.0, max 1.0, 0 NaN.** Avoids the portal's "Predicted values must be in range [0, 1]" error |
+| range | **all finite, min 0.0, max 1.0, 0 NaN.** These are local byte checks, not proof of the reported error's cause or a portal fix. Like the Yager TIFF, it uses finite zeros outside despite the official null/NaN wording; portal acceptance is untested |
 | content | 37,754 dots = all 37,654 dots of h33-2-b2 (live 0.2778) + 100 tip-family dots accepted by Dempster–Shafer fusion; 0 dots within 200 m of the catalogue |
-| unique name | `GEMSDOE48-H48-1-DS-fusion` |
-| note to paste | `GEMSDOE48 H48-1 Dempster-Shafer fusion b2(0.2778) x h32-1 tip(0.2649); pignistic>0.5, NMS 2.8px; 37754 dots, 0 within 200m of catalogue` |
-| uniqueness | support differs from all 80 sibling GeoTIFFs compared (max Jaccard 0.997, vs b2) |
-| holdout verdict | **TIE with 0.2778** (LSI 0.26336 vs 0.26351; SGMC 2/4 folds). Downside bounded at **≥ 0.2773** |
+| historical label | `GEMSDOE48-H48-1-DS-fusion` (research only; not slot-cleared) |
+| historical note | `GEMSDOE48 H48-1 Dempster-Shafer fusion b2(0.2778) x h32-1 tip(0.2649); pignistic>0.5, NMS 2.8px; 37754 dots, 0 within 200m of catalogue` (do not use to imply clearance) |
+| bounded uniqueness | support differed from the 80 sibling GeoTIFFs checked in that session; not a global uniqueness guarantee |
+| holdout verdict | did not beat b2 on the reported SGMC quadrants (2/4); owner-built LSI estimates 0.26336 vs 0.26351 but has negative top-8 rank power. No organizer score or tie claim. |
 
 Diagnostic layers (for geologists, not for submission) are in `docs/downloads/diagnostics/`:
 normalised Dempster belief, **conflict K (where the two families disagree)**, Yager m(Θ), and
 Dempster m(Θ).
 
-## ⚠ Which GEMSDOE48 file to upload (three sessions produced DS files)
+## ⚠ Competition-slot decision (three DS files plus corrected Yager proxy)
 
-| file | verdict |
+| file | evidence status |
 |---|---|
-| **`gemsdoe48-h48-1-ds-fusion-b2xh32tip-20261006-407bb7f4-zeros.tif` (this file)** | **Upload this one.** Strict superset of the live 0.2778 file plus 100 dots, 0 flank dots, downside ≥ 0.2773 |
-| `gemsdoe48-h48-ds-yager-conflict-20261006.tif` (PR #1, earlier session) | **Not recommended** (IR-48-13): 6,040 validated b2 dots down-weighted to 0.137, plus 3,894 re-added flank dots. LSI 0.2383 |
-| `gemsdoe48-ds-dotted-x-tipstepover-20261006T201749Z-95897e3f8125-decision-zeros.tif` (PR #2, merged by a parallel session) | **Not recommended** (IR-48-14): re-adds the same 3,894 flank dots. LSI 0.2590 |
+| `gemsdoe48-h48-1-ds-fusion-b2xh32tip-20261006-407bb7f4-zeros.tif` | **Do not upload yet.** It did not beat b2 on the reported SGMC quadrants; the LSI instrument cannot rank this close to the top family, and portal acceptance is untested. |
+| `gemsdoe48-h48-ds-yager-conflict-20261006.tif` | **Do not upload.** Corrected DTI proxy 0.08407 vs tip 0.09709, dotted 0.09613, and naïve mean 0.09030; lost all four quadrants. |
+| `gemsdoe48-ds-dotted-x-tipstepover-20261006T201749Z-95897e3f8125-decision-zeros.tif` | **Do not upload on prior LSI evidence alone.** Owner reports 0.25903 LSI estimate vs b2 0.26351; no private or organizer score verified. |
 
-Earlier sessions' READMEs and pages are preserved in [`docs/prev-pr1/`](docs/prev-pr1/) and [`docs/prev-pr2/`](docs/prev-pr2/). Their files remain in `docs/downloads/` for audit.
+The unique TIF artifacts are retained for research/download because the brief requests a genuinely new raster, but **none is slot-cleared**. The historical pages in [`docs/prev-pr1/`](docs/prev-pr1/) and [`docs/prev-pr2/`](docs/prev-pr2/) are not current submission instructions.
 
-## Key findings of this session (all measured; see [method](docs/md/method.md))
+## Key findings (measurements, owner reports, and model estimates are distinct)
 
-1. **Why 0.2778 won:** precision, not discovery. b2 ⊂ r1 ⊂ d2.8 ⊂ h19-5 exactly. Mass fell from
-   121,131 to 37,654 dots while the score rose 0.1922 → 0.2778. The last step removed the 2,545
-   dots within 200 m of the masked catalogue.
-2. **The two "families" are 98 % the same pattern.** h32-1 shares 36,874 of b2's 37,654 pixels.
-   No recombination of them can move the score by more than about ±0.003.
-3. **The SGMC holdout does not predict live scores** (Spearman −0.17, n = 17). It must not be
-   used for promotion.
-4. **New instrument, LSI (live-score inversion):** LOO Spearman 0.81 on 17 live scores, but −0.69
-   within the top 8. Fine-scale selection needs live probes.
-5. **Board:** #1 is **0.3774** (not 0.3195). The route to it is new data: native 1 m LiDAR
-   (H48-2, verified obtainable).
-6. **Theory correction:** Dempster's rule normalises conflict away. Yager's rule keeps it as
-   unassigned mass. Both are published.
+1. **Owner-reported 0.2778 sequence:** the project history associates that value with b2, whose
+   37,654 positive cells are verified locally. The reported sequence is consistent with a
+   precision/removal hypothesis, not proof of causation or discovery performance; no local TIFF
+   hash is tied to an organizer receipt. See the [uncertainty-aware explanation](docs/research.html).
+2. **The two "families" overlap heavily.** h32-1 shares 36,874 of b2's 37,654 pixels. This is a
+   measured support overlap and violates the independence assumption needed for a calibrated
+   Dempster fusion; it does not itself bound any hidden-score change.
+3. **The catalogue-based and SGMC instruments have limitations.** The earlier 17-anchor SGMC
+   calibration (Spearman −0.17) and later four-anchor catalogue-proximity calibration (Spearman
+   −1) are distinct proxy tests, not forecasts. Neither is used to claim private-score gain.
+4. **The LSI inversion is a model, not a score.** Its historical leave-one-out rank statistics
+   (0.81 over 17 reported anchors, −0.69 within the top 8) are owner-derived and model-dependent;
+   they do not resolve close candidate ordering.
+5. **Board:** a human-readable 2026-10-06 snapshot showed a leader at **0.3774** and a 0.2778 row
+   at rank 13. The row's account and any local TIFF match are unverified. Native 1 m LiDAR is a
+   research path; full coverage and holdout gain remain unverified.
+6. **Theory correction:** Dempster's rule normalises conflict away. Yager's rule transfers conflict
+   to unassigned mass. The repo keeps both as research diagnostics; neither fusion is slot-cleared.
 
 ## Reproduce
 
@@ -305,36 +327,31 @@ Go ahead and create a pull request and then merge the pull request onto the main
 
 ---
 
-## DS48 fusion sub-site (session `arena/64045e06`)
+## DS48 fusion sub-site (PR #6; research-only, not slot-cleared)
 
-This branch adds a second, self-contained Dempster–Shafer arm. It publishes into its own
-directories so nothing above is overwritten:
+The self-contained DS48 sub-site is retained at `docs/ds48-fusion/`; it does **not** replace the
+current project landing page.
 
-- **Portal candidate:** `docs/downloads/gemsdoe48-ds48-emission.tif` — 37,654 px, DS-ranked
-  off-flank emission at the live-best mass; all-finite float32, `[0, 1]`, `EPSG:32611`, 3730 × 3292.
+- **DS-ranked emission (audit only):** `docs/downloads/gemsdoe48-ds48-emission.tif` — 37,654 px,
+  all-finite float32 `[0,1]`, EPSG:32611, 3730 × 3292. Its recorded owner-derived SGMC
+  off-catalogue DTI is 0.09068 vs 0.09613 for the dotted baseline (about 5.7% lower).
 - **Diagnostics:** `-belief.tif` (`Bel(F)`, `[0.0000, 0.8400]`), `-mtheta.tif` (unassigned mass,
   `[0.1600, 0.2500]`), `-conflict.tif` (Shafer's `K`, `[0.0000, 0.3600]`).
-- **Pages:** `docs/ds48-fusion/` — six pages, generated by `scripts/build_site_ds48.py` from
-  `registry/` and `evidence/`.
-- **Unique submission name:** `GEMSDOE48-DS48-FUSION`.
+- **Artifact label:** `GEMSDOE48-DS48-FUSION` is retained from that experiment; it is not a
+  submission recommendation. The finite-zero outside convention does not meet official
+  null/NaN-outside wording, and portal acceptance is untested.
+- **Decision:** no organizer score exists; the catalogue-based proxy is anti-monotone with the
+  four known live anchors. Do not upload or spend a weekly slot on this unvalidated/losing artifact.
 
-**What it answers.** Why 0.2778 won: the live ladder is a *removal* ladder, and a dot is worth
-emitting iff its realised kernel weight exceeds `0.2 · DTI` = 0.0556, against a live-anchored
-break-even of τ_live = 0.05416. The rejected B = 3 rung implies the **200–300 m catalogue-companion
-band still holds credit** — the basis of rank-1 hypothesis `H48-A`.
+The page's 0.2778 analysis, Dempster–Shafer diagnostics, and historical H48-A–E proposal list are
+preserved as research. Its H48-A 200–300 m interpretation is not the current hypothesis ranking;
+use [`docs/md/hypotheses.md`](docs/md/hypotheses.md). The dotted and tip masks overlap
+substantially (31,614 of b2's 37,654 positive pixels), so the Dempster independence/distinctness
+assumption is unsupported and its layers are diagnostics, not calibrated probabilities. It also
+does not re-rank union support (Spearman ρ≈1).
 
-**What it does not claim.** Dempster–Shafer does **not** re-rank the union support: Pearson
-r = 0.991085 and mean |Bel − mean| = 0.142255, but Spearman ρ = 0.9999999, because a union pixel has
-belief exactly 1 in its own family. The repository says so in
-`registry/submission_build.json → not_the_mean → verdict`. No arm here beats 0.2778 on any
-instrument validated against the live leaderboard, and the receipt says that too.
+**Current tests:** `./.venv/bin/python -m unittest discover -s tests -t tests` — 120 tests passed
+on the merged worktree. The suite reads local raster inputs; it does not require network access.
 
-**Tests:** `python3 -m unittest discover -s tests -t tests` — 120 tests, stdlib only, no network.
-Three defects were found and fixed by writing them: the DS layers had been divided by their own
-maxima (destroying the mass semantics), `metric._shift`'s docstring contradicted its code, and
-`emit.dilate_mask` was documented as Chebyshev when it is the Manhattan ball.
-
-**Correction.** `IR-48-07` in `docs/ds48-fusion/irregularities.html` records that this arm's
-hexagonal covering-optimal re-emission was previously described as falsified; at matched mass it is
-`×1.019` on the only non-anti-monotone truth layer. The description was wrong and is corrected
-rather than defended.
+**Correction.** `DS48-IR-07` in the subsite records the hexagonal covering arm as unvalidated and
+not slot-cleared; its +1.9% SGMC-side signal was within re-sampling noise.

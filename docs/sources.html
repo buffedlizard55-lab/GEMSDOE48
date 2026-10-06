@@ -94,9 +94,9 @@ Live-scored files and their hashes are in <code>registry/live_scores.json</code>
 <td>2 tiles returned, public domain</td>
 </tr>
 <tr>
-<td>USGS ComCat FDSN</td>
+<td>USGS ComCat FDSN (older broad query)</td>
 <td><a href="https://earthquake.usgs.gov/fdsnws/event/1/count?starttime=2000-01-01&amp;minlatitude=37.3&amp;maxlatitude=40.7&amp;minlongitude=-120.0&amp;maxlongitude=-116.0">count</a></td>
-<td>267,774</td>
+<td>267,774 across all returned magnitudes; the newer M≥2 query and focal-mechanism counts are recorded below</td>
 </tr>
 <tr>
 <td>Sentinel-2 L2A (Element84 Earth Search)</td>
@@ -149,4 +149,72 @@ Live-scored files and their hashes are in <code>registry/live_scores.json</code>
 GEMSDOE28 (r1, h32-1, h36-1): <a href="https://github.com/buffedlizard55-lab/GEMSDOE28">https://github.com/buffedlizard55-lab/GEMSDOE28</a> ·
 GEMSDOE33 (h33-d): <a href="https://github.com/buffedlizard55-lab/GEMSDOE33">https://github.com/buffedlizard55-lab/GEMSDOE33</a> ·
 GEMSDOE47 (metric algebra): <a href="https://github.com/buffedlizard55-lab/GEMSDOE47">https://github.com/buffedlizard55-lab/GEMSDOE47</a></p>
+<h2>Current Yager-candidate and leaderboard checks (2026-10-06)</h2>
+<table>
+<thead>
+<tr>
+<th>topic</th>
+<th>official/trusted source</th>
+<th>what was checked / limit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Competition task, score, CRS, grid and outside-footprint format</td>
+<td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">DrivenData problem description</a></td>
+<td>Task/metric/format statement was read. Data downloads require login. The Yager TIFF uses finite zeros outside to maintain [0,1]; this does not meet the page's null/NaN-outside wording.</td>
+</tr>
+<tr>
+<td>Public score snapshot</td>
+<td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">official leaderboard</a></td>
+<td>Read via page tool on 2026-10-06; #1=0.3774, #7=0.3195, #13=0.2778. Local raw HTML fetch failed TLS, so parser has only fixture tests. No row is linked to a local TIFF hash.</td>
+</tr>
+<tr>
+<td>Corrected DTI</td>
+<td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/#performance-metric">official metric page</a></td>
+<td>Exact confidence-weighted TP and full-scene distances are implemented in <code>src/gems48/validation.py</code>; unit tests include brute-force small-grid comparison. See the versioned proxy receipt and v1 retraction.</td>
+</tr>
+<tr>
+<td>Existing-fault mask clarification</td>
+<td><a href="https://community.drivendata.org/t/scoring-clarification-masked-pixels-and-re-evaluation/11516">DrivenData staff response</a></td>
+<td>Staff say known USGS/INGENIOUS pixels are excluded. Proxy code masks exact catalogue pixels; 300 m target-buffer is a local proxy choice, not staff instruction.</td>
+</tr>
+<tr>
+<td>GeoDAWN magnetic/radiometric source</td>
+<td><a href="https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7">USGS ScienceBase item</a>, DOI <a href="https://doi.org/10.5066/P93LGLVQ">10.5066/P93LGLVQ</a></td>
+<td>Public area TIF archive metadata are listed. Binary transfer failed TLS from this sandbox; bytes, checksums, and grid alignment were not checked.</td>
+</tr>
+<tr>
+<td>Independent Nevada gravity</td>
+<td><a href="https://pubs.usgs.gov/dds/dds-42/">USGS Data Series 42</a>, DOI <a href="https://doi.org/10.3133/ds42">10.3133/ds42</a></td>
+<td>USGS page reports about 80,000 stations and lists a 4.2 MB data ZIP. Page/link read; file bytes not retrieved. Gridding and uncertainty remain to be validated.</td>
+</tr>
+<tr>
+<td>Potential-field boundary rationale</td>
+<td><a href="https://www.usgs.gov/software/pymaxspots-computing-and-connecting-horizontal-gradient-maxima-potential-field-geophysics">USGS pymaxspots</a>, DOI <a href="https://doi.org/10.5066/P13FSKEM">10.5066/P13FSKEM</a></td>
+<td>USGS describes horizontal-gradient maxima as possible abrupt field boundaries (faults, intrusions, contacts); a maximum is not automatically a fault.</td>
+</tr>
+<tr>
+<td>3DEP availability and use</td>
+<td><a href="https://www.usgs.gov/3d-elevation-program/about-3dep-products-services">USGS 3DEP products/services</a></td>
+<td>USGS says products are free and without use restrictions. Exact 1 m coverage per validation block and tile seams were not audited.</td>
+</tr>
+<tr>
+<td>ComCat availability for the study bbox</td>
+<td><a href="https://earthquake.usgs.gov/fdsnws/event/1/">USGS FDSN documentation</a> · <a href="https://earthquake.usgs.gov/fdsnws/event/1/count?format=text&amp;starttime=2000-01-01&amp;minlatitude=37.3641&amp;maxlatitude=40.7247&amp;minlongitude=-120.0024&amp;maxlongitude=-116.1415&amp;minmagnitude=2.0">count query: events</a> · <a href="https://earthquake.usgs.gov/fdsnws/event/1/count?format=text&amp;starttime=2000-01-01&amp;minlatitude=37.3641&amp;maxlatitude=40.7247&amp;minlongitude=-120.0024&amp;maxlongitude=-116.1415&amp;minmagnitude=2.0&amp;producttype=focal-mechanism">focal mechanisms</a> · <a href="https://earthquake.usgs.gov/fdsnws/event/1/count?format=text&amp;starttime=2000-01-01&amp;minlatitude=37.3641&amp;maxlatitude=40.7247&amp;minlongitude=-120.0024&amp;maxlongitude=-116.1415&amp;minmagnitude=2.0&amp;producttype=moment-tensor">moment tensors</a></td>
+<td>Live counts on 2026-10-06: 16,919 events, 5,292 focal-mechanism products, and 474 moment-tensor products. Count availability only; event payload was not ingested. Full query parameters and limitations: <a href="data/source-checks.json"><code>data/source-checks.json</code></a>.</td>
+</tr>
+<tr>
+<td>Earlier TMI persistence result</td>
+<td><a href="https://github.com/buffedlizard55-lab/GEMSDOE47/blob/main/docs/validation-h47b-20261006.md">GEMSDOE47 H47-B report</a> (owner-authored)</td>
+<td>Owner report says locked public-catalogue DTI 0.02755 vs random 0.03716; not an organizer score or independent replication. Supports treating TMI-only persistence as previously tested.</td>
+</tr>
+<tr>
+<td>External-data rules</td>
+<td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/rules/">DrivenData contest rules</a> · <a href="https://www.herox.com/GEMSPrize/resource/2274">GEMS Prize Rules</a></td>
+<td>Verify source/derivative license permits challenge use and sponsor sharing before using any external layer.</td>
+</tr>
+</tbody>
+</table>
+<p>The machine-readable <a href="data/source-checks.json"><code>source-checks.json</code></a> records dates, bbox parameters, live-fetch failures, catalog limitations, and owner-derived SGMC provenance. The source listing itself does not establish spatial coverage, license compatibility, or predictive value.</p>
 <hr><p style="font-size:.8rem;color:#667">GEMSDOE48 · built from <code>docs/md/sources.md</code> by <code>scripts/build_site.py</code></p></main></body></html>

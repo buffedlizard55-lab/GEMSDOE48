@@ -59,7 +59,7 @@ blockquote{border-left:4px solid #fca311;margin:.8rem 0;padding:.2rem .9rem;back
 <td>High</td>
 <td><strong>No available instrument ranks within the 0.245–0.278 family.</strong> LSI top-8 LOO Spearman is −0.69. "Beat the holdout" decisions at the ±0.003 scale are therefore not decidable offline</td>
 <td><code>evidence/lsi_validation.json</code></td>
-<td>The λ-probe (3 slots) is the fix</td>
+<td>Do not spend three submission slots on the λ-probe under the current no-losing-candidate rule; seek non-slot evidence first</td>
 </tr>
 <tr>
 <td>IR-48-07</td>
@@ -71,9 +71,9 @@ blockquote{border-left:4px solid #fca311;margin:.8rem 0;padding:.2rem .9rem;back
 <tr>
 <td>IR-48-08</td>
 <td>Low</td>
-<td>The uniqueness and "not done before" checks covered 4 cloned sibling repos (80 GeoTIFFs), not all ~47</td>
-<td><code>receipt-*.json</code></td>
-<td>Extend in the next session</td>
+<td>The Yager artifact's bounded scan found 0 exact value or support matches among 334 same-grid artifacts (closest positive-support Jaccard 0.874); this is not an exhaustive/global uniqueness guarantee</td>
+<td><a href="data/uniqueness-audit.json"><code>uniqueness-audit.json</code></a> · Yager build audit</td>
+<td>Preserve the scan limits; recheck before reusing or submitting a future artifact</td>
 </tr>
 <tr>
 <td>IR-48-09</td>
@@ -101,21 +101,49 @@ blockquote{border-left:4px solid #fca311;margin:.8rem 0;padding:.2rem .9rem;back
 <td>Info</td>
 <td>GEMSDOE47 notes that "x at ρ = 8.02" implies an 88 % recall for 0.2778. That conflicts with this repo's LSI estimate (T/K ≈ 0.34). Both are model-dependent</td>
 <td>GEMSDOE47 <code>knowledge/02</code></td>
-<td>The λ-probe settles it</td>
+<td>Unresolved offline; do not infer private truth from either model</td>
 </tr>
 <tr>
 <td>IR-48-13</td>
 <td><strong>High</strong></td>
-<td><strong>The file merged to <code>main</code> by an earlier session (PR #1, <code>gemsdoe48-h48-ds-yager-conflict-20261006.tif</code>, sha256 <code>fe68ae6f…</code>) is not recommended.</strong> It down-weights <strong>6,040 of b2's 37,654 live-validated dots to 0.137</strong>, losing ~86 % of their credit by the scale identity. It also adds 10,251 px at 0.086, <strong>3,894 of them within 200 m of the catalogue</strong>, which re-adds the mass whose removal earned +0.0070 live. It was promoted on the SGMC proxy, which does not predict live scores (IR-48-05). LSI predicts 0.2383 for it vs 0.2635 for b2</td>
+<td><strong>The file merged to <code>main</code> by an earlier session (PR #1, <code>gemsdoe48-h48-ds-yager-conflict-20261006.tif</code>, sha256 <code>fe68ae6f…</code>) is not recommended.</strong> It down-weights <strong>6,040 of b2's 37,654 live-validated dots to 0.137</strong>, losing ~86 % of their credit by the scale identity. It also adds 10,251 px at 0.086, <strong>3,894 of them within 200 m of the catalogue</strong>, which re-adds the mass whose removal earned +0.0070 live. LSI predicts 0.2383 vs 0.2635 for b2, but this inherited instrument is not an organizer score</td>
 <td><code>evidence/ds_file_comparison.json</code></td>
-<td>Kept for audit in <code>docs/downloads/</code> + <code>docs/prev-pr1/</code>. <strong>The H48-1 file replaces it as the primary download</strong></td>
+<td>Retained for audit. Corrected DTI v2 independently finds this Yager file loses to tip, dotted and naïve mean on the SGMC proxy; no slot cleared</td>
 </tr>
 <tr>
 <td>IR-48-14</td>
 <td>Medium</td>
 <td>A third session's PR #2 (b2 × h33-d, <code>gemsdoe48-ds-dotted-x-tipstepover-20261006T201749Z-95897e3f8125-decision-zeros.tif</code>, 47,905 px binary) was <strong>merged to main while this session was working</strong>. It carries the same 3,894 flank dots (LSI 0.2590 vs b2 0.2635). Its README called it PRIMARY</td>
 <td><code>evidence/ds_file_comparison.json</code></td>
-<td>Kept for audit (<code>docs/downloads/</code>, <code>docs/prev-pr2/</code>). Superseded as primary by H48-1</td>
+<td>Kept for audit. Neither it nor H48-1 clears the current no-losing-candidate slot gate</td>
+</tr>
+<tr>
+<td>IR-48-15</td>
+<td><strong>High</strong></td>
+<td><strong>Corrected H48-Yager proxy v2 fails:</strong> DTI 0.08407 vs tip 0.09709, dotted 0.09613, naïve mean 0.09030; loses in 0/4 quadrants. Previous v1 pass was invalid: it omitted confidence from TP and truncated quadrant neighborhoods</td>
+<td><a href="data/proxy-validation.json"><code>docs/data/proxy-validation.json</code></a> · <a href="data/proxy-validation-v1-retracted.json"><code>retraction</code></a> · <code>scripts/validate_proxy.py</code></td>
+<td>v2 supersedes v1; no submission slot; proxy is SGMC-derived, not private truth or organizer score</td>
+</tr>
+<tr>
+<td>IR-48-16</td>
+<td>High</td>
+<td><strong>Output-format ambiguity remains:</strong> finite zero outside passes the [0,1] check but the official problem page says null/NaN outside. The portal was not tested for the Yager or H48-1 TIFF</td>
+<td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">official format</a> · raster audits</td>
+<td>Keep deviation explicit; do not claim full format compliance or acceptance</td>
+</tr>
+<tr>
+<td>IR-48-17</td>
+<td>Medium</td>
+<td><strong>Leaderboard refresh is not live-verified locally:</strong> <code>urllib</code> fetch closed during TLS before returning HTML; fixture tests pass. The main-branch six-hour <code>feed.yml</code> workflow commits a refreshed JSON/HTML snapshot from GitHub Actions to the existing legacy Pages branch source</td>
+<td><a href="data/source-checks.json"><code>data/source-checks.json</code></a> · <code>.github/workflows/feed.yml</code></td>
+<td>Monitor a successful workflow run; do not call the current manually recorded snapshot an active live fetch</td>
+</tr>
+<tr>
+<td>IR-48-18</td>
+<td>High</td>
+<td><strong>PR #6 DS48 emission remains unscored and not slot-cleared.</strong> Its registry receipt reports 0.09068 SGMC off-catalogue DTI vs 0.09613 for the dotted baseline (≈5.7% lower); the separate catalogue-proximity proxy is anti-monotone with the known live ladder (ρ=−1, n=4), so its apparent catalogue gain is not promotion evidence. Emission format checks pass, but finite zeros outside conflict with official null/NaN wording</td>
+<td><a href="../registry/submission_build.json"><code>registry/submission_build.json</code></a> · <a href="../evidence/holdout_antimonotone.json"><code>evidence/holdout_antimonotone.json</code></a> · <a href="ds48-fusion/index.html">PR #6 subsite</a></td>
+<td>Preserve as a research artifact only; no organizer score or portal acceptance; do not spend a weekly slot</td>
 </tr>
 </tbody>
 </table>

@@ -7,33 +7,23 @@ th{background:#eef1f8}code{background:#f0f2f7;padding:.05rem .3rem;border-radius
 pre{background:#f0f2f7;padding:.7rem;overflow:auto}img{max-width:100%;border:1px solid #dde;margin:.5rem 0}
 .dl{background:#fff8e6;border:2px solid #fca311;border-radius:8px;padding:.6rem 1.1rem;margin-bottom:1rem}
 .btn{display:inline-block;background:#fca311;color:#14213d;font-weight:700;padding:.55rem 1rem;border-radius:6px;text-decoration:none;word-break:break-all}
-blockquote{border-left:4px solid #fca311;margin:.8rem 0;padding:.2rem .9rem;background:#fafafa}</style></head><body><nav><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">How to submit</a><a href="method.html" class="">Method & 0.2778 autopsy</a><a href="hypotheses.html" class="">Hypotheses</a><a href="irregularities.html" class="">Irregularities</a><a href="next-steps.html" class="on">Next steps</a><a href="leaderboard.html" class="">Leaderboard</a><a href="sources.html" class="">Sources</a></nav><main><h1>Next steps, ranked by P(Win) impact</h1>
+blockquote{border-left:4px solid #fca311;margin:.8rem 0;padding:.2rem .9rem;background:#fafafa}</style></head><body><nav><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">How to submit</a><a href="method.html" class="">Method & 0.2778 autopsy</a><a href="hypotheses.html" class="">Hypotheses</a><a href="irregularities.html" class="">Irregularities</a><a href="next-steps.html" class="on">Next steps</a><a href="leaderboard.html" class="">Leaderboard</a><a href="sources.html" class="">Sources</a></nav><main><h1>Next steps, ranked by expected P(Win) and evidence value</h1>
 <ol>
-<li><strong>H48-2: native 1 m LiDAR scarps via GitHub Actions</strong> (the only path to 0.32–0.38).
-   The matrix workflow streams one 3DEP tile per job, computes paired profile curvature at 1 m,
-   and commits a 100 m detection raster (~kB) per tile. Data obtainability was verified (TNM API).
-   Blocker: this sandbox has no USGS egress, so it must run on Actions runners.</li>
-<li><strong>Spend 3 slots on the λ-probe.</strong> Submit S1 = this file, S2 = this file × 0.5, and
-   S3 = this file + N dots far from any fault. <code>1/DTI</code> is linear in <code>1/λ</code>, so the three returns
-   give exact <code>T</code>, <code>F</code>, <code>K</code>. That turns LSI from a coarse instrument into an exact one and settles
-   IR-48-06 and IR-48-12. All three probes score ≤ the anchor, so they cannot cost rank.</li>
-<li><strong>H48-5: dry-season Sentinel-2 NDVI lineaments</strong> (Actions job via Element84 STAC). Mask
-   NLCD cultivated land.</li>
-<li><strong>Extend the uniqueness audit</strong> to all ~47 sibling repos (git-tree listing, then download
-   only <code>.tif</code> files with matching pixel counts).</li>
-<li><strong>Replace Dempster with Denœux's cautious rule</strong> once a second genuinely independent source
-   (H48-2 or H48-5) exists. Then the fusion has real independent evidence to fuse.</li>
-<li><strong>Record every live score</strong> in <code>registry/live_scores.json</code>. Each new score tightens LSI.</li>
+<li><strong>Keep the slot gate closed.</strong> The corrected H48-Yager proxy failed (0.08407 vs tip 0.09709, dotted 0.09613, naïve mean 0.09030; 0/4 quadrant wins). H48-1 did not beat its holdout best. PR #6's DS48 re-emission measures 0.09068 on its SGMC off-catalogue proxy vs 0.09613 for dotted; its catalogue-based proxy is anti-monotone with the known live ladder. All remain unscored research artifacts. Do not spend a competition slot on any of them or an unvalidated probe.</li>
+<li><strong>Validate N1 native-resolution 1 m DEM detection without using a slot.</strong> On a GitHub Actions runner with egress, inventory official 3DEP tiles over the exact spatial blocks, record tile IDs/checksums/CRS/seams, derive native-resolution scarp features, aggregate to the submission grid, and run the preregistered corrected spatial holdout. No numeric gain target is assumed; stop if full coverage/licensing or reproducible validation fails.</li>
+<li><strong>Stage N2 gravity–magnetic edge coherence</strong> only after the competition feature stack or official public GeoDAWN/gravity files are actually retrieved and aligned. Audit coverage, survey seams, geotransforms and contest terms before implementing a detector. Validate on fixed spatial blocks against the current best baselines.</li>
+<li><strong>Consider N3 ComCat planes or N4 drainage deflections</strong> only with uncertainty controls and a pre-registered holdout. ComCat counts establish availability, not usable geometry; 1 m DEM catalog listing establishes neither full coverage nor validation.</li>
+<li><strong>Treat N5 radiometric asymmetry as lower priority.</strong> Related scarp–radiometric concordance was previously explored; test only the distinct signed, cross-strike feature after source bytes and survey metadata are available.</li>
+<li><strong>Monitor the six-hour leaderboard Action.</strong> It parses and commits a static JSON/HTML snapshot from GitHub-hosted runners. Our local live HTML request failed TLS, so confirm a successful workflow run before calling it active. Never infer a leaderboard row's TIFF hash or score attribution.</li>
+<li><strong>Extend the bounded uniqueness/data audit</strong> only if it changes a decision: keep owner mirror hashes, CRS/bounds, external-data license checks, and exact candidate-to-score provenance explicit.</li>
 </ol>
 <h2>Limitations / access needed</h2>
 <ul>
-<li><strong>DrivenData login.</strong> Not available, and never requested. Scores are owner-reported, and the
-  owner must upload files.</li>
-<li><strong>Network.</strong> No egress to USGS, AWS, ScienceBase or community.drivendata.org from the sandbox.
-  GitHub Actions has egress.</li>
-<li><strong>Compute.</strong> 2 CPU, 3 GB RAM, no GPU. Enough for 100 m work, not for 1 m processing of the
-  whole footprint.</li>
-<li><strong>Truth.</strong> The hidden expert labels are unknowable offline, so fine-scale selection needs live
-  probes.</li>
+<li><strong>DrivenData login:</strong> unavailable; no private scores, portal acceptance, or organizer-input download is possible here.</li>
+<li><strong>Network:</strong> local TLS to DrivenData/USGS hosts failed for raw page/binary requests. The public ComCat count queries and catalog/page metadata were read, but they do not replace event/raster files. GitHub Actions runners may have egress; verify the run before relying on it.</li>
+<li><strong>Compute:</strong> sandbox is constrained; native 1 m processing should be tiled and audited. No GPU is needed for the current raster/metric work.</li>
+<li><strong>Truth:</strong> SGMC is an owner-derived public geologic-map proxy, not hidden expert truth. Its relationship with leaderboard performance is poor/uncertain; never call its DTI an organizer score.</li>
+<li><strong>Format:</strong> the present Yager file is all finite in [0,1] but stores zero outside, contrary to official null/NaN-outside text. Portal acceptance remains unknown.</li>
 </ul>
+<p>See <a href="hypotheses.html">hypotheses</a>, <a href="method.html">method</a>, <a href="irregularities.html">irregularities</a>, and <a href="data/source-checks.json">source checks</a>.</p>
 <hr><p style="font-size:.8rem;color:#667">GEMSDOE48 · built from <code>docs/md/next-steps.md</code> by <code>scripts/build_site.py</code></p></main></body></html>

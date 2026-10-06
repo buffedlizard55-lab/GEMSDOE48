@@ -7,152 +7,70 @@ th{background:#eef1f8}code{background:#f0f2f7;padding:.05rem .3rem;border-radius
 pre{background:#f0f2f7;padding:.7rem;overflow:auto}img{max-width:100%;border:1px solid #dde;margin:.5rem 0}
 .dl{background:#fff8e6;border:2px solid #fca311;border-radius:8px;padding:.6rem 1.1rem;margin-bottom:1rem}
 .btn{display:inline-block;background:#fca311;color:#14213d;font-weight:700;padding:.55rem 1rem;border-radius:6px;text-decoration:none;word-break:break-all}
-blockquote{border-left:4px solid #fca311;margin:.8rem 0;padding:.2rem .9rem;background:#fafafa}</style></head><body><nav><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">How to submit</a><a href="method.html" class="">Method & 0.2778 autopsy</a><a href="hypotheses.html" class="on">Hypotheses</a><a href="irregularities.html" class="">Irregularities</a><a href="next-steps.html" class="">Next steps</a><a href="leaderboard.html" class="">Leaderboard</a><a href="sources.html" class="">Sources</a></nav><main><h1>Hypotheses H48-1 … H48-5: untried here, ranked</h1>
-<p>Ranking = expected ΔDTI on the public board ÷ implementation cost. Every "obtainable" claim was
-checked in this session (method stated). Every "not in this repo family" claim was checked by
-<code>grep</code> across the four sibling repos cloned this session (GEMSDOE28, 32, 33, 47). The other ~43
-sibling repos were <strong>not</strong> grepped, so that claim is limited to those four (see IR-48-08).</p>
+blockquote{border-left:4px solid #fca311;margin:.8rem 0;padding:.2rem .9rem;background:#fafafa}</style></head><body><nav><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">How to submit</a><a href="method.html" class="">Method & 0.2778 autopsy</a><a href="hypotheses.html" class="on">Hypotheses</a><a href="irregularities.html" class="">Irregularities</a><a href="next-steps.html" class="">Next steps</a><a href="leaderboard.html" class="">Leaderboard</a><a href="sources.html" class="">Sources</a></nav><main><h1>Five prospective geological hypotheses — none slot-cleared</h1>
+<p><strong>Decision context.</strong> The requested H48 Yager fusion failed the corrected SGMC proxy gate. The prior H48-1 Dempster candidate also did not beat b2 on its reported spatial holdout; LSI estimates are not precise enough to claim a tie. The following are new, falsifiable data/transform hypotheses, not validated candidate submissions. Ranking is qualitative relative upside per implementation cost. <strong>No numeric ΔDTI forecast is justified.</strong> No weekly slot may be used until a candidate beats the corrected holdout best and clears the written raster-format gate.</p>
+<p>Novelty here is <strong>operational and checkout-scoped</strong>, not a claim that no related concept has ever been tried. The owner’s full site inventory in the README records prior LiDAR scarp/ridge work (<a href="https://buffedlizard55-lab.github.io/7GEMSDOE/">GEMSDOE7</a>), combined topo-geophysical work (<a href="https://buffedlizard55-lab.github.io/16GEMSDOE/docs/index.html">GEMSDOE16</a>), and scarp–radiometric work (<a href="https://buffedlizard55-lab.github.io/GEMSDOE46/">GEMSDOE46</a>). N1, N2, and N5 therefore name specific transforms/controls that were not implemented in this checkout, not wholly unprecedented data families. The old H47-B TMI-up150 multi-scale persistence arm is not counted as new: the <a href="https://github.com/buffedlizard55-lab/GEMSDOE47/blob/main/docs/validation-h47b-20261006.md">owner-reported public-catalogue screen</a> says its pooled locked-block proxy DTI (0.02755) lost to its fixed-seed random control (0.03716). Those are not organizer/private scores or independent replication.</p>
 <table>
 <thead>
 <tr>
 <th>Rank</th>
-<th>ID</th>
-<th>Hypothesis</th>
-<th>Expected ΔDTI</th>
-<th>Cost</th>
-<th>Data obtainable?</th>
-<th>Status</th>
+<th>Candidate</th>
+<th>Layers and target signature</th>
+<th>Why it could identify an unmapped fault; how it differs</th>
+<th>Expected DTI impact / cost</th>
+<th>Official/free source and current status</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>1 (value)</td>
-<td><strong>H48-2</strong></td>
-<td>Native-resolution 1 m LiDAR scarp detection</td>
-<td><strong>+0.01 to +0.05</strong> (the only idea big enough to reach 0.32+)</td>
-<td>High (~517 tiles, ~120 GB streamed)</td>
-<td><strong>Yes.</strong> TNM API returned tiles for the footprint (USGS 3DEP, public domain)</td>
-<td>Specified. Needs GitHub Actions; this sandbox can't reach USGS</td>
+<td>1</td>
+<td><strong>N1 — native-resolution 1 m LiDAR scarp detection</strong></td>
+<td>USGS 3DEP bare-earth 1 m DEMs; paired profile curvature across a convex crest and concave toe, measured perpendicular to candidate strike at metre scale, then aggregate detections to the 100 m grid.</td>
+<td>Low-relief scarps can disappear at 100 m and may be absent from the USGS/INGENIOUS catalogue. <strong>LiDAR scarp/ridge work already exists in GEMSDOE7</strong>; the checkout-scoped proposed difference is measuring paired profile-curvature signatures at native resolution before aggregation, then adding geomorphic controls. This is a refinement, not an unprecedented data family. Mimics: roads, terraces, channel banks, landslides, and fan edges.</td>
+<td><strong>Highest qualitative upside; unknown numerically. High cost</strong> (tile inventory, seams, streaming, native-resolution processing).</td>
+<td>USGS says 3DEP products are free and without use restrictions; the competition data page lists 1 m DEM links but requires login. A sample TNM query returned tile metadata; full study-area coverage, source bytes/checksums, and block coverage were not verified here. <strong>No spatial holdout run.</strong></td>
 </tr>
 <tr>
-<td>2 (cost)</td>
-<td><strong>H48-1</strong></td>
-<td>Dempster–Shafer fusion of dotted × tip families</td>
-<td>−0.0003 to +0.003</td>
-<td>Low</td>
-<td>Yes (in repo)</td>
-<td><strong>Built and validated: TIE.</strong> Shipped as the requested unique file</td>
+<td>2</td>
+<td><strong>N2 — cross-property gravity–magnetic edge geometry</strong></td>
+<td>Competition isostatic-gravity anomaly/slope and magnetic anomaly/gradients; USGS GeoDAWN magnetic grids and Nevada gravity stations where aligned. Compute oriented horizontal-gradient maxima; retain edges co-located and strike-coherent across properties, suppressing slope and survey-seam artifacts.</td>
+<td>Buried fault/contact juxtaposition can create density and magnetization boundaries without a surface scarp. Combined topography/geophysics has precedent in GEMSDOE16; the checkout-scoped difference proposed here is co-located, strike-coherent gravity and magnetic edge geometry with explicit terrain nuisance control, rather than TMI-only scale persistence. Mimics: lithologic contacts, intrusions, flight-line seams, and gridding boundaries.</td>
+<td><strong>Medium-high qualitative upside; unknown numerically. Medium cost.</strong></td>
+<td>Competition stack is login-gated. USGS GeoDAWN lists public magnetic/radiometric TIF archives; USGS Nevada Gravity Data Series 42 lists a public data archive. Catalog metadata were checked, but direct binary transfer failed TLS here and alignment/coverage is unverified. <strong>No spatial holdout run.</strong></td>
 </tr>
 <tr>
 <td>3</td>
-<td><strong>H48-5</strong></td>
-<td>Phreatophyte / vegetation lineaments in late-summer Sentinel-2 NDVI</td>
-<td>+0.003 to +0.015 (basin-floor faults that have no scarp)</td>
-<td>Medium</td>
-<td><strong>Yes.</strong> Element84 STAC <code>sentinel-2-l2a</code> collection resolved</td>
-<td>Specified</td>
+<td><strong>N3 — 3-D hypocenter planes with focal-mechanism consistency</strong></td>
+<td>USGS ComCat latitude/longitude/depth/time and focal mechanisms (strike/dip/rake), optionally strain invariants. Cluster in 3-D, fit planes, require mechanism consistency, then project supported planes to a surface trace with location uncertainty.</td>
+<td>A buried active structure can organize seismicity without a surface trace. This differs from the supplied smooth 2-D earthquake-density band and prior strain/thermal associations. Mimics: volcanic/hydrothermal swarms, quarry blasts, poor locations, and unrelated intersecting structures.</td>
+<td><strong>Low–medium qualitative upside; event-location uncertainty relative to the 300 m scoring kernel is a major unmeasured limit. Medium-high cost.</strong></td>
+<td>Official USGS FDSN count queries for the approximate study bbox since 2000, M≥2, returned 16,919 events, 5,292 with focal-mechanism products, 474 moment tensors (2026-10-06). Counts verify endpoint availability only; no event payload or detector is validated. <strong>No spatial holdout run.</strong></td>
 </tr>
 <tr>
 <td>4</td>
-<td><strong>H48-3</strong></td>
-<td>ComCat microseismicity alignments</td>
-<td>≈0 to +0.003</td>
-<td>Medium</td>
-<td><strong>Yes.</strong> FDSN count = 267,774 events since 2000 in bbox</td>
-<td>Specified. Probably weak (see below)</td>
+<td><strong>N4 — fault-related drainage deflection on lidar terrain</strong></td>
+<td>1 m DEM-derived flow network, channel centerlines, stream order, fan-surface geometry; detect aligned lateral offsets, paired bends, and knickpoints rather than scarp lines.</td>
+<td>Subtle young deformation can offset channels or fans where a continuous scarp is absent. Distinct from prior scarp/ridge persistence because the target is drainage-network displacement. Mimics: fan avulsion, lithology, incision, roads, and landslides.</td>
+<td><strong>Medium qualitative upside; unknown numerically. High cost</strong> (flow routing and tile/seam harmonization).</td>
+<td>Same public USGS 3DEP catalog and competition DEM links as N1. Per-block 1 m coverage was not inventoried; no terrain was downloaded or validated. <strong>No spatial holdout run.</strong></td>
 </tr>
 <tr>
 <td>5</td>
-<td><strong>H48-4</strong></td>
-<td>Truth-intensity map from the live-score inversion, used to emit</td>
-<td>Unknown</td>
-<td>Low</td>
-<td>Yes</td>
-<td><strong>Not viable yet.</strong> The instrument has negative top-8 rank power</td>
+<td><strong>N5 — signed radiometric asymmetry across candidate structures</strong></td>
+<td>GeoDAWN potassium, equivalent uranium/thorium and K/eTh or K/eU ratios; normalize by survey block/flight-height metadata; test signed, opposite-flank contrasts after slope/cover controls.</td>
+<td>Hydrothermal alteration or fluid-rock interaction may create asymmetric near-surface radiometric patterns around permeable structures. Scarp–radiometric fusion/concordance already appears in GEMSDOE46; the checkout-scoped proposed difference is a signed, cross-strike asymmetry statistic rather than generic overlap. Treat it as an adjacent refinement, not a wholly untried radiometric family. Mimics: lithologic boundaries, soil moisture, vegetation/cover, and survey seams.</td>
+<td><strong>Low–medium qualitative upside; unknown numerically. Medium cost.</strong></td>
+<td>Official USGS GeoDAWN release lists radiometric products and TIF archives. File bytes, block coverage, licensing details for derivatives, and score impact are not verified here. <strong>No spatial holdout run.</strong></td>
 </tr>
 </tbody>
 </table>
-<hr />
-<h2>H48-1 · Dempster–Shafer fusion that keeps disagreement (implemented)</h2>
-<ul>
-<li><strong>Layers:</strong> <code>h33-2-b2</code> (live 0.2778, dotted family) and <code>h32-1-prethin-tip</code> (live 0.2649, tip
-  family). Both derive from the H19-5 ridge backbone, which is built from the official
-  <code>training_features.tif</code> topo/geophysics bands.</li>
-<li><strong>Signature:</strong> the 300 m kernel support of each family's dots becomes a basic probability
-  assignment (BPA). Dempster's rule gives <code>m(F)</code>. Conflict <code>K</code> and Yager's <code>m(Θ)</code> are kept as
-  diagnostic layers.</li>
-<li><strong>Why it targets off-catalogue faults:</strong> the tip family deliberately protects fault-tip and
-  step-over continuations. These are "newly mapped geometry of an existing fault system", which
-  DrivenData staff explicitly count as new faults (thread 11536). The dotted family's
-  catalogue-flank veto is carried as explicit <code>m(¬F)</code>, so nothing is emitted within 200 m of the
-  catalogue.</li>
-<li><strong>How it differs:</strong> no sibling repo checked uses belief functions (<code>grep dempster|belief
-  function</code> returned 0 hits). Prior unions or averages blended surfaces. This rule takes sides,
-  measured in the disagreement region: Pearson against the naive mean is 0.71 there, vs 0.96
-  overall.</li>
-<li><strong>Validation:</strong> see <a href="method.html">method</a>. LSI instrument: 0.26336 vs b2 0.26351, a tie.
-  SGMC 4-quadrant blocked holdout: better in 2 of 4 folds. <strong>Did not beat the holdout best.</strong>
-  Downside bounded at ≥ 0.2773.</li>
-</ul>
-<h2>H48-2 · 1 m LiDAR scarp detection at native resolution (top expected value)</h2>
-<ul>
-<li><strong>Layer:</strong> USGS 3DEP 1 m bare-earth DEM. The competition's <code>1m_DEM_links.csv</code> lists the tiles,
-  and the TNM API independently returned e.g.
-  <code>USGS_1M_11_x37y438_NV_WestCentral_EarthMRI_2020_D20.tif</code> (262 MB, public domain).</li>
-<li><strong>Signature:</strong> paired profile curvature, a convex crest above a concave toe 2–20 m apart,
-  computed perpendicular to the local strike at metre scale. Then scarp height and facet slope,
-  with a template-matching scarp-likelihood. Detections are aggregated to 100 m. Elevations are
-  not resampled first.</li>
-<li><strong>Why off-catalogue:</strong> of the 376 USGS Qfault traces whose centroid is in the footprint,
-  <strong>359 (95.5 %) carry <code>map_scale = 250</code></strong> and 17 carry <code>100</code> (re-counted this session from
-  <code>gdr_qfaults_traces.csv</code>). We read "250" as a 1:250,000 compilation scale. That reading is an
-  interpretation of the field name, flagged as IR-48-09. Short, low-relief (&lt; 2 m) scarps fall
-  below that compilation's resolution. At 100 m a 1 m scarp is a ~1 % perturbation, which is why
-  every 100 m layer in the family plateaued at 0.26–0.28.</li>
-<li><strong>How it differs:</strong> no Python code in the four checked repos reads 3DEP 1 m tiles (<code>grep
-  "3DEP|1m_DEM"</code> in <code>*.py</code>: 0 hits). The family's DEM work used 100 m pre-derived rasters
-  (<code>lidar_scarp_features_u8.tif</code>) or a 10 m product (12GEMSDOE "dem10-scarp", live 0.1294, judging
-  by its submission name). GEMSDOE47 lists native 1 m processing as its #1 next step but did not
-  run it.</li>
-<li><strong>Blocker:</strong> this sandbox has no USGS/AWS egress (HTTP 000). Runnable path: a GitHub Actions
-  matrix job (runners have internet) streams one tile, derives the 100 m detection raster,
-  commits only that, and discards the tile.</li>
-</ul>
-<h2>H48-5 · Vegetation (phreatophyte) lineaments in late-summer NDVI</h2>
-<ul>
-<li><strong>Layer:</strong> Sentinel-2 L2A B04/B08 at 10 m, late July–September composites (Element84 Earth
-  Search STAC, collection <code>sentinel-2-l2a</code>, resolved this session). Landsat C2 L2 is the
-  fallback.</li>
-<li><strong>Signature:</strong> linear, strike-coherent positive anomalies of dry-season NDVI on basin floors,
-  where groundwater ponds against a fault barrier and feeds phreatophytes. The transform is a
-  directional ridge filter (oriented second derivative) on the NDVI anomaly.</li>
-<li><strong>Why off-catalogue:</strong> basin-floor faults with eroded or buried scarps have little
-  topographic signal, which makes them the class a topography-driven catalogue misses. The USGS
-  mapped Great Basin phreatophyte cover (<a href="https://pubs.usgs.gov/sim/3169/sim3169_pamphlet.pdf">SIM 3169</a>).
-  A peer-reviewed semi-arid case found 61 % of phreatophyte patches within 50 m of faults
-  (<a href="https://www.researchgate.net/publication/321756798_Remote_sensing-derived_fractures_and_shrub_patterns_to_identify_groundwater_dependence">Ecohydrology study</a>).</li>
-<li><strong>How it differs:</strong> no NDVI/phreatophyte work in the repos checked. Judging only by its submission name
-  (<code>conj_alteration_mag</code>, live 0.0782), 15GEMSDOE's spectral work targeted alteration, not
-  vegetation water access. Not verified in its code.</li>
-<li><strong>Risk:</strong> irrigation and riparian corridors cause false positives. They need masking (USGS
-  NLCD cultivated class).</li>
-</ul>
-<h2>H48-3 · ComCat microseismicity alignments</h2>
-<ul>
-<li><strong>Layer:</strong> USGS ComCat FDSN event catalogue (267,774 events since 2000 in the region bbox,
-  verified).</li>
-<li><strong>Signature:</strong> planar clustering of hypocentres (3-D PCA per cluster), projected up-dip to a
-  surface trace.</li>
-<li><strong>Why off-catalogue:</strong> these would be blind faults without surface scarps.</li>
-<li><strong>Differs:</strong> the supplied <code>ieq</code> band is a smooth density (GEMSDOE32 measured autocorrelation
-  0.9986 at 1 km).</li>
-<li><strong>Why ranked low:</strong> routine ComCat epicentral uncertainty in Nevada is typically of order
-  1 km. That is larger than the 300 m kernel, so most projected traces would earn ~0 credit. It
-  only pays where relocated catalogues exist.</li>
-</ul>
-<h2>H48-4 · Emit from the LSI truth-intensity map</h2>
-<p>The live-score inversion fits a truth intensity per (distance-to-catalogue × backbone) bin. It
-would be attractive to emit into high-intensity bins. <strong>Not viable:</strong> the leave-one-out rank
-correlation within the top-8 family is −0.69, so the fine structure is not trustworthy. Revisit
-after the λ-probe (see <a href="next-steps.html">next steps</a>) supplies exact <code>T</code>, <code>F</code>, <code>K</code> for one file.</p>
+<h2>Promotion and validation protocol</h2>
+<ol>
+<li>Select one detector and freeze layers, processing, confounds, thresholds, spatial folds, and promotion rule <strong>before</strong> looking at held-out proxy labels.</li>
+<li>Obtain/check official data rights, checksums, CRS, footprint, tile seams, survey provenance, and compatibility with contest terms. A catalog entry or count is not a validated raster.</li>
+<li>Generate fold-specific predictions without using held-out labels; compare with the corrected tip, dotted, and naïve-mean anchors using <code>src/gems48/validation.py</code> and exact known-fault masking.</li>
+<li>Require an improvement over the best baseline and consistent blocked folds. Public SGMC proxy gains are necessary evidence only, not proof of private-score gain.</li>
+<li>Re-open the final GeoTIFF, verify its [0,1] range, and resolve the official null/NaN-outside vs portal range-check conflict before any upload. <strong>No candidate on this page is slot-cleared.</strong></li>
+</ol>
+<p>All availability and source caveats are in the <a href="sources.html">source register</a> and <a href="data/source-checks.json">machine-readable source checks</a>.</p>
 <hr><p style="font-size:.8rem;color:#667">GEMSDOE48 · built from <code>docs/md/hypotheses.md</code> by <code>scripts/build_site.py</code></p></main></body></html>

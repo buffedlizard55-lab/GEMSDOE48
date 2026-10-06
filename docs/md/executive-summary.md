@@ -1,58 +1,67 @@
-# Executive summary — how to submit in 5 steps
+# Executive summary — downloads, decision, and submission procedure
 
-## ⬇ The file
+## Current decision: no weekly slot is cleared
 
-**[Download {{TIF}}](downloads/{{TIF}})** ({{BYTES}} bytes · sha256 `{{SHA16}}…`) ·
-[.zip alternative](downloads/{{ZIP}}) · [audit receipt](downloads/{{RECEIPT}})
+The requested Yager conflict-transfer candidate is available for research, but the corrected spatial SGMC proxy gate failed. The H48-1 Dempster candidate from the prior session also did not beat its corrected holdout best; its owner-built LSI estimate cannot resolve this difference. PR #6 added an unscored DS48 re-emission, whose SGMC off-catalogue proxy is below the dotted baseline; its separate catalogue-based proxy is anti-monotone with the known live ladder. **Do not upload any of these files now.** No private score or portal acceptance was observed.
 
-| field on the DrivenData form | paste this |
+### Requested Yager candidate
+
+**[Download Yager TIFF](downloads/gemsdoe48-h48-ds-yager-conflict-20261006.tif)** ·
+[download single-file ZIP](downloads/gemsdoe48-h48-ds-yager-conflict-20261006.zip) ·
+[build audit](downloads/gemsdoe48-h48-ds-yager-conflict-20261006-audit.json) ·
+[unassigned-belief diagnostic — do not submit](downloads/gemsdoe48-h48-ds-yager-conflict-20261006-unassigned-diagnostic.tif)
+
+- **Name (research only):** `GEMSDOE48-H48-DS-CONFLICT`
+- **Suggested short note:** `H48 dotted+tip Yager fusion; distinct in bounded scan; SGMC proxy gate failed; do not spend slot`
+- **SHA-256:** `fe68ae6f57be013e26d20006551b43cd84bb5fe4a0b07d1d10ce4725c90fd16c`
+- **Corrected public proxy DTI:** Yager 0.08407; tip 0.09709; dotted 0.09613; naïve mean 0.09030. Yager loses in all four quadrants.
+- **Format caveat:** the candidate is one-band float32, EPSG:32611, 100 m, 3730×3292, and every pixel is finite in [0,1] by local byte audit. This does not establish the cause of the earlier portal error or demonstrate acceptance. Finite zeros outside the footprint do not meet the official null/NaN-outside wording; the portal was not tested.
+
+### Prior H48-1 Dempster candidate (comparison only)
+
+**[Download H48-1 TIFF](downloads/{{TIF}})** ·
+[ZIP](downloads/{{ZIP}}) · [receipt](downloads/{{RECEIPT}})
+
+| field | historical value; not a submit recommendation |
 |---|---|
-| **File to submit** | `{{TIF}}` (or the `.zip`, which holds the same single GeoTIFF) |
-| **Unique name** (start of the note) | `{{UNIQUE}}` |
-| **Note (optional)** | `{{NOTE}}` |
+| file | `{{TIF}}` |
+| name | `{{UNIQUE}}` |
+| note | `{{NOTE}}` |
+| SHA-256 prefix / bytes | `{{SHA16}}…` / {{BYTES}} |
+| result | did not beat b2 on the reported SGMC quadrants (2/4); LSI’s 0.26336 vs 0.26351 is too close for that instrument’s top-family rank power |
 
-> **Upload the file above.** Do **not** upload the earlier sessions' files still in `downloads/`:
-> `gemsdoe48-h48-ds-yager-conflict-20261006.tif` (IR-48-13) or
-> `gemsdoe48-ds-dotted-x-tipstepover-…-decision-zeros.tif` (IR-48-14). See [irregularities](irregularities.html).
+### PR #6 DS48 emission (comparison only; not cleared)
 
-## Steps
+[Download `gemsdoe48-ds48-emission.tif`](downloads/gemsdoe48-ds48-emission.tif) ·
+[build receipt](../registry/submission_build.json) · [research subsite](ds48-fusion/index.html)
 
-1. Log in at <https://www.drivendata.org/competitions/306/competition-doe-gems/> (your account).
-2. Open **Submissions → Submit**
-   ([page](https://www.drivendata.org/competitions/306/competition-doe-gems/submissions/)).
-3. **File to submit:** choose the downloaded `.tif`. A single-band GeoTIFF or a `.zip` holding
-   one GeoTIFF are both accepted, according to the form text the owner quoted.
-4. **Note:** paste the note above. It carries the unique name and a short comment, as the form
-   asks ("e.g. clustering with k=25").
-5. Click **Submit** and record the score in `registry/live_scores.json` (the next session reads
-   it).
+The main-branch PR #6 emission has 37,654 positive pixels and passes that builder's single-band, grid, finite, and [0,1] checks. Its recorded SGMC off-catalogue DTI is 0.09068 versus 0.09613 for the dotted baseline (about 5.7% lower). A separate catalogue-proximity proxy is anti-monotone with the four known live anchors (Spearman −1, n=4) and cannot clear a slot. The emission is all-finite with zeros outside, so the official null/NaN-outside caveat remains; no portal acceptance or organizer score exists. **Research artifact only—do not upload.**
 
-## Why this file will not trigger "Predicted values must be in range [0, 1]"
+## Why the proxy result and 0.2778 are not organizer scores
 
-That error happens when cells contain NaN, which fails a `0 ≤ p ≤ 1` check. This file is
-**all-finite float32**: 0 outside the footprint, no nodata tag, min 0.0, max 1.0. That is the
-same encoding as the 0.2778 file that scored. All {{NCHK}} checks were re-run on the bytes on disk:
+The correction multiplies prediction confidence into each TP maximum and computes full-scene distance neighborhoods before fold accumulation. The earlier v1 apparent pass is **retracted** because it omitted confidence and cropped each quadrant before calculating distances. See the [v2 fold receipt](data/proxy-validation.json) and [v1 retraction](data/proxy-validation-v1-retracted.json).
 
-{{CHECKS}}
+The official metric weights false negatives four times as heavily as false positives (α=0.2, β=0.8), within a 300 m triangular kernel. Removing redundant off-target mass can plausibly improve DTI while preserving near-trace coverage, but that does not prove why a particular participant received 0.2778 or that a local file is the scored artifact. In the observed 2026-10-06 public snapshot, 0.2778 was rank 13; leaderboard rows are not linked to local TIFF hashes.
 
-## What it is, in one paragraph
+## Submission form procedure (use only after a candidate clears validation)
 
-A Dempster–Shafer fusion of the group's best dotted file (h33-2-b2, live 0.2778) and best tip
-file (h32-1, live 0.2649). It emits **{{NPX}}** dots: all 37,654 of b2, plus 100 tip-family dots
-that the fusion accepted, with 0 dots within 200 m of the catalogue. The disagreement between
-the two families is published as its own layer. Verdict from the holdout: **tie with 0.2778,
-downside bounded at ≥ 0.2773** ([method](method.html)). Leaderboard #1 is 0.3774. Reaching it
-needs new data (see [hypotheses](hypotheses.html) and [next steps](next-steps.html)).
+When a future candidate has passed the slot gate and format checks:
 
-## Diagnostic layers (not for submission, for geologists)
+1. Sign in at the [DOE GEMS DrivenData competition](https://www.drivendata.org/competitions/306/competition-doe-gems/).
+2. Open **Submissions → Submit**.
+3. Upload exactly one single-band GeoTIFF, or a ZIP containing exactly one GeoTIFF.
+4. Paste that candidate’s distinct name and concise note into the optional note field.
+5. Submit only after checking its raster receipt, then record the returned score and artifact hash in `registry/live_scores.json`.
+
+The Yager file above is **not cleared**. Do not treat the procedure as a recommendation to submit it.
+
+## Diagnostic layers (not for submission)
 
 | layer | meaning |
 |---|---|
-| [belief m(F), normalised 0–1](downloads/diagnostics/gemsdoe48-h48-1-belief_dempster_mF_norm01.tif) | where the fused model believes there is a fault |
-| [conflict K](downloads/diagnostics/gemsdoe48-h48-1-conflict_K.tif) | **where the two strongest approaches actively disagree** |
-| [Yager m(Θ)](downloads/diagnostics/gemsdoe48-h48-1-unassigned_yager_mTheta_incl_conflict.tif) | unassigned belief including conflict |
-| [Dempster m(Θ)](downloads/diagnostics/gemsdoe48-h48-1-unassigned_dempster_mTheta.tif) | unassigned belief after normalisation |
+| [H48-1 normalized Dempster belief](downloads/diagnostics/gemsdoe48-h48-1-belief_dempster_mF_norm01.tif) | previous graded belief surface |
+| [H48-1 conflict K](downloads/diagnostics/gemsdoe48-h48-1-conflict_K.tif) | disagreement between the two source families |
+| [H48-1 Yager unassigned mass](downloads/diagnostics/gemsdoe48-h48-1-unassigned_yager_mTheta_incl_conflict.tif) | unassigned belief including conflict |
+| [H48-1 Dempster unassigned mass](downloads/diagnostics/gemsdoe48-h48-1-unassigned_dempster_mTheta.tif) | residual mass after classical normalization |
 
-The belief layer is technically in the submission format, but it spreads mass over ~770k pixels.
-By the scale identity and marginal rule that would score far below the binary file. Do not
-submit it.
+The Yager candidate’s own unassigned-belief raster is linked above. All diagnostic layers are for scientific review only.

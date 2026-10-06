@@ -1,9 +1,9 @@
-"""Build the GitHub Pages site from the committed receipts.
+"""Build the historical PR #6 research subsite from its committed receipts.
 
-Every number rendered here is read from registry/*.json or evidence/*.json at
-build time.  Nothing is typed by hand, so a page cannot disagree with a receipt.
+Measured values are loaded from registry/*.json and evidence/*.json where available;
+interpretation and dated context are explicitly written in the page templates.
 
-Run:  python3 scripts/build_site.py
+Run:  python3 scripts/build_site_ds48.py
 """
 
 from __future__ import annotations
@@ -64,9 +64,9 @@ def fmt(x, nd=4):
 
 def page(title: str, subtitle: str, body: str, active: str = "") -> str:
     nav = [
-        ("index.html", "Submission"),
-        ("executive-summary.html", "How to submit"),
-        ("research.html", "Why 0.2778 won"),
+        ("index.html", "DS48 research"),
+        ("executive-summary.html", "Form procedure"),
+        ("research.html", "Interpreting reported 0.2778"),
         ("hypotheses.html", "Hypotheses"),
         ("sources.html", "Sources"),
         ("irregularities.html", "Irregularities"),
@@ -88,10 +88,10 @@ def page(title: str, subtitle: str, body: str, active: str = "") -> str:
   <nav>{links}</nav>
 </div></header>
 <div class="namestrip"><div class="wrap">
-  <span class="ns-label">Unique submission name</span>
+  <span class="ns-label">Research-artifact label — not slot-cleared</span>
   <code class="ns-name">{esc(BUILD.get('unique_name','—'))}</code>
   <a class="ns-dl" download href="downloads/{esc(BUILD.get('files',{}).get('emission',{}).get('file',''))}">
-    ↓ Download the .tif</a>
+    ↓ Download for audit only — do not submit</a>
 </div></div>
 <div class="xlink"><div class="wrap">
   This is the <b>DS48 fusion</b> sub-site. The repository landing page is
@@ -104,7 +104,7 @@ def page(title: str, subtitle: str, body: str, active: str = "") -> str:
   <div class="hero"><h1>{esc(title)}</h1><p class="lead">{subtitle}</p></div>
   {body}
   <footer><p>Built from <code>registry/</code> and <code>evidence/</code> by
-  <code>scripts/build_site.py</code>. Owner-reported scores are labelled
+  <code>scripts/build_site_ds48.py</code>. Owner-reported scores are labelled
   <span class="badge amber">OWNER-REPORT</span>; local measurements are labelled
   <span class="badge blue">PROXY</span> or <span class="badge">DERIVED</span>.
   No organizer score exists for any artifact in this repository.</p></footer>
@@ -134,9 +134,11 @@ def build_index() -> str:
 
     c_ds = card(
         'Dempster&ndash;Shafer fusion',
-        '<p>The dotted family and the tip / step-over family agree on 69.6 % of their pixels and '
-        'disagree on 14,724. They are combined with Dempster&rsquo;s rule on the frame '
-        '{F, &not;F} with Shafer reliability discounts a = '
+        '<p>The dotted family and the tip / step-over family agree on 69.6 % of the grid and '
+        'disagree on 14,724 pixels. They overlap substantially: 31,614 of b2&rsquo;s 37,654 '
+        'positive cells are also in the tip mask, so statistical independence/distinctness is '
+        'not supported. Dempster&rsquo;s rule is shown here as a research diagnostic, not as a '
+        'calibrated fusion. On the frame {F, &not;F}, with Shafer reliability discounts a = '
         + fmt(BUILD.get('reliability', {}).get('a_dotted'), 2) + '. Belief is '
         + fmt(diag.get('bel_at_full_agreement')) + ' at agreement and '
         + fmt(diag.get('bel_at_single_source_only')) + ' where only one family supports a pixel.</p>',
@@ -152,27 +154,25 @@ def build_index() -> str:
         'Reproduced honestly rather than claimed as a win.</p>',
         'MEASURED')
     c_fals = card(
-        'Three falsified arms',
-        '<ul><li>DS corroboration removal at 9 radii: gate fails everywhere (best safety 0.64 &lt; 2.0).</li>'
-        '<li>Hexagonal covering-optimal re-emission at 11 spacings: <b>not cleanly falsified</b>. '
-        'At matched mass the best arm (spacing 5.6 px, 37,499 dots) is x1.019 on the SGMC '
-        'off-catalogue layer and x12.5 on the catalogue-in-corridor layer. The catalogue side is '
-        'anti-monotone and carries no live information; the SGMC side is +1.9 %, inside the noise '
-        'of re-sampling the same corridor. Live-candidate, UNVALIDATED.</li>'
-        '<li>DS-ranked re-emission at matched mass: SGMC credit falls 5.8 %.</li></ul>'
-        '<p>Conclusion: <b>the emission is at a local optimum</b> and the binding constraint is '
-        'detector quality. ' + esc(neg.get('evidence_class', '')) + '</p>',
-        'PROXY')
+        'Audited arms — none slot-cleared',
+        '<ul><li>DS corroboration removal at 9 radii: the historical gate fails everywhere '
+        '(best safety 0.64 &lt; 2.0).</li>'
+        '<li>Hexagonal covering-optimal re-emission at 11 spacings: the old falsification claim '
+        'was incorrect. At matched mass the best arm (spacing 5.6 px, 37,499 dots) is x1.019 on '
+        'the owner-derived SGMC off-catalogue layer; that small change is within re-sampling noise. '
+        'Its catalogue-side gain is not useful because the proxy is anti-monotone. This arm is '
+        '<b>UNVALIDATED and not slot-cleared</b>; do not spend a slot.</li>'
+        '<li>DS-ranked re-emission at matched mass: owner-derived SGMC DTI is 5.7 % lower than '
+        'the dotted baseline; not a promotion.</li></ul>'
+        '<p>Conclusion: <b>no tested arm here clears a slot gate</b>. The available public proxies '
+        'do not establish an organizer-score gain. ' + esc(neg.get('evidence_class', '')) + '</p>',
+        'RESEARCH · NO-GO')
 
     body = f"""
 <section class="callout warn">
   <h2>Read this before uploading anything</h2>
-  <p>Every file on this page is <b>UNSCORED</b>. No organizer score exists for any artifact in
-  this repository. The measurements below are local proxies, and this repository's central
-  finding is that <b>the catalogue-based proxy ranks artifacts in the exact reverse of the live
-  leaderboard</b> (Spearman &rho; = {fmt(ANTI.get('spearman_rho_proxy_dense_vs_live'), 1)} on
-  n = 4). Spending a weekly slot on a file that has not been validated against a live score is
-  therefore an owner decision, not something this repository can certify.</p>
+  <p>Every file on this page is <b>UNSCORED</b>; no organizer score or portal acceptance exists.
+  <b>Do not upload the DS48 emission.</b> Its receipt reports SGMC off-catalogue DTI {fmt(dsem.get('sgmc_off_catalogue',{}).get('dti'),5)} versus {fmt(base.get('sgmc_off_catalogue',{}).get('dti'),5)} for the dotted baseline. The separate catalogue-based proxy ranks four owner-reported live anchors in the exact reverse order (Spearman &rho; = {fmt(ANTI.get('spearman_rho_proxy_dense_vs_live'), 1)}, n = 4), so that apparent catalogue gain cannot clear a slot. These proxies are not hidden truth. The two source masks also overlap substantially, so the Dempster distinctness/independence assumption is unsupported; treat the combination as a research diagnostic, not calibrated probabilities.</p>
 </section>
 
 <section>
@@ -193,18 +193,20 @@ def build_index() -> str:
     as a prediction.</p>
   </article>
   <article class="card feature">
-    <span class="badge blue">Portal candidate</span>
-    <h3>DS-ranked, off-flank emission at the live-best mass</h3>
+    <span class="badge amber">Research-only · no-go</span>
+    <h3>DS-ranked off-flank emission (not slot-cleared)</h3>
     <p class="fileline">{esc(em.get('file','—'))}</p>
     <p>{fmt(em.get('bytes'))} bytes · sha256 <code>{esc(em.get('sha256','—'))}…</code> ·
     {fmt(checks.get('emission',{}).get('n_positive'))} positive px · values in {{0.0, 1.0}} ·
     <b>{esc(checks.get('emission',{}).get('verdict','—'))}</b> all format checks</p>
     <p><a class="button primary" download href="downloads/{esc(em.get('file',''))}">
-      ↓ Download emission .tif</a></p>
-    <p class="micro">Mass-neutral: exactly {fmt(base.get('n'))} px, the same as the best live
-    artifact, so it spends none of the removal budget. Measured against both independent truth
-    layers it gains on one and loses {fmt(100*(1-dsem.get('sgmc_off_catalogue',{}).get('tpw',1)/max(base.get('sgmc_off_catalogue',{}).get('tpw',1),1)),1)} %
-    on the other — see below.</p>
+      ↓ Download emission for audit only (do not submit)</a></p>
+    <p class="micro">Mass-neutral: exactly {fmt(base.get('n'))} px, matching the live-best mass.
+    On the owner-derived SGMC off-catalogue proxy its DTI is {fmt(dsem.get('sgmc_off_catalogue',{}).get('dti'),5)}
+    versus {fmt(base.get('sgmc_off_catalogue',{}).get('dti'),5)} for the dotted baseline; its
+    SGMC TP credit falls {fmt(100*(1-dsem.get('sgmc_off_catalogue',{}).get('tpw',1)/max(base.get('sgmc_off_catalogue',{}).get('tpw',1),1)),1)} %.
+    A catalogue-proximity proxy gain is not reliable promotion evidence because that proxy is
+    anti-monotone with the live anchors.</p>
   </article>
 </div>
 <div class="grid2">
@@ -236,9 +238,12 @@ def build_index() -> str:
 </section>
 
 <section>
-<h2>Why the top score was 0.2778, in one table</h2>
-<p>The group's own live-recorded ladder. Every step up the ladder is a <b>removal</b>; no addition
-has ever improved a live score.</p>
+<h2>The owner-reported 0.2778 result, with its limits</h2>
+<p>The table records owner-reported scores from the project's history; they are not independently
+verified organizer receipts, and no local TIFF hash is tied to a leaderboard row here. A dated
+2026-10-06 public leaderboard snapshot placed 0.2778 at rank 13, not at the top. The reported
+sequence is consistent with useful removals in that specific family, but it does not establish
+causation or generalize to a new detector.</p>
 <table>
 <tr><th>artifact</th><th>emitted px</th><th>owner-reported live</th><th>what changed</th></tr>
 <tr><td><code>gems25-dotted-h19-5-d2-8</code></td><td>44,090</td><td>0.2600</td>
@@ -254,13 +259,14 @@ has ever improved a live score.</p>
 the metric is <code>DTI = TPw / (0.2·TPw + 0.2·FPw + 0.8·|G|)</code>. Deleting one unit of mass
 lowers the denominator by <code>0.2·(1 − k)</code> and the numerator by the credit it was
 earning. So <b>a dot is worth emitting iff its realised kernel weight exceeds
-<code>0.2·DTI</code></b> — {fmt(0.2*0.2778)} at 0.2778. The measured live break-even is
-{fmt(BUILD.get('live_anchor_inversion',{}).get('break_even_bar_tau_live', 0.05416),5)} credit per dot.
-Full derivation: <a href="research.html">Why 0.2778 won</a>.</p>
+<code>0.2·DTI</code></b> — {fmt(0.2*0.2778)} using the owner-reported 0.2778. The
+{fmt(BUILD.get('live_anchor_inversion',{}).get('break_even_bar_tau_live', 0.05416),5)} value is a
+model-derived break-even conditional on the reported anchor pair and metric assumptions, not a
+verified per-dot measurement. Full derivation: <a href="research.html">Interpreting reported 0.2778</a>.</p>
 </section>
 
 <section>
-<h2>What this session built, and what it falsified</h2>
+<h2>What the historical experiment built and measured</h2>
 <div class="grid3">
   {c_ds}{c_mean}{c_fals}</div>
 </section>
@@ -268,7 +274,7 @@ Full derivation: <a href="research.html">Why 0.2778 won</a>.</p>
 <section>
 <h2>Independent truth layers, and what each one says</h2>
 <table>
-<tr><th>truth layer</th><th>pixels</th><th>live-best base TPw</th><th>DS emission TPw</th><th>usable as a gate?</th></tr>
+<tr><th>truth layer</th><th>pixels</th><th>base TPw on local proxy</th><th>DS emission TPw</th><th>usable as a gate?</th></tr>
 <tr><td>published catalogue (organizer labels == existing faults)</td>
     <td>60,988</td>
     <td>{fmt(base.get('catalogue_all',{}).get('tpw'),1)}</td>
@@ -280,15 +286,15 @@ Full derivation: <a href="research.html">Why 0.2778 won</a>.</p>
     <td>{fmt(dsem.get('sgmc_off_catalogue',{}).get('tpw'),1)}</td>
     <td>Partially — but the pure-SGMC arm scored 0.0512 live, near random</td></tr>
 </table>
-<p>The competition's hidden truth is a third population, roughly
-{fmt(12632)} px of <i>newly identified</i> faults, that no file in this repository can see.
-Its size is <span class="badge">DERIVED</span> by inverting the live score pair through the
-official metric: <code>|G| = 12,632</code>, implied TPw = {fmt(BUILD.get('live_anchor_inversion',{}).get('implied_tpw_from_small'),0)},
-and the two anchors agree to {fmt(100*BUILD.get('live_anchor_inversion',{}).get('tpw_consistency_rel',0.0013),2)} %.</p>
+<p>A model inversion of two owner-reported score anchors, under the assumptions listed on the
+research page, estimates about {fmt(12632)} hidden new-fault pixels and TPw =
+{fmt(BUILD.get('live_anchor_inversion',{}).get('implied_tpw_from_small'),0)}. The estimates agree
+internally to {fmt(100*BUILD.get('live_anchor_inversion',{}).get('tpw_consistency_rel',0.0013),2)} %;
+this is <b>not an observation of hidden truth</b> and is not independently verified.</p>
 </section>
 """
     return page(
-        "A Dempster–Shafer fusion of two independent fault-detector families",
+        "Dempster–Shafer diagnostics for two overlapping fault-detector families",
         "DOE GEMS Prize · DrivenData competition 306 · the disagreement-preserving combination of "
         "the spacing-tuned dotted family and the tip / step-over family, with the unassigned-belief "
         "mass shipped as its own diagnostic layer.",
@@ -312,35 +318,40 @@ def build_exec() -> str:
             f"<td><b>{esc(v['verdict'])}</b></td></tr>"
         )
     body = f"""
-<section class="callout">
-  <h2>Executive summary: exactly how to enter a submission</h2>
-  <ol class="steps">
-    <li><b>Open the submission page.</b>
-        <a href="{DD}" target="_blank" rel="noopener">competition-doe-gems</a> → the
-        <i>Submissions</i> tab → <i>New submission</i>.</li>
-    <li><b>Choose the file.</b> Click the download button below. The browser saves one
-        <code>.tif</code>. A <code>.zip</code> is also accepted, and is unnecessary.</li>
-    <li><b>Upload it</b> into <i>“File to submit”</i>. The competition accepts a single-band
-        GeoTIFF or a <code>.zip</code> containing one. It must match the submission format's CRS,
-        shape and geotransform — this file does, and the table at the bottom proves it from the
-        bytes on disk.</li>
-    <li><b>Name it.</b> Put the unique name in the note field so you can tell submissions apart:
-        <br><code class="block">{esc(BUILD.get('unique_name',''))}</code></li>
-    <li><b>Note (optional), ≤ 200 characters.</b> Paste this:
-        <br><code class="block">{esc(BUILD.get('portal_note',''))}</code></li>
-    <li><b>Click Submit.</b> The score appears on the leaderboard shortly afterwards.
-        Three submissions per week.</li>
-  </ol>
-  <p class="big"><a class="button primary" download href="downloads/{esc(em.get('file',''))}">
-     ↓ Download the submission file</a>
+<section class="callout warn">
+  <h2>Current decision: do not submit any file on this subsite</h2>
+  <p>All artifacts are <b>UNSCORED</b>. The DS48 emission does not beat the dotted baseline on
+  the recorded SGMC off-catalogue proxy, the catalogue-based proxy is anti-monotone with the
+  known live anchors, and the output's finite zeros outside do not match official null/NaN wording.
+  No portal acceptance or organizer score has been observed. The download below is for research
+  and audit only.</p>
+  <p class="big"><a class="button" download href="downloads/{esc(em.get('file',''))}">
+     ↓ Download research emission (do not submit)</a>
      <span class="micro">{esc(em.get('file',''))} · {fmt(em.get('bytes'))} bytes ·
      sha256 <code>{esc(em.get('sha256',''))}…</code></span></p>
 </section>
 
+<section class="callout">
+  <h2>Generic form procedure — only after a future candidate clears validation</h2>
+  <ol class="steps">
+    <li>Sign in at the <a href="{DD}" target="_blank" rel="noopener">DOE GEMS competition</a>.</li>
+    <li>Open <i>Submissions → New submission</i>.</li>
+    <li>Only after a candidate beats the preregistered spatial holdout best, resolves the official
+        null/NaN-outside format requirement, and passes an independent byte audit, upload exactly
+        one single-band GeoTIFF or a ZIP containing exactly one GeoTIFF.</li>
+    <li>Enter that candidate's own unique name and concise note in the optional note field.</li>
+    <li>Submit only after the slot gate passes; record the returned score and exact artifact hash.</li>
+  </ol>
+  <p>This generic procedure is <b>not</b> a recommendation to upload any file currently linked
+  from GEMSDOE48.</p>
+</section>
+
 <section>
-  <h2>Why your earlier upload was rejected</h2>
-  <p>The portal said <i>“Predicted values must be in range [0, 1]”</i>. Two things produce that
-  message and both are avoided here, verifiably:</p>
+  <h2>Range audit is not proof of portal acceptance</h2>
+  <p>The owner reported the portal message <i>“Predicted values must be in range [0, 1]”</i>.
+  This emission is finite and in range, but the cause of the earlier rejection is unverified,
+  the portal was not tested here, and the official format also specifies null/NaN outside the
+  study footprint. This all-finite raster uses zeros outside and does not satisfy that wording.</p>
   <ul>
     <li><b>NaN written as a nodata value.</b> Several shipped artifacts in this project use
     <code>NaN</code> outside the study area. Some validators treat a NaN as an out-of-range
@@ -349,9 +360,9 @@ def build_exec() -> str:
     <li><b>A value outside [0, 1].</b> The minimum is 0.0 and the maximum is 1.0 exactly;
     the count of values below 0 and above 1 is <b>0</b>.</li>
   </ul>
-  <p>This is registered as <code>IR-48-03</code>; the siblings reported the same portal message
-  and could not establish its cause, but an all-finite in-range raster cannot trigger either of
-  the two known causes.</p>
+  <p>This is registered as <code>DS48-IR-03</code>. A basic [0,1] check passes on the emitted
+  values, but the exact portal validator behavior, the cause of the earlier rejection, and
+  acceptance of finite zeros outside are all unverified.</p>
 </section>
 
 <section>
@@ -369,9 +380,10 @@ def build_exec() -> str:
   positive pixels outside it.</p>
 </section>
 """
-    return page("How to make a submission, step by step",
-                "Everything needed to go from this page to a scored leaderboard row, with the "
-                "format claims verified against the bytes on disk.", body, active="executive-summary.html")
+    return page("Generic form procedure for a future validated candidate",
+                "No artifact currently linked from this historical subsite is cleared to upload. "
+                "Use this checklist only after an independent holdout and format gate pass.",
+                body, active="executive-summary.html")
 
 
 # ------------------------------------------------------------------- research
@@ -397,11 +409,12 @@ FNw = Σ_g (1 − max_x p(x)·k(d(x,g)))    DTI = TPw / (TPw + 0.2·FPw + 0.8·F
   <pre>FNw = |G| − TPw            (because p ≤ 1 and k ≤ 1)
 S = Σx p(x),  M = Σx p(x)·max_g k(x,g),  FPw = S − M
 DTI = TPw / (0.2·TPw + 0.2·FPw + 0.8·|G|)</pre>
-  <p><b>Marginal value.</b> Adding one unit of mass at realised kernel weight <i>k</i> lowers the
-  denominator by exactly 0.2 and raises the numerator by <i>k</i>, so the score rises iff
-  <code>k &gt; 0.2·DTI</code>. At the group's best live score the bar is
-  {fmt(0.2*0.2778)}; the live-anchored measurement puts it at
-  {fmt(BUILD.get('live_anchor_inversion',{}).get('break_even_bar_tau_live',0.05416),5)}.</p>
+  <p><b>Marginal value.</b> Under the stated metric, adding one unit of mass at realised kernel
+  weight <i>k</i> raises the score iff <code>k &gt; 0.2·DTI</code>. Using the owner-reported 0.2778
+  gives a nominal bar of {fmt(0.2*0.2778)}. Inverting two owner-reported anchors yields a
+  model-derived {fmt(BUILD.get('live_anchor_inversion',{}).get('break_even_bar_tau_live',0.05416),5)}
+  only if the score pair, metric version, and truth population are comparable. Neither is an
+  independent verification of the reported score or its associated TIFF.</p>
   <p><b>Binary is optimal.</b> For a pixel whose value is <i>v</i>, the score is
   <code>(T₀ + v·k)/(D₀ + 0.2v)</code> while it stays the argmax, whose derivative
   <code>(k·D₀ − 0.2·T₀)/(D₀ + 0.2v)²</code> has the sign of <code>k − 0.2·DTI</code> and
@@ -411,11 +424,12 @@ DTI = TPw / (0.2·TPw + 0.2·FPw + 0.8·|G|)</pre>
 </section>
 
 <section>
-  <h2>2 · Why the dotted family won, and why removals keep winning</h2>
-  <p>Dotting raised the mean credit per emitted pixel by cutting mass: from the solid H19-5
-  emission to the dotted D2.8 the emitted pixel count fell 64 % while the live score rose. The
-  live ladder is monotonically a <b>removal</b> ladder — 44,090 → 40,199 → 37,654 pixels, score
-  0.2600 → 0.2708 → 0.2778 — and no addition arm has ever improved a live score in this project.</p>
+  <h2>2 · What the reported dotted-family sequence suggests</h2>
+  <p>In the owner-reported examples, the pixel count falls 44,090 → 40,199 → 37,654 while the
+  reported score rises 0.2600 → 0.2708 → 0.2778. This is consistent with improved average credit
+  per emitted pixel after those particular removals, but the score/artifact mapping is not
+  independently verified and the sequence alone does not establish causation or a general rule
+  that removals will help.</p>
   <p>The staff clarification
   (<a href="{MASK_THREAD}" target="_blank" rel="noopener">community thread</a>) explains the
   mechanism: the scoring mask is <i>pixel-exact and identical to the provided training labels</i>,
@@ -426,44 +440,47 @@ DTI = TPw / (0.2·TPw + 0.2·FPw + 0.8·|G|)</pre>
 </section>
 
 <section class="callout warn">
-  <h2>3 · The instrument defect that governs every decision here</h2>
-  <p>Scoring the four artifacts whose live scores are known against a spatially blocked,
+  <h2>3 · A known limitation of the catalogue-based proxy</h2>
+  <p>For four artifacts with owner-reported live scores, comparison against a spatially blocked,
   density-matched catalogue holdout (4 quadrants × 2 draws, common random numbers) gives:</p>
   <table><tr><th>artifact</th><th>px</th><th>owner-reported live</th>
   <th>proxy (sparse)</th><th>proxy (dense)</th></tr>{tbl}</table>
-  <p><b>Spearman ρ = {fmt(ANTI.get('spearman_rho_proxy_dense_vs_live'),1)}.</b> The proxy ranks the
-  four artifacts in the <b>exact reverse</b> of the live leaderboard. The catalogue is therefore
-  <b>unusable as a promotion gate</b> for questions about which support to emit, and this
-  repository says so on its front page rather than quoting a favourable proxy number.
-  Sibling repositories reached the same conclusion independently
+  <p><b>Spearman ρ = {fmt(ANTI.get('spearman_rho_proxy_dense_vs_live'),1)}.</b> In this four-point
+  owner-reported sample, the proxy ranks the artifacts in the <b>exact reverse</b> of the reported
+  live order. That is sufficient to disqualify this catalogue proxy as a promotion gate here,
+  not to characterize every possible proxy. This repository records the limitation rather than
+  quoting its favourable catalogue-only number. Sibling repositories reached the same conclusion independently
   (<code>IR-32-PROXY-01</code>, <code>IR-H19-HARNESS-LEAK</code>), and
   <code>GEMSDOE29</code>'s own receipt shows the pure SGMC arm at 0.0446 on that proxy but 0.0512
   live, i.e. at chance.</p>
 </section>
 
 <section>
-  <h2>4 · The hidden truth, recovered by inversion</h2>
-  <p>Two emissions differing by exactly one mechanism both have organizer scores. Inverting the
-  pair through the metric with <code>M = TPw</code> gives a closed form for the hidden truth
-  size. The two anchors agree on TPw to
-  {fmt(100*BUILD.get('live_anchor_inversion',{}).get('tpw_consistency_rel',0),2)} %:</p>
+  <h2>4 · A model-derived hidden-truth estimate, conditional on owner reports</h2>
+  <p>Assuming the owner-reported scores map to the named artifacts, the official metric version
+  is unchanged, and the two reported artifacts differ only by the stated mechanism, inverting
+  that pair with <code>M = TPw</code> yields a conditional estimate of hidden-truth size. The
+  inferred TPw values agree to
+  {fmt(100*BUILD.get('live_anchor_inversion',{}).get('tpw_consistency_rel',0),2)} % under those
+  assumptions; this is not direct measurement of the hidden labels:</p>
   <table>
     <tr><th>quantity</th><th>value</th><th>meaning</th></tr>
-    <tr><td>implied TPw</td><td>{fmt(BUILD.get('live_anchor_inversion',{}).get('implied_tpw_from_small'),1)}</td>
-        <td>weighted true-positive credit of the 0.2778 emission</td></tr>
-    <tr><td>|G|</td><td>12,632</td><td>hidden new-fault pixels, 0.2445 % of the footprint</td></tr>
-    <tr><td>implied recall</td><td>{fmt(100*BUILD.get('live_anchor_inversion',{}).get('implied_tpw_from_small',0)/12632,1)} %</td>
-        <td>fraction of the hidden set's weight covered</td></tr>
-    <tr><td>credit per emitted dot</td><td>{fmt(BUILD.get('live_anchor_inversion',{}).get('implied_credit_per_dot'),4)}</td>
-        <td>the detector's live efficiency</td></tr>
-    <tr><td>break-even bar τ<sub>live</sub></td><td>{fmt(BUILD.get('live_anchor_inversion',{}).get('break_even_bar_tau_live'),5)}</td>
-        <td>a new dot must beat this to pay for itself</td></tr>
+    <tr><td>inferred TPw</td><td>{fmt(BUILD.get('live_anchor_inversion',{}).get('implied_tpw_from_small'),1)}</td>
+        <td>conditional weighted true-positive credit for the reported 0.2778 artifact</td></tr>
+    <tr><td>inferred |G|</td><td>12,632</td><td>conditional hidden new-fault estimate, 0.2445 % of the footprint</td></tr>
+    <tr><td>inferred recall</td><td>{fmt(100*BUILD.get('live_anchor_inversion',{}).get('implied_tpw_from_small',0)/12632,1)} %</td>
+        <td>conditional estimate of hidden-set weight covered</td></tr>
+    <tr><td>inferred credit per emitted dot</td><td>{fmt(BUILD.get('live_anchor_inversion',{}).get('implied_credit_per_dot'),4)}</td>
+        <td>model-derived efficiency for that owner-reported artifact</td></tr>
+    <tr><td>inferred break-even bar τ<sub>live</sub></td><td>{fmt(BUILD.get('live_anchor_inversion',{}).get('break_even_bar_tau_live'),5)}</td>
+        <td>conditional threshold a new dot would need to beat under these assumptions</td></tr>
   </table>
-  <p>At the top of the public ladder — 0.3195, read from the leaderboard on 2026-10-02 — the
-  same arithmetic needs roughly <b>a quarter more credit per emitted pixel</b> than the group's
-  best field delivers. That is a detector-quality gap, not an emission-style gap, which is why
-  this session spent its budget on the combination rule and on registering honest hypotheses
-  rather than on re-tuning spacing.</p>
+  <p>A human-readable leaderboard snapshot from 2026-10-02 showed a 0.3195 leader; the later
+  2026-10-06 snapshot showed 0.3774. These dated values have no local TIFF-hash attribution.
+  Any credit-gap calculation against a leader is therefore illustrative only: the algebra above
+  depends on the submitted artifact, metric implementation, and hidden truth, none of which this
+  repository can independently verify from a public row. It does not establish a score gain or
+  forecast.</p>
 </section>
 
 <section>
@@ -488,12 +505,14 @@ DTI = TPw / (0.2·TPw + 0.2·FPw + 0.8·|G|)</pre>
   37,499 dots) is x1.019 on the only non-anti-monotone layer and x12.5 on the catalogue layer,
   whose ordering is known to be inverted. The reason a covering argument under-delivers here is
   that the shipped dots are information-weighted along the ridges rather than uniform over the
-  corridor, so covering optimality is not the binding constraint. Reported as a
-  falsification, not hidden.</p>
+  corridor, so covering optimality alone does not establish the best re-emission. An earlier
+  falsification label is corrected; this remains an unvalidated research arm, not a slot-cleared
+  candidate.</p>
 </section>
 """
-    return page("Why 0.2778 won", "The metric, the mechanism, the instrument defect, and the hidden "
-                "truth recovered from the live score pair.", body, active="research.html")
+    return page("Interpreting the owner-reported 0.2778", "The official metric, a conditional "
+                "score inversion, the proxy limitation, and what the evidence cannot establish.",
+                body, active="research.html")
 
 
 # --------------------------------------------------------------- hypotheses
@@ -683,8 +702,13 @@ def build_hypotheses() -> str:
   </table>
 </article>""")
     body = f"""
-<section class="callout">
-  <h2>The validation gate these must clear before a slot is spent</h2>
+<section class="callout warn">
+  <h2>Historical PR #6 hypothesis list — not the current ranking</h2>
+  <p>The proposals below and their conditional arithmetic were recorded in PR #6; they are not
+  validated candidates or a current slot recommendation. The current checkout-scoped five-item
+  ranking, source checks, and promotion gate are on the <a href="../hypotheses.html">repository-level
+  hypotheses page</a>. No candidate from this list is slot-cleared.</p>
+  <h2>General promotion gate for future candidates</h2>
   <p>A candidate is promotable only if it clears <b>all four</b>:</p>
   <ol>
     <li>mass ≤ the 37,654 px of the current live-best artifact;</li>
@@ -693,12 +717,9 @@ def build_hypotheses() -> str:
     <li>live-anchored safety factor &ge; 2.0 (budget ÷ measured credit destroyed); and</li>
     <li>the improvement reproduces in &ge; 3 of 4 spatial blocks.</li>
   </ol>
-  <p><b>Rank 1 was validated and it FAILED</b> — not the hypothesis itself, but the first
-  mechanism built on it: the Dempster–Shafer corroboration filter, which deletes the pixels where
-  the two families disagree, spends its budget at safety 0.64 (needs 2.0) at its best operating
-  point and is worse at every other radius. The measurement is in
-  <a href="index.html">the results table</a>. That is why the hypotheses below, not the filter,
-  are the recommendation for the next session.</p>
+  <p>The PR #6 experiment found its Dempster–Shafer corroboration-removal filter failed the
+  historical 0.64 safety gate. That does not validate any hypothesis below. Use the current
+  repository-level ranking and source caveats instead; see the notice at the top of this page.</p>
 </section>
 <section>
   <h2>Five hypotheses, ranked by expected DTI improvement over implementation cost</h2>
@@ -753,10 +774,9 @@ SOURCES = [
      "Therefore do not assume the test faults are all Quaternary scarps or geothermal conduits."),
     ("DD-LB", "Leaderboard snapshot", "Official page read (2026-10-02)",
      DD_LEADERBOARD,
-     "#1 nchuzhoy 0.3262; #2 kinghorton42 0.3222; #3 DARD 0.3195. The brief's current top score "
-     "is 0.3195.",
-     "A snapshot is not permanent. Leaderboard reads are human snapshots: DrivenData's Terms of "
-     "Use prohibit automated access, so this repository never fetches it."),
+     "The 2026-10-02 snapshot listed #1 at 0.3195; a later 2026-10-06 page-reader snapshot found #1 at 0.3774.",
+     "Dated human snapshots, not permanent/current feed values. No artifact in this repository "
+     "is linked to a public row by TIFF hash; this repository does not automate leaderboard fetches."),
     ("GDR-1391", "INGENIOUS / GDR submission 1391", "Official data portal", GDR,
      "The competition's feature stack originates here; TC means thermal conductivity.",
      "Not fetchable from this sandbox (HTTP 000)."),
@@ -849,7 +869,7 @@ def build_sources() -> str:
 
 # ----------------------------------------------------------- irregularities
 IRREG = [
-    ("IR-48-01", "disclosed",
+    ("DS48-IR-01", "disclosed",
      "In the official data drop, <code>labels.tif</code> and <code>existing_faults.tif</code> are "
      "byte-identical.",
      "Both are SHA-256 <code>7ba308ccdc4418b3…</code>, 425,830 bytes, 60,988 fault pixels; "
@@ -857,7 +877,7 @@ IRREG = [
      "<code>tests/test_inputs.py</code>. Consequence: the published catalogue is simultaneously "
      "the training label and the pre-scoring mask, so a locally-trained model that reproduces the "
      "catalogue is reproducing the mask, not the target."),
-    ("IR-48-02", "disclosed",
+    ("DS48-IR-02", "disclosed",
      "The sibling README <code>GEMSDOE32/README.md</code> attributes live score 0.2600 to the "
      "40,199-pixel file and 0.2708 to a 36,308-pixel prune, contradicting the task brief's own "
      "ledger and the file names.",
@@ -867,39 +887,34 @@ IRREG = [
      "published τ<sub>live</sub> = 0.05416 is nevertheless reproduced exactly here "
      "(0.2 × 0.2708) because the bar depends only on the score. Flagged for the owner to resolve "
      "against the submissions page."),
-    ("IR-48-03", "partly resolved",
+    ("DS48-IR-03", "partly resolved",
      "The owner's earlier upload was rejected with &ldquo;Predicted values must be in range "
      "[0, 1]&rdquo;.",
-     "Cause not established by the siblings, and not established here either. But one candidate "
-     "mechanism is now <b>excluded by evidence</b>: the family raster "
-     "<code>dotted_d2_8_02708.tif</code> carries <code>NaN</code> in all 7,111,787 cells outside "
-     "the study area and has an owner-reported accepted live score of 0.2708, so a "
-     "<code>NaN</code> nodata tag outside the footprint does <i>not</i> trigger the message. "
-     "The remaining candidate is a value outside [0, 1]. All four files shipped here have "
-     "<code>NaN count = 0</code>, <code>min = 0.0</code>, <code>max &le; 1</code>, and "
-     "out-of-range count = 0, re-read from the bytes on disk in "
-     "<code>registry/submission_build.json</code> and re-checked in "
-     "<code>tests/test_submission.py</code>. Status: open on the cause, closed on this "
-     "repository's exposure to it."),
-    ("IR-48-04", "resolved",
+     "Cause remains unverified. An owner-reported 0.2708 raster has NaNs outside, which suggests "
+     "that outside NaNs alone may not explain the earlier error, but its exact portal validation "
+     "is not independently confirmed. The DS48 emission is all-finite and in [0,1] by the local "
+     "byte audit; this only verifies those checks. It uses finite zeros outside, contrary to the "
+     "official null/NaN-outside wording. No portal test was made, and no cause or acceptance is "
+     "claimed."),
+    ("DS48-IR-04", "resolved",
      "The catalogue-blocked holdout ranks the four artifacts with known live scores in the exact "
      "reverse order of the leaderboard.",
      "Spearman ρ = −1.0, n = 4. The instrument is consequently <b>demoted from gate to "
      "descriptive</b> for all support-choice questions. Corroborated independently by "
      "<code>GEMSDOE32 IR-32-PROXY-01</code> and <code>GEMSDOE24 IR-H19-HARNESS-LEAK</code>."),
-    ("IR-48-05", "open",
+    ("DS48-IR-05", "open",
      "Hypothesis H48-D cannot be validated without new external data.",
      "The free, official source is USGS 3DEP. <b>Obtainability is not verified:</b> every 3DEP-"
      "adjacent host tested returns HTTP 000 from this sandbox. H48-D must not be proposed as "
      "viable until the tiles are in <code>data/</code> and a byte receipt exists."),
-    ("IR-48-06", "disclosed",
+    ("DS48-IR-06", "disclosed",
      "The Dempster–Shafer belief and the naive mean have identical rankings on the union support.",
      "Spearman ρ = 0.9999999. Because a union pixel has belief exactly 1 in its own family, both "
      "statistics are monotone functions of the other family's belief alone. This repository "
      "therefore does <b>not</b> claim that Dempster–Shafer improves emission ranking; it claims "
      "the calibrated belief value, the conflict mass and the unassigned mass, which an average "
      "does not provide. Reproduced from the measurement, not asserted away."),
-    ("IR-48-07", "open, corrected",
+    ("DS48-IR-07", "open, corrected",
      "The hexagonal covering-optimal re-emission arm was described in this repository as "
      "falsified. Re-reading the measurement, that description was WRONG.",
      "The hexagonal lattice is the provably optimal plane covering, so a covering-based "
@@ -908,25 +923,26 @@ IRREG = [
      "SGMC off-catalogue layer and <b>x12.5 above</b> it on the catalogue-in-corridor layer -- "
      "not below it on any layer, which is what an earlier summary of this repository claimed. "
      "The catalogue-side gain carries no live information (that instrument is anti-monotone, "
-     "IR-48-04); the SGMC-side +1.9 % is inside the noise of re-sampling the same 48,394-pixel "
-     "union corridor at a similar mass. Status: a live-candidate worth at most one slot, "
-     "UNVALIDATED, and a corrected claim rather than a falsification. Interpretation of why the "
+     "DS48-IR-04); the SGMC-side +1.9 % is inside the noise of re-sampling the same 48,394-pixel "
+     "union corridor at a similar mass. Status: UNVALIDATED and not slot-cleared; do not spend a "
+     "weekly slot on this arm. It remains a corrected claim rather than a falsification. "
+     "Interpretation of why the "
      "covering argument under-delivers: the shipped dots are information-weighted along the "
      "ridges, so the covering argument applies to a support region that the dots are not "
      "uniformly sampling. Retained as evidence, not deleted."),
-    ("IR-48-08", "disclosed",
+    ("DS48-IR-08", "disclosed",
      "The belief, m(Θ) and conflict rasters have small numbers of non-zero pixels outside the "
      "study footprint (893 for belief and conflict, all 7,111,787 for m(Θ)).",
      "This is geometrically correct, not a defect: a committed pixel within 300 m of the "
      "footprint boundary has a kernel that extends past it, and m(Θ) = (1−a₁)(1−a₂)/(1−K) is "
      "positive everywhere for reliabilities below 1. Only the <b>emission</b> is required to be "
      "empty outside the footprint, and it is (0 pixels)."),
-    ("IR-48-09", "open",
-     "The public leaderboard moved between reads: 0.3262 (nchuzhoy, 2026-10-04) and 0.3195 "
-     "(DARD, 2026-10-02) both appear as “top”.",
-     "Snapshots are dated, not authoritative. No artifact in this repository has an organizer "
-     "score, and this repository cannot fetch the leaderboard itself without breaching the "
-     "Terms of Use."),
+    ("DS48-IR-09", "disclosed, historical",
+     "Dated public leaderboard reads differ: a 2026-10-06 page-reader snapshot showed 0.3774 at "
+     "rank 1, 0.3195 at rank 7, and 0.2778 at rank 13; earlier reads also differed.",
+     "These are dated human snapshots, not permanent values. No leaderboard row is linked to a "
+     "local TIFF hash, and no local artifact has an organizer score. This repository does not "
+     "automate leaderboard fetches."),
 ]
 
 
@@ -936,6 +952,11 @@ def build_irregularities() -> str:
         f"<td>{d}</td><td>{n}</td></tr>" for i, s, d, n in IRREG
     )
     body = f"""
+<section class="callout warn">
+  <p><b>Register scope:</b> IDs prefixed <code>DS48-IR-</code> are local to this historical PR #6
+  subsite. The repository-level <a href="../irregularities.html">irregularities register</a> is
+  canonical for current cross-session decisions; use it for current status and slot clearance.</p>
+</section>
 <section>
   <p>An irregularity is recorded whenever a claim in this repository disagrees with a source, a
   measurement, or another repository. Open items are not hidden; they are the work queue.</p>
@@ -989,8 +1010,10 @@ def main() -> int:
         "irregularities.html": build_irregularities(),
     }
     for name, html_text in pages.items():
-        (SUB / name).write_text(_relativise(html_text))
-        print(f"wrote docs/ds48-fusion/{name}  ({len(html_text):,} bytes)")
+        output = _relativise(html_text)
+        output = "\n".join(line.rstrip() for line in output.splitlines()) + "\n"
+        (SUB / name).write_text(output)
+        print(f"wrote docs/ds48-fusion/{name}  ({len(output):,} bytes)")
     (SUB / ".nojekyll").write_text("")
     return 0
 

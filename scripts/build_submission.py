@@ -21,14 +21,20 @@ Produces, in docs/downloads/:
     would take it to [0, 1] if a reader wants that instead.
   2. `gemsdoe48-ds48-emission.tif`  the DS-ranked, off-flank emission at exactly
         the mass of the best live artifact (37,654 px).  Mass-neutral, so it
-        spends none of the live-anchored removal budget.  **Portal candidate,
-        UNSCORED.**
+        spends none of the live-anchored removal budget.  **Research artifact,
+        UNSCORED and not slot-cleared.**
   3. `gemsdoe48-ds48-mtheta.tif`    the unassigned/uncertain belief mass m12(Theta)
         -- the disagreement layer, shipped as its own raster as the brief asks.
   4. `gemsdoe48-ds48-conflict.tif`  Shafer's conflict K (= Smets' m(empty set)).
 
 Every file is single-band float32, EPSG:32611, 100 m, 3730 x 3292, all-finite,
-inside [0, 1].  Nothing here is a forecast of an organizer score.
+inside [0, 1]. Nothing here is an organizer score or submission recommendation.
+
+The emission is a research artifact only: its owner-derived SGMC off-catalogue
+proxy DTI is about 5.7% lower than the dotted baseline. A separate catalogue-based
+proxy is anti-monotone with the known live ladder (rho = -1, n = 4), so it cannot
+rescue the candidate. No artifact from this script is cleared for a weekly slot;
+see the root README and the current decision receipt.
 """
 
 from __future__ import annotations
@@ -51,7 +57,7 @@ from gemsdoe48.live_anchor import LiveAnchor  # noqa: E402
 A_DOTTED = 0.60
 A_TIP = 0.60
 BASE = "dotted_b2_prune_02778"
-FLANK_EXCLUSION_M = 200.0  # the B = 2 buffer that produced the live 0.2708 -> 0.2778 gain
+FLANK_EXCLUSION_M = 200.0  # B = 2 condition in the owner-reported 0.2708/0.2778 sequence
 UNIQUE_NAME = "GEMSDOE48-DS48-FUSION"
 PREFIX = "gemsdoe48-ds48"
 
@@ -231,8 +237,8 @@ def main() -> int:
         "generated_unix": int(time.time()),
         "unique_name": UNIQUE_NAME,
         "portal_note": (
-            f"{UNIQUE_NAME} | base mass 37,654 px ranked by Dempster-Shafer combined belief, "
-            f"off-flank (>=200 m from the published catalogue); all-finite [0,1]; UNSCORED"
+            f"{UNIQUE_NAME} | research audit only; 37,654 px DS-ranked off-flank emission; "
+            f"UNSCORED and NOT slot-cleared; do not upload"
         )[:200],
         "reliability": {"a_dotted": A_DOTTED, "a_tip": A_TIP},
         "family_agreement": families.family_agreement(e_dot, e_tip),
@@ -254,23 +260,24 @@ def main() -> int:
                              ("emission", emission.astype(np.float64)))
         },
         "headline_negative_result": {
-            "claim": "No arm tested in this repository beats the 0.2778 artifact on any "
-                     "instrument that has been validated against the live leaderboard.",
-            "falsified_arms": [
+            "claim": "No candidate here has a verified organizer-score gain over the "
+                     "owner-reported 0.2778 anchor; available public proxies do not establish "
+                     "private-score performance.",
+            "arms_reviewed": [
                 "Dempster-Shafer corroboration removal at r in {300,283,250,224,200,173,141,100,0} m: "
                 "the frozen gate fails at every radius (best safety 0.64 < 2.0).",
                 "Hexagonal covering-optimal re-emission at 11 spacings: NOT a clean "
                 "falsification, contrary to an earlier reading of this receipt.  At matched mass "
-                "the best arm (spacing 5.6 px, 37,499 dots) scores ABOVE the live-best base on "
-                "all three local truth layers per unit mass -- x1.019 on the SGMC off-catalogue "
-                "layer, x12.5 on the catalogue-in-corridor layer, x14.6 on the whole catalogue. "
+                "the best arm (spacing 5.6 px, 37,499 dots) has higher TPw per unit mass than the "
+                "b2 base on three local proxy layers -- x1.019 on owner-derived SGMC off-catalogue, "
+                "x12.5 on catalogue-in-corridor, and x14.6 on the whole catalogue. "
                 "The catalogue-side gains are NOT evidence of a live gain, because that "
                 "instrument is anti-monotone with the live ladder (Spearman -1.0, n = 4, "
-                "IR-48-04).  The SGMC-side gain is +1.9 %, which is inside the noise of a point "
+                "DS48-IR-04).  The SGMC-side gain is +1.9 %, which is inside the noise of a point "
                 "set that merely re-samples the same 48,394-pixel union corridor at a similar "
                 "mass; it is not a better detector and it emits 37,499 dots of the SAME two "
-                "families.  Recorded as a live-candidate worth ONE slot if the owner wants to "
-                "test it, and as UNVALIDATED here.",
+                "families.  Status: UNVALIDATED and NOT slot-cleared. Do not spend a weekly slot "
+                "on this arm; the +1.9% SGMC signal is within re-sampling noise.",
                 "Dempster-Shafer ranked re-emission at matched mass: SGMC off-catalogue credit "
                 "falls 5.8 % (off-flank) to 7.1 % (full union) while catalogue credit rises.",
             ],

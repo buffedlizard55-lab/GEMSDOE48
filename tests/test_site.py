@@ -242,7 +242,7 @@ class TestSiteAgreesWithTheReceipts(unittest.TestCase):
 
     def test_portal_rejection_cause_is_described(self):
         self.assertIn("Predicted values must be in range [0, 1]", self.exec_sum)
-        self.assertIn("IR-48-03", self.exec_sum + self.index)
+        self.assertIn("DS48-IR-03", self.exec_sum + self.index)
 
 
 class TestSiteBuildIsReproducible(unittest.TestCase):
