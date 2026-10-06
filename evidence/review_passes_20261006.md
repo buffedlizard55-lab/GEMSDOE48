@@ -59,6 +59,7 @@ Five review passes were completed across the original candidate, main-branch rec
 - Preserved the upstream H49 TIFF unchanged and created a separate format-only copy that sets outside-footprint cells to NaN/nodata, preserving all 5,167,373 in-footprint values exactly. Local validation passes (one-band float32, EPSG:32611, 100 m, 3,730 × 3,292, in-footprint `[0,1]`); organizer acceptance remains untested.
 - Reconciled root README, current landing/validation/executive/next-steps pages, H49 sub-site, and archived mainline pages. H49 sources/rights are described cautiously. Six-hour leaderboard references are clearly historical; the current workflow remains disabled and the parser remains offline-only.
 - Final local checks: 216 pytest tests passed, 3 skipped (219 collected); compileall passed; 252 active HTML references and 61 active Markdown links checked with zero missing; JSON receipts parsed; H48 holdout JSON/log remain byte-identical; no conflict markers or whitespace errors.
+- After pushing merge commit `de786523`, both GitHub Actions checks passed: CI run `37541646140` and Python tests run `37541646165`. GitHub reported only runner/action deprecation and upcoming Ubuntu image migration advisories.
 
 **Artifacts:** `docs/research/holdout-h49-results-20261006.md`, `evidence/holdout_h49_spatial_comparison_20261006.json`, `evidence/holdout_h49_raw_sgmc_sensitivity_20261006.json`, `evidence/h49_submission_validation_20261006.json`, `docs/downloads/GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif`.
 
