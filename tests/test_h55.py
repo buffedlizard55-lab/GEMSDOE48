@@ -44,11 +44,11 @@ def test_triangular_kernel_reach_and_shape():
     assert triangular_kernel(np.array([0.0, 150.0, 300.0, 301.0])) .tolist() == [1.0, 0.5, 0.0, 0.0]
 
 
-def test_binary_emission_is_dti_optimal():
-    """d/dv[(T0+v k)/(D0+0.2 v)] has the sign of k - 0.2*DTI and is independent of v.
+def test_single_truth_marginal_credit_special_case():
+    """Special case: TP changes by k, FP by 1-k, and FN by -k.
 
-    This is why the shipped submission is binary and the graded Dempster-Shafer
-    layers are diagnostics rather than the emission.
+    The derivative sign is that of k - 0.2*DTI in this one-pixel setup only;
+    this is not a universal raster-level break-even threshold.
     """
     t0, d0 = 5209.5, 18752.4
     for k in (0.02, 0.0556, 0.14, 0.9):
@@ -238,11 +238,11 @@ def test_site_arrays_collapse_duplicates_by_maximum():
 # Dempster-Shafer
 # ---------------------------------------------------------------------------
 
-def test_dempster_preserves_disagreement_as_unassigned_mass():
+def test_dempster_reports_residual_ignorance_and_raw_conflict_separately():
     b1 = np.array([[1.0, 1.0, 0.0], [0.0, 0.5, 1.0]])
     b2 = np.array([[1.0, 0.0, 0.0], [1.0, 0.5, 0.0]])
     out = dempster_combine(b1, b2, alpha1=0.6, alpha2=0.6)
-    # agreement -> maximal belief; one-sided support -> belief drops AND mTheta rises
+    # The closed-form example: residual m(Theta) rises as normalized-away K rises.
     assert out["bel"][0, 0] == pytest.approx(0.84)
     assert out["unc"][0, 0] == pytest.approx(0.16)
     assert out["bel"][0, 1] == pytest.approx(0.375)
@@ -271,12 +271,11 @@ def test_dempster_belief_is_not_the_naive_mean():
     assert np.abs(out["bel"] - (slope * naive + intercept)).mean() > 1e-3
 
 
-def test_full_conflict_falls_back_to_vacuous_mass_instead_of_dividing_by_zero():
+def test_full_conflict_is_rejected_because_normalized_rule_is_undefined():
     b1 = np.array([[1.0]])
     b2 = np.array([[0.0]])
-    out = dempster_combine(b1, b2, alpha1=1.0, alpha2=1.0)
-    assert np.isfinite(out["bel"]).all() and np.isfinite(out["unc"]).all()
-    assert out["unc"][0, 0] == pytest.approx(1.0)
+    with pytest.raises(ValueError, match="undefined"):
+        dempster_combine(b1, b2, alpha1=1.0, alpha2=1.0)
 
 
 # ---------------------------------------------------------------------------

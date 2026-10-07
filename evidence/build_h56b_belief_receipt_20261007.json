@@ -1,0 +1,165 @@
+{
+ "session": "H56B",
+ "generated_utc": "2026-10-07T20:51:41.533725+00:00",
+ "recipe": {
+  "kernel": "official triangular k(d)=max(1-d/300m,0), R=3 cells",
+  "r_dotted": 0.95,
+  "r_tip": 0.9000719942404607,
+  "discount_interpretation": "heuristics partly derived from owner-reported scores; not calibrated source reliability",
+  "absence_on_backbone": 0.5,
+  "absence_off_backbone": 0.2,
+  "flank_absence_dotted_only_px": 2.0,
+  "flank_term_interpretation": "owner-score-informed heuristic; off-catalogue transfer is unvalidated",
+  "rule": "Dempster normalized combination; fail on total conflict",
+  "surface": "relative Bel(F), divided by footprint maximum, float32, NaN outside footprint",
+  "m_theta": "residual uncommitted/ignorance mass after normalization; not a direct disagreement map",
+  "conflict_K": "pre-normalization conflict, separately exported and normalized away by Dempster's rule",
+  "support_difference": "absolute difference between the two source support surfaces; not a Dempster-Shafer mass",
+  "independence": "not established; positive-cell overlap is measured in the receipt",
+  "submission_recommendation": "do not submit; matched blocked holdout loses to H49 on all folds for both truth sets"
+ },
+ "inputs": {
+  "dotted_c": {
+   "path": "/home/user/GEMSDOE48/data/families/dotted_b2_prune_02778.tif",
+   "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+   "origin": "GEMSDOE32 h33-h33-2-b2 (spacing-tuned dotted family)",
+   "owner_reported_live": 0.2778,
+   "site": "https://buffedlizard55-lab.github.io/GEMSDOE32/docs/index.html",
+   "sha256_verified": true
+  },
+  "tip_h33d": {
+   "path": "/home/user/GEMSDOE48/data/families/tip_stepover_r30_02632.tif",
+   "sha256": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757",
+   "origin": "GEMSDOE33 h33d analog tip-stepover r30 (tip/step-over family)",
+   "owner_reported_live": 0.2632,
+   "site": "https://buffedlizard55-lab.github.io/GEMSDOE33/",
+   "sha256_verified": true
+  },
+  "backbone_h19_5": {
+   "path": "/home/user/GEMSDOE48/data/raw/scored/h19_5_01922.tif",
+   "sha256": "ec1f9b56b83ce33cad781ceb9f104b18fb4f2ff785263a4e89616af4aabdee8d",
+   "origin": "GEMSDOE19 h19-5 power-law budget backbone (shared ancestor)",
+   "owner_reported_live": 0.1922,
+   "site": "https://buffedlizard55-lab.github.io/19GEMSDOE/docs/index.html",
+   "sha256_verified": true
+  },
+  "template": {
+   "path": "/home/user/GEMSDOE48/data/raw/sample_submission_template.tif",
+   "sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+   "origin": "owner mirror of the official sample_submission.tif grid",
+   "site": "https://www.drivendata.org/competitions/306/competition-doe-gems/data/",
+   "sha256_verified": true
+  },
+  "catalogue_labels": {
+   "path": "/home/user/GEMSDOE48/data/raw/labels_catalogue.tif",
+   "sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+   "origin": "owner mirror of existing_faults.tif (USGS/INGENIOUS catalogue labels)",
+   "site": "https://www.drivendata.org/competitions/306/competition-doe-gems/data/",
+   "sha256_verified": true
+  },
+  "footprint_mask": {
+   "path": "/home/user/GEMSDOE48/data/source_mirrors/footprint-mask.tif",
+   "sha256": "ddadb8c96cda673b91ddaa0bbed2aa955c358a8f6196c4c4e8fa70d454dd429f",
+   "origin": "on-grid AOI mask derived from the official solution/sample footprint",
+   "site": "https://www.drivendata.org/competitions/306/competition-doe-gems/data/",
+   "sha256_verified": true
+  }
+ },
+ "counts": {
+  "dotted_positive": 37654,
+  "tip_positive": 41865,
+  "intersection": 31614,
+  "union": 47905,
+  "dotted_only": 6040,
+  "tip_only": 10251
+ },
+ "ds": {
+  "raw_belief_max": 0.9950035810470581,
+  "belief_mass_S": 399799.4375,
+  "mtheta_min_footprint": 0.004996400326490402,
+  "mtheta_max_footprint": 0.6641883850097656,
+  "mtheta_mean_footprint": 0.572185218334198,
+  "conflict_K_max": 0.8550683856010437,
+  "conflict_px_gt_0.3": 30499,
+  "conflict_share_of_footprint": 0.005902225366738573,
+  "mass_sum_max_abs_error": 1.7881393432617188e-07
+ },
+ "support_difference": {
+  "definition": "abs(s_dot - s_tip), with both supports from the 300 m triangular kernel",
+  "interpretation": "direct diagnostic of source-support separation; not m(Theta), K, or a probability",
+  "mean_footprint": 0.010747747495770454,
+  "max_footprint": 1.0,
+  "pixels_gt_0_05": 176781
+ },
+ "not_the_naive_mean": {
+  "vs_binary_mean": {
+   "definition": "0.5*(1[dotted] + 1[tip])",
+   "pearson_r_footprint": 0.38865406305980027,
+   "pearson_r_support": 0.4939787014727513,
+   "mae_footprint": 0.0699099021392249,
+   "max_abs_diff_footprint": 0.8230606913566589,
+   "affine_fit": {
+    "c0": 0.06971581049174036,
+    "c1": 0.9947769245147723,
+    "mean_abs_residual": 0.11999558488653904,
+    "max_abs_residual": 0.7533448808649186
+   }
+  },
+  "vs_kernel_mean": {
+   "definition": "0.5*(s_dot + s_tip), same normalization as the submission",
+   "pearson_r_footprint": 0.9865998528364749,
+   "pearson_r_support": 0.8071251131338395,
+   "mae_footprint": 0.018752145476924942,
+   "max_abs_diff_footprint": 0.4172414541244507,
+   "affine_fit": {
+    "c0": 0.0022182256186826146,
+    "c1": 1.2151671486743003,
+    "mean_abs_residual": 0.011123359130210952,
+    "max_abs_residual": 0.33714312887232584
+   },
+   "frac_footprint_diff_gt_0.05": 0.12455748791503923
+  },
+  "is_identical_to_either_mean": false
+ },
+ "artifacts": {
+  "primary": {
+   "path": "docs/downloads/GEMSDOE48-H56B-ds-belief-dotted-x-tip-20261007-126ca59c2801-nan-outside.tif",
+   "sha256": "3589e89a1ad4f78f54e6f17f9b7cdb0edb563f66aedfcdabd632ef8774968c3a",
+   "content_id": "126ca59c2801",
+   "dtype": "float32",
+   "crs": "EPSG:32611",
+   "nodata": "NaN outside footprint",
+   "unique_byte_artifact": true,
+   "materially_novel_candidate": false,
+   "relationship_to_prior": "reproducibility/encoding rebuild of prior H56 recipe; not a new candidate",
+   "submission_recommendation": "do not submit"
+  },
+  "diagnostics": {
+   "mtheta": {
+    "path": "docs/downloads/diagnostics/gemsdoe48-h56b-mtheta-126ca59c2801.tif",
+    "sha256": "18dc6b7fe0f4bf17791b2bda6b985364324f6b3c23f89303543416ee5729d6e5",
+    "outside": "NaN",
+    "is_submission": false
+   },
+   "conflict": {
+    "path": "docs/downloads/diagnostics/gemsdoe48-h56b-conflict-126ca59c2801.tif",
+    "sha256": "9606cef20d34046e9b5f6d506df642847ffae1deafe97fc9e75a07c0094a94f5",
+    "outside": "NaN",
+    "is_submission": false
+   },
+   "plausibility": {
+    "path": "docs/downloads/diagnostics/gemsdoe48-h56b-plausibility-126ca59c2801.tif",
+    "sha256": "75c853c3f875b4732952dd59d3a97fc6942972bac8983d1c653c1321cd4c25fe",
+    "outside": "NaN",
+    "is_submission": false
+   },
+   "support_difference": {
+    "path": "docs/downloads/diagnostics/gemsdoe48-h56b-support_difference-126ca59c2801.tif",
+    "sha256": "96077b2a8875efbc47fb6f0b1d602cff25d1714b01d52ca05ed22bc141b0eba9",
+    "outside": "NaN",
+    "is_submission": false
+   }
+  },
+  "diagnostics_are_submissions": false
+ }
+}

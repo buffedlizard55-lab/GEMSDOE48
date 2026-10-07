@@ -40,8 +40,9 @@ UNAME = BUILD["submission_name"]
 DIAGS = BUILD["diagnostics"]
 
 DISCLAIMER = (
-    "No organizer score exists for any artifact on this site. Every candidate is "
-    "UNSCORED research output; owner-reported live values are labelled [OWNER-REPORT]."
+    "Historical H50 research only; no organizer score exists. Owner values are [OWNER-REPORT]. "
+    "Later metric-identity review invalidates old H55/H56 score ceilings/projections based on FPw=S−TPw. "
+    "Normalized m(Theta) is residual ignorance, not direct disagreement; K is separate."
 )
 
 NAV = (
@@ -81,13 +82,15 @@ def holdout_table(results: dict) -> str:
             '<th>folds NW·NE·SW·SE</th></tr>' + "".join(rows) + "</table></div>")
 
 
-def board_rows(n: int = 8) -> str:
-    rows = []
-    for r in BOARD["rows"][:n]:
-        rows.append(f"<tr><td>#{r['rank']}</td><td>{r['participant']}</td>"
-                    f"<td>{r['best_public']:.4f}</td><td>{r['submissions']}</td></tr>")
-    return ('<div class="table-scroll"><table><tr><th>rank</th><th>participant</th>'
-            '<th>best public</th><th>submissions</th></tr>' + "".join(rows) + "</table></div>")
+def board_rows() -> str:
+    obs = BOARD["observation"]
+    return (
+        '<div class="warn"><strong>Single dated observation; no table republished.</strong> '
+        f"Top displayed score {obs['top_displayed_score']:.4f}; 0.3195 at rank "
+        f"{obs['score_0_3195_rank']}; 0.2778 at rank {obs['score_0_2778_rank']}. "
+        "No participant names or submission counts retained; no row is linked to local TIFF bytes. "
+        "Do not poll or refresh without authorization.</div>"
+    )
 
 
 def build_index() -> str:
@@ -113,23 +116,21 @@ all-finite, no nodata tag · zeros outside footprint · {FMT['positive_pixels']:
 <a href="../downloads/diagnostics/{Path(DIAGS['plausibility']['path']).name}" download>plausibility Pl(F)</a></p>
 </section>
 
-<div class="warn"><strong>UNSCORED — NOT SLOT-CLEARED; DO NOT UPLOAD.</strong> This historical
-Dempster–Shafer research variant combines B2 with H36-1 rung30 (an H19-5/rung-30 repacking, not the
-actual tip/step-over family). It is format-verified but did not beat both parents or the union on the
-blocked public proxies, and it is not the requested B2 × H33-D family test. The official public leaderboard (single read 2026-10-07) is topped by xiaofanhu at 0.3774;
-the brief's "0.3195 highest" is stale (that is rank #7, DARD). No organizer score exists for this
-artifact, and the 0.2778 row on the public board is participant extradr19 with no organizer-level
-attribution to the local mirror bytes [OWNER-REPORT].</div>
+<div class="warn"><strong>UNSCORED — HISTORICAL RESEARCH; DO NOT UPLOAD.</strong> This H50
+Dempster–Shafer variant combines B2 with H36-1 rung30 (not the actual tip/step-over family), and
+failed the public-proxy gate. No organizer score exists for this artifact. A separate one-time
+leaderboard observation is not linked to these or any local TIFF bytes; no participant table is
+reproduced. See the current repository review for the post-hoc H56B-NF ablation and its no-submit verdict.</div>
 
 <h2>2 · What the fusion preserves that averaging destroys</h2>
-<p>Parents: dotted H33-2-B2 ({PARENTS['dotted_best']['positive_pixels']:,} px, owner live
+<p>Parents: dotted H33-2-B2 ({PARENTS['dotted_best']['positive_pixels']:,} px, owner-reported
 {PARENTS['dotted_best']['owner_reported_live']:.4f}) × H36-1 rung30 (not tip/step-over)
-({H36_PARENT['positive_pixels']:,} px, owner live {H36_PARENT['owner_reported_live']:.4f});
+({H36_PARENT['positive_pixels']:,} px, owner-reported {H36_PARENT['owner_reported_live']:.4f});
 intersection {BUILD['parent_overlap']['intersection_pixels']:,} / union
 {BUILD['parent_overlap']['union_pixels']:,} (Jaccard {BUILD['parent_overlap']['jaccard']:.3f}) —
-{BUILD['parent_overlap']['xor_disagreement_pixels']:,} pixels on which the two parent surfaces
-disagree. Dempster's rule carries that disagreement as unassigned mass m(Θ)
-(range 0.0037–0.0306 in footprint) and raw conflict K (max 0.8804; 11.5 % of the footprint &gt; 0.3).</p>
+{BUILD['parent_overlap']['xor_disagreement_pixels']:,} positive-support cells differ. Under
+normalized Dempster, m(Θ) is residual uncommitted/ignorance, not a direct disagreement map; raw
+pre-normalization conflict K is a separate diagnostic. Neither is calibrated uncertainty.</p>
 <p><strong>Not the naive mean (brief's required check):</strong> Pearson {AA['pearson_in_footprint']:.4f},
 Spearman {AA['spearman_in_footprint']:.4f}, MAE {AA['mae_in_footprint']:.4f}, max |Δ| {AA['max_abs_difference']:.4f},
 {AA['fraction_cells_abs_diff_gt_0.05']:.1%} of cells with |Δ|&gt;0.05, top-{AA['topk']:,} emission Jaccard
@@ -147,10 +148,9 @@ Spearman {AA['spearman_in_footprint']:.4f}, MAE {AA['mae_in_footprint']:.4f}, ma
 with the same parents (+0.0064 mean), but loses to both parents and to the union on both proxies.
 <strong>The slot gate is not cleared; do not spend a weekly submission on this evidence alone.</strong></p>
 
-<h2>4 · Public leaderboard snapshot (single manual read, 2026-10-07)</h2>
+<h2>4 · Score context (one-time observation, no participant table)</h2>
 {board_rows()}
-<p class="small">Source: official DrivenData public leaderboard. Scores identify participants, not files;
-no row is attributed to any local artifact.</p>
+<p class="small">Source: official DrivenData public leaderboard. Values are dated display observations, not file scores or targets for this H50 artifact. The Terms of Use prohibit unauthorized monitoring/copying; no polling is implemented.</p>
 """
     return page("GEMSDOE48 H50 — B2 x H36-1 rung30 research fusion (historical)",
                 "research candidate · unscored", body)
@@ -170,7 +170,7 @@ def build_exec() -> str:
 <li>Enter the candidate-specific unique name and short optional note exactly as shown on its landing page. Do not reuse H50's historical label or note.</li>
 <li>Check the file, name, and slot budget once more, then submit only if the gate is still cleared. Treat an organizer-reported result as the only competition score evidence.</li>
 </ol>
-<p>The current H53 card on the <a href="../index.html#h53">repository landing page</a> is explicitly marked <strong>do not upload</strong> because its frozen proxy gate failed.</p>
+<p>The historical H53-RadEdge report is explicitly marked <strong>do not upload</strong> because its frozen proxy gate failed: <a href="../research/holdout-h53-radedge-results-20261007.md">read the documented negative result</a>.</p>
 
 <h2>2 · H50's local format audit (not a score or acceptance)</h2>
 <p>The archived H50 bytes have SHA-256 <code>{SHA}</code>, one band float32, {FMT['crs']}, 100 m,
@@ -202,26 +202,29 @@ a_H36={METHOD['reliabilities']['tip']:.6f} (legacy receipt key ``tip``; H36 is a
 repacking, not the tip/step-over family; RHO_MAX=0.95 × owner-reported ratio 0.2710/0.2778 [OWNER-REPORT]).</li>
 <li>Canonical normalized Dempster rule; submission surface Bel(F)=m12(F) divided by its
 in-footprint max (already [0,1]).</li>
-<li>Diagnostics carried forward: m12(Θ) (where the two parent surfaces neither agree nor fully conflict) and raw
-conjunctive conflict K (where they actively contradict; canonical normalization redistributes K, so it
-is stored separately — Zadeh-paradox transparency).</li>
+<li>Diagnostics carried forward: residual m12(Θ) (uncommitted/ignorance after normalization), raw
+pre-normalization conflict K (divided out by Dempster), and any direct parent-support difference as a
+separate non-mass diagnostic. None is automatically a calibrated disagreement/confidence map.</li>
 </ol>
 <p>Provable properties (tests/test_ds50.py): masses sum to 1; commutativity; Bel=1 and K=0 at full
 agreement; at full opposition K=a1·a2=0.8804 and m(Θ)&gt;0 (a perfect-reliability anchor would force
 m(Θ)≡0 — the withdrawn v1 did exactly that).</p>
 
-<h2>2 · Why 0.2778 won, and what beating 0.3774 requires</h2>
-<p>The DTI is a budget: DTI = TPw / (0.2·(TPw+S−M) + 0.8·|G|); every emitted unit that is not the best
-cover of a truth pixel costs 0.2, and binary {{0,1}} is optimal. The 0.2778 file wins by sitting at the
-break-even credit bar (0.2·0.26 ≈ 0.052 per dot) with 37,654 dots, 0 within 200 m of the catalogue
-(sibling GEMSDOE32 analysis, two independent derivations of the same bar). The 0.3774 leader needs
-≈25 % more mean credit per pixel at matched mass — a detector improvement, not a fusion rule.</p>
+<h2>2 · Reported score context — mechanism is unproven</h2>
+<p>The official metric gives triangular partial credit within 300 m and weights false negatives
+more heavily than false positives (alpha=0.2, beta=0.8). Pruning low-credit points near a known-
+catalogue mask while retaining higher-credit corridor points is a plausible mechanism for the
+owner-reported B2 score, not a demonstrated causal explanation. The local B2 producer note marks
+its exact bytes UNSCORED, and no organizer receipt links a TIFF hash to the 0.2778 row. The old
+0.2843 frontier/required-truth calculations are invalid under the later metric-identity erratum;
+no score prediction or ceiling is supportable from them. See the current review page before using
+any historical H50/H55 numbers.</p>
 
 <h2>3 · Why DS fusion loses on the proxies (and why that is expected)</h2>
 <p>Dempster belief is intersection-like: high where both parent surfaces agree, uncertain where they disagree.
-The public proxies reward cheaply covering fault traces — the union's job. Preserving disagreement is
-scientifically honest (the geologist sees where these two parent surfaces contradict) but is not by
-itself score-raising. This session's kernel-credit calibration did help against the raw-sparse recipe
+The public proxies evaluate a candidate surface, not a D-S diagnostic. Residual m(Theta) is
+uncommitted mass; K is separately normalized away; neither directly says where the parent supports
+disagree. A separate support-difference layer can show that comparison, but is not a D-S mass. This session's kernel-credit calibration did help against the raw-sparse recipe
 (+0.0064 mean SGMC), and H50 beats the naive mean 4/4 folds — but not the parents.</p>
 
 <h2>4 · Evidence classes used on this site</h2>
@@ -287,7 +290,7 @@ def build_sources() -> str:
 <div class="table-scroll"><table>
 <tr><th>source</th><th>authority</th><th>evidence class</th></tr>
 <tr><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">Competition problem description</a></td><td>organizer</td><td>rules, metric, format</td></tr>
-<tr><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">Public leaderboard</a></td><td>organizer display</td><td>single manual read 2026-10-07; rows identify participants, not files</td></tr>
+<tr><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">Public leaderboard</a></td><td>organizer display</td><td>one dated observation; no table or participant names republished; no artifact-to-score link</td></tr>
 <tr><td><a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">NLR/OSTI 96647 PDF</a></td><td>official report</td><td>submission format context</td></tr>
 <tr><td><a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS GeoDAWN survey</a> · DOI <a href="https://doi.org/10.5066/P93LGLVQ">10.5066/P93LGLVQ</a></td><td>USGS</td><td>airborne mag/rad upstream of mirrors</td></tr>
 <tr><td><a href="https://gdr.openei.org/submissions/1391">GDR 1391 INGENIOUS data</a> · DOI <a href="https://doi.org/10.15121/1881483">10.15121/1881483</a></td><td>GDR/INEEL</td><td>fault catalogue, springs, probes; CC BY 4.0</td></tr>

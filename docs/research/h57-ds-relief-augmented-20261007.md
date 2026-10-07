@@ -1,5 +1,13 @@
 # H57 — Dempster–Shafer two-family fusion gated by USGS 3DEP lidar relief
 
+> **Namespace collision — read this first.** A concurrent same-day session froze a *future,
+unbuilt* hypothesis slate under the names **H57-A … H57-E**
+([`h57-hypothesis-slate-20261007.md`](h57-hypothesis-slate-20261007.md)). Those are **plans, not
+built candidates, and not this file**. The submission described here is the built artefact
+`GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07`. Note also that this candidate uses the
+**100 m scarp mosaic** `data/external/h52_scarp3m_100m.tif` (697 tiles merged, 0 failures), which
+*is* present locally — not the full-area 3 m DEM that slate's H57-C correctly reports as absent.
+
 **Session date:** 2026-10-07 (UTC) · **Branch:** `arena/567db1fc-gemsdoe48` · **Candidate id:** `e6b785718c07`
 
 **Verdict: ✅ DOWNLOAD OK · ✅ SUBMIT RECOMMENDED.** This is the first candidate in this repository
@@ -12,7 +20,7 @@ whose live-calibrated forward model projects a *gain* rather than a loss.
 | SHA-256 | `28a51fb032b8f2cfd1f04ad3bd429c29d7bb780d36961fea783ff8099130986e` |
 | Positive cells | **58,031** (37,654 parent + 20,377 new) |
 | Format | single band float32, EPSG:32611, 100 m, 3,730 × 3,292, **all 12,279,160 cells finite, all inside [0, 1]** |
-| Uniqueness | **UNIQUE** against 88 tracked artefacts (`evidence/h57_uniqueness_20261007.json`) |
+| Uniqueness | **UNIQUE** against 99 tracked artefacts (`evidence/h57_uniqueness_20261007.json`) |
 | Projected DTI *(proxy only)* | **0.3844** vs 0.2744 for the parent |
 | Marginal credit per added dot | **0.1781** vs break-even **0.0549** (3.24×) |
 | Floor if every new dot is worthless | 0.2254 |

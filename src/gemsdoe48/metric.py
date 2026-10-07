@@ -375,13 +375,18 @@ def dti_bruteforce(
 
 
 def credit_bar(dti_value: float) -> float:
-    """Marginal credit threshold: an added unit pixel helps iff k > alpha*DTI."""
+    """Return ``alpha * DTI`` for the special one-pixel credit/cost case.
+
+    This is a local algebraic boundary when changing one unit prediction changes
+    weighted TP by ``k``, weighted FP by ``1-k``, and weighted FN by ``-k``.
+    It is not a universal per-cell threshold for arbitrary raster additions.
+    """
     return ALPHA * float(dti_value)
 
 
 def optimal_value_is_binary() -> str:
-    """State the derivative result for graded values under the official DTI."""
-    return "binary {0,1} is DTI-optimal; graded surfaces lose"
+    """Summarize the coordinate-wise endpoint result; no fixed threshold is implied."""
+    return "a binary {0,1} maximizer exists; arbitrary thresholding is not guaranteed"
 
 
 def dilate(mask: np.ndarray, radius_px: int) -> np.ndarray:

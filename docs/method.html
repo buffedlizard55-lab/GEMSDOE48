@@ -111,9 +111,9 @@ not verified private-label results or portal acceptance.
 <h1>The metric, the model, and the selection rule</h1>
 </header>
 
-<div class="bad"><strong>Current H56 status: research only; no slot is cleared.</strong> The primary GeoTIFF is locally bounded and downloadable, but H56-DS and the machine-spec Hessian-only H56-A screen fail same-protocol H49 on both public-map proxies; the prose coherence extension remains untested. The method below is not an organizer score or a calibrated probability model.</div>
-<h2>Current H56 open-world Dempster–Shafer construction</h2>
-<p>Each SHA-pinned sparse parent is transformed into a 300 m triangular max-credit support field <code>b</code>. For each source, the frozen assignment is <code>m(F)=0.60·b</code>, <code>m(not F)=0.60·0.10·(1−b)</code>, and <code>m(Theta)=1−m(F)−m(not F)</code>. Only 10% of the source-weighted lack of support is assigned to not-fault; the balance is left uncommitted. The two BPAs are combined with normalized Dempster's rule. Raw <code>Bel(F)</code> is exported separately from canonical residual <code>m(Theta)</code> and raw conflict <code>K</code>; plausibility is <code>Bel(F)+m(Theta)</code>. The competition-facing primary is <code>Bel(F)/max_in_footprint(Bel(F))</code>, a relative favorability surface, not calibrated probability.</p>
+<div class="bad"><strong>Current H56B-NF decision: download OK for inspection; submit NOT recommended; no slot cleared.</strong> The post-hoc no-catalogue-flank ablation is locally format-checked and independently recomputed, but loses to H49 on both matched four-fold public-map proxies (0.056305 vs 0.095353 catalogue; 0.068987 vs 0.100751 SGMC off-catalogue; 0/4 folds). The NaN-outside file may trigger an all-pixel portal range check (<code>portal_range_error_immune=false</code>); organizer acceptance is untested. The old 0.0649 projection is invalid; no score above 0.2778 or 0.3195 is supported. See the <a href="research/h56b-review-erratum-20261007.md">full erratum</a>. This method is heuristic and does not establish a calibrated probability model.</div>
+<h2>Historical separate H56 open-world Dempster–Shafer construction</h2>
+<p>This heading refers to the <em>older, separate</em> H56-DS recipe, not the H56B file linked above. Its assignment uses <code>m(F)=0.60·b</code>, <code>m(not F)=0.60·0.10·(1−b)</code>, and residual <code>m(Theta)</code>; it has a different recipe, filename, and output mask. Its public-proxy results are archived in <a href="research/h56-results-20261007.md">the H56 report</a>; neither H56 artifact is slot-cleared. H56B's current method is specified in section 8 below.</p>
 <p>This is a distinct parameterization from H53's already-existing two-family D-S diagnostic, not a new geological evidence concept. It is pixelwise different from the arithmetic mean (Pearson 0.99668; mean absolute difference 0.01126; max difference 0.19650), but the top-37,654 rank selection is identical (Jaccard 1.0). See the <a href="research/h56-results-20261007.md">full H56 report</a> and the <a href="../evidence/h56_diagnostics_validation_20261007.json">independent diagnostic audit</a>.</p>
 <h2>1 · The official metric</h2>
 <p>Transcribed by two independent sibling repositories from the organizer's problem description
@@ -126,136 +126,41 @@ FPw   = Σ_x p(x) · (1 − max_g k(d(x, g)))
 FNw   = Σ_g (1 − max_x p(x) · k(d(x, g)))
 DTI   = TPw / (TPw + 0.2·FPw + 0.8·FNw)</code></pre>
 
-<h2>2 · Three consequences that are exact, not approximate</h2>
-<h3>(a) The optimal submission is binary</h3>
-<p>For one cell of value <code>v</code> that is the argmax of its truth pixel with realised weight
-<code>k</code>: <code>d/dv[(T₀ + v·k)/(D₀ + 0.2v)] = (k·D₀ − 0.2·T₀)/(D₀ + 0.2v)²</code>, whose
-sign is that of <code>k − 0.2·DTI</code> and is <strong>independent of v</strong>. Every cell is
-pushed to 0 or 1, so a graded belief surface is strictly worse than its own binarisation. Asserted
-numerically in <code>tests/test_h55.py::test_binary_emission_is_dti_optimal</code>.</p>
-<h3>(b) An added pixel pays iff its kernel weight exceeds 0.2·DTI</h3>
-<p>0.0556 at DTI = 0.2778, i.e. 0.397 × the mean credit of a dot in the live-best artifact
-(0.1384).</p>
-<h3>(c) Adding a pixel can never reduce TPw</h3>
-<p><code>TPw</code> is a <em>maximum</em> over emitted pixels. The only risk of an addition is the
-0.2 denominator cost, which makes the worst case of an additive candidate
-<strong>exactly computable</strong>. This is why H55 is additive-only and why its floor is a bound
-rather than an estimate.</p>
+<h2>2 · What the metric does—and what the historical model cannot establish</h2>
+<p>The official score uses two different distance-weighted maxima: <code>TPw = Σ_g max_x p(x)k(d(x,g))</code> is truth-centred, while <code>Q = Σ_x p(x)max_g k(d(x,g))</code> is prediction-centred and <code>FPw = S − Q</code>. In general <code>Q ≠ TPw</code>. Do not substitute one for the other, and do not infer private-label mass or score from owner-reported leaderboard values.</p>
+<div class="bad"><strong>H55/H54 score model retracted.</strong> The former H55 “family ceiling,” inferred <code>|G|</code>/<code>TPw</code>, fitted <code>rho</code>, H56's 0.0649 projection, H54 live-equivalent brackets, and universal per-cell break-even claims depend on <code>FPw=S−TPw</code>. They are not supportable private-label estimates or bounds. The build files, raw raster facts, and public-map holdout receipts remain available as historical records; their model-derived score implications are withdrawn. No numerical score above 0.2778 or 0.3195 is supportable for H56B-NF. Read the <a href="research/metric-identity-erratum-20261007.md">metric-identity erratum</a> and <a href="research/h55-live-model-ceiling-and-candidate-20261007.md">H55 report correction banner</a> before using historical calculations.</div>
+<p>H56B-NF's DTI values elsewhere on this page are direct computations on the two public-map proxies under the fixed spatial-block protocol; they are not organizer scores or conversions of a private-label forecast. The old “best frontier” and “reachable/unreachable” conclusions must not be used to rank candidates. See the current <a href="research/h56b-review-erratum-20261007.md">H56B review</a>.</p>
 
-<h2>3 · The removal-regime collapse</h2>
-<pre><code>Q = Σ_x p(x) max_g k(d(x,g));   FPw = S − Q
-FNw = |G| − T;                 T = TPw
-DTI = T / (0.2·T + 0.2·S − 0.2·Q + 0.8·|G| + ε)</code></pre>
-<p>Two constants remain: the hidden truth mass |G| and the numerator T. Both are unknown; both
-turn out to be recoverable.</p>
-
-<h2>4 · Identifying |G| from the nested live ladder</h2>
-<p><code>A_d2_8 ⊃ B_prune100 ⊃ C_prune200</code> — verified pixel-wise, not assumed. The removed
-dots are the catalogue-adjacent ones the organizer masks out of scoring, so all three share one T
-and |G| is identified. Least squares over the triple gives
-<strong>|G| = 14,027.5 px</strong>, shared T = 5,212.0.
-The three pairwise closed-form solutions are
-13,368, 14,089, 15,200 — a ±6 % spread
-driven entirely by the 4-decimal rounding of the owner-reported scores. The rungs then invert to
-T = 5,210.4 / 5,216.1 / 5,209.5, agreeing to <strong>0.11 %</strong>.</p>
-<p class="small">This supersedes the earlier |G| = 12,632 figure in
-<code>knowledge/research_notes.md</code>, which assumed the removed dots earned exactly the
-τ = 0.05416 bar rather than zero. Both are recorded; 14,027.5 is the value that makes the three
-rungs self-consistent.</p>
-
-<h2>5 · The sufficient statistic</h2>
-<pre><code>B_elig = h19-5 backbone AND (distance to public catalogue &gt; 200 m)    (103,805 px)
-Cov(X) = Σ_(b ∈ B_elig) max_(x ∈ X) k(d(x, b))
-T      = ρ · Cov(X)          ρ = 0.068015   (least squares through the origin)</code></pre>
-<p>Fitted against all eight live scores: RMS relative error
-<strong>1.758 %</strong>, maximum
-3.628 %. Per-artifact errors:
-h19_5_backbone +3.63%, d1_5_dotted +0.70%, A_d2_8 -0.98%, B_prune100 -1.18%, C_prune200 -1.81%, h36_rung30 -2.05%, h32_prethin_tip -1.00%, h33d_tip_step -0.48%.</p>
-<p>Nine target weightings were tested against the same eight scores — uniform, local backbone
-density at 7 px and 13 px, its square root and log, radiometric-ratio corroboration, 3 m lidar
-roughness corroboration, distance-from-catalogue, and density × distance. <strong>Uniform wins</strong>
-(RMS 1.758 %, reproduced by <code>scripts/compare_coverage_weightings.py</code>);
-distance-from-catalogue at 1.659 % and 3 m lidar roughness corroboration at 1.686 % are within
-0.1 pp — noise on eight points, and both were specified post hoc; every density weighting is
-worse (+0.37 to +0.88 pp). A corridor pixel is not more likely to sit near hidden truth because
-it has more corridor neighbours.</p>
-
-<h2>6 · Where the instrument stops</h2>
-<p>The one out-of-family live artifact — <code>sgmc_offcat_44k</code>, 44,090 px
-Poisson-disked on SGMC faults &gt; 300 m off-catalogue, owner-reported 0.0512 — inverts to
-T = 1,026 with Cov = 9,306.8, an implied
-ρ = 0.11025. The family ρ predicts 0.0316 for
-a file that scored 0.0512, i.e. the model
-<strong>under-predicts out-of-family T by 38.3 %</strong>.
-The instrument is a within-family tool. Out-of-family mass is priced as a scenario band, never as
-a prediction — and the bias direction means new signal is more likely under-priced than over-priced.</p>
-
-<h2>7 · The selection rule</h2>
-<p>With the model in hand, the emission problem is a priced maximum-coverage problem:</p>
-<pre><code>maximise   ρ · Cov(X) / (0.2·|X| + 0.8·|G|)
-over       X ⊇ C ,  X ⊂ (footprint ∧ &gt;200 m off-catalogue ∧ ¬catalogue)</code></pre>
-<p>Greedy maximum-coverage selection is used, with exact incremental coverage updates (verified
-against full recomputation in
-<code>tests/test_h55.py::test_greedy_incremental_coverage_matches_exact_recomputation</code>).
-A site is admitted while its marginal coverage gain clears
-<code>1.25 × 0.2 × DTI_C / ρ = 0.8169</code>
-coverage units. The 1.25 safety factor is pre-registered and makes the choice robust to a ±25 %
-error in ρ — 14× the instrument's measured error. The unconstrained argmax prefix would admit
-2,916 px at live-equivalent
-0.2785; the robust
-prefix admits 1,124.</p>
-<p>The total budget is solved from a pre-registered downside rule: <em>if every added pixel earns
-exactly zero credit, the live-equivalent score must not fall below 0.2778 − 0.0100</em>. That gives
-n_max = 3,568; 1,776 were used.</p>
-
-<h2>8 · Dempster–Shafer, and the honest limit of what it adds</h2>
-<p>Frame Θ = {F, ¬F}. Discounted simple mass functions
-<code>m_i(F) = α_i b_i</code>, <code>m_i(¬F) = α_i(1 − b_i)</code>, <code>m_i(Θ) = 1 − α_i</code>
-with α₁ = α₂ = 0.6. Dempster's normalised orthogonal sum gives
-<code>K = α₁α₂(b₁ + b₂ − 2b₁b₂)</code>, <code>Bel(F) = (f₁f₂ + f₁u₂ + u₁f₂)/(1 − K)</code>,
-<code>m₁₂(Θ) = u₁u₂/(1 − K)</code>, <code>Pl(F) = Bel + m₁₂(Θ)</code>. Where K = 1 the rule is
-undefined and the code falls back to vacuous mass rather than dividing by zero
-(Zadeh's 1984 paradox is exactly a consequence of this normalisation; Sentz &amp; Ferson 2002,
-Sandia SAND2002-0835, document the alternatives — which is why both K and m(Θ) ship).</p>
-<p>The limit, stated plainly: because the two parents' coverage differs by 0.3 % while their masses
-differ by 11 %, and because the metric is binary-optimal, <strong>no combination rule can beat the
-better parent</strong>. Dempster–Shafer's real contribution here is structural, not arithmetic: it
-identifies <em>where</em> two independently-built approaches disagree (K &gt; 0 on
-14.70 % of the footprint), and that set is where the
-gap-closure pool is drawn from and where the conduit anchors are vetoed unless a third source
-arbitrates. The unassigned mass m(Θ) ships as its own layer exactly as the brief asks.</p>
-
-<h2>8b · H56: the literal graded belief as a submission (and why it scores 0.0649)</h2>
-<p>The H56 session ships the submission the brief asks for: the <em>normalized combined belief</em>
-itself. Frame Θ = {F, ¬F}; per-source basic probability assignment built on the metric's own
-300 m triangular kernel <code>s_i(x) = k(d(x, D_i))</code>:</p>
-<pre><code>m_i(F)     = r_i · s_i(x)
+<h2>8 · Dempster–Shafer terminology and total-conflict behavior</h2>
+<p>For a binary frame <code>Θ={F,N}</code>, a two-source normalized Dempster combination computes pre-normalization raw conflict <code>K=m₁(F)m₂(N)+m₁(N)m₂(F)</code>, then divides every non-empty combined mass by <code>1−K</code>. The resulting <code>m₁₂(Θ)=m₁(Θ)m₂(Θ)/(1−K)</code> is residual uncommitted/ignorance mass; it is <strong>not</strong> a direct map of source disagreement and is not K. <code>K</code> is normalized away and exported separately. A direct <code>|s₁−s₂|</code> layer is a separate support-difference diagnostic, not a D-S mass. Dempster's rule is undefined at total conflict (<code>K=1</code>); both <code>src/gemsdoe48/dempster_shafer.py</code> and the H56B-specific implementation raise <code>ValueError</code> at total/numerical conflict. Neither silently falls back to vacuous mass. Mathematical discount parameters are not automatically calibrated source reliabilities; using this rule does not establish statistical independence.</p>
+<h2>8b · H56B-NF current research artifact and measured limitations</h2>
+<p><strong>Current artifact:</strong> <code>GEMSDOE48-H56B-NF-DS-dotted-x-tip-20261007-5bb2c03c981e-nan-outside.tif</code>, float32, EPSG:32611, 3,292 × 3,730, NaN/nodata outside, finite-footprint values in [0,1]. SHA-256 <code>b9530b70065da1f5e9da82caf4f5aaba3d7175dbbbfb2851e4b2ab2dd13aa4f1</code>. It combines the pinned dotted B2 and actual H33-D tip/step-over supports with a post-hoc D-S mass assignment that removes catalogue-flank absence. This is an ablation, not a new geological detector or preregistered candidate; local checks do not establish organizer acceptance or calibrated fault probability. The earlier with-flank H56B rebuild was within 1.8e-7 of the prior H56 surface and is not a meaningfully new candidate.</p>
+<pre><code>s_i(x)     = triangular max-credit support k(d(x,D_i)), R = 300 m
+m_i(F)     = r_i · s_i(x)
 m_i(N)     = r_i · (1 − s_i(x)) · a_i(x)
-m_i(Θ)     = 1 − m_i(F) − m_i(N)</code></pre>
-<p class="small">with live-anchored Shafer discounts <code>r_dot = 0.95</code>,
-<code>r_tip = 0.95 × 0.2632/0.2778</code>; absence informativeness <code>a_i = 0.5</code> on the
-shared h19-5 backbone and 0.2 off it, plus <code>a_dot = 1.0</code> inside 200 m of the catalogue
-(the live-validated flank rejection; NOT applied to the tip source). Dempster's normalized rule
-combines the two; the submission is <code>Bel(F)/max Bel(F)</code> on the footprint (zeros outside),
-and m(Θ), K, Pl ship as diagnostics (<code>scripts/build_submission_h56_belief.py</code>, frozen recipe in
-its docstring). Measured consequences: belief mass Σ Bel = 399,799; live-model projection 0.0649
-vs 0.2728 for the binary parent — §1's result (a) that the DTI-optimal submission is binary {0,1}
-is confirmed by the instrument rather than assumed, and the brief's requested artifact is published
-with exactly that label.</p>
+m_i(Θ)     = 1 − m_i(F) − m_i(N)
+K          = f₁n₂ + n₁f₂
+Bel(F)     = (f₁f₂ + f₁u₂ + u₁f₂)/(1−K)
+m₁₂(Θ)    = u₁u₂/(1−K);  Pl(F) = Bel(F) + m₁₂(Θ)
+primary    = Bel(F) / max_footprint(Bel(F)); NaN outside
+extra diag = K and |s_dot − s_tip|, each separate from m(Θ)</code></pre>
+<p class="small">The heuristic recipe uses <code>r_dot=0.95</code>, <code>r_tip=0.95×0.2632/0.2778</code>; absence weights 0.5 within 100 m of the h19-5 backbone and 0.2 elsewhere; and a dotted-only weight 1.0 within 200 m of the public catalogue. The tip/dotted positive support overlap is substantial; source independence is unproven. The catalogue-flank term was inferred from owner-reported score rungs, and its transfer to private truth is unvalidated.</p>
+<p><strong>Not the arithmetic mean:</strong> Pearson <code>r=0.392708</code> vs binary mean; <code>r=0.992499</code> vs normalized kernel mean; footprint MAE 0.018375, max absolute difference 0.417241, 12.58% differs by &gt;0.05. High kernel-mean correlation is disclosed; non-identity is not evidence of improvement.</p>
+<p><strong>Blocked result:</strong> higher DTI is better. Against same-protocol H49, H56B-NF mean DTI is 0.056305 vs 0.095353 on catalogue and 0.068987 vs 0.100751 on SGMC &gt;300 m off-catalogue; 0/4 folds on both public proxies. No score above 0.2778 or 0.3195 is supportable. The owner-reported 0.2778 may plausibly benefit from tapered 300 m credit and catalogue pruning, but exact bytes are not tied to the score by an organizer receipt and the mechanism remains unproven. The former 0.0649 projection is invalid under the <a href="research/metric-identity-erratum-20261007.md">metric-identity erratum</a>. Full evidence: <a href="research/h56b-review-erratum-20261007.md">review</a> · <a href="../evidence/audit_h56b_noflank_artifact_20261007.json">artifact audit</a> · <a href="../evidence/holdout_h56b_noflank_vs_h49_currentprotocol_20261007.json">matched holdout</a>.</p>
+<p><strong>Decision:</strong> download OK for inspection; submit NOT recommended; no weekly slot cleared.</p>
 
-<h2>9 · Reproduce</h2>
-<pre><code>python scripts/restore_h55_inputs.py                       # 7 hash-pinned mirrors, fail closed
-python scripts/restore_h55_inputs.py --with-official-features   # optional 419 MB 19-band stack
-python scripts/calibrate_live_model.py                     # |G|, rho, frontier, ceiling table
-python scripts/build_submission_h55.py                     # candidate + diagnostics + receipts
-python scripts/audit_h55.py                                # 18-point uniqueness/integrity audit
-python scripts/validate_submission.py docs/downloads/GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353-zeros-outside.tif \
-       --receipt evidence/h55_primary_format_audit_20261007.json
-python scripts/run_spatial_holdout.py \
-       --combined docs/downloads/GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353-zeros-outside.tif \
-       --candidate-name h55_conduit_conflict_priced \
-       --output evidence/holdout_h55_spatial_20261007.json --allow-unpinned-sources
-python -m pytest -q                                        # 158 passed, 3 skipped</code></pre>
+<h2>9 · Reproduce the current research artifact</h2>
+<p>Rebuilding writes deterministic local files and receipts; it does not submit or establish organizer acceptance. Install the project dependencies first. Do not run historical H55 live-model calibration as a score estimator—the derived outputs are withdrawn.</p>
+<pre><code>python -m pip install -e ".[test]"
+python scripts/build_submission_h56b_noflank.py
+python scripts/audit_h56b_artifact.py \
+  --build-receipt evidence/build_h56b_noflank_receipt_20261007.json \
+  --output evidence/audit_h56b_noflank_artifact_20261007.json
+python scripts/validate_submission.py \
+  docs/downloads/GEMSDOE48-H56B-NF-DS-dotted-x-tip-20261007-5bb2c03c981e-nan-outside.tif \
+  --encoding nan --receipt evidence/h56b_noflank_format_validation_20261007.json
+python -m pytest -q</code></pre>
+<p class="small">The spatial holdout receipts and H49 comparison are preserved under <code>evidence/</code>; the holdout protocol is documented in <a href="research/h56b-review-erratum-20261007.md">the current review</a>. A public-proxy pass is not private-label validation.</p>
 
 </main>
 <footer class="wrap">

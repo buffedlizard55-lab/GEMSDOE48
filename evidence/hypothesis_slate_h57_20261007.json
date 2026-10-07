@@ -1,0 +1,165 @@
+{
+  "schema_version": 1,
+  "slate_id": "H57-20261007-review",
+  "status": "FROZEN_FOR_FUTURE_IMPLEMENTATION_ONLY",
+  "frozen_utc": "2026-10-07T17:43:25Z",
+  "not_a_preregistration_for_prior_results": true,
+  "screening_order_basis": "data and implementation readiness, not a numeric score ranking",
+  "metric_direction": "official distance-weighted Tversky index; higher DTI is better",
+  "source_notes": [
+    "docs/research/h56b-review-erratum-20261007.md",
+    "docs/research/data-availability-geochem-magnetic-20261007.md",
+    "evidence/h56_band_screen_20261007.json",
+    "evidence/hypothesis_slate_h56b_20261007.json"
+  ],
+  "candidates": [
+    {
+      "screen_order": 1,
+      "id": "H57-A",
+      "name": "Lithology-conditioned potassium residual halos",
+      "layers": [
+        "data/source_mirrors/geodawn_rad_u8.tif band K",
+        "data/source_mirrors/geodawn_rad_u8.tif band Th",
+        "optional local U/TC control bands"
+      ],
+      "target_physical_signature": "Robust K-on-Th residual anomaly field; retain spatially coherent positive residuals, without catalogue-distance or label inputs.",
+      "off_catalogue_rationale": "Potassic alteration related to hydrothermal fluid pathways may extend under cover or beyond mapped surface-fault traces; radiometric anomalies are not direct fault observations.",
+      "prior_art_distinction": "H50-B used low-Th/K ratios in D-S conflict corridors and H53-RadEdge used radiometric edges. Residualization/coherence is a different operator, but prior radiometric evidence is closely related; no concept-level novelty claim.",
+      "expected_dti_impact": {
+        "status": "LOW_CONFIDENCE_UNVALIDATED_PRIOR",
+        "planning_range": "+0.000 to +0.003 public-proxy DTI, copied from a post-score exploratory note only",
+        "caveat": "Not measured and not a leaderboard forecast; zero or negative impact remains plausible."
+      },
+      "implementation_cost": "Low to medium; local raster, robust background model, quantization/nodata review, controls, spatial holdout.",
+      "data_availability": {
+        "status": "LOCAL_MIRROR_PRESENT_NEEDS_MASK_AUDIT",
+        "path": "data/source_mirrors/geodawn_rad_u8.tif",
+        "sha256": "c22420f75999030d7cc65c9e31e50d232ea6158423bca051613a18a8b20ba682",
+        "bytes": 26612970,
+        "grid": "3730x3292, EPSG:32611, 100m, four uint8 bands K/Th/U/TC",
+        "nodata": 0,
+        "limitation": "0 may be source nodata and the local raster is an owner mirror, not organizer-authenticated; useful-zero semantics, full valid support, and reuse terms need review.",
+        "official_source": "https://doi.org/10.5066/P93LGLVQ"
+      }
+    },
+    {
+      "screen_order": 2,
+      "id": "H57-B",
+      "name": "Buried basement-step edge concordance",
+      "layers": [
+        "official training_features.tif band 15: basement depth",
+        "band 13: isostatic gravity",
+        "bands 5/11/18: gravity derivatives",
+        "band 17: conductivity"
+      ],
+      "target_physical_signature": "Multi-scale basement-depth curvature co-located with gravity-gradient and conductivity boundaries.",
+      "off_catalogue_rationale": "A basement offset beneath basin fill can be geophysically expressed where a generalized surface-fault inventory and topographic scarp are absent.",
+      "prior_art_distinction": "H55-C proposed basement-depth conjunction but no matching multiscale edge-concordance prediction and blocked receipt was found; not a global novelty claim.",
+      "expected_dti_impact": {
+        "status": "UNKNOWN",
+        "planning_range": null,
+        "caveat": "Band screening is not a candidate result; no numeric DTI delta is defensible before a mass-matched spatial holdout."
+      },
+      "implementation_cost": "Medium; re-fetch/restore feature stack, audit units and nodata, freeze edge scales/masks, then test.",
+      "data_availability": {
+        "status": "HISTORICALLY_RESTORED_BUT_NOT_CURRENTLY_LOCAL",
+        "historical_bytes": 418912844,
+        "historical_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+        "current_checkout_search": "no training_features.tif found",
+        "official_source": "https://www.drivendata.org/competitions/306/competition-doe-gems/data/",
+        "limitations": "Organizer data tab is login-gated in this environment; prior bytes were matched to a sibling-repository mirror, not organizer-authenticated. Earlier screen had 3061 in-footprint nodata cells. Restore and re-audit before use."
+      }
+    },
+    {
+      "screen_order": 3,
+      "id": "H57-C",
+      "name": "Channel-profile knickpoint clusters",
+      "layers": [
+        "USGS 3DEP 1m DEM block-averaged to 3m",
+        "derived channel network and long profiles"
+      ],
+      "target_physical_signature": "Profile second-derivative maxima over a frozen noise floor, clustered into azimuth-coherent channel-break corridors.",
+      "off_catalogue_rationale": "Fault-related base-level perturbation may create aligned knickpoints upstream of a visible scarp, including under alluvial cover; climate, lithology, incision, and human works are confounders.",
+      "prior_art_distinction": "H52/H54 use hillslope step detectors and H53-A uses grid-scale strike-coherent scarp persistence; no channel long-profile operator was found in the reviewed source tree.",
+      "expected_dti_impact": {
+        "status": "LOW_CONFIDENCE_UNVALIDATED_PRIOR",
+        "planning_range": "+0.002 to +0.010 public-proxy DTI, copied from a post-score exploratory note only",
+        "caveat": "Not a measured result; zero or negative impact remains plausible."
+      },
+      "implementation_cost": "Medium-high; full-area DEM mosaic, hydrologic conditioning, detector implementation, controls, and blocked evaluation.",
+      "data_availability": {
+        "status": "PARTIAL_ONLY",
+        "local_pilot_tiles": [
+          {
+            "path": "data/pilot/dem3m/x40y427_3m.tif",
+            "sha256": "3a14850f2d33bb8b7ae077951c589ad9866f1978e0722691f2ef6ffcffeee718"
+          },
+          {
+            "path": "data/pilot/dem3m/x42y425_3m.tif",
+            "sha256": "927c36c88debcaa65e9de9fbd0f3adf02b338614fbaed86e3e321111084735de"
+          }
+        ],
+        "derived_100m_scarp_mosaic": {
+          "path": "data/external/h52_scarp3m_100m.tif",
+          "sha256": "b5e53d67c3a7d3d1ca44ae04ae1e84d8574857da3fcd5e34ba47276d6c04b923"
+        },
+        "limitation": "Full-area 3m DEM required for channel profiles is absent in the current checkout; a scarp-summary mosaic and two pilot tiles do not establish complete coverage."
+      }
+    },
+    {
+      "screen_order": 4,
+      "id": "H57-D",
+      "name": "Airborne magnetic analytic-signal and tilt ridges",
+      "layers": [
+        "official USGS GeoDAWN magnetic grid(s)"
+      ],
+      "target_physical_signature": "Multi-scale analytic-signal magnitude or tilt-angle edge ridges continued under basin cover.",
+      "off_catalogue_rationale": "A basement fault may juxtapose magnetized units without preserving a surface scarp; lithologic contacts and cultural noise can mimic the signal.",
+      "prior_art_distinction": "H53-RadEdge uses radiometric K/Th/U/TC edges; previous H49/H53 slates proposed magnetic methods but no matching local magnetic candidate was found. This is unimplemented, not globally novel.",
+      "expected_dti_impact": {
+        "status": "UNKNOWN",
+        "planning_range": null,
+        "caveat": "Source metadata cannot establish DTI sign or magnitude."
+      },
+      "implementation_cost": "High; acquire/regrid, verify overlap/resolution and flight-line artifacts, freeze transform, then block-test.",
+      "data_availability": {
+        "status": "OFFICIAL_METADATA_ONLY_PAYLOAD_ABSENT",
+        "official_source": "https://doi.org/10.5066/P93LGLVQ",
+        "local_magnetic_payload": false,
+        "local_radiometric_mirror": "data/source_mirrors/geodawn_rad_u8.tif",
+        "limitation": "Local file is radiometry, not magnetic data; exact magnetic product coverage/resolution in the competition footprint is unverified. See docs/research/data-availability-geochem-magnetic-20261007.md."
+      }
+    },
+    {
+      "screen_order": 5,
+      "id": "H57-E",
+      "name": "Method-stratified geochemical pathfinder anomalies",
+      "layers": [
+        "USGS National Geochemical Survey coordinates and analytes (for example As, Li, Hg, B after data dictionary review)"
+      ],
+      "target_physical_signature": "Spatially coherent, method-normalized pathfinder residuals with explicit sample-density and censoring uncertainty.",
+      "off_catalogue_rationale": "Hydrothermal geochemistry may extend beyond mapped surface traces; stream transport, lithology, sample media, detection limits, and uneven sampling can dominate.",
+      "prior_art_distinction": "H48-2 considered SGMC mapped-contact topology; radiometric and temperature candidates use different measurements. No National Geochemical Survey predictor layer was found in the reviewed outputs.",
+      "expected_dti_impact": {
+        "status": "UNKNOWN",
+        "planning_range": null,
+        "caveat": "No sample payload or in-footprint count is available to support a numeric expectation."
+      },
+      "implementation_cost": "High; download, schema/media/method audit, censored-value handling, spatial-support model, and blocked evaluation.",
+      "data_availability": {
+        "status": "OFFICIAL_DOWNLOAD_LISTED_PAYLOAD_ABSENT",
+        "official_source": "https://mrdata.usgs.gov/geochem/",
+        "metadata_available": "Repository source check recorded public geographic packages: 74409-sample shapefile and 77212-record CSV.",
+        "local_payload": false,
+        "limitation": "No in-footprint sample count, unit/media/method audit, detection-limit review, or asset-level reuse clearance is recorded. See docs/research/data-availability-geochem-magnetic-20261007.md."
+      }
+    }
+  ],
+  "promotion_gate": {
+    "comparable_reference": "same-protocol H49 blocked holdout; current mean DTI 0.095353 catalogue and 0.100751 SGMC off-catalogue",
+    "dti_direction": "higher is better",
+    "minimum_numeric_rule": "candidate must exceed the frozen same-protocol comparator in at least 3/4 folds on both public proxy truth sets; compare parents and equal-mass controls as preregistered",
+    "slot_status": "not cleared; public-map proxy pass is not private-label evidence or organizer acceptance",
+    "no_slot_before_holdout": true
+  }
+}

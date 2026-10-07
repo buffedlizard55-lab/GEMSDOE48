@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="The 2026-10-06 leaderboard snapshot converted into required recovered-truth units, with reachability from this repository&#x27;s corridor field.">
-<title>GEMSDOE48 — leaderboard and what it requires</title>
+<meta name="description" content="A one-time leaderboard observation and evidence caveats for GEMSDOE48; no artifact-to-score attribution or score projection.">
+<title>GEMSDOE48 — score context and evidence limits</title>
 <style>
 :root{color-scheme:light;--ink:#12241d;--muted:#54665c;--paper:#f4f4ec;--panel:#fffefa;
 --line:#d7ddd1;--green:#1d4c3a;--green2:#2f6b52;--soft:#e3eee5;--amber:#8a4a15;
@@ -99,62 +99,36 @@ font-family:var(--mono);font-size:.78rem;overflow-wrap:anywhere;margin:10px 0}
 <a href="research/h56-results-20261007.md">H56 results</a>
 </div></nav>
 <main class="wrap">
-<div class="bad" role="alert"><strong>Metric correction — no weekly upload cleared.</strong>
-The H55/H56 live-equivalent projections assume <code>FPw = S − TPw</code>,
-which is generally false: FP uses a prediction-centred maximum, TP a truth-centred one.
-Treat the 0.2843 "ceiling" and H56's 0.0649 as <em>historical surrogate outputs</em>,
-not verified private-label results or portal acceptance.
-<a href="research/metric-identity-erratum-20261007.md">Read the derivation and executable counterexample</a>.</div>
-<div class="bad" role="alert"><strong>Research correction — no upload cleared.</strong>
-The H55 0.2843 “ceiling” and inverted truth totals rely on <code>FPw = S − TPw</code>,
-which is false in general under the official metric. They are historical model outputs,
-not private-label bounds or evidence that a new file will beat 0.2778.
-H55 fails the mass-neutral gate. Local TIFF checks are not organizer acceptance.
-<a href="research/metric-identity-erratum-20261007.md">Read the derivation and next validation steps</a>.</div>
-
+<div class="bad" role="alert"><strong>Metric/model correction — no weekly slot is cleared.</strong>
+Historical H55/H56 “ceiling,” recovered-truth, and live-equivalent projections that assume
+<code>FPw = S − TPw</code> are not valid private-label bounds. The exact official metric instead has
+<code>FPw = S − Q</code>, where Q is prediction-centred, while TP is truth-centred.
+<a href="research/metric-identity-erratum-20261007.md">Read the executable identity erratum</a>.</div>
 <header style="background:none;padding:0">
-<p class="eyebrow" style="color:var(--muted)">Leaderboard snapshot · single manual read 2026-10-06 UTC</p>
-<h1>What the leaderboard requires, in units of recovered truth</h1>
+<p class="eyebrow" style="color:var(--muted)">Score context · one-time observation · not an artifact receipt</p>
+<h1>What the reported numbers do—and do not—establish</h1>
+<p class="deck" style="color:var(--muted)">A public leaderboard row is participant-level evidence, not a score linked to a local TIFF. The only defensible use here is limited context; do not infer the score of H56B or another new file.</p>
 </header>
-<div class="warn">One dated manual observation, snapshot at
-<a href="data/leaderboard_20261007.json"><code>docs/data/leaderboard_20261007.json</code></a>. No
-score-to-file receipt: the number of submissions is a participant display field, not a file
-identity. Automated polling is disabled
-(<code>.github/workflows/feed.yml.disabled</code>) because the DrivenData terms of use prohibit
-robots. <strong>The brief's statement that 0.3195 is the highest score is stale</strong> — 0.3195
-is seventh.</div>
-<table><thead><tr>
-<th>row</th>
-<th>DTI</th>
-<th>T needed at 37,654 px</th>
-<th>recall T/|G|</th>
-<th>% above this family</th>
-<th>reachable from the h19-5 field at any mass?</th>
-</tr></thead><tbody>
-<tr><td>xiaofanhu</td><td>0.3774</td><td>7,077.3</td><td>0.505</td><td>+35.9 %</td><td><span class="pill no">NO</span></td></tr>
-<tr><td>alexoktaba</td><td>0.3345</td><td>6,272.8</td><td>0.447</td><td>+20.4 %</td><td><span class="pill no">NO</span></td></tr>
-<tr><td>nchuzhoy</td><td>0.3262</td><td>6,117.2</td><td>0.436</td><td>+17.4 %</td><td><span class="pill no">NO</span></td></tr>
-<tr><td>DARD</td><td>0.3195</td><td>5,991.5</td><td>0.427</td><td>+15.0 %</td><td><span class="pill no">NO</span></td></tr>
-<tr><td>(rank 8)</td><td>0.2888</td><td>5,415.8</td><td>0.386</td><td>+4.0 %</td><td><span class="pill no">NO</span></td></tr>
-<tr class="hl"><td>extradr19 (this family)</td><td>0.2778</td><td>5,209.5</td><td>0.371</td><td>+0.0 %</td><td><span class="pill yes">yes</span></td></tr>
-</tbody></table>
-<p>The reachability column is the frontier maximum from
-<a href="../evidence/live_model_calibration_20261007.json">the calibration receipt</a>: greedy
-maximum-coverage re-emission over the eligible backbone peaks at n = 37,167
-px, model DTI 0.27932, live-equivalent
-<strong>0.2844</strong>. Every row above this family's 0.2778 needs
-more recovered truth than any subset of that field can deliver at any mass, and #1 needs
-T = 7,077 against the dense field's entire yield of
-6,813.</p>
-<h2>This project's own owner-reported live scores</h2>
-<p class="small">Seventeen entries in <a href="../registry/live_scores.json">
-<code>registry/live_scores.json</code></a>, all classed <strong>OWNER-REPORT</strong> — a score
-pasted by the repository owner against a SHA-256, never an organizer receipt. The eight used to
-calibrate the forward model are listed with their inverted truth in
-<a href="method.html">the method page</a>. Best: <code>h33-2-b2</code> 0.2778 at 37,654 px.
-The local receipt for that artifact says <code>UNSCORED</code>; no organizer evidence links it to
-the 0.2778 leaderboard row, which belongs to <code>extradr19</code>.</p>
-
+<div class="warn"><strong>One-time dated observation only:</strong> the official leaderboard was read once for this review. At that time the top displayed score was 0.3774; 0.3195 was rank 7; the 0.2778 row was rank 13. The row did not expose an organizer receipt tying exact file bytes to the score. This is not a permanent ranking. The <a href="https://www.drivendata.org/termsofuse/">DrivenData Terms of Use</a> restrict automatic monitoring/copying and manual monitoring/copying without prior written consent; this project does not poll the board or republish its full table.</div>
+<h2>Why 0.2778 may have scored well (hypothesis, not fact)</h2>
+<p>The official metric assigns triangular partial credit to predictions within 300 m of a fault and weights false negatives more heavily than false positives (α=0.2, β=0.8). A pruned, spacing-tuned dotted surface could therefore benefit from retaining high-credit corridor locations while removing low-credit additions, especially near a known-catalogue mask. This is a plausible mechanism consistent with the observed result, not a causal explanation. The local B2 audit says <code>UNSCORED</code>, and no organizer receipt links its exact SHA-256 bytes to 0.2778. The leaderboard observation does not identify what geometry or method produced the score.</p>
+<h2>Does the evidence support &gt;0.2778 or 0.3195?</h2>
+<p><strong>No score above 0.2778 or 0.3195 is supportable as a prediction for H56B-NF.</strong> A higher score is possible in principle, but no local artifact has private-label evaluation or an organizer byte-to-score receipt. The old H56B live-model projection of 0.0649 is invalid, not a conservative estimate. Public-map holdout DTI cannot be converted to leaderboard DTI.</p>
+<div class="dl">
+<h2>H56B-NF evidence, not leaderboard evidence</h2>
+<p>Post-hoc no-catalogue-flank research GeoTIFF <code>GEMSDOE48-H56B-NF-DS-dotted-x-tip-20261007-5bb2c03c981e-nan-outside.tif</code>, SHA-256 <code>b9530b70065da1f5e9da82caf4f5aaba3d7175dbbbfb2851e4b2ab2dd13aa4f1</code>. Download is OK for inspection; submit is NOT recommended. It is not a new geological detector or preregistered candidate.</p>
+<p>Matched four-fold public-proxy holdout, higher DTI is better:</p>
+<ul><li>Catalogue: H56B-NF 0.056305 vs H49 0.095353; 0/4 folds win.</li><li>SGMC &gt;300 m off-catalogue: H56B-NF 0.068987 vs H49 0.100751; 0/4 folds win.</li></ul>
+<p>Both truth layers are public-map proxies, not private expert labels. The earlier with-flank H56B rebuild was within 1.8e-7 of prior H56, so is a precision/encoding derivative. See the <a href="research/h56b-review-erratum-20261007.md">full review</a> and <a href="validation.html">validation page</a>.</p>
+</div>
+<h2>Audit links</h2>
+<ul>
+<li><a href="../evidence/audit_h56b_noflank_artifact_20261007.json">H56B-NF hash/format/recomputation audit</a> — local verification only.</li>
+<li><a href="../evidence/h56b_noflank_uniqueness_20261007.json">Repository-local uniqueness comparison</a> — not global or organizer proof.</li>
+<li><a href="../evidence/holdout_h56b_noflank_vs_h49_currentprotocol_20261007.json">Matched H56B-NF vs H49 holdout</a> — public proxies only.</li>
+<li><a href="irregularities.html">Evidence and chronology irregularities</a> — includes score-to-file and receipt caveats.</li>
+<li><a href="sources.html">Sources and Terms of Use</a> — official metric, data availability, and provenance limits.</li>
+</ul>
 </main>
 <footer class="wrap">
 <p><strong>GEMSDOE48</strong> — auditable fault-surface research for DrivenData competition 306

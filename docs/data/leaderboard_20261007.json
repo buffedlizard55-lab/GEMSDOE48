@@ -1,38 +1,18 @@
 {
-  "schema": "GEMSDOE48-leaderboard-v2",
-  "refresh_mode": "manual-page-reader-snapshot",
-  "attribution_warning": "Public leaderboard scores do not identify any local TIFF hash or owner-site artifact. Single manual read; no polling or scraping.",
+  "schema": "GEMSDOE48-leaderboard-observation-v1-redacted",
+  "retention_note": "Data minimized in 2026-10-07 review: no participant names, full row table, or submission counts are retained here. The original row-by-row snapshot is not republished.",
+  "refresh_mode": "single_manual_observation; no polling or scraping",
   "source": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
   "retrieved_utc": "2026-10-07",
-  "method": "fetched once via agent web tool on 2026-10-07; rows 1-24 (row 25 score truncated in fetch and not recorded to avoid fabrication)",
-  "rows": [
-    {"rank": 1, "participant": "xiaofanhu", "best_public": 0.3774, "submissions": 11},
-    {"rank": 2, "participant": "alexoktaba", "best_public": 0.3345, "submissions": 24},
-    {"rank": 3, "participant": "nchuzhoy", "best_public": 0.3262, "submissions": 5},
-    {"rank": 4, "participant": "kinghorton42", "best_public": 0.3222, "submissions": 8},
-    {"rank": 5, "participant": "joeyfezster", "best_public": 0.3220, "submissions": 22},
-    {"rank": 6, "participant": "Batik Shirt Brothers", "best_public": 0.3218, "submissions": 21},
-    {"rank": 7, "participant": "DARD", "best_public": 0.3195, "submissions": 15},
-    {"rank": 8, "participant": "ndavis7", "best_public": 0.2888, "submissions": 8},
-    {"rank": 9, "participant": "mzoorob", "best_public": 0.2884, "submissions": 25},
-    {"rank": 10, "participant": "GrigorSargsyan", "best_public": 0.2876, "submissions": 12},
-    {"rank": 11, "participant": "HardcoreTechGod", "best_public": 0.2854, "submissions": 6},
-    {"rank": 12, "participant": "op01", "best_public": 0.2792, "submissions": 6},
-    {"rank": 13, "participant": "extradr19", "best_public": 0.2778, "submissions": 11},
-    {"rank": 14, "participant": "No Fault of Our Own", "best_public": 0.2761, "submissions": 23},
-    {"rank": 15, "participant": "wbg1", "best_public": 0.2750, "submissions": 13},
-    {"rank": 16, "participant": "smashi34", "best_public": 0.2710, "submissions": 11},
-    {"rank": 17, "participant": "smrtdoog5", "best_public": 0.2708, "submissions": 11},
-    {"rank": 18, "participant": "jgaines", "best_public": 0.2682, "submissions": 23},
-    {"rank": 19, "participant": "ad3002", "best_public": 0.2634, "submissions": 22},
-    {"rank": 20, "participant": "SDCF9", "best_public": 0.2600, "submissions": 12},
-    {"rank": 21, "participant": "kpomazi", "best_public": 0.2517, "submissions": 12},
-    {"rank": 22, "participant": "Mekhi12", "best_public": 0.2515, "submissions": 2},
-    {"rank": 23, "participant": "tchu", "best_public": 0.2511, "submissions": 19},
-    {"rank": 24, "participant": "BrandenKMurray", "best_public": 0.2502, "submissions": 13}
-  ],
-  "irregularities": [
-    "The 2026-10-07 session brief stated 0.3195 is the highest score; the live page shows 0.3195 at rank #7 (DARD) and 0.3774 at rank #1 (xiaofanhu). The brief's number is stale.",
-    "The 0.2778 row is participant extradr19. No organizer evidence links the local H33-2-B2 mirror bytes to that row; the owner reports it as their own score. [OWNER-REPORT]"
-  ]
+  "observation": {
+    "top_displayed_score": 0.3774,
+    "score_0_3195_rank": 7,
+    "score_0_2778_rank": 13,
+    "artifact_to_score_receipt": false,
+    "participant_names_retained": false,
+    "full_table_retained": false,
+    "historical_submission_count_notes_conflict": true
+  },
+  "scope_limit": "A dated public participant-level display observation, not a permanent leaderboard, organizer score certificate, or artifact-to-score link.",
+  "terms_note": "DrivenData Terms of Use restrict automated monitoring/copying and manual monitoring/copying without prior written consent; do not refresh or republish the table absent authorization."
 }

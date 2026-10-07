@@ -1,6 +1,6 @@
-> **CORRECTION (2026-10-07):** This historical analysis assumes `FPw = S - TPw`, which is generally false under the official metric. Consequently its inverted truth mass, 0.2843 "ceiling", break-even thresholds and live-equivalent scenarios are *not* proven private-label bounds. Its underlying measurements are preserved for audit, but **do not use them to clear an upload**. Read the [metric-identity erratum](metric-identity-erratum-20261007.md) first.
+> **CORRECTION (2026-10-07; read first):** This archive's H55/H54 live-model inversion uses `FPw = S - TPw`, generally false under the official metric. Its inferred truth masses, fitted `rho`, 0.2843 “ceiling,” live-equivalent scenarios, per-cell credit bars, and slot decisions are withdrawn as private-label estimates or promotion criteria. The model table and conclusions below are historical calculations, not score predictions. Raw raster facts and direct public-proxy results remain for audit only. A separate coordinate-wise proof that some binary maximizer exists does not reinstate any H55 forecast or fixed threshold. See the [metric-identity erratum](metric-identity-erratum-20261007.md), [corrected 0.2778 note](why-02778-and-ceiling-20261007.md), and [current H56B-NF review](h56b-review-erratum-20261007.md). **No weekly slot is cleared.**
 
-# H55 — a live-calibrated forward model, the family ceiling, and a conduit-anchored candidate
+# H55 — historical artifact and withdrawn live-model analysis
 
 Session date: **2026-10-07 UTC**. Candidate label: **H55**. Everything below is
 recomputed from files in this repository by `scripts/calibrate_live_model.py`,
@@ -13,51 +13,40 @@ repository**.
 
 ## 0. Summary
 
-| question | answer |
+| question | corrected answer |
 |---|---|
-| Why did 0.2778 win, and can it be beaten? | It is within **1.84 %** of coverage-optimal for its corridor field, and its mass is within 0.4 % of the field's optimum. The whole family is capped at **live-equivalent 0.2843** at *any* mass, by any thinning, re-weighting or fusion. |
-| Can 0.3195 be reached by combining the two best families? | **No.** The two families recover statistically identical hidden truth (T = 5,209 vs 5,157, 1 % apart), so their union adds 27 % mass and almost no truth. The live-calibrated model prices the naive union at **0.2588 model / 0.2638 live-equivalent, i.e. −0.0140**. |
-| Can 0.2888 (#8), 0.3195 (#7), 0.3262, 0.3345 or 0.3774 (#1) be reached from this backbone at *any* mass? | **No — none of them.** Maximising `rho·Cov/(0.2 S + 0.8 \|G\|)` over *all* subset sizes of `B_elig` peaks at **n = 37,167, model DTI 0.2793, live-equivalent 0.2843**. Every leaderboard row above 0.2778 needs more truth than any subset of this field can deliver. |
-| Can 0.3774 (the actual #1) be reached from anything in this repository? | **No, and not even in principle.** 0.3774 needs T = 7,077 at 37,654 px. The *dense, unthinned* backbone's entire truth yield — all 121,131 px emitted — is T = 6,813. The leader's numerator exceeds the total truth content of the best corridor field in this repository. |
-| What is shipped? | `GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353` — the 0.2778 core untouched, plus 1,124 conflict-priced gap dots and 652 hydrothermal-conduit anchors (39,430 px total). Blocked proxies: **+0.001031 catalogue (4/4 folds)** and **+0.000795 SGMC-off (4/4 folds)** against the dotted parent, and **+0.000795 SGMC-off (4/4 folds)** against the tip parent — the first candidate in this repository to beat *both* parents in *every* fold on the SGMC proxy. |
-| Does it pass the repository's newest gate? | **No.** A concurrent session merged `scripts/audit_candidate.py` (protocol GEMSDOE48-GATE-2, mass-neutral) while this one was running. H55 returns `FAIL_MASS_NEUTRAL`: equal-mass credit density −0.002014 and added-cell credit 0.0102 against the metric's 0.0556 bar. §6.4 reconciles the two instruments and gives the honest bracket **0.2736 – 0.2880**. |
-| What is the honest expected live score? | Floor **0.2727** if every added pixel earns zero; **0.2778** if only the in-family additions pay; **0.2797 – 0.2880** as the conduit anchors' credit rises from break-even (0.0556) to 0.30. The addition is designed as a **measurement**: A2's modelled gain is **+0.0019** and A1's denominator cost at zero credit is **−0.0019** — they cancel to **−0.00003**, so the returned live score is a clean read on the conduit hypothesis. |
+| Why may the owner-reported 0.2778 have scored well? | The 300 m tapered metric and catalogue-flank pruning make a plausible mechanism, not a proven cause; no organizer receipt ties 0.2778 to the local B2 bytes. See the [corrected note](why-02778-and-ceiling-20261007.md). |
+| Can a local file be predicted to exceed 0.2778 or 0.3195? | No numerical prediction is supportable from the available evidence. A higher score is possible in principle; the historical ceiling and reachability calculations are invalid. |
+| What did H55 measure? | It built a local research TIFF and recorded direct public-proxy results. These are reproducible diagnostics against public maps, not private-label validation or organizer score. See the linked build and holdout receipts in the historical sections below. |
+| Was H55 slot-cleared by GATE-2? | No. The old receipt records a failure under a mass-neutral/density-matched interpretation whose threshold depended on the withdrawn model; that interpretation is not a valid promotion gate. |
+| Is there an organizer score for H55 or the B2 input? | No. The local producer labels the B2 input `UNSCORED`; no organizer receipt links exact local bytes to 0.2778. |
 
 ---
 
-## 1. The metric, and three consequences that are exact rather than approximate
+## 1. Official metric and corrected implications
 
-Transcribed by two independent sibling repositories from the organizer's problem
-description (competition 306, page 967) and corroborated independently by the
-organizers' own reference solution, which trains with
-`TverskyLoss(alpha=0.2, beta=0.8, mode="binary")`:
+Transcribed by two independent sibling repositories from the organizer's problem description and corroborated by the organizers' reference solution:
 
 ```
 k(d)  = max(1 - d/300 m, 0)
 TPw   = sum_g max_x p(x) k(d(x,g))
-FPw   = sum_x p(x) (1 - max_g k(d(x,g)))
-FNw   = sum_g (1 - max_x p(x) k(d(x,g)))
+Q     = sum_x p(x) max_g k(d(x,g))
+FPw   = S - Q,  where S = sum_x p(x)
+FNw   = |G| - TPw
 DTI   = TPw / (TPw + 0.2 FPw + 0.8 FNw)
 ```
 
-**(a) The optimal submission is binary.** For one cell of value `v` that is the
-argmax of its truth pixel with realised weight `k`,
-`d/dv [(T0 + v k)/(D0 + 0.2 v)] = (k D0 − 0.2 T0)/(D0 + 0.2 v)²`, whose sign is that
-of `k − 0.2·DTI` and is **independent of `v`**. Every cell is therefore pushed to 0
-or 1. This is asserted numerically in `tests/test_h55.py::test_binary_emission_is_dti_optimal`
-and is why the graded Dempster–Shafer layers ship as *diagnostics*.
+The two maxima use different axes, so `Q` and `TPw` are generally unequal. The former H55 inversion substituted `S−TPw` for `FPw`, invalidating the inferred hidden-truth mass, fitted reliability, ceiling, score bands, and universal break-even claims. Do not use this archived model to forecast or rank candidates.
 
-**(b) An added pixel pays iff its realised kernel weight exceeds `0.2·DTI`** — 0.0556
-at DTI = 0.2778, i.e. 0.397× the mean credit of a dot in the live-best artifact.
+**Binary-valued optimum (separate mathematical result):** for the official weights, holding all other pixels fixed, the score as a function of one prediction value has a derivative whose sign is constant between breakpoints and can only move from negative to positive at breakpoints. Thus replacing coordinates by their better endpoint yields a binary `{0,1}` raster with no lower DTI, under nonempty truth and `[0,1]` predictions. This establishes that a binary maximizer exists; it does **not** show that thresholding a particular graded D-S field at a fixed value improves it. The full derivation and small-raster test are in the [metric-identity erratum](metric-identity-erratum-20261007.md) and `tests/test_metric_main.py`.
 
-**(c) Adding a pixel can never reduce `TPw`**, because `TPw` is a *maximum* over
-emitted pixels. The only risk of an addition is the 0.2 denominator cost. This makes
-the worst case of an additive candidate **exactly computable** rather than estimated,
-and it is the reason H55 is additive-only.
+The former per-pixel `0.2×DTI` break-even rule is valid only in a restricted one-pixel setup with specified TP/FP/FN changes; it is not a universal threshold for arbitrary candidate additions. Adding a prediction can increase both truth-centred `TPw` and prediction-centred false-positive cost. Direct proxy scores also cannot prove transfer to unknown private faults.
 
 ---
 
-## 2. A live-anchored forward model (new this session)
+## 2. Historical live-score forward model (withdrawn; retained to reproduce prior calculations)
+
+> The remainder of this section uses owner-reported scores and additional model assumptions. Its inferred `|G|`, `rho`, `TPw`, scenario values, and cross-family conclusions are not identified by the official metric. Do not quote them as measurements, predictions, or bounds.
 
 ### 2.1 Inputs
 
@@ -162,28 +151,15 @@ data points, and both were specified *after* seeing the same eight scores the ea
 tuned on. Uniform coverage is kept, and the two near-ties are recorded as candidates for a
 pre-registered re-test once a second family recalibrates `rho`, not as findings.
 
-### 2.5 Where the instrument stops working (measured, not assumed)
+### 2.5 Out-of-family transfer — not identified
 
-One out-of-family live artifact exists: `gemsdoe29-sgmc-off-catalogue-44k`
-(44,090 px Poisson-disked on SGMC faults > 300 m off-catalogue, owner-reported
-**0.0512**). It inverts to `T = 1,026`, and its eligible-backbone coverage is
-`9,306.8`, giving an implied `rho = 0.1102` — **1.6× the in-family value**. The model
-with the in-family `rho` predicts 0.0319 for a file that scored 0.0512, i.e. it
-**under-predicts out-of-family T by 38 %**.
-
-Consequences, stated plainly:
-
-* The instrument is a **within-family** tool. It may be used to price re-thinnings,
-  unions and gap closures of the h19-5 corridor field. It may **not** be used to
-  price a new corridor field.
-* Every out-of-family mass in H55 is therefore reported as a **scenario band**, never
-  as a point prediction.
-* The bias direction is known: out-of-family sets do *better* than the model says.
-  H55's conduit anchors are therefore more likely to be under-priced than over-priced.
+The registry contains an owner-reported **0.0512** association for a proxy-built SGMC-off-catalogue emission. No organizer receipt links that value to exact local TIFF bytes. The former conversion to `T=1,026`, fitted out-of-family `rho`, 38% transfer error, and bias-direction claims used the withdrawn identity. They are not evidence for a transfer factor or expected score. This limits any claim about H55's conduit additions; it does not show they help or hurt. The raw owner report is retained in `registry/live_scores.json` for provenance only.
 
 ---
 
-## 3. The ceiling, and the answer to "can we beat 0.2778?"
+## 3. Historical ceiling / reachability calculation — retracted
+
+> Every score conversion and “unreachable” conclusion in this section depends on the invalid `FPw=S−TPw` substitution. Preserve the receipts as a record of prior calculations only; they are not private-label bounds or candidate-ranking evidence.
 
 ### 3.1 The ceiling table (reproducible: `scripts/calibrate_live_model.py`)
 
@@ -254,80 +230,54 @@ This corrects a claim in `knowledge/research_notes.md` and the README that dense
 claim is right; the T part is not, and the error hides the fact that the field's *total*
 truth content is the binding constraint on the whole family.
 
-### 3.3 Why every fusion in this repository was doomed
+### 3.3 Historical family-fusion interpretation — no impossibility result
 
-`Cov(C ∪ h33d) = 79,153.0` at `S = 47,905`, so the model prices the naive union at
-**0.25879 model / 0.26382 live-equivalent, −0.01398 against C**. Dempster's rule,
-Yager's rule, plausibility budgets, graded belief, arithmetic means and α = 0.99
-normalisations are all *re-weightings of the same coverage over a different mass*.
-Because the metric is binary-optimal (§1a), a re-weighting cannot emit more than its own
-binarisation; and because the two parents' coverage differs by only 0.3 % while their
-masses differ by 11 %, **no combination rule can produce more coverage than the union,
-and the union's coverage does not pay for its mass.** The prior sessions' empirical
-finding — "no fusion of the two best surfaces beats the better parent" — is therefore not
-a coincidence or a proxy artifact. It is a consequence of the metric plus a measured 1 %
-difference in T, and it holds at every mass.
+The former live-equivalent union score, inferred parent truth masses, and conclusion that “every fusion was doomed” are retracted. Pixelwise support unions and parent-overlap statistics are reproducible raster facts, but they do not establish private-label DTI or rule out a beneficial fusion. The coordinate-wise binary-maximizer result in the [metric-identity erratum](metric-identity-erratum-20261007.md) proves only that a binary maximizer exists; it does not justify fixed-thresholding a graded fusion or rank D-S against other methods. For the current post-hoc H56B-NF artifact, consult its direct matched public-proxy holdout, which is negative against H49; this is not a global impossibility claim.
 
-## 4. Two instruments this repository has been relying on are contradicted by a live score
+## 4. Public-proxy measurements and owner reports — not a hidden-truth instrument
 
-### 4.1 The SGMC off-catalogue proxy
+### 4.1 SGMC off-catalogue proxy
 
-Every promotion gate since PR #5 has used "SGMC-derived faults more than 300 m from the
-public catalogue" (62,122 px) as the stand-in for hidden truth. But an emission built
-*directly on that layer*, at the same 44,090 px mass and the same 2.8 px Poisson spacing
-as rung A, scored **0.0512 live — T = 1,026 against the backbone family's 5,210 at the
-same mass.** If SGMC-off-catalogue were a good stand-in for hidden truth, that file
-would have scored near 0.26.
+The blocked SGMC-off-catalogue layer is a public-map proxy. Its direct DTI values can compare candidate rasters under a fixed protocol, but do not identify private labels. `registry/live_scores.json` separately includes an owner-reported 0.0512 association for a proxy-built emission; no organizer receipt links exact local bytes to that score. The earlier inversion of 0.0512 to `T=1,026`, and any inferred score gap or claim that SGMC “systematically selects bad live candidates,” are withdrawn. Treat the mismatch as a reason to state transfer limits, not as proxy calibration.
 
-The proxy is not useless — it is a *relative* ranking device over surfaces that all
-contain the backbone — but it is **not a model of the hidden truth**, and gate decisions
-that turned on it (H50, H51, H52) should be regarded as unresolved rather than settled.
+### 4.2 Catalogue coverage ratios
 
-### 4.2 Catalogue coverage per pixel
+The following ratios are public-catalogue measurements from the archived audit. They are not estimates of private-truth yield, and do not validate the former ≥2× catalogue-lift rule:
 
-The same table explains why "catalogue lift" is not a valid screen either:
+| field | positive pixels | catalogue coverage per emitted pixel |
+|---|---:|---:|
+| h19-5 backbone | 121,131 | 0.1007 |
+| SGMC faults | 83,593 | 0.1418 |
+| GDR wells/springs, all | 12,570 | 0.1023 |
+| GDR wells/springs, Hot | 929 | 0.1897 |
+| INGENIOUS Quaternary fault centroids | 1,125 | 0.3696 |
 
-| field | px | catalogue coverage per emitted px | live T at ~44 k px |
-|---|---:|---:|---:|
-| h19-5 backbone | 121,131 | 0.1007 | 6,813 (dense) |
-| SGMC faults | 83,593 | **0.1418** | 1,026 (at 44,090 px) |
-| GDR wells/springs, all | 12,570 | 0.1023 | not measured |
-| GDR wells/springs, Hot | 929 | **0.1897** | not measured |
-| INGENIOUS Quaternary fault centroids | 1,125 | **0.3696** | not measured |
-
-SGMC covers *known* faults 41 % more efficiently per pixel than the backbone and scores
-5× worse live. **High catalogue coverage does not imply high live T.** Any hypothesis
-ranking built on catalogue lift — including the ≥ 2× rule that rejected H52 — is
-therefore not sound, and this session does not use it.
-
-What *is* live-verified: `Cov(X; B_elig)` predicts T to ±1.8 % **inside** the family, and
-the catalogue-flank prune (dots ≤ 200 m from the catalogue earn ≈ 0) is confirmed by the
-0.11 % self-consistency of the three rungs.
+These are descriptions of coverage against public catalogue pixels only. Do not infer that higher/lower values predict private scores or candidate utility. H52/H54/H55 GATE-2 interpretations and any “live-validated screen” language are withdrawn; see the [historical credit-density audit correction](credit-density-audit-20261007.md), [irregularities ledger](../irregularities.md), and [metric-identity erratum](metric-identity-erratum-20261007.md).
 
 ---
 
-## 5. H55 — the candidate
+## 5. H55 — historical artifact construction (score interpretations withdrawn)
 
-### 5.1 Construction (frozen before scoring)
+> The following pins, exact pixel counts, source descriptions, and D-S operations document what was built. Any model-priced admission rule, expected score, claimed new-signal benefit, or slot rationale is withdrawn; this build is not recommended for submission.
+
+### 5.1 Construction (historical recipe; not a current recommendation)
 
 `X = C ∪ A1 ∪ A2`
 
-* **C** — the 37,654 px live-best dotted artifact, carried through **untouched**.
-  Nothing is pruned, moved or re-weighted, so the T = 5,209 it already recovers cannot
-  be lost. Verified pixel-wise by `scripts/audit_h55.py`
-  (`core_preserved_exactly: true`, intersection 37,654/37,654).
-* **A2 — conflict-priced gap closure (in-family, model-priced), 1,124 px.** The two
-  families disagree on 10,251 pixels. Rather than average them, each candidate
-  disagreement/gap site in `(B_elig ∪ tip) \ C` is *priced*: greedy maximum-coverage
-  selection admits a site only while its marginal `Cov` gain clears
-  **1.25 × 0.2 · DTI_C / rho = 1.0211** coverage units (break-even is 0.8169). The 1.25
-  safety factor is pre-registered and makes the choice robust to a ±25 % error in `rho`,
-  which is 14× the instrument's measured 1.76 % RMS error. The unconstrained argmax
-  prefix would be 2,916 px at live-equivalent 0.2785; the robust prefix is 1,124 px.
-  Admitted gains span 1.0215 – 3.5286. Provenance of the admitted dots: **156 are
-  tip-family pixels that C never emitted and 968 are backbone-only gap sites** — the pool
-  is the union of the two families' disagreement with C, and the greedy prices both.
-* **A1 — hydrothermal conduit anchors (out-of-family, new signal), 652 px.** See §5.2.
+* **C** — a 37,654 px dotted raster associated by the owner with the 0.2778 row. The
+  producer marks the exact local B2 bytes `UNSCORED`; there is no organizer file-to-score
+  receipt. This H55 build preserves the C pixel mask exactly, verified by
+  `scripts/audit_h55.py` (`core_preserved_exactly: true`, intersection 37,654/37,654).
+  That fact does not identify the truth credit already present in C.
+* **A2 — historical conflict/gap selection, 1,124 px.** The two family rasters overlap
+  and disagree as recorded by the build receipt. The builder selected candidates from
+  `(B_elig ∪ tip) \ C` with a greedy coverage heuristic. The old price/bar, `rho`, and
+  model-derived candidate score are withdrawn; the selected pixel count and provenance
+  remain reproducible build facts. The 1,124 selected cells comprise 156 tip-family
+  pixels not in C and 968 other gap sites, according to the historical receipt.
+* **A1 — hydrothermal conduit anchors, 652 px.** This is a new input-layer experiment,
+  not a validated “new signal” or evidence of private-label credit. See §5.2 and the
+  source/coverage caveats below.
 
 Total **39,430 px** (C 37,654 + A2 1,124 + A1 652), values exactly {0, 1}.
 
@@ -409,7 +359,7 @@ Bel(F) = [f₁f₂ + f₁u₂ + u₁f₂]/(1 − K)     m₁₂(Θ) = u₁u₂/(
 Measured on the shipped raster: `Bel ∈ [0, 0.84]`, `Pl ∈ [0.16, 1.0]`,
 `m(Θ) ∈ [0.16, 0.25]`, `K ∈ [0, 0.36]` with **14.70 % of the footprint in active
 conflict** (`K > 0`). `m(Θ)` attains its maximum exactly on one-sided support — the
-disagreement is carried forward as unassigned mass, not averaged away.
+m(Θ) is residual ignorance under the selected BPAs, not a direct disagreement measure; standard Dempster normalization removes raw conflict K, which is reported separately.
 
 **Not the naive mean.** Pearson(Bel, ½(b₁+b₂)) = 0.996429, mean |Δ| = 0.013470,
 max |Δ| = 0.160000, **13.71 %** of the footprint differs by more than 0.05, and the best
@@ -437,35 +387,9 @@ blended value:
 The four graded layers ship separately, all-finite, all in [0, 1], under
 `docs/downloads/diagnostics/`.
 
-### 5.4 Risk accounting
+### 5.4 Historical risk-budget calculation — withdrawn
 
-`n_max` is solved from the pre-registered rule *"if every added pixel earns exactly zero
-credit the live-equivalent score must not fall below 0.2778 − 0.0100"*, giving
-**n_max = 3,568**. Used: 1,776.
-
-| case | model DTI | live-equivalent | Δ vs 0.2778 |
-|---|---:|---:|---:|
-| **Floor** — all 1,776 additions earn zero | 0.26770 | **0.27273** | −0.00507 |
-| A1 alone at zero credit (652 px of dead mass) | 0.27088 | 0.27591 | −0.00189 |
-| A2 alone, priced by the model (1,124 px, no A1) | 0.27462 | 0.27965 | **+0.00185** |
-| A2 priced + A1 at zero credit — **the shipped file** | 0.27275 | **0.27778** | −0.00002 |
-| A1 at the break-even credit 0.0556 | 0.27465 | 0.27968 | +0.00188 |
-| A1 at C's mean dot credit 0.1383 | 0.27747 | 0.28250 | +0.00470 |
-| A1 at 0.2000 | 0.27958 | 0.28460 | +0.00680 |
-| A1 at 0.3000 | 0.28299 | 0.28802 | +0.01022 |
-
-Anchoring rule, applied uniformly: `live_equivalent = 0.2778 + (model_DTI(candidate) −
-model_DTI(C))`. The model's constant bias on C (+0.0050) cancels, so **only model deltas
-are ever added to an owner-reported live score**; the model's absolute level is never
-quoted as a score.
-
-The design intent is a **measurement**, not a gamble, and the arithmetic came out exact:
-A2's modelled in-family gain is **+0.00185** and A1's denominator cost at zero credit is
-**−0.00189**, a net of **−0.00003**. A returned live score materially above ≈ 0.2778 is
-therefore direct evidence that hydrothermal conduits carry hidden-truth credit; a score at
-≈ 0.2727 is evidence that they carry none and that the in-family pricing was also wrong.
-Either outcome is worth more than the +0.0065 the entire in-family frontier can offer,
-because the frontier is already mapped and the conduit hypothesis is not.
+The original H55 builder recorded a 39,430-pixel binary output with 1,776 additions beyond the preserved C mask. Its `n_max`, floor, break-even scenarios, live-equivalent table, and “measurement”/slot rationale were computed from the withdrawn hidden-truth model. Do not use the old `0.2727–0.2880` table or `0.2778` cancellation claim as forecast, lower bound, score attribution, or experiment justification. The original [`build receipt`](../../evidence/build_h55_receipt_20261007.json) and [`GATE-2 receipt`](../../evidence/audit_gate2_h55_20261007.json) are preserved for reproducibility; see the [metric-identity erratum](metric-identity-erratum-20261007.md).
 
 ---
 
@@ -495,21 +419,7 @@ Paired gates, stated in full:
 | H55 vs prior α = 0.99 belief | −0.038346 | 0/4 | **+0.007572** | **4/4** |
 | H55 vs prior union decision | −0.077677 | 0/4 | −0.000705 | 1/4 |
 
-The catalogue-proxy losses against the tip parent, the mean and the union are structural,
-not a defect: those surfaces emit *on* catalogue-adjacent corridors, and the catalogue
-proxy rewards exactly that. C is built by deleting everything within 200 m of the
-catalogue, so it scores 0.0068 on a proxy whose truth is the catalogue — while scoring
-0.2778 live. H55 inherits that. **The meaningful row is the first one: H55 beats its own
-parent on both proxies in all four folds**, and it is the first candidate in this
-repository to do so.
-
-That last line is the proxy/live contradiction in one row: the SGMC proxy ranks the
-naive union above H55, while the live-calibrated instrument prices the same union at
-**−0.014** against C and the union's own ingredients scored 0.2778 and 0.2632 live.
-Both cannot be right. §4.1 explains which one to distrust.
-
-`slot_decision.cleared` remains **false** — the script is correct to say that a numeric
-proxy pass is not private-label evidence.
+These are direct computations against the historical public-proxy rasters under the stated four-quadrant protocol. They show how this H55 surface compared with its selected parents on those proxies; they do not establish private-label ranking or the organizer score. The owner-reported score associations belong to separate artifacts and have no verified exact-byte receipt, so they cannot resolve transfer from either proxy to hidden labels. The historical `slot_decision.cleared=false` remains correct; no weekly slot is cleared.
 
 ### 6.2 Format and uniqueness (`evidence/h55_primary_format_audit_20261007.json`, `evidence/h55_uniqueness_audit_20261007.json`)
 
@@ -522,79 +432,6 @@ no SHA-256 collision with any raster or recorded hash in the repository; not ide
 to any prior candidate. Highest pixel-set Jaccard against any prior artifact is
 **0.9550** (the untouched core), so the emitted set is new.
 
-### 6.4 The repository's newer mass-neutral gate: H55 FAILS it, and what that means
-
-While this session was running, a concurrent session merged `scripts/audit_candidate.py`
-(protocol **GEMSDOE48-GATE-2**) and `docs/research/credit-density-audit-20261007.md`. That work
-is independent of mine and reaches one conclusion I reproduce exactly from a different
-direction: the SGMC off-catalogue proxy cannot certify a candidate, because **C + 18,000
-uniform-random new cells scores 0.1189 mean4 on it, beating C (0.0956) and H49 (0.1010)**. A
-ranking that a random control wins is not a ranking. That is §4.1 of this report, arrived at by
-a control experiment instead of by inverting a live score — two instruments, one conclusion.
-
-GATE-2 then replaces the unequal-mass comparison with two mass-neutral tests. Run against the H55
-primary (`evidence/audit_gate2_h55_20261007.json`, incumbent `data/families/dotted_b2_prune_02778.tif`,
-SHA-256 verified `c55bafc4…`):
-
-```
-verdict                                    FAIL_MASS_NEUTRAL
-proxy mean4, own mass   incumbent 0.095607   candidate 0.096406
-equal-mass mean4 (3 seeds)                 0.093593    delta vs incumbent  -0.002014
-added cells                                1,776
-marginal credit/cell, raw proxy            0.045030    (raw bar 0.019077)  -> passes
-marginal credit/cell, DENSITY-MATCHED      0.010245    (live bar 0.05556)  -> FAILS, 0.18x
-reasons: equal_mass_credit_density_below_incumbent (-0.00201)
-         added_cells_below_live_break_even_bar (density-matched 0.0102 < 0.0556 per cell)
-```
-
-**This is a fail and it is reported as one.** If the density-matched figure transferred to the
-live metric, H55 would score `T = 5,209.5 + 1,776 x 0.010245 = 5,227.7`, i.e.
-**DTI 0.2736, −0.0042 against C**. That is the pessimistic end of the honest bracket.
-
-Three things must be said about the test, none of which excuse the fail:
-
-1. **It rests on the same proxy §4.1 contradicts.** Density-matching corrects the proxy's
-   4.3× truth-density inflation; it does not correct the proxy's *identity*. An emission built
-   directly on SGMC-off inverts to `T = 1,026` live where the backbone family reaches 5,209 at
-   the same mass, so "credit against SGMC-off" and "credit against hidden truth" are not the same
-   quantity and their ratio is unknown.
-2. **Its additions test does not appear to discriminate between candidates.** Across every
-   candidate in `credit-density-audit-20261007.md` plus this one, density-matched added-cell
-   credit lands in **0.0049 – 0.0125** regardless of what the added cells are: 268,910 H50
-   belief cells 0.0049, 222,693 hedge-v2 cells 0.0060, 96,673 h16-1 cells 0.0077, 83,477 h19-5
-   cells 0.0050, 10,251 H49 cells 0.0125, 2,000 H52 lidar cells 0.0099, 1,776 H55 cells 0.0102.
-   Curated geophysics, curated lidar, curated hydrothermal conduits and a graded belief field all
-   score within a factor of 2.5 of each other and 4–11× below the bar. A test whose output is
-   nearly independent of its input is measuring the proxy's density, not the candidate's quality.
-3. **Its equal-mass test structurally penalises any additive candidate.** Uniformly subsampling
-   a strict superset of C to C's mass discards ≈ 4.5 % of C's own dots at random and replaces them
-   with the additions, so it must score below C on any proxy where C's dots are worth more than
-   the additions. That is a real statement *about the proxy*, and it is not a statement about
-   `TPw`, which cannot decrease under addition (§1c).
-
-**Where the two instruments agree**, and this is the part that should drive the decision:
-C is the best artifact in the repository (GATE-2's equal-mass column ranks it first at 0.095607,
-ahead of H49 0.087211, H51 0.086641, h16-1 0.077045, h19-5 0.071706, random 0.067020 and
-hedge-v2 0.058228, which is the same ordering my coverage statistic gives); no curated addition
-measured so far clears the metric's own break-even bar on any proxy; and no slot is cleared.
-
-**Where they disagree** is exactly the open question: the live-calibrated instrument prices A2's
-in-family additions at +0.0019 because it is fitted to eight live scores, while GATE-2 prices all
-1,776 additions at 0.0102/cell because it is fitted to a proxy that a live score contradicts by
-5×. Neither can be settled offline. **That is the argument for spending the slot**: the returned
-live score separates them, and §5.4's arithmetic was built so the separation is legible.
-
-The honest bracket, combining both instruments, is therefore:
-
-| basis | live-equivalent | Δ vs 0.2778 |
-|---|---:|---:|
-| GATE-2 density-matched credit (0.0102/cell) | **0.2736** | −0.0042 |
-| this model, every addition earns zero | 0.2727 | −0.0051 |
-| this model, A2 pays and A1 earns zero | **0.2778** | ±0.0000 |
-| this model, A1 at break-even credit | 0.2797 | +0.0019 |
-| this model, A1 at C's mean dot credit | 0.2825 | +0.0047 |
-| this model, A1 at 0.30 credit | **0.2880** | +0.0102 |
-
 ### 6.3 Determinism
 
 Two independent builds produced the same content id `055da9855353` and the same
@@ -602,126 +439,51 @@ primary SHA-256 `8f9a9d3d1ea2aed1c99e5ab5260aad9ceb10f4011c4b5a38791509261ddd284
 The dart-throw is seed-free (rank, then tier, then row-major index) and the greedy is
 deterministic.
 
----
+### 6.4 Historical GATE-2 receipt — not a validated promotion test
 
-## 7. The `Predicted values must be in range [0, 1]` rejection — resolved
+The historical [`audit_gate2_h55_20261007.json`](../../evidence/audit_gate2_h55_20261007.json) records `FAIL_MASS_NEUTRAL` and its underlying public-proxy computations. Its density-matched proxy was thinned to an assumed hidden-truth count inferred with the withdrawn `FPw=S−TPw` model, and its 0.0556 comparison was treated as a universal break-even bar. Those threshold/gate interpretations are withdrawn. Equal-mass and own-mass DTI values in the receipt remain public-proxy diagnostics only; they do not establish private-label performance or a score bound.
 
-The portal check is a range test over the uploaded array. Two encodings circulate in
-this project and both have owner-reported live scores:
-
-| encoding | nodata | example | live |
-|---|---|---|---|
-| all-finite, exactly 0.0 outside | unset | `dotted_b2_prune_02778.tif` (C) | **0.2778** |
-| NaN outside | `NaN` | `dotted_d2_8_02708.tif` (B) | 0.2708 |
-
-A NaN cell makes `np.all((v >= 0) & (v <= 1))` evaluate to `False`, because every
-comparison against NaN is false — which reproduces the reported error message exactly.
-The organizers' own reference solution (`gems-prize-reference-solution`, notebook
-cell 19) writes an **all-finite** float32 raster with `nodata` unset and no NaN
-handling at all. The single best-scoring artifact in the family tree is also
-all-finite.
-
-**Resolution:** the H55 **primary download is all-finite with zeros outside**, and the
-audit asserts `all_cells_finite`, `all_cells_in_range_0_1` and
-`portal_range_error_immune` on the *re-read bytes*, not on the in-memory array. A
-NaN-outside twin is shipped alongside for the sample-template convention and is
-explicitly flagged `portal_range_error_immune: false`.
-
-**Irregularity fixed:** `scripts/validate_submission.py` previously *required*
-`nodata = NaN` and therefore rejected the encoding used by the 0.2778 live-best
-artifact. It now takes `--encoding {auto,nan,zeros}` (default `auto`), accepts either,
-reports which it found, and states the range-error exposure in the receipt.
+The original roll-up, per-candidate values, and builder are preserved for provenance. See the corrected [credit-density audit](credit-density-audit-20261007.md), [metric-identity erratum](metric-identity-erratum-20261007.md), and the [current H56B-NF matched holdout](h56b-review-erratum-20261007.md). No weekly slot is cleared.
 
 ---
 
-## 8. Limitations
+## 7. H55 local range audit — not portal acceptance
 
-1. **Every live number here is OWNER-REPORT.** `|G|`, `rho`, all eight `T` values and
-   the whole scenario band rest on scores pasted into the session brief. No organizer
-   receipt links any file to any score.
-2. **The instrument is within-family only.** Measured out-of-family transfer error is
-   −38 % on the one available test. A1's contribution is a scenario band, not a
-   prediction.
-3. **A1 is unfalsified, and the repository's newest gate says its additions are worth 0.18× the
-   break-even bar.** Nothing in this repository can estimate the credit of a hydrothermal conduit
-   anchor against the *hidden* truth. GATE-2 estimates 0.0102 per added cell against a
-   density-matched SGMC proxy; §6.4 gives three reasons that number should not be read as a live
-   prediction, and one reason it might be. The physical case for A1 is strong; the measured case is
-   contested, and the contest is the reason to submit it.
-4. **The in-family headroom (+0.0065) is only 1.3× the instrument's resolution (±0.0049).**
-   The claim "C is within 1.84 % of coverage-optimal and no emission from this field
-   reaches 0.2888" is robust. The claim "a greedy re-emission beats C by 0.0065" is at the
-   edge of what one submission can resolve.
-5. **Proxy leakage.** C's construction used a whole-catalogue proximity prune, so
-   quadrant-fold results are conditional and potentially leaky. Unchanged from prior
-   sessions and unchanged here.
-6. **Owner mirrors are not organizer-authenticated** and their reuse licences were not
-   verified. Hash pinning establishes byte identity only.
-7. **No slot is cleared by this document.** §6.1's numeric passes are proxy passes.
+The archived H55 primary TIFF is all-finite float32 with values in `[0,1]`, zero outside the footprint, and `nodata` unset; its local receipt verifies those byte-level facts. This makes it immune to a simple whole-array finite/range predicate, but **does not establish organizer acceptance**. The official problem page describes null/NaN outside the data bounds, so the zero-outside encoding remains an acceptance ambiguity. The repository does not have an organizer response tied to this TIFF, and no portal rejection cause is established by the local checks. H55 is not recommended for submission.
+
+A NaN fails a naïve `(v >= 0) & (v <= 1)` all-pixel predicate in ordinary NumPy, so it is one plausible reason for a range error—but this is not evidence of the actual portal implementation or the cause of any reported rejection. The current H56B-NF file uses NaN outside and its receipt explicitly reports `portal_range_error_immune: false`; see the [format-validation receipt](../../evidence/h56b_noflank_format_validation_20261007.json). Do not substitute H55's historical encoding or describe it as accepted.
 
 ---
 
-## 9. What would actually reach 0.3195, and what is now unblocked
+## 8. Limitations and correction summary
 
-The ceiling table (§3) says a higher score requires a corridor field whose *dense*
-truth yield exceeds 6,041 at reasonable mass — i.e. a detector that sees more hidden
-faults than the h19-5 field does. Three concrete moves, in order of expected value:
-
-1. **Train on the official 19-band feature stack — now unblocked.** The stated blocker
-   was data placement, not code: `training_features.tif` is login-walled on DrivenData.
-   This session restored it **byte-identical to its manifest pin** (SHA-256
-   `4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5`, 418,912,844
-   bytes, 19 float32 bands) from five pinned shards with
-   `python scripts/restore_h55_inputs.py --with-official-features`. It is 419 MB and is
-   deliberately **not committed**. The 19 bands are: magnetic anomaly, reduced-to-pole,
-   TMI horizontal gradient, geodetic second invariant of strain rate, isostatic gravity
-   slope, tilt angle, geodetic shear rate, geodetic dilatation rate, TMI vertical
-   gradient, distance to earthquake, isostatic gravity vertical gradient, detrended
-   elevation, isostatic gravity anomaly, TMI, depth to basement, earthquake
-   intensity/density, conductivity, isostatic gravity horizontal gradient, detrended
-   elevation slope.
-2. **Use the three bands nobody has used.** Measured lift of C's dots over the moat
-   background, by band: TMI horizontal gradient 1.26, detrended elevation slope 1.16,
-   **geodetic second invariant 1.05, geodetic shear rate 1.03, geodetic dilatation rate
-   1.06, earthquake intensity 1.04**. The strain-rate and seismicity channels are
-   effectively *unused information* in every artifact this project has shipped, and they
-   are the channels most directly tied to *active* faulting. Caveat measured here: their
-   100 m fields are diffuse, not linear (a multi-orientation line operator separates
-   their top-2 % from background at only p90 0.0022 vs 0.0008), so they need a
-   gradient/curvature transform or the 1 m DEM before they will yield corridors.
-3. **Emit with the calibrated budget rule, not a fixed spacing.** Once a better field
-   exists, `DTI = rho·Cov/(0.2 S + 0.8|G|)` gives the optimal mass and the optimal
-   marginal-gain stopping point analytically — `scripts/calibrate_live_model.py` already
-   traces that frontier. The 5-per-week budget should be spent on *field* variants, not on
-   spacing variants: §3.1 shows spacing and mass are already within 0.4 % of optimal, so
-   spacing sweeps cannot produce another 0.0065, let alone the +0.0417 needed for 0.3195.
-
-A useful acceptance test for any new field `F`, requiring no slot: compute
-`Cov(C; F_elig)` and `Cov(F_emission; F_elig)` and check that `F`'s *dense* emission
-inverts to a `T` above the backbone's 6,813 under the same `|G|`. That needs one live
-score for a dense `F` emission — the single most informative slot this project can spend,
-because it re-calibrates `rho` for a second family and converts the instrument from
-within-family to cross-family.
-
-The single highest-information submission available is **H55 itself**, because it is the
-only candidate whose live score would test a hypothesis the repository cannot test
-offline.
+1. **No organizer score exists for H55 or any local file.** Registry values are owner-reported; no organizer receipt links exact TIFF bytes to a score. The local B2 producer text says `UNSCORED`.
+2. **Private labels are unavailable.** H55's inferred `|G|`, `TPw`, `rho`, recall, live-equivalent scores, and scenario bands are withdrawn under the metric-identity erratum.
+3. **Public-proxy transfer is unresolved.** Direct catalogue/SGMC DTI results are protocol-specific and cannot identify which proxy better represents private labels. The H55 holdout surfaces were not reconstructed inside every fold, leaving a leakage/transfer limitation.
+4. **H55 is not slot-cleared or recommended.** Its local build/format/uniqueness checks do not establish organizer acceptance. The old GATE-2 threshold is not a valid private-label promotion rule.
+5. **Input provenance is limited.** Several inputs are owner mirrors; hash pinning establishes byte identity, not organizer provenance, licence, or permission to reuse. The GDR asset-level terms were not independently verified.
+6. **A binary maximizer exists, but no fixed threshold is justified.** The coordinate-wise proof does not show that thresholding H55's or H56B-NF's graded raster improves DTI. See §1 and the [metric-identity erratum](metric-identity-erratum-20261007.md).
 
 ---
 
-## 10. Reproduce
+## 9. Current research direction — not a score/reachability plan
 
-```bash
-python scripts/restore_h55_inputs.py                       # backbone, d1.5, SGMC-44k, conduit CSV (+2 external)
-python scripts/restore_h55_inputs.py --with-official-features   # optional: 419 MB 19-band official stack
-python scripts/calibrate_live_model.py                     # -> evidence/live_model_calibration_20261007.json
-python scripts/build_submission_h55.py                     # -> docs/downloads/GEMSDOE48-H55-* + receipts
-python scripts/audit_h55.py                                # -> evidence/h55_uniqueness_audit_20261007.json
-python scripts/validate_submission.py docs/downloads/GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353-zeros-outside.tif \
-       --receipt evidence/h55_primary_format_audit_20261007.json
-python scripts/run_spatial_holdout.py \
-       --combined docs/downloads/GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353-zeros-outside.tif \
-       --candidate-name h55_conduit_conflict_priced \
-       --output evidence/holdout_h55_spatial_20261007.json --allow-unpinned-sources
-python -m pytest -q                                        # 158 passed, 3 skipped
-```
+The former H55 recommendations to train on particular bands, infer dense hidden-truth yield, tune a model-priced budget, or spend a slot on H55 are not supported. The historical source and build facts remain in this archive; they do not establish score potential or organizer acceptance.
+
+The current five previously untried hypotheses are H57-A through H57-E, each documented with source availability and limitations, expected DTI impact, prior-art distinction, and cost in the [H57 slate](h57-hypothesis-slate-20261007.md) and [machine-readable record](../../evidence/hypothesis_slate_h57_20261007.json). Before implementation: verify the source payload, units, masks, coverage and licence; freeze the physical operator and comparable spatial blocks; then test against H49 using the same public-proxy protocol. Do not spend a weekly slot unless a candidate beats the comparable blocked best. No proxy result is a private-label prediction, and no current result supports a numerical claim above 0.2778 or 0.3195.
+
+---
+
+## 10. Audit references
+
+This report remains as a historical audit record; its original model outputs are not endorsed. Reproduction and interpretation should start from the corrected sources:
+
+- [Metric-identity erratum and executable counterexample](metric-identity-erratum-20261007.md)
+- [Corrected explanation of the owner-reported 0.2778](why-02778-and-ceiling-20261007.md)
+- [Historical H55 build receipt](../../evidence/build_h55_receipt_20261007.json)
+- [Historical local format audit](../../evidence/h55_primary_format_audit_20261007.json)
+- [Historical public-proxy holdout](../../evidence/holdout_h55_spatial_20261007.json)
+- [Historical GATE-2 receipt (threshold interpretation withdrawn)](../../evidence/audit_gate2_h55_20261007.json)
+- [Current H56B-NF review and matched holdout](h56b-review-erratum-20261007.md)
+
+The H55 builder (`scripts/build_submission_h55.py`) and calibration tools are preserved for audit; do not treat their score outputs as valid predictions. Current tests should run in the repository's `.venv` with `python -m pytest -q`.

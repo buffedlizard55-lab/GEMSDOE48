@@ -1,13 +1,13 @@
 {
   "schema": "GEMSDOE48-candidate-uniqueness-v1",
-  "generated_utc": "2026-10-07T21:42:33Z",
+  "generated_utc": "2026-10-07T22:01:35Z",
   "candidate": {
     "file": "docs/downloads/GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07.tif",
     "sha256": "28a51fb032b8f2cfd1f04ad3bd429c29d7bb780d36961fea783ff8099130986e",
     "bytes": 192597,
     "positive_cells": 58031
   },
-  "compared_files": 88,
+  "compared_files": 99,
   "max_overlap_excluding_companions": {
     "file": "docs/downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-diag-plausibility-nan.tif",
     "companion_of_same_artifact": false,
