@@ -34,22 +34,32 @@ def main() -> int:
     files = sorted(glob.glob(str(pathlib.Path(args.inp) / "**" / "*.npz"), recursive=True))
     logs = sorted(glob.glob(str(pathlib.Path(args.inp) / "**" / "log_shard*.json"), recursive=True))
     n_ok = 0
+    merge_errors = []
     for f in files:
-        d = np.load(f)
-        r0, c0 = int(d["row0"]), int(d["col0"])
-        h, w = d["h_gate12"].shape
-        win = (slice(r0, r0 + h), slice(c0, c0 + w))
-        cover = d["cover"]
-        for b in BANDS:
-            cur = acc[b][win]
-            new = d[b].astype(np.float32)
-            new = np.where(cover > 0, new, np.nan)
-            if b in ("h_gate07", "h_gate12", "h_all", "cover"):
-                acc[b][win] = np.fmax(cur, new)
-            else:
-                # keep attribute of the tile that provides the larger h_gate12 (approx: fill where NaN)
-                acc[b][win] = np.where(np.isnan(cur), new, cur)
-        n_ok += 1
+        try:
+            d = np.load(f)
+            r0, c0 = int(d["row0"]), int(d["col0"])
+            h, w = d["h_gate12"].shape
+            # clip the tile window to the official grid (edge tiles extend beyond it)
+            rr0, cc0 = max(r0, 0), max(c0, 0)
+            rr1, cc1 = min(r0 + h, GRID_SHAPE[0]), min(c0 + w, GRID_SHAPE[1])
+            if rr1 <= rr0 or cc1 <= cc0:
+                merge_errors.append({"file": f, "error": "tile entirely outside the grid"})
+                continue
+            win = (slice(rr0, rr1), slice(cc0, cc1))
+            sub = (slice(rr0 - r0, rr1 - r0), slice(cc0 - c0, cc1 - c0))
+            cover = d["cover"][sub]
+            for b in BANDS:
+                cur = acc[b][win]
+                new = np.where(cover > 0, d[b][sub].astype(np.float32), np.nan)
+                if b in ("h_gate07", "h_gate12", "h_all", "cover"):
+                    acc[b][win] = np.fmax(cur, new)
+                else:
+                    # attribute of the first tile that covers the cell (overlaps are 6 m strips)
+                    acc[b][win] = np.where(np.isnan(cur), new, cur)
+            n_ok += 1
+        except Exception as exc:  # noqa: BLE001
+            merge_errors.append({"file": f, "error": repr(exc)})
     status = []
     for lg in logs:
         status.extend(json.load(open(lg)))
@@ -64,7 +74,7 @@ def main() -> int:
             dst.write(q, i)
             dst.set_band_description(i, b)
         dst.update_tags(**{f"SCALE_{b}": str(SCALE[b]) for b in BANDS}, DETECTOR="gemsdoe48.scarp3m v1 at 3 m")
-    receipt = {"n_tiles_merged": n_ok, "n_tiles_ok": sum(1 for s in status if s.get("status") == "ok"),
+    receipt = {"n_tiles_merged": n_ok, "n_npz_files": len(files), "merge_errors": merge_errors, "n_tiles_ok": sum(1 for s in status if s.get("status") == "ok"),
                "n_tiles_failed": sum(1 for s in status if s.get("status") != "ok"),
                "failed": [{"tile": s["tile"], "error": s.get("error")} for s in status if s.get("status") != "ok"],
                "cells_with_cover": int(np.isfinite(acc["cover"]).sum()),
