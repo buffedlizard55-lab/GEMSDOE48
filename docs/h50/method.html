@@ -1,0 +1,47 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Method & evidence — H50 Dempster-Shafer fusion</title><link rel="stylesheet" href="../assets/style.css"></head>
+<body><header><p>DOE GEMS Prize · DrivenData #306 · GEMSDOE48 H50 · method</p>
+<h1>Method & evidence — H50 Dempster-Shafer fusion</h1><nav><a href="index.html">H50 summary</a><a href="executive-summary.html">Executive summary &amp; how to submit</a><a href="method.html">Method &amp; evidence</a><a href="hypotheses.html">Hypotheses</a><a href="sources.html">Sources</a><a href="../index.html">Repository site ↗</a></nav></header><main class="wrap">
+
+<h2 style="margin-top:0">1 · Construction</h2>
+<ol>
+<li>Belief surfaces in the metric's own geometry: b_i(x) = max over committed pixels y of
+k(d(x,y)), k(d)=max(1−d/300 m,0).</li>
+<li>Two-sided simple support masses with Shafer §11.2 discounting: m_i(F)=a_i·b_i,
+m_i(notF)=a_i·(1−b_i), m_i(Θ)=1−a_i, with a_dotted=0.95,
+a_tip=0.926746 (RHO_MAX=0.95 ceiling × owner-reported live ratio
+0.2710/0.2778 [OWNER-REPORT]).</li>
+<li>Canonical normalized Dempster rule; submission surface Bel(F)=m12(F) divided by its
+in-footprint max (already [0,1]).</li>
+<li>Diagnostics carried forward: m12(Θ) (where the families neither agree nor fully conflict) and raw
+conjunctive conflict K (where they actively contradict; canonical normalization redistributes K, so it
+is stored separately — Zadeh-paradox transparency).</li>
+</ol>
+<p>Provable properties (tests/test_ds50.py): masses sum to 1; commutativity; Bel=1 and K=0 at full
+agreement; at full opposition K=a1·a2=0.8804 and m(Θ)&gt;0 (a perfect-reliability anchor would force
+m(Θ)≡0 — the withdrawn v1 did exactly that).</p>
+
+<h2>2 · Why 0.2778 won, and what beating 0.3774 requires</h2>
+<p>The DTI is a budget: DTI = TPw / (0.2·(TPw+S−M) + 0.8·|G|); every emitted unit that is not the best
+cover of a truth pixel costs 0.2, and binary {0,1} is optimal. The 0.2778 file wins by sitting at the
+break-even credit bar (0.2·0.26 ≈ 0.052 per dot) with 37,654 dots, 0 within 200 m of the catalogue
+(sibling GEMSDOE32 analysis, two independent derivations of the same bar). The 0.3774 leader needs
+≈25 % more mean credit per pixel at matched mass — a detector improvement, not a fusion rule.</p>
+
+<h2>3 · Why DS fusion loses on the proxies (and why that is expected)</h2>
+<p>Dempster belief is intersection-like: high where both families agree, uncertain where they disagree.
+The public proxies reward cheaply covering fault traces — the union's job. Preserving disagreement is
+scientifically honest (the geologist sees where the two strongest approaches contradict) but is not by
+itself score-raising. This session's kernel-credit calibration did help against the raw-sparse recipe
+(+0.0064 mean SGMC), and H50 beats the naive mean 4/4 folds — but not the parents.</p>
+
+<h2>4 · Evidence classes used on this site</h2>
+<p>[OWNER-REPORT] owner-read live screens, no organizer receipt · [DERIVED] algebra from reported
+quantities · proxy = public-map layer, never private expert truth. No page here states or implies an
+organizer score.</p>
+
+</main><footer><p>No organizer score exists for any artifact on this site. Every candidate is UNSCORED research output; owner-reported live values are labelled [OWNER-REPORT].</p>
+<p class="small">Built by scripts/build_site_h50.py from evidence receipts on the same commit.
+Receipts: evidence/build_ds50_receipt_20261007.json, evidence/holdout_ds50_20261007.json,
+docs/data/leaderboard_20261007.json.</p></footer></body></html>
