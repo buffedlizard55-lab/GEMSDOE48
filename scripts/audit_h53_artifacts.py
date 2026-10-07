@@ -15,8 +15,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 from gemsdoe48.geotiff import assert_competition_grid, display_path  # noqa: E402
 
-BUILD_RECEIPT = ROOT / "evidence/build_h53_receipt_20261007.json"
-HOLDOUT = ROOT / "evidence/holdout_h53_20261007.json"
+BUILD_RECEIPT = ROOT / "evidence/build_h53_radedge_receipt_20261007.json"
+HOLDOUT = ROOT / "evidence/holdout_h53_radedge_20261007.json"
 
 
 def sha256_file(path: Path) -> str:
@@ -172,7 +172,7 @@ def main() -> int:
             "reason": "The public spatial holdout is a proxy only; no organizer score or file-to-score receipt exists.",
         },
     }
-    output = ROOT / "evidence/h53_submission_validation_20261007.json"
+    output = ROOT / "evidence/h53_radedge_submission_validation_20261007.json"
     output.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({
         "status": report["status"],

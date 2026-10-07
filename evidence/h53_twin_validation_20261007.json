@@ -1,8 +1,8 @@
 {
   "status": "PASS_LOCAL_FORMAT_AUDIT_NOT_ORGANIZER_ACCEPTANCE",
-  "file": "docs/downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-nan-outside.tif",
-  "sha256": "9242c831dc103966e7ea961e342e4dce5e655b11313d349a112ece8a4d8b0d15",
-  "bytes": 7042968,
+  "file": "docs/downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-pignistic-twin-nan.tif",
+  "sha256": "f644238f8c44f1a88fcf9aa73ae0da7b17b64fd67143e35aa64c38e9429c3ca5",
+  "bytes": 372196,
   "dtype": "float32",
   "bands": 1,
   "shape": [
@@ -22,8 +22,8 @@
   "min_inside_footprint": 0.0,
   "max_inside_footprint": 1.0,
   "all_in_footprint_range_0_1": true,
-  "positive_cells": 1488778,
-  "positive_mass": 260259.86101986736,
+  "positive_cells": 37654,
+  "positive_mass": 37654.0,
   "grid_profile": {
     "width": 3292,
     "height": 3730,

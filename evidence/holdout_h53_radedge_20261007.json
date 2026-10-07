@@ -7,7 +7,7 @@
     "name": "GEMSDOE48-H53-DS-RadEdge-B2xH33D-4c01fcf2ad8c",
     "path": "docs/downloads/GEMSDOE48-H53-DS-RadEdge-B2xH33D-20261007-4c01fcf2ad8c-nan-outside.tif",
     "sha256": "4c01fcf2ad8c1d2bd487bc4d07c85e57b2a256296586d4817b58079b0ccd7a1f",
-    "build_receipt": "evidence/build_h53_receipt_20261007.json"
+    "build_receipt": "evidence/build_h53_radedge_receipt_20261007.json"
   },
   "source_hashes": {
     "dotted_b2_prune_02778.tif": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",

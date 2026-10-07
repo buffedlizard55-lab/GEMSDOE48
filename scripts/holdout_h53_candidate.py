@@ -36,7 +36,7 @@ SGMC_NEW = ROOT / "data/official/derived_sgmc_faults_100m.tif"
 SGMC_OLD = ROOT / "data/raw/sgmc_faults_100m.tif"
 FOOTPRINT = ROOT / "data/source_mirrors/footprint-mask.tif"
 H49 = ROOT / "docs/downloads/GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif"
-BUILD_RECEIPT = ROOT / "evidence/build_h53_receipt_20261007.json"
+BUILD_RECEIPT = ROOT / "evidence/build_h53_radedge_receipt_20261007.json"
 
 PINS = {
     B2: "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
@@ -195,7 +195,7 @@ def main() -> int:
             "name": receipt["candidate"]["unique_submission_name"],
             "path": display_path(candidate_path),
             "sha256": sha256_file(candidate_path),
-            "build_receipt": "evidence/build_h53_receipt_20261007.json",
+            "build_receipt": "evidence/build_h53_radedge_receipt_20261007.json",
         },
         "source_hashes": {path.name: sha256_file(path) for path in PINS},
         "fold_protocol": {
@@ -240,10 +240,18 @@ def main() -> int:
             "A failed proxy gate does not prove zero private-label utility; a passed proxy gate would not establish organizer value.",
         ],
     }
-    output = ROOT / "evidence/holdout_h53_20261007.json"
+    output = ROOT / "evidence/holdout_h53_radedge_20261007.json"
     output.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     receipt["candidate"]["holdout_status"] = (
         "PROXY_GATE_PASSED_NOT_SLOT_CLEARED" if gate["passes_preregistered_proxy_gate"] else "FAILED_PREREGISTERED_PROXY_GATE"
+    )
+    receipt["current_disposition"] = (
+        "PROXY_GATE_PASSED_STILL_NOT_SLOT_CLEARED"
+        if gate["passes_preregistered_proxy_gate"]
+        else "FAILED_PREREGISTERED_PROXY_GATE_NO_SLOT"
+    )
+    receipt["status_semantics"] = (
+        "status records the original build-stage state; current_disposition records the later holdout outcome."
     )
     receipt["candidate"]["holdout_report"] = display_path(output)
     receipt["candidate"]["slot_cleared"] = False

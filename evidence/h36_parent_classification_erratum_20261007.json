@@ -3,7 +3,7 @@
   "erratum_id": "H36_PARENT_IS_NOT_THE_TIP_STEPOVER_FAMILY",
   "recorded_utc": "2026-10-07T04:44:40Z",
   "status": "CLASSIFICATION_CORRECTED_NO_PARENT_BYTES_OR_HISTORICAL_SCORES_CHANGED",
-  "prior_description": "Several H50/H51/H50-B records called H36-1 rung30 the best tip/step-over surface or a tip-family parent.",
+  "prior_description": "Several H50/H51/H50-B records and the original H53-1 adaptive-lidar slate/report called H36-1 rung30 a tip/step-over surface or tip-family parent.",
   "correction": "H36-1 rung30 is an owner-reported 0.2710 H19-5/rung-30 repacking; it is not the explicitly identified tip/step-over family. H33-D is the explicit tip/step-over surface (owner-reported 0.2632). H32-1 is a separate prethin-tip/Euler surface (owner-reported 0.2649).",
   "evidence": [
     {
@@ -26,8 +26,10 @@
   "impact": {
     "h50": "Its Dempster arithmetic, source hashes, TIFF bytes, and blocked scores remain tied to B2 x H36-1. Describing that pair as the two best dotted and tip/step-over families was incorrect; do not use H50 as validation of B2 x actual tip/step-over fusion.",
     "h51": "Derived from the same B2 x H36-1 H50 fusion; its results are likewise specific to that pair.",
-    "h50b": "Its radiometric-conflict probe used H36-1-derived conflict corridors; its negative result is not a test of the H33-D step/over family.",
-    "h53": "Uses B2 x H33-D, selected because H33-D is the explicit tip/step-over source and is more complementary to B2 than H32-1. H32-1 is owner-reported slightly higher at 0.2649 but 97.93% of B2 cells overlap it and B2 x H32 was already explored in H48."
+    "h50b": "Its radiometric-conflict probe used H36-1-derived conflict corridors; its negative result is not a test of the H33-D tip/step-over family.",
+    "h53_legacy_3src_lidar": "The already-merged H53-1 three-source adaptive-lidar candidate used B2 x H36-1 rung30 x lidar. Its frozen TIFF, receipt, and scores are unchanged, but it is not a fusion of B2 with the actual tip/step-over family. Do not describe H36 as tip or use this result to claim the requested B2 x H33-D pair was tested.",
+    "h53_radedge_1": "The separate H53-RadEdge-1 candidate uses B2 x the explicit H33-D tip/step-over surface plus weak GeoDAWN radiometric-edge evidence. It fails its own frozen gate; no slot is cleared.",
+    "actual_tip_pair": "H33-D is the explicit tip/step-over parent (owner-reported 0.2632); the RadEdge experiment is the current branch\u2019s test of B2 x H33-D. H32-1 is owner-reported slightly higher at 0.2649 but 97.93% of B2 cells overlap it and B2 x H32 was already explored in H48."
   },
   "corrected_active_descriptions": [
     "README.md",
@@ -40,7 +42,13 @@
     "scripts/build_site_h50.py",
     "scripts/make_ds50_figures.py",
     "src/gemsdoe48/ds50.py",
-    "src/gemsdoe48/h51.py"
+    "src/gemsdoe48/h51.py",
+    "docs/executive-summary.html",
+    "docs/research/holdout-h53-results-20261007.md",
+    "scripts/build_submission_h53.py",
+    "scripts/build_h53_candidate.py",
+    "src/gemsdoe48/ds53.py",
+    "tests/test_site_classification.py"
   ],
   "frozen_records_not_rewritten": [
     "evidence/build_ds50_receipt_20261007.json",
@@ -48,7 +56,14 @@
     "evidence/build_h51_receipt_20261007.json",
     "evidence/holdout_h51_20261007.json",
     "evidence/h50b_preregistration_20261007.json",
-    "evidence/holdout_h50b_20261007.json"
+    "evidence/holdout_h50b_20261007.json",
+    "evidence/build_h53_receipt_20261007.json",
+    "evidence/hypothesis_slate_h53_20261007.json",
+    "evidence/holdout_h53_spatial_comparison_20261007.json",
+    "evidence/holdout_h53twin_spatial_comparison_20261007.json",
+    "evidence/holdout_h53_raw_sgmc_sensitivity_20261007.json",
+    "evidence/holdout_h53twin_raw_sgmc_sensitivity_20261007.json",
+    "docs/downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-nan-outside.tif"
   ],
   "no_reinterpretation": [
     "H36-1's 0.2710 owner-reported value is not invalidated; only its family classification is corrected.",
@@ -67,6 +82,6 @@
       "tip_reliability",
       "tip_*_sha256"
     ],
-    "handling": "These field names persist in frozen H50/H51/H50-B receipts and compatibility APIs for provenance/schema continuity. They identify the H36-1 rung30 parent bytes; do not infer a tip/step-over family classification from the key. Active H50 page labels and selected builder comments make the mapping explicit. The H33-D receipt and H53 build use the actual tip/step-over family explicitly."
+    "handling": "These field names persist in frozen H50/H51/H50-B and original H53-3SRC-lidar receipts and compatibility APIs for provenance/schema continuity. In the H50/H51/H50-B and H53-3SRC-lidar records they identify H36-1 rung30 bytes, not the actual tip/step-over family. The separate H53-RadEdge-1 build uses H33-D for the actual tip/step-over parent. Do not infer classification from a legacy key. The original H53-3SRC-lidar TIFF metadata is frozen with its legacy model label; the linked erratum and corrected source-code comments govern interpretation, and the raster was not rewritten."
   }
 }

@@ -53,6 +53,14 @@
   <h2 class="sec">Format and outside-footprint handling</h2>
   <p>The current candidate uses one float32 band on the official sample grid. The local build/validation receipts confirm all in-footprint predictions are finite and in [0,1], with NaN nodata exactly outside the finite sample-template mask. The local convention matches the public template and the challenge page's null/NaN wording; organizer portal acceptance remains untested.</p>
 
+  <h2 class="sec">H53 session findings (2026-10-07)</h2>
+  <ul>
+    <li><b>H52 19-band lift numbers lack committed receipts.</b> The H52 slate reports per-band catalogue-lift measurements (e.g. geodetic 2nd-invariant 4.7×, U/K 2.2×) from the official 19-band <code>training_features.tif</code>, but no such raster or measurement receipt is committed to this repository (no <code>training_features*</code> file exists here and no H52 evidence JSON records those numbers). Treat those figures as unverified until a pinned receipt exists; the H53 slate does not rely on them.</li>
+    <li><b>No fresh leaderboard read this session.</b> The sandbox allowlist excludes <code>drivendata.org</code> (and USGS/MRLC hosts), so the "0.3195 is highest" correction still rests on the dated 2026-10-06/07 reads (top 0.3774 xiaofanhu). Do not present leaderboard state as current without a new dated observation.</li>
+    <li><b>H53 twin overlaps H51 strongly but is a distinct file.</b> The H53 pignistic twin shares 35,941/37,654 cells with the H51 emission (Jaccard 0.913) and 33,385 with C (Jaccard 0.796); SHA-256 differs from all 58 compared grid rasters. Overlap is expected (same parents, same budget); identity is disproven by hash.</li>
+    <li><b>H53 graded belief is diffuse by construction.</b> Kernel-credit beliefs spread credit over 1.49 M in-footprint cells (mass 260,260 at 37,654-dot-equivalent peak); the diffuse graded surface scores 0.071408 on the SGMC proxy. Diffuseness is a property of the brief-required graded-belief submission, not a bug — the budget-matched binary twin (0.089559) is the decision-surface comparator.</li>
+  </ul>
+
   <h2 class="sec">Source record</h2>
   <p>Point-in-time leaderboard observations, exact mirror hashes, and source limitations are preserved in <code>evidence/source_audit.json</code>, <code>docs/sources.md</code>, and the versioned holdout/build receipts. These statements are not a substitute for checking the linked official sources before a new submission or distribution.</p>
   <footer>Evidence was reviewed on 2026-10-06 UTC. Where provenance or interpretation is unresolved, it is labeled unresolved rather than inferred.</footer>

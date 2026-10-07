@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build H53-1: B2 x H33-D D-S fusion with weak GeoDAWN edge evidence.
 
-All construction parameters were frozen in docs/research/hypotheses-h53-20261007.md
+All construction parameters were frozen in docs/research/hypotheses-h53-radedge-20261007.md
 and evidence/h53_preregistration_20261007.json before this script was written or
 run. This is a research candidate, not a cleared submission.
 """
@@ -252,6 +252,8 @@ def main() -> int:
         "schema_version": 1,
         "built_utc": datetime.now(timezone.utc).isoformat(),
         "status": "BUILT_RESEARCH_CANDIDATE_HOLDOUT_NOT_YET_RUN_NOT_SLOT_CLEARED",
+        "status_semantics": "status records build-stage state; current_disposition is updated by the holdout script and governs slot status.",
+        "current_disposition": "HOLDOUT_NOT_YET_RUN_NO_SLOT",
         "preregistration": "evidence/h53_preregistration_20261007.json",
         "candidate": {
             "id": "H53-1",
@@ -332,7 +334,7 @@ def main() -> int:
             "No organizer score, leaderboard result, upload, or slot clearance is asserted.",
         ],
     }
-    receipt_path = ROOT / "evidence/build_h53_receipt_20261007.json"
+    receipt_path = ROOT / "evidence/build_h53_radedge_receipt_20261007.json"
     receipt_path.write_text(json.dumps(receipt, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"candidate": receipt["candidate"], "format": receipt["primary_format_checks"], "comparisons": comparisons, "receipt": display_path(receipt_path)}, indent=2))
     return 0
