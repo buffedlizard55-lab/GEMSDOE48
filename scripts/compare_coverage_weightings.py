@@ -2,7 +2,7 @@
 """Does weighting the coverage target predict the eight live scores better than uniform?
 
 Reproduces the negative result quoted in
-``docs/research/h53-live-model-ceiling-and-candidate-20261007.md`` §2.4 and in the H53
+``docs/research/h55-live-model-ceiling-and-candidate-20261007.md`` §2.4 and in the H55
 hypothesis slate: nine target weightings were fitted against the same eight owner-reported
 live scores, and **uniform wins**. Every density weighting is actively worse.
 
@@ -48,7 +48,7 @@ def main() -> int:
                         default=ROOT / "evidence/coverage_weighting_comparison_20261007.json")
     args = parser.parse_args()
     if not BACKBONE.exists():
-        raise SystemExit("missing backbone mirror; run: python scripts/restore_h53_inputs.py")
+        raise SystemExit("missing backbone mirror; run: python scripts/restore_h55_inputs.py")
 
     backbone = load_binary(BACKBONE)
     catalogue = load_binary(CATALOGUE)
@@ -60,7 +60,7 @@ def main() -> int:
     for art in LIVE_ARTIFACTS:
         path = ROOT / art.path
         if not path.exists():
-            raise SystemExit(f"missing mirror {art.path}; run scripts/restore_h53_inputs.py")
+            raise SystemExit(f"missing mirror {art.path}; run scripts/restore_h55_inputs.py")
         mask = load_binary(path)
         masses.append(int(mask.sum()))
         lives.append(art.live)

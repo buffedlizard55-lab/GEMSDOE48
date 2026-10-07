@@ -1,6 +1,6 @@
-"""H53 -- Conduit-Anchored, Conflict-Priced Additive Extension.
+"""H55 -- Conduit-Anchored, Conflict-Priced Additive Extension.
 
-Construction (frozen before any scoring; see ``docs/research/h53-*.md``)
+Construction (frozen before any scoring; see ``docs/research/h55-*.md``)
 ------------------------------------------------------------------------
 ``X = C  U  A2  U  A1``
 

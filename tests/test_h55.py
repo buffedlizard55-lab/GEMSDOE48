@@ -1,7 +1,7 @@
-"""Tests for the H53 live-anchored forward model, conduit layer, and emission builder.
+"""Tests for the H55 live-anchored forward model, conduit layer, and emission builder.
 
 Tests that need the git-ignored ``data/raw`` mirrors skip cleanly when those mirrors
-have not been restored (``python scripts/restore_h53_inputs.py``), matching the
+have not been restored (``python scripts/restore_h55_inputs.py``), matching the
 repository's existing data-dependent-test convention.
 """
 from __future__ import annotations
@@ -18,7 +18,7 @@ SRC = REPO / "src"
 if str(SRC) not in sys.path:
     sys.path.insert(0, str(SRC))
 
-from gemsdoe48 import conduit, h53, live_model  # noqa: E402
+from gemsdoe48 import conduit, h55, live_model  # noqa: E402
 from gemsdoe48.dempster_shafer import dempster_combine  # noqa: E402
 from gemsdoe48.geotiff import HEIGHT, WIDTH, write_float32_zeros_outside  # noqa: E402
 from gemsdoe48.metric import dti_fast, triangular_kernel  # noqa: E402
@@ -26,9 +26,9 @@ from gemsdoe48.metric import dti_fast, triangular_kernel  # noqa: E402
 CORE = REPO / "data/families/dotted_b2_prune_02778.tif"
 BACKBONE = REPO / "data/raw/scored/h19_5_01922.tif"
 CONDUIT_CSV = REPO / "data/raw/external/gdr_wellspring_in_footprint.csv"
-RECEIPT = REPO / "evidence/build_h53_receipt_20261007.json"
+RECEIPT = REPO / "evidence/build_h55_receipt_20261007.json"
 CALIBRATION = REPO / "evidence/live_model_calibration_20261007.json"
-PRIMARY = REPO / ("docs/downloads/GEMSDOE48-H53-conduit-conflict-priced-"
+PRIMARY = REPO / ("docs/downloads/GEMSDOE48-H55-conduit-conflict-priced-"
                   "20261007-055da9855353-zeros-outside.tif")
 
 
@@ -136,7 +136,7 @@ def test_greedy_incremental_coverage_matches_exact_recomputation():
     core = rng.random((80, 80)) < 0.01
     pool = (rng.random((80, 80)) < 0.30) & ~core
     model = live_model.ForwardModel(1_000.0, 0.07, int(target.sum()))
-    priced = h53.price_addition_path(core, pool, target, break_even_bar=0.2 * 0.27 / 0.07,
+    priced = h55.price_addition_path(core, pool, target, break_even_bar=0.2 * 0.27 / 0.07,
                                      max_add=60, model=model)
     rows = priced["rows"]
     for n in (1, 5, 20, len(rows)):
@@ -156,7 +156,7 @@ def test_greedy_stops_at_the_bar_and_respects_the_safety_prefix():
     pool = (rng.random((70, 70)) < 0.4) & ~core
     model = live_model.ForwardModel(1_000.0, 0.07, int(target.sum()))
     bar = 0.2 * 0.27 / 0.07
-    priced = h53.price_addition_path(core, pool, target, break_even_bar=bar,
+    priced = h55.price_addition_path(core, pool, target, break_even_bar=bar,
                                      max_add=500, model=model, safety_factor=1.25)
     gains = priced["gains"]
     assert (gains[:priced["n_admitted_at_break_even"]] >= bar - 1e-9).all()
@@ -176,8 +176,8 @@ def test_dart_throw_enforces_min_separation_and_is_deterministic():
     score[10, 20] = 1.0
     score[40, 40] = 0.5
     allowed = score > 0
-    first = h53.dart_throw(score, allowed, 3.0, 10)
-    second = h53.dart_throw(score, allowed, 3.0, 10)
+    first = h55.dart_throw(score, allowed, 3.0, 10)
+    second = h55.dart_throw(score, allowed, 3.0, 10)
     assert np.array_equal(first, second), "dart throwing must be deterministic"
     pairs = [(int(a[0]), int(a[1])) for a in first]
     assert (10, 10) in pairs and (10, 12) not in pairs and (10, 20) in pairs
@@ -367,7 +367,7 @@ def test_primary_artifact_is_binary_in_range_and_contains_the_core():
 
 @needs(RECEIPT)
 def test_uniqueness_audit_passed():
-    path = REPO / "evidence/h53_uniqueness_audit_20261007.json"
+    path = REPO / "evidence/h55_uniqueness_audit_20261007.json"
     if not path.exists():
         pytest.skip("uniqueness audit not run yet")
     audit = json.loads(path.read_text())

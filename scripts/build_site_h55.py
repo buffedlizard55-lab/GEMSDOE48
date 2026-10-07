@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""Build the H53 GitHub Pages set from the receipts.
+"""Build the H55 GitHub Pages set from the receipts.
 
 Every number on these pages is read out of a receipt written by
-``scripts/calibrate_live_model.py``, ``scripts/build_submission_h53.py``,
-``scripts/audit_h53.py``, ``scripts/validate_submission.py`` or
+``scripts/calibrate_live_model.py``, ``scripts/build_submission_h55.py``,
+``scripts/audit_h55.py``, ``scripts/validate_submission.py`` or
 ``scripts/run_spatial_holdout.py``.  Nothing is transcribed by hand, so the site cannot
 drift from the artifacts.
 
-Usage:  python scripts/build_site_h53.py
+Usage:  python scripts/build_site_h55.py
 """
 from __future__ import annotations
 
@@ -21,12 +21,12 @@ ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
 DL = DOCS / "downloads"
 
-RECEIPT = json.loads((ROOT / "evidence/build_h53_receipt_20261007.json").read_text())
+RECEIPT = json.loads((ROOT / "evidence/build_h55_receipt_20261007.json").read_text())
 CALIB = json.loads((ROOT / "evidence/live_model_calibration_20261007.json").read_text())
-AUDIT = json.loads((ROOT / "evidence/h53_uniqueness_audit_20261007.json").read_text())
-FORMAT = json.loads((ROOT / "evidence/h53_primary_format_audit_20261007.json").read_text())
-HOLDOUT = json.loads((ROOT / "evidence/holdout_h53_spatial_20261007.json").read_text())
-SLATE = json.loads((ROOT / "evidence/hypothesis_slate_h53_20261007.json").read_text())
+AUDIT = json.loads((ROOT / "evidence/h55_uniqueness_audit_20261007.json").read_text())
+FORMAT = json.loads((ROOT / "evidence/h55_primary_format_audit_20261007.json").read_text())
+HOLDOUT = json.loads((ROOT / "evidence/holdout_h55_spatial_20261007.json").read_text())
+SLATE = json.loads((ROOT / "evidence/hypothesis_slate_h55_20261007.json").read_text())
 
 PRIMARY = RECEIPT["files"]["primary_zeros_outside"]
 ZIPINFO = RECEIPT["files"]["primary_zip"]
@@ -126,7 +126,7 @@ NAV = """<nav class="top"><div class="wrap">
 <a href="irregularities.html">Irregularities</a>
 <a href="sources.html">Sources</a>
 <a href="next-steps.html">Next steps</a>
-<a href="research/h53-live-model-ceiling-and-candidate-20261007.md">Full report</a>
+<a href="research/h55-live-model-ceiling-and-candidate-20261007.md">Full report</a>
 </div></nav>"""
 
 
@@ -149,7 +149,7 @@ def page(title: str, desc: str, body: str, extra_head: str = "") -> str:
 <footer class="wrap">
 <p><strong>GEMSDOE48</strong> — auditable fault-surface research for DrivenData competition 306
 (DOE GEMS Prize). Built {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')} by
-<code>scripts/build_site_h53.py</code> directly from the receipts in <code>evidence/</code>.</p>
+<code>scripts/build_site_h55.py</code> directly from the receipts in <code>evidence/</code>.</p>
 <p class="small"><strong>No organizer score exists for any file in this repository.</strong>
 Every live number is OWNER-REPORT class: a score pasted by the repository owner, not an
 organizer receipt. Proxy numbers are computed against public map layers, not the private
@@ -332,7 +332,7 @@ is not.</div>
 <a class="btn" href="validation.html">Blocked holdout + audits</a>
 <a class="btn" href="irregularities.html">Irregularities found</a>
 <a class="btn" href="next-steps.html">Remaining work + limitations</a>
-<a class="btn" href="research/h53-live-model-ceiling-and-candidate-20261007.md">Full technical report</a>
+<a class="btn" href="research/h55-live-model-ceiling-and-candidate-20261007.md">Full technical report</a>
 </div>
 
 <h2>Candidates from earlier sessions — all preserved, none recommended</h2>
@@ -357,7 +357,7 @@ that rejected most of them are now themselves in question.</p>
 <td><a href="downloads/gemsdoe48-h50-ds-b2xh36rung30-20261007-5b59e106-zeros.tif">zeros</a> ·
 <a href="downloads/gemsdoe48-h50-ds-b2xh36rung30-20261007-5b59e106-nan.tif">nan</a></td></tr>
 <tr><td>H49</td><td>Yager conflict-balanced emission (47,905 px) — best prior proxy score</td>
-<td>SGMC 0.100751 vs prior union 0.096992; live-equivalent priced by H53 at 0.2638</td>
+<td>SGMC 0.100751 vs prior union 0.096992; live-equivalent priced by H55 at 0.2638</td>
 <td><a href="downloads/GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif">nan</a> ·
 <a href="downloads/gemsdoe48-h49-ds-conflict-balanced-20261006-e6f08013888b.tif">zeros</a></td></tr>
 <tr><td>H48</td><td>ρ = 0.5 Dempster fusion of the two best families</td>
@@ -372,12 +372,12 @@ that rejected most of them are now themselves in question.</p>
 <a href="downloads/"><code>docs/downloads/</code></a>.</p>
 
 <p class="small">Prior sessions are preserved verbatim under
-<a href="archive-main-pages/pre-h53-20261007/index.html"><code>docs/archive-main-pages/pre-h53-20261007/</code></a>
+<a href="archive-main-pages/pre-h55-20261007/index.html"><code>docs/archive-main-pages/pre-h55-20261007/</code></a>
 (H48 → H52) and <a href="ds48-fusion/index.html"><code>ds48-fusion/</code></a>,
 <a href="h49/index.html"><code>h49/</code></a>, <a href="h50/index.html"><code>h50/</code></a>.
 Every earlier candidate remains downloadable; none of them is this session's file.</p>
 """
-    return page("GEMSDOE48 — H53: live-calibrated ceiling and one unique submission",
+    return page("GEMSDOE48 — H55: live-calibrated ceiling and one unique submission",
                 "A two-constant forward model fitted to eight owner-reported live scores proves "
                 "the 0.2778 corridor family is capped at 0.2843, and prices one new additive "
                 "candidate built on GDR hydrothermal conduit evidence.", body)
@@ -391,7 +391,7 @@ def build_exec() -> str:
     fc = FC
     body = f"""
 <header style="background:none;padding:0">
-<p class="eyebrow" style="color:var(--muted)">Executive summary · 2026-10-07 · H53 session</p>
+<p class="eyebrow" style="color:var(--muted)">Executive summary · 2026-10-07 · H55 session</p>
 <h1>What we know now, what we shipped, and what it is worth</h1>
 </header>
 
@@ -455,7 +455,7 @@ emitted px against the backbone's 0.1007 — 41 % more efficient — and score 5
 <p>The one out-of-family transfer test available gives an implied ρ of
 {OOF['implied_rho']:.5f} against the family's {LM['rho']:.5f}: the model
 <strong>under-predicts out-of-family T by {abs(OOF['relative_transfer_error_pct']):.1f} %</strong>.
-That is why H53's conduit anchors are reported as a scenario band and never as a prediction —
+That is why H55's conduit anchors are reported as a scenario band and never as a prediction —
 and why the bias direction favours them.</p>
 
 <h2>6 · What was shipped</h2>
@@ -507,8 +507,8 @@ gates pass against both parents in 4/4 folds, but the holdout script is correct 
 is not private-label evidence. The decision to upload is the owner's; §6 and the scenario table
 give the exact downside. All eight live scores used to build the model are OWNER-REPORT class.</div>
 """
-    return page("GEMSDOE48 H53 — executive summary",
-                "Executive summary of the H53 session: the live-calibrated forward model, the "
+    return page("GEMSDOE48 H55 — executive summary",
+                "Executive summary of the H55 session: the live-calibrated forward model, the "
                 "0.2843 family ceiling, the proxy invalidation, and the shipped candidate.", body)
 
 
@@ -584,7 +584,7 @@ this project and both have owner-reported live scores:</p>
          '<span class="pill no">exposed</span>']])}
 <p>The organizers' own reference solution (<code>gems-prize-reference-solution</code>, notebook
 cell 19) writes an all-finite float32 raster with <code>nodata</code> unset and no NaN handling at
-all, which is why that encoding is the primary here. A NaN-outside twin of the H53 candidate is
+all, which is why that encoding is the primary here. A NaN-outside twin of the H55 candidate is
 still shipped for the sample-template convention; its own audit records
 <code>portal_range_error_immune: false</code> rather than hiding the exposure. <strong>If the
 portal ever rejects the primary, do not switch to the twin</strong> — re-check the SHA-256 and
@@ -594,10 +594,10 @@ report the exact message, because the primary has no out-of-range cell to reject
 {table(["check", "result"],
        [[k.replace("_", " "), f'<span class="pill {"yes" if v else "no"}">{"pass" if v else "FAIL"}</span>']
         for k, v in checks.items()])}
-<p class="small">Source: <a href="../evidence/h53_uniqueness_audit_20261007.json">
-<code>evidence/h53_uniqueness_audit_20261007.json</code></a> and
-<a href="../evidence/h53_primary_format_audit_20261007.json">
-<code>evidence/h53_primary_format_audit_20261007.json</code></a>. Uniqueness is byte-level (no
+<p class="small">Source: <a href="../evidence/h55_uniqueness_audit_20261007.json">
+<code>evidence/h55_uniqueness_audit_20261007.json</code></a> and
+<a href="../evidence/h55_primary_format_audit_20261007.json">
+<code>evidence/h55_primary_format_audit_20261007.json</code></a>. Uniqueness is byte-level (no
 SHA-256 collision with any raster or recorded hash in this repository) and pixel-level (highest
 Jaccard against any prior artifact is
 {AUDIT['top_10_most_similar_prior_candidates'][0]['jaccard']:.4f}, the untouched core, so the
@@ -614,8 +614,8 @@ binarisation, because the metric is binary-optimal. Every earlier candidate in
 receipts and its own recorded gate failure; none of them is this session's file and none is
 recommended.</p>
 """
-    return page("GEMSDOE48 H53 — how to submit",
-                "Step-by-step submission instructions for the H53 GeoTIFF, including the fix for "
+    return page("GEMSDOE48 H55 — how to submit",
+                "Step-by-step submission instructions for the H55 GeoTIFF, including the fix for "
                 "the 'Predicted values must be in range [0, 1]' rejection.", body)
 
 
@@ -647,14 +647,14 @@ DTI   = TPw / (TPw + 0.2·FPw + 0.8·FNw)</code></pre>
 <code>k</code>: <code>d/dv[(T₀ + v·k)/(D₀ + 0.2v)] = (k·D₀ − 0.2·T₀)/(D₀ + 0.2v)²</code>, whose
 sign is that of <code>k − 0.2·DTI</code> and is <strong>independent of v</strong>. Every cell is
 pushed to 0 or 1, so a graded belief surface is strictly worse than its own binarisation. Asserted
-numerically in <code>tests/test_h53.py::test_binary_emission_is_dti_optimal</code>.</p>
+numerically in <code>tests/test_h55.py::test_binary_emission_is_dti_optimal</code>.</p>
 <h3>(b) An added pixel pays iff its kernel weight exceeds 0.2·DTI</h3>
 <p>0.0556 at DTI = 0.2778, i.e. 0.397 × the mean credit of a dot in the live-best artifact
 ({TRUTH[4]['credit_per_px']:.4f}).</p>
 <h3>(c) Adding a pixel can never reduce TPw</h3>
 <p><code>TPw</code> is a <em>maximum</em> over emitted pixels. The only risk of an addition is the
 0.2 denominator cost, which makes the worst case of an additive candidate
-<strong>exactly computable</strong>. This is why H53 is additive-only and why its floor is a bound
+<strong>exactly computable</strong>. This is why H55 is additive-only and why its floor is a bound
 rather than an estimate.</p>
 
 <h2>3 · The removal-regime collapse</h2>
@@ -710,7 +710,7 @@ a prediction — and the bias direction means new signal is more likely under-pr
 over       X ⊇ C ,  X ⊂ (footprint ∧ &gt;200 m off-catalogue ∧ ¬catalogue)</code></pre>
 <p>Greedy maximum-coverage selection is used, with exact incremental coverage updates (verified
 against full recomputation in
-<code>tests/test_h53.py::test_greedy_incremental_coverage_matches_exact_recomputation</code>).
+<code>tests/test_h55.py::test_greedy_incremental_coverage_matches_exact_recomputation</code>).
 A site is admitted while its marginal coverage gain clears
 <code>1.25 × 0.2 × DTI_C / ρ = {CON['a2_conflict_priced_gap_closure']['break_even_bar_coverage_units']:.4f}</code>
 coverage units. The 1.25 safety factor is pre-registered and makes the choice robust to a ±25 %
@@ -740,20 +740,20 @@ gap-closure pool is drawn from and where the conduit anchors are vetoed unless a
 arbitrates. The unassigned mass m(Θ) ships as its own layer exactly as the brief asks.</p>
 
 <h2>9 · Reproduce</h2>
-<pre><code>python scripts/restore_h53_inputs.py                       # 7 hash-pinned mirrors, fail closed
-python scripts/restore_h53_inputs.py --with-official-features   # optional 419 MB 19-band stack
+<pre><code>python scripts/restore_h55_inputs.py                       # 7 hash-pinned mirrors, fail closed
+python scripts/restore_h55_inputs.py --with-official-features   # optional 419 MB 19-band stack
 python scripts/calibrate_live_model.py                     # |G|, rho, frontier, ceiling table
-python scripts/build_submission_h53.py                     # candidate + diagnostics + receipts
-python scripts/audit_h53.py                                # 18-point uniqueness/integrity audit
+python scripts/build_submission_h55.py                     # candidate + diagnostics + receipts
+python scripts/audit_h55.py                                # 18-point uniqueness/integrity audit
 python scripts/validate_submission.py docs/downloads/{NAME}-zeros-outside.tif \\
-       --receipt evidence/h53_primary_format_audit_20261007.json
+       --receipt evidence/h55_primary_format_audit_20261007.json
 python scripts/run_spatial_holdout.py \\
        --combined docs/downloads/{NAME}-zeros-outside.tif \\
-       --candidate-name h53_conduit_conflict_priced \\
-       --output evidence/holdout_h53_spatial_20261007.json --allow-unpinned-sources
+       --candidate-name h55_conduit_conflict_priced \\
+       --output evidence/holdout_h55_spatial_20261007.json --allow-unpinned-sources
 python -m pytest -q                                        # 158 passed, 3 skipped</code></pre>
 """
-    return page("GEMSDOE48 H53 — method",
+    return page("GEMSDOE48 H55 — method",
                 "Derivation of the DTI metric algebra, the live-calibrated forward model, the "
                 "coverage-frontier ceiling and the Dempster-Shafer selection rule.", body)
 
@@ -806,15 +806,15 @@ family at all (transfer error {OOF['relative_transfer_error_pct']:.1f} %).</div>
        [[html.escape(r["idea"]), html.escape(r["why_rejected"])] for r in SLATE["rejected"]])}
 
 <p class="small">Full prose version with every measured number and its source:
-<a href="research/hypothesis-slate-h53-20261007.md"><code>docs/research/hypothesis-slate-h53-20261007.md</code></a>.
+<a href="research/hypothesis-slate-h55-20261007.md"><code>docs/research/hypothesis-slate-h55-20261007.md</code></a>.
 Machine-readable twin:
-<a href="../evidence/hypothesis_slate_h53_20261007.json"><code>evidence/hypothesis_slate_h53_20261007.json</code></a>.
+<a href="../evidence/hypothesis_slate_h55_20261007.json"><code>evidence/hypothesis_slate_h55_20261007.json</code></a>.
 Prior slates are preserved at
 <a href="research/hypotheses-h52-20261007.md">H52</a>,
 <a href="research/hypotheses-20261007.md">H50</a> and
 <a href="archive-main-pages/hypotheses-main-20261006.html">H48/H49</a>.</p>
 """
-    return page("GEMSDOE48 H53 — hypothesis slate",
+    return page("GEMSDOE48 H55 — hypothesis slate",
                 "Five preregistered geological hypotheses ranked by expected DTI improvement "
                 "against implementation cost, with data-obtainability verified.", body)
 
@@ -827,11 +827,11 @@ def build_validation() -> str:
     res = HOLDOUT["results"]
     sg = HOLDOUT["sgmc_off_catalogue_results"]
     order = ["dotted", "tip_stepover", "arithmetic_mean", "prior_alpha_099_belief",
-             "prior_union_decision", "h53_conduit_conflict_priced"]
+             "prior_union_decision", "h55_conduit_conflict_priced"]
     labels = {"dotted": "dotted parent (C, live 0.2778)", "tip_stepover": "tip/step-over parent (live 0.2632)",
               "arithmetic_mean": "arithmetic mean of the two", "prior_alpha_099_belief": "prior α = 0.99 belief",
               "prior_union_decision": "prior union decision (47,905 px)",
-              "h53_conduit_conflict_priced": "<strong>H53 (this candidate)</strong>"}
+              "h55_conduit_conflict_priced": "<strong>H55 (this candidate)</strong>"}
     rows = [[labels[k]] + [f"{res[k][q]['dti']:.6f}" for q in ("NW", "NE", "SW", "SE")]
             + [f"<strong>{res[k]['mean_dti']:.6f}</strong>", f"{sg[k]['mean_dti']:.6f}"] for k in order]
     def dig(path: str) -> dict:
@@ -872,19 +872,19 @@ sources are public map proxies, not the private expert labels.</p>
 <h3>Paired gates</h3>
 {table(["comparison", "mean Δ DTI", "folds positive", "numeric gate"], gates)}
 
-<div class="warn"><strong>Read the catalogue-proxy column carefully.</strong> H53 loses badly to the
+<div class="warn"><strong>Read the catalogue-proxy column carefully.</strong> H55 loses badly to the
 tip parent, the mean and the union on that proxy — and that is structural, not a defect. Those
 surfaces emit <em>on</em> catalogue-adjacent corridors, and the catalogue proxy's truth is the
 catalogue. C is built by deleting everything within 200 m of the catalogue, so it scores 0.0068 on
-a proxy whose truth is the catalogue while scoring 0.2778 live. H53 inherits that. The meaningful
+a proxy whose truth is the catalogue while scoring 0.2778 live. H55 inherits that. The meaningful
 rows are the two against its own parents.</div>
 
-<div class="good"><strong>H53 is the first candidate in this repository to beat both parents in all
+<div class="good"><strong>H55 is the first candidate in this repository to beat both parents in all
 four folds on the SGMC-off proxy</strong> (+0.000795 against each, 4/4), and to beat its dotted
 parent on both proxies in all four folds. H48, H49, H50, H50-B, H51 and H52 each lost to at least
 one parent.</div>
 
-<div class="bad"><strong>And the same proxy ranks the naive union above H53</strong> (0.096992 vs
+<div class="bad"><strong>And the same proxy ranks the naive union above H55</strong> (0.096992 vs
 0.096286), while the live-calibrated model prices that union at {UNION['live_equivalent']:.4f}
 live-equivalent — {UNION['delta_vs_C_model']:+.4f} against C, whose ingredients scored 0.2778 and
 0.2632 live. Both cannot be right. An emission built directly on this proxy scored 0.0512 live.
@@ -941,7 +941,7 @@ recomputation to &lt; 1e-6 relative
 <h2>Test suite</h2>
 <p><code>python -m pytest -q</code> → <strong>158 passed, 3 skipped</strong> (the three skips are
 pre-existing data-dependent tests whose mirrors are absent in CI).
-<code>tests/test_h53.py</code> adds 22 tests covering the metric's binary optimality, the |G|
+<code>tests/test_h55.py</code> adds 22 tests covering the metric's binary optimality, the |G|
 identification and its 0.11 % rung self-consistency, the forward model's bounds, coverage
 monotonicity, the greedy's incremental-vs-exact coverage equality, the safety-factor prefix rule,
 dart-throw separation and determinism, the conduit tier rules including the trailing-whitespace
@@ -949,9 +949,9 @@ dart-throw separation and determinism, the conduit tier rules including the trai
 algebra including the K = 1 vacuous-mass fallback, the all-finite GeoTIFF writer's round trip and
 its range rejection, and the internal consistency of the build, format and uniqueness receipts.</p>
 """
-    return page("GEMSDOE48 H53 — validation",
+    return page("GEMSDOE48 H55 — validation",
                 "Blocked spatial holdout on two public proxies, format audit, uniqueness audit, "
-                "determinism check and test suite for the H53 candidate.", body)
+                "determinism check and test suite for the H55 candidate.", body)
 
 
 # ---------------------------------------------------------------------------
@@ -984,10 +984,10 @@ were not verified; the upstream quadrant evaluator that masked truth but retaine
 predictions and is not comparable to the current core-plus-halo folds; and the retired automatic
 leaderboard feed, preserved as <code>.github/workflows/feed.yml.disabled</code>. Full text:
 <a href="../docs/irregularities.md"><code>docs/irregularities.md</code></a> and the
-<a href="archive-main-pages/pre-h53-20261007/irregularities.html">pre-H53 snapshot</a>.</p>
+<a href="archive-main-pages/pre-h55-20261007/irregularities.html">pre-H55 snapshot</a>.</p>
 """
-    return page("GEMSDOE48 H53 — irregularities",
-                "Irregularities found and flagged during the H53 session, with the evidence and the "
+    return page("GEMSDOE48 H55 — irregularities",
+                "Irregularities found and flagged during the H55 session, with the evidence and the "
                 "action taken for each.", body)
 
 
@@ -1011,7 +1011,7 @@ def build_sources() -> str:
 {table(["role", "path", "SHA-256", "bytes"],
        [[r, f"<code>{v['path']}</code>", f"<code class='mono'>{v['sha256'][:24]}…</code>",
          f"{v['bytes']:,}"] for r, v in RECEIPT["inputs"].items()])}
-<p class="small">Restored with <code>scripts/restore_h53_inputs.py</code> over <code>gh api</code>
+<p class="small">Restored with <code>scripts/restore_h55_inputs.py</code> over <code>gh api</code>
 (GitHub egress only). Every fetch fails closed on a SHA-256 mismatch. Owner mirrors are
 <strong>not organizer-authenticated</strong>; hash pinning establishes byte identity only.
 DrivenData was never contacted: its terms of use prohibit robots and automatic access.</p>
@@ -1020,10 +1020,10 @@ DrivenData was never contacted: its terms of use prohibit robots and automatic a
 host outside this sandbox's allow-list (<code>prd-tnm.s3.amazonaws.com</code>,
 <code>earthexplorer.usgs.gov</code>, <code>portal.opentopography.org</code>,
 <code>earthquake.usgs.gov</code> all return HTTP 000 here). The official 19-band feature stack was
-obtained from a pinned GitHub mirror instead, which is why H53-B and H53-C are viable at all.</p>
+obtained from a pinned GitHub mirror instead, which is why H55-B and H55-C are viable at all.</p>
 """
-    return page("GEMSDOE48 H53 — sources",
-                "External sources behind the H53 session, what each supports, and the limit of each.",
+    return page("GEMSDOE48 H55 — sources",
+                "External sources behind the H55 session, what each supports, and the limit of each.",
                 body)
 
 
@@ -1049,7 +1049,7 @@ detector.</div>
 
 <h2>Ordered priorities</h2>
 <ol class="steps">
-<li><strong>Submit H53 and record the returned score.</strong> Cost: one weekly slot. Value: it is
+<li><strong>Submit H55 and record the returned score.</strong> Cost: one weekly slot. Value: it is
 the only experiment available that can test the hydrothermal-conduit hypothesis, and the arithmetic
 was built so the answer is legible — materially above 0.2778 means conduits carry credit, near
 {RISK['floor_all_added_pixels_zero_credit']['live_equivalent']:.4f} means they do not. Worst case
@@ -1059,22 +1059,22 @@ highest-information slot in the project. A dense (unthinned) emission of any new
 directly to that field's total truth yield T under the calibrated |G|, and simultaneously
 re-calibrates ρ for a second family — converting the instrument from within-family to cross-family
 and making every later candidate priceable offline. The best first field is
-<strong>H53-B</strong> (strain-rate localisation ridges), because bands 4/7/8/16 are measured here
+<strong>H55-B</strong> (strain-rate localisation ridges), because bands 4/7/8/16 are measured here
 to be close to pure unused information (dot lift 1.03 – 1.08).</li>
-<li><strong>Implement H53-B.</strong> Data is in hand and byte-verified. Multi-scale vesselness /
+<li><strong>Implement H55-B.</strong> Data is in hand and byte-verified. Multi-scale vesselness /
 Sato ridge filter plus structure-tensor coherence on <code>log(second invariant)</code> and
 <code>shear rate</code> at 300 – 900 m; keep coherence above the 95th percentile; emit with the
 existing greedy coverage rule and the existing pre-registered budget. Cost low-medium.</li>
-<li><strong>Unblock H53-D.</strong> Verify the units of <code>facing_at</code> against
+<li><strong>Unblock H55-D.</strong> Verify the units of <code>facing_at</code> against
 <code>strike_at</code> in <code>src/gemsdoe48/scarp3m.py</code> and
 <code>data/external/h52_scarp3m_merge_log.txt</code> before building any along-strike walk — the
 measured median perpendicularity is 46°, not ~0°, so one of the two is not what its name says.
 Then re-test lidar scarps as <em>traces</em> rather than points. Highest ceiling of any candidate.</li>
-<li><strong>Implement H53-C.</strong> Basement-depth second derivative × isostatic-gravity
+<li><strong>Implement H55-C.</strong> Basement-depth second derivative × isostatic-gravity
 horizontal gradient × conductivity contrast. Targets a measured blind spot: C's dots sit on shallow
 basement (402 m vs 535 m) and on topographic highs (+7.3 vs −15.6), so the family systematically
 misses <em>buried</em> basin-margin faults. Data in hand; cost low.</li>
-<li><strong>Ride H53-E on the result of step 1.</strong> Three-source Dempster conjunction
+<li><strong>Ride H55-E on the result of step 1.</strong> Three-source Dempster conjunction
 (Quaternary trace with a recorded slip rate × conduit tier × strain ridge). Small mass, small in
 both directions, and its prior probability depends entirely on whether step 1 says conduit evidence
 carries credit.</li>
@@ -1105,7 +1105,7 @@ receipt plus an independent format audit plus blocked evidence. Build downloads 
 primary. Static pages are maintained alongside <code>docs/research/</code> and the receipts. Run
 <code>python -m pytest -q</code> before merging.</p>
 """
-    return page("GEMSDOE48 H53 — next steps",
+    return page("GEMSDOE48 H55 — next steps",
                 "Remaining work, ordered priorities and the limitations that block a higher score.",
                 body)
 
@@ -1116,21 +1116,21 @@ def build_research() -> str:
 <p class="eyebrow" style="color:var(--muted)">Research index</p>
 <h1>Reports, in reverse chronological order</h1>
 </header>
-<h2>This session (H53, 2026-10-07)</h2>
+<h2>This session (H55, 2026-10-07)</h2>
 <ul>
-<li><a href="research/h53-live-model-ceiling-and-candidate-20261007.md"><strong>A live-calibrated
+<li><a href="research/h55-live-model-ceiling-and-candidate-20261007.md"><strong>A live-calibrated
 forward model, the family ceiling, and a conduit-anchored candidate</strong></a> — the primary
 report. Contains the metric algebra, the eight-artifact inversion, the coverage-frontier ceiling,
-the proxy invalidation, the H53 construction, the risk accounting and the limitations.</li>
-<li><a href="research/hypothesis-slate-h53-20261007.md">Hypothesis slate H53</a> — five candidates
+the proxy invalidation, the H55 construction, the risk accounting and the limitations.</li>
+<li><a href="research/hypothesis-slate-h55-20261007.md">Hypothesis slate H55</a> — five candidates
 frozen before scoring, plus seven rejected ideas with reasons.</li>
 <li><a href="../evidence/live_model_calibration_20261007.json">Live-model calibration receipt</a> ·
 <a href="../evidence/coverage_weighting_comparison_20261007.json">coverage-weighting comparison</a> ·
 <a href="../evidence/live_model_inverted_truth_20261007.csv">inverted-truth table (CSV)</a> ·
-<a href="../evidence/build_h53_receipt_20261007.json">build receipt</a> ·
-<a href="../evidence/holdout_h53_spatial_20261007.json">blocked holdout</a> ·
-<a href="../evidence/h53_uniqueness_audit_20261007.json">uniqueness audit</a> ·
-<a href="../evidence/review_passes_20261007_h53.md">three review passes</a></li>
+<a href="../evidence/build_h55_receipt_20261007.json">build receipt</a> ·
+<a href="../evidence/holdout_h55_spatial_20261007.json">blocked holdout</a> ·
+<a href="../evidence/h55_uniqueness_audit_20261007.json">uniqueness audit</a> ·
+<a href="../evidence/review_passes_20261007_h55.md">three review passes</a></li>
 </ul>
 <h2>Earlier sessions, preserved verbatim</h2>
 <ul>
@@ -1140,16 +1140,16 @@ frozen before scoring, plus seven rejected ideas with reasons.</li>
 probe</a> · <a href="research/hypotheses-20261007.md">H50 slate</a> ·
 <a href="research/h50-gdr-probe-slate-20261007.md">H50-GDR probe</a></li>
 <li><a href="research/why-02778-and-ceiling-20261007.md">Why 0.2778 won (earlier ceiling
-analysis)</a> — <strong>superseded</strong> by §3 of the H53 report, which measures the frontier
+analysis)</a> — <strong>superseded</strong> by §3 of the H55 report, which measures the frontier
 instead of estimating it and corrects the dense backbone's pixel count and truth yield</li>
 <li><a href="research/holdout-results-20261006.md">H48/H49 blocked holdout</a> ·
 <a href="research/holdout-h49-results-20261006.md">H49 same-protocol re-score</a></li>
-<li>Site snapshots: <a href="archive-main-pages/pre-h53-20261007/index.html">pre-H53 main pages</a> ·
+<li>Site snapshots: <a href="archive-main-pages/pre-h55-20261007/index.html">pre-H55 main pages</a> ·
 <a href="ds48-fusion/index.html">ds48-fusion</a> · <a href="h49/index.html">h49</a> ·
 <a href="h50/index.html">h50</a> · <a href="archive-main-pages/pr5/index-main-pr5.html">PR #5</a></li>
 </ul>
 <div class="warn"><strong>Reading order matters here.</strong> Several earlier reports rank
-candidates by the SGMC off-catalogue proxy and by catalogue lift. §4 of the H53 report shows both
+candidates by the SGMC off-catalogue proxy and by catalogue lift. §4 of the H55 report shows both
 screens are contradicted by an owner-reported live score of 0.0512 for an emission built directly
 on that proxy. The earlier numbers are not wrong as computations — they are wrong as
 <em>instruments</em>, and the gate decisions that rested on them (H50, H51, H52) should be read as

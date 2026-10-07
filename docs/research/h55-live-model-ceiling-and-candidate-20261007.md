@@ -1,8 +1,8 @@
-# H53 — a live-calibrated forward model, the family ceiling, and a conduit-anchored candidate
+# H55 — a live-calibrated forward model, the family ceiling, and a conduit-anchored candidate
 
-Session date: **2026-10-07 UTC**. Candidate label: **H53**. Everything below is
+Session date: **2026-10-07 UTC**. Candidate label: **H55**. Everything below is
 recomputed from files in this repository by `scripts/calibrate_live_model.py`,
-`scripts/build_submission_h53.py`, `scripts/audit_h53.py` and
+`scripts/build_submission_h55.py`, `scripts/audit_h55.py` and
 `scripts/run_spatial_holdout.py`; receipts are named inline. No number here is
 transcribed from memory, and **no organizer score exists for any file in this
 repository**.
@@ -17,7 +17,7 @@ repository**.
 | Can 0.3195 be reached by combining the two best families? | **No.** The two families recover statistically identical hidden truth (T = 5,209 vs 5,157, 1 % apart), so their union adds 27 % mass and almost no truth. The live-calibrated model prices the naive union at **0.2588 model / 0.2638 live-equivalent, i.e. −0.0140**. |
 | Can 0.2888 (#8), 0.3195 (#7), 0.3262, 0.3345 or 0.3774 (#1) be reached from this backbone at *any* mass? | **No — none of them.** Maximising `rho·Cov/(0.2 S + 0.8 \|G\|)` over *all* subset sizes of `B_elig` peaks at **n = 37,167, model DTI 0.2793, live-equivalent 0.2843**. Every leaderboard row above 0.2778 needs more truth than any subset of this field can deliver. |
 | Can 0.3774 (the actual #1) be reached from anything in this repository? | **No, and not even in principle.** 0.3774 needs T = 7,077 at 37,654 px. The *dense, unthinned* backbone's entire truth yield — all 121,131 px emitted — is T = 6,813. The leader's numerator exceeds the total truth content of the best corridor field in this repository. |
-| What is shipped? | `GEMSDOE48-H53-conduit-conflict-priced-20261007-055da9855353` — the 0.2778 core untouched, plus 1,124 conflict-priced gap dots and 652 hydrothermal-conduit anchors (39,430 px total). Blocked proxies: **+0.001031 catalogue (4/4 folds)** and **+0.000795 SGMC-off (4/4 folds)** against the dotted parent, and **+0.000795 SGMC-off (4/4 folds)** against the tip parent — the first candidate in this repository to beat *both* parents in *every* fold on the SGMC proxy. |
+| What is shipped? | `GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353` — the 0.2778 core untouched, plus 1,124 conflict-priced gap dots and 652 hydrothermal-conduit anchors (39,430 px total). Blocked proxies: **+0.001031 catalogue (4/4 folds)** and **+0.000795 SGMC-off (4/4 folds)** against the dotted parent, and **+0.000795 SGMC-off (4/4 folds)** against the tip parent — the first candidate in this repository to beat *both* parents in *every* fold on the SGMC proxy. |
 | What is the honest expected live score? | Floor **0.2727** if every added pixel earns zero; **0.2778** if only the in-family additions pay; **0.2797 – 0.2880** as the conduit anchors' credit rises from break-even (0.0556) to 0.30. The addition is designed as a **measurement**: A2's modelled gain is **+0.0019** and A1's denominator cost at zero credit is **−0.0019** — they cancel to **−0.00003**, so the returned live score is a clean read on the conduit hypothesis. |
 
 ---
@@ -41,7 +41,7 @@ DTI   = TPw / (TPw + 0.2 FPw + 0.8 FNw)
 argmax of its truth pixel with realised weight `k`,
 `d/dv [(T0 + v k)/(D0 + 0.2 v)] = (k D0 − 0.2 T0)/(D0 + 0.2 v)²`, whose sign is that
 of `k − 0.2·DTI` and is **independent of `v`**. Every cell is therefore pushed to 0
-or 1. This is asserted numerically in `tests/test_h53.py::test_binary_emission_is_dti_optimal`
+or 1. This is asserted numerically in `tests/test_h55.py::test_binary_emission_is_dti_optimal`
 and is why the graded Dempster–Shafer layers ship as *diagnostics*.
 
 **(b) An added pixel pays iff its realised kernel weight exceeds `0.2·DTI`** — 0.0556
@@ -50,7 +50,7 @@ at DTI = 0.2778, i.e. 0.397× the mean credit of a dot in the live-best artifact
 **(c) Adding a pixel can never reduce `TPw`**, because `TPw` is a *maximum* over
 emitted pixels. The only risk of an addition is the 0.2 denominator cost. This makes
 the worst case of an additive candidate **exactly computable** rather than estimated,
-and it is the reason H53 is additive-only.
+and it is the reason H55 is additive-only.
 
 ---
 
@@ -98,7 +98,7 @@ scores. **Internal consistency check:** the three rungs invert to
 T = 5,210.3 / 5,216.0 / 5,209.4, i.e. within **0.11 %** of each other. That agreement
 is the strongest single piece of evidence in this repository that the removal
 mechanism is exactly "catalogue-adjacent dots earn zero", and it is asserted in
-`tests/test_h53.py::test_hidden_truth_fit_is_stable_and_positive`.
+`tests/test_h55.py::test_hidden_truth_fit_is_stable_and_positive`.
 
 This supersedes the earlier `|G| = 12,632` figure in `knowledge/research_notes.md`,
 which came from a different assumption (that the removed dots earned exactly the
@@ -173,10 +173,10 @@ Consequences, stated plainly:
 * The instrument is a **within-family** tool. It may be used to price re-thinnings,
   unions and gap closures of the h19-5 corridor field. It may **not** be used to
   price a new corridor field.
-* Every out-of-family mass in H53 is therefore reported as a **scenario band**, never
+* Every out-of-family mass in H55 is therefore reported as a **scenario band**, never
   as a point prediction.
 * The bias direction is known: out-of-family sets do *better* than the model says.
-  H53's conduit anchors are therefore more likely to be under-priced than over-priced.
+  H55's conduit anchors are therefore more likely to be under-priced than over-priced.
 
 ---
 
@@ -303,7 +303,7 @@ the catalogue-flank prune (dots ≤ 200 m from the catalogue earn ≈ 0) is conf
 
 ---
 
-## 5. H53 — the candidate
+## 5. H55 — the candidate
 
 ### 5.1 Construction (frozen before scoring)
 
@@ -311,7 +311,7 @@ the catalogue-flank prune (dots ≤ 200 m from the catalogue earn ≈ 0) is conf
 
 * **C** — the 37,654 px live-best dotted artifact, carried through **untouched**.
   Nothing is pruned, moved or re-weighted, so the T = 5,209 it already recovers cannot
-  be lost. Verified pixel-wise by `scripts/audit_h53.py`
+  be lost. Verified pixel-wise by `scripts/audit_h55.py`
   (`core_preserved_exactly: true`, intersection 37,654/37,654).
 * **A2 — conflict-priced gap closure (in-family, model-priced), 1,124 px.** The two
   families disagree on 10,251 pixels. Rather than average them, each candidate
@@ -340,7 +340,7 @@ verified). Hash-pinned local mirror
 `122718e65bdf55aab0ee12ad20d80062f0deb1de957225a61ad880dd5dc196ea`, 27,092 records.
 Its `dist_known_fault_px` column is label-derived and is **dropped on read**
 (`conduit.LEAKY_COLUMNS`, asserted by
-`tests/test_h53.py::test_conduit_reader_drops_the_label_derived_column`).
+`tests/test_h55.py::test_conduit_reader_drops_the_label_derived_column`).
 
 **Physical signature targeted.** A spring or well discharging at 75–296 °C requires a
 heat source, deep meteoric circulation, and a *permeable upflow pathway*. In the
@@ -370,7 +370,7 @@ this repository has ever shipped.
 | H50-GDR | INGENIOUS **2 m soil-temperature probes** | repeat-visit residual persistence | 0.003923, failed |
 | H52 | USGS 3DEP **1 m lidar** → 3 m scarp detector | step-height top-2,000 | 0.096409, failed gate |
 | H50-B | GeoDAWN **radiometrics** | low-Th/K alteration × conflict corridors | 0.019135, negative |
-| **H53 A1** | GDR **well & spring temperature + chemistry** (discharge T and silica/calcite reservoir T) | static physical tiering, DS-conflict vetoed, dart-thrown at 300 m | this candidate |
+| **H55 A1** | GDR **well & spring temperature + chemistry** (discharge T and silica/calcite reservoir T) | static physical tiering, DS-conflict vetoed, dart-thrown at 300 m | this candidate |
 
 Different physical quantity (deep fluid temperature and reservoir geothermometry, not
 shallow soil temperature, not topography, not gamma-ray spectrometry), different
@@ -416,7 +416,7 @@ the mean. The high rank correlation (Spearman 0.99994 on a 1-in-97 subsample) is
 expected and is *not* evidence of equivalence: on this support both statistics are
 monotone in the same coverage field. The affine residual and the difference
 distribution are the informative tests, and they are recorded in
-`evidence/build_h53_receipt_20261007.json → dempster_shafer.not_the_naive_mean`.
+`evidence/build_h55_receipt_20261007.json → dempster_shafer.not_the_naive_mean`.
 
 **Where DS actually enters the emission.** Two places, both as *structure*, not as a
 blended value:
@@ -468,7 +468,7 @@ because the frontier is already mapped and the conduit hypothesis is not.
 
 ## 6. Validation actually performed
 
-### 6.1 Blocked spatial holdout (`evidence/holdout_h53_spatial_20261007.json`)
+### 6.1 Blocked spatial holdout (`evidence/holdout_h55_spatial_20261007.json`)
 
 Four fixed quadrants, core truth plus a 300 m scoring halo, official DTI parameters,
 `scripts/run_spatial_holdout.py` unchanged.
@@ -480,35 +480,35 @@ Four fixed quadrants, core truth plus a 300 m scoring halo, official DTI paramet
 | arithmetic mean | 0.046406 | 0.088755 |
 | prior α = 0.99 belief | 0.046207 | 0.088715 |
 | prior union decision | 0.085538 | 0.096992 |
-| **H53** | **0.007862** | **0.096286** |
+| **H55** | **0.007862** | **0.096286** |
 
 Paired gates, stated in full:
 
 | comparison | catalogue proxy Δ | folds | SGMC-off proxy Δ | folds |
 |---|---:|:--:|---:|:--:|
-| H53 vs dotted parent (C) | **+0.001031** | **4/4** | **+0.000795** | **4/4** |
-| H53 vs tip/step-over parent | −0.078959 | 0/4 | **+0.000795** | **4/4** |
-| H53 vs arithmetic mean | −0.038545 | 0/4 | **+0.007532** | **4/4** |
-| H53 vs prior α = 0.99 belief | −0.038346 | 0/4 | **+0.007572** | **4/4** |
-| H53 vs prior union decision | −0.077677 | 0/4 | −0.000705 | 1/4 |
+| H55 vs dotted parent (C) | **+0.001031** | **4/4** | **+0.000795** | **4/4** |
+| H55 vs tip/step-over parent | −0.078959 | 0/4 | **+0.000795** | **4/4** |
+| H55 vs arithmetic mean | −0.038545 | 0/4 | **+0.007532** | **4/4** |
+| H55 vs prior α = 0.99 belief | −0.038346 | 0/4 | **+0.007572** | **4/4** |
+| H55 vs prior union decision | −0.077677 | 0/4 | −0.000705 | 1/4 |
 
 The catalogue-proxy losses against the tip parent, the mean and the union are structural,
 not a defect: those surfaces emit *on* catalogue-adjacent corridors, and the catalogue
 proxy rewards exactly that. C is built by deleting everything within 200 m of the
 catalogue, so it scores 0.0068 on a proxy whose truth is the catalogue — while scoring
-0.2778 live. H53 inherits that. **The meaningful row is the first one: H53 beats its own
+0.2778 live. H55 inherits that. **The meaningful row is the first one: H55 beats its own
 parent on both proxies in all four folds**, and it is the first candidate in this
 repository to do so.
 
 That last line is the proxy/live contradiction in one row: the SGMC proxy ranks the
-naive union above H53, while the live-calibrated instrument prices the same union at
+naive union above H55, while the live-calibrated instrument prices the same union at
 **−0.014** against C and the union's own ingredients scored 0.2778 and 0.2632 live.
 Both cannot be right. §4.1 explains which one to distrust.
 
 `slot_decision.cleared` remains **false** — the script is correct to say that a numeric
 proxy pass is not private-label evidence.
 
-### 6.2 Format and uniqueness (`evidence/h53_primary_format_audit_20261007.json`, `evidence/h53_uniqueness_audit_20261007.json`)
+### 6.2 Format and uniqueness (`evidence/h55_primary_format_audit_20261007.json`, `evidence/h55_uniqueness_audit_20261007.json`)
 
 18/18 checks pass: single band; float32; EPSG:32611; 3,730 × 3,292; transform
 `[100, 0, 243350, 0, −100, 4508550]`; **all 12,279,160 cells finite**; `nodata` unset;
@@ -545,7 +545,7 @@ cell 19) writes an **all-finite** float32 raster with `nodata` unset and no NaN
 handling at all. The single best-scoring artifact in the family tree is also
 all-finite.
 
-**Resolution:** the H53 **primary download is all-finite with zeros outside**, and the
+**Resolution:** the H55 **primary download is all-finite with zeros outside**, and the
 audit asserts `all_cells_finite`, `all_cells_in_range_0_1` and
 `portal_range_error_immune` on the *re-read bytes*, not on the in-memory array. A
 NaN-outside twin is shipped alongside for the sample-template convention and is
@@ -593,7 +593,7 @@ faults than the h19-5 field does. Three concrete moves, in order of expected val
    This session restored it **byte-identical to its manifest pin** (SHA-256
    `4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5`, 418,912,844
    bytes, 19 float32 bands) from five pinned shards with
-   `python scripts/restore_h53_inputs.py --with-official-features`. It is 419 MB and is
+   `python scripts/restore_h55_inputs.py --with-official-features`. It is 419 MB and is
    deliberately **not committed**. The 19 bands are: magnetic anomaly, reduced-to-pole,
    TMI horizontal gradient, geodetic second invariant of strain rate, isostatic gravity
    slope, tilt angle, geodetic shear rate, geodetic dilatation rate, TMI vertical
@@ -624,7 +624,7 @@ score for a dense `F` emission — the single most informative slot this project
 because it re-calibrates `rho` for a second family and converts the instrument from
 within-family to cross-family.
 
-The single highest-information submission available is **H53 itself**, because it is the
+The single highest-information submission available is **H55 itself**, because it is the
 only candidate whose live score would test a hypothesis the repository cannot test
 offline.
 
@@ -633,16 +633,16 @@ offline.
 ## 10. Reproduce
 
 ```bash
-python scripts/restore_h53_inputs.py                       # backbone, d1.5, SGMC-44k, conduit CSV (+2 external)
-python scripts/restore_h53_inputs.py --with-official-features   # optional: 419 MB 19-band official stack
+python scripts/restore_h55_inputs.py                       # backbone, d1.5, SGMC-44k, conduit CSV (+2 external)
+python scripts/restore_h55_inputs.py --with-official-features   # optional: 419 MB 19-band official stack
 python scripts/calibrate_live_model.py                     # -> evidence/live_model_calibration_20261007.json
-python scripts/build_submission_h53.py                     # -> docs/downloads/GEMSDOE48-H53-* + receipts
-python scripts/audit_h53.py                                # -> evidence/h53_uniqueness_audit_20261007.json
-python scripts/validate_submission.py docs/downloads/GEMSDOE48-H53-conduit-conflict-priced-20261007-055da9855353-zeros-outside.tif \
-       --receipt evidence/h53_primary_format_audit_20261007.json
+python scripts/build_submission_h55.py                     # -> docs/downloads/GEMSDOE48-H55-* + receipts
+python scripts/audit_h55.py                                # -> evidence/h55_uniqueness_audit_20261007.json
+python scripts/validate_submission.py docs/downloads/GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353-zeros-outside.tif \
+       --receipt evidence/h55_primary_format_audit_20261007.json
 python scripts/run_spatial_holdout.py \
-       --combined docs/downloads/GEMSDOE48-H53-conduit-conflict-priced-20261007-055da9855353-zeros-outside.tif \
-       --candidate-name h53_conduit_conflict_priced \
-       --output evidence/holdout_h53_spatial_20261007.json --allow-unpinned-sources
+       --combined docs/downloads/GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353-zeros-outside.tif \
+       --candidate-name h55_conduit_conflict_priced \
+       --output evidence/holdout_h55_spatial_20261007.json --allow-unpinned-sources
 python -m pytest -q                                        # 158 passed, 3 skipped
 ```

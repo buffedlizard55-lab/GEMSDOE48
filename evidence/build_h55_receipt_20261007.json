@@ -1,11 +1,11 @@
 {
-  "candidate_id": "GEMSDOE48-H53",
-  "session": "H53",
-  "generated_utc": "2026-10-07T05:28:45Z",
-  "builder": "scripts/build_submission_h53.py",
-  "submission_name": "GEMSDOE48-H53-conduit-conflict-priced-20261007-055da9855353",
+  "candidate_id": "GEMSDOE48-H55",
+  "session": "H55",
+  "generated_utc": "2026-10-07T05:58:52Z",
+  "builder": "scripts/build_submission_h55.py",
+  "submission_name": "GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353",
   "content_id": "055da9855353",
-  "paste_ready_note": "GEMSDOE48-H53 | 0.2778 core untouched + 1124 conflict-priced gap dots + 652 GDR hot-spring/well conduit anchors >300 m off-catalogue | model band 0.2778-0.2880, floor 0.2727 | unscored | id 055da9855353",
+  "paste_ready_note": "GEMSDOE48-H55 | 0.2778 core untouched + 1124 conflict-priced gap dots + 652 GDR hot-spring/well conduit anchors >300 m off-catalogue | model band 0.2778-0.2880, floor 0.2727 | unscored | id 055da9855353",
   "paste_ready_note_length": 202,
   "status": "RESEARCH CANDIDATE. No organizer score exists for this file. Weekly-slot decision is the owner's; see the scenario band below.",
   "inputs": {
@@ -462,9 +462,9 @@
   },
   "files": {
     "primary_zeros_outside": {
-      "path": "docs/downloads/GEMSDOE48-H53-conduit-conflict-priced-20261007-055da9855353-zeros-outside.tif",
+      "path": "docs/downloads/GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353-zeros-outside.tif",
       "bytes": 234040,
-      "sha256": "f4671759ef80479516629974b4b028f743db52ea54bc66c166cf6506694b0c72",
+      "sha256": "8f9a9d3d1ea2aed1c99e5ab5260aad9ceb10f4011c4b5a38791509261ddd284a",
       "dtype": "float32",
       "bands": 1,
       "width": 3292,
@@ -491,12 +491,12 @@
       "portal_range_error_immune": true
     },
     "primary_zip": {
-      "path": "docs/downloads/GEMSDOE48-H53-conduit-conflict-priced-20261007-055da9855353-zeros-outside.zip",
+      "path": "docs/downloads/GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353-zeros-outside.zip",
       "bytes": 199113,
-      "sha256": "173bfe1f1dd6ac6aaadcc5f737d70f0a6c079fff3fd265576ba17d7e3ef5e62b"
+      "sha256": "d0c829aa396faaa0e0b59727b8f2cbc4b23363cae7ae9da81cca0313018d3791"
     },
     "nan_outside_twin": {
-      "path": "docs/downloads/GEMSDOE48-H53-conduit-conflict-priced-20261007-055da9855353-nan-outside.tif",
+      "path": "docs/downloads/GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353-nan-outside.tif",
       "bytes": 381046,
       "dtype": "float32",
       "bands": 1,
@@ -517,13 +517,13 @@
       "min": 0.0,
       "max": 1.0,
       "range_0_1_with_nan_outside": true,
-      "sha256": "9000c5a0c4734f853e6873bd706ee4c7fc8b4c06501cb46a08db252aec7ea9c6"
+      "sha256": "6790aee129c1e2a3ac6c30fcb56bf5fad455b375919e8d938bd12e9b9b275733"
     },
     "diagnostics": {
       "bel": {
-        "path": "docs/downloads/diagnostics/gemsdoe48-h53-bel-055da9855353.tif",
+        "path": "docs/downloads/diagnostics/gemsdoe48-h55-bel-055da9855353.tif",
         "bytes": 1921184,
-        "sha256": "7dfcee69ccec5f7b4d4b1f16802c495a72d8da4a855ff5a0ff612242300a0a72",
+        "sha256": "e9bfb8fd27989c073fc57a04cf6f0f3eca9c49b7f82dfec5c9f10e424e703a91",
         "dtype": "float32",
         "bands": 1,
         "width": 3292,
@@ -550,9 +550,9 @@
         "portal_range_error_immune": true
       },
       "plausibility": {
-        "path": "docs/downloads/diagnostics/gemsdoe48-h53-plausibility-055da9855353.tif",
+        "path": "docs/downloads/diagnostics/gemsdoe48-h55-plausibility-055da9855353.tif",
         "bytes": 1873554,
-        "sha256": "9eee27cfbc3036e2d2a575d97f4941c000170b5e383cac08dc44fa07687cc5df",
+        "sha256": "d478ccb13155d200c18b6fe6d80445992bc42228ee592578757c912dff3ff1e3",
         "dtype": "float32",
         "bands": 1,
         "width": 3292,
@@ -579,9 +579,9 @@
         "portal_range_error_immune": true
       },
       "mtheta": {
-        "path": "docs/downloads/diagnostics/gemsdoe48-h53-mtheta-055da9855353.tif",
+        "path": "docs/downloads/diagnostics/gemsdoe48-h55-mtheta-055da9855353.tif",
         "bytes": 1681344,
-        "sha256": "2ed303be4f3a8e1d6e5f8b972782d8202a41f6dbeeb54f4eda9aedea5e9829b2",
+        "sha256": "7a66001dfb72164a085005c6f010a627959265a13944b8ee9134865d429db640",
         "dtype": "float32",
         "bands": 1,
         "width": 3292,
@@ -608,9 +608,9 @@
         "portal_range_error_immune": true
       },
       "conflict": {
-        "path": "docs/downloads/diagnostics/gemsdoe48-h53-conflict-055da9855353.tif",
+        "path": "docs/downloads/diagnostics/gemsdoe48-h55-conflict-055da9855353.tif",
         "bytes": 1882894,
-        "sha256": "854f24b18ac4aac03e630930779fc0ca22ed0458f30be2b1ace438aec78465c8",
+        "sha256": "40524184b4cc88a0fa92c3fcc869b2d6ebb9a87c6c2019105fcf9716b419d8fb",
         "dtype": "float32",
         "bands": 1,
         "width": 3292,

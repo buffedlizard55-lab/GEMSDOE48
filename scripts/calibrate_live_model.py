@@ -3,7 +3,7 @@
 
 Reads only hash-pinned local artifacts and owner-reported live scores; writes
 ``evidence/live_model_calibration_<date>.json`` and prints the ceiling table used in
-``docs/research/h53-live-model-ceiling-and-candidate-20261007.md``.
+``docs/research/h55-live-model-ceiling-and-candidate-20261007.md``.
 
 Usage:  python scripts/calibrate_live_model.py [--output PATH] [--csv PATH]
 """
@@ -24,7 +24,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT / "src") not in sys.path:
     sys.path.insert(0, str(ROOT / "src"))
 
-from gemsdoe48 import h53 as h53_mod                                            # noqa: E402
+from gemsdoe48 import h55 as h55_mod                                            # noqa: E402
 from gemsdoe48.live_model import (LIVE_ARTIFACTS, OUT_OF_FAMILY, ForwardModel,  # noqa: E402
                                   calibrate, coverage, invert_truth, load_binary,
                                   max_credit_field)
@@ -58,7 +58,7 @@ def main() -> int:
 
     missing = [a.path for a in (*LIVE_ARTIFACTS, OUT_OF_FAMILY) if not (ROOT / a.path).exists()]
     if missing:
-        raise SystemExit("missing mirrors, run: python scripts/restore_h53_inputs.py\n  "
+        raise SystemExit("missing mirrors, run: python scripts/restore_h55_inputs.py\n  "
                          + "\n  ".join(missing))
     for art in (*LIVE_ARTIFACTS, OUT_OF_FAMILY):
         got = sha256_file(ROOT / art.path)
@@ -111,7 +111,7 @@ def main() -> int:
         print(f"tracing the from-scratch greedy coverage frontier over B_elig "
               f"({int(eligible.sum())} px) up to {args.frontier_max} dots ...")
         empty = np.zeros_like(eligible)
-        priced = h53_mod.price_addition_path(empty, eligible, eligible, break_even_bar=0.0,
+        priced = h55_mod.price_addition_path(empty, eligible, eligible, break_even_bar=0.0,
                                              max_add=args.frontier_max, model=model)
         path = priced["path"]
         best = priced["argmax_prefix"]

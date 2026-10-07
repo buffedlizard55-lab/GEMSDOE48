@@ -1,20 +1,20 @@
 {
   "status": "PASS_LOCAL_AUDIT_NOT_ORGANIZER_ACCEPTANCE",
-  "generated_utc": "2026-10-07T05:18:31Z",
-  "auditor": "scripts/audit_h53.py",
+  "generated_utc": "2026-10-07T05:59:57Z",
+  "auditor": "scripts/audit_h55.py",
   "primary": {
-    "path": "docs/downloads/GEMSDOE48-H53-conduit-conflict-priced-20261007-055da9855353-zeros-outside.tif",
-    "sha256": "f4671759ef80479516629974b4b028f743db52ea54bc66c166cf6506694b0c72",
+    "path": "docs/downloads/GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353-zeros-outside.tif",
+    "sha256": "8f9a9d3d1ea2aed1c99e5ab5260aad9ceb10f4011c4b5a38791509261ddd284a",
     "bytes": 234040,
     "positive_px": 39430,
     "emitted_fraction_of_footprint": 0.007630569730499424,
     "added_over_core": 1776,
     "tags": {
-      "candidate_id": "GEMSDOE48-H53",
+      "candidate_id": "GEMSDOE48-H55",
       "construction": "C (37,654 live-best dots, untouched) + conflict-priced gap closure + GDR hydrothermal conduit anchors",
       "content_id": "055da9855353",
       "encoding": "all-finite float32 in [0,1]; 0.0 outside the survey footprint; nodata unset",
-      "provenance": "GEMSDOE48 H53 session; inputs hash-pinned in the build receipt",
+      "provenance": "GEMSDOE48 H55 session; inputs hash-pinned in the build receipt",
       "status": "RESEARCH CANDIDATE - no organizer score exists for this file",
       "AREA_OR_POINT": "Area"
     }
@@ -42,15 +42,15 @@
   "all_checks_passed": true,
   "byte_collisions": [],
   "identical_prior_candidates": [],
-  "rasters_scanned_for_sha_collision": 68,
+  "rasters_scanned_for_sha_collision": 70,
   "same_candidate_files_excluded_by_content_id": [
-    "docs/downloads/GEMSDOE48-H53-conduit-conflict-priced-20261007-055da9855353-nan-outside.tif",
-    "docs/downloads/diagnostics/gemsdoe48-h53-bel-055da9855353.tif",
-    "docs/downloads/diagnostics/gemsdoe48-h53-conflict-055da9855353.tif",
-    "docs/downloads/diagnostics/gemsdoe48-h53-mtheta-055da9855353.tif",
-    "docs/downloads/diagnostics/gemsdoe48-h53-plausibility-055da9855353.tif"
+    "docs/downloads/GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353-nan-outside.tif",
+    "docs/downloads/diagnostics/gemsdoe48-h55-bel-055da9855353.tif",
+    "docs/downloads/diagnostics/gemsdoe48-h55-conflict-055da9855353.tif",
+    "docs/downloads/diagnostics/gemsdoe48-h55-mtheta-055da9855353.tif",
+    "docs/downloads/diagnostics/gemsdoe48-h55-plausibility-055da9855353.tif"
   ],
-  "rasters_compared_pixelwise": 51,
+  "rasters_compared_pixelwise": 53,
   "top_10_most_similar_prior_candidates": [
     {
       "path": "data/families/dotted_b2_prune_02778.tif",
@@ -109,6 +109,14 @@
       "candidate_is_identical_to_other": false
     },
     {
+      "path": "data/raw/scored/h32_prethin_tip_02649.tif",
+      "other_positive_px": 42294,
+      "intersection_px": 36910,
+      "jaccard": 0.8236265452760299,
+      "candidate_is_superset_of_other": false,
+      "candidate_is_identical_to_other": false
+    },
+    {
       "path": "data/raw/tip_h32_1_prethin_tip_euler.tif",
       "other_positive_px": 42294,
       "intersection_px": 36910,
@@ -122,14 +130,6 @@
       "intersection_px": 37654,
       "jaccard": 0.8209566999520342,
       "candidate_is_superset_of_other": false,
-      "candidate_is_identical_to_other": false
-    },
-    {
-      "path": "docs/downloads/GEMSDOE48-DS-conflict-aware-fusion-20261006.tif",
-      "other_positive_px": 31614,
-      "intersection_px": 31614,
-      "jaccard": 0.8017752979964494,
-      "candidate_is_superset_of_other": true,
       "candidate_is_identical_to_other": false
     }
   ],

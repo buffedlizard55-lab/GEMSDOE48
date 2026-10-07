@@ -1,4 +1,4 @@
-"""Live-anchored forward model for the official DTI metric (H53 session, 2026-10-07).
+"""Live-anchored forward model for the official DTI metric (H55 session, 2026-10-07).
 
 What this module is
 -------------------

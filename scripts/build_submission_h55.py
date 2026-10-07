@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
-"""Build the H53 unique submission: conduit-anchored, conflict-priced extension of C.
+"""Build the H55 unique submission: conduit-anchored, conflict-priced extension of C.
 
 Run from the repository root:
 
-    python scripts/build_submission_h53.py
+    python scripts/build_submission_h55.py
 
 Writes (all under ``docs/downloads/``):
-  * ``GEMSDOE48-H53-...-zeros-outside.tif``   -- PRIMARY, all-finite, portal-range-immune
-  * ``GEMSDOE48-H53-...-zeros-outside.zip``   -- PRIMARY zipped (portal accepts either)
-  * ``GEMSDOE48-H53-...-nan-outside.tif``     -- NaN-outside twin, sample-template convention
-  * ``diagnostics/gemsdoe48-h53-{bel,plausibility,mtheta,conflict}-<id>.tif``
+  * ``GEMSDOE48-H55-...-zeros-outside.tif``   -- PRIMARY, all-finite, portal-range-immune
+  * ``GEMSDOE48-H55-...-zeros-outside.zip``   -- PRIMARY zipped (portal accepts either)
+  * ``GEMSDOE48-H55-...-nan-outside.tif``     -- NaN-outside twin, sample-template convention
+  * ``diagnostics/gemsdoe48-h55-{bel,plausibility,mtheta,conflict}-<id>.tif``
 and receipts under ``evidence/`` and ``registry/``.
 
 Every number in the receipt is computed here; nothing is transcribed.
@@ -33,7 +33,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from gemsdoe48 import conduit as conduit_mod                      # noqa: E402
-from gemsdoe48 import h53 as h53_mod                               # noqa: E402
+from gemsdoe48 import h55 as h55_mod                               # noqa: E402
 from gemsdoe48.dempster_shafer import dempster_combine             # noqa: E402
 from gemsdoe48.geotiff import (HEIGHT, TRANSFORM, WIDTH,           # noqa: E402
                                assert_competition_grid, display_path,
@@ -43,7 +43,7 @@ from gemsdoe48.live_model import (LIVE_ARTIFACTS, OUT_OF_FAMILY,    # noqa: E402
                                   invert_truth, load_binary,
                                   max_credit_field)
 
-SESSION = "H53"
+SESSION = "H55"
 BUILD_DATE = "20261007"
 LIVE_C = 0.2778                # owner-reported live score of the untouched dotted core
 ALPHA1 = ALPHA2 = 0.6          # symmetric Shafer reliability discount (pre-registered)
@@ -97,7 +97,7 @@ def verify_inputs() -> dict:
             raise SystemExit(
                 f"MISSING INPUT {rel} ({role}). Restore the hash-pinned public mirrors first:\n"
                 f"  python scripts/fetch_mirrors.py            # labels/template/scored family\n"
-                f"  python scripts/restore_h53_inputs.py       # backbone + conduit CSV\n")
+                f"  python scripts/restore_h55_inputs.py       # backbone + conduit CSV\n")
         got = sha256_file(path)
         if want and got != want:
             raise SystemExit(f"SHA-256 MISMATCH for {rel}: expected {want}, got {got}")
@@ -110,9 +110,9 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output-dir", type=Path, default=ROOT / "docs/downloads")
     parser.add_argument("--receipt", type=Path,
-                        default=ROOT / f"evidence/build_h53_receipt_{BUILD_DATE}.json")
+                        default=ROOT / f"evidence/build_h55_receipt_{BUILD_DATE}.json")
     parser.add_argument("--calibration", type=Path,
-                        default=ROOT / f"evidence/h53_build_live_model_{BUILD_DATE}.json",
+                        default=ROOT / f"evidence/h55_build_live_model_{BUILD_DATE}.json",
                         help="build-time copy of the calibration. scripts/calibrate_live_model.py "
                              "owns evidence/live_model_calibration_<date>.json and adds the "
                              "coverage frontier and ceiling table; do not point this at that file")
@@ -136,7 +136,7 @@ def main() -> int:
         raise SystemExit(f"core artifact must be the 37,654 px live-best; got {s_core}")
 
     catalogue_distance_m = distance_transform_edt(~catalogue, sampling=(100.0, 100.0))
-    eligible_backbone = backbone & (catalogue_distance_m > h53_mod.CATALOGUE_BUFFER_M)
+    eligible_backbone = backbone & (catalogue_distance_m > h55_mod.CATALOGUE_BUFFER_M)
     print(f"      eligible backbone (>200 m off-catalogue) = {int(eligible_backbone.sum())}")
 
     print("[3/8] calibrating the live-anchored forward model")
@@ -199,7 +199,7 @@ def main() -> int:
     print("[5/8] A1 -- hydrothermal conduit anchors (GDR/INGENIOUS wells & springs)")
     sites = conduit_mod.read_sites(ROOT / INPUTS["conduit_csv"][0])
     tier, score = conduit_mod.site_arrays(sites, (HEIGHT, WIDTH), min_tier=MIN_TIER)
-    a1_rows, a1_scores, a1_audit = h53_mod.conduit_anchors(
+    a1_rows, a1_scores, a1_audit = h55_mod.conduit_anchors(
         tier, score, emitted=core, footprint=footprint, catalogue=catalogue,
         catalogue_distance_m=catalogue_distance_m, conflict=conflict,
         min_tier=MIN_TIER, max_points=n_max)
@@ -209,12 +209,12 @@ def main() -> int:
     print(f"      {json.dumps({k: v for k, v in a1_audit.items() if k != 'conduit_source_summary'})}")
 
     print("[6/8] A2 -- conflict-priced gap closure over the two families' union pool")
-    pool = (eligible_backbone | tip) & ~core & footprint & (catalogue_distance_m > h53_mod.CATALOGUE_BUFFER_M)
+    pool = (eligible_backbone | tip) & ~core & footprint & (catalogue_distance_m > h55_mod.CATALOGUE_BUFFER_M)
     interim = core.copy()
     if n1:
         interim[a1_rows[:, 0], a1_rows[:, 1]] = True
     break_even_bar = 0.2 * 0.2778 / model.rho
-    priced = h53_mod.price_addition_path(interim, pool, eligible_backbone,
+    priced = h55_mod.price_addition_path(interim, pool, eligible_backbone,
                                          break_even_bar=break_even_bar,
                                          max_add=max(0, n_max - n1), model=model,
                                          safety_factor=SAFETY_FACTOR)
@@ -327,20 +327,20 @@ def main() -> int:
         "construction": "C (37,654 live-best dots, untouched) + conflict-priced gap closure + "
                         "GDR hydrothermal conduit anchors",
         "encoding": "all-finite float32 in [0,1]; 0.0 outside the survey footprint; nodata unset",
-        "provenance": "GEMSDOE48 H53 session; inputs hash-pinned in the build receipt",
+        "provenance": "GEMSDOE48 H55 session; inputs hash-pinned in the build receipt",
         "status": "RESEARCH CANDIDATE - no organizer score exists for this file",
     }
     zeros_path = args.output_dir / f"{stem}-zeros-outside.tif"
     zeros_info = write_float32_zeros_outside(
         zeros_path, values, profile, valid_mask=footprint,
-        description="gems_h53_emission_binary_0_1_all_finite_zeros_outside", tags=tags)
+        description="gems_h55_emission_binary_0_1_all_finite_zeros_outside", tags=tags)
     zeros_info["sha256"] = sha256_file(zeros_path)
 
     nan_path = args.output_dir / f"{stem}-nan-outside.tif"
     nan_values = np.where(footprint, values, np.nan).astype(np.float32)
     nan_info = write_float32(
         nan_path, nan_values, profile, valid_mask=footprint,
-        description="gems_h53_emission_binary_0_1_nan_outside", tags=dict(tags, encoding=(
+        description="gems_h55_emission_binary_0_1_nan_outside", tags=dict(tags, encoding=(
             "in-footprint finite float32 in [0,1]; NaN outside; nodata=NaN")))
     nan_info["sha256"] = sha256_file(nan_path)
 
@@ -354,7 +354,7 @@ def main() -> int:
             ("plausibility", pl, "dempster_shafer_plausibility_fault_0_1"),
             ("mtheta", unc, "dempster_shafer_unassigned_mass_mTheta_0_1_disagreement_diagnostic"),
             ("conflict", conflict, "dempster_shafer_raw_conflict_K_0_1_disagreement_diagnostic")):
-        path = args.output_dir / "diagnostics" / f"gemsdoe48-h53-{name}-{content_id}.tif"
+        path = args.output_dir / "diagnostics" / f"gemsdoe48-h55-{name}-{content_id}.tif"
         layer01 = np.clip(np.where(footprint, layer, 0.0), 0.0, 1.0).astype(np.float32)
         info = write_float32_zeros_outside(
             path, layer01, profile, valid_mask=footprint, description=desc,

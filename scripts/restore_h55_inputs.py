@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
-"""Restore the H53 inputs that live under the git-ignored ``data/raw/`` tree.
+"""Restore the H55 inputs that live under the git-ignored ``data/raw/`` tree.
 
 Each file is fetched from a hash-pinned public GitHub mirror with ``gh api`` and
 **fails closed** if the restored bytes do not match the pinned SHA-256.  No
 DrivenData host is ever contacted (its terms of use prohibit automatic access);
 the mirrors are third-party owner copies and are *not* organizer-authenticated.
 
-Usage:  python scripts/restore_h53_inputs.py [--only KEY ...] [--force]
+Usage:  python scripts/restore_h55_inputs.py [--only KEY ...] [--force]
 
 Optional heavy extra (off by default, 419 MB in five shards):
-        python scripts/restore_h53_inputs.py --with-official-features
+        python scripts/restore_h55_inputs.py --with-official-features
 """
 from __future__ import annotations
 

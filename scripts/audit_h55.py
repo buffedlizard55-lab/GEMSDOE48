@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Independent uniqueness + integrity audit of the H53 candidate.
+"""Independent uniqueness + integrity audit of the H55 candidate.
 
 Answers, from the written bytes alone (nothing is taken from the build receipt):
 
@@ -12,7 +12,7 @@ Answers, from the written bytes alone (nothing is taken from the build receipt):
    3730 x 3292, 100 m, values in {0,1} subset of [0,1], all-finite, zero outside
    the footprint, no positive on or within 200 m of the public catalogue?
 
-Usage:  python scripts/audit_h53.py [--primary PATH] [--output PATH]
+Usage:  python scripts/audit_h55.py [--primary PATH] [--output PATH]
 """
 from __future__ import annotations
 
@@ -37,7 +37,7 @@ CORE = ROOT / "data/families/dotted_b2_prune_02778.tif"
 CATALOGUE = ROOT / "data/official/labels.tif"
 FOOTPRINT = ROOT / "data/source_mirrors/footprint-mask.tif"
 SCAN_ROOTS = ("data", "docs/downloads", "registry")
-DEFAULT_PRIMARY = ROOT / ("docs/downloads/GEMSDOE48-H53-conduit-conflict-priced-"
+DEFAULT_PRIMARY = ROOT / ("docs/downloads/GEMSDOE48-H55-conduit-conflict-priced-"
                           "20261007-055da9855353-zeros-outside.tif")
 
 
@@ -64,7 +64,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--primary", type=Path, default=DEFAULT_PRIMARY)
     parser.add_argument("--output", type=Path,
-                        default=ROOT / "evidence/h53_uniqueness_audit_20261007.json")
+                        default=ROOT / "evidence/h55_uniqueness_audit_20261007.json")
     args = parser.parse_args()
     if not args.primary.exists():
         raise SystemExit(f"primary artifact not found: {args.primary}")
@@ -104,7 +104,7 @@ def main() -> int:
                     text = path.read_text(encoding="utf-8", errors="ignore")
                 except OSError:
                     continue
-                if primary_sha in text and "h53" not in path.name.lower():
+                if primary_sha in text and "h55" not in path.name.lower():
                     collisions.append({"path": str(path.relative_to(ROOT)),
                                        "reason": "sha256 appears in a pre-existing receipt"})
 

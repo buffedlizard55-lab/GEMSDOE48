@@ -1,7 +1,7 @@
 {
   "status": "PASS_LOCAL_FORMAT_AUDIT_NOT_ORGANIZER_ACCEPTANCE",
-  "file": "docs/downloads/GEMSDOE48-H53-conduit-conflict-priced-20261007-055da9855353-nan-outside.tif",
-  "sha256": "9000c5a0c4734f853e6873bd706ee4c7fc8b4c06501cb46a08db252aec7ea9c6",
+  "file": "docs/downloads/GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353-nan-outside.tif",
+  "sha256": "6790aee129c1e2a3ac6c30fcb56bf5fad455b375919e8d938bd12e9b9b275733",
   "bytes": 381046,
   "dtype": "float32",
   "bands": 1,
@@ -45,11 +45,11 @@
     ]
   },
   "tags": {
-    "candidate_id": "GEMSDOE48-H53",
+    "candidate_id": "GEMSDOE48-H55",
     "construction": "C (37,654 live-best dots, untouched) + conflict-priced gap closure + GDR hydrothermal conduit anchors",
     "content_id": "055da9855353",
     "encoding": "in-footprint finite float32 in [0,1]; NaN outside; nodata=NaN",
-    "provenance": "GEMSDOE48 H53 session; inputs hash-pinned in the build receipt",
+    "provenance": "GEMSDOE48 H55 session; inputs hash-pinned in the build receipt",
     "status": "RESEARCH CANDIDATE - no organizer score exists for this file",
     "AREA_OR_POINT": "Area"
   }

@@ -1,8 +1,8 @@
 {
-  "slate_id": "hypothesis-slate-h53-20261007",
+  "slate_id": "hypothesis-slate-h55-20261007",
   "frozen_before_scoring": true,
   "frozen_utc": "2026-10-07T05:40:00Z",
-  "prose_version": "docs/research/hypothesis-slate-h53-20261007.md",
+  "prose_version": "docs/research/hypothesis-slate-h55-20261007.md",
   "ranking_rule": "a candidate is interesting only if it can raise the corridor field's DENSE truth yield above the h19-5 backbone's measured T = 6813.1; re-ranking or re-thinning the existing field is worth at most +0.0066 live-equivalent (the measured coverage-frontier headroom) and ranks last",
   "screens_dropped_before_ranking": [
     {
@@ -26,7 +26,7 @@
   "hypotheses": [
     {
       "rank": 1,
-      "id": "H53-B",
+      "id": "H55-B",
       "title": "Active-deformation localisation ridges from the official geodetic strain and seismicity bands",
       "layers": "data/raw/training_features.tif band 4 (geodetic second invariant of strain rate), band 7 (geodetic shear rate), band 8 (geodetic dilatation rate), band 16 (earthquake intensity/density), band 10 (distance to earthquake)",
       "physical_signature": "not the amplitude but the anisotropic LOCALISATION: multi-scale vesselness / Sato ridge filter plus structure-tensor coherence (|l1|-|l2|)^2/(|l1|+|l2|)^2 at 300-900 m, applied to log(second invariant) and to shear rate, keeping only pixels above the 95th percentile of coherence. Measured here: the raw fields are diffuse - a multi-orientation line operator separates their top 2% from background at only p90 0.0022 vs 0.0008 - so the ridge transform IS the hypothesis, not a refinement.",
@@ -35,7 +35,7 @@
       "difference_from_repository": "H48-3 proposed OPERA InSAR DISP-S1 displacement gradients and was never run ('Earthdata Login required; no granules downloaded'). These bands are already inside the official competition raster, restored byte-identical this session. No file in evidence/ scores a strain-rate or seismicity surface in any form.",
       "data_source": "official competition feature raster, restored from five hash-pinned shards at buffedlizard55-lab/GEMSDOE @ c0c06ac82178f26b94fce3397036ef8f12a2f3a0; assembled SHA-256 4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5, 418,912,844 bytes, matching registry/data_manifest_gemsdoe32.json",
       "data_obtainable_verified": true,
-      "data_obtainable_how": "python scripts/restore_h53_inputs.py --with-official-features  (free, no login, GitHub egress only; 419 MB, deliberately not committed)",
+      "data_obtainable_how": "python scripts/restore_h55_inputs.py --with-official-features  (free, no login, GitHub egress only; 419 MB, deliberately not committed)",
       "expected_dti": "unknown but the largest available from data already in hand - the only candidate that could raise the DENSE ceiling above 6,813 rather than re-thinning below it",
       "cost": "low-medium: one ridge-filter module, then the existing greedy coverage emitter and pre-registered budget rule; no new downloads",
       "kill_criterion_preregistered": "emit the dense ridge field and invert its T under the calibrated |G|. If dense T < 6,813 the field is worse than the backbone and the hypothesis is dead regardless of how good its ridges look. One weekly slot; it also re-calibrates rho for a second family.",
@@ -43,7 +43,7 @@
     },
     {
       "rank": 2,
-      "id": "H53-D",
+      "id": "H55-D",
       "title": "3 m lidar scarp TRACES (re-test of H52 with the corrected gate)",
       "layers": "data/external/h52_scarp3m_100m.tif bands h_gate12, h_all, sigma_mean, strike_at, cover; upstream USGS 3DEP 1 m DEM, 706 of 716 zone-11 tiles, block-averaged to 3 m then to 100 m in GitHub Actions",
       "physical_signature": "line-persistent step height selected as TRACES not points: gate h_gate12 at or above its 99th percentile INSIDE low sigma_mean (smooth terrain, so a step is not merely roughness), then require persistence along a consistent azimuth over >= 5 consecutive 100 m cells, and emit one dot per ~300 m of trace. H52 emitted the top 2,000 individual detections; a fault is a line and the kernel is isotropic, so trace-level selection is a different estimator.",
@@ -59,22 +59,22 @@
     },
     {
       "rank": 3,
-      "id": "H53-C",
+      "id": "H55-C",
       "title": "Buried basement steps and isostatic-gravity gradients",
-      "layers": "official band 15 (depth to basement surface), band 13 (isostatic gravity anomaly), bands 5/11/18 (its slope and vertical/horizontal gradients), band 17 (conductivity surface), band 6 (see irregularity IR-H53-01)",
+      "layers": "official band 15 (depth to basement surface), band 13 (isostatic gravity anomaly), bands 5/11/18 (its slope and vertical/horizontal gradients), band 17 (conductivity surface), band 6 (see irregularity IR-H55-01)",
       "physical_signature": "lateral second derivative of basement depth, plus horizontal-gradient magnitude and tilt angle of the isostatic gravity field, intersected with a conductivity contrast (fault gouge and hydrothermal alteration are conductive relative to unaltered basement). Basin-range normal faulting produces a sharp basement-depth step; where the range front is buried the topography is flat but gravity and basement depth still record the offset.",
       "why_it_catches_a_missing_fault": "measured blind spot: C's dots sit on SHALLOW basement (mean 402 m against 535 m for the moat background, lift 0.75) and on topographic HIGHS (detrended elevation +7.3 against -15.6). The family therefore systematically favours exposed range fronts. Buried basin-margin faults - a basement step with no topographic expression, in the basin fill - are precisely the population it cannot see, and precisely the population that hosts geothermal reservoirs.",
       "difference_from_repository": "H48-2 proposed 'stratigraphic contact topology plus magnetic/gravity breaks' and was never implemented ('payload/coverage not audited'). No file in evidence/ scores a gravity-gradient, basement-depth or conductivity surface.",
-      "data_source": "same official competition raster as H53-B; same restore command; same pin 4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+      "data_source": "same official competition raster as H55-B; same restore command; same pin 4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
       "data_obtainable_verified": true,
-      "data_obtainable_how": "python scripts/restore_h53_inputs.py --with-official-features",
+      "data_obtainable_how": "python scripts/restore_h55_inputs.py --with-official-features",
       "expected_dti": "moderate",
       "cost": "low: data in hand, transforms standard",
       "status": "proposed"
     },
     {
       "rank": 4,
-      "id": "H53-A",
+      "id": "H55-A",
       "title": "Hydrothermal conduit anchors from GDR well and spring temperature and chemistry",
       "layers": "data/raw/external/gdr_wellspring_in_footprint.csv - GDR 1391 'Well and Spring Temperature and Chemistry', 27,092 records; columns used: thermalclass, temp_c, geothermquartz_c, geothermchalc_c, geothermcat_c, row, col, layer, name. dist_known_fault_px is DROPPED ON READ (label-derived leakage).",
       "physical_signature": "direct measurement of deep fluid temperature at a point, tiered. Tier 3 = discharge class Hot (median 75.0 C, p90 171.1 C, max 296.5 C) OR any silica/calcite geothermometer >= 150 C (180 records, max 269.1 C). Tier 2 = discharge >= 50 C OR geothermometer >= 100 C. Tier 1 = discharge >= 35 C. Warm (max 38.9 C, effectively ambient) and Cold (<= 20 C) are excluded as non-indicators. No smoothing: a geothermometer is already an integral along the flow path, so the point IS the evidence.",
@@ -82,24 +82,24 @@
       "difference_from_repository": "H50-GDR used the INGENIOUS 2 m SOIL-temperature probe archive with a repeat-visit residual persistence operator (proxy 0.003923, failed). H52 used lidar topography. H50-B used gamma-ray spectrometry ratios. This uses well/spring DISCHARGE temperature and silica/calcite RESERVOIR geothermometry - a different physical quantity, a different source file, a static tiering operator. No prior GEMSDOE artifact of any session emits on this layer.",
       "data_source": "Geothermal Data Registry submission 1391, INGENIOUS Great Basin Regional Dataset Compilation. DOI 10.15121/1881483. https://gdr.openei.org/submissions/1391 . Data.gov metadata https://catalog.data.gov/dataset/ingenious-great-basin-regional-dataset-compilation reports CC BY 4.0; the GDR asset-level attribution/reuse terms were NOT independently verified and are flagged rather than assumed.",
       "data_obtainable_verified": true,
-      "data_obtainable_how": "python scripts/restore_h53_inputs.py ; local mirror SHA-256 122718e65bdf55aab0ee12ad20d80062f0deb1de957225a61ad880dd5dc196ea",
+      "data_obtainable_how": "python scripts/restore_h55_inputs.py ; local mirror SHA-256 122718e65bdf55aab0ee12ad20d80062f0deb1de957225a61ad880dd5dc196ea",
       "expected_dti": "652 anchors shipped; scenario band +0.0019 to +0.0102 live-equivalent as per-anchor credit rises from break-even (0.0556) to 0.30; worst case -0.0019, and A2's in-family gain of +0.0019 pre-pays it (net -0.00003)",
       "cost": "low - implemented, tested and shipped this session",
       "status": "shipped"
     },
     {
       "rank": 5,
-      "id": "H53-E",
+      "id": "H55-E",
       "title": "Three-source Dempster-Shafer conjunction: Quaternary trace x conduit x strain",
-      "layers": "data/raw/external/gdr_qfaults_traces.csv (1,125 INGENIOUS Quaternary fault trace centroids WITH attributes slip_rate, recency, dip_direct, slip_sense, map_scale, full_length_m, clipped_length_m) x H53-A conduit tier x H53-B strain-rate ridge",
+      "layers": "data/raw/external/gdr_qfaults_traces.csv (1,125 INGENIOUS Quaternary fault trace centroids WITH attributes slip_rate, recency, dip_direct, slip_sense, map_scale, full_length_m, clipped_length_m) x H55-A conduit tier x H55-B strain-rate ridge",
       "physical_signature": "CONJUNCTION not union. Extend the frame to three independent sources and admit a dot only where at least two of {a Quaternary trace with a recorded slip rate, a tier >= 2 hydrothermal conduit, a strain-rate localisation ridge} agree within 300 m. slip_rate and recency are used as RELIABILITY WEIGHTS in Dempster's discounting (a trace with slip_rate > 0.2 mm/yr and recency < 1,600,000 yr gets a higher alpha than an unspecified one) - the first use of the attribute columns rather than the geometry alone.",
       "why_it_catches_a_missing_fault": "the INGENIOUS Quaternary traces are not the competition catalogue: measured catalogue coverage per pixel 0.3696, the highest of any layer tested, yet only 1.3% of the centroids fall inside the h19-5 backbone. The dropped-catalogue-lift screen says high catalogue coverage is not a reason to trust a layer on its own; the CONJUNCTION is the point. A trace with a measured slip rate AND hot fluid at the surface AND localised active strain is a fault an expert reviewer would add, and each pair alone is much weaker.",
       "difference_from_repository": "gemsdoe29-xfit-h41-union-qfaults was a plain UNION and was never live-scored. No prior artifact in any GEMSDOE session used the slip_rate / recency / slip_sense attributes, and none combined THREE sources under Dempster's rule - every fusion in this repository has combined exactly two.",
       "data_source": "all three inputs already local and hash-pinned: gdr_qfaults_traces.csv SHA-256 9702f2e5c382a4f472ae834d22b94990983b059677a37adfafd51c50f75e643c, plus the conduit CSV and the official raster",
       "data_obtainable_verified": true,
-      "data_obtainable_how": "python scripts/restore_h53_inputs.py ; no external fetch",
+      "data_obtainable_how": "python scripts/restore_h55_inputs.py ; no external fetch",
       "expected_dti": "small mass (~100-400 dots), so small in both directions: worst case about -0.001, upside about +0.003 if the conjunction is real",
-      "cost": "low. Best used as a rider on H53-A once A's live score is known, because A's returned score is what tells us whether conduit evidence carries credit at all.",
+      "cost": "low. Best used as a rider on H55-A once A's live score is known, because A's returned score is what tells us whether conduit evidence carries credit at all.",
       "status": "proposed"
     }
   ],
@@ -118,15 +118,15 @@
     },
     {
       "idea": "Pruning C's 200-300 m catalogue-flank band (rung D, 2,171 dots)",
-      "why_rejected": "The live ladder proves the 0-200 m band earns about zero credit but says NOTHING about 200-300 m, and 2,171 of C's dots sit there. Removal is irreversible against a Phase-2 truth the organizers expand by expert review of ALL Phase-1 submissions. H53 is additive-only for exactly this reason. Left as an owner decision, not a recommendation."
+      "why_rejected": "The live ladder proves the 0-200 m band earns about zero credit but says NOTHING about 200-300 m, and 2,171 of C's dots sit there. Removal is irreversible against a Phase-2 truth the organizers expand by expert review of ALL Phase-1 submissions. H55 is additive-only for exactly this reason. Left as an owner decision, not a recommendation."
     },
     {
       "idea": "INGENIOUS 2 m soil-temperature probes",
-      "why_rejected": "H50-GDR already ran a repeat-persistence operator on them: proxy 0.003923, 0/4 folds. A different operator is conceivable but the layer is shallow-soil, not deep-fluid, and H53-A's well/spring chemistry is the stronger version of the same idea."
+      "why_rejected": "H50-GDR already ran a repeat-persistence operator on them: proxy 0.003923, 0/4 folds. A different operator is conceivable but the layer is shallow-soil, not deep-fluid, and H55-A's well/spring chemistry is the stronger version of the same idea."
     },
     {
       "idea": "OPERA InSAR DISP-S1 displacement gradients",
-      "why_rejected": "Earthdata Login required; no granules downloadable from this sandbox. Superseded by H53-B, which uses geodetic strain-rate bands already inside the official raster with no login."
+      "why_rejected": "Earthdata Login required; no granules downloadable from this sandbox. Superseded by H55-B, which uses geodetic strain-rate bands already inside the official raster with no login."
     },
     {
       "idea": "USGS Mineral Resources Data System",
@@ -135,74 +135,74 @@
   ],
   "irregularities": [
     {
-      "id": "IR-H53-01",
+      "id": "IR-H55-01",
       "title": "Official training_features.tif band 6 is gamma-ray total count, but its in-file metadata says it is a magnetic derivative",
       "evidence": "Band 6's description reads 'Tilt angle or total curvature - magnetic field derivative for edge detection' and its data_category tag reads 'magnetic_data'. Reproduced independently this session over 5,164,300 in-footprint cells: Pearson r = 0.9971 and Spearman rho = 1.0000 against the separately mirrored GeoDAWN radiometric TOTAL COUNT (data/source_mirrors/geodawn_rad_u8.tif band TC), r = 0.8817 against its K band, r = -0.0409 against the same file's own TMI band 14, and r = -0.1624 against TMI horizontal gradient band 3. Band 6 ranges 2.95-88.57 with a median of 18.5.",
       "severity": "high",
-      "action_taken": "Confirms and strengthens the irregularity already logged in docs/irregularities.md with an independent reproduction and a Spearman check. Recorded in the H53 hypothesis slate so H53-C does not treat band 6 as a magnetic tilt feature. Anyone consuming the official stack should read band 6 as radiometric total count."
+      "action_taken": "Confirms and strengthens the irregularity already logged in docs/irregularities.md with an independent reproduction and a Spearman check. Recorded in the H55 hypothesis slate so H55-C does not treat band 6 as a magnetic tilt feature. Anyone consuming the official stack should read band 6 as radiometric total count."
     },
     {
-      "id": "IR-H53-02",
+      "id": "IR-H55-02",
       "title": "The repository's own format validator rejected the encoding used by its highest-scoring artifact",
       "evidence": "scripts/validate_submission.py required nodata = NaN and raised SystemExit otherwise. But data/families/dotted_b2_prune_02778.tif - the 0.2778 live-best - is all-finite with zeros outside and nodata unset, verified by reading the bytes (0 NaN cells, min 0.0, max 1.0) and by data/raw/audit-h33-2-b2.json which records nodata null and validator_range_0_1_guaranteed true.",
       "severity": "high",
-      "action_taken": "validate_submission.py now takes --encoding {auto,nan,zeros}, default auto, accepts either encoding, reports which it found, and states the portal range-error exposure explicitly (all_cells_finite, all_cells_in_range_0_1, portal_range_error_immune, portal_range_error_note). A new writer write_float32_zeros_outside was added to src/gemsdoe48/geotiff.py and re-reads the written bytes to assert the encoding. The H53 primary uses the all-finite encoding."
+      "action_taken": "validate_submission.py now takes --encoding {auto,nan,zeros}, default auto, accepts either encoding, reports which it found, and states the portal range-error exposure explicitly (all_cells_finite, all_cells_in_range_0_1, portal_range_error_immune, portal_range_error_note). A new writer write_float32_zeros_outside was added to src/gemsdoe48/geotiff.py and re-reads the written bytes to assert the encoding. The H55 primary uses the all-finite encoding."
     },
     {
-      "id": "IR-H53-03",
+      "id": "IR-H55-03",
       "title": "The dense backbone's pixel count and truth yield are both misstated in the repository's own notes",
       "evidence": "knowledge/research_notes.md and README.md describe dense H19-5 as '129 k px' with 'the same T, triple the FP'. Measured from the restored hash-pinned mirror (SHA-256 ec1f9b56...): 121,131 positive pixels, and inverting its owner-reported live 0.1922 under the calibrated |G| gives T = 6,813.1 - 30.8% HIGHER than C's 5,209.5, not equal. The FP part of the claim is correct; the T part is not.",
       "severity": "high",
-      "action_taken": "Corrected in docs/research/h53-live-model-ceiling-and-candidate-20261007.md section 3.2. The error mattered: it hid the fact that the field's TOTAL truth content (6,813) is the binding constraint on the whole family, and that #1 at 0.3774 needs T = 7,077 which exceeds it."
+      "action_taken": "Corrected in docs/research/h55-live-model-ceiling-and-candidate-20261007.md section 3.2. The error mattered: it hid the fact that the field's TOTAL truth content (6,813) is the binding constraint on the whole family, and that #1 at 0.3774 needs T = 7,077 which exceeds it."
     },
     {
-      "id": "IR-H53-04",
+      "id": "IR-H55-04",
       "title": "The SGMC off-catalogue proxy that gated every prior session is contradicted by a live score",
       "evidence": "gemsdoe29-sgmc-off-catalogue-44k - 44,090 px, 2.8 px Poisson spacing, built directly on the proxy layer - is owner-reported at 0.0512 live, inverting to T = 1,026.0. The backbone family recovers T = 5,209 at the same mass. Were the proxy a good stand-in for the hidden truth, that file would have scored near 0.26.",
       "severity": "high",
-      "action_taken": "Recorded in section 4.1 of the H53 report and in the slate's dropped-screens list. The proxy is retained as a RELATIVE ranking device over surfaces that all contain the backbone, and the blocked holdout is still run and reported, but every gate decision that turned on it (H50, H51, H52) is reclassified as unresolved rather than settled. Not deleted - the receipt trail is preserved."
+      "action_taken": "Recorded in section 4.1 of the H55 report and in the slate's dropped-screens list. The proxy is retained as a RELATIVE ranking device over surfaces that all contain the backbone, and the blocked holdout is still run and reported, but every gate decision that turned on it (H50, H51, H52) is reclassified as unresolved rather than settled. Not deleted - the receipt trail is preserved."
     },
     {
-      "id": "IR-H53-05",
+      "id": "IR-H55-05",
       "title": "Catalogue coverage per emitted pixel does not predict live truth yield",
       "evidence": "SGMC faults 0.1418 per px, GDR Hot wells/springs 0.1897, INGENIOUS Quaternary centroids 0.3696, against the h19-5 backbone's 0.1007 - yet SGMC returned T = 1,026 live where the backbone family returns 5,209 at the same mass.",
       "severity": "high",
-      "action_taken": "The '>= 2x catalogue lift' promotion rule that rejected H52 is recorded as unsound and is not used anywhere in this session. Section 4.2 of the report gives the full table. H53-D's re-test is explicitly re-judged on the live-calibrated instrument instead."
+      "action_taken": "The '>= 2x catalogue lift' promotion rule that rejected H52 is recorded as unsound and is not used anywhere in this session. Section 4.2 of the report gives the full table. H55-D's re-test is explicitly re-judged on the live-calibrated instrument instead."
     },
     {
-      "id": "IR-H53-06",
+      "id": "IR-H55-06",
       "title": "Two different hidden-truth calibrations coexist in the repository: |G| = 12,632 and |G| = 14,027.5",
       "evidence": "knowledge/research_notes.md, src/gemsdoe48/holdout.py (HIDDEN_TRUTH_PX = 12632), src/gemsdoe48/live_anchor.py and scripts/build_site_ds48.py all use 12,632, derived by assuming the removed dots earned exactly the tau = 0.05416 bar. This session's least-squares fit over the strictly nested triple A/B/C, assuming the removed dots earned zero, gives 14,027.5 with the three rungs inverting to T = 5,210.4 / 5,216.1 / 5,209.5 - self-consistent to 0.11%. The three pairwise closed-form solutions are 13,368 / 15,198 / 14,089, a +/-6% spread driven by 4-decimal rounding of the reported scores.",
       "severity": "medium",
-      "action_taken": "Both are recorded. 14,027.5 is used everywhere in H53 because it is the value that makes the three nested rungs mutually consistent; the 12,632 assumption is documented as the alternative and its derivation is stated. The older constants were NOT edited out of the historical modules, because those modules belong to prior sessions' receipts."
+      "action_taken": "Both are recorded. 14,027.5 is used everywhere in H55 because it is the value that makes the three nested rungs mutually consistent; the 12,632 assumption is documented as the alternative and its derivation is stated. The older constants were NOT edited out of the historical modules, because those modules belong to prior sessions' receipts."
     },
     {
-      "id": "IR-H53-07",
+      "id": "IR-H55-07",
       "title": "A tracked local mirror and its published upstream mirror are pixel-identical but byte-different",
       "evidence": "data/raw/ref_h36_1_rung30.tif (SHA-256 7c74270a...) and the GEMSDOE28 published file gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif (SHA-256 5556aa14...) have identical emission pixel sets (np.array_equal on the boolean mask, 37,660 px) and differ only in outside-footprint encoding and tags. Same for data/raw/tip_h32_1_prethin_tip_euler.tif (26748e4b...) versus 04d31922....",
       "severity": "low",
-      "action_taken": "live_model.LIVE_ARTIFACTS now points at the restored published mirrors under data/raw/scored/ so every pin is the published one, with a comment recording the pixel-identity check. scripts/restore_h53_inputs.py fetches both. scripts/calibrate_live_model.py fails closed on any pin mismatch."
+      "action_taken": "live_model.LIVE_ARTIFACTS now points at the restored published mirrors under data/raw/scored/ so every pin is the published one, with a comment recording the pixel-identity check. scripts/restore_h55_inputs.py fetches both. scripts/calibrate_live_model.py fails closed on any pin mismatch."
     },
     {
-      "id": "IR-H53-08",
+      "id": "IR-H55-08",
       "title": "h52_scarp3m_100m.tif band facing_at has unconfirmed units",
       "evidence": "strike_at takes only the values 0, 1500, 3000, ..., 16500, consistent with a strike in 0.01-degree units quantised to 15-degree bins over 0-165 degrees. facing_at ranges 0-10,000 with a median of 4,893. If facing_at were a dip direction in the same 0.01-degree units the two should be perpendicular, but the measured median deviation from perpendicularity over all valid cells is 46 degrees, with p10 = 8.9 and p90 = 81.4 - i.e. no perpendicular relationship at all.",
       "severity": "medium",
-      "action_taken": "An along-strike extension of the hydrothermal conduit anchors was designed and then WITHDRAWN rather than shipped on an unverified band. Recorded as a blocker on hypothesis H53-D with the exact check required (re-read src/gemsdoe48/scarp3m.py and data/external/h52_scarp3m_merge_log.txt against the Actions run that produced the mosaic)."
+      "action_taken": "An along-strike extension of the hydrothermal conduit anchors was designed and then WITHDRAWN rather than shipped on an unverified band. Recorded as a blocker on hypothesis H55-D with the exact check required (re-read src/gemsdoe48/scarp3m.py and data/external/h52_scarp3m_merge_log.txt against the Actions run that produced the mosaic)."
     },
     {
-      "id": "IR-H53-09",
+      "id": "IR-H55-09",
       "title": "The brief's statement that 0.3195 is the highest score is stale",
       "evidence": "The single manual read of the official leaderboard on 2026-10-06 UTC (docs/data/leaderboard_20261007.json) shows xiaofanhu at 0.3774 in first place and 0.3195 at seventh (DARD). The 0.2778 row belongs to extradr19, ranked 13th with 10 submissions.",
       "severity": "medium",
       "action_taken": "Carried forward and restated. The ceiling table in this session is computed against the full snapshot (0.3774 / 0.3345 / 0.3262 / 0.3195 / 0.2888), not against 0.3195. Automated leaderboard polling remains disabled (.github/workflows/feed.yml.disabled); only dated manual observations are retained."
     },
     {
-      "id": "IR-H53-10",
+      "id": "IR-H55-10",
       "title": "No organizer score exists for any file in this repository",
       "evidence": "registry/live_scores.json holds 17 entries, all classed OWNER-REPORT, each a score pasted by the repository owner against a SHA-256. No organizer receipt, API response or page capture links any file to any score. The local receipt for the 0.2778 artifact says UNSCORED.",
       "severity": "high",
-      "action_taken": "Stated on every page of this site and in every receipt written this session. The H53 forward model, its |G|, its rho, all eight inverted T values and the whole scenario band are labelled OWNER-REPORT-derived wherever they appear. No projected leaderboard position is claimed."
+      "action_taken": "Stated on every page of this site and in every receipt written this session. The H55 forward model, its |G|, its rho, all eight inverted T values and the whole scenario band are labelled OWNER-REPORT-derived wherever they appear. No projected leaderboard position is claimed."
     }
   ],
   "sources": [
@@ -230,7 +230,7 @@
     {
       "name": "Geothermal Data Registry submission 1391 - INGENIOUS Great Basin Regional Dataset Compilation",
       "url": "https://gdr.openei.org/submissions/1391",
-      "what_it_supports": "the H53-A conduit layer: 27,092 well and spring records with thermalclass, temp_c and three silica/calcite geothermometers",
+      "what_it_supports": "the H55-A conduit layer: 27,092 well and spring records with thermalclass, temp_c and three silica/calcite geothermometers",
       "limit": "the local bytes were restored from a pinned owner mirror (GEMSDOE24 @ 07345ea0), not fetched from the GDR landing page in this run. Data.gov metadata reports CC BY 4.0; the GDR asset-level attribution/reuse terms were NOT independently verified. Its dist_known_fault_px column is label-derived and is dropped on read.",
       "reachable_from_this_sandbox": false
     },
@@ -244,7 +244,7 @@
     {
       "name": "DOI 10.15121/1881483",
       "url": "https://doi.org/10.15121/1881483",
-      "what_it_supports": "persistent identifier for the INGENIOUS regional dataset used by H53-A",
+      "what_it_supports": "persistent identifier for the INGENIOUS regional dataset used by H55-A",
       "limit": "not resolved from this sandbox.",
       "reachable_from_this_sandbox": false
     },
@@ -258,7 +258,7 @@
     {
       "name": "USGS 3D Elevation Program",
       "url": "https://www.usgs.gov/3d-elevation-program/about-3dep-products-services",
-      "what_it_supports": "the free official source behind the 1 m DEM tiles used to build data/external/h52_scarp3m_100m.tif (706 of 716 zone-11 tiles) and therefore hypothesis H53-D",
+      "what_it_supports": "the free official source behind the 1 m DEM tiles used to build data/external/h52_scarp3m_100m.tif (706 of 716 zone-11 tiles) and therefore hypothesis H55-D",
       "limit": "prd-tnm.s3.amazonaws.com and earthexplorer.usgs.gov both return HTTP 000 from this sandbox. Native-resolution DEM work must run in GitHub Actions with compact products committed back.",
       "reachable_from_this_sandbox": false
     },

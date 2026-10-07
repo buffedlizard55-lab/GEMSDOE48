@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Derivation of the DTI metric algebra, the live-calibrated forward model, the coverage-frontier ceiling and the Dempster-Shafer selection rule.">
-<title>GEMSDOE48 H53 — method</title>
+<title>GEMSDOE48 H55 — method</title>
 <style>
 :root{color-scheme:light;--ink:#12241d;--muted:#54665c;--paper:#f4f4ec;--panel:#fffefa;
 --line:#d7ddd1;--green:#1d4c3a;--green2:#2f6b52;--soft:#e3eee5;--amber:#8a4a15;
@@ -84,7 +84,7 @@ letter-spacing:.05em;text-transform:uppercase}
 <a href="irregularities.html">Irregularities</a>
 <a href="sources.html">Sources</a>
 <a href="next-steps.html">Next steps</a>
-<a href="research/h53-live-model-ceiling-and-candidate-20261007.md">Full report</a>
+<a href="research/h55-live-model-ceiling-and-candidate-20261007.md">Full report</a>
 </div></nav>
 <main class="wrap">
 
@@ -110,14 +110,14 @@ DTI   = TPw / (TPw + 0.2·FPw + 0.8·FNw)</code></pre>
 <code>k</code>: <code>d/dv[(T₀ + v·k)/(D₀ + 0.2v)] = (k·D₀ − 0.2·T₀)/(D₀ + 0.2v)²</code>, whose
 sign is that of <code>k − 0.2·DTI</code> and is <strong>independent of v</strong>. Every cell is
 pushed to 0 or 1, so a graded belief surface is strictly worse than its own binarisation. Asserted
-numerically in <code>tests/test_h53.py::test_binary_emission_is_dti_optimal</code>.</p>
+numerically in <code>tests/test_h55.py::test_binary_emission_is_dti_optimal</code>.</p>
 <h3>(b) An added pixel pays iff its kernel weight exceeds 0.2·DTI</h3>
 <p>0.0556 at DTI = 0.2778, i.e. 0.397 × the mean credit of a dot in the live-best artifact
 (0.1384).</p>
 <h3>(c) Adding a pixel can never reduce TPw</h3>
 <p><code>TPw</code> is a <em>maximum</em> over emitted pixels. The only risk of an addition is the
 0.2 denominator cost, which makes the worst case of an additive candidate
-<strong>exactly computable</strong>. This is why H53 is additive-only and why its floor is a bound
+<strong>exactly computable</strong>. This is why H55 is additive-only and why its floor is a bound
 rather than an estimate.</p>
 
 <h2>3 · The removal-regime collapse</h2>
@@ -173,7 +173,7 @@ a prediction — and the bias direction means new signal is more likely under-pr
 over       X ⊇ C ,  X ⊂ (footprint ∧ &gt;200 m off-catalogue ∧ ¬catalogue)</code></pre>
 <p>Greedy maximum-coverage selection is used, with exact incremental coverage updates (verified
 against full recomputation in
-<code>tests/test_h53.py::test_greedy_incremental_coverage_matches_exact_recomputation</code>).
+<code>tests/test_h55.py::test_greedy_incremental_coverage_matches_exact_recomputation</code>).
 A site is admitted while its marginal coverage gain clears
 <code>1.25 × 0.2 × DTI_C / ρ = 0.8169</code>
 coverage units. The 1.25 safety factor is pre-registered and makes the choice robust to a ±25 %
@@ -203,24 +203,24 @@ gap-closure pool is drawn from and where the conduit anchors are vetoed unless a
 arbitrates. The unassigned mass m(Θ) ships as its own layer exactly as the brief asks.</p>
 
 <h2>9 · Reproduce</h2>
-<pre><code>python scripts/restore_h53_inputs.py                       # 7 hash-pinned mirrors, fail closed
-python scripts/restore_h53_inputs.py --with-official-features   # optional 419 MB 19-band stack
+<pre><code>python scripts/restore_h55_inputs.py                       # 7 hash-pinned mirrors, fail closed
+python scripts/restore_h55_inputs.py --with-official-features   # optional 419 MB 19-band stack
 python scripts/calibrate_live_model.py                     # |G|, rho, frontier, ceiling table
-python scripts/build_submission_h53.py                     # candidate + diagnostics + receipts
-python scripts/audit_h53.py                                # 18-point uniqueness/integrity audit
-python scripts/validate_submission.py docs/downloads/GEMSDOE48-H53-conduit-conflict-priced-20261007-055da9855353-zeros-outside.tif \
-       --receipt evidence/h53_primary_format_audit_20261007.json
+python scripts/build_submission_h55.py                     # candidate + diagnostics + receipts
+python scripts/audit_h55.py                                # 18-point uniqueness/integrity audit
+python scripts/validate_submission.py docs/downloads/GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353-zeros-outside.tif \
+       --receipt evidence/h55_primary_format_audit_20261007.json
 python scripts/run_spatial_holdout.py \
-       --combined docs/downloads/GEMSDOE48-H53-conduit-conflict-priced-20261007-055da9855353-zeros-outside.tif \
-       --candidate-name h53_conduit_conflict_priced \
-       --output evidence/holdout_h53_spatial_20261007.json --allow-unpinned-sources
+       --combined docs/downloads/GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353-zeros-outside.tif \
+       --candidate-name h55_conduit_conflict_priced \
+       --output evidence/holdout_h55_spatial_20261007.json --allow-unpinned-sources
 python -m pytest -q                                        # 158 passed, 3 skipped</code></pre>
 
 </main>
 <footer class="wrap">
 <p><strong>GEMSDOE48</strong> — auditable fault-surface research for DrivenData competition 306
-(DOE GEMS Prize). Built 2026-10-07 05:52 UTC by
-<code>scripts/build_site_h53.py</code> directly from the receipts in <code>evidence/</code>.</p>
+(DOE GEMS Prize). Built 2026-10-07 06:02 UTC by
+<code>scripts/build_site_h55.py</code> directly from the receipts in <code>evidence/</code>.</p>
 <p class="small"><strong>No organizer score exists for any file in this repository.</strong>
 Every live number is OWNER-REPORT class: a score pasted by the repository owner, not an
 organizer receipt. Proxy numbers are computed against public map layers, not the private

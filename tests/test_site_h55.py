@@ -1,6 +1,6 @@
 """The published site must agree with the receipts it is generated from.
 
-`scripts/build_site_h53.py` reads every number out of a receipt, so these tests catch two failure
+`scripts/build_site_h55.py` reads every number out of a receipt, so these tests catch two failure
 modes: a page that was hand-edited away from the receipts, and a receipt field that changed shape
 without the pages being rebuilt.
 """
@@ -24,14 +24,14 @@ PAGES = ["index.html", "executive-summary.html", "submission-guide.html", "metho
          "hypotheses.html", "validation.html", "irregularities.html", "sources.html",
          "next-steps.html"]
 
-RECEIPT = REPO / "evidence/build_h53_receipt_20261007.json"
+RECEIPT = REPO / "evidence/build_h55_receipt_20261007.json"
 
 
 def needs_site():
     return pytest.mark.skipif(
         not (RECEIPT.exists() and all((DOCS / p).exists() for p in PAGES)),
-        reason="site or receipts not built; run scripts/build_submission_h53.py then "
-               "scripts/build_site_h53.py")
+        reason="site or receipts not built; run scripts/build_submission_h55.py then "
+               "scripts/build_site_h55.py")
 
 
 @pytest.fixture(scope="module")
@@ -142,7 +142,7 @@ def test_diagnostic_layers_are_labelled_not_submissions(receipt, flatpages):
 
 @needs_site()
 def test_hypothesis_page_carries_every_required_field(pages):
-    slate = json.loads((REPO / "evidence/hypothesis_slate_h53_20261007.json").read_text())
+    slate = json.loads((REPO / "evidence/hypothesis_slate_h55_20261007.json").read_text())
     assert len(slate["hypotheses"]) >= 3
     required = ("layers", "physical_signature", "why_it_catches_a_missing_fault",
                 "difference_from_repository", "data_source", "data_obtainable_verified",
@@ -162,7 +162,7 @@ def test_irregularities_page_matches_the_markdown_record(pages):
     text = pages["irregularities.html"]
     md = (REPO / "docs/irregularities.md").read_text()
     for i in range(1, 11):
-        tag = f"IR-H53-{i:02d}"
+        tag = f"IR-H55-{i:02d}"
         assert tag in text, f"{tag} missing from irregularities.html"
         assert tag in md, f"{tag} missing from docs/irregularities.md"
 

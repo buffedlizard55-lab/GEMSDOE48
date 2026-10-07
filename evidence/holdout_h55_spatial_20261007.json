@@ -1,11 +1,11 @@
 {
   "schema_version": 2,
-  "evaluated_utc": "2026-10-07T05:12:19.897578+00:00",
+  "evaluated_utc": "2026-10-07T06:02:41.738799+00:00",
   "status": "CONDITIONAL_SPATIAL_BLOCK_DIAGNOSTIC_NOT_SLOT_CLEARED",
   "candidate": {
-    "name": "h53_conduit_conflict_priced",
-    "path": "docs/downloads/GEMSDOE48-H53-conduit-conflict-priced-20261007-055da9855353-zeros-outside.tif",
-    "sha256": "f4671759ef80479516629974b4b028f743db52ea54bc66c166cf6506694b0c72"
+    "name": "h55_conduit_conflict_priced",
+    "path": "docs/downloads/GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353-zeros-outside.tif",
+    "sha256": "8f9a9d3d1ea2aed1c99e5ab5260aad9ceb10f4011c4b5a38791509261ddd284a"
   },
   "source_inputs": {
     "dotted": {
@@ -17,8 +17,8 @@
       "sha256": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757"
     },
     "combined": {
-      "path": "docs/downloads/GEMSDOE48-H53-conduit-conflict-priced-20261007-055da9855353-zeros-outside.tif",
-      "sha256": "f4671759ef80479516629974b4b028f743db52ea54bc66c166cf6506694b0c72"
+      "path": "docs/downloads/GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353-zeros-outside.tif",
+      "sha256": "8f9a9d3d1ea2aed1c99e5ab5260aad9ceb10f4011c4b5a38791509261ddd284a"
     }
   },
   "truth_sources": {
@@ -285,7 +285,7 @@
       },
       "mean_dti": 0.08553836970234897
     },
-    "h53_conduit_conflict_priced": {
+    "h55_conduit_conflict_priced": {
       "NW": {
         "tp": 193.97093714254464,
         "fp": 18943.128497488786,
@@ -626,7 +626,7 @@
       },
       "mean_dti": 0.09699165735436653
     },
-    "h53_conduit_conflict_priced": {
+    "h55_conduit_conflict_priced": {
       "NW": {
         "tp": 2308.29113099628,
         "fp": 18037.49634732007,
@@ -734,7 +734,7 @@
   "alternative_candidate_comparisons": {},
   "slot_decision": {
     "cleared": false,
-    "reason": "h53_conduit_conflict_priced is evaluated only against public-map proxy targets with frozen upstream surfaces; even a numeric proxy pass is not private-label evidence or a slot clearance and must also pass format, live-evidence, and review gates."
+    "reason": "h55_conduit_conflict_priced is evaluated only against public-map proxy targets with frozen upstream surfaces; even a numeric proxy pass is not private-label evidence or a slot clearance and must also pass format, live-evidence, and review gates."
   },
   "caveats": [
     "The catalogue and SGMC labels are public map proxies, not the private expert-labelled competition target.",

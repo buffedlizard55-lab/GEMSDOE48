@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Remaining work, ordered priorities and the limitations that block a higher score.">
-<title>GEMSDOE48 H53 — next steps</title>
+<title>GEMSDOE48 H55 — next steps</title>
 <style>
 :root{color-scheme:light;--ink:#12241d;--muted:#54665c;--paper:#f4f4ec;--panel:#fffefa;
 --line:#d7ddd1;--green:#1d4c3a;--green2:#2f6b52;--soft:#e3eee5;--amber:#8a4a15;
@@ -84,7 +84,7 @@ letter-spacing:.05em;text-transform:uppercase}
 <a href="irregularities.html">Irregularities</a>
 <a href="sources.html">Sources</a>
 <a href="next-steps.html">Next steps</a>
-<a href="research/h53-live-model-ceiling-and-candidate-20261007.md">Full report</a>
+<a href="research/h55-live-model-ceiling-and-candidate-20261007.md">Full report</a>
 </div></nav>
 <main class="wrap">
 
@@ -104,7 +104,7 @@ detector.</div>
 
 <h2>Ordered priorities</h2>
 <ol class="steps">
-<li><strong>Submit H53 and record the returned score.</strong> Cost: one weekly slot. Value: it is
+<li><strong>Submit H55 and record the returned score.</strong> Cost: one weekly slot. Value: it is
 the only experiment available that can test the hydrothermal-conduit hypothesis, and the arithmetic
 was built so the answer is legible — materially above 0.2778 means conduits carry credit, near
 0.2727 means they do not. Worst case
@@ -114,22 +114,22 @@ highest-information slot in the project. A dense (unthinned) emission of any new
 directly to that field's total truth yield T under the calibrated |G|, and simultaneously
 re-calibrates ρ for a second family — converting the instrument from within-family to cross-family
 and making every later candidate priceable offline. The best first field is
-<strong>H53-B</strong> (strain-rate localisation ridges), because bands 4/7/8/16 are measured here
+<strong>H55-B</strong> (strain-rate localisation ridges), because bands 4/7/8/16 are measured here
 to be close to pure unused information (dot lift 1.03 – 1.08).</li>
-<li><strong>Implement H53-B.</strong> Data is in hand and byte-verified. Multi-scale vesselness /
+<li><strong>Implement H55-B.</strong> Data is in hand and byte-verified. Multi-scale vesselness /
 Sato ridge filter plus structure-tensor coherence on <code>log(second invariant)</code> and
 <code>shear rate</code> at 300 – 900 m; keep coherence above the 95th percentile; emit with the
 existing greedy coverage rule and the existing pre-registered budget. Cost low-medium.</li>
-<li><strong>Unblock H53-D.</strong> Verify the units of <code>facing_at</code> against
+<li><strong>Unblock H55-D.</strong> Verify the units of <code>facing_at</code> against
 <code>strike_at</code> in <code>src/gemsdoe48/scarp3m.py</code> and
 <code>data/external/h52_scarp3m_merge_log.txt</code> before building any along-strike walk — the
 measured median perpendicularity is 46°, not ~0°, so one of the two is not what its name says.
 Then re-test lidar scarps as <em>traces</em> rather than points. Highest ceiling of any candidate.</li>
-<li><strong>Implement H53-C.</strong> Basement-depth second derivative × isostatic-gravity
+<li><strong>Implement H55-C.</strong> Basement-depth second derivative × isostatic-gravity
 horizontal gradient × conductivity contrast. Targets a measured blind spot: C's dots sit on shallow
 basement (402 m vs 535 m) and on topographic highs (+7.3 vs −15.6), so the family systematically
 misses <em>buried</em> basin-margin faults. Data in hand; cost low.</li>
-<li><strong>Ride H53-E on the result of step 1.</strong> Three-source Dempster conjunction
+<li><strong>Ride H55-E on the result of step 1.</strong> Three-source Dempster conjunction
 (Quaternary trace with a recorded slip rate × conduit tier × strain ridge). Small mass, small in
 both directions, and its prior probability depends entirely on whether step 1 says conduit evidence
 carries credit.</li>
@@ -167,8 +167,8 @@ primary. Static pages are maintained alongside <code>docs/research/</code> and t
 </main>
 <footer class="wrap">
 <p><strong>GEMSDOE48</strong> — auditable fault-surface research for DrivenData competition 306
-(DOE GEMS Prize). Built 2026-10-07 05:52 UTC by
-<code>scripts/build_site_h53.py</code> directly from the receipts in <code>evidence/</code>.</p>
+(DOE GEMS Prize). Built 2026-10-07 06:02 UTC by
+<code>scripts/build_site_h55.py</code> directly from the receipts in <code>evidence/</code>.</p>
 <p class="small"><strong>No organizer score exists for any file in this repository.</strong>
 Every live number is OWNER-REPORT class: a score pasted by the repository owner, not an
 organizer receipt. Proxy numbers are computed against public map layers, not the private
