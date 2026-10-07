@@ -1,0 +1,747 @@
+{
+  "schema_version": 2,
+  "evaluated_utc": "2026-10-07T15:21:52.901207+00:00",
+  "status": "CONDITIONAL_SPATIAL_BLOCK_DIAGNOSTIC_NOT_SLOT_CLEARED",
+  "candidate": {
+    "name": "h56a_strain_ridge",
+    "path": "scratch/H56-A-strain-ridge-massmatched-20261007.tif",
+    "sha256": "41493c0dce88041de03ddc832d29270baa9984a4910c8cff7facbe2e3d6a4e46"
+  },
+  "source_inputs": {
+    "dotted": {
+      "path": "data/raw/dotted_h33_2_b2_zeros.tif",
+      "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9"
+    },
+    "tip_stepover": {
+      "path": "data/raw/tip_h33d_stepover.tif",
+      "sha256": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757"
+    },
+    "combined": {
+      "path": "scratch/H56-A-strain-ridge-massmatched-20261007.tif",
+      "sha256": "41493c0dce88041de03ddc832d29270baa9984a4910c8cff7facbe2e3d6a4e46"
+    }
+  },
+  "truth_sources": {
+    "catalogue": {
+      "path": "data/raw/labels_catalogue.tif",
+      "sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+      "class": "owner-mirror of existing public USGS/INGENIOUS catalogue labels",
+      "organizer_authenticated": false,
+      "positive_pixels": 60988,
+      "is_private_expert_test_truth": false
+    },
+    "sgmc_off_catalogue_gt_300m": {
+      "path": "data/official/derived_sgmc_faults_100m.tif",
+      "sha256": "643cbe992ef4ba37588fb469163ed8291e3ceb23d6c1f78a3cfaa462430c2da0",
+      "class": "owner-mirror of an on-grid rasterization of USGS SGMC fault traces",
+      "organizer_authenticated": false,
+      "positive_pixels": 62122,
+      "definition": "SGMC raster positive and within footprint, with Euclidean distance >300 m from a positive catalogue-label cell.",
+      "source_comparison_receipt": "evidence/sgmc_raster_comparison_20261006.json",
+      "prior_raw_raster_sensitivity_receipt": "evidence/holdout_raw_sgmc_20261006.json",
+      "is_private_expert_test_truth": false
+    }
+  },
+  "fold_protocol": {
+    "geometry": "Four fixed 2x2 geographic quadrants on the full EPSG:32611 grid.",
+    "metric": "Official distance-weighted Tversky equations; alpha=0.2, beta=0.8, triangular radius=300 m.",
+    "evaluation_domain": "Held-out quadrant plus a 300 m Euclidean halo, clipped to the finite survey footprint; only truth in the core quadrant is scored.",
+    "candidate_retraining": false,
+    "leakage_limitation": "These surfaces are frozen upstream owner mirrors and are not reconstructed inside each fold. The H33-2-B2 owner audit describes deleting predictions within 200 m of the full catalogue; therefore catalogue geometry was available during source construction. SGMC faults are filtered to >300 m from that catalogue, but this does not independently reconstruct or validate the source models. Both targets remain public-map proxies, not the private expert-labelled set."
+  },
+  "results": {
+    "dotted": {
+      "NW": {
+        "tp": 166.3061269188496,
+        "fp": 17982.33702223734,
+        "fn": 29152.69387308115,
+        "n_truth": 29319,
+        "dti": 0.006140172240870542,
+        "coverage": 0.005672298745484143,
+        "prediction_mass": 18105.0,
+        "positive_cells": 18105,
+        "valid_domain_cells": 2457001
+      },
+      "NE": {
+        "tp": 102.89051980063647,
+        "fp": 9566.131033143483,
+        "fn": 12493.109480199364,
+        "n_truth": 12596,
+        "dti": 0.008566639707706115,
+        "coverage": 0.00816850744685904,
+        "prediction_mass": 9644.0,
+        "positive_cells": 9644,
+        "valid_domain_cells": 1372176
+      },
+      "SW": {
+        "tp": 64.3306624529001,
+        "fp": 4791.384866112941,
+        "fn": 9408.6693375471,
+        "n_truth": 9473,
+        "dti": 0.0075244561794081824,
+        "coverage": 0.006790949271920204,
+        "prediction_mass": 4837.0,
+        "positive_cells": 4837,
+        "valid_domain_cells": 570886
+      },
+      "SE": {
+        "tp": 44.472587598677805,
+        "fp": 5233.954481301147,
+        "fn": 9555.527412401323,
+        "n_truth": 9600,
+        "dti": 0.005090909927745937,
+        "coverage": 0.004632561208195604,
+        "prediction_mass": 5266.0,
+        "positive_cells": 5266,
+        "valid_domain_cells": 792240
+      },
+      "mean_dti": 0.006830544513932694
+    },
+    "tip_stepover": {
+      "NW": {
+        "tp": 2292.84158696349,
+        "fp": 19020.979900771235,
+        "fn": 27026.158413036508,
+        "n_truth": 29319,
+        "dti": 0.08272041778935431,
+        "coverage": 0.07820326706106927,
+        "prediction_mass": 20071.0,
+        "positive_cells": 20071,
+        "valid_domain_cells": 2457001
+      },
+      "NE": {
+        "tp": 1262.126856697211,
+        "fp": 10204.669279570975,
+        "fn": 11333.87314330279,
+        "n_truth": 12596,
+        "dti": 0.10202996044840904,
+        "coverage": 0.10020060786735559,
+        "prediction_mass": 10797.0,
+        "positive_cells": 10797,
+        "valid_domain_cells": 1372176
+      },
+      "SW": {
+        "tp": 784.1685529847127,
+        "fp": 5082.867922496783,
+        "fn": 8688.831447015287,
+        "n_truth": 9473,
+        "dti": 0.08960075634024618,
+        "coverage": 0.08277932576635835,
+        "prediction_mass": 5421.0,
+        "positive_cells": 5421,
+        "valid_domain_cells": 570886
+      },
+      "SE": {
+        "tp": 650.3152604032955,
+        "fp": 5534.816790090567,
+        "fn": 8949.684739596705,
+        "n_truth": 9600,
+        "dti": 0.07292961021925379,
+        "coverage": 0.06774117295867661,
+        "prediction_mass": 5816.0,
+        "positive_cells": 5816,
+        "valid_domain_cells": 792240
+      },
+      "mean_dti": 0.08682018619931584
+    },
+    "arithmetic_mean": {
+      "NW": {
+        "tp": 1205.4478618790884,
+        "fp": 18501.65846150429,
+        "fn": 28113.55213812091,
+        "n_truth": 29319,
+        "dti": 0.04399987320455863,
+        "coverage": 0.04111490371019095,
+        "prediction_mass": 19088.0,
+        "positive_cells": 22880,
+        "valid_domain_cells": 2457001
+      },
+      "NE": {
+        "tp": 666.2811529632821,
+        "fp": 9885.40015635723,
+        "fn": 11929.718847036718,
+        "n_truth": 12596,
+        "dti": 0.05467085446875687,
+        "coverage": 0.052896249044401565,
+        "prediction_mass": 10220.5,
+        "positive_cells": 12449,
+        "valid_domain_cells": 1372176
+      },
+      "SW": {
+        "tp": 417.286335469981,
+        "fp": 4937.126394304862,
+        "fn": 9055.71366453002,
+        "n_truth": 9473,
+        "dti": 0.048245196437146594,
+        "coverage": 0.04405007236039069,
+        "prediction_mass": 5129.0,
+        "positive_cells": 6215,
+        "valid_domain_cells": 570886
+      },
+      "SE": {
+        "tp": 341.62080065741543,
+        "fp": 5384.385635695857,
+        "fn": 9258.379199342584,
+        "n_truth": 9600,
+        "dti": 0.03870968939259939,
+        "coverage": 0.035585500068480776,
+        "prediction_mass": 5541.0,
+        "positive_cells": 6623,
+        "valid_domain_cells": 792240
+      },
+      "mean_dti": 0.04640640337576537
+    },
+    "prior_alpha_099_belief": {
+      "NW": {
+        "tp": 1200.0474098195623,
+        "fp": 18485.400579757643,
+        "fn": 28118.952590180437,
+        "n_truth": 29319,
+        "dti": 0.04380967883425437,
+        "coverage": 0.04093070738495727,
+        "prediction_mass": 19069.328872680664,
+        "positive_cells": 22880,
+        "valid_domain_cells": 2457001
+      },
+      "NE": {
+        "tp": 663.2844765367684,
+        "fp": 9875.812845486173,
+        "fn": 11932.715523463232,
+        "n_truth": 12596,
+        "dti": 0.054436207751456446,
+        "coverage": 0.05265834205595176,
+        "prediction_mass": 10209.527266025543,
+        "positive_cells": 12449,
+        "valid_domain_cells": 1372176
+      },
+      "SW": {
+        "tp": 415.46970293722507,
+        "fp": 4932.5342820165315,
+        "fn": 9057.530297062774,
+        "n_truth": 9473,
+        "dti": 0.04804228314615745,
+        "coverage": 0.043858302854135445,
+        "prediction_mass": 5123.6527309417725,
+        "positive_cells": 6215,
+        "valid_domain_cells": 570886
+      },
+      "SE": {
+        "tp": 340.0891387795586,
+        "fp": 5379.706831890813,
+        "fn": 9259.910861220442,
+        "n_truth": 9600,
+        "dti": 0.038541558420356295,
+        "coverage": 0.03542595195620402,
+        "prediction_mass": 5535.672426223755,
+        "positive_cells": 6623,
+        "valid_domain_cells": 792240
+      },
+      "mean_dti": 0.046207432038056134
+    },
+    "prior_union_decision": {
+      "NW": {
+        "tp": 2303.9015034720455,
+        "fp": 21803.541980848146,
+        "fn": 27015.098496527953,
+        "n_truth": 29319,
+        "dti": 0.08147706148236354,
+        "coverage": 0.07858049399611329,
+        "prediction_mass": 22880.0,
+        "positive_cells": 22880,
+        "valid_domain_cells": 2457001
+      },
+      "NE": {
+        "tp": 1275.6760223223496,
+        "fp": 11832.528586326149,
+        "fn": 11320.32397767765,
+        "n_truth": 12596,
+        "dti": 0.10045926347851096,
+        "coverage": 0.10127627995572798,
+        "prediction_mass": 12449.0,
+        "positive_cells": 12449,
+        "valid_domain_cells": 1372176
+      },
+      "SW": {
+        "tp": 786.5488507952209,
+        "fp": 5869.758339849848,
+        "fn": 8686.451149204779,
+        "n_truth": 9473,
+        "dti": 0.08828044210851542,
+        "coverage": 0.08303059757154238,
+        "prediction_mass": 6215.0,
+        "positive_cells": 6215,
+        "valid_domain_cells": 570886
+      },
+      "SE": {
+        "tp": 653.0073931797218,
+        "fp": 6334.624136311386,
+        "fn": 8946.992606820279,
+        "n_truth": 9600,
+        "dti": 0.07193671174000597,
+        "coverage": 0.06802160345622102,
+        "prediction_mass": 6623.0,
+        "positive_cells": 6623,
+        "valid_domain_cells": 792240
+      },
+      "mean_dti": 0.08553836970234897
+    },
+    "h56a_strain_ridge": {
+      "NW": {
+        "tp": 601.7643699755025,
+        "fp": 30107.215902742577,
+        "fn": 28717.235630024497,
+        "n_truth": 29319,
+        "dti": 0.02033194074380133,
+        "coverage": 0.020524723557266703,
+        "prediction_mass": 31631.0,
+        "positive_cells": 31631,
+        "valid_domain_cells": 2457001
+      },
+      "NE": {
+        "tp": 160.32488369122797,
+        "fp": 3736.83539340892,
+        "fn": 12435.675116308772,
+        "n_truth": 12596,
+        "dti": 0.014768004485606487,
+        "coverage": 0.012728237828773258,
+        "prediction_mass": 4078.0,
+        "positive_cells": 4078,
+        "valid_domain_cells": 1372176
+      },
+      "SW": {
+        "tp": 149.62033353035216,
+        "fp": 1258.0264910251744,
+        "fn": 9323.379666469647,
+        "n_truth": 9473,
+        "dti": 0.01903583691200822,
+        "coverage": 0.015794398134735793,
+        "prediction_mass": 1527.0,
+        "positive_cells": 1527,
+        "valid_domain_cells": 570886
+      },
+      "SE": {
+        "tp": 23.4997929679656,
+        "fp": 830.0434107988995,
+        "fn": 9576.500207032035,
+        "n_truth": 9600,
+        "dti": 0.0029933339833779003,
+        "coverage": 0.00244789510082975,
+        "prediction_mass": 857.0,
+        "positive_cells": 857,
+        "valid_domain_cells": 792240
+      },
+      "mean_dti": 0.014282279031198485
+    }
+  },
+  "paired_gate_vs_each_input": {
+    "dotted": {
+      "fold_delta_dti": {
+        "NW": 0.014191768502930788,
+        "NE": 0.006201364777900372,
+        "SW": 0.011511380732600038,
+        "SE": -0.0020975759443680364
+      },
+      "mean_delta_dti": 0.00745173451726579,
+      "positive_folds": 3,
+      "passes_numeric_gate": true
+    },
+    "tip_stepover": {
+      "fold_delta_dti": {
+        "NW": -0.062388477045552976,
+        "NE": -0.08726195596280255,
+        "SW": -0.07056491942823796,
+        "SE": -0.0699362762358759
+      },
+      "mean_delta_dti": -0.07253790716811734,
+      "positive_folds": 0,
+      "passes_numeric_gate": false
+    }
+  },
+  "paired_comparison_vs_arithmetic_mean": {
+    "fold_delta_dti": {
+      "NW": -0.0236679324607573,
+      "NE": -0.039902849983150385,
+      "SW": -0.029209359525138374,
+      "SE": -0.03571635540922149
+    },
+    "mean_delta_dti": -0.032124124344566886,
+    "positive_folds": 0,
+    "passes_numeric_gate": false
+  },
+  "paired_comparison_vs_prior_alpha_099_belief": {
+    "fold_delta_dti": {
+      "NW": -0.023477738090453042,
+      "NE": -0.03966820326584996,
+      "SW": -0.029006446234149233,
+      "SE": -0.035548224436978394
+    },
+    "mean_delta_dti": -0.03192515300685766,
+    "positive_folds": 0,
+    "passes_numeric_gate": false
+  },
+  "paired_comparison_vs_prior_union_decision": {
+    "fold_delta_dti": {
+      "NW": -0.06114512073856221,
+      "NE": -0.08569125899290447,
+      "SW": -0.0692446051965072,
+      "SE": -0.06894337775662808
+    },
+    "mean_delta_dti": -0.07125609067115049,
+    "positive_folds": 0,
+    "passes_numeric_gate": false
+  },
+  "sgmc_off_catalogue_results": {
+    "dotted": {
+      "NW": {
+        "tp": 2278.4274253446,
+        "fp": 17084.36224387496,
+        "fn": 20851.5725746554,
+        "n_truth": 23130,
+        "dti": 0.10182206897418047,
+        "coverage": 0.09850529292453956,
+        "prediction_mass": 18105.0,
+        "positive_cells": 18105,
+        "valid_domain_cells": 2457001
+      },
+      "NE": {
+        "tp": 2053.440729971507,
+        "fp": 8757.275760136814,
+        "fn": 21138.559270028494,
+        "n_truth": 23192,
+        "dti": 0.09912464643098802,
+        "coverage": 0.08854090763933715,
+        "prediction_mass": 9644.0,
+        "positive_cells": 9644,
+        "valid_domain_cells": 1372176
+      },
+      "SW": {
+        "tp": 309.58153550533325,
+        "fp": 4682.810047882023,
+        "fn": 2043.4184644946668,
+        "n_truth": 2353,
+        "dti": 0.10746081627716049,
+        "coverage": 0.13156886336818244,
+        "prediction_mass": 4837.0,
+        "positive_cells": 4837,
+        "valid_domain_cells": 570886
+      },
+      "SE": {
+        "tp": 876.1870117382703,
+        "fp": 4894.070830045559,
+        "fn": 12570.81298826173,
+        "n_truth": 13447,
+        "dti": 0.07355713913474901,
+        "coverage": 0.0651585492480308,
+        "prediction_mass": 5266.0,
+        "positive_cells": 5266,
+        "valid_domain_cells": 792240
+      },
+      "mean_dti": 0.09549116770426949
+    },
+    "tip_stepover": {
+      "NW": {
+        "tp": 2309.5694540761447,
+        "fp": 19022.265492676543,
+        "fn": 20820.430545923857,
+        "n_truth": 23130,
+        "dti": 0.10142873213928899,
+        "coverage": 0.09985168413645243,
+        "prediction_mass": 20071.0,
+        "positive_cells": 20071,
+        "valid_domain_cells": 2457001
+      },
+      "NE": {
+        "tp": 2098.594358157621,
+        "fp": 9883.22190557988,
+        "fn": 21093.40564184238,
+        "n_truth": 23192,
+        "dti": 0.10017174411427186,
+        "coverage": 0.09048785607785534,
+        "prediction_mass": 10797.0,
+        "positive_cells": 10797,
+        "valid_domain_cells": 1372176
+      },
+      "SW": {
+        "tp": 319.18799218223785,
+        "fp": 5260.432355038791,
+        "fn": 2033.8120078177622,
+        "n_truth": 2353,
+        "dti": 0.10645546805132546,
+        "coverage": 0.13565150538981635,
+        "prediction_mass": 5421.0,
+        "positive_cells": 5421,
+        "valid_domain_cells": 570886
+      },
+      "SE": {
+        "tp": 888.5519732263328,
+        "fp": 5435.192198736084,
+        "fn": 12558.448026773667,
+        "n_truth": 13447,
+        "dti": 0.07390835064479588,
+        "coverage": 0.06607808234002624,
+        "prediction_mass": 5816.0,
+        "positive_cells": 5816,
+        "valid_domain_cells": 792240
+      },
+      "mean_dti": 0.09549107373742055
+    },
+    "arithmetic_mean": {
+      "NW": {
+        "tp": 2165.86003406268,
+        "fp": 18053.31386827575,
+        "fn": 20964.13996593732,
+        "n_truth": 23130,
+        "dti": 0.09605623134771595,
+        "coverage": 0.09363856610733592,
+        "prediction_mass": 19088.0,
+        "positive_cells": 22880,
+        "valid_domain_cells": 2457001
+      },
+      "NE": {
+        "tp": 1922.2207126605663,
+        "fp": 9320.248832858346,
+        "fn": 21269.779287339436,
+        "n_truth": 23192,
+        "dti": 0.09240515503198116,
+        "coverage": 0.08288292138067292,
+        "prediction_mass": 10220.5,
+        "positive_cells": 12449,
+        "valid_domain_cells": 1372176
+      },
+      "SW": {
+        "tp": 286.0123429262441,
+        "fp": 4971.621201460406,
+        "fn": 2066.987657073756,
+        "n_truth": 2353,
+        "dti": 0.09748448795971693,
+        "coverage": 0.12155220693848029,
+        "prediction_mass": 5129.0,
+        "positive_cells": 6215,
+        "valid_domain_cells": 570886
+      },
+      "SE": {
+        "tp": 825.8088479389564,
+        "fp": 5164.631514390821,
+        "fn": 12621.191152061043,
+        "n_truth": 13447,
+        "dti": 0.0690724651675047,
+        "coverage": 0.061412125227854275,
+        "prediction_mass": 5541.0,
+        "positive_cells": 6623,
+        "valid_domain_cells": 792240
+      },
+      "mean_dti": 0.08875458487672969
+    },
+    "prior_alpha_099_belief": {
+      "NW": {
+        "tp": 2164.790504054323,
+        "fp": 18035.521774827885,
+        "fn": 20965.209495945677,
+        "n_truth": 23130,
+        "dti": 0.09602486279040806,
+        "coverage": 0.0935923261588553,
+        "prediction_mass": 19069.328872680664,
+        "positive_cells": 22880,
+        "valid_domain_cells": 2457001
+      },
+      "NE": {
+        "tp": 1920.9759546129485,
+        "fp": 9310.248087450265,
+        "fn": 21271.02404538705,
+        "n_truth": 23192,
+        "dti": 0.0923553022778322,
+        "coverage": 0.08282924950900951,
+        "prediction_mass": 10209.527266025543,
+        "positive_cells": 12449,
+        "valid_domain_cells": 1372176
+      },
+      "SW": {
+        "tp": 285.7789192790998,
+        "fp": 4966.479642732098,
+        "fn": 2067.2210807209003,
+        "n_truth": 2353,
+        "dti": 0.09744063024755655,
+        "coverage": 0.1214530043685082,
+        "prediction_mass": 5123.6527309417725,
+        "positive_cells": 6215,
+        "valid_domain_cells": 570886
+      },
+      "SE": {
+        "tp": 825.3138109839839,
+        "fp": 5159.659393265591,
+        "fn": 12621.686189016016,
+        "n_truth": 13447,
+        "dti": 0.06903737314219027,
+        "coverage": 0.06137531129500884,
+        "prediction_mass": 5535.672426223755,
+        "positive_cells": 6623,
+        "valid_domain_cells": 792240
+      },
+      "mean_dti": 0.08871454211449677
+    },
+    "prior_union_decision": {
+      "NW": {
+        "tp": 2390.4958847897715,
+        "fp": 21666.78707749313,
+        "fn": 20739.504115210228,
+        "n_truth": 23130,
+        "dti": 0.1025283753423549,
+        "coverage": 0.10335044897491447,
+        "prediction_mass": 22880.0,
+        "positive_cells": 22880,
+        "valid_domain_cells": 2457001
+      },
+      "NE": {
+        "tp": 2182.509610279585,
+        "fp": 11351.34347105768,
+        "fn": 21009.490389720413,
+        "n_truth": 23192,
+        "dti": 0.10265623538141098,
+        "coverage": 0.09410614049153092,
+        "prediction_mass": 12449.0,
+        "positive_cells": 12449,
+        "valid_domain_cells": 1372176
+      },
+      "SW": {
+        "tp": 335.829192739145,
+        "fp": 6015.842600858819,
+        "fn": 2017.1708072608549,
+        "n_truth": 2353,
+        "dti": 0.10651997743175985,
+        "coverage": 0.14272383881816617,
+        "prediction_mass": 6215.0,
+        "positive_cells": 6215,
+        "valid_domain_cells": 570886
+      },
+      "SE": {
+        "tp": 928.7371089843136,
+        "fp": 6174.441098162102,
+        "fn": 12518.262891015685,
+        "n_truth": 13447,
+        "dti": 0.07626204126194043,
+        "coverage": 0.06906649133519102,
+        "prediction_mass": 6623.0,
+        "positive_cells": 6623,
+        "valid_domain_cells": 792240
+      },
+      "mean_dti": 0.09699165735436653
+    },
+    "h56a_strain_ridge": {
+      "NW": {
+        "tp": 457.50439205117016,
+        "fp": 30572.202577626154,
+        "fn": 22672.49560794883,
+        "n_truth": 23130,
+        "dti": 0.018514993004534398,
+        "coverage": 0.019779697019073506,
+        "prediction_mass": 31631.0,
+        "positive_cells": 31631,
+        "valid_domain_cells": 2457001
+      },
+      "NE": {
+        "tp": 120.00908098296574,
+        "fp": 3778.747940470261,
+        "fn": 23071.990919017033,
+        "n_truth": 23192,
+        "dti": 0.006207360455690685,
+        "coverage": 0.005174589556009216,
+        "prediction_mass": 4078.0,
+        "positive_cells": 4078,
+        "valid_domain_cells": 1372176
+      },
+      "SW": {
+        "tp": 0.0,
+        "fp": 1527.0,
+        "fn": 2353.0,
+        "n_truth": 2353,
+        "dti": 0.0,
+        "coverage": 0.0,
+        "prediction_mass": 1527.0,
+        "positive_cells": 1527,
+        "valid_domain_cells": 570886
+      },
+      "SE": {
+        "tp": 15.30964406271151,
+        "fp": 835.0503008786587,
+        "fn": 13431.690355937288,
+        "n_truth": 13447,
+        "dti": 0.0014009977676982717,
+        "coverage": 0.0011385174434975465,
+        "prediction_mass": 857.0,
+        "positive_cells": 857,
+        "valid_domain_cells": 792240
+      },
+      "mean_dti": 0.006530837806980838
+    }
+  },
+  "sgmc_paired_gate_vs_each_input": {
+    "dotted": {
+      "fold_delta_dti": {
+        "NW": -0.08330707596964608,
+        "NE": -0.09291728597529733,
+        "SW": -0.10746081627716049,
+        "SE": -0.07215614136705074
+      },
+      "mean_delta_dti": -0.08896032989728865,
+      "positive_folds": 0,
+      "passes_numeric_gate": false
+    },
+    "tip_stepover": {
+      "fold_delta_dti": {
+        "NW": -0.0829137391347546,
+        "NE": -0.09396438365858117,
+        "SW": -0.10645546805132546,
+        "SE": -0.07250735287709761
+      },
+      "mean_delta_dti": -0.0889602359304397,
+      "positive_folds": 0,
+      "passes_numeric_gate": false
+    }
+  },
+  "sgmc_paired_comparison_vs_arithmetic_mean": {
+    "fold_delta_dti": {
+      "NW": -0.07754123834318155,
+      "NE": -0.08619779457629047,
+      "SW": -0.09748448795971693,
+      "SE": -0.06767146739980644
+    },
+    "mean_delta_dti": -0.08222374706974885,
+    "positive_folds": 0,
+    "passes_numeric_gate": false
+  },
+  "sgmc_paired_comparison_vs_prior_alpha_099_belief": {
+    "fold_delta_dti": {
+      "NW": -0.07750986978587367,
+      "NE": -0.08614794182214151,
+      "SW": -0.09744063024755655,
+      "SE": -0.067636375374492
+    },
+    "mean_delta_dti": -0.08218370430751594,
+    "positive_folds": 0,
+    "passes_numeric_gate": false
+  },
+  "sgmc_paired_comparison_vs_prior_union_decision": {
+    "fold_delta_dti": {
+      "NW": -0.0840133823378205,
+      "NE": -0.0964488749257203,
+      "SW": -0.10651997743175985,
+      "SE": -0.07486104349424216
+    },
+    "mean_delta_dti": -0.0904608195473857,
+    "positive_folds": 0,
+    "passes_numeric_gate": false
+  },
+  "alternative_candidate_comparisons": {},
+  "slot_decision": {
+    "cleared": false,
+    "reason": "h56a_strain_ridge is evaluated only against public-map proxy targets with frozen upstream surfaces; even a numeric proxy pass is not private-label evidence or a slot clearance and must also pass format, live-evidence, and review gates."
+  },
+  "caveats": [
+    "The catalogue and SGMC labels are public map proxies, not the private expert-labelled competition target.",
+    "Owner mirrors are not organizer-authenticated; their applicable reuse licenses were not verified.",
+    "Source surfaces were not rebuilt independently within folds; results are conditional and potentially leaky.",
+    "Two pinned SGMC rasters share the spatial grid but differ in hash, nodata metadata, and 1,450 positive-mask cells; the newer derived raster is primary and the older raw raster has a separate sensitivity report.",
+    "Sample submission values were not used as truth; only its derived finite footprint mask is used.",
+    "No leaderboard or competition score is estimated by this holdout."
+  ]
+}

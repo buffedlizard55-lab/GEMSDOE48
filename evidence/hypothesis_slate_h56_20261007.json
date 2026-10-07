@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "slate_id": "H56-20261007",
+  "status": "FROZEN_BEFORE_H56_SCORING",
+  "frozen_utc": "2026-10-07",
+  "candidate_count": 5,
+  "ranking_basis": "Ordinal scientific prior and implementation cost only; hidden expert labels are unavailable and no numeric DTI forecast is claimed.",
+  "hypotheses": [
+    {
+      "rank": 1,
+      "id": "H56-A",
+      "name": "Active-deformation strain ridges",
+      "layers": ["training_features.tif band 4: second invariant of strain rate", "band 7: shear strain rate", "band 8: dilatation rate", "band 16: earthquake density", "band 10: distance to earthquake (context only)"],
+      "physical_signature": "Scale-normalized Hessian line-ridge response of log-magnitude strain at 3, 6, and 9 pixels (300/600/900 m), with a weak earthquake-density term; exact band descriptions and units must be verified before processing.",
+      "off_catalogue_rationale": "A buried or alluvium-covered active fault may lack a mapped surface trace while deformation/seismicity remains spatially expressed; this is conditional, since strain can be diffuse and non-fault-specific.",
+      "prior_art_difference": "H55-B proposed strain-ridge analysis but no matching prediction artifact or blocked score exists; prior candidates do not use a strain-ridge transform.",
+      "expected_dti_improvement": "Highest plausible novel-signal upside; unknown numeric value; must be measured.",
+      "implementation_cost": "Medium; restore ~419 MB stack mirror, verify SHA and band metadata, compute multi-scale Hessian/coherence, create mass-matched mask.",
+      "data_availability": {
+        "official_source": "https://www.drivendata.org/competitions/306/competition-doe-gems/data/",
+        "official_access": "Login-gated in this environment.",
+        "mirror": "scripts/restore_h55_inputs.py --with-official-features",
+        "mirror_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+        "limitations": "Hash identity verified against a third-party GitHub mirror, not organizer authentication; license/provenance review remains open."
+      },
+      "frozen_test": {
+        "mass_px": 37654,
+        "scales_px": [3, 6, 9],
+        "strain_channels": [4, 7, 8],
+        "strain_transform": "log1p(abs(x)/median(abs(nonzero(x)))) then scale-normalized absolute-Hessian line response; per-channel/scale P99.5 normalization.",
+        "earthquake_weight": 0.1,
+        "holdout": "four fixed quadrants; held-out core plus 300 m halo; catalogue and SGMC-positive >300 m from catalogue evaluated separately",
+        "slot_gate": "must beat the current same-protocol H49 proxy-best on the preregistered comparison; public proxy pass alone cannot clear a private-label slot"
+      }
+    },
+    {
+      "rank": 2,
+      "id": "H56-B",
+      "name": "Buried basement-step edges",
+      "layers": ["band 15: depth to basement", "band 13: isostatic gravity anomaly", "bands 5/11/18: gravity derivatives", "band 17: conductivity"],
+      "physical_signature": "Multi-scale lateral basement-depth curvature and gravity horizontal-gradient/tilt edges, gated by conductivity contrast.",
+      "off_catalogue_rationale": "A basement offset beneath basin fill may lack surface relief yet remain expressed by density and conductivity boundaries.",
+      "prior_art_difference": "H55-C proposed the concept but no matching raster candidate or blocked score exists; it differs from radiometric-edge and lidar-scarp candidates.",
+      "expected_dti_improvement": "Moderate/unknown; requires validation.",
+      "implementation_cost": "Medium; exact bands, units, nodata, and lithologic confounding must be audited.",
+      "data_availability": {
+        "official_source": "https://www.drivendata.org/competitions/306/competition-doe-gems/data/",
+        "official_access": "Login-gated in this environment.",
+        "mirror": "same 19-band hash-pinned mirror as H56-A",
+        "limitations": "Owner mirror rather than organizer-authenticated original; terms and independent coverage are unresolved."
+      }
+    },
+    {
+      "rank": 3,
+      "id": "H56-C",
+      "name": "Lidar scarp trace persistence",
+      "layers": ["data/external/h52_scarp3m_100m.tif: h_gate12, sigma_mean, strike_at, cover"],
+      "physical_signature": "Select low-amplitude height steps persisting across adjacent 100 m cells with compatible strike, rather than isolated scarp pixels.",
+      "off_catalogue_rationale": "Subtle young scarps can be unmapped or omitted from generalized fault inventories; line persistence tests a structural trace rather than a point anomaly.",
+      "prior_art_difference": "H52 used point additions and H53-A used strike-coherent point selection; H55-D proposed trace persistence but did not implement it. This is not claimed as wholly novel lidar use.",
+      "expected_dti_improvement": "Moderate but unverified; previous related point-based candidate failed its proxy gate.",
+      "implementation_cost": "Medium/high; regional product is local, but tile/source coverage and facing_at/strike semantics require review.",
+      "data_availability": {
+        "official_source": "https://www.usgs.gov/3d-elevation-program/3dep-spatial-metadata",
+        "local_product": "data/external/h52_scarp3m_100m.tif",
+        "limitations": "Product is a derived, owner-mirrored regional mosaic; do not infer complete official coverage from the two pilot tiles."
+      }
+    },
+    {
+      "rank": 4,
+      "id": "H56-D",
+      "name": "Magnetic analytic-signal and tilt edges",
+      "layers": ["USGS GeoDAWN airborne magnetic grid(s) from DOI 10.5066/P93LGLVQ"],
+      "physical_signature": "Multi-scale analytic-signal magnitude and tilt-angle edge coherence, distinct from gamma/radiometric edges.",
+      "off_catalogue_rationale": "Basement structure beneath cover can create magnetic contrasts without a topographic scarp; a structural edge may therefore be absent from surface catalogues.",
+      "prior_art_difference": "H53-RadEdge used radiometric K/Th/U/total-count edges and failed its proxy test; no candidate in this repository computes an analytic signal from the official magnetic grids.",
+      "expected_dti_improvement": "Moderate/unknown; magnetic contrasts are non-unique and may be lithologic rather than fault-related.",
+      "implementation_cost": "High; download/regrid source products and verify exact footprint, flight-line artifacts, and resolution.",
+      "data_availability": {
+        "official_source": "https://doi.org/10.5066/P93LGLVQ",
+        "verified_source_claim": "USGS GeoDAWN release page describes magnetic/radiometric grids and provides a public CC0 release.",
+        "payload_status": "Not downloaded or footprint-tested for this slate."
+      }
+    },
+    {
+      "rank": 5,
+      "id": "H56-E",
+      "name": "Geochemical alteration/pathfinder anomalies",
+      "layers": ["USGS National Geochemical Survey sample locations and analytes B, Li, As, Hg, subject to dictionary/method audit"],
+      "physical_signature": "Method-stratified robust log-anomaly scores for a frozen analyte set, rasterized with sample-density uncertainty and tested only after media/units review.",
+      "off_catalogue_rationale": "Hydrothermal alteration/fluids may leave geochemical anomalies near buried pathways not mapped as faults; stream transport and lithology are major confounders.",
+      "prior_art_difference": "No National Geochemical Survey predictor is in the current candidate outputs; this differs from airborne radiometry (H50-B/H53-RadEdge) and well/spring point observations (H55-A).",
+      "expected_dti_improvement": "Low-to-moderate, highly uncertain; sampling density and laboratory heterogeneity could erase signal.",
+      "implementation_cost": "High; audit sample media, dates, analyte limits, coordinates, geology, and footprint coverage before modeling.",
+      "data_availability": {
+        "official_source": "https://mrdata.usgs.gov/geochem/",
+        "availability": "USGS page offers geographic downloads and national CSV/shapefile packages.",
+        "payload_status": "Not downloaded; exact competition-footprint sample coverage has not been verified."
+      }
+    }
+  ],
+  "separate_requested_deliverable": {
+    "id": "H56-DS",
+    "name": "Open-world discounted Dempster-Shafer B2 x H33-D",
+    "source_files": [
+      {"path": "data/families/dotted_b2_prune_02778.tif", "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9"},
+      {"path": "data/raw/tip_h33d_stepover.tif", "sha256": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757"}
+    ],
+    "belief_surface": "300 m triangular max-credit field derived from each sparse parent mask",
+    "reliability_alpha": 0.6,
+    "absence_informativeness": 0.1,
+    "mass_assignment": "m(F)=alpha*b; m(not_F)=alpha*q*(1-b); m(Theta)=1-m(F)-m(not_F); q=0.10 means a missing source prediction is mostly ignorance, not a strong no-fault assertion.",
+    "rule": "canonical normalized Dempster combination; raw conflict K and residual m(Theta) exported separately",
+    "primary": "Bel(F) divided by its maximum inside the valid footprint; relative favorability, not calibrated probability",
+    "slot_status": "not cleared unless comparable spatially blocked evidence beats current best; no competition slot will be used in this session"
+  }
+}

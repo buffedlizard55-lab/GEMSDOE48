@@ -71,16 +71,23 @@ def test_relative_links_resolve(pages):
 
 @needs_site()
 def test_download_is_the_first_content_on_index_and_exec_summary(receipt, pages):
-    primary = receipt["files"]["primary_zeros_outside"]["path"].split("/")[-1]
+    # H56 is the current one-click research download. Keep the H55 receipt checks
+    # below for its historical section, but do not let it displace H56 at the top.
+    h56_receipt = REPO / "evidence/build_h56_receipt_20261007.json"
+    if h56_receipt.exists():
+        current = json.loads(h56_receipt.read_text())
+        primary = current["candidate"]["primary"]["path"].split("/")[-1]
+    else:
+        primary = receipt["files"]["primary_zeros_outside"]["path"].split("/")[-1]
     for name in ("index.html", "executive-summary.html"):
         text = pages[name]
         body = text.split("<main", 1)[1]
         link = body.index(f'href="downloads/{primary}"')
-        # the only things before it are the header copy and the download-card heading
+        # the only things before it are the H56 header copy and download-card lead.
         before = body[:link]
-        assert "<table" not in before, f"{name}: a table appears before the download button"
-        assert "bigbtn" in before, f"{name}: the download button class is missing"
-        assert len(before) < 3000, f"{name}: too much content before the one-click download"
+        assert "<table" not in before, f"{name}: a table appears before the current download button"
+        assert "bigbtn" in before, f"{name}: the current download button class is missing"
+        assert len(before) < 3000, f"{name}: too much content before the current one-click download"
 
 
 @needs_site()
