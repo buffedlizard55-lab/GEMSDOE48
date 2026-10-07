@@ -1,0 +1,293 @@
+{
+  "schema_version": 1,
+  "generated_utc": "2026-10-07T04:22:01.240145+00:00",
+  "candidate_id": "H53",
+  "submission_status": "UNSCORED_RESEARCH_CANDIDATE",
+  "submission_name": "GEMSDOE48-H53-3SRC-DS",
+  "submission_note": "GEMSDOE48-H53 | 3-source DS: dotted 0.2778 x tip 0.2710 x lidar scarp, terrain-adaptive discount; unscored research candidate.",
+  "submission_note_length": 126,
+  "primary_file": "docs/downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-nan-outside.tif",
+  "primary_sha256": "9242c831dc103966e7ea961e342e4dce5e655b11313d349a112ece8a4d8b0d15",
+  "primary_bytes": 7042968,
+  "zip_file": "docs/downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-nan-outside.zip",
+  "zip_sha256": "e1a4d39ffa1785604f2d507831cceb7b56212bf52a7c93981db0c35abdc63e5f",
+  "zeros_outside_twin": {
+    "path": "docs/downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-zeros-outside.tif",
+    "sha256": "a5c1c4fbd53e889fe5178628fa5f25b02e920e6db434ccca63e44792f7d4bf0f",
+    "purpose": "all-finite zeros-outside encoding; immune to portal range rejection by construction"
+  },
+  "pignistic_binary_twin": {
+    "path": "docs/downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-pignistic-twin-nan.tif",
+    "bytes": 372196,
+    "dtype": "float32",
+    "bands": 1,
+    "width": 3292,
+    "height": 3730,
+    "crs": "EPSG:32611",
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    "nodata": "NaN",
+    "finite_cells": 5167373,
+    "nodata_cells": 7111787,
+    "min": 0.0,
+    "max": 1.0,
+    "range_0_1_with_nan_outside": true,
+    "sha256": "f644238f8c44f1a88fcf9aa73ae0da7b17b64fd67143e35aa64c38e9429c3ca5",
+    "support_px": 37654,
+    "purpose": "BetP top-37654 (parent-A-mass-matched) binary decision surface; same gate"
+  },
+  "encoding": "float32 in [0,1] in-footprint; NaN/nodata outside (official sample-template convention)",
+  "diagnostics": {
+    "unassigned": {
+      "path": "docs/downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-diag-unassigned-nan.tif",
+      "bytes": 6398634,
+      "dtype": "float32",
+      "bands": 1,
+      "width": 3292,
+      "height": 3730,
+      "crs": "EPSG:32611",
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": "NaN",
+      "finite_cells": 5167373,
+      "nodata_cells": 7111787,
+      "min": 0.0009156767628155649,
+      "max": 0.029967408627271652,
+      "range_0_1_with_nan_outside": true,
+      "sha256": "a765eaefedf6abeba3229c873784754928c87c284c81f8d439ce1f8da853a530"
+    },
+    "conflict-AB": {
+      "path": "docs/downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-diag-conflict-AB-nan.tif",
+      "bytes": 2045196,
+      "dtype": "float32",
+      "bands": 1,
+      "width": 3292,
+      "height": 3730,
+      "crs": "EPSG:32611",
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": "NaN",
+      "finite_cells": 5167373,
+      "nodata_cells": 7111787,
+      "min": 0.0,
+      "max": 0.8804085850715637,
+      "range_0_1_with_nan_outside": true,
+      "sha256": "cf59ad8290e4f883b6c9d0fd19871a003a4e32bede578860b56ff5815966db40"
+    },
+    "conflict-ABL": {
+      "path": "docs/downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-diag-conflict-ABL-nan.tif",
+      "bytes": 6892084,
+      "dtype": "float32",
+      "bands": 1,
+      "width": 3292,
+      "height": 3730,
+      "crs": "EPSG:32611",
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": "NaN",
+      "finite_cells": 5167373,
+      "nodata_cells": 7111787,
+      "min": 0.0,
+      "max": 0.7472529411315918,
+      "range_0_1_with_nan_outside": true,
+      "sha256": "0f1be73cdcd91d82300e5182b0ffe6d4ef7bcb6114c650a663b71e3c16146d89"
+    },
+    "plausibility": {
+      "path": "docs/downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-diag-plausibility-nan.tif",
+      "bytes": 6853286,
+      "dtype": "float32",
+      "bands": 1,
+      "width": 3292,
+      "height": 3730,
+      "crs": "EPSG:32611",
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": "NaN",
+      "finite_cells": 5167373,
+      "nodata_cells": 7111787,
+      "min": 0.0009156767628155649,
+      "max": 1.0,
+      "range_0_1_with_nan_outside": true,
+      "sha256": "b8a2c58ad78cbe29fc90a60c64bc9928ebc29041c9771e7af5c554f69781820c"
+    }
+  },
+  "parents": {
+    "dotted_best": {
+      "family": "dotted (spacing-tuned)",
+      "id": "H33-2-B2",
+      "path": "data/raw/dotted_h33_2_b2_zeros.tif",
+      "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+      "positive_pixels": 37654,
+      "owner_reported_live": 0.2778,
+      "evidence_class": "OWNER-REPORT"
+    },
+    "tip_best": {
+      "family": "tip / step-over",
+      "id": "H36-1-rung30",
+      "path": "data/source_mirrors/gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif",
+      "sha256": "5556aa1438fd67376b60d5ffc99228ec09dcc11a8408298a743ccb88d6163641",
+      "positive_pixels": 37660,
+      "owner_reported_live": 0.271,
+      "evidence_class": "OWNER-REPORT"
+    },
+    "lidar_scarp": {
+      "product": "data/external/h52_scarp3m_100m.tif",
+      "sha256": "b5e53d67c3a7d3d1ca44ae04ae1e84d8574857da3fcd5e34ba47276d6c04b923",
+      "bands_used": [
+        "h_gate12",
+        "sigma_mean",
+        "cover"
+      ],
+      "support_belief_gt0_px": 948005,
+      "reliability_class_px": {
+        "smooth": 2004660,
+        "rough": 1652975,
+        "uncovered": 1509738
+      }
+    }
+  },
+  "method": {
+    "belief_construction": "b_A/b_B = max_y k(d(x,y)) triangular 300 m (metric geometry); b_L = clip((h_gate12-1.0)/(2.8-1.0)) on cover>=0.9 else 0",
+    "mass_assignment": "m_i(F)=a_i*b_i, m_i(notF)=a_i*(1-b_i), m_i(Theta)=1-a_i; a_L is a per-pixel map",
+    "combination": "canonical normalized Dempster (Dempster 1967; Shafer 1976), sequential (A(+)B)(+)L",
+    "reliabilities": {
+      "dotted": 0.95,
+      "tip": 0.9267458603311736,
+      "lidar_map": "0.75/0.25/0.05"
+    },
+    "reliability_anchor": "RHO_MAX=0.95 ceiling x owner-reported live ratio [OWNER-REPORT]; lidar classes preregistered from pilot lift (smooth) vs unproven (rough) vs missing (uncovered)",
+    "submitted_surface": "Bel_ABC(F) / max(footprint)",
+    "chunk_rows": 512,
+    "assumptions": [
+      "Kernel-credit belief treats distance-decayed credit as graded evidence.",
+      "Sources are not assumed statistically independent; shared regional inputs remain a risk.",
+      "Lidar ramp anchors are label-free distribution quantiles, not calibrated probabilities."
+    ]
+  },
+  "fusion_summary_in_footprint": {
+    "belief_max_before_norm": 0.9990842938423157,
+    "belief_normalized_max": 1.0,
+    "belief_normalized_mean": 0.05036599084769508,
+    "unassigned_min": 0.0009156767628155649,
+    "unassigned_max": 0.029967408627271652,
+    "conflict_AB_max": 0.8804085850715637,
+    "conflict_ABL_max": 0.7472529411315918,
+    "conflict_total_max": 0.9326021522803014,
+    "unassigned_strictly_positive": true
+  },
+  "anti_average_checks": {
+    "mean3_of_beliefs": {
+      "pearson_in_footprint": 0.8600091644193882,
+      "spearman_in_footprint": 0.9963540454559291,
+      "mae_in_footprint": 0.03780484302905895,
+      "max_abs_difference": 0.46872082433580314,
+      "fraction_cells_abs_diff_gt_0.05": 0.21478050839372345,
+      "cells_exactly_equal": 3678752,
+      "topk_emission_jaccard": 0.5504086632491302,
+      "topk": 37654
+    },
+    "mean2_of_family_beliefs": {
+      "pearson_in_footprint": 0.9621305855851903,
+      "spearman_in_footprint": 0.8351644332691159,
+      "mae_in_footprint": 0.015491564205620319,
+      "max_abs_difference": 0.38594875405688833,
+      "fraction_cells_abs_diff_gt_0.05": 0.10503073805587482,
+      "cells_exactly_equal": 3678752,
+      "topk_emission_jaccard": 0.9038325412074022,
+      "topk": 37654
+    },
+    "is_the_average": false
+  },
+  "twin_support_overlap": {
+    "dotted_parent_C": {
+      "present": true,
+      "other_px": 37654,
+      "intersection_px": 33385,
+      "jaccard": 0.7963409107172674
+    },
+    "tip_parent_H36": {
+      "present": true,
+      "other_px": 37660,
+      "intersection_px": 30517,
+      "jaccard": 0.6812286537044892
+    },
+    "h52_lidar_additions": {
+      "present": true,
+      "other_px": 39654,
+      "intersection_px": 33385,
+      "jaccard": 0.7600801402454295
+    },
+    "h51_plausibility": {
+      "present": true,
+      "other_px": 37654,
+      "intersection_px": 35941,
+      "jaccard": 0.9129727944725278
+    },
+    "h49_yager": {
+      "present": true,
+      "other_px": 47905,
+      "intersection_px": 33385,
+      "jaccard": 0.6398781002031664
+    }
+  },
+  "uniqueness": {
+    "compared_existing_tifs": 58,
+    "hash_collisions": [],
+    "novelty": "first three-source fusion (dotted x tip x lidar) with a terrain-adaptive reliability map in any reviewed GEMSDOE artifact"
+  },
+  "format_receipt_primary": {
+    "path": "docs/downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-nan-outside.tif",
+    "bytes": 7042968,
+    "dtype": "float32",
+    "bands": 1,
+    "width": 3292,
+    "height": 3730,
+    "crs": "EPSG:32611",
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    "nodata": "NaN",
+    "finite_cells": 5167373,
+    "nodata_cells": 7111787,
+    "min": 0.0,
+    "max": 1.0,
+    "range_0_1_with_nan_outside": true
+  },
+  "organizer_score": null,
+  "score_claim": "No organizer score exists for this artifact; no leaderboard projection is claimed."
+}

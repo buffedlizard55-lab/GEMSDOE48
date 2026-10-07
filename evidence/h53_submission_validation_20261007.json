@@ -1,0 +1,51 @@
+{
+  "status": "PASS_LOCAL_FORMAT_AUDIT_NOT_ORGANIZER_ACCEPTANCE",
+  "file": "docs/downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-nan-outside.tif",
+  "sha256": "9242c831dc103966e7ea961e342e4dce5e655b11313d349a112ece8a4d8b0d15",
+  "bytes": 7042968,
+  "dtype": "float32",
+  "bands": 1,
+  "shape": [
+    3730,
+    3292
+  ],
+  "crs": "EPSG:32611",
+  "resolution_m": [
+    100.0,
+    100.0
+  ],
+  "nodata": "NaN",
+  "finite_inside_footprint": true,
+  "nan_outside_footprint": true,
+  "finite_footprint_cells": 5167373,
+  "nan_outside_cells": 7111787,
+  "min_inside_footprint": 0.0,
+  "max_inside_footprint": 1.0,
+  "all_in_footprint_range_0_1": true,
+  "positive_cells": 1488778,
+  "positive_mass": 260259.86101986736,
+  "grid_profile": {
+    "width": 3292,
+    "height": 3730,
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ]
+  },
+  "tags": {
+    "frame": "{fault, not_fault, Theta}",
+    "model": "H53 three-source Dempster combination (dotted x tip x lidar)",
+    "reliability_dotted": "0.95",
+    "reliability_lidar_map": "smooth<1.2m:0.75/rough:0.25/uncovered:0.05",
+    "reliability_tip": "0.926746",
+    "source_dotted_sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+    "source_lidar_sha256": "b5e53d67c3a7d3d1ca44ae04ae1e84d8574857da3fcd5e34ba47276d6c04b923",
+    "source_tip_sha256": "5556aa1438fd67376b60d5ffc99228ec09dcc11a8408298a743ccb88d6163641",
+    "submission_name": "GEMSDOE48-H53-3SRC-DS",
+    "AREA_OR_POINT": "Area"
+  }
+}
