@@ -1,0 +1,153 @@
+{
+  "session": "H56B-NF exploratory ablation",
+  "generated_utc": "2026-10-07T20:41:55.931653+00:00",
+  "status": "POST_HOC_ABLATION_NOT_PREREGISTERED_NOT_SLOT_CLEARED",
+  "recipe": {
+    "variant": "remove dotted-only catalogue-flank absence term",
+    "relation_to_prior": "post-hoc sensitivity ablation of H56B; not a new geological detector",
+    "kernel": "official triangular k(d)=max(1-d/300m,0), R=3 cells",
+    "r_dotted": 0.95,
+    "r_tip": 0.9000719942404607,
+    "discount_interpretation": "heuristic, partly informed by owner-reported values; not calibrated source reliability",
+    "absence_on_backbone": 0.5,
+    "absence_off_backbone": 0.2,
+    "catalogue_flank_absence": "disabled in this variant",
+    "rule": "normalized Dempster combination; fail on total/numerical conflict",
+    "surface": "relative Bel(F), divided by footprint maximum, float32, NaN outside footprint",
+    "m_theta": "residual uncommitted/ignorance mass after normalization; not a direct disagreement map",
+    "conflict_K": "pre-normalization conflict, divided out by normalized Dempster and exported separately",
+    "support_difference": "absolute difference between 300 m kernel-support surfaces; not a D-S mass",
+    "independence": "not established; parent positive-cell overlap is reported",
+    "submission_recommendation": "do not submit; same-protocol blocked public-proxy comparison required and cannot establish private-label performance"
+  },
+  "inputs": {
+    "dotted_c": {
+      "path": "data/families/dotted_b2_prune_02778.tif",
+      "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+      "origin": "GEMSDOE32 h33-h33-2-b2 (spacing-tuned dotted family)",
+      "owner_reported_live": 0.2778,
+      "site": "https://buffedlizard55-lab.github.io/GEMSDOE32/docs/index.html",
+      "sha256_verified": true
+    },
+    "tip_h33d": {
+      "path": "data/families/tip_stepover_r30_02632.tif",
+      "sha256": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757",
+      "origin": "GEMSDOE33 h33d analog tip-stepover r30 (tip/step-over family)",
+      "owner_reported_live": 0.2632,
+      "site": "https://buffedlizard55-lab.github.io/GEMSDOE33/",
+      "sha256_verified": true
+    },
+    "backbone_h19_5": {
+      "path": "data/raw/scored/h19_5_01922.tif",
+      "sha256": "ec1f9b56b83ce33cad781ceb9f104b18fb4f2ff785263a4e89616af4aabdee8d",
+      "origin": "GEMSDOE19 h19-5 power-law budget backbone (shared ancestor)",
+      "owner_reported_live": 0.1922,
+      "site": "https://buffedlizard55-lab.github.io/19GEMSDOE/docs/index.html",
+      "sha256_verified": true
+    },
+    "template": {
+      "path": "data/raw/sample_submission_template.tif",
+      "sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+      "origin": "owner mirror of the official sample_submission.tif grid",
+      "site": "https://www.drivendata.org/competitions/306/competition-doe-gems/data/",
+      "sha256_verified": true
+    },
+    "catalogue_labels": {
+      "path": "data/raw/labels_catalogue.tif",
+      "sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+      "origin": "owner mirror of existing_faults.tif (USGS/INGENIOUS catalogue labels)",
+      "site": "https://www.drivendata.org/competitions/306/competition-doe-gems/data/",
+      "sha256_verified": true
+    },
+    "footprint_mask": {
+      "path": "data/source_mirrors/footprint-mask.tif",
+      "sha256": "ddadb8c96cda673b91ddaa0bbed2aa955c358a8f6196c4c4e8fa70d454dd429f",
+      "origin": "on-grid AOI mask derived from the official solution/sample footprint",
+      "site": "https://www.drivendata.org/competitions/306/competition-doe-gems/data/",
+      "sha256_verified": true
+    }
+  },
+  "counts": {
+    "dotted_positive": 37654,
+    "tip_positive": 41865,
+    "intersection": 31614,
+    "union": 47905,
+    "dotted_only": 6040,
+    "tip_only": 10251
+  },
+  "ds": {
+    "raw_belief_max": 0.9950035810470581,
+    "normalized_belief_mass_S": 414522.8746748548,
+    "mtheta_min_footprint": 0.004996400326490402,
+    "mtheta_max_footprint": 0.6641883850097656,
+    "mtheta_mean_footprint": 0.6031528115272522,
+    "conflict_K_max_footprint": 0.42753419280052185,
+    "mass_sum_max_abs_error": 1.1920928955078125e-07
+  },
+  "support_difference": {
+    "definition": "abs(s_dot-s_tip) with each support from the 300 m triangular kernel",
+    "interpretation": "direct support-difference diagnostic; not m(Theta), K, or a probability",
+    "mean_footprint": 0.010747747495770454,
+    "max_footprint": 1.0,
+    "pixels_gt_0_05": 176781
+  },
+  "not_the_arithmetic_mean": {
+    "vs_binary_mean": {
+      "definition": "0.5*(1[dotted]+1[tip])",
+      "pearson_r_footprint": 0.39270830930157424,
+      "mae_footprint": 0.07252493185122398,
+      "max_abs_diff_footprint": 0.8230606913566589,
+      "frac_footprint_diff_gt_0.05": 0.14355282655229262,
+      "is_pixel_identical": false
+    },
+    "vs_normalized_kernel_mean": {
+      "definition": "normalize(0.5*(s_dot+s_tip)) by its footprint maximum",
+      "pearson_r_footprint": 0.9924987997981903,
+      "mae_footprint": 0.018374838955835426,
+      "max_abs_diff_footprint": 0.4172414541244507,
+      "frac_footprint_diff_gt_0.05": 0.1258380225309843,
+      "is_pixel_identical": false
+    },
+    "is_identical_to_either_mean": false
+  },
+  "artifacts": {
+    "primary": {
+      "path": "docs/downloads/GEMSDOE48-H56B-NF-DS-dotted-x-tip-20261007-5bb2c03c981e-nan-outside.tif",
+      "sha256": "b9530b70065da1f5e9da82caf4f5aaba3d7175dbbbfb2851e4b2ab2dd13aa4f1",
+      "content_id": "5bb2c03c981e",
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "nodata": "NaN outside footprint",
+      "unique_byte_artifact": true,
+      "meaningful_novelty": "not claimed; this is a post-hoc D-S mass-assignment ablation",
+      "submission_recommendation": "do not submit"
+    },
+    "diagnostics": {
+      "mtheta": {
+        "path": "docs/downloads/diagnostics/gemsdoe48-h56b-noflank-mtheta-5bb2c03c981e.tif",
+        "sha256": "326ee7020b9bb32794b053befd2da5ef5b3531eeae91de822651f3f6ee4ecd15",
+        "outside": "NaN",
+        "is_submission": false
+      },
+      "conflict": {
+        "path": "docs/downloads/diagnostics/gemsdoe48-h56b-noflank-conflict-5bb2c03c981e.tif",
+        "sha256": "756af6ee74b3fd456eeb30bbcaaa41de51d3cdc17222b04166d8280ba7c18c3e",
+        "outside": "NaN",
+        "is_submission": false
+      },
+      "plausibility": {
+        "path": "docs/downloads/diagnostics/gemsdoe48-h56b-noflank-plausibility-5bb2c03c981e.tif",
+        "sha256": "639e2a2f0b7a5afbca516f7b9fae44179aab2dc2fe0dba408bf0f616cb04a5a8",
+        "outside": "NaN",
+        "is_submission": false
+      },
+      "support_difference": {
+        "path": "docs/downloads/diagnostics/gemsdoe48-h56b-noflank-support_difference-5bb2c03c981e.tif",
+        "sha256": "96077b2a8875efbc47fb6f0b1d602cff25d1714b01d52ca05ed22bc141b0eba9",
+        "outside": "NaN",
+        "is_submission": false
+      }
+    },
+    "diagnostics_are_submissions": false
+  }
+}

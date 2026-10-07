@@ -14,26 +14,29 @@ a_H36=0.926746 (legacy receipt key ``tip``; H36 is an H19-5/rung-30
 repacking, not the tip/step-over family; RHO_MAX=0.95 × owner-reported ratio 0.2710/0.2778 [OWNER-REPORT]).</li>
 <li>Canonical normalized Dempster rule; submission surface Bel(F)=m12(F) divided by its
 in-footprint max (already [0,1]).</li>
-<li>Diagnostics carried forward: m12(Θ) (where the two parent surfaces neither agree nor fully conflict) and raw
-conjunctive conflict K (where they actively contradict; canonical normalization redistributes K, so it
-is stored separately — Zadeh-paradox transparency).</li>
+<li>Diagnostics carried forward: residual m12(Θ) (uncommitted/ignorance after normalization), raw
+pre-normalization conflict K (divided out by Dempster), and any direct parent-support difference as a
+separate non-mass diagnostic. None is automatically a calibrated disagreement/confidence map.</li>
 </ol>
 <p>Provable properties (tests/test_ds50.py): masses sum to 1; commutativity; Bel=1 and K=0 at full
 agreement; at full opposition K=a1·a2=0.8804 and m(Θ)&gt;0 (a perfect-reliability anchor would force
 m(Θ)≡0 — the withdrawn v1 did exactly that).</p>
 
-<h2>2 · Why 0.2778 won, and what beating 0.3774 requires</h2>
-<p>The DTI is a budget: DTI = TPw / (0.2·(TPw+S−M) + 0.8·|G|); every emitted unit that is not the best
-cover of a truth pixel costs 0.2, and binary {0,1} is optimal. The 0.2778 file wins by sitting at the
-break-even credit bar (0.2·0.26 ≈ 0.052 per dot) with 37,654 dots, 0 within 200 m of the catalogue
-(sibling GEMSDOE32 analysis, two independent derivations of the same bar). The 0.3774 leader needs
-≈25 % more mean credit per pixel at matched mass — a detector improvement, not a fusion rule.</p>
+<h2>2 · Reported score context — mechanism is unproven</h2>
+<p>The official metric gives triangular partial credit within 300 m and weights false negatives
+more heavily than false positives (alpha=0.2, beta=0.8). Pruning low-credit points near a known-
+catalogue mask while retaining higher-credit corridor points is a plausible mechanism for the
+owner-reported B2 score, not a demonstrated causal explanation. The local B2 producer note marks
+its exact bytes UNSCORED, and no organizer receipt links a TIFF hash to the 0.2778 row. The old
+0.2843 frontier/required-truth calculations are invalid under the later metric-identity erratum;
+no score prediction or ceiling is supportable from them. See the current review page before using
+any historical H50/H55 numbers.</p>
 
 <h2>3 · Why DS fusion loses on the proxies (and why that is expected)</h2>
 <p>Dempster belief is intersection-like: high where both parent surfaces agree, uncertain where they disagree.
-The public proxies reward cheaply covering fault traces — the union's job. Preserving disagreement is
-scientifically honest (the geologist sees where these two parent surfaces contradict) but is not by
-itself score-raising. This session's kernel-credit calibration did help against the raw-sparse recipe
+The public proxies evaluate a candidate surface, not a D-S diagnostic. Residual m(Theta) is
+uncommitted mass; K is separately normalized away; neither directly says where the parent supports
+disagree. A separate support-difference layer can show that comparison, but is not a D-S mass. This session's kernel-credit calibration did help against the raw-sparse recipe
 (+0.0064 mean SGMC), and H50 beats the naive mean 4/4 folds — but not the parents.</p>
 
 <h2>4 · Evidence classes used on this site</h2>
@@ -41,7 +44,7 @@ itself score-raising. This session's kernel-credit calibration did help against 
 quantities · proxy = public-map layer, never private expert truth. No page here states or implies an
 organizer score.</p>
 
-</main><footer><p>No organizer score exists for any artifact on this site. Every candidate is UNSCORED research output; owner-reported live values are labelled [OWNER-REPORT].</p>
+</main><footer><p>Historical H50 research only; no organizer score exists. Owner values are [OWNER-REPORT]. Later metric-identity review invalidates old H55/H56 score ceilings/projections based on FPw=S−TPw. Normalized m(Theta) is residual ignorance, not direct disagreement; K is separate.</p>
 <p class="small">Built by scripts/build_site_h50.py from evidence receipts on the same commit.
 Receipts: evidence/build_ds50_receipt_20261007.json, evidence/holdout_ds50_20261007.json,
 docs/data/leaderboard_20261007.json.</p></footer></body></html>

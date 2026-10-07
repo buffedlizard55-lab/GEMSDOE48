@@ -100,9 +100,9 @@ font-family:var(--mono);font-size:.78rem;overflow-wrap:anywhere;margin:10px 0}
 </div></nav>
 <main class="wrap">
 <div class="bad" role="alert"><strong>Metric correction — no weekly upload cleared.</strong>
-Historical H54–H56 score projections and break-even diagnostics assume <code>FPw = S − TPw</code>,
+The H55/H56 live-equivalent projections assume <code>FPw = S − TPw</code>,
 which is generally false: FP uses a prediction-centred maximum, TP a truth-centred one.
-Treat H54 density-matched/live-frontier outputs, the 0.2843 "ceiling", and H56's 0.0649 as <em>historical surrogate outputs</em>,
+Treat the 0.2843 "ceiling" and H56's 0.0649 as <em>historical surrogate outputs</em>,
 not verified private-label results or portal acceptance.
 <a href="research/metric-identity-erratum-20261007.md">Read the derivation and executable counterexample</a>.</div>
 
@@ -112,38 +112,24 @@ not verified private-label results or portal acceptance.
 <p class="deck" style="color:var(--muted)">The GeoTIFF may be downloaded for inspection, but there are no upload steps to follow today. The legacy H55 portal walkthrough below is reference material only; it is not authorization to spend a slot.</p>
 </header>
 
-<div class="bad">
-<div class="dl" id="h56" style="border:3px solid #b3541e">
-<h2>⬇ This session's unique downloadable research candidate (H56B graded belief) — ✅ download OK, ⛔ submit NOT recommended</h2>
-<p class="small" style="margin-bottom:0"><strong>GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b</strong><br>
-continuous Bel(F) in [0, 1] · single-band float32 · EPSG:32611 · 100 m ·
-3,730 × 3,292 · 791,389 positive cells · <strong>all 12,279,160 cells finite,
-whole raster inside [0, 1]</strong> — whole-raster range-safe in local validation. The official out-of-bounds null/NaN rule and portal behavior have not been confirmed together.</p>
-<a class="bigbtn" href="downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros-outside.tif" download>⬇ Download GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros-outside.tif
-<small>1,646,054 bytes · click to save · single band float32 · EPSG:32611 ·
-normalized combined belief Bel(F)</small></a>
-<p class="meta">SHA-256 <code>4d6548d4ec07a47a25b83d28ebc05d58b57448c1507b460aed52cec395bdb6b5</code><br>
-content id <code>9ec0d605c45b</code> · submission name <code>GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b</code></p>
-<div class="btnrow">
-<a class="btn" href="downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros-outside.zip" download>Same file as .zip (1,572,211 B)</a>
-<a class="btn" href="downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-nan-outside.tif" download>NaN/nodata twin — masked local audit only (1,694,269 B)</a>
-</div>
-<p class="meta">paste-ready submission label/note (inspection only):<br>
-<code>GEMSDOE48-H56 | Dempster belief[0,1] of dotted-C(0.2778) x tip-H33D(0.2632), metric-kernel BPA, live-anchored discounts; m(Theta) diagnostic separate; holdout below H49 -&gt; submit NOT recommended; unscored | id 9ec0d605c45b</code></p>
-<p class="meta">Dempster–Shafer diagnostic layers (not submissions):
-<a href="downloads/diagnostics/gemsdoe48-h56-mtheta-9ec0d605c45b.tif">unassigned mass m(Θ)</a> ·
-<a href="downloads/diagnostics/gemsdoe48-h56-conflict-9ec0d605c45b.tif">raw conflict K</a> ·
-<a href="downloads/diagnostics/gemsdoe48-h56-plausibility-9ec0d605c45b.tif">plausibility Pl(F)</a></p>
-<p class="small"><strong>Why NOT recommended:</strong> H56B scores 0.032347 / 0.070552 on the catalogue / SGMC off-catalogue public proxies, versus the same-protocol H49 reference at 0.095353 / 0.100751; it loses in all four folds on both. H56-F pruning also failed the frozen offline proxy screen. The former 0.0649 live-model projection is retired because its formula used an invalid identity for official false-positive weight. The zero-outside primary passes the whole-raster range check but does not meet the official null/NaN outside-bounds wording. The NaN/nodata twin passes a masked local-format audit, but an unmasked portal range check could reject NaN; acceptance of either variant is untested. **Do not submit or use a weekly slot.** The portal walkthrough below is retained as general instructions for a future candidate only. <strong>UNSCORED.</strong></p>
+<div class="dl" id="h56b" style="border:3px solid #b3541e">
+<h2>⬇ Unique H56B-NF research GeoTIFF — download OK; submit NOT recommended</h2>
+<p style="font-size:1.05rem"><strong style="color:#1c5e2e">✅ DOWNLOAD: OK for inspection</strong> — independent format/recomputation audits pass for float32/EPSG:32611 grid and [0,1] footprint values with NaN outside. The local receipt says <code>portal_range_error_immune=false</code>; a whole-array range check may reject NaNs. This is not organizer acceptance.
+<strong style="color:#b3541e">⛔ SUBMIT: NOT RECOMMENDED</strong> — H56B-NF loses to H49 in all four folds on both public-map proxies; no weekly slot is cleared.</p>
+<p class="small"><strong>GEMSDOE48-H56B-NF-DS-dotted-x-tip-20261007-5bb2c03c981e</strong><br>
+post-hoc no-catalogue-flank D-S ablation · float32 · EPSG:32611 · 100 m · 3,292 × 3,730 · NaN/nodata outside · footprint [0,1].</p>
+<a class="bigbtn" href="downloads/GEMSDOE48-H56B-NF-DS-dotted-x-tip-20261007-5bb2c03c981e-nan-outside.tif" download>⬇ Download H56B-NF GeoTIFF for inspection
+<small>SHA-256 b9530b70065da1f5… · unscored · not organizer accepted</small></a>
+<p class="meta">Full SHA-256 <code>b9530b70065da1f5e9da82caf4f5aaba3d7175dbbbfb2851e4b2ab2dd13aa4f1</code> · unique name <code>GEMSDOE48-H56B-NF-DS-dotted-x-tip-20261007-5bb2c03c981e</code>.</p>
+<p class="meta">Short note — <strong>do not submit</strong>:<br><code>GEMSDOE48-H56B-NF-DS-5bb2c03c981e | relative D-S belief, no catalogue-flank term; m(Theta), K, support difference separate; research only, unscored, NOT slot-cleared.</code></p>
+<p class="meta">Separate non-submission diagnostics: <a href="downloads/diagnostics/gemsdoe48-h56b-noflank-mtheta-5bb2c03c981e.tif">residual uncommitted m(Θ)</a> · <a href="downloads/diagnostics/gemsdoe48-h56b-noflank-conflict-5bb2c03c981e.tif">pre-normalization conflict K</a> · <a href="downloads/diagnostics/gemsdoe48-h56b-noflank-support_difference-5bb2c03c981e.tif">support difference |s_dot−s_tip|</a> · <a href="downloads/diagnostics/gemsdoe48-h56b-noflank-plausibility-5bb2c03c981e.tif">Pl(F)</a>. <code>m(Θ)</code> is residual uncommitted mass, not a direct disagreement map; normalized Dempster divides out K; support difference is not D-S mass.</p>
+<p class="small"><strong>Mean check:</strong> r=0.392708 vs binary mean; r=0.992499 vs normalized kernel mean (MAE 0.018375; max difference 0.417241; 12.58% differ by &gt;0.05). Not identical does not mean better.</p>
+<p class="small"><strong>Holdout:</strong> higher DTI is better. Catalogue 0.056305 vs H49 0.095353 and SGMC &gt;300 m off-catalogue 0.068987 vs H49 0.100751; 0/4 folds on both. The owner's 0.2778 may plausibly benefit from tapered 300 m credit and catalogue pruning, but that mechanism is unproven and no organizer receipt links the exact local bytes to the reported row. No score above 0.2778 or 0.3195 is supportable; the former 0.0649 projection is invalid. The earlier with-flank H56B rebuild is near-identical to prior H56, not a new candidate. See <a href="research/h56b-review-erratum-20261007.md">full review</a>, <a href="../evidence/h56b_noflank_uniqueness_20261007.json">uniqueness scope</a>, and <a href="../evidence/holdout_h56b_noflank_vs_h49_currentprotocol_20261007.json">matched holdout</a>.</p>
 </div>
 
-
-<h2>Current status: H56 — download yes, submission no</h2>
-<p><strong>Do not upload this file or spend a weekly slot.</strong> The open-world H56-DS GeoTIFF passes the local grid/range check, but it loses to same-protocol H49 on both public proxy targets, with 0/4 folds positive. H56-A's machine-spec Hessian-only screen fails the same comparison; the slate's prose coherence extension remains untested. Neither proxy result is private-label evidence. No organizer score, portal test, or acceptance receipt exists.</p>
-<p>The official problem description also documents null/NaN outside the feature footprint. H56 uses finite zeros outside to avoid NaNs in a whole-raster range check; whether the portal accepts that encoding remains untested. A local format pass is not submission approval.</p>
-<p><a class="button" href="downloads/GEMSDOE48-H56-OWDS-B2xH33D-20261007-1f7b5a4f18db-zeros-outside.tif" download>Download H56 for inspection only</a></p>
-<p class="meta">SHA-256 <code>1f7b5a4f18dbc62f31b14078545332238be9289dd388d57f550d75fb5a5fe95a</code> · <a href="research/h56-results-20261007.md">full result and limitations</a> · <a href="../evidence/h56_decision_20261007.json">machine decision receipt</a></p>
-</div>
+<h2>Historical H56 open-world artifact — also not slot-cleared</h2>
+<p><strong>Do not upload either H56 file.</strong> The older H56 open-world result also loses to H49 on both public proxy targets; its zero-outside encoding conflicts with the official null/NaN-outside wording. It is a distinct recipe, not the current H56B TIFF. Neither proxy result is private-label evidence, and no organizer score or acceptance receipt exists. See <a href="research/h56-results-20261007.md">its archived report</a> and <a href="../evidence/h56_decision_20261007.json">decision receipt</a>.</p>
+<p><a class="button" href="downloads/GEMSDOE48-H56-OWDS-B2xH33D-20261007-1f7b5a4f18db-zeros-outside.tif" download>Download historical H56 for inspection</a></p>
 
 <div class="warn"><strong>Everything below is a historical H55 portal walkthrough.</strong> It describes a prior research file that was also not slot-cleared. Do not follow those upload steps unless a future candidate independently clears the required gates and the organizer confirms its file format.</div>
 
@@ -152,7 +138,8 @@ content id <code>9ec0d605c45b</code> · submission name <code>GEMSDOE48-H56-ds-b
 <p class="small" style="margin-bottom:0"><strong>GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353</strong><br>
 39,430 positive pixels · single-band float32 · EPSG:32611 · 100 m ·
 3,730 × 3,292 · values exactly {0, 1} · <strong>all 12,279,160 cells finite,
-whole raster inside [0, 1]</strong> — whole-raster range-safe in local validation. The official out-of-bounds null/NaN rule and portal behavior have not been confirmed together.</p>
+whole raster inside [0, 1]</strong> — passes a simple local whole-array range predicate only;
+this does not establish portal acceptance or absence of other rejection reasons.</p>
 <a class="bigbtn" href="downloads/GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353-zeros-outside.tif" download>⬇ Download GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353-zeros-outside.tif
 <small>234,040 bytes · click to save · single band float32 · EPSG:32611 ·
 39,430 positive pixels</small></a>
@@ -161,78 +148,31 @@ content id <code>055da9855353</code> · submission name <code>GEMSDOE48-H55-cond
 <div class="btnrow">
 <a class="btn" href="downloads/GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353-zeros-outside.zip" download>Same file as .zip (199,113 B)</a>
 <a class="btn" href="downloads/GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353-nan-outside.tif" download>NaN-outside twin (381,046 B)</a>
-<a class="btn" href="submission-guide.html">How to submit this → step by step</a>
+<span class="btn" aria-label="Historical archive only">Archived inspection file — not for submission</span>
 </div>
-<p class="meta">Historical H55 label example (not for submission):<br>
-<code>GEMSDOE48-H55 | archived research artifact; live-model estimates retired; proxy gate failed; no slot cleared | id 055da9855353</code></p>
+<p class="meta"><strong>Historical, non-submission identifier only:</strong> <code>GEMSDOE48-H55 | archived unscored research artifact | do not upload | id 055da9855353</code>. The former model band and floor are withdrawn under the metric-identity correction.</p>
 <p class="meta">Dempster–Shafer diagnostic layers (not submissions): <a href="downloads/diagnostics/gemsdoe48-h55-bel-055da9855353.tif">bel</a> · <a href="downloads/diagnostics/gemsdoe48-h55-plausibility-055da9855353.tif">plausibility</a> · <a href="downloads/diagnostics/gemsdoe48-h55-mtheta-055da9855353.tif">mtheta</a> · <a href="downloads/diagnostics/gemsdoe48-h55-conflict-055da9855353.tif">conflict</a></p>
-<p class="bad"><strong>Retired model output.</strong> The former 0.2778–0.2880 “live-equivalent” band and 0.2727 floor rely on an invalid identity for official FPw. They are not score estimates or bounds. H55 remains unscored and is not slot-cleared; see the <a href="research/metric-identity-erratum-20261007.md">metric erratum</a>.</p>
+<p class="small"><strong>Metric-model correction:</strong> the 0.2778–0.2880 live-equivalent band, 0.2727 floor, and inferred truth/credit quantities are withdrawn because they used the invalid <code>FPw=S−TPw</code> identity. The artifact remains unscored and not recommended for submission.</p>
 </div>
 
-<h2>Historical H55 portal steps — do not follow for H56</h2>
-<ol class="steps">
-<li><strong>Download the file.</strong> Click the green button above. You want
-<code>GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353-zeros-outside.tif</code> — 234,040 bytes. Your
-browser saves it to your normal Downloads folder. A GeoTIFF does not need to be opened, unzipped
-or converted; the portal takes it as-is. If you would rather upload an archive, the
-<a href="downloads/GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353-zeros-outside.zip" download>.zip</a> contains exactly this one
-file and nothing else.</li>
+<h2>Historical H55 portal instructions withdrawn — do not follow</h2>
+<div class="bad"><strong>Archive only; do not upload the H55 artifact.</strong> The steps, paste-ready submission text, score update directions, and organizer-acceptance language from the earlier portal walkthrough are removed. H55 was unscored; no organizer receipt exists, and the former model-based recommendation is withdrawn. The H56B-NF artifact has its own explicit decision above: download OK for inspection; submit not recommended because it lost to H49 on both public-proxy holdouts and its NaN-outside encoding may fail a whole-array range check.</div>
 
-<li><strong>Check you got the right file (optional, 20 seconds).</strong> The name must contain
-<code>055da9855353</code>. If you have a checksum tool, SHA-256 must be
-<code class="mono">8f9a9d3d1ea2aed1c99e5ab5260aad9ceb10f4011c4b5a38791509261ddd284a</code>. Size must be 234,040 bytes.</li>
-
-<li><strong>Open the competition submission page.</strong>
-<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">DrivenData
-competition 306 — DOE GEMS Prize</a>, then <em>Submit</em> / <em>Make a submission</em>. Sign in
-with the account that holds your remaining weekly slots. This project never accesses that site
-programmatically — its terms of use prohibit robots — so this step is always a human one.</li>
-
-<li><strong>Upload the GeoTIFF.</strong> Choose the <code>.tif</code> (or the <code>.zip</code>).
-Required format, all verified on the written bytes: single band; <code>float32</code>;
-<code>EPSG:32611</code> (UTM zone 11N); 3,730 rows × 3,292 columns; 100 m pixels; geotransform
-<code>[100, 0, 243350, 0, −100, 4508550]</code>; values in [0, 1].</li>
-
-<li><strong>Paste the distinguishing note.</strong> Copy this exactly —
-202 characters:
-<p class="small"><strong>Withdrawn historical note — do not paste:</strong> <code>GEMSDOE48-H55 | archived research artifact; former live-model outputs retired; public-proxy gate failed; no weekly slot cleared | id 055da9855353</code></p>
-The submission name to quote if the form asks separately is
-<code>GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353</code>.</li>
-
-<li><strong>Submit, then record the returned score.</strong> Write the score down against the
-SHA-256 above in <code>registry/live_scores.json</code>. That is the only way this project's
-forward model gets better: every owner-reported live score is a new calibration point, and the
-conduit hypothesis in this candidate is <em>unfalsifiable offline</em> — the returned number is
-the entire experiment.</li>
-</ol>
 
 <h2>If the portal says “Predicted values must be in range [0, 1]”</h2>
-<div class="good"><strong>This primary file cannot produce that error.</strong> All
-12,279,160 cells are finite, the whole-raster minimum is 0.0
-and the maximum is 1.0, and <code>nodata</code> is unset. The audit asserts
-<code>portal_range_error_immune: true</code> on the
-<em>re-read bytes</em>, not on an in-memory array.</div>
-<p>The cause of that rejection is almost always a NaN cell. Any NaN makes a vectorised
-<code>np.all((v &gt;= 0) &amp; (v &lt;= 1))</code> test return <code>False</code>, because every
-comparison against NaN is false — which reproduces the message exactly. Two encodings circulate in
-this project and both have owner-reported live scores:</p>
+<div class="good"><strong>Local H55 encoding fact, not an acceptance result.</strong> Its archived re-read bytes have all 12,279,160 cells finite, whole-raster minimum 0.0 and maximum 1.0, and <code>nodata</code> unset. The local receipt therefore reports <code>portal_range_error_immune: true</code> for a hypothetical all-pixel [0,1] comparison only. This does not establish any organizer portal behavior or acceptance; H55 is not recommended for upload.</div>
+<p>A NaN makes a vectorised <code>np.all((v &gt;= 0) &amp; (v &lt;= 1))</code> comparison return <code>False</code>; this is one possible cause, not a verified explanation of any portal response. The following are historical owner-reported score associations, not organizer file-to-score receipts:</p>
 <table><thead><tr>
 <th>encoding</th>
 <th>nodata</th>
 <th>example artifact</th>
-<th>owner-reported live</th>
+<th>owner-reported score association (unverified)</th>
 <th>range-error immune</th>
 </tr></thead><tbody>
 <tr><td>all-finite, exactly 0.0 outside the footprint</td><td>unset</td><td><code>dotted_b2_prune_02778.tif</code> (the 0.2778 live-best)</td><td>0.2778</td><td><span class="pill yes">yes</span></td></tr>
 <tr><td>NaN outside the footprint</td><td><code>NaN</code></td><td><code>dotted_d2_8_02708.tif</code> (rung B)</td><td>0.2708</td><td><span class="pill no">exposed</span></td></tr>
 </tbody></table>
-<p>The organizers' own reference solution (<code>gems-prize-reference-solution</code>, notebook
-cell 19) writes an all-finite float32 raster with <code>nodata</code> unset and no NaN handling at
-all, which is why that encoding is the primary here. A NaN-outside twin of the H55 candidate is
-still shipped for the sample-template convention; its own audit records
-<code>portal_range_error_immune: false</code> rather than hiding the exposure. <strong>If the
-portal ever rejects the primary, do not switch to the twin</strong> — re-check the SHA-256 and
-report the exact message, because the primary has no out-of-range cell to reject.</p>
+<p>The organizers' reference solution (<code>gems-prize-reference-solution</code>, notebook cell 19) writes an all-finite float32 raster with <code>nodata</code> unset. That is useful prior-art context, but it does not establish the portal's validation policy. The older H55 NaN-outside twin's local receipt reports <code>portal_range_error_immune: false</code>. The current H56B-NF artifact also uses NaN outside and has the same unresolved portal-range exposure. <strong>Neither historical H55 nor current H56B-NF is recommended for upload.</strong></p>
 
 <h2>What was verified before this file was published</h2>
 <table><thead><tr>
@@ -270,14 +210,7 @@ emitted set is not identical to anything shipped before). The candidate delibera
 lost, not a copy of a prior submission.</p>
 
 <h2>Do not upload these</h2>
-<p class="small">The four files under <code>docs/downloads/diagnostics/</code>
-(Bel, Plausibility, m(Θ), raw conflict K) are diagnostic layers for a geologist and are not
-submissions. They are graded in [0, 1]. The former H55 claim that every graded surface scores worse than
-its own binarisation relied on the invalid <code>FPw = S − TPw</code> derivation and is withdrawn;
-no local proof establishes an optimal binary decision for the private-label metric. Every earlier candidate in
-<code>docs/downloads/</code> (H48, H49, H50, H50-B, H51, H52) remains downloadable with its own
-receipts and its own recorded gate failure; none of them is this session's file and none is
-recommended.</p>
+<p class="small">The files under <code>docs/downloads/diagnostics/</code> (belief, plausibility, <code>m(Θ)</code>, raw conflict <code>K</code>, and support difference) are diagnostic layers, not submissions. A coordinate-wise endpoint argument may establish that some binary maximizer exists for this metric under stated assumptions; it does not show that thresholding a particular graded raster improves its score. Earlier candidate files and their receipts are historical only; none is recommended for upload.</p>
 
 </main>
 <footer class="wrap">

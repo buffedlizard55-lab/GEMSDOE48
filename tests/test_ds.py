@@ -34,11 +34,11 @@ class TestMassFunction(unittest.TestCase):
         self.assertAlmostEqual(m[ds.NN, 0, 0], 0.45)
         self.assertAlmostEqual(m[ds.NT, 0, 0], 0.40)
 
-    def test_belief_is_clipped(self):
-        b = np.array([[-3.0, 2.0]])
-        m = ds.mass_function(b, 1.0)
-        self.assertAlmostEqual(m[ds.NF, 0, 0], 0.0)
-        self.assertAlmostEqual(m[ds.NF, 0, 1], 1.0)
+    def test_out_of_range_and_nonfinite_belief_is_rejected(self):
+        for b in (np.array([[-3.0, 0.5]]), np.array([[0.5, 2.0]]),
+                  np.array([[np.nan]]), np.array([[np.inf]])):
+            with self.assertRaises(ValueError):
+                ds.mass_function(b, 1.0)
 
     def test_reliability_bounds(self):
         b = np.array([[0.5]])
@@ -135,11 +135,13 @@ class TestAlgebraicProperties(unittest.TestCase):
         for b1v, b2v in ((0.9, 0.2), (0.5, 0.5), (1.0, 1.0), (0.0, 0.0)):
             b1 = np.array([[b1v]])
             b2 = np.array([[b2v]])
-            r = ds.combine_pair(b1, b2, 1.0, 1.0)
             num = b1v * b2v
             den = b1v * b2v + (1 - b1v) * (1 - b2v)
             if den == 0:
+                with self.assertRaises(ValueError):
+                    ds.combine_pair(b1, b2, 1.0, 1.0)
                 continue
+            r = ds.combine_pair(b1, b2, 1.0, 1.0)
             self.assertAlmostEqual(r.bel_F[0, 0], num / den, places=12)
             self.assertAlmostEqual(r.m_theta[0, 0], 0.0, places=15)
 
@@ -204,15 +206,13 @@ class TestAlgebraicProperties(unittest.TestCase):
         with self.assertRaises(ValueError):
             ds.combine_two(np.zeros((2, 5, 5)), np.zeros((2, 5, 5)))
 
-    def test_total_conflict_falls_back_and_does_not_divide_by_zero(self):
+    def test_total_conflict_is_rejected_as_undefined(self):
         m1 = np.zeros((3, 2, 2))
         m2 = np.zeros((3, 2, 2))
         m1[ds.NF] = 1.0
         m2[ds.NN] = 1.0
-        r = ds.combine_two(m1, m2)  # K = 1 everywhere
-        self.assertTrue(np.isfinite(r.m_F).all())
-        self.assertTrue(np.isfinite(r.m_theta).all())
-        np.testing.assert_allclose(r.m_theta, 0.0, atol=1e-9)
+        with self.assertRaises(ValueError):
+            ds.combine_two(m1, m2)  # K = 1 everywhere; Dempster's rule is undefined
 
 
 class TestAgainstNaiveMean(unittest.TestCase):

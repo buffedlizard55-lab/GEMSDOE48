@@ -2,24 +2,18 @@
 
 This ledger separates what was directly observed from what cannot be attributed. It is intended to prevent a plausible-looking filename or owner receipt from becoming an unsupported score claim.
 
-## One-time official leaderboard read — 2026-10-06 UTC
+## One-time leaderboard context — attribution is not established
 
-| Displayed participant | Displayed DTI | Rank on page | What this establishes |
-|---|---:|---:|---|
-| `xiaofanhu` | 0.3774 | #1 | Participant-level official leaderboard row at the time read |
-| `alexoktaba` | 0.3345 | #2 | Participant-level official leaderboard row at the time read |
-| `nchuzhoy` | 0.3262 | #3 | Participant-level official leaderboard row at the time read |
-| DARD | 0.3195 | #7 | DARD had a 0.3195 row; it was **not** the highest displayed score |
-| `extradr19` | 0.2778 | #13 (10 submissions) | The displayed 0.2778 row belonged to this participant |
+A single dated read for the current review observed a top displayed DTI of **0.3774**, **0.3195 at rank 7**, and a **0.2778 row at rank 13**. These are participant-level display values only; they do not establish any local TIFF's score. No leaderboard table or participant names are republished here. Older repository notes contain 2026-10-06 / 2026-10-07 readings and inconsistent submission counts (10 versus 11); without an auditable page capture, that discrepancy is preserved as unresolved rather than reconciled by another read.
 
-Source: [official leaderboard](https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/), opened once on 2026-10-06 UTC. No screenshot or raw page copy is treated as a score-to-file receipt. The number of submissions is a participant display field, not a file identity.
+The [DrivenData Terms of Use](https://www.drivendata.org/termsofuse/) restrict automated monitoring/copying and manual monitoring/copying without prior written consent. This repository does not poll or scrape the leaderboard. The one-time value observation is not a permanent ranking and should not be updated without authorization.
 
 ### Attribution not verified
 
-- The local H33-2-B2 owner-mirror receipt says **“UNSCORED.”** No organizer receipt or file-level identifier links that exact artifact to the 0.2778 leaderboard row.
-- The DARD 0.3195 row is not evidence that 0.3195 is the highest leaderboard score; the page displayed higher entries.
+- The local H33-2-B2 owner-mirror receipt says **“UNSCORED.”** No organizer receipt or file-level identifier links those exact TIFF bytes to the 0.2778 row.
+- The observed 0.3195 at rank 7 is not the top displayed value; no score-to-file association is established by the row.
 - The presence of H33-2-B2 and H33-D artifacts in public repositories does not establish that either exact file was used in a scored submission.
-- Owner-reported projected scores, holdouts, and “slot eligible” labels are not organizer scores and are not used as this project's measured result.
+- Owner-reported projected scores, holdouts, and “slot eligible” labels are not organizer scores.
 - No claim is made about what any participant's score would be if a different artifact were submitted.
 
 ## Provenance and label caveats
@@ -47,9 +41,9 @@ The organizer's layer list (problem description, page 967) describes the 19-band
 
 `gh run download` and `gh run view --log` fail with EOF because `productionresultssa*.blob.core.windows.net` and `objects.githubusercontent.com` are unreachable from the sandbox (only `github.com`, `api.github.com`, `codeload.github.com`, `pypi.org` answer). CI outputs are therefore brought back by committing compact (<100 MB) products to the session branch (`data/pilot/dem3m/`, `data/external/h52_scarp3m_100m.tif`). This is a workflow constraint, not a data irregularity; the artifacts remain attached to the runs for manual review.
 
-### Leaderboard observation 2026-10-07 UTC (single read, not polled)
+### Leaderboard observation 2026-10-07 UTC (single read; no table republished)
 
-Top of the public board: 0.3774, 0.3345, 0.3262, 0.3222, 0.3220, 0.3218, 0.3195 (DARD), 0.2888; the 0.2778 row (extradr19, 11 submissions) is 13th. The brief's "top 0.3195" is therefore the 7th place, not the top. Recorded once; no automation.
+The one-time observation above places 0.3195 at rank 7 and 0.2778 at rank 13; the top displayed value was 0.3774. Older 2026-10-06 notes preserve an inconsistent submissions-display count. No participant names or row-by-row table are reproduced; no exact artifact is tied to a score, and the Terms of Use caveat remains in force.
 
 ### Live-ladder inversion assumes the removed dots carried ~zero credit
 
@@ -90,41 +84,43 @@ The 2026-10-07 entry above is **confirmed**, with a stronger test. The official 
 
 **Spearman ρ(band 6, total count) = 1.0000** on a 1-in-37 subsample. Band 6 ranges 2.95–88.57 with a median of 18.5. Severity **high**: anyone who takes band 6's description at face value builds a "magnetic tilt" feature out of radiometrics. Carried into hypothesis H55-C so it does not treat band 6 as a magnetic derivative.
 
-## IR-H55-02 · The local format validator once required a different outside-footprint encoding than a known owner-reported artifact
+## IR-H55-02 · Local GeoTIFF validation does not establish portal acceptance
 
-An earlier `scripts/validate_submission.py` required `nodata = NaN`, while the local B2 raster is all-finite with zeros outside and `nodata` unset; the pinned reference-solution mirror also writes finite float32 values without an explicit NaN mask. These facts establish a local-format mismatch, not why a prior portal upload returned “Predicted values must be in range [0, 1]”. The cause of that portal message remains unverified.
+The historical B2 raster is all-finite with zeros outside and `nodata` unset; local bytes and `data/raw/audit-h33-2-b2.json` record that fact. The organizers' reference solution (notebook cell 19) also writes an all-finite float32 raster with `nodata` unset. These observations do not establish the portal's validator policy, the acceptance of any local file, or a file-to-score link. The local B2 receipt itself labels the file `UNSCORED`.
 
-**Action:** the local validator now accepts and reports `auto`, `nan`, and `zeros` encodings and exposes range-check risks. This does not establish organizer acceptance. Zero-outside is whole-raster range-safe but conflicts with the official null/NaN outside-bounds wording; a NaN-outside file meets that wording and can fail an unmasked range validator. Neither convention has portal acceptance evidence in this repository. Severity **high**, still open pending an organizer/portal test.
+**Action:** `scripts/validate_submission.py` supports `--encoding {auto,nan,zeros}` and reports local exposure fields including `portal_range_error_immune`; the field means only that a simple whole-array `[0,1]` predicate would pass the re-read bytes. The current H56B-NF NaN-outside file reports `portal_range_error_immune: false`; portal behavior and acceptance remain untested. Severity **high**.
 
-## IR-H55-03 · The dense-backbone pixel count was misstated; its former truth-yield inference is unsupported
+A NaN makes ordinary NumPy comparisons `(v >= 0) & (v <= 1)` false, so NaN is a plausible source of a range error from a simple vectorized check. **The cause of any reported organizer portal response is unknown.** Owner-reported scores associated with different encodings do not prove that exact local bytes passed or failed. See the [metric/format caveat](research/metric-identity-erratum-20261007.md) and [H56B-NF format receipt](../evidence/h56b_noflank_format_validation_20261007.json).
 
-`knowledge/research_notes.md` and an earlier README described dense H19-5 as "129 k px" with "the same T, triple the FP". The local raster count is directly measured from the restored hash-pinned mirror (SHA-256 `ec1f9b56…`): **121,131 positive pixels**. The former inversion of the owner-reported 0.1922 score to `T = 6,813.1` depended on the invalid `FPw = S − TPw` identity and is withdrawn; it does not establish private truth or a comparison with C.
+## IR-H55-03 · Dense-backbone pixel count is factual; the prior truth-yield inference is retracted
 
-Severity **high** because the source notes overstated what can be inferred from the score. The measured 121,131-pixel count stands; the 6,813 truth-yield and 7,077 leader-requirement figures are retired model outputs, not verified private truth or a score ceiling. See the [metric-identity erratum](research/metric-identity-erratum-20261007.md). Historical notes are retained for audit, with this correction made explicit.
+`knowledge/research_notes.md` and earlier README text described dense H19-5 as “129 k px.” The pinned mirror (`data/raw/scored/h19_5_01922.tif`, SHA-256 prefix `ec1f9b56…`) has **121,131** positive pixels; that raster count is directly measured. A former inversion of its owner-reported 0.1922 value to `T=6,813.1` used the invalid `FPw=S−TPw` identity and is **not a supported truth-yield estimate**. The related comparisons with C's former inferred `T=5,209.5` and leaderboard thresholds are withdrawn.
 
-## IR-H55-04 · A proxy-derived emission has an owner-reported score inconsistent with treating SGMC as private truth
+Severity **high**: preserve the corrected positive-cell count, but do not describe any inferred hidden-truth mass or “binding constraint” from these scores. See the [metric-identity erratum](research/metric-identity-erratum-20261007.md); the H55 report remains for historical audit with its correction banner.
 
-`gemsdoe29-sgmc-off-catalogue-44k` — 44,090 px at the same 2.8 px Poisson spacing as rung A, built directly on the public proxy — is listed in owner-maintained records at **0.0512**. There is no organizer file-to-score receipt, and the former inversion to `T = 1,026.0` used the invalid `FPw = S − TPw` identity. The score/identity comparison is a caution against treating SGMC as the hidden target, not a verified contradiction or a quantified truth-yield gap.
+## IR-H55-04 · A public SGMC proxy score is not an estimate of the organizer score
 
-**Action:** retain catalogue and SGMC as imperfect public-map diagnostics; report same-protocol results with full lineage and do not call them private-label validation. Earlier model-based gate conclusions that depended on inferred live truth are withdrawn; direct proxy comparisons remain descriptive. Severity **high**.
+H49's direct score on the frozen SGMC>300m public-map test set is **0.100751**; the repository separately records an owner-reported **0.0512** value for a proxy-built candidate, without an organizer file-to-score receipt. Those observations warn against equating this public proxy with private truth. The former conversion of 0.0512 into hidden-truth mass, and resulting H55/H56 score-gap calculations, depended on the withdrawn `FPw=S−TPw` assumption; they are not evidence that this proxy systematically selects candidates or quantifies a live shortfall.
 
-## IR-H55-05 · Catalogue-proximity statistics are not a validated predictor of private-label credit
+Severity **high**: retain direct public-proxy measurements with exact protocols, but report them as separate diagnostics. Do not infer private labels, score gaps, or hidden-set candidate rank. See the [H56B review](research/h56b-review-erratum-20261007.md), [metric-identity erratum](research/metric-identity-erratum-20261007.md), and `evidence/live_ladder_20261007.json` (historical, with H55 report correction).
 
-| field | px | catalogue coverage per emitted px |
+## IR-H55-05 · Catalogue coverage per emitted pixel is a proxy statistic, not live truth yield
+
+| field | positive pixels | catalogue coverage per emitted pixel |
 |---|---:|---:|
 | h19-5 backbone | 121,131 | 0.1007 |
-| SGMC faults | 83,593 | **0.1418** |
+| SGMC faults | 83,593 | 0.1418 |
 | GDR wells/springs, all | 12,570 | 0.1023 |
-| GDR wells/springs, *Hot* | 929 | **0.1897** |
-| INGENIOUS Quaternary fault centroids | 1,125 | **0.3696** |
+| GDR wells/springs, *Hot* | 929 | 0.1897 |
+| INGENIOUS Quaternary fault centroids | 1,125 | 0.3696 |
 
-These are direct local proximity measurements; the former inferred live `T` values (6,813 and 1,026) are retired. The owner-reported 0.0512 score for a proxy-derived artifact lacks organizer file attribution. Neither the 41% coverage difference nor the score comparison establishes hidden-truth yield. Catalogue-lift thresholds are not used as proof of improvement; frozen public-proxy holdouts remain descriptive and do not clear a weekly slot. Severity **high**.
+These measured ratios compare each public layer to a public catalogue under the cited calculation. They do **not** estimate private-truth yield or validate the former `≥2× catalogue lift` candidate rule. Any conclusions that interpreted the values as expected hidden-label credit or a slot gate are withdrawn. Severity **high**; see the [metric-identity erratum](research/metric-identity-erratum-20261007.md).
 
-## IR-H55-06 · Two different hidden-truth calibrations coexist in this repository
+## IR-H55-06 · Historical hidden-truth calibrations are not identified by these scores
 
-Historical modules contain two inferred values for `|G|`: 12,632 (from an earlier assumed removed-dot credit) and 14,027.5 (from an H55 fit assuming zero credit for removed dots). The H55 fit also produced inverted rung values and pairwise estimates; all depend on the invalid metric identity and assumptions about unobserved labels. Neither value is a measured private-truth count, and their numerical agreement/self-consistency is not a validation of the model.
+Prior files and notes contain two different assumed hidden-truth totals: **12,632**, from a fixed 0.05416 removed-dot credit, and a later fitted **14,027.5**, from an assumed zero-credit nested-rung model. Neither is identified from the available owner-reported scores under the official DTI: the calculations used a generally false `FPw=S−TPw` identity and additional assumptions about credit and file attribution.
 
-**Action:** retain old constants only for reproducibility, mark both as retired inference, and use neither for ranking or slot decisions. Severity **medium**.
+**Action:** both constants and their derivations remain in historical modules and receipts for reproducibility, but treat them as assumption-indexed algebra, not measurements of `|G|`, recall, or an organizer ceiling. No model-dependent live-score conclusion follows. Severity **high**; see [`metric-identity-erratum-20261007.md`](research/metric-identity-erratum-20261007.md).
 
 ## IR-H55-07 · A tracked local mirror and its published upstream mirror are pixel-identical but byte-different
 
@@ -138,22 +134,19 @@ Historical modules contain two inferred values for `|G|`: 12,632 (from an earlie
 
 **Action:** an along-strike extension of the hydrothermal conduit anchors was designed and then **withdrawn** rather than shipped on an unverified band. Recorded as the blocker on hypothesis H55-D with the exact check required: re-read `src/gemsdoe48/scarp3m.py` and `data/external/h52_scarp3m_merge_log.txt` against the GitHub Actions run that produced the mosaic. Severity **medium** — this is a case of refusing to guess.
 
-## IR-H55-09 · The brief's "0.3195 is the highest score right now" is stale
+## IR-H55-09 · Brief's 0.3195 “top” statement and historical reachability claims
 
-The dated official leaderboard read on 2026-10-07 UTC (`docs/data/leaderboard_20261007.json`) shows #1 xiaofanhu **0.3774**, #2 alexoktaba 0.3345, #3 nchuzhoy 0.3262, #7 DARD **0.3195**, and the 0.2778 row at `extradr19` (#13). This corrects the snapshot statement only. Leaderboard rows do not identify local TIFF hashes. The former H55 inversion, 0.2843 ceiling and all “reachable/unreachable” conclusions are withdrawn because they used the invalid `FPw = S − TPw` identity; no local reachability bound is established. Severity **medium**.
+A one-time dated observation found 0.3195 at rank 7 and a top displayed value of 0.3774; a 0.2778 row appeared at rank 13. No participant names or full leaderboard table are republished here, and none of those rows is linked to a local TIFF hash. Earlier H55 ceiling and recovered-truth claims (including the 0.2843 live-equivalent “frontier”) depended on invalid metric identities and are superseded by [`metric-identity-erratum-20261007.md`](research/metric-identity-erratum-20261007.md). **No reachability conclusion or score prediction from those calculations is supported.** Severity **high**; historical outputs remain archived, but must not be used as private-label bounds.
 
 ## IR-H55-10 · No organizer score exists for any file in this repository
 
-`registry/live_scores.json` holds 17 entries, all classed **OWNER-REPORT** — values entered by the repository owner, not organizer receipts. No verified organizer response links any local file hash to a score; the local receipt for the 0.2778 B2 artifact says `UNSCORED`. The H55 forward model, its fitted `|G|` and `ρ`, inverted `T` values and scenario bands are assumption-dependent historical outputs and are withdrawn as private-score estimates by the metric-identity erratum. No projected leaderboard position is established. Severity **high**.
+`registry/live_scores.json` holds owner-reported score entries with associated local hashes, but no organizer receipt, API response, or page capture links any exact local TIFF bytes to a score. The local receipt for B2 marks it `UNSCORED`. H55's fitted `|G|`, `rho`, inverted `T` values, and scenario band are retracted as private-label estimates because they depend on the invalid metric identity and owner-reported inputs. No projected leaderboard position is supported. Severity **high**—this is the central limitation on score attribution and forecasting.
 
-## IR-H56-01 · The producer page labels the local B2 artifact UNSCORED; its former projection is retired
+## IR-H56-01 · The 0.2778 producer page says UNSCORED; attribution to local bytes remains unverified
 
-On 2026-10-07 a source-page snapshot from GEMSDOE32 recorded the local B2 TIFF name and SHA-256
-prefix `c55bafc470054e82…`, and its note called the artifact `UNSCORED` while also displaying a
-0.2747 projection. No organizer file-to-score receipt authenticates those exact bytes as the
-0.2778 leaderboard entry. The displayed 0.2747 was generated by the same invalid `FPw = S − TPw`
-identity and is withdrawn as a score estimate; the 0.2778 owner-reported association remains
-unverified. This is not evidence of private-label performance for H56. Severity **medium**.
+On 2026-10-07 the H56 session fetched `docs/index.html` from the GEMSDOE32 source repository (`api.github.com/repos/buffedlizard55-lab/GEMSDOE32/contents/docs/index.html`). The producer's paste-ready note for `gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif` (SHA-256 prefix `c55bafc470054e82…`, byte-identical to `data/families/dotted_b2_prune_02778.tif`) states 37,654 dots, the 200 m catalogue prune, a public-proxy result, “projected 0.2747,” and `UNSCORED`. That is evidence about the producer's own label and method—not an organizer file-to-score receipt. The 0.2778 association remains owner-reported and unauthenticated against exact bytes; the 0.2747 projection is withdrawn under the metric correction.
+
+Severity **medium**. H56/H56B public-proxy results are reported only as direct public-map computations and cannot establish private-label performance. See [`why-02778-and-ceiling-20261007.md`](research/why-02778-and-ceiling-20261007.md), the [H56B review](research/h56b-review-erratum-20261007.md), and [metric-identity erratum](research/metric-identity-erratum-20261007.md).
 
 ## IR-H56-02 · Battery development incident: official-band nodata contamination, caught and fixed before publication
 
@@ -166,3 +159,30 @@ runs, fixed (reference-solution convention `X[X < −1e38] = NaN`), and the fina
 produced by the corrected script only. No published number used a contaminated value. Severity
 **low** (process caught its own defect), recorded because the brief requires every
 irregularity to be flagged.
+
+
+## H56B review additions — 2026-10-07
+
+### IR-H56B-01 · 0.2778 score attribution and H56B performance are unverified
+
+The H56B-NF ablation combines two SHA-pinned public owner-mirror inputs; both parent score values are owner-reported. The local B2 audit says `UNSCORED`, and there is no organizer receipt linking exact local input/output bytes to leaderboard rows. The B2 producer's note says its B=2 prune removed dots within 200 m of the full catalogue; H56B-NF removes only the later D-S recipe's catalogue-flank absence term, so its parent is not catalogue-independent. H56B-NF itself has **no organizer score**. Its four-fold public-proxy DTI is 0.056305 catalogue and 0.068987 SGMC-off, below same-protocol H49 (0.095353 / 0.100751) in 0/4 folds on each. The proxy labels are public maps, not private expert truth, and the frozen sources are not reconstructed inside folds. It is a post-hoc ablation, not a new geological detector. See [`h56b-review-erratum-20261007.md`](research/h56b-review-erratum-20261007.md).
+
+### IR-H56B-02 · `m(Theta)` is not a direct disagreement map
+
+Normalized Dempster leaves residual `m(Theta)` as uncommitted/ignorance mass; raw conflict `K` is divided out and exported separately. Absolute support difference `|s_dot-s_tip|` is another diagnostic, not a D-S mass. Earlier copy describing `m(Theta)` as “where families disagree” was imprecise. At total/numerical conflict Dempster normalization is undefined; `src/gemsdoe48/h56.py`, `src/gemsdoe48/dempster_shafer.py`, and the H56B builder raise `ValueError` rather than substituting vacuous mass. Tests are part of this change.
+
+### IR-H56B-03 · H56 slate chronology and recipe collision
+
+The date-only main H56 slate ranks H56-A first; its H56-A holdout is timestamped 15:21Z and the build receipt 15:43Z, so build-before-holdout order is not established. The 15:17Z build and 15:20Z holdout are for the earlier H56 predecessor, not final H56B. A different H56B-specific slate claims a 16:00Z freeze, ranks H56-F first, and contains measurements; it follows the predecessor but precedes final H56B at 17:37Z/17:38Z, and describes a different recipe, so it is not a verified preregistration of final H56B. The two slates also reuse H56-B for different candidates. H56B-NF was built post hoc. Historical records and correction are preserved; see [`evidence/h56_preregistration_reconciliation_20261007.json`](../evidence/h56_preregistration_reconciliation_20261007.json) and [`evidence/h56b_review_corrections_20261007.json`](../evidence/h56b_review_corrections_20261007.json).
+
+### IR-H56B-04 · Data availability does not equal verified coverage
+
+The 19-band feature raster cited by historical H56 screens is absent from the current checkout; its prior sibling-mirror hash is not organizer authentication. H57-B therefore cannot currently build. H57-C has two local 3 m pilot tiles and a 100 m scarp summary, not the full-area 3 m DEM needed for channel profiles. The official magnetic and geochemical pages expose potential downloads, but no payload or footprint-wide coverage is present. The local GeoDAWN radiometric mirror is available with `nodata=0`; valid-zero/nodata semantics require review. Details: [`h57-hypothesis-slate-20261007.md`](research/h57-hypothesis-slate-20261007.md) and [`data-availability-geochem-magnetic-20261007.md`](research/data-availability-geochem-magnetic-20261007.md).
+
+### IR-H56B-05 · Old 0.0649 projection and score “ceilings” are invalid
+
+The old H56B projection uses `FPw=S−TPw`, whereas the official metric gives `FPw=S−Q` with a prediction-centred `Q` and truth-centred `TPw`. The 0.0649 projection and related H55/H56 live-equivalent ceilings/private-truth bounds are not supportable. The corrected identity and executable counterexample are documented in [`metric-identity-erratum-20261007.md`](research/metric-identity-erratum-20261007.md). The only current H56B evaluation reported here is its matched public-proxy holdout, which loses to H49.
+
+### IR-H56B-06 · NaN-outside portal acceptance remains untested
+
+The current H56B-NF file passes local format validation as float32, EPSG:32611, finite `[0,1]` in-footprint values, and NaN/nodata outside, matching the documented null-outside convention. However, the local receipt reports `portal_range_error_immune=false`: an all-pixel range check may treat NaNs as out of range. This is download-only for inspection; no organizer portal acceptance or score is claimed. See [`evidence/h56b_noflank_format_validation_20261007.json`](../evidence/h56b_noflank_format_validation_20261007.json).

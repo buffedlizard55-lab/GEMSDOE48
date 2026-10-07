@@ -1,13 +1,4 @@
-"""Site contract for the H56 session: the published pages must agree with the
-H56 receipts, the verdict banner must be present and consistent with the gates,
-and the download must be the first content on the index and executive summary.
-
-Mirrors the shape of tests/test_site_h55.py but reads the H56 evidence files:
-  evidence/build_h56_belief_receipt_20261007.json
-  evidence/h56_format_audit_20261007.json
-  evidence/h56_uniqueness_20261007.json
-  evidence/h56f_pruning_holdout_20261007.json
-"""
+"""H56B-NF site contract: downloadable research artifact, audits, and no-submit verdict."""
 from __future__ import annotations
 
 import hashlib
@@ -16,173 +7,215 @@ import json
 import pathlib
 import re
 
-import pytest
+import numpy as np
+import rasterio
 
 REPO = pathlib.Path(__file__).resolve().parents[1]
 DOCS = REPO / "docs"
 EV = REPO / "evidence"
-PAGES = ["index.html", "executive-summary.html", "submission-guide.html"]
-
-PRIMARY_NAME = "GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros-outside.tif"
+PRIMARY_NAME = "GEMSDOE48-H56B-NF-DS-dotted-x-tip-20261007-5bb2c03c981e-nan-outside.tif"
 PRIMARY_REL = f"downloads/{PRIMARY_NAME}"
-NOTE = ("GEMSDOE48-H56 | Dempster belief[0,1] of dotted-C(0.2778) x tip-H33D(0.2632), "
-        "metric-kernel BPA, live-anchored discounts; m(Theta) diagnostic separate; "
-        "holdout below H49 -> submit NOT recommended; unscored | id 9ec0d605c45b")
+PRIMARY_SHA = "b9530b70065da1f5e9da82caf4f5aaba3d7175dbbbfb2851e4b2ab2dd13aa4f1"
+NOTE = (
+    "GEMSDOE48-H56B-NF-DS-5bb2c03c981e | relative D-S belief, no catalogue-flank term; "
+    "m(Theta), K, support difference separate; research only, unscored, NOT slot-cleared."
+)
+PAGES = [
+    "index.html", "executive-summary.html", "submission-guide.html", "method.html",
+    "validation.html", "hypotheses.html", "next-steps.html", "leaderboard.html",
+    "irregularities.html", "sources.html",
+]
 
 
 def flat(text: str) -> str:
-    return re.sub(r"\s+", " ", html.unescape(text))
+    text = html.unescape(text)
+    text = re.sub(r"<[^>]+>", " ", text)
+    return re.sub(r"\s+", " ", text)
 
 
-def needs_site():
-    return pytest.mark.skipif(
-        not (EV / "build_h56_belief_receipt_20261007.json").exists() or
-        not all((DOCS / p).exists() for p in PAGES),
-        reason="H56 site or receipts not built; run scripts/build_submission_h56_belief.py "
-               "and scripts/validate_h56.py")
+def read_json(name: str) -> dict:
+    return json.loads((EV / name).read_text(encoding="utf-8"))
 
 
-@pytest.fixture(scope="module")
-def pages():
-    return {p: (DOCS / p).read_text() for p in PAGES if (DOCS / p).exists()}
-
-
-@pytest.fixture(scope="module")
-def receipts():
-    return {
-        "build": json.loads((EV / "build_h56_belief_receipt_20261007.json").read_text()),
-        "format": json.loads((EV / "h56_format_audit_20261007.json").read_text()),
-        "uniq": json.loads((EV / "h56_uniqueness_20261007.json").read_text()),
-        "holdout": json.loads((EV / "h56f_pruning_holdout_20261007.json").read_text()),
-    }
-
-
-@needs_site()
-def test_download_is_the_first_content_on_index_and_exec_summary(pages):
+def test_download_is_prominent_and_names_the_h56b_noflank_artifact():
     for name in ("index.html", "executive-summary.html"):
-        body = pages[name].split("<main", 1)[1]
+        text = (DOCS / name).read_text(encoding="utf-8")
+        body = text.split("<main", 1)[1]
         link = body.index(f'href="{PRIMARY_REL}"')
         before = body[:link]
-        assert "<table" not in before, f"{name}: a table appears before the H56 download button"
-        assert "bigbtn" in before, f"{name}: the H56 download button class is missing"
-        assert len(before) < 3500, f"{name}: too much content before the H56 one-click download"
+        assert "<table" not in before
+        assert "bigbtn" in before
+        assert len(before) < 3500
+        assert PRIMARY_NAME in text
+        assert "DOWNLOAD: OK" in flat(text)
+        assert "SUBMIT: NOT RECOMMENDED" in flat(text)
 
 
-@needs_site()
-def test_primary_file_exists_and_matches_receipt(receipts):
-    fmt = receipts["format"]
-    path = REPO / "docs/downloads" / PRIMARY_NAME
-    assert path.exists()
-    assert hashlib.sha256(path.read_bytes()).hexdigest() == fmt["sha256"]
-    assert fmt["all_passed"] is True  # local checks only
-    assert all(fmt["checks"].values())
-    assert fmt["official_format_acceptance_confirmed"] is False
-    assert fmt["outside_bounds_requirement"]["primary_passes_official_null_nan_outside_requirement"] is False
+def test_primary_bytes_match_independent_audit_and_geotiff_contract():
+    audit = read_json("audit_h56b_noflank_artifact_20261007.json")
+    fmt = read_json("h56b_noflank_format_validation_20261007.json")
+    path = DOCS / PRIMARY_REL
+    assert path.is_file()
+    assert hashlib.sha256(path.read_bytes()).hexdigest() == PRIMARY_SHA
+    assert audit["status"] == "PASS_FORMAT_AND_RECOMPUTATION_NOT_VALIDITY_OR_ACCEPTANCE"
+    assert audit["primary"]["sha256"] == PRIMARY_SHA
+    assert fmt["sha256"] == PRIMARY_SHA
+    assert fmt["outside_footprint_encoding"] == "nan"
+    assert fmt["portal_range_error_immune"] is False
+    assert audit["primary"]["dtype"] == "float32"
+    assert audit["primary"]["crs"] == "EPSG:32611"
+    assert audit["primary"]["nodata_is_nan"] is True
+    assert audit["primary"]["outside_cells_all_nan"] is True
+    with rasterio.open(path) as src:
+        assert src.count == 1
+        assert src.dtypes == ("float32",)
+        assert src.crs.to_string() == "EPSG:32611"
+        assert (src.height, src.width) == (3730, 3292)
+        values = src.read(1)
+        valid = src.dataset_mask() > 0
+        assert np.isnan(values[~valid]).all()
+        assert np.isfinite(values[valid]).all()
+        assert 0.0 <= float(values[valid].min()) <= float(values[valid].max()) <= 1.0
 
 
-@needs_site()
-def test_nan_nodata_twin_matches_official_outside_encoding_but_is_not_portal_cleared():
-    receipt_path = EV / "h56b_nan_twin_local_validation_20261007.json"
-    receipt = json.loads(receipt_path.read_text())
-    assert receipt["status"] == "PASS_LOCAL_FORMAT_AUDIT_NOT_ORGANIZER_ACCEPTANCE"
-    path = REPO / receipt["file"]
-    assert path.exists()
-    assert hashlib.sha256(path.read_bytes()).hexdigest() == receipt["sha256"]
-    assert receipt["outside_footprint_encoding"] == "nan"
-    assert receipt["nodata"] == "NaN"
-    assert receipt["finite_inside_footprint"] is True
-    assert receipt["all_in_footprint_range_0_1"] is True
-    assert receipt["portal_range_error_immune"] is False
-    assert "portal acceptance" not in receipt["status"].lower()
+def test_download_and_submission_verdict_are_not_conflated():
+    holdout = read_json("holdout_h56b_noflank_vs_h49_currentprotocol_20261007.json")
+    assert holdout["slot_decision"]["cleared"] is False
+    assert holdout["slot_decision"]["submit_recommended"] is False
+    for name in ("index.html", "executive-summary.html", "submission-guide.html"):
+        text = flat((DOCS / name).read_text(encoding="utf-8"))
+        assert "DOWNLOAD: OK" in text
+        assert "SUBMIT: NOT RECOMMENDED" in text
+        assert "no weekly slot" in text.lower() or "no slot is cleared" in text.lower()
+        assert "organizer acceptance" in text.lower() or "organizer accepted" in text.lower()
+        assert "portal_range_error_immune=false" in text
 
 
-@needs_site()
-def test_verdict_banner_matches_the_gates(pages, receipts):
-    """The banner must state exactly what the gates computed — never optimism."""
-    verdict = receipts["format"]["verdict"]
-    assert verdict["banner"] == "DOWNLOAD OK FOR INSPECTION - SUBMIT NOT RECOMMENDED"
-    assert verdict["official_outside_bounds_rule_confirmed"] is False
-    assert verdict["submit_recommended"] is False
-    idx = flat(pages["index.html"])
-    assert "DOWNLOAD: OK" in idx
-    assert "SUBMIT: NOT RECOMMENDED" in idx
-    assert "0.032347" in idx and "0.070552" in idx
-    assert "0.095353" in idx and "0.100751" in idx
-    assert "0.2778" in idx  # owner-reported family result is shown with caveat
+def test_holdout_means_and_fold_direction_match_receipt():
+    holdout = read_json("holdout_h56b_noflank_vs_h49_currentprotocol_20261007.json")
+    assert holdout["metric_direction"]["higher_is_better"] is True
+    cat = holdout["targets"]["catalogue_proxy"]
+    sgmc = holdout["targets"]["sgmc_off_catalogue_proxy"]
+    assert cat["h56b_wins"] == 0 and cat["fold_count"] == 4
+    assert sgmc["h56b_wins"] == 0 and sgmc["fold_count"] == 4
+    page = flat((DOCS / "index.html").read_text(encoding="utf-8"))
+    assert "0.056305" in page and "0.095353" in page
+    assert "0.068987" in page and "0.100751" in page
+    assert "higher DTI is better" in page
+    assert "public-map proxies" in page
 
 
-@needs_site()
-def test_not_naive_mean_numbers_are_published(pages, receipts):
-    build = receipts["build"]
-    r_bin = build["not_the_naive_mean"]["vs_binary_mean"]["pearson_r_footprint"]
-    idx = flat(pages["index.html"])
-    assert f"{r_bin:.3f}" in idx, "Pearson r vs the binary naive mean must be on the page"
-    assert "m(Θ)" in idx or "m(Theta)" in idx
+def test_mean_comparison_is_recomputed_and_qualified():
+    audit = read_json("audit_h56b_noflank_artifact_20261007.json")
+    stats = audit["not_the_arithmetic_mean"]
+    assert stats["is_identical_to_either_mean"] is False
+    page = flat((DOCS / "index.html").read_text(encoding="utf-8"))
+    assert f"{stats['normalized_binary_mean_pearson_r']:.6f}" in page
+    assert f"{stats['normalized_kernel_mean_pearson_r']:.6f}" in page
+    assert f"{stats['normalized_kernel_mean_mae']:.6f}" in page
+    assert "high correlation is disclosed" in page.lower()
+    assert "non-identity" in page.lower()
 
 
-@needs_site()
-def test_paste_ready_note_on_index_and_guide(pages):
-    for name in ("index.html", "submission-guide.html"):
-        assert NOTE in flat(pages[name]), f"{name} must carry the paste-ready H56 note"
+def test_dempster_shafer_terms_and_total_conflict_are_documented():
+    method = flat((DOCS / "method.html").read_text(encoding="utf-8"))
+    assert "not a direct map of source disagreement" in method
+    assert "pre-normalization raw conflict" in method
+    assert "raise ValueError" in method
+    assert "silently falls back to vacuous mass" in method
+    assert "support-difference diagnostic" in method
+    assert "calibrated probability model" in method.lower()
 
 
-@needs_site()
-def test_sha_and_name_on_index_and_guide(pages, receipts):
-    sha = receipts["format"]["sha256"]
-    for name in ("index.html", "submission-guide.html"):
-        assert sha in pages[name], f"{name} does not carry the full H56 SHA-256"
-        assert PRIMARY_NAME in pages[name]
+def test_short_note_and_separate_diagnostics_exist():
+    assert len(NOTE) <= 200
+    for name in ("index.html", "submission-guide.html", "executive-summary.html"):
+        assert NOTE in flat((DOCS / name).read_text(encoding="utf-8"))
+    audit = read_json("audit_h56b_noflank_artifact_20261007.json")
+    expected_diags = audit["independent_recomputation"]["diagnostics"]
+    for key, expected in expected_diags.items():
+        path = REPO / expected["path"]
+        assert path.is_file(), f"missing diagnostic {key}"
+        with rasterio.open(path) as src:
+            assert src.count == 1
+            assert src.crs.to_string() == "EPSG:32611"
+        assert expected["matches_independent_recomputation"] is True
+    page = flat((DOCS / "index.html").read_text(encoding="utf-8"))
+    assert "m(Θ) is not a direct disagreement map" in page
+    assert "support difference is not a D-S mass" in page
 
 
-@needs_site()
-def test_diagnostics_labelled_not_submissions(pages):
-    for name in ("index.html", "executive-summary.html"):
-        assert "not submissions" in flat(pages[name])
-    for layer in ("mtheta", "conflict", "plausibility", "support-disagreement"):
-        p = DOCS / "downloads/diagnostics" / f"gemsdoe48-h56-{layer}-9ec0d605c45b.tif"
-        assert p.exists(), f"missing diagnostic layer {layer}"
-    assert "residual ignorance" in flat(pages["index.html"])
-    assert "not a pure disagreement map" in flat(pages["index.html"])
+def test_local_uniqueness_and_prior_rebuild_similarity_are_fully_disclosed():
+    receipt = read_json("h56b_noflank_uniqueness_20261007.json")
+    result = receipt["result"]
+    assert result["same_sha256_as_any_searched_raster"] is False
+    assert result["exact_in_footprint_pixel_match"] is False
+    assert receipt["search_scope"]["same_grid_one_band_rasters_compared_in_footprint"] == 105
+    prior = result["prior_h56_zero_outside_comparison"]
+    assert prior["max_abs_difference"] > 0.5
+    assert prior["top_37654_jaccard"] > 0.99
+    withflank = read_json("h56b_uniqueness_audit_20261007.json")
+    old_h56 = withflank["result"]["prior_h56_zero_outside_comparison"]
+    assert old_h56["max_abs_difference"] < 2e-7
+    assert old_h56["top_37654_jaccard"] == 1.0
+    report = flat((DOCS / "research/h56b-review-erratum-20261007.md").read_text())
+    assert "meaningfully new candidate" in report.lower()
+    assert "not" in report.lower()
+    assert "post-hoc" in report.lower()
 
 
-@needs_site()
-def test_no_organizer_score_claim_on_h56_pages(pages):
-    banned = ["organizer-verified score", "official score of", "confirmed leaderboard score",
-              "we scored", "our score is"]
-    for name, text in pages.items():
-        low = text.lower()
-        for phrase in banned:
-            assert phrase not in low, f"{name} claims {phrase!r}"
-        assert "UNSCORED" in text or "No organizer score exists" in text
+def test_build_stat_and_chronology_corrections_are_preserved():
+    build = read_json("build_h56b_noflank_receipt_20261007.json")
+    assert build["status"] == "POST_HOC_ABLATION_NOT_PREREGISTERED_NOT_SLOT_CLEARED"
+    assert build["artifacts"]["primary"]["sha256"] == PRIMARY_SHA
+    correction = read_json("h56b_review_corrections_20261007.json")
+    withflank_build = read_json("build_h56b_belief_receipt_20261007.json")
+    assert withflank_build["generated_utc"] == correction["correction_2_kernel_mean_max_difference"]["current_build_receipt_generated_utc"]
+    mean_fix = correction["correction_2_kernel_mean_max_difference"]
+    assert mean_fix["prior_reported_max_abs_difference"] == 0.6666666865348816
+    assert mean_fix["current_build_receipt_max_abs_difference"] == 0.4172414541244507
+    timing = correction["correction_1_receipt_identity_and_chronology"]
+    assert "not the final H56B" in timing["mislabelled_predecessor"]["interpretation"]
+    assert timing["h56b_specific_slate"]["frozen_utc"] == "2026-10-07T16:00:00Z"
 
 
-@needs_site()
-def test_h56f_report_matches_machine_receipt(receipts):
-    report = (DOCS / "research/h56f-pruning-results-20261007.md").read_text()
-    hold = receipts["holdout"]
-    cat = hold["results"]["catalogue_public_proxy"]["scores"]
-    sgmc = hold["results"]["SGMC_off_catalogue_gt300m_public_proxy"]["scores"]
-    h56b_cat = cat["H56B_graded_belief"]["mean_dti"]
-    h56b_sgmc = sgmc["H56B_graded_belief"]["mean_dti"]
-    assert f"| H56B graded belief | graded | {h56b_cat:.6f} | {h56b_sgmc:.6f} |" in report
-    for rung, key in (("0.90", "H56F_Bel_ge_0.90"), ("0.95", "H56F_Bel_ge_0.95"),
-                      ("0.99", "H56F_Bel_ge_0.99")):
-        cat_score = cat[key]["mean_dti"]
-        sgmc_score = sgmc[key]["mean_dti"]
-        assert f"H56-F, threshold {rung}" in report
-        assert f"| {cat_score:.6f} | {sgmc_score:.6f} |" in report
+def test_score_projection_is_retracted_not_repeated_as_prediction():
+    for name in ("index.html", "executive-summary.html", "submission-guide.html",
+                 "validation.html", "next-steps.html", "leaderboard.html"):
+        text = flat((DOCS / name).read_text()).lower()
+        if "0.0649" in text:
+            assert "invalid" in text or "not supportable" in text
+    report = (DOCS / "research/h56b-review-erratum-20261007.md").read_text()
+    assert "no score above 0.2778" in report.lower()
+    assert "supportable as a prediction" in report.lower()
+    assert "0.3195" in report
 
 
-def test_dated_leaderboard_snapshot_is_not_misreported_or_used_for_file_attribution():
-    snapshot = json.loads((DOCS / "data/leaderboard_20261007.json").read_text())
-    assert snapshot["retrieved_utc"] == "2026-10-07"
-    by_rank = {row["rank"]: row for row in snapshot["rows"]}
-    assert by_rank[1]["best_public"] == 0.3774
-    assert by_rank[7]["best_public"] == 0.3195
-    assert by_rank[13]["participant"] == "extradr19"
-    assert by_rank[13]["best_public"] == 0.2778
-    assert "not identify any local TIFF" in snapshot["attribution_warning"]
-    page = (DOCS / "leaderboard.html").read_text()
-    assert "required recovered-truth units" in page
-    assert "withdrawn" in page
-    assert "reachability" in page
+def test_future_hypothesis_slate_and_chronology_are_linked():
+    slate = (DOCS / "research/h57-hypothesis-slate-20261007.md").read_text()
+    machine = read_json("hypothesis_slate_h57_20261007.json")
+    assert len(machine["candidates"]) == 5
+    assert machine["not_a_preregistration_for_prior_results"] is True
+    assert "Verified availability now" in slate
+    assert "no weekly submission slot is spent" in slate.lower()
+    reconciliation = read_json("h56_preregistration_reconciliation_20261007.json")
+    assert reconciliation["status"] == "CHRONOLOGY_AND_RANKING_INCONSISTENCIES_FLAGGED"
+    assert reconciliation["decision"]["submission_slot_cleared"] is False
+    assert "not a verified preregistration" in flat((DOCS / "hypotheses.html").read_text()).lower()
+
+
+def test_leaderboard_context_is_minimal_and_no_names_are_republished():
+    text = flat((DOCS / "leaderboard.html").read_text())
+    assert "0.3774" in text and "0.3195 was rank 7" in text and "0.2778 row was rank 13" in text
+    for name in ("xiaofanhu", "extradr19", "DARD", "alexoktaba"):
+        assert name not in text
+    assert "does not poll" in text
+    assert "no organizer receipt" in text
+
+
+def test_no_h56b_site_claims_organizer_score_or_acceptance(pages=None):
+    for name in PAGES:
+        text = flat((DOCS / name).read_text()).lower()
+        for phrase in ("organizer-verified score", "confirmed leaderboard score", "our organizer score"):
+            assert phrase not in text, f"{name} includes unsupported phrase {phrase!r}"
+    assert "no organizer score exists" in flat((DOCS / "executive-summary.html").read_text()).lower()

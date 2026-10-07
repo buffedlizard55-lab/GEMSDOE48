@@ -94,7 +94,7 @@ class TestH50Site(unittest.TestCase):
 
     def test_every_page_disclaims_organizer_scores(self):
         for name in PAGES:
-            self.assertIn("No organizer score exists", self.texts[name])
+            self.assertIn("no organizer score exists", self.texts[name].lower())
         self.assertIn("UNSCORED", self.texts["index.html"])
 
     def test_portal_error_message_is_addressed(self):
@@ -105,12 +105,19 @@ class TestH50Site(unittest.TestCase):
             for bad in ("{esc(", "{fmt(", "TODO", "XXX", "None</", "nan<"):
                 self.assertNotIn(bad, self.texts[name])
 
-    def test_leaderboard_snapshot_is_labelled(self):
+    def test_leaderboard_observation_is_redacted_and_labelled(self):
         board = json.loads((conftest.DOCS / "data/leaderboard_20261007.json").read_text())
         self.assertEqual(board["retrieved_utc"], "2026-10-07")
-        top = board["rows"][0]
-        self.assertEqual((top["participant"], top["best_public"]), ("xiaofanhu", 0.3774))
+        observation = board["observation"]
+        self.assertEqual(observation["top_displayed_score"], 0.3774)
+        self.assertEqual(observation["score_0_3195_rank"], 7)
+        self.assertEqual(observation["score_0_2778_rank"], 13)
+        self.assertFalse(observation["artifact_to_score_receipt"])
+        self.assertFalse(observation["participant_names_retained"])
+        self.assertFalse(observation["full_table_retained"])
         self.assertIn("0.3774", self.texts["index.html"])
+        self.assertNotIn("xiaofanhu", self.texts["index.html"])
+        self.assertNotIn("extradr19", self.texts["index.html"])
 
     def test_holdout_numbers_on_index_match_receipts(self):
         holdout = json.loads((conftest.EVIDENCE / "holdout_ds50_20261007.json").read_text())

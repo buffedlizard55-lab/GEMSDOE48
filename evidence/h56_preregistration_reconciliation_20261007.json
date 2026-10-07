@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "recorded_utc": "2026-10-07T17:43:25Z",
+  "status": "CHRONOLOGY_AND_RANKING_INCONSISTENCIES_FLAGGED",
+  "historical_files_preserved": true,
+  "records": {
+    "main_machine_slate": {
+      "path": "evidence/hypothesis_slate_h56_20261007.json",
+      "frozen_utc": "2026-10-07",
+      "declared_status": "FROZEN_BEFORE_H56_SCORING",
+      "rank_1": "H56-A active-deformation strain ridges",
+      "timestamp_precision": "date only; exact ordering relative to scored receipts cannot be independently verified"
+    },
+    "main_h56a_holdout": {
+      "path": "evidence/holdout_h56a_strain_ridge_20261007.json",
+      "evaluated_utc": "2026-10-07T15:21:52.901207+00:00",
+      "catalogue_mean_dti": 0.014282,
+      "catalogue_h49_reference_mean_dti": 0.095353,
+      "catalogue_positive_folds": 0,
+      "sgmc_off_catalogue_mean_dti": 0.006531,
+      "sgmc_h49_reference_mean_dti": 0.100751,
+      "sgmc_positive_folds": 0,
+      "direction": "higher DTI is better"
+    },
+    "h56a_build_receipt": {
+      "path": "evidence/h56_strain_ridge_build_20261007.json",
+      "built_utc": "2026-10-07T15:43:08.728359+00:00",
+      "chronology_note": "receipt time is after the holdout receipt; could be delayed/finalized receipt or an unrecorded earlier artifact, but the exact build-to-holdout ordering is not established by these timestamps"
+    },
+    "h56b_primary_build": {
+      "path": "evidence/build_h56_belief_receipt_20261007.json",
+      "generated_utc": "2026-10-07T15:17:03.929194+00:00",
+      "artifact": "GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros-outside.tif"
+    },
+    "h56b_first_holdout": {
+      "path": "evidence/holdout_h56_spatial_20261007.json",
+      "generated_utc": "2026-10-07T15:20:25.915773+00:00"
+    },
+    "later_h56b_specific_slate": {
+      "path": "evidence/hypothesis_slate_h56b_20261007.json",
+      "frozen_utc": "2026-10-07T16:00:00Z",
+      "declared_frozen_before_scoring": true,
+      "contains_prior_measurements": true,
+      "chronology_note": "16:00Z is later than the H56B 15:17 build and 15:20 holdout; this file is post-score exploratory ranking, not preregistration for those results"
+    },
+    "competing_h56_b_labels": {
+      "main_slate_H56_B": "buried basement-step edges",
+      "later_h56b_slate_H56_B": "radiometric K-residual alteration halos",
+      "resolution": "namespace by source slate; do not merge ranks or reuse ambiguous H56-B ID"
+    },
+    "h56_ds_recipe_mismatch": {
+      "main_slate_separate_requested_deliverable": {
+        "alpha": 0.6,
+        "absence_q": 0.1
+      },
+      "h56b_built_recipe": {
+        "r_dot": 0.95,
+        "r_tip": "0.95*0.2632/0.2778",
+        "absence_on_backbone": 0.5,
+        "absence_off_backbone": 0.2,
+        "dotted_catalogue_flank_absence": 1.0
+      },
+      "resolution": "H56B output is a separate post-hoc recipe; do not call it a reproduction of the main slate's frozen H56-DS recipe"
+    }
+  },
+  "dempster_shafer_correction": {
+    "m_theta": "normalized residual uncommitted/ignorance mass; not a direct disagreement map",
+    "K": "pre-normalization conflict divided out by Dempster's normalized rule; separately exported",
+    "support_difference": "abs(s_dot-s_tip), a distinct direct diagnostic, not D-S mass",
+    "total_conflict": "normalized Dempster is undefined; implementation raises ValueError, no vacuous fallback"
+  },
+  "decision": {
+    "authoritative_pre_score_top_candidate": "main-machine H56-A, subject to date-only freeze and build/holdout timestamp caveat",
+    "h56a_result": "failed H49 on both public proxies, 0/4 folds",
+    "later_h56f_rank": "exploratory post-score; not authoritative preregistered lead",
+    "submission_slot_cleared": false,
+    "future_plan": "use evidence/hypothesis_slate_h57_20261007.json for any future build; no new geological detector implemented in this review"
+  },
+  "posthoc_correction": {
+    "corrected_utc": "2026-10-07T20:50:49Z",
+    "preservation_note": "The original recorded_utc and contemporaneous claims above are preserved as historical content. The original attribution of the 15:17/15:20 receipts to H56B was incorrect; this correction block supersedes that attribution.",
+    "misattributed_predecessor_receipts": {
+      "build_receipt": "evidence/build_h56_belief_receipt_20261007.json",
+      "generated_utc": "2026-10-07T15:17:03.929194+00:00",
+      "actual_artifact": "docs/downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros-outside.tif",
+      "paired_holdout_receipt": "evidence/holdout_h56_spatial_20261007.json",
+      "holdout_generated_utc": "2026-10-07T15:20:25.915773+00:00",
+      "corrected_interpretation": "These are the earlier H56 zero-outside predecessor build and holdout, not final H56B."
+    },
+    "final_with_flank_h56b": {
+      "build_receipt": "evidence/build_h56b_belief_receipt_20261007.json",
+      "first_build_receipt_time_utc": "2026-10-07T17:37:10.453189+00:00",
+      "artifact": "docs/downloads/GEMSDOE48-H56B-ds-belief-dotted-x-tip-20261007-126ca59c2801-nan-outside.tif",
+      "sha256": "3589e89a1ad4f78f54e6f17f9b7cdb0edb563f66aedfcdabd632ef8774968c3a",
+      "first_holdout_receipt": "evidence/holdout_h56b_nan_outside_currentprotocol_20261007.json",
+      "first_holdout_time_utc": "2026-10-07T17:38:33.864586+00:00",
+      "rebuild_receipt_time_utc": "2026-10-07T20:51:41.533725+00:00",
+      "interpretation": "This is the actual final H56B with-flank artifact; it is within 1.8e-7 of the prior H56 surface and is not a meaningfully new candidate.",
+      "first_matching_rebuild_receipt_time_utc": "2026-10-07T20:33:02.233310+00:00"
+    },
+    "h56b_specific_slate_corrected_interpretation": {
+      "path": "evidence/hypothesis_slate_h56b_20261007.json",
+      "frozen_utc": "2026-10-07T16:00:00Z",
+      "contains_prior_measurements": true,
+      "interpretation": "The slate follows the H56 predecessor measurement but precedes final H56B. It contains measured outputs and a different recipe, so it is not verified preregistration of final H56B. H56B-NF is a later post-hoc ablation."
+    },
+    "h56b_noflank_posthoc_ablation": {
+      "build_receipt": "evidence/build_h56b_noflank_receipt_20261007.json",
+      "built_utc": "2026-10-07T20:41:55.931653+00:00",
+      "artifact": "docs/downloads/GEMSDOE48-H56B-NF-DS-dotted-x-tip-20261007-5bb2c03c981e-nan-outside.tif",
+      "sha256": "b9530b70065da1f5e9da82caf4f5aaba3d7175dbbbfb2851e4b2ab2dd13aa4f1",
+      "holdout_receipt": "evidence/holdout_h56b_noflank_vs_h49_currentprotocol_20261007.json",
+      "evaluated_utc": "2026-10-07T20:45:07.648671+00:00",
+      "interpretation": "Post-hoc ablation, not preregistered, no new geological detector, no slot cleared; loses to H49 on both public-map proxies in all four folds."
+    },
+    "authoritative_correction_record": "evidence/h56b_review_corrections_20261007.json",
+    "current_submission_decision": "No weekly slot cleared; H56B-NF is OK to download for inspection but not recommended to submit. Public-proxy holdout is not private-label or organizer-score evidence."
+  }
+}
