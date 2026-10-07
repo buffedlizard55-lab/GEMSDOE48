@@ -123,21 +123,6 @@ font-family:var(--mono);font-size:.78rem;overflow-wrap:anywhere;margin:10px 0}
 <tr><td><a href="https://doi.org/10.1111/j.2517-6161.1967.tb00680.x">Dempster (1967) and Shafer (1976)</a></td><td>Dempster&#x27;s rule of combination and the frame of discernment used for the Bel / Pl / m(Theta) / K layers. Shafer, &#x27;A Mathematical Theory of Evidence&#x27;, Princeton University Press, 1976.</td><td>the rule&#x27;s normalisation is exactly what produces Zadeh&#x27;s (1984) paradox; Sentz &amp; Ferson (2002), Sandia SAND2002-0835, document the alternatives. Both K and m(Theta) are therefore shipped rather than one being presented as &#x27;the&#x27; disagreement.</td><td><span class="pill no">not reachable</span></td></tr>
 <tr><td><a href="https://github.com/buffedlizard55-lab">Hash-pinned owner mirrors on GitHub</a></td><td>every input this session used: GEMSDOE24 @ 07345ea0604953d7efb858d9cfbc21e20c7aca0b (labels, existing_faults, sample_submission, dense backbone, d1.5, conduit CSV, qfault traces, GeoDAWN extensions), GEMSDOE28 (h36 rung30, h32 prethin tip), GEMSDOE29 (sgmc-off-catalogue-44k), GEMSDOE @ c0c06ac82178f26b94fce3397036ef8f12a2f3a0 (the 419 MB official feature stack in five shards)</td><td>third-party owner copies, NOT organizer-authenticated. Hash pinning establishes byte identity only; reuse licences were not verified. Fetched over gh api (GitHub egress only); raw.githubusercontent.com is not on this sandbox&#x27;s allow-list, codeload.github.com and api.github.com are.</td><td><span class="pill yes">reachable</span></td></tr>
 </tbody></table>
-<h2>H56 addendum (2026-10-07)</h2>
-<p class="small">This session re-verified two external anchors directly from the allowed hosts and
-records the checks: (1) the organizers' reference-solution notebook
-(<a href="https://github.com/drivendataorg/gems-prize-reference-solution">github.com/drivendataorg/gems-prize-reference-solution</a>,
-fetched via api.github.com) trains with <code>TverskyLoss(alpha=0.2, beta=0.8)</code> — corroborating
-the metric weights this repository implements literally in <code>src/gems48/metric.py</code> (verified
-against a brute-force reference in <code>tests/test_metric.py</code>); the notebook contains no scoring
-implementation, so the competition problem page 967 remains the metric's authoritative text
-(not reachable from this sandbox by design). (2) The 419 MB official 19-band GeoDAWN features raster
-was restored byte-identical from the pinned five-shard mirror (SHA-256
-<code>4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5</code>) and used for the
-all-band screen in <code>evidence/h56_band_screen_20261007.json</code>; per-band official descriptions
-were read from the file's own band tags. Band 6 is tagged “tilt angle or total curvature” but
-correlates 0.9971 with radiometric total count — the pre-existing irregularity IR-H48-B6, unchanged.</p>
-
 <h2>Hash-pinned mirrors actually restored this session</h2>
 <table><thead><tr>
 <th>role</th>

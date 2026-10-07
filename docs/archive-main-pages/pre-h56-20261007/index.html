@@ -102,66 +102,16 @@ font-family:var(--mono);font-size:.78rem;overflow-wrap:anywhere;margin:10px 0}
 
 <header style="background:none;padding:0;color:inherit">
 <p class="eyebrow" style="color:var(--muted)">GEMSDOE48 · DrivenData competition 306 · DOE GEMS Prize</p>
-<h1>The Dempster–Shafer belief of the two best families — graded, measured, and honestly labelled</h1>
-<p class="deck" style="color:var(--muted)">This session did what the brief asked: combined the
-0.2778 dotted family and the 0.2632 tip/step-over family with <strong>Dempster's rule of
-combination</strong>, kept the unassigned mass m(Θ) as its own diagnostic layer instead of
-averaging disagreement away, normalized the combined belief to [0, 1], wrote it to the
-required grid, and verified it is not the naive mean of the two inputs. Then it measured the
-result with every instrument in this repository — and publishes the verdict in one banner.</p>
+<h1>A live-calibrated forward model, the family ceiling, and one unique submission</h1>
+<p class="deck" style="color:var(--muted)">This session stopped guessing. Eight owner-reported
+live scores were restored byte-identical from hash-pinned mirrors, inverted against the
+official metric, and used to fit a two-constant model that predicts all eight within
+<strong>±1.76 %</strong>. That model proves the 0.2778 family is finished — and it prices
+exactly one new bet.</p>
 </header>
 
-<div class="dl" id="h56" style="border:3px solid #b3541e">
-<h2>⬇ One-click download — this session's unique submission (H56)</h2>
-<p style="font-size:1.05rem;margin:6px 0"><strong style="color:#1c5e2e">✅ DOWNLOAD: OK</strong> —
-format-verified, byte-unique, range-error-immune. &nbsp;
-<strong style="color:#b3541e">⛔ SUBMIT: NOT RECOMMENDED</strong> — the live-calibrated forward model
-that reproduces all eight owner-reported live scores within ±1.76 % projects this graded surface at
-<strong>0.0649</strong> live-equivalent, far below the 0.2778 incumbent, and the spatially-blocked
-holdout loses to both parents on the SGMC off-catalogue truth. See the pre-registered gates below.</p>
-<p class="small" style="margin-bottom:0"><strong>GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b</strong><br>
-continuous Bel(F) in [0, 1] · single-band float32 · EPSG:32611 · 100 m ·
-3,730 × 3,292 · 791,389 positive cells · belief mass Σ Bel = 399,799.4 ·
-<strong>all 12,279,160 cells finite, whole raster inside [0, 1]</strong> — immune to the portal's
-<em>“Predicted values must be in range [0, 1]”</em> rejection.</p>
-<a class="bigbtn" href="downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros-outside.tif" download>⬇ Download GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros-outside.tif
-<small>1,646,054 bytes · click to save · single band float32 · EPSG:32611 ·
-normalized combined belief Bel(F)</small></a>
-<p class="meta">SHA-256 <code>4d6548d4ec07a47a25b83d28ebc05d58b57448c1507b460aed52cec395bdb6b5</code><br>
-content id <code>9ec0d605c45b</code> · submission name <code>GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b</code></p>
-<div class="btnrow">
-<a class="btn" href="downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros-outside.zip" download>Same file as .zip (1,572,211 B)</a>
-<a class="btn" href="downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-nan-outside.tif" download>NaN-outside twin (1,694,257 B)</a>
-<a class="btn" href="submission-guide.html">How to submit this → step by step</a>
-</div>
-<p class="meta">paste-ready submission note (231 characters):<br>
-<code>GEMSDOE48-H56 | Dempster belief[0,1] of dotted-C(0.2778) x tip-H33D(0.2632), metric-kernel BPA, live-anchored discounts; m(Theta) diagnostic separate; live-model proj 0.0649 -&gt; submit NOT recommended; unscored | id 9ec0d605c45b</code></p>
-<p class="meta">Dempster–Shafer diagnostic layers for a geologist and are not submissions:
-<a href="downloads/diagnostics/gemsdoe48-h56-mtheta-9ec0d605c45b.tif">unassigned mass m(Θ)</a> ·
-<a href="downloads/diagnostics/gemsdoe48-h56-conflict-9ec0d605c45b.tif">raw conflict K</a> ·
-<a href="downloads/diagnostics/gemsdoe48-h56-plausibility-9ec0d605c45b.tif">plausibility Pl(F)</a> —
-m(Θ) ∈ [0.005, 0.664] is exactly where the two strongest independent approaches actively disagree.</p>
-<p class="small"><strong>Why the banner says what it says (pre-registered gates, computed after the numbers existed):</strong>
-G1 format — <strong>PASS</strong> (10/10 checks, <code>evidence/h56_format_audit_20261007.json</code>).
-G2 blocked holdout beats both parents ≥ 3/4 folds on both truths — <strong>FAIL</strong>
-(catalogue mean 0.0321 vs dotted 0.0070 / tip 0.0897; SGMC-off mean 0.0735 vs dotted 0.0970 / tip 0.0970,
-<code>evidence/holdout_h56_spatial_20261007.json</code>).
-G3 live-model projection ≥ 0.2778 — <strong>FAIL</strong> (0.0649; the metric's algebra pushes optimal
-submissions to binary {0, 1}, and this surface's belief mass Σ Bel = 399,799 pays 0.2-weight false-positive
-penalty over its whole kernel halo, <code>evidence/h56_live_model_projection_20261007.json</code>).
-<strong>Not the naive mean:</strong> Pearson r = 0.389 vs the binary mean ½(1<sub>dot</sub>+1<sub>tip</sub>);
-vs the kernel mean, the best affine fit leaves mean |residual| 0.0111 and 12.46 % of the footprint differs by
-&gt; 0.05 (<code>evidence/build_h56_receipt_20261007.json</code>). <strong>UNSCORED.</strong></p>
-<p class="small"><strong>Honest purpose of this file:</strong> the brief requires the combined belief,
-normalized to [0, 1], as the unique submission, with disagreement preserved rather than averaged away.
-That surface is published exactly as specified, byte-unique against all 67 prior downloads
-(<code>evidence/h56_uniqueness_20261007.json</code>). The same evidence shows the metric rewards binary
-dots, so this page tells you plainly: download it, read the m(Θ) layer, but do not spend the weekly slot
-on it while the 0.2778 core is unimproved.</p>
-</div>
-
-<div class="dl" id="h55-download">
-<h2>⬇ Previous session's submission (H55) — preserved verbatim</h2>
+<div class="dl">
+<h2>⬇ One-click download — this session's unique submission</h2>
 <p class="small" style="margin-bottom:0"><strong>GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353</strong><br>
 39,430 positive pixels · single-band float32 · EPSG:32611 · 100 m ·
 3,730 × 3,292 · values exactly {0, 1} · <strong>all 12,279,160 cells finite,

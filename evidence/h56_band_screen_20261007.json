@@ -1,0 +1,178 @@
+{
+ "generated_utc": "2026-10-07T15:31:24.077237+00:00",
+ "moat_definition": "footprint & d(catalogue) > 200 m",
+ "features_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5 (restored, manifest-pinned)",
+ "bands": [
+  {
+   "band": 1,
+   "description": "Magnetic anomaly - deviation from expected Earth's magnetic field",
+   "mean_at_C_dots": -35.54714995508334,
+   "mean_moat_background": -42.73510593038343,
+   "lift_mean_ratio": 0.8318020789041811,
+   "frac_C_dots_above_bg_p99": 0.013098464317976514,
+   "auc_dot_vs_background": 0.5174843958897922
+  },
+  {
+   "band": 2,
+   "description": "Reduced to pole magnetic data - magnetic anomaly corrected for latitude effects",
+   "mean_at_C_dots": -114.94896801833427,
+   "mean_moat_background": -119.46772786298139,
+   "lift_mean_ratio": 0.9621758953193642,
+   "frac_C_dots_above_bg_p99": 0.012327966416919071,
+   "auc_dot_vs_background": 0.5053492039295393
+  },
+  {
+   "band": 3,
+   "description": "Total magnetic intensity horizontal gradient - rate of change in horizontal direction",
+   "mean_at_C_dots": 33.22340401472489,
+   "mean_moat_background": 26.275211523868037,
+   "lift_mean_ratio": 1.2644390696739096,
+   "frac_C_dots_above_bg_p99": 0.013151602104256336,
+   "auc_dot_vs_background": 0.5757309804585791
+  },
+  {
+   "band": 4,
+   "description": "Geodetic second invariant - measure of strain rate tensor magnitude",
+   "mean_at_C_dots": 22.704778022610032,
+   "mean_moat_background": 20.99215732425584,
+   "lift_mean_ratio": 1.0815838349484599,
+   "frac_C_dots_above_bg_p99": 0.02045804771773208,
+   "auc_dot_vs_background": 0.5291569300308199
+  },
+  {
+   "band": 5,
+   "description": "Isostatic gravity anomaly slope - gradient of gravity after isostatic correction",
+   "mean_at_C_dots": 0.12344408834696316,
+   "mean_moat_background": 0.11956422783119049,
+   "lift_mean_ratio": 1.0324500110622596,
+   "frac_C_dots_above_bg_p99": 0.0068282055369573305,
+   "auc_dot_vs_background": 0.5172415831074978
+  },
+  {
+   "band": 6,
+   "description": "Tilt angle or total curvature - magnetic field derivative for edge detection",
+   "mean_at_C_dots": 16.78266991214143,
+   "mean_moat_background": 18.520795023854397,
+   "lift_mean_ratio": 0.9061527807270531,
+   "frac_C_dots_above_bg_p99": 0.005234071948562623,
+   "auc_dot_vs_background": 0.3725768082124449
+  },
+  {
+   "band": 7,
+   "description": "Geodetic shear rate - rate of angular deformation from GPS/InSAR",
+   "mean_at_C_dots": 11.496417591565393,
+   "mean_moat_background": 10.635317805784222,
+   "lift_mean_ratio": 1.0809660605828673,
+   "frac_C_dots_above_bg_p99": 0.019820394282374195,
+   "auc_dot_vs_background": 0.5188902341383708
+  },
+  {
+   "band": 8,
+   "description": "Geodetic dilatation rate - rate of volumetric strain (expansion/contraction)",
+   "mean_at_C_dots": 6.921467697034655,
+   "mean_moat_background": 6.320305546567567,
+   "lift_mean_ratio": 1.095115994952739,
+   "frac_C_dots_above_bg_p99": 0.00993676603432701,
+   "auc_dot_vs_background": 0.5346501883070301
+  },
+  {
+   "band": 9,
+   "description": "Total magnetic intensity vertical gradient - rate of change in vertical direction",
+   "mean_at_C_dots": -0.010185692015346914,
+   "mean_moat_background": 0.0016578397528997744,
+   "lift_mean_ratio": -6.143954503160413,
+   "frac_C_dots_above_bg_p99": 0.010946383973643658,
+   "auc_dot_vs_background": 0.4728783753121845
+  },
+  {
+   "band": 10,
+   "description": "Distance to earthquake (n=100km radius, a=15\u00b0 azimuth parameters)",
+   "mean_at_C_dots": 14206.352597467681,
+   "mean_moat_background": 9857.231325749428,
+   "lift_mean_ratio": 1.4412112415742255,
+   "frac_C_dots_above_bg_p99": 0.01453318454753175,
+   "auc_dot_vs_background": 0.5319852526037515
+  },
+  {
+   "band": 11,
+   "description": "Isostatic gravity anomaly vertical gradient - vertical rate of change",
+   "mean_at_C_dots": 0.029319611262970426,
+   "mean_moat_background": -0.06726046841382495,
+   "lift_mean_ratio": -0.4359114938447852,
+   "frac_C_dots_above_bg_p99": 0.005526329773101653,
+   "auc_dot_vs_background": 0.5259640449811361
+  },
+  {
+   "band": 12,
+   "description": "Detrended elevation - topography with regional trends removed",
+   "mean_at_C_dots": 7.2884049093622165,
+   "mean_moat_background": -15.743761631145041,
+   "lift_mean_ratio": -0.4629392314314487,
+   "frac_C_dots_above_bg_p99": 0.003294542749349062,
+   "auc_dot_vs_background": 0.5601442986476434
+  },
+  {
+   "band": 13,
+   "description": "Isostatic gravity anomaly - gravity after compensating for topographic mass",
+   "mean_at_C_dots": -6.300166809955114,
+   "mean_moat_background": -8.147868788033396,
+   "lift_mean_ratio": 0.7732288005432828,
+   "frac_C_dots_above_bg_p99": 0.012195121951219513,
+   "auc_dot_vs_background": 0.5490612362505978
+  },
+  {
+   "band": 14,
+   "description": "Total magnetic intensity - total strength of magnetic field",
+   "mean_at_C_dots": -102.17621109361497,
+   "mean_moat_background": -107.14362410649206,
+   "lift_mean_ratio": 0.953637810422206,
+   "frac_C_dots_above_bg_p99": 0.012248259737499335,
+   "auc_dot_vs_background": 0.5088541531829534
+  },
+  {
+   "band": 15,
+   "description": "Depth to basement surface - thickness of sedimentary cover",
+   "mean_at_C_dots": 402.3547302191952,
+   "mean_moat_background": 535.9543902698025,
+   "lift_mean_ratio": 0.750725691446706,
+   "frac_C_dots_above_bg_p99": 0.0019660980923534724,
+   "auc_dot_vs_background": 0.46919640190764655
+  },
+  {
+   "band": 16,
+   "description": "Earthquake intensity or density (n=100km radius, a=15\u00b0 parameters)",
+   "mean_at_C_dots": 1198.1102595180043,
+   "mean_moat_background": 1106.9051849683867,
+   "lift_mean_ratio": 1.082396465196992,
+   "frac_C_dots_above_bg_p99": 0.014267495616132633,
+   "auc_dot_vs_background": 0.521504007585419
+  },
+  {
+   "band": 17,
+   "description": "Conductivity surface - electrical conductivity of subsurface",
+   "mean_at_C_dots": 2.8021903627036076,
+   "mean_moat_background": 2.8574574531616617,
+   "lift_mean_ratio": 0.9806586479890004,
+   "frac_C_dots_above_bg_p99": 0.005313778627982358,
+   "auc_dot_vs_background": 0.4736672774190977
+  },
+  {
+   "band": 18,
+   "description": "Isostatic gravity anomaly horizontal gradient - horizontal rate of change",
+   "mean_at_C_dots": -0.12420775757579652,
+   "mean_moat_background": 0.003959210670878921,
+   "lift_mean_ratio": -31.37184855794075,
+   "frac_C_dots_above_bg_p99": 0.0056060364525213876,
+   "auc_dot_vs_background": 0.4867344767256496
+  },
+  {
+   "band": 19,
+   "description": "Detrended elevation slope - gradient of elevation after detrending",
+   "mean_at_C_dots": 8.571071918404307,
+   "mean_moat_background": 7.386508990922971,
+   "lift_mean_ratio": 1.160368440482101,
+   "frac_C_dots_above_bg_p99": 0.0002922578245390297,
+   "auc_dot_vs_background": 0.6601048452361975
+  }
+ ]
+}

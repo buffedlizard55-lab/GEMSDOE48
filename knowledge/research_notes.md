@@ -216,3 +216,46 @@ result.
 science-data host tested. **Deliberately not fetched:** anything under `drivendata.org` — the terms
 of use prohibit robots and automatic access, and a past push-triggered Actions run in this project
 did fetch the leaderboard.
+
+---
+
+## H56 session append (2026-10-07) — official 19-band inventory, full band screen, and two offline-killed candidates
+
+**Official feature raster restored byte-identical:** `data/raw/training_features.tif`, 418,912,844
+bytes, SHA-256 `4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5` (five hash-pinned
+shards from the GEMSDOE mirror, fail-closed restore via `scripts/restore_h55_inputs.py
+--with-official-features`). Band descriptions read from the file's own tags:
+1 magnetic anomaly · 2 reduced-to-pole · 3 TMI horizontal gradient · 4 geodetic second invariant ·
+5 isostatic gravity slope · 6 tilt angle/total curvature (IRREGULARITY: correlates 0.9971 with
+radiometric total count, see IR-H48-B6) · 7 geodetic shear rate · 8 geodetic dilatation rate ·
+9 TMI vertical gradient · 10 distance to earthquake · 11 isostatic gravity vertical gradient ·
+12 detrended elevation · 13 isostatic gravity anomaly · 14 total magnetic intensity ·
+15 depth to basement · 16 earthquake intensity · 17 conductivity · 18 isostatic gravity horizontal
+gradient · 19 detrended elevation slope.
+
+**Full band screen** (lift of incumbent C dots over the >200 m catalogue moat; rank-AUC for signed
+bands; `evidence/h56_band_screen_20261007.json`): strongest family-used bands are 19 (slope, AUC
+0.660) and 3 (HG, 1.264/0.576); genuinely unused: 4/7/8 strain (1.08-1.10/0.52-0.54), 16 seismic
+(1.082/0.522), 14 TMI amplitude (0.954/0.509), 17 conductivity (0.981/0.474), 15 basement depth
+(0.751/0.469 — C sits shallow: 402.4 m vs 534.9 m moat mean, reproducing the H55 measurement).
+
+**Two candidates built and offline-killed (no slot spent):**
+1. H55-B strain-rate ridge field (structure-tensor coherence > p95): 258,369 px, only 5.0 % of C's
+   dots inside; 25,837 Poisson dots → live-model projection 0.0152 standalone, C+field 0.2152
+   (< 0.2728); ≈ 0.017 credit/dot vs the 0.0556 break-even bar.
+2. H56-A DEMGLOW (band-14 TMI local z ≤ −1.5 AND band-3 HG ≥ p75): 5,944 px conjunction, 1,991
+   dots → projection 0.0028 vs same-mass random control 0.0023; C+field 0.2673.
+   Ladder (all rungs measured): z≤−1.5&p75: 5,944 px · z≤−1.5&p90: 2,576 · z≤−2&p75: 852 ·
+   z≤−2&p90: 428.
+
+**Battery sanity reproductions:** C projection 0.2728 (calibration 0.27277) with Cov(X;B_elig) =
+75,206.82023682502 vs calibration 75,206.82023682503; union projection 0.2588 (= the H55 session's
+−0.0140 pricing of the union, reproduced exactly).
+
+**H56 submission (unique TIF, brief-mandated):** normalized Dempster belief of dotted-C × tip-H33-D
+with metric-kernel BPA, live-anchored discounts (0.95, 0.95×0.2632/0.2778), backbone absence 0.5/0.2,
+dotted-only flank absence 1.0. Belief mass Σ Bel = 399,799.4; 791,389 positive cells; m(Θ) ∈
+[0.005, 0.664]; K > 0.3 on 30,499 px. Gates: format PASS 10/10; holdout FAIL (loses to both parents
+on SGMC-off truth); live-model FAIL (0.0649 < 0.2778). Verdict: DOWNLOAD OK — SUBMIT NOT RECOMMENDED.
+The metric-algebra result "optimal submission is binary {0,1}" is thereby confirmed by the instrument
+on a real graded surface, not just in derivation.

@@ -1,0 +1,121 @@
+{
+ "session": "H56",
+ "generated_utc": "2026-10-07T15:17:03.929194+00:00",
+ "recipe": {
+  "kernel": "official triangular k(d)=max(1-d/300m,0), R=3 cells",
+  "r_dotted": 0.95,
+  "r_tip": 0.9000719942404607,
+  "absence_on_backbone": 0.5,
+  "absence_off_backbone": 0.2,
+  "flank_absence_dotted_only_px": 2.0,
+  "rule": "Dempster normalized combination",
+  "submission_surface": "Bel(F) normalized by footprint max, zeros outside footprint"
+ },
+ "inputs": {
+  "dotted_c": {
+   "path": "/home/user/GEMSDOE48/data/families/dotted_b2_prune_02778.tif",
+   "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+   "origin": "GEMSDOE32 h33-h33-2-b2 (spacing-tuned dotted family)",
+   "owner_reported_live": 0.2778,
+   "site": "https://buffedlizard55-lab.github.io/GEMSDOE32/docs/index.html",
+   "sha256_verified": true
+  },
+  "tip_h33d": {
+   "path": "/home/user/GEMSDOE48/data/families/tip_stepover_r30_02632.tif",
+   "sha256": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757",
+   "origin": "GEMSDOE33 h33d analog tip-stepover r30 (tip/step-over family)",
+   "owner_reported_live": 0.2632,
+   "site": "https://buffedlizard55-lab.github.io/GEMSDOE33/",
+   "sha256_verified": true
+  },
+  "backbone_h19_5": {
+   "path": "/home/user/GEMSDOE48/data/raw/scored/h19_5_01922.tif",
+   "sha256": "ec1f9b56b83ce33cad781ceb9f104b18fb4f2ff785263a4e89616af4aabdee8d",
+   "origin": "GEMSDOE19 h19-5 power-law budget backbone (shared ancestor)",
+   "owner_reported_live": 0.1922,
+   "site": "https://buffedlizard55-lab.github.io/19GEMSDOE/docs/index.html",
+   "sha256_verified": true
+  },
+  "template": {
+   "path": "/home/user/GEMSDOE48/data/raw/sample_submission_template.tif",
+   "sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+   "origin": "owner mirror of the official sample_submission.tif grid",
+   "site": "https://www.drivendata.org/competitions/306/competition-doe-gems/data/",
+   "sha256_verified": true
+  },
+  "catalogue_labels": {
+   "path": "/home/user/GEMSDOE48/data/raw/labels_catalogue.tif",
+   "sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+   "origin": "owner mirror of existing_faults.tif (USGS/INGENIOUS catalogue labels)",
+   "site": "https://www.drivendata.org/competitions/306/competition-doe-gems/data/",
+   "sha256_verified": true
+  },
+  "sgmc_offcat_truth": {
+   "path": "/home/user/GEMSDOE48/data/official/derived_sgmc_faults_100m.tif",
+   "sha256": "643cbe992ef4ba37588fb469163ed8291e3ceb23d6c1f78a3cfaa462430c2da0",
+   "origin": "owner-mirror on-grid rasterization of USGS SGMC fault traces",
+   "site": "https://mrdata.usgs.gov/geology/state/",
+   "sha256_verified": true
+  }
+ },
+ "counts": {
+  "dotted_positive": 37654,
+  "tip_positive": 41865,
+  "intersection": 31614,
+  "union": 47905,
+  "dotted_only": 6040,
+  "tip_only": 10251
+ },
+ "ds": {
+  "raw_belief_max": 0.9950035810470581,
+  "belief_mass_S": 399799.4375,
+  "mtheta_min_footprint": 0.0049964021891355515,
+  "mtheta_max_footprint": 0.6641883850097656,
+  "conflict_K_max": 0.8550683856010437,
+  "conflict_px_gt_0.3": 30499,
+  "conflict_share_of_footprint": 0.005902225366738573
+ },
+ "not_the_naive_mean": {
+  "vs_binary_mean": {
+   "definition": "0.5*(1[dotted] + 1[tip])",
+   "pearson_r_footprint": 0.3886540589108688,
+   "pearson_r_support": 0.4939786936730699,
+   "mae_footprint": 0.06990990292347483,
+   "max_abs_diff": 0.8230607509613037,
+   "affine_fit": {
+    "c0": 0.06971581134974039,
+    "c1": 0.9947769294158882,
+    "mean_abs_residual": 0.11999558628158784,
+    "max_abs_residual": 0.7533449396115633
+   }
+  },
+  "vs_kernel_mean": {
+   "definition": "0.5*(s_dot + s_tip), same normalization as the submission",
+   "pearson_r_footprint": 0.9865998541536448,
+   "pearson_r_support": 0.8071251092600837,
+   "mae_footprint": 0.01875214610958607,
+   "max_abs_diff": 0.6666666865348816,
+   "affine_fit": {
+    "c0": 0.002218225241545902,
+    "c1": 1.2151671692556298,
+    "mean_abs_residual": 0.011123358579817116,
+    "max_abs_residual": 0.3371431204544713
+   },
+   "frac_footprint_diff_gt_0.05": 0.12455748791503923
+  },
+  "is_identical_to_either_mean": false
+ },
+ "artifacts": {
+  "base": "GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b",
+  "content_id": "9ec0d605c45b",
+  "primary_zeros": "docs/downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros-outside.tif",
+  "nan_twin": "docs/downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-nan-outside.tif",
+  "zip": "docs/downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros-outside.zip",
+  "diagnostics": {
+   "mtheta": "docs/downloads/diagnostics/gemsdoe48-h56-mtheta-9ec0d605c45b.tif",
+   "conflict": "docs/downloads/diagnostics/gemsdoe48-h56-conflict-9ec0d605c45b.tif",
+   "plausibility": "docs/downloads/diagnostics/gemsdoe48-h56-plausibility-9ec0d605c45b.tif"
+  },
+  "diagnostics_are_submissions": false
+ }
+}

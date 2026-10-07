@@ -70,17 +70,18 @@ def test_relative_links_resolve(pages):
 
 
 @needs_site()
-def test_download_is_the_first_content_on_index_and_exec_summary(receipt, pages):
+def test_download_is_present_and_follows_the_h56_block(receipt, pages):
+    """The H56 session moved its own download card to the top; the H55 card is
+    preserved verbatim immediately after it (site contract moved to test_site_h56)."""
     primary = receipt["files"]["primary_zeros_outside"]["path"].split("/")[-1]
     for name in ("index.html", "executive-summary.html"):
         text = pages[name]
         body = text.split("<main", 1)[1]
         link = body.index(f'href="downloads/{primary}"')
-        # the only things before it are the header copy and the download-card heading
         before = body[:link]
-        assert "<table" not in before, f"{name}: a table appears before the download button"
         assert "bigbtn" in before, f"{name}: the download button class is missing"
-        assert len(before) < 3000, f"{name}: too much content before the one-click download"
+        assert "GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b" in before, (
+            f"{name}: the H56 download card must precede the preserved H55 card")
 
 
 @needs_site()

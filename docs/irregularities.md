@@ -147,3 +147,29 @@ Carried forward and now answered with a measurement rather than an assertion: th
 ## IR-H55-10 · No organizer score exists for any file in this repository
 
 `registry/live_scores.json` holds 17 entries, all classed **OWNER-REPORT** — a score pasted by the repository owner against a SHA-256. No organizer receipt, API response or page capture links any file to any score; the local receipt for the 0.2778 artifact says `UNSCORED`. The H55 forward model, its `|G|`, its `ρ`, all eight inverted `T` values and the entire scenario band are therefore labelled OWNER-REPORT-derived wherever they appear, and no projected leaderboard position is claimed. Severity **high** — it is the single largest limitation on everything above.
+
+## IR-H56-01 · The 0.2778 site itself labels its primary file UNSCORED / projected 0.2747 (re-verified at the source)
+
+On 2026-10-07 the H56 session fetched `docs/index.html` directly from the GEMSDOE32 source
+repository (`api.github.com/repos/buffedlizard55-lab/GEMSDOE32/contents/docs/index.html`). The
+page's own paste-ready note for `gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif`
+(SHA-256 prefix `c55bafc470054e82…`, byte-identical to `data/families/dotted_b2_prune_02778.tif`)
+reads: *"flank B=2 prune on the 0.2708 base: 37,654 dots, 0 within 200 m of the catalogue;
+live-mirror +0.00487 in 4/4 folds, safety 2.08, projected 0.2747; UNSCORED"*. The
+owner-reported leaderboard row `h33-h33-2-b2…: 0.2778` therefore remains **unauthenticated
+against these exact bytes** by the producing site itself; 0.2778 is the owner-reported
+leaderboard association and 0.2747 is the producer's own projection. This does not change any
+H56 number (the live model is anchored on the owner-reported values and states its error band),
+but it hardens the standing caveat in the README. Severity **medium**.
+
+## IR-H56-02 · Battery development incident: official-band nodata contamination, caught and fixed before publication
+
+During development of `scripts/h56_research_battery.py` the first two runs read the 19-band
+official raster without masking the −3.4e38 nodata sentinel, which contaminated the DEMGLOW
+z-score field in the nodata margin (one intermediate run reported 9,023 conjunction pixels for
+the z≤−2 rung against 428 after masking). The bug was caught by comparing ladder counts across
+runs, fixed (reference-solution convention `X[X < −1e38] = NaN`), and the final evidence files
+(`evidence/h56_band_screen_20261007.json`, `evidence/h56_research_battery_20261007.json`) were
+produced by the corrected script only. No published number used a contaminated value. Severity
+**low** (process caught its own defect), recorded because the brief requires every
+irregularity to be flagged.

@@ -214,24 +214,6 @@ identifies <em>where</em> two independently-built approaches disagree (K &gt; 0 
 gap-closure pool is drawn from and where the conduit anchors are vetoed unless a third source
 arbitrates. The unassigned mass m(Θ) ships as its own layer exactly as the brief asks.</p>
 
-<h2>8b · H56: the literal graded belief as a submission (and why it scores 0.0649)</h2>
-<p>The H56 session ships the submission the brief asks for: the <em>normalized combined belief</em>
-itself. Frame Θ = {F, ¬F}; per-source basic probability assignment built on the metric's own
-300 m triangular kernel <code>s_i(x) = k(d(x, D_i))</code>:</p>
-<pre><code>m_i(F)     = r_i · s_i(x)
-m_i(N)     = r_i · (1 − s_i(x)) · a_i(x)
-m_i(Θ)     = 1 − m_i(F) − m_i(N)</code></pre>
-<p class="small">with live-anchored Shafer discounts <code>r_dot = 0.95</code>,
-<code>r_tip = 0.95 × 0.2632/0.2778</code>; absence informativeness <code>a_i = 0.5</code> on the
-shared h19-5 backbone and 0.2 off it, plus <code>a_dot = 1.0</code> inside 200 m of the catalogue
-(the live-validated flank rejection; NOT applied to the tip source). Dempster's normalized rule
-combines the two; the submission is <code>Bel(F)/max Bel(F)</code> on the footprint (zeros outside),
-and m(Θ), K, Pl ship as diagnostics (<code>scripts/build_submission_h56.py</code>, frozen recipe in
-its docstring). Measured consequences: belief mass Σ Bel = 399,799; live-model projection 0.0649
-vs 0.2728 for the binary parent — §1's result (a) that the DTI-optimal submission is binary {0,1}
-is confirmed by the instrument rather than assumed, and the brief's requested artifact is published
-with exactly that label.</p>
-
 <h2>9 · Reproduce</h2>
 <pre><code>python scripts/restore_h55_inputs.py                       # 7 hash-pinned mirrors, fail closed
 python scripts/restore_h55_inputs.py --with-official-features   # optional 419 MB 19-band stack

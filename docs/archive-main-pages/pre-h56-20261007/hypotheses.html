@@ -101,79 +101,13 @@ font-family:var(--mono);font-size:.78rem;overflow-wrap:anywhere;margin:10px 0}
 <main class="wrap">
 
 <header style="background:none;padding:0">
-<p class="eyebrow" style="color:var(--muted)">Preregistered hypothesis slates · H56 (2026-10-07, current) over H55 (preserved)</p>
-<h1>Two slates: the five new H56 candidates first, the H55 slate preserved below</h1>
-<p class="deck" style="color:var(--muted)">The H56 session restored the full 419 MB official
-19-band GeoDAWN raster byte-identical (SHA-256 <code>4371c82e…</code>), screened every band
-against the incumbent C, built and measured the two top offline candidates — and both
-<strong>failed their pre-registered gates</strong>, so no weekly slot was touched. Full slate:
-<a href="../docs/research/hypotheses-h56-20261007.md"><code>docs/research/hypotheses-h56-20261007.md</code></a> ·
-machine twin <a href="../evidence/hypothesis_slate_h56_20261007.json"><code>evidence/hypothesis_slate_h56_20261007.json</code></a> ·
-battery <a href="../evidence/h56_research_battery_20261007.json"><code>evidence/h56_research_battery_20261007.json</code></a>.</p>
+<p class="eyebrow" style="color:var(--muted)">Preregistered hypothesis slate · frozen 2026-10-07 before scoring</p>
+<h1>Five candidates, ranked by expected ΔDTI against implementation cost</h1>
+<p class="deck" style="color:var(--muted)">Ranked by one rule measured this session: a candidate is
+only interesting if it can raise the corridor field's <em>dense</em> truth yield above the
+backbone's T = 6,813. Anything that merely re-ranks or re-thins the
+existing field is worth at most +0.0066 and ranks last.</p>
 </header>
-
-<section class="card" id="h56-slate" style="border-width:2px">
-<h2>H56 slate — five new candidates (ranked), with two already measured dead</h2>
-<table>
-<tr><th>#</th><th>Candidate</th><th>Layers</th><th>Signature / transform</th><th>Why it catches a MISSING fault</th><th>Difference from everything here</th><th>Expected ΔDTI / cost</th></tr>
-<tr><td>1</td><td><strong>H56-F</strong> absence-driven Dempster pruning ladder</td>
-<td>C (0.2778) × H33-D (0.2632), both pinned local</td>
-<td>Remove C dots where the tip family's kernel support + backbone absence drops combined Bel(F) below τ ∈ {0.99, 0.95, 0.90}</td>
-<td>Deletion of sub-bar dots is the proven lever: A→B→C gained +0.0108 deleting ~3,900 zero-credit dots; tip disagreement is the only independent estimate of the next such population</td>
-<td>Every prior fusion ADDED or re-weighted; no artifact has ever removed C dots with the other family's evidence</td>
-<td>+0.002…+0.005 if C-only dots are sub-bar, −0.003 if not / low cost, ONE live slot</td></tr>
-<tr><td>2</td><td><strong>H56-C</strong> 3 m DEM channel-knickpoint clusters</td>
-<td>USGS 3DEP 1 m (706-tile runner pipeline already proven) → 3 m</td>
-<td>Stream extraction; knickpoints as profile second-derivative maxima &gt; 3σ; RANSAC azimuth clustering; one dot per cluster</td>
-<td>Base-level perturbation leaves knickpoints upstream of any mappable scarp — including alluvium-mantled faults with no catalogue trace</td>
-<td>H52/H54 detected hillslope steps; no channel-profile operator exists in <code>src/</code></td>
-<td>+0.002…+0.010 / medium-high (~1 session)</td></tr>
-<tr><td>3</td><td><strong>H56-D</strong> conduit stepping-stone traces</td>
-<td>GDR wells/springs CSV (local) × band 3 HG</td>
-<td>Pair tier≥2 anchors within 15 cells, score segments by mean HG, emit along top segments</td>
-<td>Conduits prove existence; the connecting trace is what the 300 m kernel rewards and the surface catalogue lacks</td>
-<td>H55-A dart-threw isolated anchors; none connected them</td>
-<td>−0.001…+0.002 / low</td></tr>
-<tr><td>4</td><td><strong>H56-B</strong> radiometric K-residual halos</td>
-<td>GeoDAWN K/Th/U/TC mirror (DOI 10.5066/P93LGLVQ)</td>
-<td>Robust K~Th regression residual z ≥ 2 AND band-3 HG ≥ p75</td>
-<td>K-metasomatism persists under cover after surface expression erodes; catalogue is surface-trace only</td>
-<td>H50-B used Th/K ratios; GEMSDOE46 scarp∩radiometric; H53-RadEdge edges — a regressed residual is a different null</td>
-<td>+0.000…+0.003 / low (uint8 quantisation risk)</td></tr>
-<tr><td>5</td><td><strong>H56-E</strong> cover-gated additions</td>
-<td>Band 15 depth-to-basement as a gate on future additions</td>
-<td>Restrict additions to basement depth above the moat median; re-measure</td>
-<td>Catalogue incompleteness is maximal under thick cover; C under-emits deep basins (402.4 m vs 534.9 m moat mean, measured)</td>
-<td>H55-C used depth as detector conjunction; this is a sampling prior</td>
-<td>±0.001 modifier / trivial</td></tr>
-</table>
-<h3>Measured before ranking — offline results that killed two candidates without spending a slot</h3>
-<p class="small">Band screen of all 19 official bands (lift of C dots over the &gt;200 m catalogue moat;
-rank-AUC for signed bands): band 3 HG 1.264/0.576, band 19 slope 1.160/0.660, band 10 distance-to-quake
-1.441/0.532, bands 4/7/8 strain 1.08–1.10/0.52–0.54, band 14 TMI 0.954/0.509, band 15 basement 0.751/0.469,
-band 17 conductivity 0.981/0.474 (<code>evidence/h56_band_screen_20261007.json</code>). Pipeline verified by
-reproducing H55-session numbers line by line (band lifts 1.26/1.16/1.44; basement 402/535 m; C projection
-0.2728 with Cov identical to calibration at 14 decimals).</p>
-<ul class="small">
-<li><strong>H55-B strain ridges (previous session's Priority 3, implemented here):</strong> 258,369 px coherence field,
-only 5.0 % of C's dots inside; 25,837 Poisson dots score projection <strong>0.0152</strong> standalone and drag
-C+field to 0.2152 &lt; 0.2728 → ≈ 0.017 credit/dot vs the 0.0556 bar. <strong>OFFLINE FAIL.</strong></li>
-<li><strong>H56-A DEMGLOW (TMI demagnetisation lows × HG ridges):</strong> primary rung 5,944 px → 1,991 dots;
-projection <strong>0.0028</strong> vs same-mass random control 0.0023; C+field 0.2673 &lt; 0.2728.
-<strong>OFFLINE FAIL.</strong></li>
-</ul>
-<p class="small"><strong>Validation rule carried forward:</strong> no weekly slot without (a) blocked holdout
-≥ 3/4 folds vs both parents on both truths AND (b) live-model projection ≥ 0.2778 — with one explicit
-exemption: the first rung of H56-F, whose information value (which C-dots carry credit) exceeds its
-expected score, mirroring how A→B→C was discovered.</p>
-</section>
-
-<section class="card" id="h55-slate-preserved">
-<h2>H55 slate — preserved verbatim (2026-10-07, frozen before scoring)</h2>
-<p class="small">The ranking below was frozen by the H55 session; its rule: a candidate is only
-interesting if it can raise the corridor field's <em>dense</em> truth yield above the backbone's
-T = 6,813. Anything that merely re-ranks or re-thins the existing field is worth at most +0.0066
-and ranks last.</p>
 
 <div class="warn"><strong>Two screens were dropped before ranking, on live evidence.</strong>
 <em>Catalogue coverage per pixel</em> is not a valid screen: SGMC faults score 0.1418 against the
@@ -224,14 +158,12 @@ Prior slates are preserved at
 <a href="research/hypotheses-h52-20261007.md">H52</a>,
 <a href="research/hypotheses-20261007.md">H50</a> and
 <a href="archive-main-pages/hypotheses-main-20261006.html">H48/H49</a>.</p>
-</section>
 
 </main>
 <footer class="wrap">
 <p><strong>GEMSDOE48</strong> — auditable fault-surface research for DrivenData competition 306
-(DOE GEMS Prize). H55 pages built by <code>scripts/build_site_h55.py</code> from the receipts in
-<code>evidence/</code>; H56 session content added 2026-10-07 directly from
-<code>evidence/build_h56_receipt_20261007.json</code> and siblings.</p>
+(DOE GEMS Prize). Built 2026-10-07 06:11 UTC by
+<code>scripts/build_site_h55.py</code> directly from the receipts in <code>evidence/</code>.</p>
 <p class="small"><strong>No organizer score exists for any file in this repository.</strong>
 Every live number is OWNER-REPORT class: a score pasted by the repository owner, not an
 organizer receipt. Proxy numbers are computed against public map layers, not the private
