@@ -1,0 +1,125 @@
+{
+  "schema": "GEMSDOE48-h54-build-v1",
+  "generated_utc": "2026-10-07T05:33:27Z",
+  "artifact": {
+    "file": "docs/downloads/GEMSDOE48-H54-ds-core-lidar-20261007-dedc43dc0167.tif",
+    "sha256": "dedc43dc0167edcf1dca9fa1693b69153c71325d59e47218298e577cd8159fc4",
+    "bytes": 1562508,
+    "bands": 1,
+    "dtype": "float32",
+    "epsg": 32611,
+    "shape": [
+      3730,
+      3292
+    ],
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    "nodata": NaN,
+    "compress": "lzw",
+    "zeros_nan_outside_twin": "docs/downloads/GEMSDOE48-H54-ds-core-lidar-20261007-dedc43dc0167-zeros-nan-outside.tif",
+    "zip": "docs/downloads/GEMSDOE48-H54-ds-core-lidar-20261007-dedc43dc0167.zip"
+  },
+  "diagnostics": {
+    "belief-normalized": {
+      "file": "docs/downloads/diagnostics/gemsdoe48-h54-belief-normalized-dedc43dc0167.tif",
+      "sha256": "a1a26570f336e84a743e5acb451df16ede8734613f1f9a4b1d515ff69d369ba3",
+      "min": 0.0,
+      "max": 1.0
+    },
+    "unassigned-mtheta": {
+      "file": "docs/downloads/diagnostics/gemsdoe48-h54-unassigned-mtheta-dedc43dc0167.tif",
+      "sha256": "e3ff2258b3835c2ec01bdad7fba7913a5dcf188cf2dff77ca11c2c7a323202f6",
+      "min": 0.004996400326490402,
+      "max": 0.034474194049835205
+    },
+    "conflict-K": {
+      "file": "docs/downloads/diagnostics/gemsdoe48-h54-conflict-K-dedc43dc0167.tif",
+      "sha256": "318fdda4e26bcb1c673a1c8af866b4d9515a3ac73d88ee95c3ff52ed4e124f43",
+      "min": 0.0,
+      "max": 0.8550683856010437
+    }
+  },
+  "preregistered_constants": {
+    "max_additions": 1000,
+    "poisson_min_dist_px": 3.0,
+    "rho": 0.95,
+    "live_dotted": 0.2778,
+    "live_tip": 0.2632,
+    "a1": 0.95,
+    "a2": 0.9000719942404607
+  },
+  "composition": {
+    "cells": 38654,
+    "core_dotted_cells": 37654,
+    "added_lidar_cells": 1000,
+    "added_within_200m_of_catalogue": 0,
+    "added_min_height_m": 3.4000000953674316
+  },
+  "format_checks": {
+    "bands": 1,
+    "dtype": "float32",
+    "epsg": 32611,
+    "shape": [
+      3730,
+      3292
+    ],
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    "nodata": NaN,
+    "compress": "lzw",
+    "all_finite_in_footprint": true,
+    "nan_outside_footprint": true,
+    "min_in_footprint": 0.0,
+    "max_in_footprint": 1.0,
+    "portal_range_ok": true
+  },
+  "ds_diagnostics": {
+    "bel_raw_min": 0.002706134898388265,
+    "bel_raw_max": 0.995003599712023,
+    "m_theta_range": [
+      0.00499640028797697,
+      0.03447419402910937
+    ],
+    "conflict_range": [
+      0.0,
+      0.8550683945284376
+    ],
+    "bel_at_both_families_mean": 0.9950035997120229,
+    "bel_at_dotted_only_mean": 0.955828806409782,
+    "bel_at_lidar_additions_mean": 0.0004389717603012629,
+    "uncertainty_preserved_note": "m(Theta) is exported separately and never merged into the emission"
+  },
+  "not_the_average_check": {
+    "pearson_ds_normalized_belief_vs_naive_mean": 0.9742757081146146,
+    "max_abs_difference_ds_belief_vs_naive_mean": 0.2706204796751053,
+    "pixel_identical_ds_belief_to_naive_mean": false,
+    "max_abs_difference_binary_support_vs_naive_mean": 1.0,
+    "identical_to_dotted_parent": false,
+    "identical_to_tip_parent": false,
+    "identical_to_union": false,
+    "pass": true
+  },
+  "blocked_proxy_diagnostic": {
+    "C_dotted": 0.09549116770426949,
+    "H54": 0.09599561836145015
+  },
+  "status": "NOT_SLOT_CLEARED",
+  "status_basis": "scripts/audit_candidate.py (GATE-2): additions are worth ~0.010-0.014 credit/cell on a live-density-matched truth vs the 0.0556 break-even bar; see docs/research/credit-density-audit-20261007.md",
+  "evidence_class": {
+    "measured": "format_checks, composition, ds_diagnostics, not_the_average_check, blocked_proxy_diagnostic",
+    "owner_reported": "live anchors 0.2778 / 0.2632 (registry/live_scores.json)",
+    "proxy": "SGMC > 300 m off-catalogue, four fixed quadrants; not the private truth"
+  }
+}
