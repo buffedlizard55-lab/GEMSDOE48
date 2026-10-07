@@ -1,0 +1,440 @@
+{
+ "generated_utc": "2026-10-07T02:23:30Z",
+ "params": {
+  "res_m": 3.0,
+  "sigma_local_m": 6.0,
+  "sigma_regional_m": 60.0,
+  "half_offset_m": 21.0,
+  "line_length_m": 150.0,
+  "n_line_samples": 11,
+  "n_orient": 12,
+  "context_window_m": 150.0,
+  "facing_power": 1.0,
+  "roughness_floor_m": 0.15,
+  "slope_floor": 0.005,
+  "edge_guard_m": 150.0
+ },
+ "instrument": "share of 100 m cells within 100 m of existing_faults among top-q cells / share among all covered cells",
+ "tiles": {
+  "x42y425": {
+   "covered_cells": 9409,
+   "near_cells": 1054,
+   "base_near_rate": 0.11202040599426082,
+   "detect_seconds": 148.3,
+   "near_rate_lift_by_sigma_ctx_bin": {
+    "0-0.2": {
+     "n": 2544,
+     "lift": 0.467
+    },
+    "0.2-0.4": {
+     "n": 1253,
+     "lift": 1.518
+    },
+    "0.4-0.7": {
+     "n": 579,
+     "lift": 2.128
+    },
+    "0.7-1.2": {
+     "n": 525,
+     "lift": 2.176
+    },
+    "1.2-2.5": {
+     "n": 1029,
+     "lift": 1.258
+    },
+    "2.5-inf": {
+     "n": 3479,
+     "lift": 0.762
+    }
+   },
+   "layers": {
+    "score_ungated_max": {
+     "eligible_cells": 9409,
+     "eligible_lift": 1.0,
+     "top_10pct": {
+      "n": 941,
+      "lift": 0.816
+     },
+     "top_5pct": {
+      "n": 471,
+      "lift": 0.701
+     },
+     "top_2pct": {
+      "n": 189,
+      "lift": 0.614
+     }
+    },
+    "height_ungated_max": {
+     "eligible_cells": 9409,
+     "eligible_lift": 1.0,
+     "top_10pct": {
+      "n": 941,
+      "lift": 0.626
+     },
+     "top_5pct": {
+      "n": 471,
+      "lift": 0.398
+     },
+     "top_2pct": {
+      "n": 189,
+      "lift": 0.283
+     }
+    },
+    "height_gate_sigma<0.4_max": {
+     "eligible_cells": 4283,
+     "eligible_lift": 0.9816929912663852,
+     "top_10pct": {
+      "n": 429,
+      "lift": 1.706
+     },
+     "top_5pct": {
+      "n": 215,
+      "lift": 1.868
+     },
+     "top_2pct": {
+      "n": 86,
+      "lift": 1.972
+     }
+    },
+    "height*facing_gate_sigma<0.4_max": {
+     "eligible_cells": 4283,
+     "eligible_lift": 0.9816929912663852,
+     "top_10pct": {
+      "n": 429,
+      "lift": 2.143
+     },
+     "top_5pct": {
+      "n": 215,
+      "lift": 2.574
+     },
+     "top_2pct": {
+      "n": 86,
+      "lift": 3.322
+     }
+    },
+    "height_gate_sigma<0.7_max": {
+     "eligible_cells": 4855,
+     "eligible_lift": 1.1087431138695802,
+     "top_10pct": {
+      "n": 486,
+      "lift": 2.223
+     },
+     "top_5pct": {
+      "n": 243,
+      "lift": 2.314
+     },
+     "top_2pct": {
+      "n": 98,
+      "lift": 2.368
+     }
+    },
+    "height*facing_gate_sigma<0.7_max": {
+     "eligible_cells": 4855,
+     "eligible_lift": 1.1087431138695802,
+     "top_10pct": {
+      "n": 486,
+      "lift": 2.314
+     },
+     "top_5pct": {
+      "n": 243,
+      "lift": 2.314
+     },
+     "top_2pct": {
+      "n": 98,
+      "lift": 2.277
+     }
+    },
+    "height_gate_sigma<1.2_max": {
+     "eligible_cells": 5429,
+     "eligible_lift": 1.1460822702452185,
+     "top_10pct": {
+      "n": 543,
+      "lift": 2.006
+     },
+     "top_5pct": {
+      "n": 272,
+      "lift": 1.969
+     },
+     "top_2pct": {
+      "n": 109,
+      "lift": 2.293
+     }
+    },
+    "height*facing_gate_sigma<1.2_max": {
+     "eligible_cells": 5429,
+     "eligible_lift": 1.1460822702452185,
+     "top_10pct": {
+      "n": 543,
+      "lift": 1.611
+     },
+     "top_5pct": {
+      "n": 272,
+      "lift": 1.641
+     },
+     "top_2pct": {
+      "n": 109,
+      "lift": 1.065
+     }
+    },
+    "u8_band1_ex_max": {
+     "eligible_cells": 9409,
+     "eligible_lift": 1.0,
+     "top_10pct": {
+      "n": 961,
+      "lift": 0.595
+     },
+     "top_5pct": {
+      "n": 473,
+      "lift": 0.396
+     },
+     "top_2pct": {
+      "n": 195,
+      "lift": 0.32
+     }
+    },
+    "u8_band3_step_max": {
+     "eligible_cells": 9409,
+     "eligible_lift": 1.0,
+     "top_10pct": {
+      "n": 949,
+      "lift": 0.743
+     },
+     "top_5pct": {
+      "n": 492,
+      "lift": 0.708
+     },
+     "top_2pct": {
+      "n": 204,
+      "lift": 0.613
+     }
+    },
+    "u8_band7_upface_max": {
+     "eligible_cells": 8557,
+     "eligible_lift": 0.9900281381311925,
+     "top_10pct": {
+      "n": 880,
+      "lift": 0.832
+     },
+     "top_5pct": {
+      "n": 434,
+      "lift": 0.946
+     },
+     "top_2pct": {
+      "n": 177,
+      "lift": 1.16
+     }
+    }
+   }
+  },
+  "x40y427": {
+   "covered_cells": 9409,
+   "near_cells": 511,
+   "base_near_rate": 0.0543097034753959,
+   "detect_seconds": 149.3,
+   "near_rate_lift_by_sigma_ctx_bin": {
+    "0-0.2": {
+     "n": 648,
+     "lift": 0.511
+    },
+    "0.2-0.4": {
+     "n": 651,
+     "lift": 1.075
+    },
+    "0.4-0.7": {
+     "n": 383,
+     "lift": 2.163
+    },
+    "0.7-1.2": {
+     "n": 472,
+     "lift": 1.951
+    },
+    "1.2-2.5": {
+     "n": 1124,
+     "lift": 1.605
+    },
+    "2.5-inf": {
+     "n": 6131,
+     "lift": 0.787
+    }
+   },
+   "layers": {
+    "score_ungated_max": {
+     "eligible_cells": 9409,
+     "eligible_lift": 1.0,
+     "top_10pct": {
+      "n": 941,
+      "lift": 0.744
+     },
+     "top_5pct": {
+      "n": 471,
+      "lift": 0.86
+     },
+     "top_2pct": {
+      "n": 189,
+      "lift": 0.877
+     }
+    },
+    "height_ungated_max": {
+     "eligible_cells": 9409,
+     "eligible_lift": 1.0,
+     "top_10pct": {
+      "n": 941,
+      "lift": 0.098
+     },
+     "top_5pct": {
+      "n": 471,
+      "lift": 0.195
+     },
+     "top_2pct": {
+      "n": 189,
+      "lift": 0.0
+     }
+    },
+    "height_gate_sigma<0.4_max": {
+     "eligible_cells": 1661,
+     "eligible_lift": 1.064202240651483,
+     "top_10pct": {
+      "n": 167,
+      "lift": 0.992
+     },
+     "top_5pct": {
+      "n": 84,
+      "lift": 0.877
+     },
+     "top_2pct": {
+      "n": 34,
+      "lift": 0.542
+     }
+    },
+    "height*facing_gate_sigma<0.4_max": {
+     "eligible_cells": 1661,
+     "eligible_lift": 1.064202240651483,
+     "top_10pct": {
+      "n": 167,
+      "lift": 0.882
+     },
+     "top_5pct": {
+      "n": 84,
+      "lift": 0.438
+     },
+     "top_2pct": {
+      "n": 34,
+      "lift": 0.0
+     }
+    },
+    "height_gate_sigma<0.7_max": {
+     "eligible_cells": 2165,
+     "eligible_lift": 1.1821687313287805,
+     "top_10pct": {
+      "n": 217,
+      "lift": 2.291
+     },
+     "top_5pct": {
+      "n": 109,
+      "lift": 2.872
+     },
+     "top_2pct": {
+      "n": 44,
+      "lift": 2.929
+     }
+    },
+    "height*facing_gate_sigma<0.7_max": {
+     "eligible_cells": 2165,
+     "eligible_lift": 1.1821687313287805,
+     "top_10pct": {
+      "n": 217,
+      "lift": 0.679
+     },
+     "top_5pct": {
+      "n": 109,
+      "lift": 0.676
+     },
+     "top_2pct": {
+      "n": 44,
+      "lift": 0.418
+     }
+    },
+    "height_gate_sigma<1.2_max": {
+     "eligible_cells": 2834,
+     "eligible_lift": 1.3059266358876767,
+     "top_10pct": {
+      "n": 284,
+      "lift": 1.556
+     },
+     "top_5pct": {
+      "n": 142,
+      "lift": 2.334
+     },
+     "top_2pct": {
+      "n": 57,
+      "lift": 2.261
+     }
+    },
+    "height*facing_gate_sigma<1.2_max": {
+     "eligible_cells": 2834,
+     "eligible_lift": 1.3059266358876767,
+     "top_10pct": {
+      "n": 284,
+      "lift": 2.14
+     },
+     "top_5pct": {
+      "n": 142,
+      "lift": 1.297
+     },
+     "top_2pct": {
+      "n": 57,
+      "lift": 1.292
+     }
+    },
+    "u8_band1_ex_max": {
+     "eligible_cells": 9409,
+     "eligible_lift": 1.0,
+     "top_10pct": {
+      "n": 947,
+      "lift": 0.156
+     },
+     "top_5pct": {
+      "n": 478,
+      "lift": 0.077
+     },
+     "top_2pct": {
+      "n": 191,
+      "lift": 0.0
+     }
+    },
+    "u8_band3_step_max": {
+     "eligible_cells": 9409,
+     "eligible_lift": 1.0,
+     "top_10pct": {
+      "n": 981,
+      "lift": 0.113
+     },
+     "top_5pct": {
+      "n": 506,
+      "lift": 0.036
+     },
+     "top_2pct": {
+      "n": 189,
+      "lift": 0.0
+     }
+    },
+    "u8_band7_upface_max": {
+     "eligible_cells": 9261,
+     "eligible_lift": 1.0159809955728323,
+     "top_10pct": {
+      "n": 927,
+      "lift": 0.497
+     },
+     "top_5pct": {
+      "n": 467,
+      "lift": 0.394
+     },
+     "top_2pct": {
+      "n": 194,
+      "lift": 0.095
+     }
+    }
+   }
+  }
+ }
+}
