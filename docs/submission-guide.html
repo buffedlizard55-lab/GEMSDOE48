@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Step-by-step submission instructions for the H55 GeoTIFF, including the fix for the &#x27;Predicted values must be in range [0, 1]&#x27; rejection.">
-<title>GEMSDOE48 H55 — how to submit</title>
+<meta name="description" content="Current H56 submission status: downloadable research GeoTIFF, but not cleared or recommended for upload; legacy portal steps are archived reference only.">
+<title>GEMSDOE48 H56 — current submission status: do not submit</title>
 <style>
 :root{color-scheme:light;--ink:#12241d;--muted:#54665c;--paper:#f4f4ec;--panel:#fffefa;
 --line:#d7ddd1;--green:#1d4c3a;--green2:#2f6b52;--soft:#e3eee5;--amber:#8a4a15;
@@ -96,20 +96,19 @@ font-family:var(--mono);font-size:.78rem;overflow-wrap:anywhere;margin:10px 0}
 <a href="irregularities.html">Irregularities</a>
 <a href="sources.html">Sources</a>
 <a href="next-steps.html">Next steps</a>
-<a href="research/h55-live-model-ceiling-and-candidate-20261007.md">Full report</a>
+<a href="research/h56-results-20261007.md">H56 results</a>
 </div></nav>
 <main class="wrap">
 
 <header style="background:none;padding:0">
-<p class="eyebrow" style="color:var(--muted)">Submission guide · step by step</p>
-<h1>Exactly how to submit this file</h1>
-<p class="deck" style="color:var(--muted)">Six steps, about four minutes. Nothing here requires
-command-line work; the file is already built, audited and zipped. Read the verdict banner first:
-it tells you whether this session's file is worth a weekly slot.</p>
+<p class="eyebrow" style="color:var(--muted)">Submission status · H56 · 2026-10-07</p>
+<h1>No H56 file is cleared for submission</h1>
+<p class="deck" style="color:var(--muted)">The GeoTIFF may be downloaded for inspection, but there are no upload steps to follow today. The legacy H55 portal walkthrough below is reference material only; it is not authorization to spend a slot.</p>
 </header>
 
+<div class="bad">
 <div class="dl" id="h56" style="border:3px solid #b3541e">
-<h2>⬇ This session's unique submission (H56) — ✅ download OK, ⛔ submit NOT recommended</h2>
+<h2>⬇ This session's unique submission (H56B graded belief) — ✅ download OK, ⛔ submit NOT recommended</h2>
 <p class="small" style="margin-bottom:0"><strong>GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b</strong><br>
 continuous Bel(F) in [0, 1] · single-band float32 · EPSG:32611 · 100 m ·
 3,730 × 3,292 · 791,389 positive cells · <strong>all 12,279,160 cells finite,
@@ -140,8 +139,18 @@ spend a slot measuring whether the organizer metric treats graded mass the way t
 formula says — the six steps below apply unchanged. <strong>UNSCORED.</strong></p>
 </div>
 
-<div class="dl" id="h55-download">
-<h2>⬇ Previous session's submission (H55) — preserved verbatim</h2>
+
+<h2>Current status: H56 — download yes, submission no</h2>
+<p><strong>Do not upload this file or spend a weekly slot.</strong> The open-world H56-DS GeoTIFF passes the local grid/range check, but it loses to same-protocol H49 on both public proxy targets, with 0/4 folds positive. H56-A's machine-spec Hessian-only screen fails the same comparison; the slate's prose coherence extension remains untested. Neither proxy result is private-label evidence. No organizer score, portal test, or acceptance receipt exists.</p>
+<p>The official problem description also documents null/NaN outside the feature footprint. H56 uses finite zeros outside to avoid NaNs in a whole-raster range check; whether the portal accepts that encoding remains untested. A local format pass is not submission approval.</p>
+<p><a class="button" href="downloads/GEMSDOE48-H56-OWDS-B2xH33D-20261007-1f7b5a4f18db-zeros-outside.tif" download>Download H56 for inspection only</a></p>
+<p class="meta">SHA-256 <code>1f7b5a4f18dbc62f31b14078545332238be9289dd388d57f550d75fb5a5fe95a</code> · <a href="research/h56-results-20261007.md">full result and limitations</a> · <a href="../evidence/h56_decision_20261007.json">machine decision receipt</a></p>
+</div>
+
+<div class="warn"><strong>Everything below is a historical H55 portal walkthrough.</strong> It describes a prior research file that was also not slot-cleared. Do not follow those upload steps unless a future candidate independently clears the required gates and the organizer confirms its file format.</div>
+
+<div class="dl">
+<h2>⬇ Previous H55 research artifact (historical; not slot-cleared)</h2>
 <p class="small" style="margin-bottom:0"><strong>GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353</strong><br>
 39,430 positive pixels · single-band float32 · EPSG:32611 · 100 m ·
 3,730 × 3,292 · values exactly {0, 1} · <strong>all 12,279,160 cells finite,
@@ -165,7 +174,7 @@ against the current best 0.2778, floor 0.2727 if every added pixel earns zero cr
 <strong>UNSCORED.</strong> No weekly submission slot is cleared by this page.</p>
 </div>
 
-<h2>The six steps</h2>
+<h2>Historical H55 portal steps — do not follow for H56</h2>
 <ol class="steps">
 <li><strong>Download the file.</strong> Click the green button above. You want
 <code>GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353-zeros-outside.tif</code> — 234,040 bytes. Your

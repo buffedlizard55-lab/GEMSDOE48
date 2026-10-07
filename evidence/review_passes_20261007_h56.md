@@ -59,3 +59,25 @@
   pipelines carry anything native-resolution.
 - The H56-F removal ladder needs one live slot to resolve — the single highest-information
   experiment identified this session.
+
+## Pass 4 — merge reconciliation with the concurrent H56 open-world session (PR #17)
+
+While PR #18 was open, a concurrent session merged its own H56 effort to main (commit 55cc9b6,
+"H56 open-world D-S research artifact": OWDS B2×H33-D GeoTIFF 1f7b5a4f18db, Hessian-only
+H56-A probe, own slate and receipts). Both sessions responded to the same brief with the same
+verdict class (download OK, do not submit). Resolution, keeping both works intact:
+
+- This session renamed to H56B: `scripts/build_submission_h56_belief.py`,
+  `evidence/build_h56_belief_receipt_20261007.json`, `evidence/hypothesis_slate_h56b_20261007.json`;
+  all page and test references updated; the submission filename itself was already unique
+  (content id 9ec0d605c45b).
+- README: H56B decision block first, then the open-world decision, then H55-previous; sections
+  ordered H56B submission → H56B slate → open-world OWDS → H55. Duplicated H55 decision
+  paragraphs collapsed to one.
+- Site: index/executive-summary carry the H56B banner card first, then the OWDS card, then the
+  preserved H55 card; submission-guide, validation and next-steps re-gained their H56B sections
+  above the open-world content; hypotheses.html carries the H56B slate, then the open-world
+  slate, then the preserved H55 slate. HTML tag balance verified programmatically on every page.
+- tests/test_site_h55.py keeps the concurrent session's assertions and is extended so BOTH
+  current H56 downloads must sit above the preserved H55 card; tests/test_site_h56.py reads the
+  belief receipt. Full suite green.

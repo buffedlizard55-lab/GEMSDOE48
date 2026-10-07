@@ -3,7 +3,7 @@ H56 receipts, the verdict banner must be present and consistent with the gates,
 and the download must be the first content on the index and executive summary.
 
 Mirrors the shape of tests/test_site_h55.py but reads the H56 evidence files:
-  evidence/build_h56_receipt_20261007.json
+  evidence/build_h56_belief_receipt_20261007.json
   evidence/h56_format_audit_20261007.json
   evidence/h56_uniqueness_20261007.json
   evidence/holdout_h56_spatial_20261007.json
@@ -37,9 +37,9 @@ def flat(text: str) -> str:
 
 def needs_site():
     return pytest.mark.skipif(
-        not (EV / "build_h56_receipt_20261007.json").exists() or
+        not (EV / "build_h56_belief_receipt_20261007.json").exists() or
         not all((DOCS / p).exists() for p in PAGES),
-        reason="H56 site or receipts not built; run scripts/build_submission_h56.py "
+        reason="H56 site or receipts not built; run scripts/build_submission_h56_belief.py "
                "and scripts/validate_h56.py")
 
 
@@ -51,7 +51,7 @@ def pages():
 @pytest.fixture(scope="module")
 def receipts():
     return {
-        "build": json.loads((EV / "build_h56_receipt_20261007.json").read_text()),
+        "build": json.loads((EV / "build_h56_belief_receipt_20261007.json").read_text()),
         "format": json.loads((EV / "h56_format_audit_20261007.json").read_text()),
         "uniq": json.loads((EV / "h56_uniqueness_20261007.json").read_text()),
         "proj": json.loads((EV / "h56_live_model_projection_20261007.json").read_text()),

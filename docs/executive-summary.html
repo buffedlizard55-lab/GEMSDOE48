@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Executive summary of the H55 session: the live-calibrated forward model, the 0.2843 family ceiling, the proxy invalidation, and the shipped candidate.">
-<title>GEMSDOE48 H55 — executive summary</title>
+<meta name="description" content="H56 executive summary: unique open-world Dempster-Shafer GeoTIFF, local format audit, novelty resolution, and failed same-protocol public proxy gates.">
+<title>GEMSDOE48 H56 — executive summary and submission status</title>
 <style>
 :root{color-scheme:light;--ink:#12241d;--muted:#54665c;--paper:#f4f4ec;--panel:#fffefa;
 --line:#d7ddd1;--green:#1d4c3a;--green2:#2f6b52;--soft:#e3eee5;--amber:#8a4a15;
@@ -96,7 +96,7 @@ font-family:var(--mono);font-size:.78rem;overflow-wrap:anywhere;margin:10px 0}
 <a href="irregularities.html">Irregularities</a>
 <a href="sources.html">Sources</a>
 <a href="next-steps.html">Next steps</a>
-<a href="research/h55-live-model-ceiling-and-candidate-20261007.md">Full report</a>
+<a href="research/h56-results-20261007.md">H56 results</a>
 </div></nav>
 <main class="wrap">
 
@@ -106,7 +106,7 @@ font-family:var(--mono);font-size:.78rem;overflow-wrap:anywhere;margin:10px 0}
 </header>
 
 <div class="dl" id="h56" style="border:3px solid #b3541e">
-<h2>⬇ One-click download — this session's unique submission (H56)</h2>
+<h2>⬇ One-click download — this session's unique submission (H56B graded belief)</h2>
 <p style="font-size:1.05rem;margin:6px 0"><strong style="color:#1c5e2e">✅ DOWNLOAD: OK</strong> —
 format-verified, byte-unique, range-error-immune. &nbsp;
 <strong style="color:#b3541e">⛔ SUBMIT: NOT RECOMMENDED</strong> — live-model projection
@@ -138,8 +138,24 @@ content id <code>9ec0d605c45b</code> · submission name <code>GEMSDOE48-H56-ds-b
 and no weekly submission slot is cleared by this page.</p>
 </div>
 
-<div class="dl" id="h55-download">
-<h2>⬇ Previous session's submission (H55) — preserved verbatim</h2>
+<header style="background:none;padding:24px 0 0">
+<p class="eyebrow" style="color:var(--muted)">Executive summary · 2026-10-07 · H56 (concurrent open-world session)</p>
+<h1>H56 (concurrent session): what is downloadable, what failed, and why no slot is cleared</h1>
+</header>
+
+<div class="dl">
+<h2>⬇ H56 open-world D-S GeoTIFF — download yes, submit no</h2>
+<p class="small" style="margin-bottom:0"><strong>GEMSDOE48-H56-OWDS-B2xH33D-1f7b5a4f18db</strong><br>
+1,888,728 bytes · SHA-256 <code>1f7b5a4f18dbc62f31b14078545332238be9289dd388d57f550d75fb5a5fe95a</code> · one-band float32 · EPSG:32611 · 100 m · 3,730 × 3,292 · whole raster finite in [0,1]. Local format audit passes.</p>
+<a class="bigbtn" href="downloads/GEMSDOE48-H56-OWDS-B2xH33D-20261007-1f7b5a4f18db-zeros-outside.tif" download>⬇ Download the H56 GeoTIFF for inspection
+<small>H33-2-B2 dotted × H33-D tip/step-over · relative D-S Bel(F) · diagnostics separate</small></a>
+<p class="bad"><strong>DO NOT SUBMIT OR SPEND A SLOT.</strong> H56-DS loses to H49 on both public blocked proxies (0.054242 vs 0.095353 catalogue; 0.066070 vs 0.100751 SGMC, 0/4 folds improved). The machine-spec Hessian-only H56-A screen also fails (0.014282 / 0.006531); the prose coherence extension remains untested. No private-label or organizer score exists. Organizer portal acceptance is untested; the finite-zero outside encoding conflicts with the official description's null/NaN wording.</p>
+<p class="small">H53 already had the same two-family D-S concept as a diagnostic. H56 is a distinct alpha=0.60, q=0.10 open-world mass-assignment variant, not a new geological signal. Numerically it is not the arithmetic mean, but its top-37,654 rank set is identical to the mean (Jaccard 1.0); this should not be described as a materially different ranking.</p>
+<p class="meta">Separate diagnostics: <a href="downloads/diagnostics/GEMSDOE48-H56-OWDS-B2xH33D-20261007-1f7b5a4f18db-belief-raw.tif">Bel(F)</a> · <a href="downloads/diagnostics/GEMSDOE48-H56-OWDS-B2xH33D-20261007-1f7b5a4f18db-unassigned-mtheta.tif">unassigned m(Theta)</a> · <a href="downloads/diagnostics/GEMSDOE48-H56-OWDS-B2xH33D-20261007-1f7b5a4f18db-conflict-k.tif">raw conflict K</a> · <a href="downloads/diagnostics/GEMSDOE48-H56-OWDS-B2xH33D-20261007-1f7b5a4f18db-plausibility.tif">plausibility</a> · <a href="research/h56-results-20261007.md">full H56 results</a></p>
+</div>
+
+<div class="dl">
+<h2>⬇ Previous H55 research artifact (historical; not slot-cleared)</h2>
 <p class="small" style="margin-bottom:0"><strong>GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353</strong><br>
 39,430 positive pixels · single-band float32 · EPSG:32611 · 100 m ·
 3,730 × 3,292 · values exactly {0, 1} · <strong>all 12,279,160 cells finite,

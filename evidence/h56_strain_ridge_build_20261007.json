@@ -1,0 +1,203 @@
+{
+  "schema_version": 1,
+  "status": "BUILT_AND_PUBLIC_PROXY_TESTED_NOT_SLOT_CLEARED",
+  "built_utc": "2026-10-07T15:43:08.728359+00:00",
+  "hypothesis_slate": "evidence/hypothesis_slate_h56_20261007.json",
+  "preregistration_interpretation": {
+    "implemented_specification": "the explicit machine-readable hypotheses[H56-A].frozen_test transform",
+    "companion_markdown_mismatch": "the original slate prose also mentions structure-tensor coherence; the machine frozen_test does not specify it, and this builder does not compute it",
+    "confirmation_scope": "the holdout applies to this Hessian-only screen, not to the coherence-augmented prose idea",
+    "erratum": "docs/research/h56-slate-erratum-20261007.md"
+  },
+  "inputs": {
+    "training_features": {
+      "path": "data/raw/training_features.tif",
+      "sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+      "bytes": 418912844,
+      "origin_class": "third-party mirror of competition-provided GeoDAWN numerical feature stack; hash-pinned, not organizer-authenticated",
+      "bands": {
+        "4": "geod_2ndinv - Geodetic second invariant - measure of strain rate tensor magnitude",
+        "7": "geod_shearrate - Geodetic shear rate - rate of angular deformation from GPS/InSAR",
+        "8": "geod_dilaterate - Geodetic dilatation rate - rate of volumetric strain (expansion/contraction)",
+        "16": "ieq_n100a15 - Earthquake intensity or density (n=100km radius, a=15\u00b0 parameters)"
+      },
+      "crs": "EPSG:32611",
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": -3.4028234663852886e+38
+    },
+    "footprint": {
+      "path": "data/source_mirrors/footprint-mask.tif",
+      "sha256": "ddadb8c96cda673b91ddaa0bbed2aa955c358a8f6196c4c4e8fa70d454dd429f",
+      "inside_cells": 5167373,
+      "feature_nodata_cells_inside_footprint": 3061,
+      "feature_valid_cells_outside_footprint_ignored": 1540
+    }
+  },
+  "frozen_method": {
+    "strain_bands": [
+      4,
+      7,
+      8
+    ],
+    "transformation": "log1p(abs(x)/median(abs(nonzero valid x)))",
+    "ridge_operator": "scale-normalized absolute Hessian line response; response = |lambda_large| * exp(-0.5*(|lambda_small|/|lambda_large|)^2)",
+    "scales_px": [
+      3.0,
+      6.0,
+      9.0
+    ],
+    "per_band_scale_factors": {
+      "4": 19.90778923034668,
+      "7": 12.800000190734863,
+      "8": 5.692678451538086
+    },
+    "response_normalization": {
+      "percentile": 99.5,
+      "records": [
+        {
+          "band": 4,
+          "sigma_px": 3.0,
+          "response_p99_5": 0.010354195721447468
+        },
+        {
+          "band": 4,
+          "sigma_px": 6.0,
+          "response_p99_5": 0.01190497912466526
+        },
+        {
+          "band": 4,
+          "sigma_px": 9.0,
+          "response_p99_5": 0.011060097254812717
+        },
+        {
+          "band": 7,
+          "sigma_px": 3.0,
+          "response_p99_5": 0.019364498555660248
+        },
+        {
+          "band": 7,
+          "sigma_px": 6.0,
+          "response_p99_5": 0.02320774272084236
+        },
+        {
+          "band": 7,
+          "sigma_px": 9.0,
+          "response_p99_5": 0.022455036640167236
+        },
+        {
+          "band": 8,
+          "sigma_px": 3.0,
+          "response_p99_5": 0.055506911128759384
+        },
+        {
+          "band": 8,
+          "sigma_px": 6.0,
+          "response_p99_5": 0.07131819427013397
+        },
+        {
+          "band": 8,
+          "sigma_px": 9.0,
+          "response_p99_5": 0.08308866620063782
+        }
+      ]
+    },
+    "earthquake_band": 16,
+    "earthquake_transform": "log1p(nonnegative band 16); P99.5 clip/scale",
+    "weights": {
+      "mean_strain_ridge": 0.9,
+      "earthquake_density": 0.1
+    },
+    "emission": "deterministic top 37,654 valid cells; descending score then ascending row-major index",
+    "label_use_in_construction": false
+  },
+  "output": {
+    "path": "scratch/H56-A-strain-ridge-massmatched-20261007.tif",
+    "sha256": "41493c0dce88041de03ddc832d29270baa9984a4910c8cff7facbe2e3d6a4e46",
+    "bytes": 78882,
+    "dtype": "float32",
+    "bands": 1,
+    "width": 3292,
+    "height": 3730,
+    "crs": "EPSG:32611",
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    "nodata": null,
+    "encoding": "all_finite_zeros_outside",
+    "all_cells_finite": true,
+    "all_cells_in_range_0_1": true,
+    "finite_cells": 12279160,
+    "nan_cells": 0,
+    "min": 0.0,
+    "max": 1.0,
+    "positive_cells": 37654,
+    "in_footprint_cells": 5167373,
+    "portal_range_error_immune": true,
+    "slot_cleared": false
+  },
+  "score_diagnostics": {
+    "ridge_score_quantiles_valid": {
+      "0": 0.06812279671430588,
+      "50": 0.15888555347919464,
+      "90": 0.3213071823120117,
+      "99": 0.57333904504776,
+      "99.5": 0.6420364379882812,
+      "100": 0.9877932667732239
+    },
+    "earthquake_log_p99_5": 8.6981201171875,
+    "valid_cells": 5164312
+  },
+  "limitations": [
+    "Feature stack bytes came from a non-organizer GitHub mirror; hash identity is not original-source authentication or license clearance.",
+    "A public-map proxy pass cannot establish private-label leaderboard performance.",
+    "The score is an exploratory rank field, not a calibrated fault probability.",
+    "Nearest-valid extension is derivative context only; output candidates are restricted to valid in-footprint cells."
+  ],
+  "holdout": {
+    "status": "COMPLETED_CONDITIONAL_PUBLIC_PROXY_SPATIAL_BLOCK_TEST",
+    "h49_reference_receipt": "evidence/holdout_h56_h49_reference_20261007.json",
+    "candidate_receipt": "evidence/holdout_h56a_strain_ridge_20261007.json",
+    "results_vs_h49": {
+      "catalogue_proxy": {
+        "candidate_mean_dti": 0.014282279031198485,
+        "h49_same_protocol_mean_dti": 0.0953532478651188,
+        "mean_delta_vs_h49": -0.08107096883392031,
+        "fold_delta_vs_h49": {
+          "NW": -0.07017034107266108,
+          "NE": -0.10195892003249847,
+          "SW": -0.07681666836921583,
+          "SE": -0.07533794586130585
+        },
+        "positive_folds": 0,
+        "pass_numeric_improvement": false
+      },
+      "sgmc_off_catalogue_gt_300m_proxy": {
+        "candidate_mean_dti": 0.006530837806980838,
+        "h49_same_protocol_mean_dti": 0.10075118848176869,
+        "mean_delta_vs_h49": -0.09422035067478784,
+        "fold_delta_vs_h49": {
+          "NW": -0.08753842127969727,
+          "NE": -0.10169404093305284,
+          "SW": -0.11041352496876927,
+          "SE": -0.07723541551763201
+        },
+        "positive_folds": 0,
+        "pass_numeric_improvement": false
+      }
+    },
+    "slot_decision": "NOT_CLEARED",
+    "decision_reason": "The candidate fails to beat same-protocol H49 on both public proxy targets; no private-label or organizer score exists."
+  }
+}
