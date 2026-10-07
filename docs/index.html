@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="GEMSDOE48 research project: downloadable H50 probe-persistence GeoTIFF, spatially blocked validation, submission guide, and transparent limitations.">
+  <meta name="description" content="GEMSDOE48 research project: conflict-aware fault evidence fusion, downloadable GeoTIFF, blocked validation, and transparent limitations.">
   <title>GEMSDOE48 — evidence, not certainty</title>
   <style>
     :root {
@@ -75,41 +75,80 @@
 <body>
   <header>
     <div class="wrap">
-      <div class="eyebrow">DOE GEMS Prize Challenge · research artifacts · 2026-10-07</div>
+      <div class="eyebrow">DOE GEMS Prize Challenge · research artifact · 2026-10-07</div>
       <h1>GEMSDOE48</h1>
-      <p class="deck">A reproducible geothermal-fault research project. H50-1 adds a new, hash-pinned shallow-temperature test; public spatial-block validation shows it does not beat the current proxy-best, so no submission slot is cleared.</p>
-      <p style="margin-top:12px"><a href="submission-guide.html">Open the step-by-step submission guide</a></p>
+      <p class="deck">A reproducible test of conflict-aware fusion for sparse fault-candidate maps—built to preserve disagreement, scored against public catalogue proxies, and gated by evidence rather than optimism.</p>
     </div>
   </header>
   <main class="wrap">
-    <div class="warning">
-      <strong>NO CANDIDATE IS CLEARED FOR A SUBMISSION SLOT.</strong>
-      The corrected H50-1 v2 file scores 0.003923 versus H49's 0.100751 on the primary public SGMC proxy (−0.096828, 0/4 positive folds) and fails the frozen promotion gate. V2 is a post-v1-score source-identity correction, so its score is an exploratory sensitivity, not confirmatory evidence. H49's +0.003760 gain over the prior union is also below its preregistered +0.005 threshold and comes from related public proxies. Both files pass local format checks only; neither has organizer acceptance or private-label evidence. Do not upload either on this evidence.
-    </div>
-
-    <section class="card download-card" style="border-color:#e1ba7f; background:#fff9ed">
-      <p class="eyebrow" style="color:#8d4b16">H50-1 v2 corrected artifact · format pass · spatial gate failed</p>
-      <h2>Repeat-survey 2 m probe persistence</h2>
-      <p>The corrected v2 TIFF uses exact NAD83 point coordinates as physical location IDs, collapsing repeated same-location/same-date readings before leave-one-location-out residuals. The builder reads the pinned GDR probe archive and footprint only—not labels, known-fault distances, SGMC, or parent predictions. Thermal targeting is not claimed as a new concept: H18-5/H49-1 proposed related probe/thermal approaches.</p>
-      <p><b>Exploratory v2 proxy result:</b> H50 mean DTI 0.003923 versus H49 0.100751 (paired −0.096828; 0/4 folds positive). The older-SGMC sensitivity is also negative (−0.095837; 0/4). Because this correction followed observation of the v1 score, v2 is not confirmatory. It fails the frozen +0.005 gate. <b>Keep the competition slot unused.</b></p>
-      <a class="button" href="downloads/GEMSDOE48-H50-2M-PERSIST-20261007-f12e5391bb9c-nan.tif" download>↓ Download corrected H50-1 research TIFF — do not upload</a>
-      <p class="file-meta">GEMSDOE48-H50-2M-PERSIST-20261007-F12E5391BB9C-NAN<br>225,114 bytes · SHA-256 f12e5391bb9cd2709ae7331699bb0876cc4bf3c443f96ea8a5456c858eb67908</p>
+    <section class="card download-card" style="margin-bottom:24px;border:2px solid #e1ba7f;background:#fff9ed">
+      <p class="eyebrow" style="color:#8d4b16">H50-GDR shallow-probe persistence · historical local ID H50-1 · research only</p>
+      <h2>H50-GDR corrected v2 GeoTIFF — do not upload</h2>
+      <p>Unique-name single-source binary support map from the pinned INGENIOUS 2 m probe archive; exact-coordinate/date aggregation is the v2 correction. The primary blocked proxy is <b>0.003923</b> versus H49 <b>0.100751</b> (paired delta −0.096828; 0/4 folds positive); the older-SGMC sensitivity also fails (−0.095837; 0/4). V2 follows observation of the v1 score, so it is an exploratory implementation sensitivity, not confirmatory evidence. Keep the weekly slot unused.</p>
+      <a class="button" href="downloads/GEMSDOE48-H50-2M-PERSIST-20261007-f12e5391bb9c-nan.tif" download>↓ Download H50-GDR research GeoTIFF — do not upload</a>
+      <div class="file-meta">GEMSDOE48-H50-2M-PERSIST-20261007-F12E5391BB9C-NAN<br>225,114 bytes · SHA-256 f12e5391bb9cd2709ae7331699bb0876cc4bf3c443f96ea8a5456c858eb67908<br>One band float32 · EPSG:32611 · 100 m · 3,730 × 3,292 · in-footprint [0,1] · NaN/nodata outside.</div>
+      <p class="small">No exact raster/support match was found in the bounded local audit; the nearest is superseded v1 (support Jaccard 0.998179). This is a corrected file variant, not a new conceptual map. Global/organizer uniqueness and portal acceptance are unverified. The merged main slate contains related H50-C INGENIOUS probe prior art; no thermal-concept novelty is claimed.</p>
       <p class="small"><b>Tracking note only:</b> <code>GDR 2m probe repeat-persistence; 300 m buffers; research proxy only, no slot clearance.</code></p>
-      <p class="small">One-band float32 · EPSG:32611 · 3,730 × 3,292 · 100 m · in-footprint [0,1] · NaN/nodata outside. No exact prediction/support match was found among 36 other local same-grid TIFFs; the closest is superseded v1 from this study (positive-support Jaccard 0.998179). V2 is a corrected file variant, not a new conceptual map. This bounded local check is not global or organizer uniqueness, and the format check is not portal acceptance.</p>
       <div class="diag-links">
-        <a href="submission-guide.html">Step-by-step submission guide</a>
-        <a href="research/hypotheses-20261007.md">Frozen H50 hypotheses and append-only corrections</a>
-        <a href="../evidence/build_h50_probe_candidate_20261007.json">Current build/provenance receipt</a>
-        <a href="../evidence/h50_probe_format_validation_20261007.json">Format validation</a>
-        <a href="../evidence/h50_probe_uniqueness_20261007.json">Local uniqueness audit</a>
-        <a href="../evidence/h50_probe_v2_exact_location_vs_h49_20261007.json">v2 paired comparison to H49</a>
-        <a href="../evidence/holdout_h50_probe_v2_exact_location_20261007.json">Primary v2 fold results</a>
-        <a href="../evidence/holdout_h50_probe_v2_exact_location_raw_sgmc_20261007.json">Older-SGMC v2 sensitivity</a>
-        <a href="../evidence/h50_selected_station_audit_20261007.csv">Selected-location audit CSV</a>
-        <a href="../evidence/h50_implementation_errata_20261007.json">v1→v2 implementation erratum</a>
-        <a href="../evidence/holdout_h50_probe_v1_preduplicate_correction_20261007.json">Preserved v1 holdout report</a>
+        <a href="submission-guide.html">H50-GDR submission guide (slot currently closed)</a>
+        <a href="research/h50-gdr-probe-slate-20261007.md">Original frozen probe slate and later prior-art reconciliation</a>
+        <a href="research/hypotheses-20261007.md">Current main H50/H51 slate, including H50-C prior art</a>
+        <a href="../evidence/build_h50_probe_candidate_20261007.json">Build and source receipt</a>
+        <a href="../evidence/h50_probe_v2_exact_location_vs_h49_20261007.json">Paired H50-GDR/H49 comparison</a>
+        <a href="../evidence/holdout_h50_probe_v2_exact_location_20261007.json">Primary v2 blocked report</a>
+        <a href="../evidence/holdout_h50_probe_v2_exact_location_raw_sgmc_20261007.json">Older-SGMC sensitivity</a>
+        <a href="../evidence/h50_probe_format_validation_20261007.json">Local format audit</a>
+        <a href="../evidence/h50_probe_uniqueness_20261007.json">Bounded local uniqueness audit</a>
+        <a href="../evidence/h50_gdr_prior_art_errata_20261007.json">Prior-art/identifier erratum</a>
       </div>
     </section>
+
+    <section class="card download-card" style="margin-bottom:24px;border-width:2px">
+      <p class="eyebrow" style="color:#41664d">2026-10-07 · H50 — unique Dempster-Shafer fusion of the two best families · one-click download</p>
+      <h2>⬇ Submission GeoTIFF — GEMSDOE48-H50-DS-B2xH36</h2>
+      <p>Best dotted family (H33-2-B2, 37,654 px; owner-reported live value 0.2778) × best tip/step-over family (H36-1 rung30, 37,660 px; reported sibling value 0.2710), combined with Dempster's rule on metric-geometry belief surfaces; disagreement is carried as unassigned mass m(Θ) and raw conflict K instead of being averaged away. The displayed 0.2778 leaderboard row is not linked by organizer evidence to the local H33-2-B2 bytes. One-band float32, EPSG:32611, 100 m, 3,730 × 3,292, all-finite in [0,1], zeros outside — the same portal-safe encoding as the scored 0.27xx sibling files.</p>
+      <a class="button" href="downloads/gemsdoe48-h50-ds-b2xh36rung30-20261007-5b59e106-zeros.tif" download>↓ Download H50 Dempster research GeoTIFF — do not upload</a>
+      <a class="button" href="downloads/gemsdoe48-h50-ds-b2xh36rung30-20261007-5b59e106-zeros.zip" download>↓ .zip (single GeoTIFF)</a>
+      <a class="button" href="downloads/gemsdoe48-h50-ds-b2xh36rung30-20261007-5b59e106-nan.tif" download>↓ NaN-outside twin (official convention)</a>
+      <div class="file-meta">SHA-256 5b59e106b6e448038b96fb340c5bae39094d4558c239c437aea28b6020d5d32f · 1,453,567 bytes<br>
+      Paste-ready note: GEMSDOE48 H50 | Dempster fusion, best dotted H33-2-B2 (0.2778) x best tip H36-1 rung30 (0.2710); kernel-credit beliefs, live-anchored discounts; m(Theta)+K diagnostics; unscored research candidate.</div>
+      <div class="diag-links" style="margin-top:12px">
+        <a href="h50/index.html">H50 research sub-site</a>
+        <a href="h50/executive-summary.html">Executive summary — exactly how to submit</a>
+        <a href="downloads/diagnostics/gemsdoe48-h50-unassigned-mTheta-20261007-5b59e106.tif" download>unassigned mass m(Θ) diagnostic</a>
+        <a href="downloads/diagnostics/gemsdoe48-h50-conflict-K-20261007-5b59e106.tif" download>raw conflict K diagnostic</a>
+        <a href="research/h50-method-20261007.md">method &amp; honest results</a>
+      </div>
+      <p class="small" style="margin-top:10px"><strong>UNSCORED, NOT SLOT-CLEARED.</strong> On the blocked public proxies H50 beats the naive mean (4/4 folds) and the raw-sparse DS recipe, but loses to both parents and the union — the disagreement-preserving property is honest, not score-raising. Do not upload or spend a weekly slot: the gate failed and no owner override is in scope for this project.</p>
+    </section>
+
+    <section class="card" style="margin-bottom:24px">
+      <p class="eyebrow" style="color:#41664d">2026-10-07 (later session) · two new unique constructions tested on the blocked holdout</p>
+      <h2>H51 plausibility-budget emission &amp; H50-B alteration probe — both gate-failed, both published</h2>
+      <p><b>H51</b> keeps the exact H50 fusion and changes only the decision rule: binary emission on the top 37,654 cells ranked by plausibility <code>Pl(F)=Bel(F)+m(Θ)</code> (Shafer's upper interval bound — commit wherever the combined evidence has not refuted a fault). Every emitted cell lies inside the parents' union: H51 is a budget-trimmed union, and it is not the naive mean (Pl vs 0.5·(b1+b2): Pearson 0.9754). On the blocked proxies it scores 0.007589 (catalogue) / 0.086537 (SGMC off-catalogue) — it does not beat H49 (0.095353 / 0.100751) or the union, so the preregistered gate fails.</p>
+      <a class="button" href="downloads/gemsdoe48-h51-plausibility-budget-20261007-f8fa1d08-zeros.tif" download>↓ Download H51 research GeoTIFF — not slot-cleared</a>
+      <a class="button" href="downloads/gemsdoe48-h51-plausibility-budget-20261007-f8fa1d08-zeros.zip" download>↓ .zip</a>
+      <a class="button" href="downloads/gemsdoe48-h51-plausibility-budget-20261007-f8fa1d08-nan.tif" download>↓ NaN-outside twin</a>
+      <div class="file-meta">GEMSDOE48-H51-PLAUSIBILITY-BUDGET · SHA-256 f8fa1d0817712d34935acd70663eb14c510876598c4f70729fcd79288706120f<br>
+      Paste-ready note: GEMSDOE48 H51 | binary budget emission, top-37,654 cells by DS plausibility Pl=Bel+m(Theta); Dempster fusion of best dotted B2 x best tip H36-1; H50 diagnostics reused; unscored research candidate.</div>
+      <p style="margin-top:12px"><b>H50-B</b> is the first non-fusion probe: low-Th/K radiometric alteration anomalies (GeoDAWN airborne radiometrics, official USGS <a href="https://doi.org/10.5066/P93LGLVQ">DOI 10.5066/P93LGLVQ</a>, SHA-verified mirror restored from the GEMSDOE24 public repo) gated by the H50 high-conflict corridors. Preregistered, then scored: 0.015312 / 0.019135 — a clear negative result consistent with the mirror's own caveat that radiometrics are a lithology proxy, not a fault detector.</p>
+      <a class="button" href="downloads/gemsdoe48-h50b-alteration-conflict-20261007-806a4ba4-zeros.tif" download>↓ Download H50-B probe GeoTIFF (negative result)</a>
+      <div class="file-meta">GEMSDOE48-H50B-ALTERATION-CONFLICT · SHA-256 806a4ba42e7be89cdef226dd75c09246d3e5923feb1796ab6d5b86ae94f8dda9</div>
+      <div class="diag-links" style="margin-top:12px">
+        <a href="h50/executive-summary.html">Executive summary — exactly how to submit (runbook applies to these files too)</a>
+        <a href="research/h51-h50b-results-20261007.md">Full session results &amp; what they imply about the 0.2778 → 0.3195+ gap</a>
+        <a href="../evidence/holdout_h51_20261007.json">H51 blocked-holdout JSON</a>
+        <a href="../evidence/holdout_h50b_20261007.json">H50-B blocked-holdout JSON</a>
+        <a href="../evidence/build_h51_receipt_20261007.json">H51 build receipt / preregistration</a>
+        <a href="../evidence/h50b_preregistration_20261007.json">H50-B preregistration</a>
+      </div>
+      <p class="small" style="margin-top:10px"><strong>UNSCORED, NOT SLOT-CLEARED.</strong> Key finding: every DS decision variant on the same two best families scores ≤0.0872 on the SGMC proxy and ≤0.0313 on the catalogue proxy, while the better parent alone scores 0.0955 / 0.0476 — fusion of these surfaces cannot beat the better parent. Raising the live score requires higher credit density (new signal), which is where the N1–N5 leads point.</p>
+    </section>
+
+    <div class="warning">
+      <strong>NO CANDIDATE IS CLEARED FOR A SUBMISSION SLOT.</strong>
+      H48 rho=.5 loses to the prior union on the shared blocked SGMC proxy. Newer-main H49 now scores 0.100751 versus 0.096992 for that prior best (+0.003760 in 4/4 folds), but this is a post-selection re-score on related public proxies; the gain is below the live instrument's roughly 0.005 resolution, and the live-anchored change bracket includes loss. H49's NaN-outside derivative passes local format validation, not organizer acceptance. Do not submit on these results alone.
+    </div>
 
     <section class="card">
       <h2>Latest-main H49 candidate — proxy-best measured, not slot-cleared</h2>
@@ -209,29 +248,27 @@
     </section>
 
     <section class="card">
-      <h2>Current H50 geological hypotheses</h2>
+      <h2>Preregistered geology hypotheses</h2>
       <div class="hypotheses">
-        <div class="hypothesis"><b>1 · Repeat-survey 2 m thermal residual persistence</b>GDR point temperatures; same-area/date leave-one-location-out residuals across repeat surveys. Related to H18-5/H49-1 thermal prior art, not claimed as a new thermal concept. Corrected v2 sensitivity failed the proxy gate; its score is post-v1-selection.</div>
-        <div class="hypothesis"><b>2 · Landsat surface-temperature persistence</b>USGS Collection 2 Level-2 ST_B10 anomalies recurring across clear scenes; bbox ST catalogue query returned 34,447 items, but exact usable-pixel coverage is unchecked.</div>
-        <div class="hypothesis"><b>3 · Focal-mechanism orientation corridors</b>USGS ComCat nodal-plane orientations, not earthquake density; broad-bbox product count only, no payload downloaded.</div>
-        <div class="hypothesis"><b>4 · Sentinel-2 SWIR alteration boundaries</b>20 m B11/B12 surface-reflectance ratios with cloud/scene-classification masks; a bbox-intersecting catalogue item exists, but exact cloud-free coverage is unverified.</div>
+        <div class="hypothesis"><b>1 · Conflict-aware surface fusion</b>Existing dotted + tip/stepover candidate maps; expected DTI unknown; low cost. Proxy test failed the promotion gate.</div>
+        <div class="hypothesis"><b>2 · Stratigraphic-contact topology</b>USGS GeMS/SGMC unit contacts plus magnetic/gravity breaks; moderate potential, medium-high cost; exact coverage unaudited.</div>
+        <div class="hypothesis"><b>3 · OPERA InSAR gradients</b>Persistent line-of-sight displacement discontinuities; low-moderate public DTI potential, high processing cost; no granules downloaded.</div>
+        <div class="hypothesis"><b>4 · Hydrography profile breaks</b>NHDPlus HR/3DHP channels plus 3DEP; terrain-dependent potential; in-footprint coverage unaudited.</div>
+        <div class="hypothesis"><b>5 · Geothermal favorability spread</b>USGS Great Basin favorability median + ensemble spread; exploratory prior, not fault truth; large package not downloaded.</div>
       </div>
-      <p class="small" style="margin-top:16px">The <a href="research/hypotheses-20261007.md">frozen H50 slate</a> records ranked costs, physical signatures, catalogue-gap rationale, prior-art distinctions, source queries, and the no-slot gate. H50-2/3/4 were not downloaded or scored. Earlier H48 hypotheses remain documented in <a href="research/hypotheses-20261006.md">the H48 slate</a>.</p>
+      <p class="small" style="margin-top:16px">Layer details, physical signatures, off-catalogue rationale, differences from prior methods, source checks, and costs are in the frozen <a href="research/hypotheses-20261006.md">hypothesis slate</a>.</p>
     </section>
 
     <section class="card">
-      <h2>Historical H48 tracking note — not an upload recommendation</h2>
+      <h2>Paste-ready note</h2>
       <p class="note">GEMSDOE48 DS fusion | H33-2-B2 dotted + H33-D tip/step-over; rho=0.5; conflict/ignorance diagnostic; unscored research candidate.</p>
-      <p class="small">129 characters. This note labels the historical H48 artifact <code>GEMSDOE48-DS-FUSION-20261006</code>; the current H50 tracking note is shown above. No artifact is slot-cleared.</p>
+      <p class="small">129 characters. The unique candidate name is <code>GEMSDOE48-DS-FUSION-20261006</code>.</p>
     </section>
 
     <section class="card">
       <h2>Provenance, reproducibility, and review</h2>
       <div class="links">
-        <a href="submission-guide.html">Step-by-step submission guide (current slot is closed)</a>
         <a href="../README.md">Project README and repeat-use guide</a>
-        <a href="research/hypotheses-20261007.md">Frozen H50 slate</a>
-        <a href="../evidence/h50_probe_v2_exact_location_vs_h49_20261007.json">Current v2 paired H50/H49 comparison</a>
         <a href="research/holdout-results-20261006.md">Holdout result and limitations</a>
         <a href="../evidence/build_receipt_20261006.json">Build receipt and input hashes</a>
         <a href="../evidence/submission_validation_20261006.json">Local format audit</a>

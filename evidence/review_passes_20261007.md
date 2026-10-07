@@ -5,7 +5,7 @@ These are sequential review passes by the coding agent, not independent human or
 ## Pass 1 — brief, prior art, sources, and preregistration
 
 - Re-read the full owner brief in `README.md`, the existing executive site, H48/H49 records, and the bounded campaign history relevant to thermal, seismic, Landsat, and alteration methods.
-- Froze four ranked hypotheses and bbox-level source-availability claims in `docs/research/hypotheses-20261007.md` and `evidence/hypothesis_slate_20261007.json` at **2026-10-07 02:05:46 UTC**, before candidate construction and holdout scoring.
+- Froze four ranked hypotheses and bbox-level source-availability claims in `docs/research/h50-gdr-probe-slate-20261007.md` and `evidence/hypothesis_slate_20261007.json` at **2026-10-07 02:05:46 UTC**, before candidate construction and holdout scoring.
 - Explicitly treated broad thermal targeting as prior art: H18-5/H49-1 already proposed related geothermal/probe ideas. H50-1 is a narrow, unexecuted repeated-date leave-one-station-out persistence operator; no global novelty claim is made.
 - Checked official source landing/catalog pages. Landsat, ComCat, and Sentinel counts are broad-bbox metadata only, not exact footprint or usable-pixel coverage. No H50-2/3/4 payload was downloaded.
 
@@ -54,7 +54,15 @@ These are sequential review passes by the coding agent, not independent human or
 
 - Reviewed staged-artifact scope and found that the selected-location CSVs used CRLF line endings, which `git diff --check` reports as trailing whitespace. Standardized both exports to LF without changing any field values or row order; retained each original build-time CSV hash alongside the normalized-file hash and timestamp in its receipt. Updated the builder to emit LF on future runs.
 - Re-ran the complete suite with a clean local environment: `python -m pytest -q -ra` passed; three raw-input pipeline cases skipped because the source mirrors are not restored. `compileall`, `git diff --check`, local HTML-link checks, current TIFF format validation against the official sample-template footprint, and a fresh bounded uniqueness audit passed.
-- Confirmed the TIFF hash remains `f12e5391bb9cd2709ae7331699bb0876cc4bf3c443f96ea8a5456c858eb67908`, local uniqueness remains bounded (36 comparisons; no exact match; v1 Jaccard 0.998179), and no results justify using a weekly slot.
+- Confirmed the TIFF hash remains `f12e5391bb9cd2709ae7331699bb0876cc4bf3c443f96ea8a5456c858eb67908`. After integrating newer `main` artifacts, the refreshed bounded audit has 45 comparable local same-grid TIFFs, no exact match, and superseded v1 remains closest (positive-support Jaccard 0.998179). No results justify using a weekly slot.
+
+## Pass 9 — latest-main integration and prior-art reconciliation
+
+- Integrated the latest `origin/main` (which had advanced through PR #9) into the fixed Arena branch rather than opening a stale/conflicting PR. Preserved the merged H50 DS, H50-B, and H51 work, their site/assets, and the main H50/H51 slate.
+- The merged main slate contains H50-C: INGENIOUS 2 m probe residuals against elevation/depth intersected with family corridors. This is directly related prior art; H50-GDR shares the source and broad thermal concept. The different repeated-date leave-one-location-out operator and lack of corridor gating are not concept-level novelty. Kept the original frozen JSON unchanged, split the local slate into `docs/research/h50-gdr-probe-slate-20261007.md`, and recorded the reconciliation/ID collision in `evidence/h50_gdr_prior_art_errata_20261007.json`. The original local ID H50-1 collides with the main slate's separate splay ID; user-facing surfaces now say H50-GDR.
+- Replaced main H50/H51 runbook language that allowed an owner override with an explicit no-upload/no-slot instruction, consistent with the standing gate. Added the H50-GDR download card before the merged main H50 card and retained separate Dempster–Shafer diagnostics and naïve-mean checks for the fusion artifact.
+- Refreshed the bounded H50-GDR uniqueness scan after main integration: 45 comparable same-grid TIFFs, zero exact value/support matches, v1 nearest at Jaccard 0.998179. The output remains a corrected file variant, not a materially distinct map; no global or organizer uniqueness is claimed.
+- Final post-merge suite: `python -m pytest -q -ra` passed with 3 raw-input pipeline skips; `compileall`, local HTML/Markdown-link checks, exact-mask format audits for v1/v2, reproducible v2 build, and staged `git diff --check` passed. The v2 SHA remains `f12e5391bb9cd2709ae7331699bb0876cc4bf3c443f96ea8a5456c858eb67908`.
 
 ## Remaining blockers
 

@@ -51,24 +51,24 @@
   <main class="wrap">
     <section class="card alert" aria-labelledby="decision">
       <h2 id="decision">Current decision: do not use a competition slot</h2>
-      <p><strong>The corrected H50-1 v2 TIFF is a research artifact, not a recommended upload.</strong> It passes local GeoTIFF/range checks. Its exploratory public-proxy score is <b>0.003923</b> versus <b>0.100751</b> for H49, a paired delta of <b>−0.096828</b> with 0/4 folds positive. V2 corrects source-location deduplication after the v1 score had been seen, so this is a post-selection implementation sensitivity, not confirmatory validation. It fails the frozen +0.005 promotion gate. No private-label score or organizer acceptance is available.</p>
+      <p><strong>The corrected H50-GDR v2 TIFF is a research artifact, not a recommended upload.</strong> It passes local GeoTIFF/range checks. Its exploratory public-proxy score is <b>0.003923</b> versus <b>0.100751</b> for H49, a paired delta of <b>−0.096828</b> with 0/4 folds positive. V2 corrects source-location deduplication after the v1 score had been seen, so this is a post-selection implementation sensitivity, not confirmatory validation. It fails the frozen +0.005 promotion gate. No private-label score or organizer acceptance is available.</p>
       <p>H49 itself remains un-cleared: its +0.003760 proxy gain over the prior union is below the preregistered +0.005 threshold and is not an independent private-label test. Keep the weekly slot unused.</p>
     </section>
 
     <section class="card" aria-labelledby="candidate">
-      <h2 id="candidate">New H50-1 file — research only</h2>
+      <h2 id="candidate">New H50-GDR file — research only</h2>
       <p>Generated from the pinned INGENIOUS 2 m probe archive with a frozen repeat-survey residual rule and the v2 exact-coordinate identity correction. The builder reads no labels, known-fault distances, SGMC truth, or parent prediction rasters. The corrected file is closely similar to its superseded v1 build; it is a corrected artifact, not a new conceptual map.</p>
-      <a class="button" href="downloads/GEMSDOE48-H50-2M-PERSIST-20261007-f12e5391bb9c-nan.tif" download>↓ Download corrected H50-1 research TIFF (do not upload)</a>
+      <a class="button" href="downloads/GEMSDOE48-H50-2M-PERSIST-20261007-f12e5391bb9c-nan.tif" download>↓ Download corrected H50-GDR research TIFF (do not upload)</a>
       <p class="mono">Current artifact name: GEMSDOE48-H50-2M-PERSIST-20261007-F12E5391BB9C-NAN<br>GeoTIFF SHA-256: f12e5391bb9cd2709ae7331699bb0876cc4bf3c443f96ea8a5456c858eb67908<br>One float32 band · EPSG:32611 · 3,730 × 3,292 · 100 m · in-footprint [0,1] · NaN/nodata outside</p>
       <p><b>Comment string (for artifact tracking only; not an upload recommendation):</b></p>
       <p class="mono">GDR 2m probe repeat-persistence; 300 m buffers; research proxy only, no slot clearance.</p>
-      <p class="small">Format receipt: <a href="../evidence/h50_probe_format_validation_20261007.json">local submission-format audit</a>. Uniqueness receipt: <a href="../evidence/h50_probe_uniqueness_20261007.json">bounded local TIFF comparison</a> (36 other same-grid artifacts checked; no exact match; closest is superseded v1 with 0.998179 positive-support Jaccard). This does not prove global or organizer uniqueness. Spatial reports: <a href="../evidence/h50_probe_v2_exact_location_vs_h49_20261007.json">paired v2 comparison to H49</a> · <a href="../evidence/h50_implementation_errata_20261007.json">v1→v2 correction record</a>.</p>
+      <p class="small">Format receipt: <a href="../evidence/h50_probe_format_validation_20261007.json">local submission-format audit</a>. Uniqueness receipt: <a href="../evidence/h50_probe_uniqueness_20261007.json">bounded local TIFF comparison</a> (45 other same-grid artifacts checked; no exact match; closest is superseded v1 with 0.998179 positive-support Jaccard). This does not prove global or organizer uniqueness. Spatial reports: <a href="../evidence/h50_probe_v2_exact_location_vs_h49_20261007.json">paired v2 comparison to H49</a> · <a href="../evidence/h50_implementation_errata_20261007.json">v1→v2 correction record</a>.</p>
     </section>
 
     <section class="card" aria-labelledby="steps">
       <h2 id="steps">Upload steps — only after a candidate clears the research gate</h2>
       <ol class="steps">
-        <li><b>Choose the exact approved artifact.</b> Download one single-band GeoTIFF from the project's executive summary. Check that the candidate's status explicitly says it is cleared for consideration. The current H50-1 file fails that condition; do not upload it.</li>
+        <li><b>Choose the exact approved artifact.</b> Download one single-band GeoTIFF from the project's executive summary. Check that the candidate's status explicitly says it is cleared for consideration. The current H50-GDR file fails that condition; do not upload it.</li>
         <li><b>Sign in to DrivenData and open the DOE GEMS Prize Challenge.</b> Read the official <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">problem and submission-format page</a> and current competition rules. This repository cannot bypass login or upload on your behalf.</li>
         <li><b>Open the competition's submission form.</b> Choose “File to submit”, select the downloaded <code>.tif</code> (or a ZIP containing exactly one TIFF if the portal requires it), and paste the short candidate comment in the optional note field. Do not upload diagnostic TIFFs or multiple files.</li>
         <li><b>Review and submit in the portal.</b> Wait for DrivenData's file validation. Local validation does not guarantee portal acceptance. If the portal reports a CRS, shape, geotransform, nodata, or range error, stop and preserve the exact error text; do not spend another slot on a modified guess.</li>
@@ -85,7 +85,7 @@
           <tr><td>Grid</td><td>EPSG:32611; 100 m; 3,730 × 3,292; template transform</td><td>Pass</td></tr>
           <tr><td>Data type / values</td><td>float32; finite in-footprint predictions in [0,1]</td><td>Pass; binary 0/1 output</td></tr>
           <tr><td>Outside footprint</td><td>Null/NaN convention in official instructions and sample</td><td>NaN/nodata outside; pass locally</td></tr>
-          <tr><td>Local artifact comparison</td><td>Different from previous local TIFF artifacts; do not claim global or organizer uniqueness</td><td>No exact match among 36 other same-grid files; closest is same-study v1 (Jaccard 0.998179). v2 is a corrected variant, not a new conceptual map.</td></tr>
+          <tr><td>Local artifact comparison</td><td>Different from previous local TIFF artifacts; do not claim global or organizer uniqueness</td><td>No exact match among 45 other same-grid files; closest is same-study v1 (Jaccard 0.998179). v2 is a corrected variant, not a new conceptual map.</td></tr>
           <tr><td>Scientific promotion</td><td>Beat the spatially blocked current best under the frozen gate</td><td><b>Fail</b>; exploratory v2 delta −0.096828 vs H49, 0/4 folds positive; v2 followed v1 score</td></tr>
           <tr><td>Organizer acceptance</td><td>Validated by the real portal</td><td>Not tested</td></tr>
         </tbody>
@@ -97,7 +97,9 @@
       <h2 id="links">Review and provenance links</h2>
       <ul>
         <li><a href="../README.md">README: decision, methodology, validation and limitations</a></li>
-        <li><a href="research/hypotheses-20261007.md">Frozen H50 hypothesis slate and build gate</a></li>
+        <li><a href="research/h50-gdr-probe-slate-20261007.md">Original frozen H50-GDR probe slate and later prior-art reconciliation</a></li>
+        <li><a href="research/hypotheses-20261007.md">Current main-branch H50/H51 slate (includes related H50-C probe prior art)</a></li>
+        <li><a href="../evidence/h50_gdr_prior_art_errata_20261007.json">H50-C prior-art/identifier erratum</a></li>
         <li><a href="../evidence/build_h50_probe_candidate_20261007.json">H50 build receipt and input hash</a></li>
         <li><a href="../evidence/h50_selected_station_audit_20261007.csv">Selected-station audit table</a></li>
         <li><a href="../evidence/holdout_h50_probe_v2_exact_location_20261007.json">Primary v2 spatial-block report</a> · <a href="../evidence/holdout_h50_probe_v2_exact_location_raw_sgmc_20261007.json">older-raster v2 sensitivity</a></li>
@@ -105,7 +107,7 @@
         <li><a href="sources.md">Sources and provenance boundaries</a> · <a href="https://gdr.openei.org/submissions/1391">GDR INGENIOUS source landing</a></li>
         <li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">Official competition page</a></li>
       </ul>
-      <p><b>Limitations:</b> public map proxies are not the hidden expert-label set; source mirrors are not organizer-authenticated; the H50 hypothesis is related to already-proposed thermal work and is not claimed as a novel thermal concept; no DrivenData score is estimated here.</p>
+      <p><b>Limitations:</b> public map proxies are not the hidden expert-label set; source mirrors are not organizer-authenticated; merged main already includes related H50-C INGENIOUS probe prior art, so no thermal-concept novelty is claimed. The original local receipt ID H50-1 collides with the main slate's separate splay ID; this page uses H50-GDR for clarity. No DrivenData score is estimated here.</p>
     </section>
   </main>
   <footer><div class="wrap">Research artifact only. No upload, leaderboard polling, or organizer acceptance is performed by this page.</div></footer>

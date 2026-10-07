@@ -4,7 +4,7 @@
 This script reads only the GDR 1391 shallow-temperature archive plus the local
 competition-footprint mask. It does not read labels, catalogue distances, SGMC,
 or any parent prediction surface. The frozen rule is in
-``docs/research/hypotheses-20261007.md``.
+``docs/research/h50-gdr-probe-slate-20261007.md``.
 
 The 1.08 MB input archive and its provenance note are stored under
 ``data/external/``. The local bytes are from a pinned owner mirror, not a direct

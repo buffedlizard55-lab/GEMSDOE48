@@ -1,55 +1,128 @@
-# Frozen H50 research slate — 2026-10-07 UTC
+# Preregistered hypothesis slate — H50 session, 2026-10-07 UTC
 
-**Status: preregistered before candidate construction and before any spatial-holdout scoring.** The input-source coverage audit is complete; no new hypothesis has yet been scored against labels. Ranking is qualitative expected proxy value versus cost, not a promised leaderboard gain. The top executable candidate is deliberately conservative: it uses an external, point-measured thermal signal and no competition-label geometry.
+**Status: preregistered before holdout scoring.** Distinct from the frozen
+2026-10-06 slate (H48-1…H48-5) and from everything implemented in this or the
+reviewed sibling repos. Ranking is expected value-of-information per cost, not
+a promised gain. No candidate is promoted to a submission slot on this page.
 
-## What was checked for prior art
+## Session-later results (added 2026-10-07, later session)
 
-The current README and campaign history in this checkout were searched, including the H48/H49 pages and the archived H18 register in `16GEMSDOE`. Related prior work/proposals are:
+- **H50-A** — not yet validated on the blocked folds; still the top slate
+  priority (implementation sketch in `docs/md/next-steps.md`).
+- **H50-B** — **tested this session, negative result.** Preregistered
+  construction (conflict K>0.3 corridor ∩ high-K gate ∩ robust-z low-Th/K,
+  budget 37,654) scored 0.015312 catalogue / 0.019135 SGMC off-catalogue,
+  far below every structure-based comparator. Receipts:
+  `evidence/h50b_preregistration_20261007.json`,
+  `evidence/holdout_h50b_20261007.json`. The GeoDAWN mirror used is committed
+  SHA-verified at `data/source_mirrors/geodawn_rad_u8.tif`.
+- **H50-C / H50-D / H50-E** — untested; H50-D's LiDAR scarp mirror is now
+  restorable via the same GitHub-mirror path used for the radiometrics.
+- **H51 (method family, added post-slate, preregistered before its own
+  scoring)** — plausibility-ranked budget emission of the H50 fusion: gate
+  failed (0.086537 SGMC / 0.007589 catalogue vs required wins over H49 and
+  the union). See `docs/research/h51-h50b-results-20261007.md`.
 
-- H18-5 / H49-1 already proposed geothermal-feature or 2 m probe targeting. H49-1 specified elevation/latitude detrending and collinearity with magnetic/DTI lineaments; no build/holdout receipt for it was found. This slate does **not** claim novelty for using shallow temperature data. H50-1's specific, not-yet-executed test is leave-one-station-out, same-area/same-survey-date residual persistence across repeat visits, without magnetic/DTI lineament gating.
-- H49-2 proposed paleo-sinter/tufa anchoring; H49-4 proposed magnetic texture with a Quaternary-volcanics mask; H49-3 proposed K/Th alteration at lineament intersections. These are not re-proposed as new concepts here.
-- H38-1 / GEMSDOE38 used heat-flow residuals with Euler; GEMSDOE36 used geothermal well gradients; campaign methods also include earthquake-density, geodetic shear/dilation, fault-tip/stepover, terrain/scarp, Euler, and structural-geometry features. H50-3 therefore targets *focal-mechanism orientations*, not earthquake density; H50-2 targets optical SWIR alteration rather than GeoDAWN radiometrics.
-- H48-2/H49-5 and older campaign hypotheses already mention stratigraphic contacts and drainage-network/knickpoint work; neither is included again.
+## H50-A — coverage-budget credit repacking on scatter-blurred family fields
 
-Prior-art searches are bounded to the reviewed project/campaign files and public GitHub code-search results. They are not proof of global novelty; no global novelty claim is made.
+- **Layers:** the two frozen family surfaces, the mirrored catalogue
+  (footprint/geometry only), no new external data.
+- **Physical signature:** the hidden expert set is inferred (GEMSDOE32
+  derivation, [DERIVED]) to be ~12,632 px scattered around true fault surfaces
+  at ~1.85 px scale; covering the family fields *blurred* at that scale with a
+  greedy credit-packing budget (break-even bar k > 0.2·DTI) instead of fusing
+  them should raise credit density where the families are corroborated and cut
+  budget where they are lone.
+- **Why off-catalogue:** the repacker is free to spend budget on
+  single-family corridors far from the catalogue whenever the marginal credit
+  model says so; it is not tied to catalogue proximity.
+- **Difference from prior art:** H33/H49 emitted fixed-budget unions or
+  pignistic ranks; this is a two-round objective (cover the blurred field,
+  then spend residual budget on the highest marginal-credit single-family
+  cells), measured +0.0247±0.0005 in 12/12 draws on the sibling live-anchored
+  truth model ([DERIVED], not a score).
+- **Expected DTI / cost:** highest expected gain of the slate; medium cost;
+  fully computable locally. **Validation required before any slot.**
 
-## Ranked hypotheses
+## H50-B — radiometric alteration ratio × DS conflict corridors
 
-| Rank | ID | Hypothesis and physical signature | Catalogue-gap rationale / prior-art distinction | Expected public-proxy potential and cost | Source and obtainability check |
-|---:|---|---|---|---|---|
-| **1 — test now** | **H50-1: repeat-survey 2 m thermal residual persistence** | GDR INGENIOUS `T2m`/`Date` repeat observations plus `2mDAB` and station coordinates. For each `Area × exact survey date` with at least five distinct stations, calculate each station's temperature residual against the median of the *other* stations. A station is temporally persistent if it has at least two eligible distinct dates, median residual ≥ +2 °C, and at least half of eligible date residuals ≥ +2 °C. Use the GDR `2mDAB > 0` value only for stations without two eligible repeat dates; this avoids interpreting missing temporal coverage as cold evidence. Emit a fixed 300 m-radius support around selected stations, clipped to the competition footprint. No known-fault distance attribute or label raster enters the build. | Persistent shallow heat advection may indicate fluid pathways on faults lacking a mapped surface trace. This is a fresh *operator* relative to the reviewed H18-5/H49-1 proposals: repeated-date, same-survey, leave-one-station-out persistence, not an elevation-trend/lineament-coincidence map or a spring/vent anchor. It is closely related prior art, not a claim of a new thermal-data concept. | **Moderate but uncertain; low cost.** Direct thermal observations are relevant, but access/survey clustering and sparse repeats can bias the map. Before holdout comparison the audit found 2,782 point records in the finite grid footprint, 139 with ≥2 valid dated observations, and 26 meeting the persistence rule (coverage statistics only; no label scoring). | Official GDR 1391 / DOI 10.15121/1881483 describes 2 m temperature probes and reports CC BY 4.0. The 1,080,530-byte archive was obtained from a pinned owner mirror because direct GDR bytes were not fetched in this sandbox; SHA-256 is recorded in the build receipt. The shapefile has 3,800 point records; 2,782 points fall on finite footprint cells (not a proof of uniform coverage). |
-| 2 | **H50-2: multi-date Landsat Collection 2 surface-temperature persistence** | USGS Landsat Collection 2 Level-2 `ST_B10` and QA bands. Remove cloud, emissivity, terrain/vegetation and seasonal background effects; retain pixels with recurrent local hot residuals over multiple scenes, then skeletonize coherent elongated anomalies. The ST band is native/nominal 100 m even when distributed on a finer grid; do not report it as 30 m thermal resolution. | A stable surface-temperature anomaly can be the surface expression of shallow fluid flow in a covered basin without a preserved scarp. New sensor/temporal signature versus GDR point probes and prior conductive heat-flow models; it is not assumed to be fault truth. | **Moderate, high cost/uncertainty.** Daylight, cloud, emissivity, vegetation, ASTER GED gaps and acquisition bias can dominate geothermal signals; several seasons and QA are essential. | Official USGS Landsat STAC was queried on 2026-10-07 over the approximate competition bounding box, 1982–2026: it reported 34,447 matching Level-2 ST scenes and returned an intersecting 2026 item. This is bbox catalogue availability, not a count of complete-footprint scenes or usable cloud-free pixels; no scene was downloaded. USGS says Collection 2 Level-2 ST is global and no-cost. |
-| 3 | **H50-3: lineament orientation from USGS ComCat focal mechanisms** | USGS ANSS ComCat focal-mechanism products: nodal-plane strike/dip/rake and event locations. Cluster compatible mechanisms/epicentres into fault-plane orientation corridors, with depth, magnitude and catalog-completeness controls; do not turn raw event density into the predictor. | Mechanism orientations constrain active fault kinematics and may expose blind structures absent from a geomorphic fault inventory. The campaign has seismicity-density methods; no focal-mechanism/nodal-plane corridor implementation was found in the reviewed files. | **Low–moderate; medium cost.** Most mechanisms represent active events, not necessarily geothermal conduits; event clustering, duplicate network origins, depth uncertainty and temporal completeness are major limitations. | The official USGS FDSN count endpoint returned 8,185 focal-mechanism and 746 moment-tensor product-associated events in the **bounding box** (1970–2026-10-07, M≥2.5). The box extends beyond the footprint; these counts are not exact in-mask unique earthquakes. The service and product metadata are publicly queryable; no event payload was used in this candidate. |
-| 4 | **H50-4: Sentinel-2 SWIR hydrothermal-alteration anomalies** | Copernicus Sentinel-2 Level-2A surface reflectance, especially 20 m SWIR bands B11/B12 plus red/NIR and scene-classification masks. Test published clay/iron-oxide spectral ratios, composited across cloud-free dry-season scenes, then retain spatially coherent alteration boundaries/linear corridors. Do not infer a fault from a spectral ratio alone. | Hydrothermal alteration/mineral coatings can persist where surficial fault morphology is absent; this is optical mineralogical evidence rather than the campaign's airborne K/Th/total-count radiometry. | **Low–moderate; high cost.** Useful mainly on exposed ground; alluvium, vegetation, lithologic variation and shadow are serious confounders. | Copernicus Data Space's official STAC query returned an L2A item for tile `T11SNV` intersecting the approximate footprint bounding box on 2026-10-06; the result advertises 20 m SWIR assets. This verifies catalogue availability only. Product assets advertise OIDC authorization; no payload was downloaded and exact valid-pixel coverage is unknown. |
+- **Layers:** GeoDAWN airborne radiometrics K/Th/U/TC (owner-mirror
+  `ext_geodawn_rad_u8`, upstream official USGS data release DOI
+  [10.5066/P93LGLVQ](https://doi.org/10.5066/P93LGLVQ), restorable from the
+  GEMSDOE24 public mirror) crossed with the H50 conflict layer K.
+- **Physical signature:** hydrothermal alteration (clay/potassic) depresses
+  Th/K; a *linear* low-Th/K trend inside a high-K disagreement corridor is a
+  fluid-pathway candidate the two structural families split on.
+- **Why off-catalogue:** alteration records past fluid flow along buried or
+  weakly expressed structures absent from the Quaternary-fault inventory.
+- **Difference:** no reviewed campaign crosses alteration *ratios* with a
+  two-family conflict prior; prior radiometric work (r11f 0.1589) fused raw
+  channels with scarps.
+- **Expected / cost:** moderate, uncertain; medium cost (restore mirror, audit
+  bands, holdout). Official source free and obtainable (verified present in
+  the sibling mirror with SHA pin).
 
-## H50-1 frozen build and promotion protocol
+## H50-C — shallow temperature probe residual prior along family corridors
 
-1. Read the GDR probe archive only; pin its SHA-256 and record the pinned mirror commit. Parse dated, finite, nonzero `T2m` readings; a blank date means the corresponding empty/zero field is missing. If a zero-valued dated observation appears, fail/flag rather than silently discarding it. Aggregate duplicate readings from the same station on the same date by the median before forming the `Area × date` background.
-2. A survey-date group is eligible only when it contains at least five distinct station records. Use the leave-one-station-out median as the reference. A repeated station with at least two eligible distinct dates must satisfy the persistence thresholds above; otherwise it is excluded from the repeat branch. A station with fewer than two eligible dates is eligible only when its source `2mDAB` is strictly positive. Report the number of records, dates, repeat stations, eligible residuals, persistent stations and fallback stations.
-3. Rasterize selected points as a binary 300 m Euclidean-radius buffer at 100 m cell-centre distance. Emit value `1` on supported footprint pixels and `0` on the rest of the finite footprint; NaN/nodata outside. The 300 m radius is fixed to the published metric's support radius, not tuned against either proxy. No candidate threshold, block-specific adjustment, catalogue distance or fault-label information is permitted.
-4. Score on the existing four fixed geographic quadrants, held-out core truth plus the 300 m halo, exact official distance-weighted Tversky equations (`α=0.2`, `β=0.8`, `R=300 m`). Compare to H49's stored same-protocol fold receipt, the full-union baseline, and the parents. Repeat on the older raw SGMC raster as a separate sensitivity; never pool the two.
-5. **Slot gate:** the new candidate must exceed the current H49 spatially blocked mean on the primary SGMC proxy by at least 0.005 absolute, be positive in at least 3/4 paired folds, and retain the direction on the older SGMC sensitivity. This is a conservative research screen, not a statistical confidence interval or organizer threshold. A proxy pass is still insufficient for a slot without fold-independent source reconstruction and organizer/private-label evidence. If the candidate does not pass, publish it as research-only and do not spend a slot.
+- **Layers:** INGENIOUS 2 m temperature probes (GDR 1391, CC BY 4.0, DOI
+  [10.15121/1881483](https://doi.org/10.15121/1881483); fetched by sibling CI
+  per `data/raw/external_receipt_g30.json`) residualized against elevation and
+  depth; intersect family support corridors.
+- **Physical signature:** localized shallow heat anomalies on a structural
+  corridor indicate a permeable, possibly unmapped, pathway.
+- **Why off-catalogue:** active seeps are independent of scarps; several known
+  systems have no mapped Quaternary trace at the vent.
+- **Difference:** temperature has appeared only as a regional favorability
+  channel, never as a residual point prior gated by two-family support.
+- **Expected / cost:** low–moderate (sparse points); medium cost; free data
+  obtainable (receipt shows successful sibling fetch).
 
-## Source links
+## H50-D — scarp-youth continuation past catalogue tips
 
-- GDR INGENIOUS compilation, DOI 10.15121/1881483: <https://gdr.openei.org/submissions/1391>
-- GDR dataset listing on Data.gov (CC BY 4.0 metadata): <https://catalog.data.gov/dataset/ingenious-great-basin-regional-dataset-compilation>
-- USGS Landsat Collection 2 overview: <https://www.usgs.gov/landsat-missions/landsat-collection-2>
-- USGS Landsat STAC catalog: <https://landsatlook.usgs.gov/stac-server/>
-- Exact broad-bbox Landsat Level-2 ST query (`numberMatched=34447`; not an exact-mask or cloud-free count): <https://landsatlook.usgs.gov/stac-server/collections/landsat-c2l2-st/items?bbox=-119.82,35.28,-116.23,41.83&datetime=1982-01-01T00:00:00Z/2026-10-07T00:00:00Z&limit=1>
-- USGS ANSS ComCat API: <https://earthquake.usgs.gov/fdsnws/event/1/>
-- USGS ComCat product documentation: <https://earthquake.usgs.gov/data/comcat/index.php>
-- Exact focal-mechanism bbox count query (`8185`; not an exact-mask unique-event count): <https://earthquake.usgs.gov/fdsnws/event/1/count?starttime=1970-01-01&endtime=2026-10-07&minlatitude=35.28&maxlatitude=41.83&minlongitude=-119.82&maxlongitude=-116.23&minmagnitude=2.5&eventtype=earthquake&producttype=focal-mechanism>
-- Exact moment-tensor bbox count query (`746`; not an exact-mask unique-event count): <https://earthquake.usgs.gov/fdsnws/event/1/count?starttime=1970-01-01&endtime=2026-10-07&minlatitude=35.28&maxlatitude=41.83&minlongitude=-119.82&maxlongitude=-116.23&minmagnitude=2.5&eventtype=earthquake&producttype=moment-tensor>
-- Copernicus Sentinel-2 data access: <https://dataspace.copernicus.eu/explore-data/data-collections/sentinel-data/sentinel-2>
-- Copernicus STAC catalog: <https://stac.dataspace.copernicus.eu/v1/>
-- Exact Sentinel-2 L2A bbox metadata query (`limit=1`; not an exact-mask pixel-coverage count): <https://stac.dataspace.copernicus.eu/v1/search?collections=sentinel-2-l2a&bbox=-119.82,35.28,-116.23,41.83&datetime=2017-01-01T00:00:00Z/2026-10-07T00:00:00Z&limit=1>
-- Official competition metric and format: <https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/>
+- **Layers:** LiDAR-derived scarp features (owner-mirror
+  `ext_lidar_scarp_features_u8`, upstream USGS 3DEP 1 m DEM, no use
+  restrictions per sibling receipt) morphology (height/length, dissection) at
+  catalogue trace tips.
+- **Physical signature:** youthful, continuous scarp segments extending beyond
+  a mapped trace tip are candidate unmapped continuations; rank by relief
+  index, emit only where the family corridor also supports.
+- **Why off-catalogue:** explicitly spends budget past the catalogue endpoint.
+- **Difference:** GEMSDOE38 used step-over/Euler tip protection (0.0763); this
+  uses scarp *morphology youth*, a different observable.
+- **Expected / cost:** moderate; medium cost; data restorable from sibling
+  mirror with SHA pin.
 
-## Append-only source-count correction (after build, before holdout)
+## H50-E — oriented splay prior from SGMC contact topology (refined H50-1)
 
-The initial frozen slate records 26 stations meeting the persistence rule. The first executable build collapsed repeated measurements within a DBF row, producing **31** repeat-persistent rows. The exploratory count had used raw rows before that aggregation. This source-only count correction was made before v1 holdout scoring; see [`evidence/hypothesis_slate_20261007_errata.json`](../../evidence/hypothesis_slate_20261007_errata.json).
+- **Layers:** USGS SGMC structure vectors (NV/CA zips; public domain; sibling
+  CI receipt `data/raw/external_receipt_g30.json`) + catalogue trace geometry.
+- **Physical signature:** damage-zone splays branch at characteristic angles
+  from parent traces at extensional bends; build oriented offset bands from
+  *vector* geometry, not isotropic distance.
+- **Why off-catalogue:** targets unmapped splays by construction.
+- **Difference from tested coarse version:** the coarse isotropic 100–600 m
+  band was validated this session and **failed** (SGMC offcat 0.0518 vs 0.0970
+  union; see `evidence/splay_probe_holdout_20261007.json`); orientation gating
+  is the untested refinement.
+- **Expected / cost:** low–moderate; medium–high cost; official data verified
+  obtainable in sibling CI.
 
-## Append-only implementation clarification (after v1 holdout, before v2 scoring)
+## Validation rule carried forward
 
-A second review found that the v1 implementation treated every DBF row as a separate station. The source's display `Station` label is reused at different coordinates, while some source rows at exactly the same NAD83 point also repeat the same date. V1 therefore did not fully collapse same-location/same-date readings before the leave-one-out baseline. The corrected builder uses exact source coordinates as the physical location key (no fuzzy-distance tolerance), then median-aggregates all readings for that location/date. The archive contains 3,800 rows, 3,784 exact point locations, 13 coordinate groups with multiple rows (16 rows beyond the first), and 14 location/date groups with 18 extra readings to aggregate. The number of eligible `Area × date` groups remains 246, but the v2 source-only result is 28 repeat-persistent locations, not the v1 count of 31. **The v1 score had already been seen before this correction. Any v2 score is exploratory sensitivity only, not an independent confirmatory holdout and cannot clear a slot.** No threshold changed and the original preregistration JSON is unchanged. See [`evidence/h50_implementation_errata_20261007.json`](../../evidence/h50_implementation_errata_20261007.json), the archived [v1 build receipt](../../evidence/build_h50_probe_candidate_v1_preduplicate_correction_20261007.json), and the current [v2 build receipt](../../evidence/build_h50_probe_candidate_20261007.json).
+A candidate touches a weekly slot only after beating the current blocked
+holdout best (union 0.0970 SGMC offcat; H49 0.1008 on the same proxy) in ≥3/4
+folds on *both* proxy regimes, with the construction re-derived inside folds
+where feasible, and with the leakage limitation restated. The coarse splay
+band (H50-1) did not clear this and is recorded as a negative result.
+
+## Append-only related probe implementation result (after merge)
+
+The separately documented H50-GDR repeat-persistence raster uses the same
+INGENIOUS 2 m probe source as H50-C, but does **not** implement H50-C's
+family-corridor gate or elevation/depth residualization. It is therefore a
+related single-source operator test, not a completed H50-C run. Its corrected
+v2 sensitivity scored 0.003923 versus H49 0.100751 (paired −0.096828; 0/4
+positive folds) on the primary public proxy and failed the promotion gate.
+Because v2 corrected source identity after v1 scores were observed, this is not
+confirmatory evidence. See [`h50-gdr-probe-slate-20261007.md`](h50-gdr-probe-slate-20261007.md)
+and [`../../evidence/h50_gdr_prior_art_errata_20261007.json`](../../evidence/h50_gdr_prior_art_errata_20261007.json).

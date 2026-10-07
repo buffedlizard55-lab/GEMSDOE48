@@ -1,0 +1,69 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GEMSDOE48 H50 — conflict-aware fusion of the two best families</title><link rel="stylesheet" href="../assets/style.css"></head>
+<body><header><p>DOE GEMS Prize · DrivenData #306 · GEMSDOE48 H50 · research candidate · unscored</p>
+<h1>GEMSDOE48 H50 — conflict-aware fusion of the two best families</h1><nav><a href="index.html">H50 summary</a><a href="executive-summary.html">Executive summary &amp; how to submit</a><a href="method.html">Method &amp; evidence</a><a href="hypotheses.html">Hypotheses</a><a href="sources.html">Sources</a><a href="../index.html">Repository site ↗</a></nav></header><main class="wrap">
+
+<section class="download">
+<p class="eyebrow">1 · One-click research TIFF — unique local artifact, not slot-cleared</p>
+<p><a class="button" href="../downloads/gemsdoe48-h50-ds-b2xh36rung30-20261007-5b59e106-zeros.tif" download>⬇ Download H50 Dempster research GeoTIFF — do not upload (1,453,567 B)</a>
+<a class="button alt" href="../downloads/gemsdoe48-h50-ds-b2xh36rung30-20261007-5b59e106-zeros.zip" download>⬇ .zip (single GeoTIFF)</a>
+<a class="button alt" href="../downloads/gemsdoe48-h50-ds-b2xh36rung30-20261007-5b59e106-nan.tif" download>⬇ NaN-outside twin (official sample convention)</a></p>
+<p class="small">All three carry identical in-footprint values (SHA-audited twin). The zeros file is immune to the
+portal's "[0, 1]" range rejection by construction; the NaN twin additionally passes
+<code>scripts/validate_submission.py</code>'s official-convention audit
+(<a href="../../evidence/h50_submission_validation_20261007.json">receipt</a>).</p>
+<p><strong>Unique submission name:</strong> <code>GEMSDOE48-H50-DS-B2xH36</code><br>
+<strong>Paste-ready note (197/200 chars):</strong> <code>GEMSDOE48 H50 | Dempster fusion, best dotted H33-2-B2 (0.2778) x best tip H36-1 rung30 (0.2710); kernel-credit beliefs, live-anchored discounts; m(Theta)+K diagnostics; unscored research candidate.</code></p>
+<p class="small">SHA-256 <code>5b59e106b6e448038b96fb340c5bae39094d4558c239c437aea28b6020d5d32f</code> · one band float32 · EPSG:32611 · 100 m ·
+3730×3292 · in-footprint [0.0000, 1.0000] ·
+all-finite, no nodata tag · zeros outside footprint · 767,043 positive cells</p>
+<p class="small">Disagreement diagnostics (review only, never upload):
+<a href="../downloads/diagnostics/gemsdoe48-h50-unassigned-mTheta-20261007-5b59e106.tif" download>unassigned mass m(Θ)</a> ·
+<a href="../downloads/diagnostics/gemsdoe48-h50-conflict-K-20261007-5b59e106.tif" download>raw conflict K</a> ·
+<a href="../downloads/diagnostics/gemsdoe48-h50-plausibility-20261007-5b59e106.tif" download>plausibility Pl(F)</a></p>
+</section>
+
+<div class="warn"><strong>UNSCORED — NOT SLOT-CLEARED.</strong> This file is the brief's requested
+unique Dempster–Shafer fusion of the two best families, format-verified and downloadable, but the
+blocked-holdout diagnostics below do <em>not</em> beat both parents or the union on the public
+proxies. The official public leaderboard (single read 2026-10-07) is topped by xiaofanhu at 0.3774;
+the brief's "0.3195 highest" is stale (that is rank #7, DARD). No organizer score exists for this
+artifact, and the 0.2778 row on the public board is participant extradr19 with no organizer-level
+attribution to the local mirror bytes [OWNER-REPORT].</div>
+
+<h2>2 · What the fusion preserves that averaging destroys</h2>
+<p>Parents: dotted H33-2-B2 (37,654 px, owner-reported
+0.2778) × tip H36-1 rung30
+(37,660 px, reported sibling value 0.2710);
+intersection 26,248 / union
+49,066 (Jaccard 0.535) —
+22,818 pixels on which the two strongest approaches
+disagree. Dempster's rule carries that disagreement as unassigned mass m(Θ)
+(range 0.0037–0.0306 in footprint) and raw conflict K (max 0.8804; 11.5 % of the footprint &gt; 0.3).</p>
+<p><strong>Not the naive mean (brief's required check):</strong> Pearson 0.9749,
+Spearman 1.0000, MAE 0.0133, max |Δ| 0.2648,
+10.3% of cells with |Δ|&gt;0.05, top-37,654 emission Jaccard
+0.9687. Pearson vs the prior H48 artifact 0.454; zero SHA-256 collisions against
+44 existing grid rasters.</p>
+<img src="../assets/h50_ds_layers.png" alt="Dempster-Shafer layers: belief, unassigned mass, conflict" style="width:100%;border:1px solid var(--line);border-radius:10px">
+<img src="../assets/h50_disagreement.png" alt="DS belief versus naive mean disagreement" style="width:100%;border:1px solid var(--line);border-radius:10px;margin-top:.6rem">
+
+<h2>3 · Blocked-holdout diagnostics (public proxies only)</h2>
+<h3>SGMC off-catalogue truth (&gt;300 m from catalogue), 4 fixed quadrants, official metric</h3>
+<div class="table-scroll"><table><tr><th>candidate</th><th>mean DTI</th><th>folds NW·NE·SW·SE</th></tr><tr><td>dotted_b2_parent</td><td>0.095491</td><td>0.1018 · 0.0991 · 0.1075 · 0.0736</td></tr><tr><td>tip_h36_parent</td><td>0.093315</td><td>0.0998 · 0.0972 · 0.1048 · 0.0715</td></tr><tr><td>union_decision</td><td>0.097037</td><td>0.1037 · 0.1025 · 0.1057 · 0.0763</td></tr><tr><td>naive_mean_beliefs</td><td>0.062656</td><td>0.0646 · 0.0807 · 0.0415 · 0.0638</td></tr><tr><td>raw_sparse_rho05_same_parents</td><td>0.065108</td><td>0.0698 · 0.0666 · 0.0749 · 0.0491</td></tr><tr style="background:#edf8f3;font-weight:700"><td>h50_ds_belief</td><td>0.071553</td><td>0.0743 · 0.0914 · 0.0486 · 0.0718</td></tr><tr><td>h50_binary_budget_matched</td><td>0.087161</td><td>0.0933 · 0.0930 · 0.0950 · 0.0673</td></tr></table></div>
+<h3>Catalogue truth proxy, same folds</h3>
+<div class="table-scroll"><table><tr><th>candidate</th><th>mean DTI</th><th>folds NW·NE·SW·SE</th></tr><tr><td>dotted_b2_parent</td><td>0.006831</td><td>0.0061 · 0.0086 · 0.0075 · 0.0051</td></tr><tr><td>tip_h36_parent</td><td>0.047560</td><td>0.0411 · 0.0596 · 0.0445 · 0.0450</td></tr><tr><td>union_decision</td><td>0.046889</td><td>0.0407 · 0.0586 · 0.0443 · 0.0440</td></tr><tr><td>naive_mean_beliefs</td><td>0.035945</td><td>0.0325 · 0.0399 · 0.0386 · 0.0328</td></tr><tr><td>raw_sparse_rho05_same_parents</td><td>0.018654</td><td>0.0162 · 0.0234 · 0.0178 · 0.0172</td></tr><tr style="background:#edf8f3;font-weight:700"><td>h50_ds_belief</td><td>0.030323</td><td>0.0278 · 0.0345 · 0.0326 · 0.0264</td></tr><tr><td>h50_binary_budget_matched</td><td>0.007604</td><td>0.0066 · 0.0097 · 0.0086 · 0.0055</td></tr></table></div>
+<p>H50 beats the naive mean 4/4 folds on the SGMC proxy and improves on the raw-sparse rho=0.5 recipe
+with the same parents (+0.0064 mean), but loses to both parents and to the union on both proxies.
+<strong>The slot gate is not cleared; do not spend a weekly submission on this evidence alone.</strong></p>
+
+<h2>4 · Public leaderboard snapshot (single manual read, 2026-10-07)</h2>
+<div class="table-scroll"><table><tr><th>rank</th><th>participant</th><th>best public</th><th>submissions</th></tr><tr><td>#1</td><td>xiaofanhu</td><td>0.3774</td><td>11</td></tr><tr><td>#2</td><td>alexoktaba</td><td>0.3345</td><td>24</td></tr><tr><td>#3</td><td>nchuzhoy</td><td>0.3262</td><td>5</td></tr><tr><td>#4</td><td>kinghorton42</td><td>0.3222</td><td>8</td></tr><tr><td>#5</td><td>joeyfezster</td><td>0.3220</td><td>22</td></tr><tr><td>#6</td><td>Batik Shirt Brothers</td><td>0.3218</td><td>21</td></tr><tr><td>#7</td><td>DARD</td><td>0.3195</td><td>15</td></tr><tr><td>#8</td><td>ndavis7</td><td>0.2888</td><td>8</td></tr></table></div>
+<p class="small">Source: official DrivenData public leaderboard. Scores identify participants, not files;
+no row is attributed to any local artifact.</p>
+
+</main><footer><p>No organizer score exists for any artifact on this site. Every candidate is UNSCORED research output; owner-reported live values are labelled [OWNER-REPORT].</p>
+<p class="small">Built by scripts/build_site_h50.py from evidence receipts on the same commit.
+Receipts: evidence/build_ds50_receipt_20261007.json, evidence/holdout_ds50_20261007.json,
+docs/data/leaderboard_20261007.json.</p></footer></body></html>

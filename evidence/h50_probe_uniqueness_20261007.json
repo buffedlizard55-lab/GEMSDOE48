@@ -1,5 +1,5 @@
 {
-  "artifacts_attempted": 36,
+  "artifacts_attempted": 45,
   "candidate": {
     "bytes": 225114,
     "path": "docs/downloads/GEMSDOE48-H50-2M-PERSIST-20261007-f12e5391bb9c-nan.tif",
@@ -18,7 +18,7 @@
     "sha256": "1997316a0102909135dfa12d48e86dbc1fbe567b4d4ba3884c53ce981b2bc50c",
     "union": 29661
   },
-  "comparable_artifacts": 36,
+  "comparable_artifacts": 45,
   "comparison_scope": [
     "docs/downloads",
     "data/raw",
@@ -254,6 +254,39 @@
       "comparable": true,
       "exact_in_footprint_values": false,
       "exact_positive_support": false,
+      "intersection": 3461,
+      "path": "docs/downloads/diagnostics/gemsdoe48-h50-conflict-K-20261007-5b59e106.tif",
+      "positive_cells": 740795,
+      "positive_support_jaccard": 0.0045127330524773095,
+      "sha256": "612412b48e45704e40a00718589da6a04f12e0b23d55954094de7c4ebc85a44f",
+      "union": 766941
+    },
+    {
+      "comparable": true,
+      "exact_in_footprint_values": false,
+      "exact_positive_support": false,
+      "intersection": 29607,
+      "path": "docs/downloads/diagnostics/gemsdoe48-h50-plausibility-20261007-5b59e106.tif",
+      "positive_cells": 5167373,
+      "positive_support_jaccard": 0.005729603804486342,
+      "sha256": "cd0e07fb882927d528a6708044e4f88e63ea21ffa9e6af4b41f045f186a930e0",
+      "union": 5167373
+    },
+    {
+      "comparable": true,
+      "exact_in_footprint_values": false,
+      "exact_positive_support": false,
+      "intersection": 29607,
+      "path": "docs/downloads/diagnostics/gemsdoe48-h50-unassigned-mTheta-20261007-5b59e106.tif",
+      "positive_cells": 5167373,
+      "positive_support_jaccard": 0.005729603804486342,
+      "sha256": "405346c4c940615e725bca74370888d527860fd561ef237723626acd9f6c2b40",
+      "union": 5167373
+    },
+    {
+      "comparable": true,
+      "exact_in_footprint_values": false,
+      "exact_positive_support": false,
       "intersection": 226,
       "path": "docs/downloads/gemsdoe48-ds-belief-raw-20261006T201749Z-95897e3f8125.tif",
       "positive_cells": 47905,
@@ -425,6 +458,72 @@
       "positive_support_jaccard": 0.005729603804486342,
       "sha256": "cd1f9d6ac726288d27c41820a4da9845a30dddbf7b25b15185df11381e523d39",
       "union": 5167373
+    },
+    {
+      "comparable": true,
+      "exact_in_footprint_values": false,
+      "exact_positive_support": false,
+      "intersection": 3578,
+      "path": "docs/downloads/gemsdoe48-h50-ds-b2xh36rung30-20261007-5b59e106-nan.tif",
+      "positive_cells": 767043,
+      "positive_support_jaccard": 0.004511570197913935,
+      "sha256": "54dfe8bd79f767370558bebc1c23366cb43e5e5a4b26c7d9d14131c8b58bdc0c",
+      "union": 793072
+    },
+    {
+      "comparable": true,
+      "exact_in_footprint_values": false,
+      "exact_positive_support": false,
+      "intersection": 3578,
+      "path": "docs/downloads/gemsdoe48-h50-ds-b2xh36rung30-20261007-5b59e106-zeros.tif",
+      "positive_cells": 767043,
+      "positive_support_jaccard": 0.004511570197913935,
+      "sha256": "5b59e106b6e448038b96fb340c5bae39094d4558c239c437aea28b6020d5d32f",
+      "union": 793072
+    },
+    {
+      "comparable": true,
+      "exact_in_footprint_values": false,
+      "exact_positive_support": false,
+      "intersection": 402,
+      "path": "docs/downloads/gemsdoe48-h50b-alteration-conflict-20261007-806a4ba4-nan.tif",
+      "positive_cells": 37654,
+      "positive_support_jaccard": 0.006012653494667883,
+      "sha256": "d3ce73e0cfd340dc974c0117420213f36ea97ffd46a6f46b8e294a2de9c853de",
+      "union": 66859
+    },
+    {
+      "comparable": true,
+      "exact_in_footprint_values": false,
+      "exact_positive_support": false,
+      "intersection": 402,
+      "path": "docs/downloads/gemsdoe48-h50b-alteration-conflict-20261007-806a4ba4-zeros.tif",
+      "positive_cells": 37654,
+      "positive_support_jaccard": 0.006012653494667883,
+      "sha256": "806a4ba42e7be89cdef226dd75c09246d3e5923feb1796ab6d5b86ae94f8dda9",
+      "union": 66859
+    },
+    {
+      "comparable": true,
+      "exact_in_footprint_values": false,
+      "exact_positive_support": false,
+      "intersection": 160,
+      "path": "docs/downloads/gemsdoe48-h51-plausibility-budget-20261007-f8fa1d08-nan.tif",
+      "positive_cells": 37654,
+      "positive_support_jaccard": 0.0023844652091623074,
+      "sha256": "ce34944afa302e8a2b7e71502caf18a0d2f71d706dcb6f39397f11a237355961",
+      "union": 67101
+    },
+    {
+      "comparable": true,
+      "exact_in_footprint_values": false,
+      "exact_positive_support": false,
+      "intersection": 160,
+      "path": "docs/downloads/gemsdoe48-h51-plausibility-budget-20261007-f8fa1d08-zeros.tif",
+      "positive_cells": 37654,
+      "positive_support_jaccard": 0.0023844652091623074,
+      "sha256": "f8fa1d0817712d34935acd70663eb14c510876598c4f70729fcd79288706120f",
+      "union": 67101
     }
   ],
   "schema_version": 1,
