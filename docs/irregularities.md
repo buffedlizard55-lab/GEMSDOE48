@@ -61,4 +61,4 @@ The two-tile pilot measured 2.3–3.2× catalogue-adjacency lift for the top-2 %
 
 ### Tile inventory covers UTM zone 11 only
 
-`registry/dem_tiles_pilot.json` (700 records, 661 distinct source files — some tiles appear in two 3DEP projects) omits the 16 zone-10 tiles of the competition footprint; the region product therefore covers 3.66 M of the 5.17 M footprint cells at ≥ 90 % cover (the 2 m u8 descriptors cover 3.89 M). Cells within 150 m of a tile edge are flagged invalid by design.
+`registry/dem_tiles_pilot.json` (700 records, 661 distinct tile names — 39 tiles are staged under two 3DEP projects) omits the 16 zone-10 tiles of the competition footprint; the region product therefore covers 3.66 M of the 5.17 M footprint cells at ≥ 90 % cover (the 2 m u8 descriptors cover 3.89 M). Cells within 150 m of a tile edge are flagged invalid by design.

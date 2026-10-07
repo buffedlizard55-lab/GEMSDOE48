@@ -1,6 +1,6 @@
 # Research slate H50 — 2026-10-07 UTC
 
-**Status: pre-registered before any weekly slot is considered.** This session started from the previous session's open items (`docs/next-steps.html`): N1 native-resolution lidar extraction, measured lift tests for the 2 m u8 scarp descriptors and the official 19-band `training_features.tif`, an exact inversion of the live submission ladder, and only then a new candidate. Every number below is reproduced by a script in `scripts/` and stored in `evidence/`; nothing is quoted from memory.
+**Status: pre-registered before any weekly slot is considered.** *Addendum 2026-10-07 (after measurement, text below unchanged): the H50-1 gate in §4 was applied and **failed** on both criteria — see `holdout-h50-results-20261007.md`. The unique file `GEMSDOE48-H50-lidar-scarp-additions-20261007-38029417f6ca-nan-outside.tif` is published as not slot-cleared.* This session started from the previous session's open items (`docs/next-steps.html`): N1 native-resolution lidar extraction, measured lift tests for the 2 m u8 scarp descriptors and the official 19-band `training_features.tif`, an exact inversion of the live submission ladder, and only then a new candidate. Every number below is reproduced by a script in `scripts/` and stored in `evidence/`; nothing is quoted from memory.
 
 ## 1. What the live ladder says (exact metric algebra, no model)
 
