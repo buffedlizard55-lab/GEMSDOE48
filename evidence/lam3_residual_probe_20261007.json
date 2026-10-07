@@ -1,6 +1,6 @@
 {
   "schema": "GEMSDOE48-lam3-residual-probe-v1",
-  "generated_utc": "2026-10-07T05:29:43Z",
+  "generated_utc": "2026-10-07T05:35:21Z",
   "question": "Would any new dot clear the metric break-even bar 0.2*DTI = 0.0556 under the best-calibrated hidden-truth density model?",
   "method": {
     "lam3": "a * Pl(ladder)**0.6 + (1-a) * Q(other detectors' normalized kernel credit), scaled to N; (a, N) fitted to the 17 owner-reported live ladder scores",
@@ -161,8 +161,8 @@
       "per_cell_fitted_mass": 0.016751718724809052,
       "verdict": "below_bar"
     },
-    "H53_lidar_1000": {
-      "file": "docs/downloads/GEMSDOE48-H53-ds-core-lidar-20261007-dedc43dc0167.tif",
+    "H54_lidar_1000": {
+      "file": "docs/downloads/GEMSDOE48-H54-ds-core-lidar-20261007-dedc43dc0167.tif",
       "added_cells": 1000,
       "ladder_mass_14307": {
         "per_cell": 0.013965278531890363,

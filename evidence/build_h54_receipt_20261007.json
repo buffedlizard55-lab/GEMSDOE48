@@ -1,8 +1,8 @@
 {
-  "schema": "GEMSDOE48-h53-build-v1",
-  "generated_utc": "2026-10-07T05:22:37Z",
+  "schema": "GEMSDOE48-h54-build-v1",
+  "generated_utc": "2026-10-07T05:33:27Z",
   "artifact": {
-    "file": "docs/downloads/GEMSDOE48-H53-ds-core-lidar-20261007-dedc43dc0167.tif",
+    "file": "docs/downloads/GEMSDOE48-H54-ds-core-lidar-20261007-dedc43dc0167.tif",
     "sha256": "dedc43dc0167edcf1dca9fa1693b69153c71325d59e47218298e577cd8159fc4",
     "bytes": 1562508,
     "bands": 1,
@@ -22,24 +22,24 @@
     ],
     "nodata": NaN,
     "compress": "lzw",
-    "zeros_nan_outside_twin": "docs/downloads/GEMSDOE48-H53-ds-core-lidar-20261007-dedc43dc0167-zeros-nan-outside.tif",
-    "zip": "docs/downloads/GEMSDOE48-H53-ds-core-lidar-20261007-dedc43dc0167.zip"
+    "zeros_nan_outside_twin": "docs/downloads/GEMSDOE48-H54-ds-core-lidar-20261007-dedc43dc0167-zeros-nan-outside.tif",
+    "zip": "docs/downloads/GEMSDOE48-H54-ds-core-lidar-20261007-dedc43dc0167.zip"
   },
   "diagnostics": {
     "belief-normalized": {
-      "file": "docs/downloads/diagnostics/gemsdoe48-h53-belief-normalized-dedc43dc0167.tif",
+      "file": "docs/downloads/diagnostics/gemsdoe48-h54-belief-normalized-dedc43dc0167.tif",
       "sha256": "a1a26570f336e84a743e5acb451df16ede8734613f1f9a4b1d515ff69d369ba3",
       "min": 0.0,
       "max": 1.0
     },
     "unassigned-mtheta": {
-      "file": "docs/downloads/diagnostics/gemsdoe48-h53-unassigned-mtheta-dedc43dc0167.tif",
+      "file": "docs/downloads/diagnostics/gemsdoe48-h54-unassigned-mtheta-dedc43dc0167.tif",
       "sha256": "e3ff2258b3835c2ec01bdad7fba7913a5dcf188cf2dff77ca11c2c7a323202f6",
       "min": 0.004996400326490402,
       "max": 0.034474194049835205
     },
     "conflict-K": {
-      "file": "docs/downloads/diagnostics/gemsdoe48-h53-conflict-K-dedc43dc0167.tif",
+      "file": "docs/downloads/diagnostics/gemsdoe48-h54-conflict-K-dedc43dc0167.tif",
       "sha256": "318fdda4e26bcb1c673a1c8af866b4d9515a3ac73d88ee95c3ff52ed4e124f43",
       "min": 0.0,
       "max": 0.8550683856010437
@@ -113,7 +113,7 @@
   },
   "blocked_proxy_diagnostic": {
     "C_dotted": 0.09549116770426949,
-    "H53": 0.09599561836145015
+    "H54": 0.09599561836145015
   },
   "status": "NOT_SLOT_CLEARED",
   "status_basis": "scripts/audit_candidate.py (GATE-2): additions are worth ~0.010-0.014 credit/cell on a live-density-matched truth vs the 0.0556 break-even bar; see docs/research/credit-density-audit-20261007.md",

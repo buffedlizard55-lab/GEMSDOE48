@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Build, re-read and audit the GEMSDOE48 H53 submission candidate.
+"""Build, re-read and audit the GEMSDOE48 H54 submission candidate.
 
-H53 = Dempster-Shafer-diagnosed core + bounded novel content
+H54 = Dempster-Shafer-diagnosed core + bounded novel content
 -----------------------------------------------------------
 Emission (binary, p = 1 on support - optimal for the official metric because a
 cell with expected kernel credit above 0.2*DTI is always worth full mass):
@@ -57,7 +57,7 @@ PIX_MIN_DIST = 3.0
 RHO = 0.95
 LIVE_DOTTED = 0.2778
 LIVE_TIP = 0.2632
-STEM = "GEMSDOE48-H53-ds-core-lidar-20261007"
+STEM = "GEMSDOE48-H54-ds-core-lidar-20261007"
 
 
 def sha256_file(path: pathlib.Path) -> str:
@@ -84,7 +84,7 @@ def main() -> int:
     parser.add_argument("--out-dir", type=pathlib.Path, default=ROOT / "docs" / "downloads")
     parser.add_argument("--diag-dir", type=pathlib.Path, default=ROOT / "docs" / "downloads" / "diagnostics")
     parser.add_argument("--receipt", type=pathlib.Path,
-                        default=ROOT / "evidence" / "build_h53_receipt_20261007.json")
+                        default=ROOT / "evidence" / "build_h54_receipt_20261007.json")
     args = parser.parse_args()
     t0 = time.time()
 
@@ -153,7 +153,7 @@ def main() -> int:
     diag = {}
     for name, array in (("belief-normalized", bel_norm), ("unassigned-mtheta", m_theta.astype(np.float32)),
                         ("conflict-K", conflict.astype(np.float32))):
-        path = args.diag_dir / f"gemsdoe48-h53-{name}-{ident}.tif"
+        path = args.diag_dir / f"gemsdoe48-h54-{name}-{ident}.tif"
         out = np.where(footprint, np.clip(array, 0.0, 1.0), 0.0).astype(np.float32)
         with rasterio.open(path, "w", **{**profile, "nodata": None}) as sink:
             sink.write(out, 1)
@@ -193,10 +193,10 @@ def main() -> int:
         return float(np.mean([h52.score_fold(pred.astype(np.float64), truth, footprint, core)["dti"]
                               for core in blocks.values()]))
 
-    proxy = {"C_dotted": proxy_mean4(dotted), "H53": proxy_mean4(support)}
+    proxy = {"C_dotted": proxy_mean4(dotted), "H54": proxy_mean4(support)}
 
     receipt = {
-        "schema": "GEMSDOE48-h53-build-v1",
+        "schema": "GEMSDOE48-h54-build-v1",
         "generated_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         "artifact": {"file": str(primary.relative_to(ROOT)), "sha256": sha256_file(primary),
                      "bytes": primary.stat().st_size, **tags,

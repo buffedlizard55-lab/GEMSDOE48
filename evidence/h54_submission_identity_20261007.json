@@ -1,8 +1,8 @@
 {
   "schema": "GEMSDOE48-candidate-uniqueness-v1",
-  "generated_utc": "2026-10-07T05:31:27Z",
+  "generated_utc": "2026-10-07T05:33:40Z",
   "candidate": {
-    "file": "docs/downloads/GEMSDOE48-H53-ds-core-lidar-20261007-dedc43dc0167.tif",
+    "file": "docs/downloads/GEMSDOE48-H54-ds-core-lidar-20261007-dedc43dc0167.tif",
     "sha256": "dedc43dc0167edcf1dca9fa1693b69153c71325d59e47218298e577cd8159fc4",
     "bytes": 1562508,
     "positive_cells": 38654
@@ -20,7 +20,7 @@
     "identical_support": false
   },
   "companions_of_same_artifact": [
-    "docs/downloads/GEMSDOE48-H53-ds-core-lidar-20261007-dedc43dc0167-zeros-nan-outside.tif"
+    "docs/downloads/GEMSDOE48-H54-ds-core-lidar-20261007-dedc43dc0167-zeros-nan-outside.tif"
   ],
   "duplicates_byte_or_support_identical": [],
   "verdict": "UNIQUE",

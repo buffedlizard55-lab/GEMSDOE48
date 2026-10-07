@@ -156,7 +156,7 @@ added cell, always inside the union with the intact incumbent.
 |---|---|---|---|
 | H49 Yager-balanced DS | 10,251 | 0.0220 | 0.0262 |
 | H52 2,000 lidar-scarp dots | 2,000 | 0.0141 | 0.0168 |
-| H53 1,000 strictly-gated lidar-scarp dots | 1,000 | 0.0140 | 0.0166 |
+| H54 1,000 strictly-gated lidar-scarp dots | 1,000 | 0.0140 | 0.0166 |
 | random 2,000 cells inside the λ3 support | 2,000 | 0.0133 | 0.0158 |
 | λ3's own greedy optimum: top 250 uncovered cells | 250 | 0.0498 | 0.0592 |
 | … top 500 | 500 | 0.0490 | 0.0582 |

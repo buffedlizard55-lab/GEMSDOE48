@@ -1,6 +1,6 @@
 {
   "schema": "GEMSDOE48-credit-density-audit-v1",
-  "generated_utc": "2026-10-07T05:30:10.630870+00:00",
+  "generated_utc": "2026-10-07T05:35:21.434980+00:00",
   "question": "Does any existing candidate or documented addition raise *credit density* over the incumbent dotted family (H33-2-B2, 37,654 cells, owner-reported live 0.2778) on the frozen blocked proxy?",
   "instrument": "scripts/audit_candidate.py (GEMSDOE48-GATE-2): (1) equal-mass subsample of the candidate support to the incumbent cell count, scored on the frozen SGMC>300 m off-catalogue proxy with the repository's four-quadrant core+300 m halo protocol; (2) marginal credit per added cell on a density-matched proxy (proxy truth thinned to 14,307 cells) compared with the metric break-even bar 0.2*DTI_incumbent = 0.0556.",
   "warning": "Public-proxy instrument only: SGMC-derived fault traces are not the private expert truth and no organizer score is implied. Equal-mass and density-matched comparisons are the mass-neutral part of the corrected gate; the 2026-10-06 gate lacked both.",
@@ -77,9 +77,9 @@
       "support_rule": "binary >0"
     },
     {
-      "candidate_file": "docs/downloads/GEMSDOE48-H53-ds-core-lidar-20261007-dedc43dc0167.tif",
+      "candidate_file": "docs/downloads/GEMSDOE48-H54-ds-core-lidar-20261007-dedc43dc0167.tif",
       "candidate_sha256": "dedc43dc0167edcf1dca9fa1693b69153c71325d59e47218298e577cd8159fc4",
-      "receipt": "evidence/audit_gate2_gemsdoe48_h53_20261007.json",
+      "receipt": "evidence/audit_gate2_gemsdoe48_h54_20261007.json",
       "verdict": "FAIL_MASS_NEUTRAL",
       "reasons": [
         "added_cells_below_live_break_even_bar (density-matched 0.0107 < 0.0556 per cell)"

@@ -1,10 +1,10 @@
 {
   "schema": "GEMSDOE48-candidate-audit-v1",
-  "generated_utc": "2026-10-07T05:23:03.187138+00:00",
+  "generated_utc": "2026-10-07T05:34:01.302557+00:00",
   "protocol": "GEMSDOE48-GATE-2 (mass-neutral): equal-mass credit density vs incumbent + density-matched marginal credit of added cells vs the metric break-even bar",
   "warning": "Public-proxy instrument only; not the private expert truth and not an organizer score. PASS does not authorize an upload by itself; it means the candidate survives the mass-neutral screen that the 2026-10-06 gate failed to apply.",
   "candidate": {
-    "path": "docs/downloads/GEMSDOE48-H53-ds-core-lidar-20261007-dedc43dc0167.tif",
+    "path": "docs/downloads/GEMSDOE48-H54-ds-core-lidar-20261007-dedc43dc0167.tif",
     "sha256": "dedc43dc0167edcf1dca9fa1693b69153c71325d59e47218298e577cd8159fc4",
     "bytes": 1562508,
     "bands": 1,

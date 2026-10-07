@@ -73,7 +73,7 @@ FILES = [
 ADDITIONS = [
     ("H49_yager_balanced", "docs/downloads/GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif"),
     ("H52_lidar_2000", "docs/downloads/GEMSDOE48-H52-lidar-scarp-additions-20261007-38029417f6ca-nan-outside.tif"),
-    ("H53_lidar_1000", "docs/downloads/GEMSDOE48-H53-ds-core-lidar-20261007-dedc43dc0167.tif"),
+    ("H54_lidar_1000", "docs/downloads/GEMSDOE48-H54-ds-core-lidar-20261007-dedc43dc0167.tif"),
 ]
 
 
