@@ -15,6 +15,24 @@
   <a href="hypotheses.html">Hypotheses</a><a href="sources.html">Sources</a><a href="irregularities.html">Irregularities</a>
 </div></nav>
 <div class="wrap">
+  <section class="hero" id="h53">
+    <h2>2026-10-07 — H53 unique candidate file (download first, read second)</h2>
+    <p><a class="btn" href="downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-nan-outside.tif" download>Download GEMSDOE48-H53 GeoTIFF (NaN outside)</a>
+    <a class="btn alt" href="downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-nan-outside.zip" download>.zip (single GeoTIFF)</a>
+    <a class="btn alt" href="research/holdout-h53-results-20261007.md">Read the H53 results + gate report</a></p>
+    <p><b>Paste-ready note (126 characters):</b> <code>GEMSDOE48-H53 | 3-source DS: dotted 0.2778 x tip 0.2710 x lidar scarp, terrain-adaptive discount; unscored research candidate.</code></p>
+    <p>Three-source Dempster combination of the two best live families (dotted 0.2778 × tip 0.2710, kernel-credit beliefs, live-anchored discounts) with native-lidar scarp belief under a terrain-adaptive reliability map. SHA-256 <code>9242c831dc10…</code>, 7,042,968 bytes, graded belief in [0,1] in-footprint and NaN outside — the format the portal rejected before was out-of-range values, which this file cannot produce (<a href="../evidence/h53_submission_validation_20261007.json">local validation</a>; organizer acceptance untested). Also: <a href="downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-pignistic-twin-nan.tif" download>binary pignistic twin</a>, <a href="downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-diag-unassigned-nan.tif" download>m(Θ)</a>, <a href="downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-diag-conflict-AB-nan.tif" download>K_AB</a>, <a href="downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-diag-conflict-ABL-nan.tif" download>K_ABL</a>.</p>
+    <p class="small"><b>Not slot-cleared.</b> Newer-SGMC blocked proxy: graded 0.071408, twin 0.089559 (best fusion-decision yet, still below parents 0.0955/0.0933, union 0.096992, H49 0.100751; 0/4 folds vs H49 for both). Pre-registered gate fails; raw-SGMC agrees. Keep the weekly slot unused. No organizer score exists for any file here.</p>
+    <h3>Format and portal steps for a future cleared candidate only</h3>
+    <p class="small"><b>These steps are reference-only.</b> No current candidate is cleared; do not use a weekly slot unless a future candidate beats the spatially blocked best under the project gate.</p>
+    <ol>
+      <li>Only after a candidate has cleared the project gate, use exactly one single-band float32 GeoTIFF on the competition grid (EPSG:32611, 100 m, 3,730 rows × 3,292 columns, origin 243,350 E / 4,508,550 N), or a .zip containing exactly that one file. Re-check the exact candidate bytes with <code>python scripts/validate_submission.py &lt;file&gt;</code>; local validation is not organizer acceptance.</li>
+      <li>Values must be finite and inside [0, 1] wherever the sample template is finite; outside the footprint use NaN (preferred, nodata=NaN) or 0. The earlier portal error "Predicted values must be in range [0, 1]" came from out-of-range or non-finite in-footprint cells.</li>
+      <li>For a future cleared candidate only, paste its candidate-specific tracking note (≤ 200 characters) into the submission comment; preserve the exact filename and SHA-256 so any portal row can be tied to those bytes.</li>
+      <li>On the DrivenData submission page: choose the file (or .zip), paste the note, and submit. Confirm the portal's format checks pass before leaving the page.</li>
+    </ol>
+  </section>
+
   <section class="hero" id="h52">
     <h2>2026-10-07 — H52 unique candidate file (download first, read second)</h2>
     <p><a class="btn" href="downloads/GEMSDOE48-H52-lidar-scarp-additions-20261007-38029417f6ca-nan-outside.tif" download>Download GEMSDOE48-H52 GeoTIFF (NaN outside)</a>
