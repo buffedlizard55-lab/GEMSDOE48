@@ -11,10 +11,19 @@ on:
       res:
         description: "Output resolution in metres"
         default: "2"
+  push:
+    branches: ["arena/**"]
+    paths:
+      - ".github/workflows/dem-pilot.yml"
+      - "scripts/dem_pilot_fetch.py"
 permissions:
   contents: read
+env:
+  TILES: ${{ github.event.inputs.tiles || 'x42y425,x30y436,x41y427,x35y444,x38y420,x40y427' }}
+  RES: ${{ github.event.inputs.res || '2' }}
 jobs:
   fetch:
+    if: github.event_name == 'workflow_dispatch' || startsWith(github.event.head_commit.message, '[run-pilot]')
     runs-on: ubuntu-latest
     timeout-minutes: 120
     steps:
@@ -26,7 +35,7 @@ jobs:
       - name: Fetch and reduce tiles
         run: |
           free -g; nproc; df -h /tmp | tail -1
-          python scripts/dem_pilot_fetch.py --tiles "${{ github.event.inputs.tiles }}" --res "${{ github.event.inputs.res }}" --out scratch/dem_pilot || echo "one or more tiles failed (see receipt)"
+          python scripts/dem_pilot_fetch.py --tiles "$TILES" --res "$RES" --out scratch/dem_pilot || echo "one or more tiles failed (see receipt)"
           ls -la scratch/dem_pilot
       - uses: actions/upload-artifact@v4
         with:
