@@ -10,6 +10,12 @@ The organizer's metric (DrivenData competition 306, problem-description page 967
     FNw   = sum_g (1 - max_x p(x) k(d(x, g)))
     DTI   = TPw / (TPw + 0.2 FPw + 0.8 FNw)
 
+IMPORTANT: This is a historical ASSUMPTION-DEPENDENT surrogate, not an exact
+inversion of the official metric.  The `M = TPw` assertion below is false in
+general: M sums over predictions and TPw sums over truth pixels.  See
+docs/research/metric-identity-erratum-20261007.md.  Do not use its fitted
+"ceiling" or per-cell threshold as an upload gate or a private-label bound.
+
 The hidden truth ``G`` is never published.  Every previous session in this
 repository scored candidates against *public-map proxies* (the SGMC raster, the
 public catalogue) and used those numbers as a promotion gate.

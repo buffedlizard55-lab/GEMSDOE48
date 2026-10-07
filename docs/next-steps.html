@@ -99,6 +99,18 @@ font-family:var(--mono);font-size:.78rem;overflow-wrap:anywhere;margin:10px 0}
 <a href="research/h56-results-20261007.md">H56 results</a>
 </div></nav>
 <main class="wrap">
+<div class="bad" role="alert"><strong>Metric correction — no weekly upload cleared.</strong>
+The H55/H56 live-equivalent projections assume <code>FPw = S − TPw</code>,
+which is generally false: FP uses a prediction-centred maximum, TP a truth-centred one.
+Treat the 0.2843 "ceiling" and H56's 0.0649 as <em>historical surrogate outputs</em>,
+not verified private-label results or portal acceptance.
+<a href="research/metric-identity-erratum-20261007.md">Read the derivation and executable counterexample</a>.</div>
+<div class="bad" role="alert"><strong>Research correction — no upload cleared.</strong>
+The H55 0.2843 “ceiling” and inverted truth totals rely on <code>FPw = S − TPw</code>,
+which is false in general under the official metric. They are historical model outputs,
+not private-label bounds or evidence that a new file will beat 0.2778.
+H55 fails the mass-neutral gate. Local TIFF checks are not organizer acceptance.
+<a href="research/metric-identity-erratum-20261007.md">Read the derivation and next validation steps</a>.</div>
 
 <header style="background:none;padding:0">
 <p class="eyebrow" style="color:var(--muted)">H56 current decision · no slot cleared</p>
@@ -233,7 +245,7 @@ primary. Static pages are maintained alongside <code>docs/research/</code> and t
 </main>
 <footer class="wrap">
 <p><strong>GEMSDOE48</strong> — auditable fault-surface research for DrivenData competition 306
-(DOE GEMS Prize). Built 2026-10-07 06:11 UTC by
+(DOE GEMS Prize). Built 2026-10-07 16:37 UTC by
 <code>scripts/build_site_h55.py</code> directly from the receipts in <code>evidence/</code>.</p>
 <p class="small"><strong>No organizer score exists for any file in this repository.</strong>
 Every live number is OWNER-REPORT class: a score pasted by the repository owner, not an

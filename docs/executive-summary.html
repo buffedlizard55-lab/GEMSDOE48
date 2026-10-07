@@ -99,6 +99,12 @@ font-family:var(--mono);font-size:.78rem;overflow-wrap:anywhere;margin:10px 0}
 <a href="research/h56-results-20261007.md">H56 results</a>
 </div></nav>
 <main class="wrap">
+<div class="bad" role="alert"><strong>Metric correction — no weekly upload cleared.</strong>
+The H55/H56 live-equivalent projections assume <code>FPw = S − TPw</code>,
+which is generally false: FP uses a prediction-centred maximum, TP a truth-centred one.
+Treat the 0.2843 "ceiling" and H56's 0.0649 as <em>historical surrogate outputs</em>,
+not verified private-label results or portal acceptance.
+<a href="research/metric-identity-erratum-20261007.md">Read the derivation and executable counterexample</a>.</div>
 
 <header style="background:none;padding:0">
 <p class="eyebrow" style="color:var(--muted)">Executive summary · 2026-10-07 · H56 session</p>
@@ -213,8 +219,9 @@ detector.</p>
 
 <h2>2 · The model</h2>
 <pre><code>k(d) = max(1 − d/300 m, 0)          official 300 m triangular kernel, α = 0.2, β = 0.8
-FPw  = S − TPw ,  FNw = |G| − TPw   exact for a matched binary emission
-DTI  = T / (0.2·S + 0.8·|G|)        linear in recovered truth at fixed mass
+Q    = Σ_x p(x) max_g k(d(x,g))   prediction-centred coverage
+FPw  = S − Q ,  FNw = |G| − T       T = TPw (truth-centred coverage)
+DTI  = T / (0.2·T + 0.2·S − 0.2·Q + 0.8·|G| + ε)
 
 T    = ρ · Cov(X)                   Cov(X) = Σ_(b ∈ B_elig) max_(x ∈ X) k(d(x,b))
 B_elig = h19-5 backbone AND &gt;200 m from the public catalogue   (103,805 px)</code></pre>

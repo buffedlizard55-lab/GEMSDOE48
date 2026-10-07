@@ -133,6 +133,16 @@ NAV = """<nav class="top"><div class="wrap">
 </div></nav>"""
 
 
+# Always render the correction above historical estimates, including on rebuild.
+# The 2026-10-07 H55 receipts are preserved for audit, NOT proven metric bounds.
+METRIC_ERRATUM = """<div class="bad" role="alert"><strong>Research correction — no upload cleared.</strong>
+The H55 0.2843 “ceiling” and inverted truth totals rely on <code>FPw = S − TPw</code>,
+which is false in general under the official metric. They are historical model outputs,
+not private-label bounds or evidence that a new file will beat 0.2778.
+H55 fails the mass-neutral gate. Local TIFF checks are not organizer acceptance.
+<a href="research/metric-identity-erratum-20261007.md">Read the derivation and next validation steps</a>.</div>"""
+
+
 def page(title: str, desc: str, body: str, extra_head: str = "") -> str:
     return f"""<!doctype html>
 <html lang="en">
@@ -147,6 +157,7 @@ def page(title: str, desc: str, body: str, extra_head: str = "") -> str:
 <body>
 {NAV}
 <main class="wrap">
+{METRIC_ERRATUM}
 {body}
 </main>
 <footer class="wrap">
@@ -174,12 +185,11 @@ def download_block(compact: bool = False) -> str:
     diag_links = " · ".join(
         f'<a href="{d["path"].replace("docs/", "", 1)}">{n}</a>' for n, d in DIAG.items())
     head = "" if compact else f"""<div class="dl">
-<h2>⬇ One-click download — this session's unique submission</h2>
+<h2>⬇ Archived H55 research TIFF — NOT cleared for competition upload</h2>
 <p class="small" style="margin-bottom:0"><strong>{html.escape(NAME)}</strong><br>
 {EM['positive_pixels']:,} positive pixels · single-band float32 · EPSG:32611 · 100 m ·
 3,730 × 3,292 · values exactly {{0, 1}} · <strong>all {PRIMARY['finite_cells']:,} cells finite,
-whole raster inside [0, 1]</strong> — immune to the portal's
-<em>“Predicted values must be in range [0, 1]”</em> rejection.</p>"""
+whole raster inside [0, 1]</strong> — passes a local range audit; organizer acceptance is unverified.</p>"""
     return f"""{head}
 <a class="bigbtn" href="{rel}" download>⬇ Download {html.escape(NAME)}-zeros-outside.tif
 <small>{PRIMARY['bytes']:,} bytes · click to save · single band float32 · EPSG:32611 ·
@@ -189,7 +199,7 @@ content id <code>{CID}</code> · submission name <code>{html.escape(NAME)}</code
 <div class="btnrow">
 <a class="btn" href="{relzip}" download>Same file as .zip ({ZIPINFO['bytes']:,} B)</a>
 <a class="btn" href="{relnan}" download>NaN-outside twin ({NANTWIN['bytes']:,} B)</a>
-<a class="btn" href="submission-guide.html">How to submit this → step by step</a>
+<a class="btn" href="submission-guide.html">Validation status and conditional upload steps</a>
 </div>
 <p class="meta">paste-ready submission note ({RECEIPT['paste_ready_note_length']} characters):<br>
 <code>{html.escape(NOTE)}</code></p>
@@ -309,12 +319,11 @@ def build_index() -> str:
     body = f"""
 <header style="background:none;padding:0;color:inherit">
 <p class="eyebrow" style="color:var(--muted)">GEMSDOE48 · DrivenData competition 306 · DOE GEMS Prize</p>
-<h1>A live-calibrated forward model, the family ceiling, and one unique submission</h1>
+<h1>H55 research candidate and a corrected metric audit</h1>
 <p class="deck" style="color:var(--muted)">This session stopped guessing. Eight owner-reported
 live scores were restored byte-identical from hash-pinned mirrors, inverted against the
 official metric, and used to fit a two-constant model that predicts all eight within
-<strong>±1.76 %</strong>. That model proves the 0.2778 family is finished — and it prices
-exactly one new bet.</p>
+<strong>±1.76 %</strong> in-sample. The model is assumption-dependent and does not prove a family ceiling; see the correction above.</p>
 </header>
 
 {download_block()}
@@ -323,9 +332,9 @@ exactly one new bet.</p>
 
 <h2>The four things this session established</h2>
 <div class="grid3">
-<div class="metric"><strong>0.2843</strong><span><strong>the family ceiling.</strong> Greedy
+<div class="metric"><strong>0.2843</strong><span><strong>historical surrogate frontier (not a ceiling).</strong> Greedy
 maximum-coverage re-emission over the eligible backbone peaks at n = {FRONT['argmax_prefix']['n']:,}
-px. No emission drawn from this corridor field reaches 0.2888 at <em>any</em> mass.</span></div>
+px in this model. This does not bound private-label DTI.</span></div>
 <div class="metric"><strong>±1.76 %</strong><span><strong>the instrument.</strong>
 DTI = ρ·Cov/(0.2 S + 0.8 |G|) with ρ = {LM['rho']:.6f}, |G| = {LM['hidden_truth_px']:,.0f},
 reproduces eight owner-reported live scores. Seven of eight inside ±2 %.</span></div>
@@ -340,10 +349,9 @@ prior session is not a model of the hidden truth.</span></div>
 <h2>Why 0.2778 won, and what it would take to beat it</h2>
 <p>The metric is a distance-weighted Tversky index with a 300 m triangular kernel and
 α = 0.2, β = 0.8 (independently corroborated by the organizers' own reference solution, which
-trains with <code>TverskyLoss(alpha=0.2, beta=0.8)</code>). For a binary emission the two
-identities <code>FPw = S − TPw</code> and <code>FNw = |G| − TPw</code> collapse it to</p>
-<pre><code>DTI = T / (0.2·S + 0.8·|G|)</code></pre>
-<p>so the score is <em>linear in recovered truth at fixed mass</em>. The 0.2778 artifact is a
+trains with <code>TverskyLoss(alpha=0.2, beta=0.8)</code>). For a binary emission, define <code>S = Σp</code>, <code>T = TPw</code>, and <code>Q = Σ_x p(x) max_g k(d(x,g))</code>. The exact identities are <code>FPw = S − Q</code> and <code>FNw = |G| − T</code>, giving</p>
+<pre><code>DTI = T / (0.2·T + 0.2·S − 0.2·Q + 0.8·|G| + ε)</code></pre>
+<p>The old inversion further assumed Q≈T, which the official metric does not guarantee. The numbers below are historical surrogate outputs, not measured hidden-truth totals. The 0.2778 artifact is a
 Poisson-disk thinning of one corridor field with every dot within 200 m of the public catalogue
 deleted. Restoring all eight live-scored members of that family and inverting gives:</p>
 {table(["artifact", "emitted px", "live", "inverted T", "recall", "credit/px"],
@@ -355,23 +363,21 @@ two independent views of the truth; they are two samplings of one corridor field
 recover the same hidden mass. Thinning from 121,131 px to 37,654 px discards 23.5 % of the
 field's truth while discarding 68.9 % of its mass — a good trade, already taken.</p>
 
-<h2>The ceiling, with two separate reachability tests</h2>
+<h2>Historical surrogate reachability table — NOT a proven ceiling</h2>
 {table(["target", "DTI", "T needed at 37,654 px", "recall", "% above C",
-        "in the dense field's yield (6,813)?", "by any 37,654 px subset?", "at ANY mass?"],
+        "historical dense-field model", "historical subset model", "historical mass model"],
        [[c["who"], f"{c['dti']:.4f}", f"{c['tpw_needed_at_37654_px']:,.1f}",
          f"{c['recall_needed']:.3f}", f"{c['pct_above_C_tpw']:+.1f} %",
          f'<span class="pill {"yes" if c["test_1_within_dense_backbone_truth_yield"] else "no"}">'
-         f'{"yes" if c["test_1_within_dense_backbone_truth_yield"] else "NO"}</span>',
+         f'{"yes" if c["test_1_within_dense_backbone_truth_yield"] else "model no"}</span>',
          f'<span class="pill {"yes" if c["test_2_achievable_by_any_37654_px_subset"] else "no"}">'
-         f'{"yes" if c["test_2_achievable_by_any_37654_px_subset"] else "NO"}</span>',
+         f'{"yes" if c["test_2_achievable_by_any_37654_px_subset"] else "model no"}</span>',
          f'<span class="pill {"yes" if c["test_3_reachable_at_any_mass_from_this_field"] else "no"}">'
-         f'{"yes" if c["test_3_reachable_at_any_mass_from_this_field"] else "NO"}</span>']
+         f'{"yes" if c["test_3_reachable_at_any_mass_from_this_field"] else "model no"}</span>']
         for c in CEIL], hl_row=len(CEIL) - 1)}
-<div class="bad"><strong>The headline negative result.</strong> #1 at 0.3774 needs
+<div class="warn"><strong>Model-only comparison, not a proof.</strong> Under the historical surrogate, #1 at 0.3774 needs
 T = {CEIL[0]['tpw_needed_at_37654_px']:,.0f}. The <em>dense, unthinned</em> backbone — all
-121,131 px emitted — yields T = {TRUTH[0]['inverted_tpw']:,.0f}. The leader's numerator exceeds
-the total truth content of the best corridor field in this repository. No combination rule,
-spacing sweep, re-weighting or fusion can close that gap; only a better detector can.</div>
+121,131 px emitted — yields T = {TRUTH[0]['inverted_tpw']:,.0f}. This comparison depends on Q≈T and unobserved private truth, so it cannot exclude a better emission.</div>
 
 <h2>What is shipped instead</h2>
 <p>The candidate is additive-only, because <code>TPw</code> is a maximum over emitted pixels:
@@ -489,9 +495,7 @@ that rejected most of them are now themselves in question.</p>
 Every earlier candidate remains downloadable; none of them is this session's file.</p>
 """
     return page("GEMSDOE48 — H55: live-calibrated ceiling and one unique submission",
-                "A two-constant forward model fitted to eight owner-reported live scores proves "
-                "the 0.2778 corridor family is capped at 0.2843, and prices one new additive "
-                "candidate built on GDR hydrothermal conduit evidence.", body)
+                "H55 research candidate, Gate-2 failure and metric-identity correction; no upload cleared.", body)
 
 
 # ---------------------------------------------------------------------------
@@ -516,22 +520,21 @@ then declined to submit. This session replaced the proxy with a <strong>forward 
 on eight owner-reported live scores</strong>. The model has two constants — the hidden truth mass
 |G| = {LM['hidden_truth_px']:,.1f} px and a coverage-to-truth ratio ρ = {LM['rho']:.6f} — and it
 reproduces all eight live scores with an RMS relative error of
-<strong>{RHO['rms_relative_error_pct']:.3f} %</strong>. Used honestly, it settles three questions
-that were previously matters of opinion: the 0.2778 artifact is within
-<strong>{fc['coverage_shortfall_of_C_pct']:.2f} %</strong> of coverage-optimal for its corridor
-field; the entire field is capped at live-equivalent <strong>{fc['live_equivalent_at_frontier']:.4f}</strong>
-at any mass; and the union of the two best families is worth <strong>{UNION['delta_vs_C_model']:+.5f}</strong>.
-Nothing in this repository can reach 0.2888, let alone 0.3195 or 0.3774, without a better
-detector.</p>
+<strong>{RHO['rms_relative_error_pct']:.3f} %</strong> in-sample. Its historical
+surrogate frontier at {fc['live_equivalent_at_frontier']:.4f} is NOT a bound under the
+organizer's metric; the inferred |G| and the estimated union delta
+{UNION['delta_vs_C_model']:+.5f} inherit the false Q≈T assumption. A new detector
+must be evaluated with the exact metric on untouched spatial blocks.</p>
 
 <h2>2 · The model</h2>
 <pre><code>k(d) = max(1 − d/300 m, 0)          official 300 m triangular kernel, α = 0.2, β = 0.8
-FPw  = S − TPw ,  FNw = |G| − TPw   exact for a matched binary emission
-DTI  = T / (0.2·S + 0.8·|G|)        linear in recovered truth at fixed mass
+Q    = Σ_x p(x) max_g k(d(x,g))    (prediction-centred coverage)
+FPw  = S − Q ,  FNw = |G| − T        T = TPw (truth-centred coverage)
+DTI  = T / (0.2·T + 0.2·S − 0.2·Q + 0.8·|G| + ε)
 
 T    = ρ · Cov(X)                   Cov(X) = Σ_(b ∈ B_elig) max_(x ∈ X) k(d(x,b))
 B_elig = h19-5 backbone AND &gt;200 m from the public catalogue   ({LM['target_eligible_backbone_px']:,} px)</code></pre>
-<p>|G| is identified because <code>A_d2_8 ⊃ B_prune100 ⊃ C_prune200</code> are strictly nested
+<p>The historical surrogate treated |G| as identified because <code>A_d2_8 ⊃ B_prune100 ⊃ C_prune200</code> are strictly nested
 (verified pixel-wise, not assumed) and the removed dots are catalogue-adjacent, so all three share
 one T. Least squares gives |G| = {GFIT['hidden_truth_px']:,.1f}; the three rungs then invert to
 T = 5,210.4 / 5,216.1 / 5,209.5, agreeing to <strong>0.11 %</strong>. That self-consistency is the
@@ -543,7 +546,7 @@ strongest single piece of evidence in the repository that catalogue-adjacent dot
 Two artifacts differing 12 % in mass (C and h32_prethin_tip) differ <strong>0.07 %</strong> in T
 and 0.9 % in Cov. Mass is noise; coverage of the corridor field is signal.</p>
 
-<h2>4 · The ceiling</h2>
+<h2>4 · Historical surrogate frontier (not an upper bound)</h2>
 <p>Greedy maximum-coverage selection over <code>B_elig</code>, traced from n = 1 to n = 45,000,
 maximises model DTI at <strong>n = {FRONT['argmax_prefix']['n']:,}</strong> with
 Cov = {FRONT['argmax_prefix']['coverage']:,.1f} → model DTI {FRONT['argmax_model_dti']:.5f} →
@@ -552,10 +555,9 @@ Cov = {fc['cov_of_live_best_C']:,.1f}, i.e. <strong>{fc['coverage_shortfall_of_C
 of coverage-optimal and 0.4 % off the optimal mass</strong>. The whole remaining in-family headroom
 is {fc['in_family_headroom_model_units']:+.4f} model units against an instrument resolution of
 ±{fc['instrument_resolution_in_dti_units']:.4f}.</p>
-<div class="bad"><strong>Therefore:</strong> #8 (0.2888), #7 (0.3195), #3 (0.3262), #2 (0.3345)
-and #1 (0.3774) are all unreachable from this corridor field at any mass — and #1 needs more
-truth (T = {CEIL[0]['tpw_needed_at_37654_px']:,.0f}) than the dense backbone contains in total
-(T = {TRUTH[0]['inverted_tpw']:,.0f}).</div>
+<div class="warn"><strong>Not a leaderboard reachability proof.</strong> The historical
+frontier used Q≈T and an inferred private truth mass. It cannot determine whether
+0.2888, 0.3195, or 0.3774 is reachable with a better candidate.</div>
 
 <h2>5 · Two instruments this repository relied on are contradicted by a live score</h2>
 <p><strong>The SGMC off-catalogue proxy.</strong> An emission built directly on it — 44,090 px,
@@ -636,9 +638,8 @@ def build_guide() -> str:
     body = f"""
 <header style="background:none;padding:0">
 <p class="eyebrow" style="color:var(--muted)">Submission guide · step by step</p>
-<h1>Exactly how to submit this file</h1>
-<p class="deck" style="color:var(--muted)">Six steps, about four minutes. Nothing here requires
-command-line work; the file is already built, audited and zipped.</p>
+<h1>How to submit a candidate after validation and slot clearance</h1>
+<p class="deck" style="color:var(--muted)">H55 is an archived, downloadable research file. It failed Gate-2; do not use a weekly submission slot for it. These instructions apply only once a future candidate passes validation and an organizer format check.</p>
 </header>
 
 {download_block()}
@@ -681,7 +682,7 @@ the entire experiment.</li>
 </ol>
 
 <h2>If the portal says “Predicted values must be in range [0, 1]”</h2>
-<div class="good"><strong>This primary file cannot produce that error.</strong> All
+<div class="warn"><strong>Local range check only; portal compatibility is unverified.</strong> All
 {PRIMARY['finite_cells']:,} cells are finite, the whole-raster minimum is {FORMAT['min_whole_raster']}
 and the maximum is {FORMAT['max_whole_raster']}, and <code>nodata</code> is unset. The audit asserts
 <code>portal_range_error_immune: {str(FORMAT['portal_range_error_immune']).lower()}</code> on the
@@ -756,16 +757,17 @@ FPw   = Σ_x p(x) · (1 − max_g k(d(x, g)))
 FNw   = Σ_g (1 − max_x p(x) · k(d(x, g)))
 DTI   = TPw / (TPw + 0.2·FPw + 0.8·FNw)</code></pre>
 
-<h2>2 · Three consequences that are exact, not approximate</h2>
+<h2>2 · Caveats on the historical selection arguments</h2>
 <h3>(a) The optimal submission is binary</h3>
 <p>For one cell of value <code>v</code> that is the argmax of its truth pixel with realised weight
 <code>k</code>: <code>d/dv[(T₀ + v·k)/(D₀ + 0.2v)] = (k·D₀ − 0.2·T₀)/(D₀ + 0.2v)²</code>, whose
 sign is that of <code>k − 0.2·DTI</code> and is <strong>independent of v</strong>. Every cell is
 pushed to 0 or 1, so a graded belief surface is strictly worse than its own binarisation. Asserted
 numerically in <code>tests/test_h55.py::test_binary_emission_is_dti_optimal</code>.</p>
-<h3>(b) An added pixel pays iff its kernel weight exceeds 0.2·DTI</h3>
-<p>0.0556 at DTI = 0.2778, i.e. 0.397 × the mean credit of a dot in the live-best artifact
-({TRUTH[4]['credit_per_px']:.4f}).</p>
+<h3>(b) The 0.2·DTI threshold is conditional</h3>
+<p>An addition changes both TPw and FPw. Its break-even point depends on its actual
+incremental FPw and coverage overlap; 0.0556 is the historical surrogate threshold,
+not a universal rule for a candidate dot.</p>
 <h3>(c) Adding a pixel can never reduce TPw</h3>
 <p><code>TPw</code> is a <em>maximum</em> over emitted pixels. The only risk of an addition is the
 0.2 denominator cost, which makes the worst case of an additive candidate
@@ -773,16 +775,18 @@ numerically in <code>tests/test_h55.py::test_binary_emission_is_dti_optimal</cod
 rather than an estimate.</p>
 
 <h2>3 · The removal-regime collapse</h2>
-<pre><code>FPw = S − M ,  FNw = |G| − TPw ,  M = TPw  (to within 0.2 %)
-⟹  DTI = T / (0.2·S + 0.8·|G|)</code></pre>
-<p>Two constants remain: the hidden truth mass |G| and the numerator T. Both are unknown; both
-turn out to be recoverable.</p>
+<pre><code>Q = Σ_x p(x) max_g k(d(x,g));   FPw = S − Q
+FNw = |G| − T;                 T = TPw
+DTI = T / (0.2·T + 0.2·S − 0.2·Q + 0.8·|G| + ε)</code></pre>
+<p>The historical simplification assumed Q≈T without verifying it against hidden labels.
+Neither |G| nor T is identified from the owner-reported scores alone.</p>
 
 <h2>4 · Identifying |G| from the nested live ladder</h2>
 <p><code>A_d2_8 ⊃ B_prune100 ⊃ C_prune200</code> — verified pixel-wise, not assumed. The removed
 dots are the catalogue-adjacent ones the organizer masks out of scoring, so all three share one T
 and |G| is identified. Least squares over the triple gives
-<strong>|G| = {GFIT['hidden_truth_px']:,.1f} px</strong>, shared T = {GFIT['shared_tpw']:,.1f}.
+<strong>model |G| = {GFIT['hidden_truth_px']:,.1f} px</strong>, model shared T = {GFIT['shared_tpw']:,.1f}.
+These are conditional outputs, not identified private-label quantities.
 The three pairwise closed-form solutions are
 {", ".join(f"{p['closed_form_G']:,.0f}" for p in GFIT['pairwise_closed_form'])} — a ±6 % spread
 driven entirely by the 4-decimal rounding of the owner-reported scores. The rungs then invert to
@@ -869,8 +873,7 @@ python scripts/run_spatial_holdout.py \\
 python -m pytest -q                                        # 158 passed, 3 skipped</code></pre>
 """
     return page("GEMSDOE48 H55 — method",
-                "Derivation of the DTI metric algebra, the live-calibrated forward model, the "
-                "coverage-frontier ceiling and the Dempster-Shafer selection rule.", body)
+                "Official DTI identities, H55 historical surrogate limits and Dempster-Shafer diagnostics.", body)
 
 
 # ---------------------------------------------------------------------------
@@ -1348,6 +1351,11 @@ the 0.2778 leaderboard row, which belongs to <code>extradr19</code>.</p>
 
 
 def main() -> int:
+    # This builder is for archived H55 pages. Never silently overwrite the
+    # current H56 landing page or its verified one-click downloads.
+    current = DOCS / "index.html"
+    if current.exists() and "GEMSDOE48 — H56" in current.read_text(encoding="utf-8"):
+        raise SystemExit("Refusing to overwrite the current H56 site with archived H55 pages")
     pages = {
         "research.html": build_research(),
         "leaderboard.html": build_leaderboard(),
