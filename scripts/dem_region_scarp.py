@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""H50-1 region-scale run: USGS 3DEP 1 m tiles -> 3 m -> linear scarp detector -> 100 m cells.
+"""H52-1 region-scale run: USGS 3DEP 1 m tiles -> 3 m -> linear scarp detector -> 100 m cells.
 
 Runs on GitHub-hosted runners (.github/workflows/dem-region-scarp.yml) because the sandbox
 cannot reach USGS hosts. Per tile it downloads the verbatim bucket URL from

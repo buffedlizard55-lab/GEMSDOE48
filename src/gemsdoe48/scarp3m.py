@@ -1,4 +1,4 @@
-"""H50-1: linear fault-scarp detector for 2–3 m DEM tiles (USGS 3DEP 1 m, block-averaged).
+"""H52-1: linear fault-scarp detector for 2–3 m DEM tiles (USGS 3DEP 1 m, block-averaged).
 
 Physical model (Bucknam & Anderson 1979, Geology 7:11-14; Hanks et al. 1984, JGR 89:5771;
 Hilley et al. 2010, GRL doi:10.1029/2009GL042044): a fault scarp is a *step* in an

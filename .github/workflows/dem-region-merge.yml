@@ -1,4 +1,4 @@
-name: H50-1 merge shards from a previous region run
+name: H52-1 merge shards from a previous region run
 # Re-runs only the mosaic step of dem-region-scarp.yml using the artifacts of the run id stored
 # in registry/scarp_merge_source_run.txt (the sandbox cannot read job logs or artifacts, so the
 # merge log is committed back to the branch as well). Trigger: push whose message starts with
@@ -43,13 +43,13 @@ jobs:
             echo "source_run=$(cat registry/scarp_merge_source_run.txt)"
             find scratch/shards -maxdepth 3 | head -50
             echo "npz_count=$(find scratch/shards -name '*.npz' | wc -l)"
-            python scripts/dem_region_merge.py --inp scratch/shards --out data/external/h50_scarp3m_100m.tif 2>&1
+            python scripts/dem_region_merge.py --inp scratch/shards --out data/external/h52_scarp3m_100m.tif 2>&1
             echo "merge_exit=$?"
             ls -la data/external
-          } | tee data/external/h50_scarp3m_merge_log.txt
+          } | tee data/external/h52_scarp3m_merge_log.txt
           python - <<'PY'
           import json, os, pathlib
-          p = pathlib.Path('data/external/h50_scarp3m_100m.json')
+          p = pathlib.Path('data/external/h52_scarp3m_100m.json')
           if p.exists():
               d = json.loads(p.read_text())
               d['workflow_run'] = f"{os.environ['GITHUB_SERVER_URL']}/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{os.environ['GITHUB_RUN_ID']}"
@@ -63,7 +63,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/external
-          git commit -m "Add H50-1 region-scale 3 m scarp product / merge log (run ${GITHUB_RUN_ID}) [skip ci]" || exit 0
+          git commit -m "Add H52-1 region-scale 3 m scarp product / merge log (run ${GITHUB_RUN_ID}) [skip ci]" || exit 0
           for i in 1 2 3 4 5; do
             git pull --rebase origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && break
             sleep 10

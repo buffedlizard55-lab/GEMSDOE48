@@ -1,10 +1,10 @@
 {
   "schema_version": 2,
-  "evaluated_utc": "2026-10-07T03:20:45.467025+00:00",
+  "evaluated_utc": "2026-10-07T03:21:44.218251+00:00",
   "status": "CONDITIONAL_SPATIAL_BLOCK_DIAGNOSTIC_NOT_SLOT_CLEARED",
   "candidate": {
-    "name": "h50_lidar_additions_2000",
-    "path": "docs/downloads/GEMSDOE48-H50-lidar-scarp-additions-20261007-38029417f6ca-nan-outside.tif",
+    "name": "h52_lidar_additions_2000",
+    "path": "docs/downloads/GEMSDOE48-H52-lidar-scarp-additions-20261007-38029417f6ca-nan-outside.tif",
     "sha256": "38029417f6cab01f9f56d4d3259a998affad6ae45a2a21a394682ee38b98e0c7"
   },
   "source_inputs": {
@@ -17,7 +17,7 @@
       "sha256": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757"
     },
     "combined": {
-      "path": "docs/downloads/GEMSDOE48-H50-lidar-scarp-additions-20261007-38029417f6ca-nan-outside.tif",
+      "path": "docs/downloads/GEMSDOE48-H52-lidar-scarp-additions-20261007-38029417f6ca-nan-outside.tif",
       "sha256": "38029417f6cab01f9f56d4d3259a998affad6ae45a2a21a394682ee38b98e0c7"
     }
   },
@@ -31,11 +31,11 @@
       "is_private_expert_test_truth": false
     },
     "sgmc_off_catalogue_gt_300m": {
-      "path": "data/official/derived_sgmc_faults_100m.tif",
-      "sha256": "643cbe992ef4ba37588fb469163ed8291e3ceb23d6c1f78a3cfaa462430c2da0",
+      "path": "data/raw/sgmc_faults_100m.tif",
+      "sha256": "26d142c4c93282cd94f6950ab96f22aeff59fbbea523d43d662e76fa1b161b5c",
       "class": "owner-mirror of an on-grid rasterization of USGS SGMC fault traces",
       "organizer_authenticated": false,
-      "positive_pixels": 62122,
+      "positive_pixels": 61664,
       "definition": "SGMC raster positive and within footprint, with Euclidean distance >300 m from a positive catalogue-label cell.",
       "source_comparison_receipt": "evidence/sgmc_raster_comparison_20261006.json",
       "prior_raw_raster_sensitivity_receipt": "evidence/holdout_raw_sgmc_20261006.json",
@@ -285,7 +285,7 @@
       },
       "mean_dti": 0.08553836970234897
     },
-    "h50_lidar_additions_2000": {
+    "h52_lidar_additions_2000": {
       "NW": {
         "tp": 174.52821794955364,
         "fp": 18840.93418065449,
@@ -404,12 +404,12 @@
         "valid_domain_cells": 2457001
       },
       "NE": {
-        "tp": 2053.440729971507,
-        "fp": 8757.275760136814,
-        "fn": 21138.559270028494,
-        "n_truth": 23192,
-        "dti": 0.09912464643098802,
-        "coverage": 0.08854090763933715,
+        "tp": 1935.8984544261277,
+        "fp": 8808.90632014841,
+        "fn": 20801.10154557387,
+        "n_truth": 22737,
+        "dti": 0.0951836493603206,
+        "coverage": 0.0851430907519078,
         "prediction_mass": 9644.0,
         "positive_cells": 9644,
         "valid_domain_cells": 1372176
@@ -426,17 +426,17 @@
         "valid_domain_cells": 570886
       },
       "SE": {
-        "tp": 876.1870117382703,
+        "tp": 875.8751767723522,
         "fp": 4894.070830045559,
-        "fn": 12570.81298826173,
-        "n_truth": 13447,
-        "dti": 0.07355713913474901,
-        "coverage": 0.0651585492480308,
+        "fn": 12568.124823227648,
+        "n_truth": 13444,
+        "dti": 0.073546163551761,
+        "coverage": 0.0651498941365927,
         "prediction_mass": 5266.0,
         "positive_cells": 5266,
         "valid_domain_cells": 792240
       },
-      "mean_dti": 0.09549116770426949
+      "mean_dti": 0.09450317454085563
     },
     "tip_stepover": {
       "NW": {
@@ -451,12 +451,12 @@
         "valid_domain_cells": 2457001
       },
       "NE": {
-        "tp": 2098.594358157621,
-        "fp": 9883.22190557988,
-        "fn": 21093.40564184238,
-        "n_truth": 23192,
-        "dti": 0.10017174411427186,
-        "coverage": 0.09048785607785534,
+        "tp": 1978.740979080532,
+        "fp": 9935.535517384935,
+        "fn": 20758.259020919468,
+        "n_truth": 22737,
+        "dti": 0.09618399701413012,
+        "coverage": 0.08702735537144443,
         "prediction_mass": 10797.0,
         "positive_cells": 10797,
         "valid_domain_cells": 1372176
@@ -473,17 +473,17 @@
         "valid_domain_cells": 570886
       },
       "SE": {
-        "tp": 888.5519732263328,
+        "tp": 888.2401382604148,
         "fp": 5435.192198736084,
-        "fn": 12558.448026773667,
-        "n_truth": 13447,
-        "dti": 0.07390835064479588,
-        "coverage": 0.06607808234002624,
+        "fn": 12555.759861739585,
+        "n_truth": 13444,
+        "dti": 0.07389754808995297,
+        "coverage": 0.06606963242044145,
         "prediction_mass": 5816.0,
         "positive_cells": 5816,
         "valid_domain_cells": 792240
       },
-      "mean_dti": 0.09549107373742055
+      "mean_dti": 0.09449143632367438
     },
     "arithmetic_mean": {
       "NW": {
@@ -498,12 +498,12 @@
         "valid_domain_cells": 2457001
       },
       "NE": {
-        "tp": 1922.2207126605663,
-        "fp": 9320.248832858346,
-        "fn": 21269.779287339436,
-        "n_truth": 23192,
-        "dti": 0.09240515503198116,
-        "coverage": 0.08288292138067292,
+        "tp": 1813.14253749215,
+        "fp": 9372.220918766672,
+        "fn": 20923.85746250785,
+        "n_truth": 22737,
+        "dti": 0.08876347924587218,
+        "coverage": 0.07974414115723931,
         "prediction_mass": 10220.5,
         "positive_cells": 12449,
         "valid_domain_cells": 1372176
@@ -520,17 +520,17 @@
         "valid_domain_cells": 570886
       },
       "SE": {
-        "tp": 825.8088479389564,
+        "tp": 825.4970129730384,
         "fp": 5164.631514390821,
-        "fn": 12621.191152061043,
-        "n_truth": 13447,
-        "dti": 0.0690724651675047,
-        "coverage": 0.061412125227854275,
+        "fn": 12618.50298702696,
+        "n_truth": 13444,
+        "dti": 0.0690606061755435,
+        "coverage": 0.061402634109865996,
         "prediction_mass": 5541.0,
         "positive_cells": 6623,
         "valid_domain_cells": 792240
       },
-      "mean_dti": 0.08875458487672969
+      "mean_dti": 0.08784120118221213
     },
     "prior_alpha_099_belief": {
       "NW": {
@@ -545,12 +545,12 @@
         "valid_domain_cells": 2457001
       },
       "NE": {
-        "tp": 1920.9759546129485,
-        "fp": 9310.248087450265,
-        "fn": 21271.02404538705,
-        "n_truth": 23192,
-        "dti": 0.0923553022778322,
-        "coverage": 0.08282924950900951,
+        "tp": 1811.973252848786,
+        "fp": 9362.157120753487,
+        "fn": 20925.026747151212,
+        "n_truth": 22737,
+        "dti": 0.08871599359609356,
+        "coverage": 0.07969271464347917,
         "prediction_mass": 10209.527266025543,
         "positive_cells": 12449,
         "valid_domain_cells": 1372176
@@ -567,17 +567,17 @@
         "valid_domain_cells": 570886
       },
       "SE": {
-        "tp": 825.3138109839839,
+        "tp": 825.0019760180659,
         "fp": 5159.659393265591,
-        "fn": 12621.686189016016,
-        "n_truth": 13447,
-        "dti": 0.06903737314219027,
-        "coverage": 0.06137531129500884,
+        "fn": 12618.998023981934,
+        "n_truth": 13444,
+        "dti": 0.06902550583569243,
+        "coverage": 0.06136581196206976,
         "prediction_mass": 5535.672426223755,
         "positive_cells": 6623,
         "valid_domain_cells": 792240
       },
-      "mean_dti": 0.08871454211449677
+      "mean_dti": 0.08780174811743766
     },
     "prior_union_decision": {
       "NW": {
@@ -592,12 +592,12 @@
         "valid_domain_cells": 2457001
       },
       "NE": {
-        "tp": 2182.509610279585,
-        "fp": 11351.34347105768,
-        "fn": 21009.490389720413,
-        "n_truth": 23192,
-        "dti": 0.10265623538141098,
-        "coverage": 0.09410614049153092,
+        "tp": 2057.7126907267057,
+        "fp": 11416.121183239698,
+        "fn": 20679.287309273295,
+        "n_truth": 22737,
+        "dti": 0.09852885236675189,
+        "coverage": 0.09050062412484962,
         "prediction_mass": 12449.0,
         "positive_cells": 12449,
         "valid_domain_cells": 1372176
@@ -614,19 +614,19 @@
         "valid_domain_cells": 570886
       },
       "SE": {
-        "tp": 928.7371089843136,
+        "tp": 928.4252740183956,
         "fp": 6174.441098162102,
-        "fn": 12518.262891015685,
-        "n_truth": 13447,
-        "dti": 0.07626204126194043,
-        "coverage": 0.06906649133519102,
+        "fn": 12515.574725981605,
+        "n_truth": 13444,
+        "dti": 0.07625185301106832,
+        "coverage": 0.06905870827271612,
         "prediction_mass": 6623.0,
         "positive_cells": 6623,
         "valid_domain_cells": 792240
       },
-      "mean_dti": 0.09699165735436653
+      "mean_dti": 0.09595726453798373
     },
-    "h50_lidar_additions_2000": {
+    "h52_lidar_additions_2000": {
       "NW": {
         "tp": 2300.4284707495294,
         "fp": 17939.29085869295,
@@ -639,12 +639,12 @@
         "valid_domain_cells": 2457001
       },
       "NE": {
-        "tp": 2070.230128103767,
-        "fp": 9097.218569178396,
-        "fn": 21121.769871896235,
-        "n_truth": 23192,
-        "dti": 0.09959211000923412,
-        "coverage": 0.08926483822455016,
+        "tp": 1952.6878525583875,
+        "fp": 9148.84912918999,
+        "fn": 20784.31214744161,
+        "n_truth": 22737,
+        "dti": 0.0956735282839954,
+        "coverage": 0.08588150822704788,
         "prediction_mass": 9992.0,
         "positive_cells": 9992,
         "valid_domain_cells": 1372176
@@ -661,39 +661,39 @@
         "valid_domain_cells": 570886
       },
       "SE": {
-        "tp": 914.6182417682974,
+        "tp": 914.3064068023793,
         "fp": 5460.669033867636,
-        "fn": 12532.381758231702,
-        "n_truth": 13447,
-        "dti": 0.07601132544320648,
-        "coverage": 0.06801652723791904,
+        "fn": 12529.69359319762,
+        "n_truth": 13444,
+        "dti": 0.0760009625865674,
+        "coverage": 0.06800850987818947,
         "prediction_mass": 5848.0,
         "positive_cells": 5848,
         "valid_domain_cells": 792240
       },
-      "mean_dti": 0.09640857027377896
+      "mean_dti": 0.0954263341283095
     }
   },
   "sgmc_paired_gate_vs_each_input": {
     "dotted": {
       "fold_delta_dti": {
         "NW": 0.00018370420571377222,
-        "NE": 0.00046746357824610507,
+        "NE": 0.0004898789236748025,
         "SW": 0.0005642561856204625,
-        "SE": 0.002454186308457465
+        "SE": 0.0024547990348064014
       },
-      "mean_delta_dti": 0.0009174025695094512,
+      "mean_delta_dti": 0.0009231595874538596,
       "positive_folds": 4,
       "passes_numeric_gate": true
     },
     "tip_stepover": {
       "fold_delta_dti": {
         "NW": 0.0005770410406052556,
-        "NE": -0.0005796341050377379,
+        "NE": -0.0005104687301347166,
         "SW": 0.001569604411455497,
-        "SE": 0.002102974798410595
+        "SE": 0.002103414496614428
       },
-      "mean_delta_dti": 0.0009174965363584024,
+      "mean_delta_dti": 0.000934897804635116,
       "positive_folds": 3,
       "passes_numeric_gate": true
     }
@@ -701,40 +701,40 @@
   "sgmc_paired_comparison_vs_arithmetic_mean": {
     "fold_delta_dti": {
       "NW": 0.005949541832178301,
-      "NE": 0.007186954977252968,
+      "NE": 0.006910049038123228,
       "SW": 0.010540584503064027,
-      "SE": 0.006938860275701772
+      "SE": 0.00694035641102389
     },
-    "mean_delta_dti": 0.007653985397049267,
+    "mean_delta_dti": 0.0075851329460973616,
     "positive_folds": 4,
     "passes_numeric_gate": true
   },
   "sgmc_paired_comparison_vs_prior_alpha_099_belief": {
     "fold_delta_dti": {
       "NW": 0.005980910389486185,
-      "NE": 0.007236807731401923,
+      "NE": 0.006957534687901848,
       "SW": 0.010584442215224407,
-      "SE": 0.0069739523010162036
+      "SE": 0.006975456750874964
     },
-    "mean_delta_dti": 0.00769402815928218,
+    "mean_delta_dti": 0.007624586010871851,
     "positive_folds": 4,
     "passes_numeric_gate": true
   },
   "sgmc_paired_comparison_vs_prior_union_decision": {
     "fold_delta_dti": {
       "NW": -0.000522602162460653,
-      "NE": -0.0030641253721768597,
+      "NE": -0.0028553240827564885,
       "SW": 0.0015050950310211003,
-      "SE": -0.0002507158187339542
+      "SE": -0.00025089042450092414
     },
-    "mean_delta_dti": -0.0005830870805875916,
+    "mean_delta_dti": -0.0005309304096742413,
     "positive_folds": 1,
     "passes_numeric_gate": false
   },
   "alternative_candidate_comparisons": {},
   "slot_decision": {
     "cleared": false,
-    "reason": "h50_lidar_additions_2000 is evaluated only against public-map proxy targets with frozen upstream surfaces; even a numeric proxy pass is not private-label evidence or a slot clearance and must also pass format, live-evidence, and review gates."
+    "reason": "h52_lidar_additions_2000 is evaluated only against public-map proxy targets with frozen upstream surfaces; even a numeric proxy pass is not private-label evidence or a slot clearance and must also pass format, live-evidence, and review gates."
   },
   "caveats": [
     "The catalogue and SGMC labels are public map proxies, not the private expert-labelled competition target.",

@@ -1,8 +1,8 @@
-# H50-1 candidate sweep — blocked SGMC proxy — 2026-10-07T03:10:55Z
+# H52-1 candidate sweep — blocked SGMC proxy — 2026-10-07T03:10:55Z
 
-Protocol: identical to `scripts/run_spatial_holdout.py` — four fixed quadrants, core + 300 m halo domain, truth = SGMC fault cells > 300 m from any public-catalogue cell (newer pinned derivative; raw-raster sensitivity in the second table), DTI with α = 0.2, β = 0.8, R = 300 m. The SGMC proxy is a *bedrock geologic-map* fault set; it is the agreed like-for-like instrument of this repository but a weak proxy for lidar-visible alluvial scarps, which is what H50-1 targets. Proxy scores are not organizer scores.
+Protocol: identical to `scripts/run_spatial_holdout.py` — four fixed quadrants, core + 300 m halo domain, truth = SGMC fault cells > 300 m from any public-catalogue cell (newer pinned derivative; raw-raster sensitivity in the second table), DTI with α = 0.2, β = 0.8, R = 300 m. The SGMC proxy is a *bedrock geologic-map* fault set; it is the agreed like-for-like instrument of this repository but a weak proxy for lidar-visible alluvial scarps, which is what H52-1 targets. Proxy scores are not organizer scores.
 
-Inputs: base `/home/user/GEMSDOE48/data/families/dotted_b2_prune_02778.tif` (SHA-256 `c55bafc47005…`), scarp product `/home/user/GEMSDOE48/data/external/h50_scarp3m_100m.tif` (SHA-256 `b5e53d67c3a7…`), layer `h_gate12`, cover ≥ 0.9. Covered cells 3,657,635; eligible addition cells 2,027,126; Poisson-thinned pool 12,000.
+Inputs: base `/home/user/GEMSDOE48/data/families/dotted_b2_prune_02778.tif` (SHA-256 `c55bafc47005…`), scarp product `/home/user/GEMSDOE48/data/external/h52_scarp3m_100m.tif` (SHA-256 `b5e53d67c3a7…`), layer `h_gate12`, cover ≥ 0.9. Covered cells 3,657,635; eligible addition cells 2,027,126; Poisson-thinned pool 12,000.
 
 ## Label-free detector check (top cells of the gated height vs catalogue adjacency, per quadrant)
 
@@ -58,7 +58,7 @@ Global thresholds: top-2 % = 2.73 m, top-1 % = 2.94 m.
 * Detector top-2 % lift ≥ 2× in all four quadrants: **no**.
 * **Slot decision: NOT slot-cleared.**
 
-Machine-readable: `evidence/h50_candidate_sweep_20261007.json`.
+Machine-readable: `evidence/h52_candidate_sweep_20261007.json`.
 
 ## Controls (post-hoc, not pre-registered)
 
@@ -71,8 +71,8 @@ Two controls separate *what the detector ranks* from *where the lidar footprint 
 | 8,000 | +0.003037 | +0.000552 | +0.006048 | 3/4 |
 | 12,000 | +0.005172 | +0.000484 | +0.009078 | 3/4 |
 
-Reading: height-ranked additions beat random additions by ~10× on this proxy, but random dots confined to the 0.7–2.5 m context-roughness band (dissected piedmont / range-front terrain) do better still (+0.009078 at 12,000, beating H49 by +0.003818 on the mean, 3/4 folds). On the SGMC bedrock-fault proxy the detector's value is therefore its *terrain class*, not its step height; the label-free check agrees (top-2 % height cells 1.48× catalogue-adjacency lift vs 1.57× for the roughness band alone, `evidence/h50_region_detector_checks_20261007.json`). The roughness-band result is a post-hoc control on a proxy that systematically favours rock-exposed terrain; it is **not** promoted to a candidate and clears no slot.
+Reading: height-ranked additions beat random additions by ~10× on this proxy, but random dots confined to the 0.7–2.5 m context-roughness band (dissected piedmont / range-front terrain) do better still (+0.009078 at 12,000, beating H49 by +0.003818 on the mean, 3/4 folds). On the SGMC bedrock-fault proxy the detector's value is therefore its *terrain class*, not its step height; the label-free check agrees (top-2 % height cells 1.48× catalogue-adjacency lift vs 1.57× for the roughness band alone, `evidence/h52_region_detector_checks_20261007.json`). The roughness-band result is a post-hoc control on a proxy that systematically favours rock-exposed terrain; it is **not** promoted to a candidate and clears no slot.
 
 ## Pilot vs region
 
-The two pilot tiles gave 2.3–3.2× top-2 % lift for the gated height (`evidence/h50_pilot_scarp_eval_20261007.json`, n = 44–98 cells); region-wide the same statistic is 1.19× (NW), 2.27× (NE), 1.53× (SW), 1.63× (SE). The pilot did not generalise: the pre-registered label-free gate (≥ 2× in all four quadrants) fails. Visual inspection of the pilot tiles (hillshade overlays, this session) shows why — the top-2 % height cells sit on fan-head incision and terrace risers along range fronts (≥ 2.7 m effective steps), while the catalogue's faint basin-floor scarps (0.3–1 m) fall below the threshold and the flattest terrain class (σ_ctx < 0.2 m) is dominated by playas and agriculture (lift 0.5×).
+The two pilot tiles gave 2.3–3.2× top-2 % lift for the gated height (`evidence/h52_pilot_scarp_eval_20261007.json`, n = 44–98 cells); region-wide the same statistic is 1.19× (NW), 2.27× (NE), 1.53× (SW), 1.63× (SE). The pilot did not generalise: the pre-registered label-free gate (≥ 2× in all four quadrants) fails. Visual inspection of the pilot tiles (hillshade overlays, this session) shows why — the top-2 % height cells sit on fan-head incision and terrace risers along range fronts (≥ 2.7 m effective steps), while the catalogue's faint basin-floor scarps (0.3–1 m) fall below the threshold and the flattest terrain class (σ_ctx < 0.2 m) is dominated by playas and agriculture (lift 0.5×).

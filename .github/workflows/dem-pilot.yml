@@ -1,4 +1,4 @@
-name: H50 DEM pilot (2 m copies of selected USGS 3DEP 1 m tiles)
+name: H52 DEM pilot (2 m copies of selected USGS 3DEP 1 m tiles)
 # The development sandbox cannot reach USGS hosts, so a hosted runner downloads a few
 # official 1 m tiles, block-averages them to 2 m and uploads them as a run artifact that
 # the sandbox retrieves through the GitHub API. Manual dispatch only; nothing is committed.

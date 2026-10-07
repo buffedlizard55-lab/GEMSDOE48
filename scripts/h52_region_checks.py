@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Label-free checks of the H50-1 region product: catalogue-adjacency lift (<=100 m) of the top-2 %
+"""Label-free checks of the H52-1 region product: catalogue-adjacency lift (<=100 m) of the top-2 %
 cells of several 100 m rankers, per quadrant, plus the roughness-band flag alone.
-Writes evidence/h50_region_detector_checks_20261007.json."""
+Writes evidence/h52_region_detector_checks_20261007.json."""
 from __future__ import annotations
 import json, pathlib, time
 import numpy as np, rasterio
@@ -9,7 +9,7 @@ from scipy.ndimage import distance_transform_edt
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 
 def main() -> int:
-    s = rasterio.open(ROOT / "data/external/h50_scarp3m_100m.tif"); tags = s.tags()
+    s = rasterio.open(ROOT / "data/external/h52_scarp3m_100m.tif"); tags = s.tags()
     def band(i, name):
         a = s.read(i).astype(np.float32); a[a == s.nodata] = np.nan; return a / float(tags["SCALE_" + name])
     h07, h12, hall, sig, cov = band(1, "h_gate07"), band(2, "h_gate12"), band(3, "h_all"), band(4, "sigma_mean"), band(7, "cover")
@@ -38,7 +38,7 @@ def main() -> int:
     for lo, hi in [(0, 0.1), (0.1, 0.2), (0.2, 0.4), (0.4, 0.7), (0.7, 1.2), (1.2, 2.5), (2.5, 1e9)]:
         m = covered & (sig >= lo) & (sig < hi)
         out["lift_by_sigma_bin_all_covered"][f"{lo}-{hi if hi < 1e8 else 'inf'}"] = {"n": int(m.sum()), "lift": float(near[m].mean() / near[covered].mean())}
-    (ROOT / "evidence/h50_region_detector_checks_20261007.json").write_text(json.dumps(out, indent=1))
+    (ROOT / "evidence/h52_region_detector_checks_20261007.json").write_text(json.dumps(out, indent=1))
     return 0
 
 if __name__ == "__main__":

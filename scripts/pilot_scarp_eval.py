@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""H50-1 pilot: evaluate the 3 m linear scarp detector on the two committed pilot tiles.
+"""H52-1 pilot: evaluate the 3 m linear scarp detector on the two committed pilot tiles.
 
 Instrument: catalogue-adjacency lift. For 100 m cells fully covered by the tile, the share of
 cells within 100 m of an existing_faults pixel ("near") among the top-q cells of a layer is
@@ -9,7 +9,7 @@ but it is the only label-free instrument available inside the sandbox, and the s
 instrument scored the 2 m u8 descriptors (data/raw/external/lidar_scarp_features_u8.tif)
 at <= 1x on these tiles, so the comparison is like-for-like.
 
-Writes evidence/h50_pilot_scarp_eval_20261007.json.
+Writes evidence/h52_pilot_scarp_eval_20261007.json.
 """
 from __future__ import annotations
 
@@ -86,7 +86,7 @@ def main() -> int:
             rec["layers"][n] = lifts(a, dom, nw, base)
         out["tiles"][tile] = rec
         print(tile, json.dumps({k: v for k, v in rec["layers"].items() if "gate_sigma<0.7" in k or "u8" in k}, indent=None))
-    dst = ROOT / "evidence/h50_pilot_scarp_eval_20261007.json"
+    dst = ROOT / "evidence/h52_pilot_scarp_eval_20261007.json"
     dst.write_text(json.dumps(out, indent=1))
     print("wrote", dst)
     return 0

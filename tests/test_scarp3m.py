@@ -1,4 +1,4 @@
-"""Synthetic checks for the H50-1 linear scarp detector (src/gemsdoe48/scarp3m.py)."""
+"""Synthetic checks for the H52-1 linear scarp detector (src/gemsdoe48/scarp3m.py)."""
 from __future__ import annotations
 
 import numpy as np

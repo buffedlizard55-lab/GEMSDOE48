@@ -63,6 +63,6 @@ merge_exit=0
 total 42880
 drwxr-xr-x 2 runner runner     4096 Oct  7 03:08 .
 drwxr-xr-x 9 runner runner     4096 Oct  7 03:07 ..
--rw-r--r-- 1 runner runner    53719 Oct  7 03:08 h50_scarp3m_100m.json
--rw-r--r-- 1 runner runner 43839078 Oct  7 03:08 h50_scarp3m_100m.tif
--rw-r--r-- 1 runner runner     2073 Oct  7 03:08 h50_scarp3m_merge_log.txt
+-rw-r--r-- 1 runner runner    53719 Oct  7 03:08 h52_scarp3m_100m.json
+-rw-r--r-- 1 runner runner 43839078 Oct  7 03:08 h52_scarp3m_100m.tif
+-rw-r--r-- 1 runner runner     2073 Oct  7 03:08 h52_scarp3m_merge_log.txt

@@ -1,9 +1,9 @@
 {
- "name": "GEMSDOE48-H50-lidar-scarp-additions-20261007-38029417f6ca",
- "file": "docs/downloads/GEMSDOE48-H50-lidar-scarp-additions-20261007-38029417f6ca-nan-outside.tif",
+ "name": "GEMSDOE48-H52-lidar-scarp-additions-20261007-38029417f6ca",
+ "file": "docs/downloads/GEMSDOE48-H52-lidar-scarp-additions-20261007-38029417f6ca-nan-outside.tif",
  "sha256": "38029417f6cab01f9f56d4d3259a998affad6ae45a2a21a394682ee38b98e0c7",
  "bytes": 346152,
- "zeros_twin": "docs/downloads/GEMSDOE48-H50-lidar-scarp-additions-20261007-38029417f6ca-zeros-outside.tif",
+ "zeros_twin": "docs/downloads/GEMSDOE48-H52-lidar-scarp-additions-20261007-38029417f6ca-zeros-outside.tif",
  "zeros_twin_sha256": "018ca3065cedf8f0fbda6cde429c759dacfdd8c6214c4814788d3bbf3e760a2f",
  "positives": 39654,
  "base_C_dots": 37654,
@@ -54,5 +54,6 @@
    "data/raw/tip_h33d_stepover.tif": 31614,
    "data/source_mirrors/footprint-mask.tif": 39654
   }
- }
+ },
+ "note": "renamed from H50 to H52 after the concurrent merge of other sessions' H50/H50-B/H51 artifacts into main; content and SHA-256 unchanged"
 }

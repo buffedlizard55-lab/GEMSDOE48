@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Build the H50-1 candidate family: C (0.2778 dotted prune) + lidar-scarp additions.
+"""Build the H52-1 candidate family: C (0.2778 dotted prune) + lidar-scarp additions.
 
 Inputs
   --base    data/families/dotted_b2_prune_02778.tif   (C: 37,654 binary dots, NaN outside)
-  --scarp   data/external/h50_scarp3m_100m.tif          (CI product of scripts/dem_region_merge.py)
+  --scarp   data/external/h52_scarp3m_100m.tif          (CI product of scripts/dem_region_merge.py)
   labels / footprint / SGMC proxies from the repository mirrors.
 
-Construction (pre-registered in docs/research/hypotheses-h50-20261007.md §4)
+Construction (pre-registered in docs/research/hypotheses-h52-20261007.md §4)
   1. eligible = footprint & cover >= --cover-min & height(layer) > 0
                & distance to catalogue > 200 m (C's own rule) & not within 200 m of a C dot
   2. rank eligible cells by the gated line-persistent scarp height, descending
@@ -94,7 +94,7 @@ def write_candidate(path: pathlib.Path, binary: np.ndarray, footprint: np.ndarra
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--base", type=pathlib.Path, default=ROOT / "data/families/dotted_b2_prune_02778.tif")
-    ap.add_argument("--scarp", type=pathlib.Path, default=ROOT / "data/external/h50_scarp3m_100m.tif")
+    ap.add_argument("--scarp", type=pathlib.Path, default=ROOT / "data/external/h52_scarp3m_100m.tif")
     ap.add_argument("--layer", default="h_gate12")
     ap.add_argument("--cover-min", type=float, default=0.9)
     ap.add_argument("--min-height", type=float, default=0.0, help="metres; additional absolute floor")
@@ -106,8 +106,8 @@ def main() -> int:
     ap.add_argument("--tip", type=pathlib.Path, default=ROOT / "data/raw/tip_h33d_stepover.tif")
     ap.add_argument("--h49", type=pathlib.Path,
                     default=ROOT / "docs/downloads/GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif")
-    ap.add_argument("--out-dir", type=pathlib.Path, default=ROOT / "scratch/h50")
-    ap.add_argument("--report", type=pathlib.Path, default=ROOT / "evidence/h50_candidate_sweep_20261007.json")
+    ap.add_argument("--out-dir", type=pathlib.Path, default=ROOT / "scratch/h52")
+    ap.add_argument("--report", type=pathlib.Path, default=ROOT / "evidence/h52_candidate_sweep_20261007.json")
     ap.add_argument("--tag", default="")
     ap.add_argument("--control", choices=["none", "random", "sigma_band"], default="none",
                     help="random: ignore the height ranking and add eligible cells in random order (seed 0); "
@@ -197,7 +197,7 @@ def main() -> int:
              **score(cand)}
         v["delta_vs_C_newer"] = v["sgmc_newer_offcat"]["mean_dti"] - report["references"]["C_dotted_02778"]["sgmc_newer_offcat"]["mean_dti"]
         v["delta_vs_h49_newer"] = v["sgmc_newer_offcat"]["mean_dti"] - report["references"]["h49_yager_balanced"]["sgmc_newer_offcat"]["mean_dti"]
-        path = args.out_dir / f"h50_C_plus_{n_eff}{('_' + args.tag) if args.tag else ''}.tif"
+        path = args.out_dir / f"h52_C_plus_{n_eff}{('_' + args.tag) if args.tag else ''}.tif"
         v["path"] = str(path.relative_to(ROOT)); v["sha256"] = write_candidate(path, cand, footprint, profile, nan_outside=True)
         report["variants"][str(n)] = v
         print(f"n={n_eff:5d} dots={v['dots']} newer={v['sgmc_newer_offcat']['mean_dti']:.6f} "

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Mosaic per-tile H50-1 scarp layers onto the official 100 m grid and write a compact GeoTIFF.
+"""Mosaic per-tile H52-1 scarp layers onto the official 100 m grid and write a compact GeoTIFF.
 
-Output: data/external/h50_scarp3m_100m.tif, int16, 7 bands, deflate. Encodings (see tags):
+Output: data/external/h52_scarp3m_100m.tif, int16, 7 bands, deflate. Encodings (see tags):
   h_gate07, h_gate12, h_all, sigma_mean : centimetres (value/100 = m), clipped to 327 m
   facing_at                             : value/10000
   strike_at                             : value/100 degrees
@@ -28,7 +28,7 @@ SCALE = {"h_gate07": 100, "h_gate12": 100, "h_all": 100, "sigma_mean": 100, "fac
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--inp", default="scratch/shards")
-    ap.add_argument("--out", default="data/external/h50_scarp3m_100m.tif")
+    ap.add_argument("--out", default="data/external/h52_scarp3m_100m.tif")
     args = ap.parse_args()
     acc = {b: np.full(GRID_SHAPE, np.nan, np.float32) for b in BANDS}
     files = sorted(glob.glob(str(pathlib.Path(args.inp) / "**" / "*.npz"), recursive=True))

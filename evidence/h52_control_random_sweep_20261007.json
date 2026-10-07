@@ -4,7 +4,7 @@
  "inputs": {
   "base": "/home/user/GEMSDOE48/data/families/dotted_b2_prune_02778.tif",
   "base_sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
-  "scarp": "/home/user/GEMSDOE48/data/external/h50_scarp3m_100m.tif",
+  "scarp": "/home/user/GEMSDOE48/data/external/h52_scarp3m_100m.tif",
   "scarp_sha256": "b5e53d67c3a7d3d1ca44ae04ae1e84d8574857da3fcd5e34ba47276d6c04b923",
   "layer": "h_gate12",
   "cover_min": 0.9,
@@ -161,7 +161,7 @@
    },
    "delta_vs_C_newer": -0.00015475693960936843,
    "delta_vs_h49_newer": -0.005414777717108563,
-   "path": "scratch/h50/h50_C_plus_2000_ctrl.tif",
+   "path": "scratch/h52/h52_C_plus_2000_ctrl.tif",
    "sha256": "101a08dc4fd07eadaeef573ab6a09bab330f361023342697186052e30e1bebce"
   },
   "4000": {
@@ -190,7 +190,7 @@
    },
    "delta_vs_C_newer": 0.00016782495276457254,
    "delta_vs_h49_newer": -0.005092195824734622,
-   "path": "scratch/h50/h50_C_plus_4000_ctrl.tif",
+   "path": "scratch/h52/h52_C_plus_4000_ctrl.tif",
    "sha256": "9a2b9a5b7d9988acfa135ea3941da261eb262104cf16315460a97828206aa4d1"
   },
   "8000": {
@@ -219,7 +219,7 @@
    },
    "delta_vs_C_newer": 0.0005515093160576579,
    "delta_vs_h49_newer": -0.004708511461441536,
-   "path": "scratch/h50/h50_C_plus_8000_ctrl.tif",
+   "path": "scratch/h52/h52_C_plus_8000_ctrl.tif",
    "sha256": "10281e657d75ea5bfe74fa68d9d9ecfce7bdc6bdb0be1c2f5ce6c7f766bb27bc"
   },
   "12000": {
@@ -248,7 +248,7 @@
    },
    "delta_vs_C_newer": 0.00048410607322094124,
    "delta_vs_h49_newer": -0.004775914704278253,
-   "path": "scratch/h50/h50_C_plus_12000_ctrl.tif",
+   "path": "scratch/h52/h52_C_plus_12000_ctrl.tif",
    "sha256": "c2df7a09aff77b209d12aa33718531e243fefa6f1695eb7e34f24e3347e7e65b"
   }
  }

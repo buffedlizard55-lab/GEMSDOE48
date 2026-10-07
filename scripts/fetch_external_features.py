@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fetch hash-pinned external feature mirrors needed by the H50 lidar-kinematic detector.
+"""Fetch hash-pinned external feature mirrors needed by the H52 (this session) lidar tests.
 
 Only GitHub egress is used (``gh api``); DrivenData is never contacted. Every file is
 verified against the SHA-256 recorded in ``registry/data_manifest_gemsdoe32.json`` and the

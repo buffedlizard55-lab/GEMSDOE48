@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""H50 pilot: fetch a handful of official USGS 3DEP 1 m DEM tiles and store 2 m copies.
+"""H52 pilot: fetch a handful of official USGS 3DEP 1 m DEM tiles and store 2 m copies.
 
 The development sandbox cannot reach ``prd-tnm.s3.amazonaws.com`` (every USGS host
 returns HTTP 000 there), so this script runs on a GitHub-hosted runner via

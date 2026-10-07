@@ -1,6 +1,6 @@
-name: H50-1 region-scale 3 m scarp detector
+name: H52-1 region-scale 3 m scarp detector
 # Downloads every zone-11 USGS 3DEP 1 m tile in registry/dem_tiles_pilot.json on hosted
-# runners (the sandbox cannot reach USGS hosts), runs the H50-1 linear scarp detector at 3 m
+# runners (the sandbox cannot reach USGS hosts), runs the H52-1 linear scarp detector at 3 m
 # and commits only the compact 100 m product (+ receipt) back to the pushing session branch.
 # Triggered manually or by a push whose message STARTS WITH "[run-scarp]".
 on:
@@ -72,10 +72,10 @@ jobs:
           path: scratch/shards
       - name: Mosaic onto the official grid
         run: |
-          python scripts/dem_region_merge.py --inp scratch/shards --out data/external/h50_scarp3m_100m.tif
+          python scripts/dem_region_merge.py --inp scratch/shards --out data/external/h52_scarp3m_100m.tif
           python - <<'PY'
           import json, os
-          p = 'data/external/h50_scarp3m_100m.json'
+          p = 'data/external/h52_scarp3m_100m.json'
           d = json.load(open(p))
           d['workflow_run'] = f"{os.environ['GITHUB_SERVER_URL']}/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{os.environ['GITHUB_RUN_ID']}"
           d['commit'] = os.environ['GITHUB_SHA']
@@ -88,7 +88,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/external
-          git commit -m "Add H50-1 region-scale 3 m scarp product on the 100 m grid (run ${GITHUB_RUN_ID}) [skip ci]" || exit 0
+          git commit -m "Add H52-1 region-scale 3 m scarp product on the 100 m grid (run ${GITHUB_RUN_ID}) [skip ci]" || exit 0
           for i in 1 2 3 4 5; do
             git pull --rebase origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && break
             sleep 10

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""Render the H50 candidate sweep (evidence/h50_candidate_sweep_*.json) as a Markdown report
-and apply the pre-registered slot gate from docs/research/hypotheses-h50-20261007.md §4."""
+"""Render the H52 candidate sweep (evidence/h52_candidate_sweep_*.json) as a Markdown report
+and apply the pre-registered slot gate from docs/research/hypotheses-h52-20261007.md §4."""
 from __future__ import annotations
 
 import argparse
@@ -16,9 +16,9 @@ def fmt(x):
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--sweep", type=pathlib.Path, default=ROOT / "evidence/h50_candidate_sweep_20261007.json")
-    ap.add_argument("--out", type=pathlib.Path, default=ROOT / "docs/research/holdout-h50-results-20261007.md")
-    ap.add_argument("--title", default="H50-1 candidate sweep — blocked SGMC proxy")
+    ap.add_argument("--sweep", type=pathlib.Path, default=ROOT / "evidence/h52_candidate_sweep_20261007.json")
+    ap.add_argument("--out", type=pathlib.Path, default=ROOT / "docs/research/holdout-h52-results-20261007.md")
+    ap.add_argument("--title", default="H52-1 candidate sweep — blocked SGMC proxy")
     args = ap.parse_args()
     d = json.load(args.sweep.open())
     refs, vars_ = d["references"], d["variants"]
@@ -28,7 +28,7 @@ def main() -> int:
          "truth = SGMC fault cells > 300 m from any public-catalogue cell (newer pinned derivative; raw-raster sensitivity "
          "in the second table), DTI with α = 0.2, β = 0.8, R = 300 m. The SGMC proxy is a *bedrock geologic-map* fault set; "
          "it is the agreed like-for-like instrument of this repository but a weak proxy for lidar-visible alluvial scarps, "
-         "which is what H50-1 targets. Proxy scores are not organizer scores.", "",
+         "which is what H52-1 targets. Proxy scores are not organizer scores.", "",
          f"Inputs: base `{d['inputs']['base']}` (SHA-256 `{d['inputs']['base_sha256'][:12]}…`), scarp product "
          f"`{d['inputs']['scarp']}` (SHA-256 `{d['inputs']['scarp_sha256'][:12]}…`), layer `{d['inputs']['layer']}`, "
          f"cover ≥ {d['inputs']['cover_min']}. Covered cells {d['counts']['covered_cells']:,}; eligible addition cells "
