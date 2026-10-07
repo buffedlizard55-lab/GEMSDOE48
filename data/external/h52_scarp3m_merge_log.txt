@@ -1,0 +1,68 @@
+source_run=37561683197
+scratch/shards
+scratch/shards/scarp-shard-17
+scratch/shards/scarp-shard-17/log_a.txt
+scratch/shards/scarp-shard-17/log_b.txt
+scratch/shards/scarp-shard-17/scratch
+scratch/shards/scarp-shard-17/scratch/scarp
+scratch/shards/scarp-shard-19
+scratch/shards/scarp-shard-19/log_a.txt
+scratch/shards/scarp-shard-19/log_b.txt
+scratch/shards/scarp-shard-19/scratch
+scratch/shards/scarp-shard-19/scratch/scarp
+scratch/shards/scarp-shard-14
+scratch/shards/scarp-shard-14/log_a.txt
+scratch/shards/scarp-shard-14/log_b.txt
+scratch/shards/scarp-shard-14/scratch
+scratch/shards/scarp-shard-14/scratch/scarp
+scratch/shards/scarp-shard-7
+scratch/shards/scarp-shard-7/log_a.txt
+scratch/shards/scarp-shard-7/log_b.txt
+scratch/shards/scarp-shard-7/scratch
+scratch/shards/scarp-shard-7/scratch/scarp
+scratch/shards/scarp-shard-0
+scratch/shards/scarp-shard-0/log_a.txt
+scratch/shards/scarp-shard-0/log_b.txt
+scratch/shards/scarp-shard-0/scratch
+scratch/shards/scarp-shard-0/scratch/scarp
+scratch/shards/scarp-shard-6
+scratch/shards/scarp-shard-6/log_a.txt
+scratch/shards/scarp-shard-6/log_b.txt
+scratch/shards/scarp-shard-6/scratch
+scratch/shards/scarp-shard-6/scratch/scarp
+scratch/shards/scarp-shard-18
+scratch/shards/scarp-shard-18/log_a.txt
+scratch/shards/scarp-shard-18/log_b.txt
+scratch/shards/scarp-shard-18/scratch
+scratch/shards/scarp-shard-18/scratch/scarp
+scratch/shards/scarp-shard-2
+scratch/shards/scarp-shard-2/log_a.txt
+scratch/shards/scarp-shard-2/log_b.txt
+scratch/shards/scarp-shard-2/scratch
+scratch/shards/scarp-shard-2/scratch/scarp
+scratch/shards/scarp-shard-12
+scratch/shards/scarp-shard-12/log_a.txt
+scratch/shards/scarp-shard-12/log_b.txt
+scratch/shards/scarp-shard-12/scratch
+scratch/shards/scarp-shard-12/scratch/scarp
+scratch/shards/scarp-shard-1
+scratch/shards/scarp-shard-1/log_a.txt
+scratch/shards/scarp-shard-1/log_b.txt
+scratch/shards/scarp-shard-1/scratch
+npz_count=697
+{
+ "n_tiles_merged": 697,
+ "n_npz_files": 697,
+ "merge_errors": [],
+ "n_tiles_ok": 700,
+ "n_tiles_failed": 0,
+ "failed": [],
+ "cells_with_cover": 5900588
+}
+merge_exit=0
+total 42880
+drwxr-xr-x 2 runner runner     4096 Oct  7 03:08 .
+drwxr-xr-x 9 runner runner     4096 Oct  7 03:07 ..
+-rw-r--r-- 1 runner runner    53719 Oct  7 03:08 h52_scarp3m_100m.json
+-rw-r--r-- 1 runner runner 43839078 Oct  7 03:08 h52_scarp3m_100m.tif
+-rw-r--r-- 1 runner runner     2073 Oct  7 03:08 h52_scarp3m_merge_log.txt

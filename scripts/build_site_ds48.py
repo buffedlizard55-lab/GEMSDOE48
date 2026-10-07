@@ -160,7 +160,7 @@ def build_index() -> str:
         'At matched mass the best arm (spacing 5.6 px, 37,499 dots) is x1.019 on the SGMC '
         'off-catalogue layer and x12.5 on the catalogue-in-corridor layer. The catalogue side is '
         'anti-monotone and carries no live information; the SGMC side is +1.9 %, inside the noise '
-        'of re-sampling the same corridor. Live-candidate, UNVALIDATED.</li>'
+        'of re-sampling the same corridor. Historical proxy candidate only; not slot-cleared.</li>'
         '<li>DS-ranked re-emission at matched mass: SGMC credit falls 5.8 %.</li></ul>'
         '<p>Conclusion: <b>the emission is at a local optimum</b> and the binding constraint is '
         'detector quality. ' + esc(neg.get('evidence_class', '')) + '</p>',
@@ -173,8 +173,8 @@ def build_index() -> str:
   this repository. The measurements below are local proxies, and this repository's central
   finding is that <b>the catalogue-based proxy ranks artifacts in the exact reverse of the live
   leaderboard</b> (Spearman &rho; = {fmt(ANTI.get('spearman_rho_proxy_dense_vs_live'), 1)} on
-  n = 4). Spending a weekly slot on a file that has not been validated against a live score is
-  therefore an owner decision, not something this repository can certify.</p>
+  n = 4). No weekly slot is cleared: do not upload any artifact on this historical page or
+  spend a slot. No owner override applies.</p>
 </section>
 
 <section>
@@ -195,7 +195,7 @@ def build_index() -> str:
     as a prediction.</p>
   </article>
   <article class="card feature">
-    <span class="badge blue">Portal candidate</span>
+    <span class="badge blue">Historical research artifact — not slot-cleared</span>
     <h3>DS-ranked, off-flank emission at the live-best mass</h3>
     <p class="fileline">{esc(em.get('file','—'))}</p>
     <p>{fmt(em.get('bytes'))} bytes · sha256 <code>{esc(em.get('sha256','—'))}…</code> ·
@@ -972,8 +972,8 @@ def _relativise(html_text: str) -> str:
         'padding:1rem;margin:1rem auto;max-width:1100px;color:#3d270e">'
         '<strong>HISTORICAL SUB-SITE — NOT A CURRENT SUBMISSION RECOMMENDATION.</strong> '
         'The figures, candidate names, and slot suggestions below belong to an earlier upstream '
-        'experiment and are superseded by the current rho=0.5 candidate and like-for-like blocked '
-        'proxy results. No weekly slot is cleared. Use the '
+        'experiment and are superseded by later H48/H49/H52 results and like-for-like blocked '
+        'proxy checks. No weekly slot is cleared. Use the '
         '<a href="../index.html">current overview</a> and '
         '<a href="../validation.html">current validation</a>.</div>'
     )

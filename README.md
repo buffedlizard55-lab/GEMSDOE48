@@ -1,18 +1,50 @@
-# GEMSDOE48 — auditable Dempster-Shafer fault-surface research
+# GEMSDOE48 — auditable fault-surface research (H48 → H49 → H52)
 
-> **Decision: no weekly submission slot is cleared.** The H48 `rho=0.5` candidate loses to the prior union on the shared SGMC blocked diagnostic (0.069261 vs 0.096992). The newer-main H49 balanced emission now scores 0.100751 vs that 0.096992 prior-union baseline (+0.003760, 4/4 folds) on the same protocol, and the direction repeats on the separate older SGMC raster. This is a post-selection re-score on related public proxy evidence, below the live instrument's roughly 0.005 resolution, and its live-anchored change bracket is −0.010 to +0.005. A format-only NaN-outside H49 copy passes local checks; organizer acceptance remains untested. No private-label or organizer score exists, so H49 is not slot-cleared.
->
-> **2026-10-07 (later session) update:** the merged H50 artifact was re-audited line by line and every checked number reproduced exactly. Two new unique constructions were preregistered and tested on the same blocked holdout: **H51** (binary plausibility-budget emission of the H50 fusion; SGMC proxy 0.086537, catalogue 0.007589 — gate not cleared) and **H50-B** (GeoDAWN low-Th/K alteration anomalies inside H50 conflict corridors, using the DOI 10.5066/P93LGLVQ mirror restored byte-identical from the GEMSDOE24 repo; 0.019135 / 0.015312 — a recorded negative result). Both are downloadable, honestly labelled research candidates; neither is recommended for upload. The session's consolidated finding: **no fusion of the two best existing surfaces beats the better parent on the proxies — raising the live score requires higher credit density (new signal), not better combination.** See [`docs/research/h51-h50b-results-20261007.md`](docs/research/h51-h50b-results-20261007.md).
->
-> **H50-GDR probe (separate GDR persistence line):** the corrected v2 repeat-persistence TIFF scores 0.003923 versus H49's 0.100751 on the primary spatial proxy (−0.096828; 0/4 folds positive), and also fails on the older raster (−0.095837; 0/4). V2 is a post-v1-score implementation sensitivity, not confirmatory evidence; do not upload or use a weekly slot. The merged H50-C slate also proposed a related INGENIOUS probe prior; this is an operator variant, not a novel thermal concept. See the [H50-GDR audit](docs/research/h50-gdr-probe-slate-20261007.md) and [prior-art erratum](evidence/h50_gdr_prior_art_errata_20261007.json).
+> **Decision (2026-10-07, H52 session — latest): still no weekly submission slot is cleared.** This session's unique file, **H52 = C + 2,000 native-lidar scarp additions**, scores 0.096409 on the shared blocked newer-SGMC proxy (C 0.095491, prior union 0.096992, H49 0.100751) and fails its pre-registered gate; the live-anchored bracket of the additions is −0.006 to +0.009. The earlier H48 ρ=0.5 and H49 conclusions below are unchanged. No organizer score exists for any file in this repository.
 
-## Executive summary and downloads
+> **Earlier decisions (unchanged):** no weekly submission slot is cleared. The H48 `rho=0.5` candidate loses to the prior union on the shared SGMC blocked diagnostic (0.069261 vs 0.096992). The newer-main H49 balanced emission now scores 0.100751 vs that 0.096992 prior-union baseline (+0.003760, 4/4 folds) on the same protocol, and the direction repeats on the separate older SGMC raster. This is a post-selection re-score on related public proxy evidence, below the live instrument's roughly 0.005 resolution, and its live-anchored change bracket is −0.010 to +0.005. A format-only NaN-outside H49 copy passes local checks; organizer acceptance remains untested. No private-label or organizer score exists, so H49 is not slot-cleared.
+>
+> **2026-10-07 (later session) update:** the merged H50 artifact was re-audited line by line and every checked number reproduced exactly. Two new unique constructions were preregistered and tested on the same blocked holdout: **H51** (binary plausibility-budget emission of the H50 fusion; SGMC proxy 0.086537, catalogue 0.007589 — gate not cleared) and **H50-B** (GeoDAWN low-Th/K alteration anomalies inside H50 conflict corridors, using the DOI 10.5066/P93LGLVQ mirror restored byte-identical from the GEMSDOE24 repo; 0.019135 / 0.015312 — a recorded negative result). Both are downloadable, honestly labelled research candidates; neither is recommended for upload. The session's consolidated finding: **no fusion of the two best existing surfaces beats the better parent on the proxies — raising the live score requires higher credit density (new signal), not better combination.** See [`docs/research/h51-h50b-results-20261007.md`](docs/research/h51-h50b-results-20261007.md). *Note: the H50/H50-B/H51 labels belong to those concurrent sessions; this session's work is labelled **H52** to avoid collisions.*
+
+## ⬇ This session's unique research TIFF (H52, 2026-10-07; not slot-cleared)
+
+- **Download:** [`docs/downloads/GEMSDOE48-H52-lidar-scarp-additions-20261007-38029417f6ca-nan-outside.tif`](docs/downloads/GEMSDOE48-H52-lidar-scarp-additions-20261007-38029417f6ca-nan-outside.tif) (346,152 bytes, SHA-256 `38029417f6cab01f9f56d4d3259a998affad6ae45a2a21a394682ee38b98e0c7`; [zeros-outside twin](docs/downloads/GEMSDOE48-H52-lidar-scarp-additions-20261007-38029417f6ca-zeros-outside.tif)) — one float32 band, EPSG:32611, 100 m, 3,730 × 3,292, {0,1} in-footprint, NaN outside, 39,654 positives. Byte- and pixel-distinct from every prior GEMSDOE artifact here ([identity receipt](evidence/h52_submission_identity_20261007.json)); [local format validation](evidence/h52_submission_validation_20261007.json) passes.
+- **Paste-ready note (143 characters):** `GEMSDOE48-H52 | 0.2778 dotted family + 2,000 lidar-scarp dots (3 m USGS 3DEP step detector, >200 m off-catalogue); unscored research candidate.`
+- **What it is:** the 0.2778 dotted family C (37,654 dots, untouched) plus 2,000 Poisson-spaced dots on the strongest line-persistent steps (effective height ≥ 3.29 m inside smooth terrain) found by `src/gemsdoe48/scarp3m.py` on all 700 zone-11 USGS 3DEP 1 m tiles, block-averaged to 3 m in GitHub Actions ([extract run](https://github.com/buffedlizard55-lab/GEMSDOE48/actions/runs/37561683197), [mosaic run](https://github.com/buffedlizard55-lab/GEMSDOE48/actions/runs/37565284104)); additions are > 200 m from the public catalogue and from any C dot. Builder: `scripts/build_submission_h52.py`.
+- **Status: not slot-cleared.** Pre-registered gate ([slate §4](docs/research/hypotheses-h52-20261007.md)) fails on both criteria: it does not beat H49 on the proxy, and the detector's label-free catalogue lift is 1.19× / 2.27× / 1.53× / 1.63× by quadrant (pilot tiles: 2.3–3.2×) against a ≥ 2× rule. Random additions in the same footprint give −0.000155 at 2,000 and +0.000484 at 12,000 (control). Full sweep, controls and the pilot-vs-region discrepancy: [H52 report](docs/research/holdout-h52-results-20261007.md).
+
+### What this session established (details in `docs/research/`)
+
+1. **The live ladder is bookkeeping, not geology.** A (44,090 dots, 0.2600) → B (40,199, 0.2708) → C (37,654, 0.2778) is reproduced exactly by removing catalogue-adjacent dots that the organizer masks from scoring; both steps give the same hidden-mass estimate within 7.5 %. C recovers ≈ 37 % of the hidden kernel mass; 0.3195 needs ≈ 42 %, 0.3774 ≈ 50 % at the same mass. A dot is worth adding only if its expected kernel weight exceeds 0.2·DTI ≈ 0.056 ([why-0.2778 note](docs/research/why-02778-and-ceiling-20261007.md), [`evidence/live_ladder_20261007.json`](evidence/live_ladder_20261007.json)).
+2. **No 100 m layer can re-rank C's dots profitably.** Best non-circular per-dot lift 1.43× (U/K), bar ≈ 2.6×; the 2 m u8 lidar descriptors are negative (≤ 0.91×); official band 6 `tc` is radiometric total count, not a magnetic derivative (irregularity logged).
+3. **Native 3 m lidar is obtainable and processable for free** (two-tile pilot + 700-tile region run, ≈ 1 h wall clock on hosted runners; sandbox cannot reach USGS or artifact hosts, so compact products are committed back). The v1 detector's region-wide value on bedrock-fault proxies is its *terrain class* (random dots in the 0.7–2.5 m roughness band: +0.009 on the proxy, beating H49 by +0.0038 — a post-hoc control, not promoted), not its step height. The v2 detector is the top next step ([next steps](docs/next-steps.html)).
+
+## Historical H50-GDR probe — failed gate; research archive
+
+H50-GDR is a separate, single-source repeat-persistence experiment from the earlier probe session. It is **not** the current H52 lidar candidate or the later H50 Dempster-Shafer fusion. Its corrected v2 file is retained for reproducibility, but it failed the frozen spatial gate; **do not upload it or spend a weekly slot**.
+
+- **Download:** [`GEMSDOE48-H50-2M-PERSIST-20261007-F12E5391BB9C-NAN`](docs/downloads/GEMSDOE48-H50-2M-PERSIST-20261007-f12e5391bb9c-nan.tif) · 225,114 bytes · SHA-256 `f12e5391bb9cd2709ae7331699bb0876cc4bf3c443f96ea8a5456c858eb67908`.
+- **Result:** primary proxy mean 0.003923 vs H49 0.100751 (paired −0.096828; 0/4 folds positive); older-raster sensitivity −0.095837, 0/4 positive. V2 corrected exact-location/date aggregation after v1 scores were observed, so this is a post-selection implementation sensitivity—not confirmatory validation.
+- **Checks:** local format audit passes; the refreshed bounded audit found no exact prediction/support match among 47 comparable local same-grid rasters. The closest is superseded v1 (support Jaccard 0.998179). This is not global or organizer-side uniqueness or acceptance.
+- **Prior art:** main's H50-C slate already proposed a related INGENIOUS 2 m probe residual along family corridors. H50-GDR uses a different operator but does not establish concept-level thermal novelty. The original local `H50-1` identifier also collides with the main slate's splay ID; user-facing references use H50-GDR.
+- **Review:** [H50-GDR research slate](docs/research/h50-gdr-probe-slate-20261007.md) · [prior-art/identifier erratum](evidence/h50_gdr_prior_art_errata_20261007.json) · [local format receipt](evidence/h50_probe_format_validation_20261007.json) · [bounded uniqueness receipt](evidence/h50_probe_uniqueness_20261007.json) · [proxy comparison](evidence/h50_probe_v2_exact_location_vs_h49_20261007.json) · [historical how-to and no-upload note](docs/submission-guide.html) · [review-pass log](evidence/review_passes_20261007.md).
+
+Rebuild the historical H50-GDR TIFF into a scratch directory (the command does not overwrite the published download):
+
+```bash
+python scripts/build_h50_probe_candidate.py \
+  --output-dir /tmp/h50-gdr-rebuild \
+  --receipt /tmp/h50-gdr-build-receipt.json \
+  --station-audit /tmp/h50-gdr-stations.csv \
+  --require-pinned-mirror-sha
+```
+
+## Executive summary and downloads (H48/H49, unchanged)
 
 GEMSDOE48 combines the public owner-mirror dotted and tip/step-over candidate families with reliability-discounted Dempster-Shafer mass assignments. It exports a graded belief raster plus separate residual-ignorance and raw-conflict diagnostics. A prior main-branch implementation also explored a full-confidence union decision surface; that historical result is retained and discussed below, not silently treated as a cleared submission.
 
 - **H48 `rho=.5` research artifact (fails the spatial promotion gate):** `GEMSDOE48-DS-FUSION-20261006` · [`GeoTIFF`](docs/downloads/GEMSDOE48-DS-conflict-aware-fusion-20261006.tif)
 - **Latest-main H49 proxy-best, still not slot-cleared:** `GEMSDOE48-H49-DS-CB-e6f08013888b-NAN` · [`NaN-outside format-audited GeoTIFF`](docs/downloads/GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif) · [`H49 same-protocol report`](docs/research/holdout-h49-results-20261006.md)
-- **H50-GDR repeat-persistence research TIFF (format pass; spatial gate failed; do not upload):** [`GEMSDOE48-H50-2M-PERSIST-20261007-F12E5391BB9C-NAN`](docs/downloads/GEMSDOE48-H50-2M-PERSIST-20261007-f12e5391bb9c-nan.tif) · [v2 proxy comparison](evidence/h50_probe_v2_exact_location_vs_h49_20261007.json) · [submission guide](docs/submission-guide.html)
 - **H51 plausibility-budget emission (gate not cleared):** `GEMSDOE48-H51-PLAUSIBILITY-BUDGET` · [`zeros-outside GeoTIFF`](docs/downloads/gemsdoe48-h51-plausibility-budget-20261007-f8fa1d08-zeros.tif) · [`zip`](docs/downloads/gemsdoe48-h51-plausibility-budget-20261007-f8fa1d08-zeros.zip) · [`NaN-outside twin`](docs/downloads/gemsdoe48-h51-plausibility-budget-20261007-f8fa1d08-nan.tif) · [`build receipt`](evidence/build_h51_receipt_20261007.json) · [`blocked holdout`](evidence/holdout_h51_20261007.json)
 - **H50-B alteration-conflict probe (negative result):** `GEMSDOE48-H50B-ALTERATION-CONFLICT` · [`zeros-outside GeoTIFF`](docs/downloads/gemsdoe48-h50b-alteration-conflict-20261007-806a4ba4-zeros.tif) · [`preregistration`](evidence/h50b_preregistration_20261007.json) · [`blocked holdout`](evidence/holdout_h50b_20261007.json) · [`restored GeoDAWN radiometric mirror`](data/source_mirrors/geodawn_rad_u8.tif) (SHA-256 `c22420f7…`, official DOI 10.5066/P93LGLVQ)
 - **Session results (H51 + H50-B + H50 re-audit):** [`docs/research/h51-h50b-results-20261007.md`](docs/research/h51-h50b-results-20261007.md)
@@ -31,12 +63,12 @@ GEMSDOE48 combines the public owner-mirror dotted and tip/step-over candidate fa
 
 The H48 Dempster TIFF uses one `float32` band, EPSG:32611, 100 m pixels, the documented 3,730 × 3,292 grid, finite in-footprint values in `[0,1]`, and NaN/nodata outside. Its output was re-opened and audited locally; organizer portal acceptance has not been tested. The original H49 file stored zeros outside; [`prepare_h49_format_copy.py`](scripts/prepare_h49_format_copy.py) creates a separate H49 derivative with NaN/nodata outside while preserving every in-footprint value exactly. Its independent local format audit also passes, but organizer portal acceptance is untested. The earlier alpha=.99 decision file likewise encodes zeros outside and is not the format-preferred artifact.
 
-## 2026-10-07 session — H50 unique Dempster-Shafer fusion (current deliverable)
+## 2026-10-07 concurrent session — H50 Dempster-Shafer fusion (research-only; slot gate failed)
 
 - **Deliverable:** `docs/downloads/gemsdoe48-h50-ds-b2xh36rung30-20261007-5b59e106-zeros.tif`
   (unique name `GEMSDOE48-H50-DS-B2xH36`, with a `.zip` twin), built by
   `scripts/build_ds50_submission.py`; receipt `evidence/build_ds50_receipt_20261007.json`.
-- **Parents:** dotted H33-2-B2 (37,654 px; owner-reported 0.2778, not linked by organizer evidence to the local bytes) × tip H36-1 rung30 (37,660 px; reported sibling score 0.2710) — first-ever fusion of this pair. Belief surfaces are the metric-geometry
+- **Parents:** dotted H33-2-B2 (37,654 px, owner-reported 0.2778; organizer has not linked it to these local bytes) × tip H36-1 rung30 (37,660 px, reported sibling value 0.2710) — first-ever fusion of this pair. Belief surfaces are the metric-geometry
   kernel-credit fields; discounts are the preregistered RHO_MAX=0.95 ceiling × the live-score
   ratio (a v1 build with a perfect-reliability anchor was withdrawn because it forced the
   unassigned-mass diagnostic to zero).
@@ -47,8 +79,8 @@ The H48 Dempster TIFF uses one `float32` band, EPSG:32611, 100 m pixels, the doc
 - **Honest blocked-holdout result:** `evidence/holdout_ds50_20261007.json` — H50 beats the naive
   mean 4/4 folds on the SGMC off-catalogue proxy and improves on the raw-sparse DS recipe with
   the same parents, but loses to both parents and the union on both proxies. **The slot gate is
-  not cleared; do not upload or spend a weekly slot.** The runbook in
-  `docs/h50/executive-summary.html` explains the portal form for future candidates only.
+  not cleared; do not upload H50 or spend a weekly slot.** The runbook in
+  `docs/h50/executive-summary.html` is future-use reference only, not authorization.
 - **Top hypothesis validated with no new data:** the coarse 100–600 m splay band fails its
   blocked test (`evidence/splay_probe_holdout_20261007.json`); the fresh preregistered slate is
   `docs/research/hypotheses-20261007.md`.
@@ -57,28 +89,6 @@ The H48 Dempster TIFF uses one `float32` band, EPSG:32611, 100 m pixels, the doc
 - **Leaderboard irregularity:** the brief's "0.3195 is the highest score" is stale; the official
   page (single manual read 2026-10-07) shows xiaofanhu #1 at 0.3774 and 0.3195 at #7 (DARD).
   Snapshot: `docs/data/leaderboard_20261007.json`.
-
-## H50-GDR shallow-probe persistence — failed gate, research only
-
-The separately named H50-GDR candidate is a single-source binary support map from public INGENIOUS 2 m probe data. Its TIFF has a local format pass, but the frozen public-proxy gate fails by a large margin; **do not upload it or spend a weekly slot**.
-
-- **Current v2 file:** [`GEMSDOE48-H50-2M-PERSIST-20261007-F12E5391BB9C-NAN`](docs/downloads/GEMSDOE48-H50-2M-PERSIST-20261007-f12e5391bb9c-nan.tif), 225,114 bytes, SHA-256 `f12e5391bb9cd2709ae7331699bb0876cc4bf3c443f96ea8a5456c858eb67908`.
-- **Rule/counts:** exact NAD83 source coordinates define locations; same-location/same-area/date readings are median-aggregated before leave-one-location-out residuals. V2 selected 28 persistent-repeat locations plus 1,404 positive-`2mDAB` fallback locations (1,432 total) and marks 29,607 positive 100 m cells with 300 m buffers. The builder reads the pinned probe archive and footprint only—not labels, SGMC, fault distance, or parent rasters.
-- **Post-score correction:** V1 treated duplicate rows at the same physical point as separate locations. V2 fixed exact-coordinate identity after V1 scores were observed; therefore V2 is an exploratory sensitivity, not an independent confirmatory test. See the [v1→v2 erratum](evidence/h50_implementation_errata_20261007.json) and the [prior-art/identifier erratum](evidence/h50_gdr_prior_art_errata_20261007.json).
-
-| Primary newer-SGMC spatial block | NW | NE | SW | SE | Mean DTI |
-|---|---:|---:|---:|---:|---:|
-| H50-GDR v2 | 0.008280 | 0.001864 | 0.003391 | 0.002156 | **0.003923** |
-| H49 Yager proxy-best | 0.106053 | 0.107901 | 0.110414 | 0.078636 | **0.100751** |
-| Paired delta | −0.097773 | −0.106037 | −0.107023 | −0.076480 | **−0.096828** |
-
-V2 loses in **0/4** folds. The separate older-SGMC sensitivity is also negative (−0.095837, 0/4); the catalogue proxy is 0.015601 versus H49's 0.095353. These are public-map proxy diagnostics, not leaderboard or hidden-label scores. Format validation against the competition sample footprint and the current bounded local uniqueness results are in the receipts below; no organizer acceptance or global uniqueness is claimed.
-
-The merged main slate also includes **H50-C**, a related proposal using INGENIOUS probes residualized against elevation/depth and intersected with family corridors. H50-GDR shares the source and broad thermal concept; repeat-date leave-one-location-out persistence, `2mDAB` fallback and no family gate are operator differences, not concept-level novelty. The two documents are kept separate: the main `docs/research/hypotheses-20261007.md` is the current main H50/H51 slate; the historical local frozen probe slate and its post-merge prior-art reconciliation are in [`docs/research/h50-gdr-probe-slate-20261007.md`](docs/research/h50-gdr-probe-slate-20261007.md). Its receipt/TIFF metadata retain the original local ID `H50-1`; current main uses that ID for a separate splay hypothesis, so user-facing text says H50-GDR.
-
-This candidate is a single-source binary raster, not a Dempster–Shafer fusion. It has no cross-source conflict/ignorance diagnostic, and a naïve-mean comparison is not meaningful for this one-source emission. The repository's distinct H50 DS fusion retains separate `m(Theta)` / raw `K` diagnostics and its explicit naïve-mean comparison in [`docs/h50/method.html`](docs/h50/method.html). The existing DS work is not replaced by this probe.
-
-**Tracking note only (not upload-ready):** `GDR 2m probe repeat-persistence; 300 m buffers; research proxy only, no slot clearance.` Build, format, spatial-holdout, source-audit and bounded-uniqueness receipts are linked in the [H50-GDR guide](docs/submission-guide.html).
 
 ## Starting prompt and project requirements
 
@@ -215,22 +225,29 @@ python scripts/validate_submission.py docs/downloads/GEMSDOE48-H49-DS-conflict-b
 python scripts/run_spatial_holdout.py --combined docs/downloads/GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif --candidate-name h49_yager_balanced --output evidence/holdout_h49_spatial_comparison_20261006.json
 python scripts/run_spatial_holdout.py --combined docs/downloads/GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif --candidate-name h49_yager_balanced --sgmc data/raw/sgmc_faults_100m.tif --allow-unpinned-sgmc --output evidence/holdout_h49_raw_sgmc_sensitivity_20261006.json
 
-# 2026-10-07 (later session): H51 + H50-B (inputs already committed and SHA-pinned)
+# --- H52 session (2026-10-07) ---
+python scripts/live_ladder_analysis.py                       # exact inversion of the live ladder -> evidence/live_ladder_20261007.json
+python scripts/pilot_scarp_eval.py                           # 3 m detector on the two committed pilot tiles (data/pilot/dem3m/)
+# region product: push a commit starting with "[run-scarp]" touching .github/workflows/dem-region-scarp.yml (hosted runners; ~1 h);
+# the mosaic is committed back as data/external/h52_scarp3m_100m.tif (+ .json receipt). Merge-only re-run: "[run-merge]" + registry/scarp_merge_source_run.txt
+python scripts/h52_region_checks.py                          # label-free quadrant checks -> evidence/h52_region_detector_checks_20261007.json
+python scripts/build_submission_h52.py --n-add 500,1000,2000,3000,4000,6000,8000,12000   # sweep -> evidence/h52_candidate_sweep_20261007.json, scratch/h52/*.tif
+python scripts/build_submission_h52.py --control random --tag ctrl --n-add 2000,4000,8000,12000 --report evidence/h52_control_random_sweep_20261007.json
+python scripts/build_submission_h52.py --control sigma_band --tag ctrlsig --n-add 4000,8000,12000 --report evidence/h52_control_sigma_band_sweep_20261007.json
+python scripts/h52_report.py                                 # -> docs/research/holdout-h52-results-20261007.md (controls appended by hand from the JSONs)
+python scripts/validate_submission.py docs/downloads/GEMSDOE48-H52-lidar-scarp-additions-20261007-38029417f6ca-nan-outside.tif --receipt evidence/h52_submission_validation_20261007.json
+python scripts/run_spatial_holdout.py --combined docs/downloads/GEMSDOE48-H52-lidar-scarp-additions-20261007-38029417f6ca-nan-outside.tif --candidate-name h52_lidar_additions_2000 --output evidence/holdout_h52_spatial_comparison_20261007.json
+python scripts/run_spatial_holdout.py --combined docs/downloads/GEMSDOE48-H52-lidar-scarp-additions-20261007-38029417f6ca-nan-outside.tif --candidate-name h52_lidar_additions_2000 --sgmc data/raw/sgmc_faults_100m.tif --allow-unpinned-sgmc --output evidence/holdout_h52_raw_sgmc_sensitivity_20261007.json
+
+# 2026-10-07 (concurrent session): H51 + H50-B (inputs already committed and SHA-pinned)
 python scripts/build_h51_submission.py          # H51 plausibility-budget emission + preregistration receipt
 python scripts/holdout_h51.py                   # blocked folds, both proxies, H49 as gate target
 python scripts/build_h50b_probe.py              # H50-B alteration-conflict probe (uses data/source_mirrors/geodawn_rad_u8.tif)
 python scripts/holdout_h50b.py                  # same protocol; negative result recorded
 python scripts/validate_submission.py docs/downloads/gemsdoe48-h51-plausibility-budget-20261007-f8fa1d08-nan.tif
-
-# H50-GDR shallow-probe persistence (v2 is an exploratory, gate-failed sensitivity)
-python scripts/build_h50_probe_candidate.py --require-pinned-mirror-sha
-python scripts/validate_submission.py docs/downloads/GEMSDOE48-H50-2M-PERSIST-20261007-f12e5391bb9c-nan.tif --receipt evidence/h50_probe_format_validation_20261007.json
-python scripts/run_spatial_holdout.py --combined docs/downloads/GEMSDOE48-H50-2M-PERSIST-20261007-f12e5391bb9c-nan.tif --candidate-name h50_probe_persistence_v2_exact_location --output evidence/holdout_h50_probe_v2_exact_location_20261007.json
-python scripts/audit_h50_candidate_uniqueness.py
-python scripts/compare_h50_to_h49.py
 ```
 
-The H48 rho=.5 builder remains `scripts/build_submission.py`. H49's separate mainline generation pipeline is `scripts/build_submission_h49.py`; `scripts/prepare_h49_format_copy.py` only fixes its outside-footprint encoding and preserves all inside values. The earlier alpha=.99 builder snapshot is retained as `scripts/previous_build_submission.py`; the earlier main builder is `scripts/previous_main_build_submission.py`, and the later PR #5 main Dempster builder is preserved as `scripts/previous_main_build_submission_pr5.py.disabled`. Build and holdout receipts are dated and hash-pinned. Five H48/H49 review passes—including API compatibility and the follow-up against the newer SGMC derivative—are recorded in [`evidence/review_passes_20261006.md`](evidence/review_passes_20261006.md). Nine sequential H50-GDR review passes, including post-merge H50-C prior-art reconciliation, current-main integration, refreshed format/uniqueness checks, and the no-slot decision, are recorded in [`evidence/review_passes_20261007.md`](evidence/review_passes_20261007.md).
+The H48 rho=.5 builder remains `scripts/build_submission.py`. H49's separate mainline generation pipeline is `scripts/build_submission_h49.py`; `scripts/prepare_h49_format_copy.py` only fixes its outside-footprint encoding and preserves all inside values. The earlier alpha=.99 builder snapshot is retained as `scripts/previous_build_submission.py`; the earlier main builder is `scripts/previous_main_build_submission.py`, and the later PR #5 main Dempster builder is preserved as `scripts/previous_main_build_submission_pr5.py.disabled`. Build and holdout receipts are dated and hash-pinned. Five review passes—including API compatibility and the follow-up against the newer SGMC derivative—are recorded in [`evidence/review_passes_20261006.md`](evidence/review_passes_20261006.md).
 
 ## Sources
 

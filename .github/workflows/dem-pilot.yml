@@ -1,0 +1,65 @@
+name: H52 DEM pilot (2 m copies of selected USGS 3DEP 1 m tiles)
+# The development sandbox cannot reach USGS hosts, so a hosted runner downloads a few
+# official 1 m tiles, block-averages them to 2 m and uploads them as a run artifact that
+# the sandbox retrieves through the GitHub API. Manual dispatch only; nothing is committed.
+on:
+  workflow_dispatch:
+    inputs:
+      tiles:
+        description: "Comma-separated tile ids from registry/dem_tiles_pilot.json"
+        default: "x42y425,x30y436,x41y427,x35y444,x38y420,x40y427"
+      res:
+        description: "Output resolution in metres"
+        default: "2"
+      commit_tiles:
+        description: "Comma-separated subset to commit back as compact int16 3 m copies (empty = none)"
+        default: "x42y425,x40y427"
+  push:
+    branches: ["arena/**"]
+    paths:
+      - ".github/workflows/dem-pilot.yml"
+      - "scripts/dem_pilot_fetch.py"
+permissions:
+  contents: write
+env:
+  TILES: ${{ github.event.inputs.tiles || 'x42y425,x30y436,x41y427,x35y444,x38y420,x40y427' }}
+  RES: ${{ github.event.inputs.res || '2' }}
+  COMMIT_TILES: ${{ github.event.inputs.commit_tiles || 'x42y425,x40y427' }}
+jobs:
+  fetch:
+    if: github.event_name == 'workflow_dispatch' || startsWith(github.event.head_commit.message, '[run-pilot]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install numpy==2.4.6 rasterio==1.4.4
+      - name: Fetch and reduce tiles
+        run: |
+          free -g; nproc; df -h /tmp | tail -1
+          python scripts/dem_pilot_fetch.py --tiles "$TILES" --res "$RES" --out scratch/dem_pilot || echo "one or more tiles failed (see receipt)"
+          ls -la scratch/dem_pilot
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dem-pilot-${{ github.run_id }}
+          path: scratch/dem_pilot/
+          retention-days: 14
+          compression-level: 0
+      - name: Compact 3 m int16 copies for the sandbox (the sandbox cannot reach artifact storage)
+        if: env.COMMIT_TILES != ''
+        run: |
+          python scripts/dem_pilot_fetch.py --tiles "$COMMIT_TILES" --res 3 --compact --out data/pilot/dem3m || echo "one or more compact tiles failed (see receipt)"
+          ls -la data/pilot/dem3m
+      - name: Commit compact pilot tiles to this session branch
+        if: env.COMMIT_TILES != '' && github.ref != 'refs/heads/main'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/pilot/dem3m
+          git commit -m "Add compact 3 m pilot DEM tiles (run ${GITHUB_RUN_ID}) [skip ci]" || exit 0
+          for i in 1 2 3 4 5; do
+            git pull --rebase origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && break
+            sleep 10
+          done

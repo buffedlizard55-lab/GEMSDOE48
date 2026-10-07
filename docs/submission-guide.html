@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Executive submission guide for GEMSDOE48: download, format checks, DrivenData upload steps, and the current no-slot decision.">
-  <title>Submission guide — GEMSDOE48</title>
+  <meta name="description" content="Historical H50-GDR research TIFF, bounded audits, prior-art caveats, and a no-upload format reference. Current executive summary links to the H52 session.">
+  <title>H50-GDR archive and format guide — GEMSDOE48</title>
   <style>
     :root { color-scheme: light; --ink:#173126; --muted:#52665c; --paper:#f5f4ed; --panel:#fffefa; --line:#d7ded5; --green:#214f3d; --green-soft:#e4eee5; --amber:#fff0d7; --amber-ink:#6b4215; --red:#8e3329; --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; --sans:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
     * { box-sizing:border-box; }
@@ -42,16 +42,16 @@
 <body>
   <header>
     <div class="wrap">
-      <div class="eyebrow">GEMSDOE48 · Executive how-to</div>
-      <h1>How to submit a GeoTIFF</h1>
-      <p>Use this checklist for the DOE GEMS Prize Challenge. The project can create and validate files locally, but it cannot submit them to DrivenData or verify portal acceptance.</p>
-      <p style="margin-top:10px"><a href="index.html">← Back to the project executive summary</a></p>
+      <div class="eyebrow">GEMSDOE48 · archived H50-GDR research note</div>
+      <h1>H50-GDR: gate failed; do not upload</h1>
+      <p>This page preserves the earlier probe TIFF, local audits, and future-use format checklist. The current main-session H52 page is the <a href="executive-summary.html">project executive summary</a>; no candidate is cleared for a weekly slot.</p>
+      <p style="margin-top:10px"><a href="index.html">← Back to the project research site</a></p>
     </div>
   </header>
   <main class="wrap">
     <section class="card alert" aria-labelledby="decision">
       <h2 id="decision">Current decision: do not use a competition slot</h2>
-      <p><strong>The corrected H50-GDR v2 TIFF is a research artifact, not a recommended upload.</strong> It passes local GeoTIFF/range checks. Its exploratory public-proxy score is <b>0.003923</b> versus <b>0.100751</b> for H49, a paired delta of <b>−0.096828</b> with 0/4 folds positive. V2 corrects source-location deduplication after the v1 score had been seen, so this is a post-selection implementation sensitivity, not confirmatory validation. It fails the frozen +0.005 promotion gate. No private-label score or organizer acceptance is available.</p>
+      <p><strong>No candidate is cleared for a weekly slot; keep the slot unused.</strong> The later H52 native-lidar candidate also failed its gate (0.096409 vs H49 0.100751), so do not upload it. The archived H50-GDR v2 TIFF is weaker still: it passes local GeoTIFF/range checks, but scores <b>0.003923</b> versus <b>0.100751</b> for H49, a paired delta of <b>−0.096828</b> with 0/4 folds positive. V2 corrects source-location deduplication after the v1 score had been seen, so this is a post-selection implementation sensitivity, not confirmatory validation. It fails the frozen +0.005 promotion gate. No private-label score or organizer acceptance is available.</p>
       <p>H49 itself remains un-cleared: its +0.003760 proxy gain over the prior union is below the preregistered +0.005 threshold and is not an independent private-label test. Keep the weekly slot unused.</p>
     </section>
 
@@ -62,7 +62,7 @@
       <p class="mono">Current artifact name: GEMSDOE48-H50-2M-PERSIST-20261007-F12E5391BB9C-NAN<br>GeoTIFF SHA-256: f12e5391bb9cd2709ae7331699bb0876cc4bf3c443f96ea8a5456c858eb67908<br>One float32 band · EPSG:32611 · 3,730 × 3,292 · 100 m · in-footprint [0,1] · NaN/nodata outside</p>
       <p><b>Comment string (for artifact tracking only; not an upload recommendation):</b></p>
       <p class="mono">GDR 2m probe repeat-persistence; 300 m buffers; research proxy only, no slot clearance.</p>
-      <p class="small">Format receipt: <a href="../evidence/h50_probe_format_validation_20261007.json">local submission-format audit</a>. Uniqueness receipt: <a href="../evidence/h50_probe_uniqueness_20261007.json">bounded local TIFF comparison</a> (45 other same-grid artifacts checked; no exact match; closest is superseded v1 with 0.998179 positive-support Jaccard). This does not prove global or organizer uniqueness. Spatial reports: <a href="../evidence/h50_probe_v2_exact_location_vs_h49_20261007.json">paired v2 comparison to H49</a> · <a href="../evidence/h50_implementation_errata_20261007.json">v1→v2 correction record</a>.</p>
+      <p class="small">Format receipt: <a href="../evidence/h50_probe_format_validation_20261007.json">local submission-format audit</a>. Uniqueness receipt: <a href="../evidence/h50_probe_uniqueness_20261007.json">bounded local TIFF comparison</a> (47 other same-grid artifacts checked; no exact match; closest is superseded v1 with 0.998179 positive-support Jaccard). This does not prove global or organizer uniqueness. Spatial reports: <a href="../evidence/h50_probe_v2_exact_location_vs_h49_20261007.json">paired v2 comparison to H49</a> · <a href="../evidence/h50_implementation_errata_20261007.json">v1→v2 correction record</a>.</p>
     </section>
 
     <section class="card" aria-labelledby="steps">
@@ -85,7 +85,7 @@
           <tr><td>Grid</td><td>EPSG:32611; 100 m; 3,730 × 3,292; template transform</td><td>Pass</td></tr>
           <tr><td>Data type / values</td><td>float32; finite in-footprint predictions in [0,1]</td><td>Pass; binary 0/1 output</td></tr>
           <tr><td>Outside footprint</td><td>Null/NaN convention in official instructions and sample</td><td>NaN/nodata outside; pass locally</td></tr>
-          <tr><td>Local artifact comparison</td><td>Different from previous local TIFF artifacts; do not claim global or organizer uniqueness</td><td>No exact match among 45 other same-grid files; closest is same-study v1 (Jaccard 0.998179). v2 is a corrected variant, not a new conceptual map.</td></tr>
+          <tr><td>Local artifact comparison</td><td>Different from previous local TIFF artifacts; do not claim global or organizer uniqueness</td><td>No exact match among 47 other same-grid files; closest is same-study v1 (Jaccard 0.998179). v2 is a corrected variant, not a new conceptual map.</td></tr>
           <tr><td>Scientific promotion</td><td>Beat the spatially blocked current best under the frozen gate</td><td><b>Fail</b>; exploratory v2 delta −0.096828 vs H49, 0/4 folds positive; v2 followed v1 score</td></tr>
           <tr><td>Organizer acceptance</td><td>Validated by the real portal</td><td>Not tested</td></tr>
         </tbody>

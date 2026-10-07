@@ -4,7 +4,7 @@
 <title>A Dempster–Shafer fusion of two independent fault-detector families · GEMSDOE48</title>
 <link rel="stylesheet" href="../assets/ds48-fusion/site.css">
 </head><body>
-<div style="background:#fff0d7;border:2px solid #b65c00;border-radius:8px;padding:1rem;margin:1rem auto;max-width:1100px;color:#3d270e"><strong>HISTORICAL SUB-SITE — NOT A CURRENT SUBMISSION RECOMMENDATION.</strong> The figures, candidate names, and slot suggestions below belong to an earlier upstream experiment and are superseded by the current rho=0.5 candidate and like-for-like blocked proxy results. No weekly slot is cleared. Use the <a href="../index.html">current overview</a> and <a href="../validation.html">current validation</a>.</div>
+<div style="background:#fff0d7;border:2px solid #b65c00;border-radius:8px;padding:1rem;margin:1rem auto;max-width:1100px;color:#3d270e"><strong>HISTORICAL SUB-SITE — NOT A CURRENT SUBMISSION RECOMMENDATION.</strong> The figures, candidate names, and slot suggestions below belong to an earlier upstream experiment and are superseded by later H48/H49/H52 results and like-for-like blocked proxy checks. No weekly slot is cleared. Use the <a href="../index.html">current overview</a> and <a href="../validation.html">current validation</a>.</div>
 <header class="top"><div class="wrap">
   <div class="brand"><span class="dot"></span><b>GEMSDOE48</b>
     <span class="tag">Dempster&ndash;Shafer disagreement-preserving fusion</span></div>
@@ -32,8 +32,8 @@
   this repository. The measurements below are local proxies, and this repository's central
   finding is that <b>the catalogue-based proxy ranks artifacts in the exact reverse of the live
   leaderboard</b> (Spearman &rho; = -1.0 on
-  n = 4). Spending a weekly slot on a file that has not been validated against a live score is
-  therefore an owner decision, not something this repository can certify.</p>
+  n = 4). No weekly slot is cleared: do not upload any artifact on this historical page or
+  spend a slot. No owner override applies.</p>
 </section>
 
 <section>
@@ -54,7 +54,7 @@
     as a prediction.</p>
   </article>
   <article class="card feature">
-    <span class="badge blue">Portal candidate</span>
+    <span class="badge blue">Historical research artifact — not slot-cleared</span>
     <h3>DS-ranked, off-flank emission at the live-best mass</h3>
     <p class="fileline">gemsdoe48-ds48-emission.tif</p>
     <p>282,876 bytes · sha256 <code>a579081d…</code> ·
@@ -123,7 +123,7 @@ Full derivation: <a href="research.html">Why 0.2778 won</a>.</p>
 <section>
 <h2>What this session built, and what it falsified</h2>
 <div class="grid3">
-  <article class="card"><h3>Dempster&amp;ndash;Shafer fusion <span class="badge blue">DERIVED</span></h3><p>The dotted family and the tip / step-over family agree on 69.6 % of their pixels and disagree on 14,724. They are combined with Dempster&rsquo;s rule on the frame {F, &not;F} with Shafer reliability discounts a = 0.60. Belief is 0.8400 at agreement and 0.3750 where only one family supports a pixel.</p></article><article class="card"><h3>Not the naive mean &amp;mdash; measured <span class="badge blue">MEASURED</span></h3><p>Pearson r = 0.991085 and Spearman rho = 1.000000 on the union. Values differ (mean |delta| = 0.1423) but the <b>ranking is identical</b>, because a union pixel has belief 1 in its own family, so both statistics are monotone in the other family&rsquo;s belief alone. Reproduced honestly rather than claimed as a win.</p></article><article class="card"><h3>Three falsified arms <span class="badge blue">PROXY</span></h3><ul><li>DS corroboration removal at 9 radii: gate fails everywhere (best safety 0.64 &lt; 2.0).</li><li>Hexagonal covering-optimal re-emission at 11 spacings: <b>not cleanly falsified</b>. At matched mass the best arm (spacing 5.6 px, 37,499 dots) is x1.019 on the SGMC off-catalogue layer and x12.5 on the catalogue-in-corridor layer. The catalogue side is anti-monotone and carries no live information; the SGMC side is +1.9 %, inside the noise of re-sampling the same corridor. Live-candidate, UNVALIDATED.</li><li>DS-ranked re-emission at matched mass: SGMC credit falls 5.8 %.</li></ul><p>Conclusion: <b>the emission is at a local optimum</b> and the binding constraint is detector quality. PROXY + DERIVED</p></article></div>
+  <article class="card"><h3>Dempster&amp;ndash;Shafer fusion <span class="badge blue">DERIVED</span></h3><p>The dotted family and the tip / step-over family agree on 69.6 % of their pixels and disagree on 14,724. They are combined with Dempster&rsquo;s rule on the frame {F, &not;F} with Shafer reliability discounts a = 0.60. Belief is 0.8400 at agreement and 0.3750 where only one family supports a pixel.</p></article><article class="card"><h3>Not the naive mean &amp;mdash; measured <span class="badge blue">MEASURED</span></h3><p>Pearson r = 0.991085 and Spearman rho = 1.000000 on the union. Values differ (mean |delta| = 0.1423) but the <b>ranking is identical</b>, because a union pixel has belief 1 in its own family, so both statistics are monotone in the other family&rsquo;s belief alone. Reproduced honestly rather than claimed as a win.</p></article><article class="card"><h3>Three falsified arms <span class="badge blue">PROXY</span></h3><ul><li>DS corroboration removal at 9 radii: gate fails everywhere (best safety 0.64 &lt; 2.0).</li><li>Hexagonal covering-optimal re-emission at 11 spacings: <b>not cleanly falsified</b>. At matched mass the best arm (spacing 5.6 px, 37,499 dots) is x1.019 on the SGMC off-catalogue layer and x12.5 on the catalogue-in-corridor layer. The catalogue side is anti-monotone and carries no live information; the SGMC side is +1.9 %, inside the noise of re-sampling the same corridor. Historical proxy candidate only; not slot-cleared.</li><li>DS-ranked re-emission at matched mass: SGMC credit falls 5.8 %.</li></ul><p>Conclusion: <b>the emission is at a local optimum</b> and the binding constraint is detector quality. PROXY + DERIVED</p></article></div>
 </section>
 
 <section>

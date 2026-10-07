@@ -1,5 +1,5 @@
 {
-  "artifacts_attempted": 45,
+  "artifacts_attempted": 47,
   "candidate": {
     "bytes": 225114,
     "path": "docs/downloads/GEMSDOE48-H50-2M-PERSIST-20261007-f12e5391bb9c-nan.tif",
@@ -18,7 +18,7 @@
     "sha256": "1997316a0102909135dfa12d48e86dbc1fbe567b4d4ba3884c53ce981b2bc50c",
     "union": 29661
   },
-  "comparable_artifacts": 45,
+  "comparable_artifacts": 47,
   "comparison_scope": [
     "docs/downloads",
     "data/raw",
@@ -183,6 +183,28 @@
       "positive_support_jaccard": 0.9981794275311014,
       "sha256": "1997316a0102909135dfa12d48e86dbc1fbe567b4d4ba3884c53ce981b2bc50c",
       "union": 29661
+    },
+    {
+      "comparable": true,
+      "exact_in_footprint_values": false,
+      "exact_positive_support": false,
+      "intersection": 172,
+      "path": "docs/downloads/GEMSDOE48-H52-lidar-scarp-additions-20261007-38029417f6ca-nan-outside.tif",
+      "positive_cells": 39654,
+      "positive_support_jaccard": 0.002489542474199945,
+      "sha256": "38029417f6cab01f9f56d4d3259a998affad6ae45a2a21a394682ee38b98e0c7",
+      "union": 69089
+    },
+    {
+      "comparable": true,
+      "exact_in_footprint_values": false,
+      "exact_positive_support": false,
+      "intersection": 172,
+      "path": "docs/downloads/GEMSDOE48-H52-lidar-scarp-additions-20261007-38029417f6ca-zeros-outside.tif",
+      "positive_cells": 39654,
+      "positive_support_jaccard": 0.002489542474199945,
+      "sha256": "018ca3065cedf8f0fbda6cde429c759dacfdd8c6214c4814788d3bbf3e760a2f",
+      "union": 69089
     },
     {
       "comparable": true,
