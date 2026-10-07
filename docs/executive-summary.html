@@ -15,6 +15,21 @@
   <a href="hypotheses.html">Hypotheses</a><a href="sources.html">Sources</a><a href="irregularities.html">Irregularities</a>
 </div></nav>
 <div class="wrap">
+  <section class="hero" id="h52">
+    <h2>2026-10-07 — H52 unique candidate file (download first, read second)</h2>
+    <p><a class="btn" href="downloads/GEMSDOE48-H52-lidar-scarp-additions-20261007-38029417f6ca-nan-outside.tif" download>Download GEMSDOE48-H52 GeoTIFF (NaN outside)</a>
+    <a class="btn alt" href="research/holdout-h52-results-20261007.md">Read the H52 sweep and controls</a></p>
+    <p><b>Paste-ready note (143 characters):</b> <code>GEMSDOE48-H52 | 0.2778 dotted family + 2,000 lidar-scarp dots (3 m USGS 3DEP step detector, &gt;200 m off-catalogue); unscored research candidate.</code></p>
+    <p>C (37,654 dots of the 0.2778 family) plus 2,000 dots on the strongest 3 m lidar steps (≥ 3.29 m effective height, smooth-terrain gate, &gt; 200 m from the catalogue and from C). SHA-256 <code>38029417f6ca…</code>, 346,152 bytes, 39,654 positives, one float32 band, EPSG:32611, 100 m, 3,730 × 3,292, values in [0,1] in-footprint and NaN outside — the format the portal rejected before was out-of-range values, which this file cannot produce (<a href="../evidence/h52_submission_validation_20261007.json">local validation</a>).</p>
+    <p class="small"><b>Not slot-cleared.</b> Newer-SGMC blocked proxy 0.096409 (C 0.095491, union 0.096992, H49 0.100751); pre-registered gate fails on both criteria; live bracket for the additions −0.006 to +0.009. If a slot must be used this week for Phase-2 option value (expert review of all submissions), this is the file; otherwise keep the slot. No organizer score exists for any file here.</p>
+    <h3>How to submit (unchanged)</h3>
+    <ol>
+      <li>Upload exactly one file: a single-band float32 GeoTIFF on the competition grid (EPSG:32611, 100 m, 3,730 rows × 3,292 columns, origin 243,350 E / 4,508,550 N). Every file in <code>downloads/</code> satisfies this; run <code>python scripts/validate_submission.py &lt;file&gt;</code> to re-check.</li>
+      <li>Values must be finite and inside [0, 1] wherever the sample template is finite; outside the footprint use NaN (preferred) or 0. The earlier portal error "Predicted values must be in range [0, 1]" came from out-of-range or non-finite in-footprint cells.</li>
+      <li>Paste the note above into the submission comment; keep the file name (it encodes the SHA-256 prefix) so the leaderboard row can be tied back to this repository.</li>
+    </ol>
+  </section>
+
   <section class="hero">
     <h2>Weekly slot decision: do not submit this candidate</h2>
     <p>The fixed <code>rho=0.5</code> discounted-Dempster surface loses to tip/stepover and the arithmetic-mean baseline on all four spatial blocks for both public-map proxy targets. It also loses to the prior union decision on all eight comparisons. These are conditional proxy diagnostics, not private-label validation, but they are sufficient to fail the preregistered promotion gate.</p>

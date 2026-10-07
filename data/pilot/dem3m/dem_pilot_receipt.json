@@ -1,0 +1,102 @@
+{
+  "generated_utc": "2026-10-07T02:06:40Z",
+  "res_m": 3.0,
+  "tiles": [
+    {
+      "tile": "x42y425",
+      "status": "ok",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NV_WestCentral_EarthMRI_2020_D20/TIFF/USGS_1M_11_x42y425_NV_WestCentral_EarthMRI_2020_D20.tif",
+      "project": "NV_WestCentral_EarthMRI_2020_D20",
+      "source_bytes": 262121460,
+      "source_sha256": "110073d0baebe79fdefe5b4ea1d8ec0267a14b24dc13017f244d840c400c7220",
+      "output": "x42y425_3m.tif",
+      "output_bytes": 4156097,
+      "output_sha256": "927c36c88debcaa65e9de9fbd0f3adf02b338614fbaed86e3e321111084735de",
+      "seconds": 15.3,
+      "src_crs": "EPSG:26911",
+      "src_transform": [
+        1.0,
+        0.0,
+        419993.9996882569,
+        0.0,
+        -1.0,
+        4250006.000006528
+      ],
+      "src_shape": [
+        10012,
+        10012
+      ],
+      "src_res": [
+        1.0,
+        1.0
+      ],
+      "src_nodata": -999999.0,
+      "src_dtype": "float32",
+      "out_shape": [
+        3337,
+        3337
+      ],
+      "out_transform": [
+        3.000299670362601,
+        0.0,
+        419993.9996882569,
+        0.0,
+        -3.000299670362601,
+        4250006.000006528
+      ],
+      "out_res_m": 3.0,
+      "valid_fraction": 1.0,
+      "z_min": 1606.775634765625,
+      "z_max": 2736.58642578125,
+      "encoding": "int16 decimetres: z_m = 1000 + value/10; nodata -32768"
+    },
+    {
+      "tile": "x40y427",
+      "status": "ok",
+      "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/NV_WestCentral_EarthMRI_2020_D20/TIFF/USGS_1M_11_x40y427_NV_WestCentral_EarthMRI_2020_D20.tif",
+      "project": "NV_WestCentral_EarthMRI_2020_D20",
+      "source_bytes": 284249117,
+      "source_sha256": "3fbe4601edf0338342121ed5260f2a09ba4a3a8f4b13b97e7270e196b6ba16f9",
+      "output": "x40y427_3m.tif",
+      "output_bytes": 5677887,
+      "output_sha256": "3a14850f2d33bb8b7ae077951c589ad9866f1978e0722691f2ef6ffcffeee718",
+      "seconds": 13.0,
+      "src_crs": "EPSG:26911",
+      "src_transform": [
+        1.0,
+        0.0,
+        399993.99966901785,
+        0.0,
+        -1.0,
+        4270006.0000292035
+      ],
+      "src_shape": [
+        10012,
+        10012
+      ],
+      "src_res": [
+        1.0,
+        1.0
+      ],
+      "src_nodata": -999999.0,
+      "src_dtype": "float32",
+      "out_shape": [
+        3337,
+        3337
+      ],
+      "out_transform": [
+        3.000299670362601,
+        0.0,
+        399993.99966901785,
+        0.0,
+        -3.000299670362601,
+        4270006.0000292035
+      ],
+      "out_res_m": 3.0,
+      "valid_fraction": 1.0,
+      "z_min": 1353.760009765625,
+      "z_max": 2435.554931640625,
+      "encoding": "int16 decimetres: z_m = 1000 + value/10; nodata -32768"
+    }
+  ]
+}

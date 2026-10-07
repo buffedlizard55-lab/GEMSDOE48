@@ -1,0 +1,70 @@
+name: H52-1 merge shards from a previous region run
+# Re-runs only the mosaic step of dem-region-scarp.yml using the artifacts of the run id stored
+# in registry/scarp_merge_source_run.txt (the sandbox cannot read job logs or artifacts, so the
+# merge log is committed back to the branch as well). Trigger: push whose message starts with
+# "[run-merge]".
+on:
+  push:
+    branches: ["arena/**"]
+    paths:
+      - ".github/workflows/dem-region-merge.yml"
+      - "registry/scarp_merge_source_run.txt"
+      - "scripts/dem_region_merge.py"
+permissions:
+  contents: write
+  actions: read
+jobs:
+  merge:
+    if: startsWith(github.event.head_commit.message, '[run-merge]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install numpy==2.4.6 scipy==1.17.1 rasterio==1.4.4
+      - name: Read source run id
+        run: echo "SOURCE_RUN=$(tr -d '[:space:]' < registry/scarp_merge_source_run.txt)" >> "$GITHUB_ENV"
+      - name: Download shard artifacts of the source run
+        uses: actions/download-artifact@v4
+        with:
+          pattern: scarp-shard-*
+          path: scratch/shards
+          run-id: ${{ env.SOURCE_RUN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Mosaic onto the official grid (always leaves a log)
+        shell: bash
+        run: |
+          mkdir -p data/external
+          {
+            echo "source_run=$(cat registry/scarp_merge_source_run.txt)"
+            find scratch/shards -maxdepth 3 | head -50
+            echo "npz_count=$(find scratch/shards -name '*.npz' | wc -l)"
+            python scripts/dem_region_merge.py --inp scratch/shards --out data/external/h52_scarp3m_100m.tif 2>&1
+            echo "merge_exit=$?"
+            ls -la data/external
+          } | tee data/external/h52_scarp3m_merge_log.txt
+          python - <<'PY'
+          import json, os, pathlib
+          p = pathlib.Path('data/external/h52_scarp3m_100m.json')
+          if p.exists():
+              d = json.loads(p.read_text())
+              d['workflow_run'] = f"{os.environ['GITHUB_SERVER_URL']}/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{os.environ['GITHUB_RUN_ID']}"
+              d['source_run'] = pathlib.Path('registry/scarp_merge_source_run.txt').read_text().strip()
+              d['commit'] = os.environ['GITHUB_SHA']
+              p.write_text(json.dumps(d, indent=1))
+          PY
+      - name: Commit product and log to this session branch
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/external
+          git commit -m "Add H52-1 region-scale 3 m scarp product / merge log (run ${GITHUB_RUN_ID}) [skip ci]" || exit 0
+          for i in 1 2 3 4 5; do
+            git pull --rebase origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && break
+            sleep 10
+          done

@@ -1,0 +1,171 @@
+{
+  "nested_A_superset_B_superset_C": true,
+  "n": {
+    "A": 44090,
+    "B": 40199,
+    "C": 37654
+  },
+  "removed": {
+    "A_minus_B": {
+      "n": 3891,
+      "max_d_cat_m": 100.0,
+      "n_on_catalogue_d0": 0
+    },
+    "B_minus_C": {
+      "n": 2545,
+      "min_d_cat_m": 141.4213562373095,
+      "max_d_cat_m": 200.0
+    }
+  },
+  "c_dots_within_300m_of_catalogue": 2171,
+  "inversion_S0": {
+    "T_per_pi_from_AB": 5073.287555555577,
+    "T_per_pi_from_BC": 5470.167737142842,
+    "T_per_pi_mean": 5271.727646349209,
+    "pair_consistency_pct": 7.5284652055595895,
+    "G_per_pi": 14307.376738432367,
+    "D_C_per_pi": 18976.701390745893,
+    "recall_weighted_T_over_G": 0.36846220958090337,
+    "mean_credit_per_C_dot": 0.14000445228526076,
+    "addition_bar_credit_per_dot": 0.05556,
+    "addition_bar_as_fraction_of_mean_dot": 0.39684452239272955,
+    "removal_rule": "removing n dots gains iff their total credit < 0.2*DTI*n, i.e. < 0.40 of the average C dot",
+    "note": "per-pi = full-region-equivalent; the public-chunk fraction pi cancels"
+  },
+  "ceiling": {
+    "xiaofanhu_0.3774": {
+      "T_needed_at_37654_px": 7161.8071048675,
+      "T_gain_pct_needed": 35.853131749460054,
+      "recall_needed": 0.5005674510289163
+    },
+    "alexoktaba_0.3345": {
+      "T_needed_at_37654_px": 6347.706615204502,
+      "T_gain_pct_needed": 20.410367170626365,
+      "recall_needed": 0.4436666994413686
+    },
+    "nchuzhoy_0.3262": {
+      "T_needed_at_37654_px": 6190.19999366131,
+      "T_gain_pct_needed": 17.422606191504684,
+      "recall_needed": 0.4326579293207008
+    }
+  },
+  "removal_frontier": [
+    {
+      "n_drop": 5000,
+      "removed_credit_rel_to_mean": 0.0,
+      "dti": 0.2932533356237984
+    },
+    {
+      "n_drop": 5000,
+      "removed_credit_rel_to_mean": 0.25,
+      "dti": 0.2838196239145883
+    },
+    {
+      "n_drop": 5000,
+      "removed_credit_rel_to_mean": 0.38,
+      "dti": 0.2789061622116348
+    },
+    {
+      "n_drop": 5000,
+      "removed_credit_rel_to_mean": 0.5,
+      "dti": 0.27436583207874565
+    },
+    {
+      "n_drop": 5000,
+      "removed_credit_rel_to_mean": 1.0,
+      "dti": 0.25539775103081713
+    },
+    {
+      "n_drop": 10000,
+      "removed_credit_rel_to_mean": 0.0,
+      "dti": 0.3105272057870359
+    },
+    {
+      "n_drop": 10000,
+      "removed_credit_rel_to_mean": 0.25,
+      "dti": 0.2905635789108487
+    },
+    {
+      "n_drop": 10000,
+      "removed_credit_rel_to_mean": 0.38,
+      "dti": 0.2801468813958167
+    },
+    {
+      "n_drop": 10000,
+      "removed_credit_rel_to_mean": 0.5,
+      "dti": 0.2705097441425736
+    },
+    {
+      "n_drop": 10000,
+      "removed_credit_rel_to_mean": 1.0,
+      "dti": 0.23012899414148355
+    },
+    {
+      "n_drop": 15000,
+      "removed_credit_rel_to_mean": 0.0,
+      "dti": 0.32996345850231174
+    },
+    {
+      "n_drop": 15000,
+      "removed_credit_rel_to_mean": 0.25,
+      "dti": 0.29817097043540103
+    },
+    {
+      "n_drop": 15000,
+      "removed_credit_rel_to_mean": 0.38,
+      "dti": 0.281548299427357
+    },
+    {
+      "n_drop": 15000,
+      "removed_credit_rel_to_mean": 0.5,
+      "dti": 0.26614889178441375
+    },
+    {
+      "n_drop": 15000,
+      "removed_credit_rel_to_mean": 1.0,
+      "dti": 0.20140594238851078
+    },
+    {
+      "n_drop": 20000,
+      "removed_credit_rel_to_mean": 0.0,
+      "dti": 0.3519952430651125
+    },
+    {
+      "n_drop": 20000,
+      "removed_credit_rel_to_mean": 0.25,
+      "dti": 0.3068189597711697
+    },
+    {
+      "n_drop": 20000,
+      "removed_credit_rel_to_mean": 0.38,
+      "dti": 0.283143798923273
+    },
+    {
+      "n_drop": 20000,
+      "removed_credit_rel_to_mean": 0.5,
+      "dti": 0.26117722287024003
+    },
+    {
+      "n_drop": 20000,
+      "removed_credit_rel_to_mean": 1.0,
+      "dti": 0.1684683151487855
+    }
+  ],
+  "synthetic_check": {
+    "exact_dti": 0.22933909611606085,
+    "identity_dti": 0.2293390961160611,
+    "identity_abs_err": 2.498001805406602e-16,
+    "after_removing_300_empty_dots_exact": 0.24459733917639606,
+    "predicted": 0.24459733917639637,
+    "removal_prediction_abs_err": 3.0531133177191805e-16,
+    "true_TPw": 220.58528937030508,
+    "inverted_TPw_from_pair": 220.58528937030556,
+    "inversion_rel_err_pct": 2.1903956591853842e-13,
+    "marginal_bar_check": {
+      "bar": 0.045867819223212175,
+      "note": "adding a dot with realised credit k changes DTI with the sign of k - 0.2*DTI",
+      "add_credit1_dot_delta": 0.0031109253627961964,
+      "add_credit0_dot_delta": -4.7678144535268085e-05
+    }
+  }
+}
