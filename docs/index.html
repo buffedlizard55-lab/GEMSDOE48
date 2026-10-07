@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="H56 open-world Dempster-Shafer GeoTIFF: downloadable and locally format-audited, but not slot-cleared; both H56 candidates fail same-protocol public proxy validation against H49.">
+<meta name="description" content="H56B-NF Dempster-Shafer GeoTIFF: downloadable for inspection, not recommended to submit; H56B-NF and the H56-F pruning ladder both fail matched public-proxy holdouts against H49.">
 <title>GEMSDOE48 — H56 results: download for inspection, do not submit</title>
 <style>
 :root{color-scheme:light;--ink:#12241d;--muted:#54665c;--paper:#f4f4ec;--panel:#fffefa;
@@ -140,6 +140,7 @@ Unique name <code>GEMSDOE48-H56B-NF-DS-dotted-x-tip-20261007-5bb2c03c981e</code>
 <p class="small"><strong>Not the arithmetic mean:</strong> Pearson r=0.392708 vs binary mean; r=0.992499 vs normalized kernel mean (MAE 0.018375, maximum difference 0.417241, 12.58% differ by &gt;0.05). High correlation is disclosed; non-identity is not evidence of improvement.</p>
 <p class="small"><strong>Matched holdout:</strong> catalogue DTI 0.056305 vs H49 0.095353; SGMC &gt;300 m off-catalogue DTI 0.068987 vs H49 0.100751; 0/4 folds on both public-map proxies. No score above 0.2778 or 0.3195 is supportable for this file; the old 0.0649 projection is invalid under the <a href="research/metric-identity-erratum-20261007.md">metric-identity correction</a>.</p>
 <p class="small"><strong>Prior-art/receipt trail:</strong> the earlier with-flank H56B rebuild is within 1.8e-7 of prior H56, so it is not a meaningfully new candidate. H56B-NF has no exact byte/pixel match in the local search but is a post-hoc ablation, not a new geological signal. See <a href="../evidence/build_h56b_noflank_receipt_20261007.json">build</a> · <a href="../evidence/audit_h56b_noflank_artifact_20261007.json">independent audit</a> · <a href="../evidence/h56b_noflank_format_validation_20261007.json">format check</a> · <a href="../evidence/h56b_noflank_uniqueness_20261007.json">uniqueness scope</a> · <a href="../evidence/holdout_h56b_noflank_vs_h49_currentprotocol_20261007.json">matched holdout</a> · <a href="research/h56b-review-erratum-20261007.md">full review</a> · <a href="research/h57-hypothesis-slate-20261007.md">five future hypotheses</a>.</p>
+<p class="small"><strong>Separate H56-F pruning screen — rejected, no slot.</strong> The frozen 0.90/0.95/0.99 thresholds on the earlier H56B Bel(F) field never beat H49 on any of four folds for either public proxy. The 0.90 rung removes no dotted cells; stronger pruning worsens the SGMC proxy. This is an offline screen on public maps and frozen full-scene parents, not private-label validation. See the <a href="research/h56f-pruning-results-20261007.md">H56-F report</a> and <a href="../evidence/h56f_pruning_holdout_20261007.json">receipt</a>.</p>
 </div>
 
 <section class="card" id="historical-h56">

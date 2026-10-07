@@ -1,8 +1,8 @@
-# Correction: the H55 fitted family ceiling is not a metric bound
+# Correction: historical fitted family ceilings and live-equivalent projections are not metric bounds
 
 **Status: research erratum, 2026-10-07. No candidate is cleared for a weekly upload.**
 
-The published H55 pages and `src/gemsdoe48/live_model.py` use `FPw = S - TPw` to invert owner-reported scores and claim a 0.2843 ceiling for every emission from the corridor. **That identity is false in general, even for binary predictions.** The reported calibration and greedy frontier are an *assumption-dependent surrogate*, not an exact inverse of the competition metric, and not an upper bound on hidden-label DTI. Keep the historical receipts to audit what was computed, but do not use the resulting `|G|`, inverted `T`, credit/px, 0.2843 ceiling, 0.2736–0.2880 scenario band, or `0.0556` universal per-pixel threshold as established facts about the organizer's labels.
+The H54–H56 credit-density/live-model pages and `src/gemsdoe48/live_model.py` use `FPw = S - TPw` to invert owner-reported scores, derive per-cell break-even bars and claim a 0.2843 ceiling for emissions from the corridor. **That identity is false in general, even for binary predictions.** The reported calibration and greedy frontier are an *assumption-dependent surrogate*, not an exact inverse of the competition metric, and not an upper bound on hidden-label DTI. Keep the historical receipts to audit what was computed, but do not use the resulting `|G|`, inverted `T`, credit/px, 0.2843 ceiling, 0.2736–0.2880 scenario band, or `0.0556` universal per-pixel threshold as established facts about the organizer's labels.
 
 ## Derivation from the organizer's definition
 

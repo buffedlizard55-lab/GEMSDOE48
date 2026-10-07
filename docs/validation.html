@@ -128,6 +128,18 @@ The H55 0.2843 “ceiling,” inverted truth totals, and live-equivalent scenari
 <p class="small">Chronology correction: the 15:17/15:20Z receipts are an earlier H56 predecessor, not final H56B. The H56B-specific 16:00Z slate is later than that predecessor run but before final H56B at 17:37/17:38Z; it contains measurements and a different recipe, so it is not a verified preregistration of final H56B. H56B-NF was built post hoc. See <a href="research/h56b-review-erratum-20261007.md">review/chronology erratum</a>, <a href="../evidence/h56b_review_corrections_20261007.json">correction record</a>, and the <a href="research/h57-hypothesis-slate-20261007.md">five-hypothesis H57 slate</a>.</p>
 </section>
 
+<h2>H56-F frozen pruning ladder — blocked holdout FAIL; no slot</h2>
+<section class="card">
+<p>H56-F thresholds the earlier with-flank H56B normalized Bel(F) only at dotted-parent cells, at frozen cutoffs 0.90, 0.95, and 0.99. No new cells are added. Every rung loses to same-protocol H49 in all four folds for both public proxies; the 0.90 rung removes no cells and is just the dotted baseline.</p>
+<table><thead><tr><th>rung</th><th>catalogue proxy DTI</th><th>SGMC &gt;300 m off-catalogue proxy DTI</th><th>status</th></tr></thead><tbody>
+<tr><td>H49 reference</td><td>0.095353</td><td>0.100751</td><td>reference</td></tr>
+<tr><td>H56-F ≥0.90</td><td>0.006831</td><td>0.095491</td><td>fails; removes 0</td></tr>
+<tr><td>H56-F ≥0.95</td><td>0.006744</td><td>0.094821</td><td>fails; removes 512</td></tr>
+<tr><td>H56-F ≥0.99</td><td>0.005337</td><td>0.081123</td><td>fails; removes 6,040</td></tr>
+</tbody></table>
+<p class="small">These are means over four fixed folds on public maps, not private expert labels or organizer scores. Full-scene parent surfaces were not independently rebuilt inside the folds; the dotted source is catalogue-distance-pruned, so leakage remains possible. The threshold ladder is a pruning screen, not a new geological signal. <a href="research/h56f-pruning-results-20261007.md">Full report</a> · <a href="../evidence/h56f_pruning_holdout_20261007.json">machine receipt</a> · <a href="../evidence/review_passes_h56f_20261007.md">review record</a>.</p>
+</section>
+
 <h2>Historical H56 open-world results and output audits (distinct recipe/file)</h2>
 <div class="bad"><strong>NO SLOT CLEARED.</strong> H56-DS and H56-A fail to beat same-protocol H49 on both public proxy targets, with 0/4 folds positive. The local format and diagnostic audits are not organizer acceptance.</div>
 <table><thead><tr><th>candidate</th><th>catalogue mean</th><th>delta vs H49</th><th>positive folds</th><th>SGMC-off mean</th><th>delta vs H49</th><th>positive folds</th></tr></thead><tbody>

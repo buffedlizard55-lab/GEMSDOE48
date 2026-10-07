@@ -1,31 +1,28 @@
 #!/usr/bin/env python3
-"""GEMSDOE48 H56 validation: format audit, uniqueness, blocked holdout, live-model
-projection, and the pre-registered OK-to-submit verdict.
+"""GEMSDOE48 H56-OWDS local audit: format, bounded uniqueness, and blocked holdout.
+
+The historical live-model projection is retained for audit only and is never used
+for submission recommendation because its FPw identity is generally false.
 
 Instruments (each one documented with what it IS and IS NOT)
 -------------------------------------------------------------
-1. Format audit      - grid/CRS/transform/dtype/range checks against the pinned
-                       sample template; the "Predicted values must be in range
-                       [0,1]" rejection is re-derived from the organizer's words.
+1. Local format audit - grid/CRS/transform/dtype/range checks against the pinned
+                       sample template. This is not portal acceptance; the finite-
+                       zero outside encoding also differs from null/NaN wording.
 2. Uniqueness        - sha256 distinctness from every file in docs/downloads and
                        every registry mirror pin; nearest-neighbour correlation
                        against all prior downloads (bounded, local check only).
-3. Blocked holdout   - H55 protocol (evidence/holdout_h55_spatial_20261007.json):
+3. Blocked holdout   - H55 protocol, writing namespace-isolated H56-OWDS evidence:
                        four fixed 2x2 quadrants; held-out quadrant + 300 m halo
                        clipped to the footprint; only core-quadrant truth scored;
                        two truth sources (catalogue; SGMC off-catalogue > 300 m).
                        PROXY ONLY: never an organizer score.
-4. Live-model        - the two-constant forward model fitted to the eight
-                       owner-reported live scores (evidence/live_model_calibration
-                       _20261007.json): DTI = rho*Cov(X;B_elig)/(0.2*S + 0.8*|G|),
-                       extended to graded surfaces by letting Cov and S be value
-                       weighted. A PROJECTION with measured +/-2 % family error
-                       and -38 % out-of-family transfer error; not a score.
-5. Verdict           - pre-registered gates, computed after the numbers exist:
-                       G1 format ok; G2 holdout beats BOTH parents on >=3/4 folds
-                       for BOTH truths; G3 live-model projection >= 0.2778.
-                       Banner = G1 AND G2 AND G3 -> "OK TO SUBMIT", else
-                       "DOWNLOAD OK - SUBMIT NOT RECOMMENDED".
+4. Historical projection - retained only as an assumption-sensitive diagnostic.
+                       Its metric identity is invalid in general and it cannot
+                       authorize a slot.
+5. Verdict           - local grid/range plus blocked public-proxy audit only.
+                       No offline result authorizes submission; banner remains
+                       "DOWNLOAD OK - NOT CLEARED FOR SUBMISSION".
 
 Usage: python scripts/validate_h56.py --primary <h56-zeros-outside.tif>
 """
@@ -114,7 +111,7 @@ def main() -> int:
     checks["organizer_rule_values_in_range_0_1"] = checks["all_cells_finite"] and checks["values_in_0_1"]
     fa["checks"] = checks
     fa["all_passed"] = bool(all(checks.values()))
-    (ROOT / "evidence/h56_format_audit_20261007.json").write_text(json.dumps(fa, indent=1))
+    (ROOT / "evidence/h56_owds_format_audit_20261007.json").write_text(json.dumps(fa, indent=1))
     print(f"[format] all_passed={fa['all_passed']}")
 
     # ---------------------------------------------------------------- 2. uniqueness
@@ -156,7 +153,7 @@ def main() -> int:
     uniq["support_jaccard_vs_dotted"] = float((jsup & dots_d).sum() / (jsup | dots_d).sum())
     uniq["support_jaccard_vs_tip"] = float((jsup & dots_t).sum() / (jsup | dots_t).sum())
     uniq["support_jaccard_vs_union"] = float((jsup & (union > 0)).sum() / (jsup | (union > 0)).sum())
-    (ROOT / "evidence/h56_uniqueness_20261007.json").write_text(json.dumps(uniq, indent=1))
+    (ROOT / "evidence/h56_owds_uniqueness_20261007.json").write_text(json.dumps(uniq, indent=1))
     print(f"[uniqueness] distinct={uniq['byte_distinct_from_all_downloads']} "
           f"n={uniq['n_compared']} nearest={nearest[0]['file'] if nearest else '-'} "
           f"r={nearest[0].get('pearson_r_subsampled') if nearest else '-'}")
@@ -218,7 +215,7 @@ def main() -> int:
                 "folds_won_of_4": wins,
             }
         hold["paired_vs_parents"][tname] = row
-    (ROOT / "evidence/holdout_h56_spatial_20261007.json").write_text(json.dumps(hold, indent=1))
+    (ROOT / "evidence/holdout_h56_owds_spatial_20261007.json").write_text(json.dumps(hold, indent=1))
     print("[holdout] catalogue:", {k: round(v, 5) for k, v in
           {c: hold["results"]["catalogue"][c]["mean_dti"] for c in candidates}.items()})
     print("[holdout] sgmc:", {k: round(v, 5) for k, v in
@@ -242,9 +239,10 @@ def main() -> int:
                      "Cov and S value-weighted",
             "rho": RHO, "hidden_truth_px": G_PX, "eligible_backbone_px": int(belig.sum()),
             "break_even_credit_at_0.2778": BREAK_EVEN_02778,
-            "projection_note": ("In-family fitted RMS 1.76% on binary artifacts; graded "
-                                "surfaces extrapolate the same forward model - an "
-                                "extrapolation, not a measurement."),
+            "projection_note": ("RETIRED. This is an assumption-sensitive historical surrogate. "
+                                "The formula uses FPw = S - TPw, which is generally false "
+                                "for the official metric; never interpret as a score estimate."),
+            "status": "RETIRED_INVALID_METRIC_IDENTITY_NOT_A_SCORE_ESTIMATE",
             "surfaces": {}}
     proj["surfaces"]["h56_belief"] = project(prim)
     proj["surfaces"]["dotted_c_binary"] = project(dots_d.astype(np.float64))
@@ -263,33 +261,34 @@ def main() -> int:
     }
     mass_below = float((prim[(prim > 0) & footprint] <= BREAK_EVEN_02778).sum())
     proj["h56_mass_below_breakeven_px"] = mass_below
-    (ROOT / "evidence/h56_live_model_projection_20261007.json").write_text(json.dumps(proj, indent=1))
-    print("[live-model]", {k: round(v["dti_projection"], 4) for k, v in proj["surfaces"].items()})
+    (ROOT / "evidence/h56_owds_live_model_projection_20261007.json").write_text(json.dumps(proj, indent=1))
+    print("[retired-surrogate-audit-only]", {k: round(v["dti_projection"], 4) for k, v in proj["surfaces"].items()})
 
     # ---------------------------------------------------------------- 5. verdict
     g1 = fa["all_passed"]
     g2 = all(hold["paired_vs_parents"][t][p]["folds_won_of_4"] >= 3
              for t in truths for p in LIVE_PARENTS) and all(
         hold["paired_vs_parents"][t][p]["delta_mean"] > 0 for t in truths for p in LIVE_PARENTS)
-    g3 = proj["surfaces"]["h56_belief"]["dti_projection"] >= LIVE_PARENTS["dotted_c"]
     verdict = {
         "generated_utc": now,
-        "gate_1_format": g1,
-        "gate_2_holdout_beats_both_parents_3_of_4_both_truths": g2,
-        "gate_3_live_model_projection_ge_0.2778": g3,
-        "ok_to_download": g1,
-        "submit_recommended": bool(g1 and g2 and g3),
-        "banner": ("OK TO DOWNLOAD AND SUBMIT" if (g1 and g2 and g3)
-                   else "DOWNLOAD OK - SUBMIT NOT RECOMMENDED"),
+        "local_grid_and_range_checks": g1,
+        "blocked_public_proxy_beats_both_parents_3_of_4_both_truths": g2,
+        "historical_projection_gate": "RETIRED_INVALID_METRIC_IDENTITY_NOT_USED",
+        "official_outside_bounds_compliance_confirmed": False,
+        "portal_acceptance_confirmed": False,
+        "ok_to_download_for_inspection": g1,
+        "submit_recommended": False,
+        "banner": "DOWNLOAD OK FOR INSPECTION - NOT CLEARED FOR SUBMISSION",
         "reasons": {
             "holdout_means": {t: {c: hold["results"][t][c]["mean_dti"] for c in
                                   ["h56_belief", "dotted_c", "tip_h33d"]} for t in truths},
-            "live_projection": proj["surfaces"]["h56_belief"]["dti_projection"],
-            "incumbent_live": 0.2778,
+            "historical_projection": "retired; not used for submission decision",
+            "format_caveat": "finite zeros outside the footprint; official page specifies null/NaN outside bounds",
+            "no_slot_authorized": True,
         },
     }
     fa["verdict"] = verdict
-    (ROOT / "evidence/h56_format_audit_20261007.json").write_text(json.dumps(fa, indent=1))
+    (ROOT / "evidence/h56_owds_format_audit_20261007.json").write_text(json.dumps(fa, indent=1))
     print("[verdict]", verdict["banner"])
     return 0
 

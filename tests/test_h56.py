@@ -42,7 +42,7 @@ def test_open_world_dempster_combination_normalizes_and_exposes_conflict():
     np.testing.assert_allclose(ab.fault + ab.not_fault + ab.ignorance, 1.0, atol=1e-12)
     assert ab.conflict[0] == pytest.approx(0.0)
     assert ab.conflict[1] > 0.0  # one source supports fault; the other's small negative mass conflicts
-    assert ab.ignorance[1] > ab.ignorance[0]  # disagreement leaves more residual uncertainty
+    assert ab.ignorance[1] > ab.ignorance[0]  # this BPA example yields more residual ignorance at cell 1
     assert np.all((ab.fault >= 0) & (ab.fault <= 1))
     assert np.all((ab.ignorance >= 0) & (ab.ignorance <= 1))
 
