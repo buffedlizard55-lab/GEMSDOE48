@@ -1,0 +1,56 @@
+{
+  "status": "PASS_LOCAL_FORMAT_AUDIT_NOT_ORGANIZER_ACCEPTANCE",
+  "file": "docs/downloads/GEMSDOE48-H53-conduit-conflict-priced-20261007-055da9855353-nan-outside.tif",
+  "sha256": "9000c5a0c4734f853e6873bd706ee4c7fc8b4c06501cb46a08db252aec7ea9c6",
+  "bytes": 381046,
+  "dtype": "float32",
+  "bands": 1,
+  "shape": [
+    3730,
+    3292
+  ],
+  "crs": "EPSG:32611",
+  "resolution_m": [
+    100.0,
+    100.0
+  ],
+  "outside_footprint_encoding": "nan",
+  "nodata": "NaN",
+  "finite_inside_footprint": true,
+  "nan_outside_footprint": true,
+  "zeros_outside_footprint": false,
+  "all_cells_finite": false,
+  "all_cells_in_range_0_1": false,
+  "portal_range_error_immune": false,
+  "portal_range_error_note": "cells outside the footprint are NaN; a vectorised range check that does not mask nodata will report 'Predicted values must be in range [0, 1]'. Use the all-finite zeros-outside twin if the portal rejects this file.",
+  "finite_footprint_cells": 5167373,
+  "nan_outside_cells": 7111787,
+  "min_inside_footprint": 0.0,
+  "max_inside_footprint": 1.0,
+  "min_whole_raster": 0.0,
+  "max_whole_raster": 1.0,
+  "all_in_footprint_range_0_1": true,
+  "positive_cells": 39430,
+  "positive_mass": 39430.0,
+  "grid_profile": {
+    "width": 3292,
+    "height": 3730,
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ]
+  },
+  "tags": {
+    "candidate_id": "GEMSDOE48-H53",
+    "construction": "C (37,654 live-best dots, untouched) + conflict-priced gap closure + GDR hydrothermal conduit anchors",
+    "content_id": "055da9855353",
+    "encoding": "in-footprint finite float32 in [0,1]; NaN outside; nodata=NaN",
+    "provenance": "GEMSDOE48 H53 session; inputs hash-pinned in the build receipt",
+    "status": "RESEARCH CANDIDATE - no organizer score exists for this file",
+    "AREA_OR_POINT": "Area"
+  }
+}

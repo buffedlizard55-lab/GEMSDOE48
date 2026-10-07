@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Method and diagnostics · GEMSDOE48</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><div class="wrap">
+  <h1>Method and diagnostics</h1>
+  <p>Discounted Dempster-Shafer combination of two sparse candidate surfaces.</p>
+</div></header>
+<nav><div class="wrap">
+  <a href="index.html">Overview</a><a href="executive-summary.html">Summary</a>
+  <a class="active" href="method.html">Method</a><a href="validation.html">Validation</a>
+  <a href="hypotheses.html">Hypotheses</a><a href="sources.html">Sources</a><a href="irregularities.html">Irregularities</a>
+</div></nav>
+<div class="wrap">
+  <div class="note"><b>Research status:</b> ρ=.5 was frozen before scoring, not calibrated or selected from holdout. The resulting raster is distinct from a mean, but loses the stronger source, the arithmetic mean, and the previous union decision in the blocked comparisons. No submission slot is cleared.</div>
+
+  <h2 class="sec">Inputs and frame</h2>
+  <p>Inputs are the public-owner-mirror H33-2-B2 dotted surface and H33-D tip/stepover surface. Their full-file SHA-256 values, byte counts, attribution limitations, and restore locations are in <a href="sources.html">sources and provenance</a>. Both are sparse binary emissions. They are not organizer-authenticated, and zero may mean “no candidate emitted” rather than an observation against a fault.</p>
+  <p>For each pixel, the model operationally treats an input value <code>p</code> as a binary opinion over the frame <code>{F, not-F}</code>, discounted by a fixed symmetric reliability ρ=0.5:</p>
+  <pre>m(F)       = ρ p
+m(not-F)   = ρ (1 − p)
+m(Θ)       = 1 − ρ</pre>
+  <p>This is an explicit modeling convention—not a learned probability, calibrated accuracy, or official competition model.</p>
+
+  <h2 class="sec">Combination and disagreement</h2>
+  <p>For source masses <code>m₁</code> and <code>m₂</code>, raw conjunctive conflict is</p>
+  <pre>K = m₁(F)m₂(not-F) + m₁(not-F)m₂(F).</pre>
+  <p>The normalized Dempster combination divides the non-conflicting conjunctive masses by <code>1−K</code>. The submitted research candidate is the resulting <code>m(F)</code>. We separately export:</p>
+  <ul>
+    <li><b>Unassigned mass</b> <code>m(Θ)</code> after normalization. This records residual ignorance; it is not the raw conflict.</li>
+    <li><b>Raw conflict K</b> before normalization. Canonical Dempster normalization redistributes conflict, so K is a diagnostic layer—not mass retained by the normalized rule.</li>
+  </ul>
+  <table>
+    <tr><th>Input pattern</th><th>Combined fault m(F)</th><th>Unassigned m(Θ)</th><th>Raw K</th><th>Interpretation</th></tr>
+    <tr><td>Both sources positive</td><td>0.75</td><td>0.25</td><td>0</td><td>Concordant candidate support</td></tr>
+    <tr><td>Exactly one source positive</td><td>1/3</td><td>1/3</td><td>0.25</td><td>Support remains, discounted, with visible ignorance/conflict</td></tr>
+    <tr><td>Neither source positive</td><td>0</td><td>0.25</td><td>0</td><td>No fault belief under this operational zero-as-not-F interpretation</td></tr>
+  </table>
+  <p>At total conflict the normalized rule is undefined; the implementation fails closed. The fixed discount prevents binary 1-vs-0 pixels from reaching total conflict.</p>
+
+  <h2 class="sec">Not an arithmetic mean</h2>
+  <p>The independent build receipt verifies that the primary output and simple 0.5 arithmetic mean are not equal. There are 47,905 differing in-footprint cells; full-footprint MAE is 0.00205494 and MAE on the positive union is 0.22166091. The maximum absolute difference is 0.25. Full-footprint Pearson correlation is 0.999355 because both surfaces are sparse with many shared zeros; union-only correlation is also structurally uninformative. Pixelwise inequality, mass values, and errors—not correlation alone—establish distinction.</p>
+
+  <h2 class="sec">Do not conflate the historical main-branch model</h2>
+  <p>The upstream main branch included an <code>alpha=.99</code> normalized-belief experiment and a full-confidence binary union decision. They are retained as distinct comparators. On the newer pinned SGMC derivative, the prior union mean DTI is 0.096992 and the current ρ=.5 belief mean is 0.069261; on catalogue labels they are 0.085538 and 0.032588. The older raw SGMC raster produces a separate sensitivity pair of 0.095957 and 0.068574. The union is rescored from the two pinned candidate inputs in the same fold domains. Earlier upstream quadrant numbers used full-grid predictions and are not directly comparable.</p>
+  <p>A separate Yager-rule evidence module and candidate TIFF are preserved as historical/alternative work; they are not used to build this Dempster candidate and are not slot-cleared. Same-protocol comparisons, the two-raster discrepancy, and the separate older-raster report are linked from <a href="validation.html">validation</a>. The earlier alpha=.99 builder snapshot remains at <code>scripts/previous_build_submission.py</code>, and the exact builder from the merged main branch is preserved at <code>scripts/previous_main_build_submission.py</code>. Neither is the default.</p>
+
+  <h2 class="sec">Grid and outside-footprint encoding</h2>
+  <p>The candidate is one-band float32 on the 3,730 × 3,292, 100 m EPSG:32611 competition grid. The primary file is finite and bounded by [0,1] inside the derived survey footprint. Every outside cell is NaN and the GeoTIFF nodata tag is NaN, matching the public sample-template convention. The sample pixel values are never used as labels. The local validator confirms the finite mask exactly equals the derived footprint; this is not organizer acceptance.</p>
+
+  <h2 class="sec">Implementation and rerun</h2>
+  <p>Core combination: <code>src/gemsdoe48/evidence.py</code>. Independent GeoTIFF writer/format checks: <code>src/gemsdoe48/geotiff.py</code> and <code>scripts/validate_submission.py</code>. The official DTI equations are in <code>src/gemsdoe48/metric.py</code> and are checked against a brute-force reference by tests.</p>
+  <pre>python scripts/restore_candidate_surfaces.py
+python scripts/restore_proxy_labels.py
+python scripts/build_footprint_mask.py
+python scripts/build_submission.py
+python scripts/validate_submission.py
+python scripts/run_spatial_holdout.py --yager docs/downloads/gemsdoe48-h48-ds-yager-conflict-20261006.tif
+pytest -q</pre>
+  <p>Full formulas, limitations, source lineage and the blocked-gate outcomes are in <a href="validation.html">validation</a>, <a href="sources.html">sources</a>, and the root README.</p>
+  <footer>Method is an auditable hypothesis. Its proxy evaluation failed the current promotion gate.</footer>
+</div>
+</body>
+</html>

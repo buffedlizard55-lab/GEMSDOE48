@@ -1,61 +1,140 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Irregularities and evidence limits · GEMSDOE48</title><link rel="stylesheet" href="style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Irregularities found and flagged during the H53 session, with the evidence and the action taken for each.">
+<title>GEMSDOE48 H53 — irregularities</title>
+<style>
+:root{color-scheme:light;--ink:#12241d;--muted:#54665c;--paper:#f4f4ec;--panel:#fffefa;
+--line:#d7ddd1;--green:#1d4c3a;--green2:#2f6b52;--soft:#e3eee5;--amber:#8a4a15;
+--ambersoft:#fff1d9;--red:#8d3227;--redsoft:#f9e7e1;
+--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+--sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.62}
+a{color:var(--green);text-underline-offset:3px}
+.wrap{width:min(1120px,calc(100% - 32px));margin:0 auto}
+header{background:#17392e;color:#f2f5ef;padding:34px 0 30px}
+header .eyebrow{color:#a9cbb4;text-transform:uppercase;letter-spacing:.16em;font-size:.72rem;font-weight:800}
+h1{margin:.35rem 0 .5rem;font-size:clamp(1.9rem,5vw,3.2rem);line-height:1.03;letter-spacing:-.045em}
+.deck{max-width:820px;margin:0;color:#d5e5d9;font-size:clamp(1rem,1.8vw,1.15rem)}
+main{padding:26px 0 70px}
+h2{margin:34px 0 10px;font-size:1.42rem;letter-spacing:-.025em;border-bottom:2px solid var(--line);padding-bottom:6px}
+h3{margin:22px 0 6px;font-size:1.06rem}
+p{margin:0 0 12px}
+code,kbd,.mono{font-family:var(--mono);font-size:.86em}
+code{background:#eceee5;padding:1px 5px;border-radius:4px;overflow-wrap:anywhere}
+pre{background:#132a22;color:#dceade;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:.8rem;line-height:1.5}
+pre code{background:none;color:inherit;padding:0}
+.dl{background:var(--soft);border:2px solid #a9c6ae;border-radius:16px;padding:22px;margin:0 0 22px}
+.dl h2{margin:0 0 6px;border:0;padding:0;font-size:1.3rem}
+.bigbtn{display:block;text-align:center;margin:14px 0 10px;padding:20px 22px;border-radius:12px;
+background:var(--green);color:#fff;text-decoration:none;font-weight:850;font-size:1.16rem;
+letter-spacing:-.01em;box-shadow:0 6px 20px rgba(20,60,44,.22)}
+.bigbtn:hover{background:#123327;color:#fff}
+.bigbtn small{display:block;font-weight:600;font-size:.78rem;opacity:.86;margin-top:4px;letter-spacing:.02em}
+.btnrow{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 4px}
+.btn{flex:1 1 210px;text-align:center;padding:11px 14px;border-radius:9px;background:#fff;
+border:1px solid #b9c9bb;color:var(--green);text-decoration:none;font-weight:700;font-size:.9rem}
+.btn:hover{background:var(--green);color:#fff}
+.meta{font-family:var(--mono);font-size:.75rem;color:#3d5347;overflow-wrap:anywhere;margin-top:10px}
+.warn{border:1px solid #e3b87e;background:var(--ambersoft);color:#57340f;border-radius:12px;padding:14px 18px;margin:16px 0}
+.bad{border:1px solid #e0b3aa;background:var(--redsoft);color:#5d231b;border-radius:12px;padding:14px 18px;margin:16px 0}
+.good{border:1px solid #a9c6ae;background:var(--soft);color:#1d4c3a;border-radius:12px;padding:14px 18px;margin:16px 0}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:.88rem;margin:10px 0 18px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:right;vertical-align:top}
+th:first-child,td:first-child{text-align:left}
+thead th{color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em}
+tbody tr.hl{background:#eef3ea;font-weight:750}
+.neg{color:var(--red);font-weight:700}
+.pos{color:var(--green2);font-weight:700}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px;margin:14px 0}
+.metric{background:#f1f4ed;border:1px solid var(--line);border-radius:11px;padding:15px}
+.metric strong{display:block;font-size:1.5rem;letter-spacing:-.035em;font-variant-numeric:tabular-nums}
+.metric span{color:var(--muted);font-size:.83rem}
+nav.top{background:#0f2a21;padding:9px 0;font-size:.86rem;position:sticky;top:0;z-index:9}
+nav.top .wrap{display:flex;flex-wrap:wrap;gap:6px 16px}
+nav.top a{color:#c6dccc;text-decoration:none;font-weight:650}
+nav.top a:hover{color:#fff;text-decoration:underline}
+footer{border-top:1px solid var(--line);padding:22px 0 46px;color:var(--muted);font-size:.86rem}
+.steps{counter-reset:s;list-style:none;padding:0;margin:12px 0}
+.steps li{counter-increment:s;position:relative;padding:0 0 16px 46px;border-left:2px solid var(--line);margin-left:16px}
+.steps li:before{content:counter(s);position:absolute;left:-17px;top:-2px;width:32px;height:32px;
+border-radius:50%;background:var(--green);color:#fff;font-weight:800;display:grid;place-items:center;font-size:.9rem}
+.steps li:last-child{border-left-color:transparent}
+.pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:.72rem;font-weight:800;
+letter-spacing:.05em;text-transform:uppercase}
+.pill.no{background:var(--redsoft);color:var(--red)}
+.pill.yes{background:var(--soft);color:var(--green)}
+.pill.warn{background:var(--ambersoft);color:var(--amber)}
+.small{color:var(--muted);font-size:.85rem}
+@media print{nav.top{position:static}}
+</style>
+
 </head>
 <body>
-<header><div class="wrap">
-  <h1>Irregularities and evidence limits</h1>
-  <p>Corrections, attribution uncertainty, leakage, and claims that must not be repeated as fact.</p>
-</div></header>
-<nav><div class="wrap">
-  <a href="index.html">Overview</a><a href="executive-summary.html">Summary</a>
-  <a href="method.html">Method</a><a href="validation.html">Validation</a>
-  <a href="hypotheses.html">Hypotheses</a><a href="sources.html">Sources</a><a class="active" href="irregularities.html">Irregularities</a>
+<nav class="top"><div class="wrap">
+<a href="index.html">Overview</a>
+<a href="executive-summary.html">Executive summary</a>
+<a href="submission-guide.html">How to submit</a>
+<a href="method.html">Method</a>
+<a href="hypotheses.html">Hypotheses</a>
+<a href="validation.html">Validation</a>
+<a href="irregularities.html">Irregularities</a>
+<a href="sources.html">Sources</a>
+<a href="next-steps.html">Next steps</a>
+<a href="research/h53-live-model-ceiling-and-candidate-20261007.md">Full report</a>
 </div></nav>
-<div class="wrap">
-  <div class="note"><b>Standing decision:</b> no weekly submission slot is cleared. Public-mirror scores and hash receipts are not organizer evidence or private-label validation.</div>
+<main class="wrap">
 
-  <h2 class="sec">Leaderboard and score attribution</h2>
-  <ul>
-    <li>The official public leaderboard was read once on 2026-10-06 UTC. It showed `xiaofanhu` at 0.3774 (#1), `alexoktaba` at 0.3345 (#2), `nchuzhoy` at 0.3262 (#3), and DARD at 0.3195 (#7)—not 0.3195 as the top score.</li>
-    <li>The displayed 0.2778 belonged to `extradr19` (#13, 10 submissions). No organizer evidence ties it to the local H33-2-B2 artifact. That upstream owner receipt marks the raster **UNSCORED**.</li>
-    <li>The H33-D value 0.2632 is an owner-reported claim, not a file-linked organizer score. Hash identity does not prove attribution.</li>
-    <li>No leaderboard polling, automated scraping, or result monitor is active. The upstream scheduled workflow is preserved only as <code>.github/workflows/feed.yml.disabled</code>; the parser script has no network-fetch path. The Terms of Use were checked before disabling it.</li>
-  </ul>
+<header style="background:none;padding:0">
+<p class="eyebrow" style="color:var(--muted)">Irregularities · flagged for owner review</p>
+<h1>Things that did not add up, and what was done about each</h1>
+<p class="deck" style="color:var(--muted)">Each entry states what was measured, with what, and what
+was changed. Nothing here is speculation; every line is reproducible from a receipt or a script in
+this repository.</p>
+</header>
+<table><thead><tr>
+<th>id</th>
+<th>irregularity</th>
+<th>evidence</th>
+<th>severity</th>
+<th>action taken</th>
+</tr></thead><tbody>
+<tr><td><strong>IR-H53-01</strong></td><td>Official training_features.tif band 6 is gamma-ray total count, but its in-file metadata says it is a magnetic derivative</td><td>Band 6&#x27;s description reads &#x27;Tilt angle or total curvature - magnetic field derivative for edge detection&#x27; and its data_category tag reads &#x27;magnetic_data&#x27;. Reproduced independently this session over 5,164,300 in-footprint cells: Pearson r = 0.9971 and Spearman rho = 1.0000 against the separately mirrored GeoDAWN radiometric TOTAL COUNT (data/source_mirrors/geodawn_rad_u8.tif band TC), r = 0.8817 against its K band, r = -0.0409 against the same file&#x27;s own TMI band 14, and r = -0.1624 against TMI horizontal gradient band 3. Band 6 ranges 2.95-88.57 with a median of 18.5.</td><td><span class="pill no">high</span></td><td>Confirms and strengthens the irregularity already logged in docs/irregularities.md with an independent reproduction and a Spearman check. Recorded in the H53 hypothesis slate so H53-C does not treat band 6 as a magnetic tilt feature. Anyone consuming the official stack should read band 6 as radiometric total count.</td></tr>
+<tr><td><strong>IR-H53-02</strong></td><td>The repository&#x27;s own format validator rejected the encoding used by its highest-scoring artifact</td><td>scripts/validate_submission.py required nodata = NaN and raised SystemExit otherwise. But data/families/dotted_b2_prune_02778.tif - the 0.2778 live-best - is all-finite with zeros outside and nodata unset, verified by reading the bytes (0 NaN cells, min 0.0, max 1.0) and by data/raw/audit-h33-2-b2.json which records nodata null and validator_range_0_1_guaranteed true.</td><td><span class="pill no">high</span></td><td>validate_submission.py now takes --encoding {auto,nan,zeros}, default auto, accepts either encoding, reports which it found, and states the portal range-error exposure explicitly (all_cells_finite, all_cells_in_range_0_1, portal_range_error_immune, portal_range_error_note). A new writer write_float32_zeros_outside was added to src/gemsdoe48/geotiff.py and re-reads the written bytes to assert the encoding. The H53 primary uses the all-finite encoding.</td></tr>
+<tr><td><strong>IR-H53-03</strong></td><td>The dense backbone&#x27;s pixel count and truth yield are both misstated in the repository&#x27;s own notes</td><td>knowledge/research_notes.md and README.md describe dense H19-5 as &#x27;129 k px&#x27; with &#x27;the same T, triple the FP&#x27;. Measured from the restored hash-pinned mirror (SHA-256 ec1f9b56...): 121,131 positive pixels, and inverting its owner-reported live 0.1922 under the calibrated |G| gives T = 6,813.1 - 30.8% HIGHER than C&#x27;s 5,209.5, not equal. The FP part of the claim is correct; the T part is not.</td><td><span class="pill no">high</span></td><td>Corrected in docs/research/h53-live-model-ceiling-and-candidate-20261007.md section 3.2. The error mattered: it hid the fact that the field&#x27;s TOTAL truth content (6,813) is the binding constraint on the whole family, and that #1 at 0.3774 needs T = 7,077 which exceeds it.</td></tr>
+<tr><td><strong>IR-H53-04</strong></td><td>The SGMC off-catalogue proxy that gated every prior session is contradicted by a live score</td><td>gemsdoe29-sgmc-off-catalogue-44k - 44,090 px, 2.8 px Poisson spacing, built directly on the proxy layer - is owner-reported at 0.0512 live, inverting to T = 1,026.0. The backbone family recovers T = 5,209 at the same mass. Were the proxy a good stand-in for the hidden truth, that file would have scored near 0.26.</td><td><span class="pill no">high</span></td><td>Recorded in section 4.1 of the H53 report and in the slate&#x27;s dropped-screens list. The proxy is retained as a RELATIVE ranking device over surfaces that all contain the backbone, and the blocked holdout is still run and reported, but every gate decision that turned on it (H50, H51, H52) is reclassified as unresolved rather than settled. Not deleted - the receipt trail is preserved.</td></tr>
+<tr><td><strong>IR-H53-05</strong></td><td>Catalogue coverage per emitted pixel does not predict live truth yield</td><td>SGMC faults 0.1418 per px, GDR Hot wells/springs 0.1897, INGENIOUS Quaternary centroids 0.3696, against the h19-5 backbone&#x27;s 0.1007 - yet SGMC returned T = 1,026 live where the backbone family returns 5,209 at the same mass.</td><td><span class="pill no">high</span></td><td>The &#x27;&gt;= 2x catalogue lift&#x27; promotion rule that rejected H52 is recorded as unsound and is not used anywhere in this session. Section 4.2 of the report gives the full table. H53-D&#x27;s re-test is explicitly re-judged on the live-calibrated instrument instead.</td></tr>
+<tr><td><strong>IR-H53-06</strong></td><td>Two different hidden-truth calibrations coexist in the repository: |G| = 12,632 and |G| = 14,027.5</td><td>knowledge/research_notes.md, src/gemsdoe48/holdout.py (HIDDEN_TRUTH_PX = 12632), src/gemsdoe48/live_anchor.py and scripts/build_site_ds48.py all use 12,632, derived by assuming the removed dots earned exactly the tau = 0.05416 bar. This session&#x27;s least-squares fit over the strictly nested triple A/B/C, assuming the removed dots earned zero, gives 14,027.5 with the three rungs inverting to T = 5,210.4 / 5,216.1 / 5,209.5 - self-consistent to 0.11%. The three pairwise closed-form solutions are 13,368 / 15,198 / 14,089, a +/-6% spread driven by 4-decimal rounding of the reported scores.</td><td><span class="pill warn">medium</span></td><td>Both are recorded. 14,027.5 is used everywhere in H53 because it is the value that makes the three nested rungs mutually consistent; the 12,632 assumption is documented as the alternative and its derivation is stated. The older constants were NOT edited out of the historical modules, because those modules belong to prior sessions&#x27; receipts.</td></tr>
+<tr><td><strong>IR-H53-07</strong></td><td>A tracked local mirror and its published upstream mirror are pixel-identical but byte-different</td><td>data/raw/ref_h36_1_rung30.tif (SHA-256 7c74270a...) and the GEMSDOE28 published file gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif (SHA-256 5556aa14...) have identical emission pixel sets (np.array_equal on the boolean mask, 37,660 px) and differ only in outside-footprint encoding and tags. Same for data/raw/tip_h32_1_prethin_tip_euler.tif (26748e4b...) versus 04d31922....</td><td><span class="pill warn">low</span></td><td>live_model.LIVE_ARTIFACTS now points at the restored published mirrors under data/raw/scored/ so every pin is the published one, with a comment recording the pixel-identity check. scripts/restore_h53_inputs.py fetches both. scripts/calibrate_live_model.py fails closed on any pin mismatch.</td></tr>
+<tr><td><strong>IR-H53-08</strong></td><td>h52_scarp3m_100m.tif band facing_at has unconfirmed units</td><td>strike_at takes only the values 0, 1500, 3000, ..., 16500, consistent with a strike in 0.01-degree units quantised to 15-degree bins over 0-165 degrees. facing_at ranges 0-10,000 with a median of 4,893. If facing_at were a dip direction in the same 0.01-degree units the two should be perpendicular, but the measured median deviation from perpendicularity over all valid cells is 46 degrees, with p10 = 8.9 and p90 = 81.4 - i.e. no perpendicular relationship at all.</td><td><span class="pill warn">medium</span></td><td>An along-strike extension of the hydrothermal conduit anchors was designed and then WITHDRAWN rather than shipped on an unverified band. Recorded as a blocker on hypothesis H53-D with the exact check required (re-read src/gemsdoe48/scarp3m.py and data/external/h52_scarp3m_merge_log.txt against the Actions run that produced the mosaic).</td></tr>
+<tr><td><strong>IR-H53-09</strong></td><td>The brief&#x27;s statement that 0.3195 is the highest score is stale</td><td>The single manual read of the official leaderboard on 2026-10-06 UTC (docs/data/leaderboard_20261007.json) shows xiaofanhu at 0.3774 in first place and 0.3195 at seventh (DARD). The 0.2778 row belongs to extradr19, ranked 13th with 10 submissions.</td><td><span class="pill warn">medium</span></td><td>Carried forward and restated. The ceiling table in this session is computed against the full snapshot (0.3774 / 0.3345 / 0.3262 / 0.3195 / 0.2888), not against 0.3195. Automated leaderboard polling remains disabled (.github/workflows/feed.yml.disabled); only dated manual observations are retained.</td></tr>
+<tr><td><strong>IR-H53-10</strong></td><td>No organizer score exists for any file in this repository</td><td>registry/live_scores.json holds 17 entries, all classed OWNER-REPORT, each a score pasted by the repository owner against a SHA-256. No organizer receipt, API response or page capture links any file to any score. The local receipt for the 0.2778 artifact says UNSCORED.</td><td><span class="pill no">high</span></td><td>Stated on every page of this site and in every receipt written this session. The H53 forward model, its |G|, its rho, all eight inverted T values and the whole scenario band are labelled OWNER-REPORT-derived wherever they appear. No projected leaderboard position is claimed.</td></tr>
+</tbody></table>
+<h2>Carried forward from earlier sessions, unchanged</h2>
+<p class="small">The 2026-10-06 leaderboard read (single manual observation, no monitor; #1
+xiaofanhu 0.3774, #2 alexoktaba 0.3345, #3 nchuzhoy 0.3262, #7 DARD 0.3195, and a 0.2778 row
+belonging to <code>extradr19</code> with 10 submissions — <em>not</em> 0.3195 as the brief states);
+the two pinned SGMC rasters that share the grid but differ in hash, nodata metadata and 1,450
+positive cells; the owner mirrors that are not organizer-authenticated and whose reuse licences
+were not verified; the upstream quadrant evaluator that masked truth but retained full-grid
+predictions and is not comparable to the current core-plus-halo folds; and the retired automatic
+leaderboard feed, preserved as <code>.github/workflows/feed.yml.disabled</code>. Full text:
+<a href="../docs/irregularities.md"><code>docs/irregularities.md</code></a> and the
+<a href="archive-main-pages/pre-h53-20261007/irregularities.html">pre-H53 snapshot</a>.</p>
 
-  <h2 class="sec">Previous main-branch alpha=.99 result</h2>
-  <ul>
-    <li>The earlier tier sweep chose full-union support from pooled SGMC off-catalogue scores (union 0.096047, dotted 0.093965, tip 0.094245). Pooled selection is not a spatially blocked holdout gate.</li>
-    <li>The old per-quadrant evaluator retained full-grid predictions while masking truth to one quadrant; predictions outside the truth block could count as false positives. Its fold values are not directly comparable to the current core-plus-halo protocol.</li>
-    <li>The archived normalized-belief gate states `PASS_offcat_blocked: false` and records no beats against either parent. The union and normalized α=.99 belief were rescored from the pinned inputs with the same current fold semantics as ρ=.5; current paired results are in <a href="validation.html">validation</a>.</li>
-    <li>The old HTML pages are preserved under <code>docs/archive-main-pages/</code> with an archival warning. Current pages replace the previous unsupported upload instructions and slot-clear language.</li>
-  </ul>
-
-  <h2 class="sec">Separate PR #5 Yager-rule candidate</h2>
-  <ul>
-    <li>A separate Yager-rule raster is retained for research, not as the current candidate. Its local audit reports that it is all-finite with zeros outside the footprint and explicitly fails the published null/NaN-outside requirement; portal acceptance is untested.</li>
-    <li>The PR #5 evaluator reported fusion DTI 0.084070 versus dotted 0.096132, tip 0.097094, and mean 0.090303 on a different full-scene/at-least-300-m protocol. It failed the proxy gate. The candidate was separately rescored with the current common folds; results are in <a href="validation.html">validation</a>.</li>
-  </ul>
-
-  <h2 class="sec">Data lineage, leakage and labels</h2>
-  <ul>
-    <li>The dotted and tip/stepover rasters, catalogue labels, sample template, and processed SGMC raster are third-party owner mirrors, not organizer-authenticated files. Hash pins prove equality with named bytes only; reuse licenses were not verified.</li>
-    <li>The H33-2-B2 owner audit describes removing predictions within 200 m of the full catalogue. Therefore source construction had access to the withheld catalogue geometry. The models were not rebuilt independently per fold; catalogue-block results are conditional and potentially leaky.</li>
-    <li>The current primary SGMC target has 62,122 positive cells more than 300 m from public-catalogue positives. It is an off-catalogue map proxy, not independent private expert truth; the source-vector derivation was not rebuilt in this session.</li>
-    <li>The official competition's private labels are not available to this research process. No hidden truth or competition score is claimed.</li>
-  </ul>
-
-  <h2 class="sec">SGMC raster provenance discrepancy</h2>
-  <p>The newer pinned derivative <code>data/official/derived_sgmc_faults_100m.tif</code> has 83,593 positive cells; the prior raw mirror <code>data/raw/sgmc_faults_100m.tif</code> has 82,151. They share dimensions, CRS, and transform but differ in nodata metadata and 1,450 binary-mask cells (1,446 only in the newer raster, 4 only in the older). The derivation difference is unresolved. The primary holdout uses the newer raster; the older raster result remains in <code>evidence/holdout_raw_sgmc_20261006.json</code>. See <code>evidence/sgmc_raster_comparison_20261006.json</code>.</p>
-
-  <h2 class="sec">Format and outside-footprint handling</h2>
-  <p>The current candidate uses one float32 band on the official sample grid. The local build/validation receipts confirm all in-footprint predictions are finite and in [0,1], with NaN nodata exactly outside the finite sample-template mask. The local convention matches the public template and the challenge page's null/NaN wording; organizer portal acceptance remains untested.</p>
-
-  <h2 class="sec">Source record</h2>
-  <p>Point-in-time leaderboard observations, exact mirror hashes, and source limitations are preserved in <code>evidence/source_audit.json</code>, <code>docs/sources.md</code>, and the versioned holdout/build receipts. These statements are not a substitute for checking the linked official sources before a new submission or distribution.</p>
-  <footer>Evidence was reviewed on 2026-10-06 UTC. Where provenance or interpretation is unresolved, it is labeled unresolved rather than inferred.</footer>
-</div>
+</main>
+<footer class="wrap">
+<p><strong>GEMSDOE48</strong> — auditable fault-surface research for DrivenData competition 306
+(DOE GEMS Prize). Built 2026-10-07 05:52 UTC by
+<code>scripts/build_site_h53.py</code> directly from the receipts in <code>evidence/</code>.</p>
+<p class="small"><strong>No organizer score exists for any file in this repository.</strong>
+Every live number is OWNER-REPORT class: a score pasted by the repository owner, not an
+organizer receipt. Proxy numbers are computed against public map layers, not the private
+expert labels. Automated leaderboard access is disabled; the one snapshot here was a single
+dated manual read.</p>
+</footer>
 </body>
 </html>

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Irregularities and evidence limits · GEMSDOE48</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><div class="wrap">
+  <h1>Irregularities and evidence limits</h1>
+  <p>Corrections, attribution uncertainty, leakage, and claims that must not be repeated as fact.</p>
+</div></header>
+<nav><div class="wrap">
+  <a href="index.html">Overview</a><a href="executive-summary.html">Summary</a>
+  <a href="method.html">Method</a><a href="validation.html">Validation</a>
+  <a href="hypotheses.html">Hypotheses</a><a href="sources.html">Sources</a><a class="active" href="irregularities.html">Irregularities</a>
+</div></nav>
+<div class="wrap">
+  <div class="note"><b>Standing decision:</b> no weekly submission slot is cleared. Public-mirror scores and hash receipts are not organizer evidence or private-label validation.</div>
+
+  <h2 class="sec">Leaderboard and score attribution</h2>
+  <ul>
+    <li>The official public leaderboard was read once on 2026-10-06 UTC. It showed `xiaofanhu` at 0.3774 (#1), `alexoktaba` at 0.3345 (#2), `nchuzhoy` at 0.3262 (#3), and DARD at 0.3195 (#7)—not 0.3195 as the top score.</li>
+    <li>The displayed 0.2778 belonged to `extradr19` (#13, 10 submissions). No organizer evidence ties it to the local H33-2-B2 artifact. That upstream owner receipt marks the raster **UNSCORED**.</li>
+    <li>The H33-D value 0.2632 is an owner-reported claim, not a file-linked organizer score. Hash identity does not prove attribution.</li>
+    <li>No leaderboard polling, automated scraping, or result monitor is active. The upstream scheduled workflow is preserved only as <code>.github/workflows/feed.yml.disabled</code>; the parser script has no network-fetch path. The Terms of Use were checked before disabling it.</li>
+  </ul>
+
+  <h2 class="sec">Previous main-branch alpha=.99 result</h2>
+  <ul>
+    <li>The earlier tier sweep chose full-union support from pooled SGMC off-catalogue scores (union 0.096047, dotted 0.093965, tip 0.094245). Pooled selection is not a spatially blocked holdout gate.</li>
+    <li>The old per-quadrant evaluator retained full-grid predictions while masking truth to one quadrant; predictions outside the truth block could count as false positives. Its fold values are not directly comparable to the current core-plus-halo protocol.</li>
+    <li>The archived normalized-belief gate states `PASS_offcat_blocked: false` and records no beats against either parent. The union and normalized α=.99 belief were rescored from the pinned inputs with the same current fold semantics as ρ=.5; current paired results are in <a href="validation.html">validation</a>.</li>
+    <li>The old HTML pages are preserved under <code>docs/archive-main-pages/</code> with an archival warning. Current pages replace the previous unsupported upload instructions and slot-clear language.</li>
+  </ul>
+
+  <h2 class="sec">Separate PR #5 Yager-rule candidate</h2>
+  <ul>
+    <li>A separate Yager-rule raster is retained for research, not as the current candidate. Its local audit reports that it is all-finite with zeros outside the footprint and explicitly fails the published null/NaN-outside requirement; portal acceptance is untested.</li>
+    <li>The PR #5 evaluator reported fusion DTI 0.084070 versus dotted 0.096132, tip 0.097094, and mean 0.090303 on a different full-scene/at-least-300-m protocol. It failed the proxy gate. The candidate was separately rescored with the current common folds; results are in <a href="validation.html">validation</a>.</li>
+  </ul>
+
+  <h2 class="sec">Data lineage, leakage and labels</h2>
+  <ul>
+    <li>The dotted and tip/stepover rasters, catalogue labels, sample template, and processed SGMC raster are third-party owner mirrors, not organizer-authenticated files. Hash pins prove equality with named bytes only; reuse licenses were not verified.</li>
+    <li>The H33-2-B2 owner audit describes removing predictions within 200 m of the full catalogue. Therefore source construction had access to the withheld catalogue geometry. The models were not rebuilt independently per fold; catalogue-block results are conditional and potentially leaky.</li>
+    <li>The current primary SGMC target has 62,122 positive cells more than 300 m from public-catalogue positives. It is an off-catalogue map proxy, not independent private expert truth; the source-vector derivation was not rebuilt in this session.</li>
+    <li>The official competition's private labels are not available to this research process. No hidden truth or competition score is claimed.</li>
+  </ul>
+
+  <h2 class="sec">SGMC raster provenance discrepancy</h2>
+  <p>The newer pinned derivative <code>data/official/derived_sgmc_faults_100m.tif</code> has 83,593 positive cells; the prior raw mirror <code>data/raw/sgmc_faults_100m.tif</code> has 82,151. They share dimensions, CRS, and transform but differ in nodata metadata and 1,450 binary-mask cells (1,446 only in the newer raster, 4 only in the older). The derivation difference is unresolved. The primary holdout uses the newer raster; the older raster result remains in <code>evidence/holdout_raw_sgmc_20261006.json</code>. See <code>evidence/sgmc_raster_comparison_20261006.json</code>.</p>
+
+  <h2 class="sec">Format and outside-footprint handling</h2>
+  <p>The current candidate uses one float32 band on the official sample grid. The local build/validation receipts confirm all in-footprint predictions are finite and in [0,1], with NaN nodata exactly outside the finite sample-template mask. The local convention matches the public template and the challenge page's null/NaN wording; organizer portal acceptance remains untested.</p>
+
+  <h2 class="sec">Source record</h2>
+  <p>Point-in-time leaderboard observations, exact mirror hashes, and source limitations are preserved in <code>evidence/source_audit.json</code>, <code>docs/sources.md</code>, and the versioned holdout/build receipts. These statements are not a substitute for checking the linked official sources before a new submission or distribution.</p>
+  <footer>Evidence was reviewed on 2026-10-06 UTC. Where provenance or interpretation is unresolved, it is labeled unresolved rather than inferred.</footer>
+</div>
+</body>
+</html>

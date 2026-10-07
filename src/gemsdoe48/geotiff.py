@@ -148,6 +148,101 @@ def write_float32(
         }
 
 
+def write_float32_zeros_outside(
+    path: str | Path,
+    values: np.ndarray,
+    reference_profile: dict[str, Any],
+    *,
+    valid_mask: np.ndarray,
+    description: str,
+    tags: dict[str, str] | None = None,
+) -> dict[str, object]:
+    """Write a one-band float32 GeoTIFF that is **all-finite** with 0.0 outside.
+
+    Why this encoding exists
+    ------------------------
+    The portal rejects uploads with ``Predicted values must be in range [0, 1]``.
+    A NaN-outside raster can trip that check on any validator that tests
+    ``np.all((v >= 0) & (v <= 1))`` over the raw array, because every comparison
+    against NaN is ``False``.  The two highest-scoring owner-reported artifacts in
+    this project's family tree are split between the two encodings, and the single
+    best one (``h33-2-b2``, 0.2778) is all-finite with zeros outside and
+    ``nodata=None`` -- see ``data/raw/audit-h33-2-b2.json`` and the byte-level read
+    of ``data/families/dotted_b2_prune_02778.tif``.  The organizers' own reference
+    solution (``gems-prize-reference-solution``, cell 19) also writes an all-finite
+    float32 raster with no nodata value.  This writer reproduces that encoding and
+    is therefore the primary download path; :func:`write_float32` remains available
+    for the NaN-outside twin.
+
+    Every cell of the output is finite and in [0, 1]; cells outside ``valid_mask``
+    are exactly 0.0 and ``nodata`` is left unset.
+    """
+    output = Path(path)
+    output.parent.mkdir(parents=True, exist_ok=True)
+    a = np.asarray(values, dtype=np.float32).copy()
+    raw_valid = np.asarray(valid_mask)
+    if not np.isin(raw_valid, (False, True, 0, 1)).all():
+        raise ValueError(f"{output}: valid mask must contain only boolean/0/1 values")
+    valid = raw_valid.astype(bool, copy=False)
+    if a.shape != (HEIGHT, WIDTH) or valid.shape != a.shape:
+        raise ValueError(f"{output}: expected arrays of shape {(HEIGHT, WIDTH)}")
+    if not valid.any():
+        raise ValueError(f"{output}: valid mask is empty")
+    if not np.isfinite(a[valid]).all():
+        raise ValueError(f"{output}: in-footprint values contain NaN or infinity")
+    if np.any((a[valid] < 0.0) | (a[valid] > 1.0)):
+        raise ValueError(f"{output}: in-footprint values outside [0, 1]")
+    a[~valid] = 0.0  # force the out-of-footprint encoding, whatever the caller passed
+
+    profile = reference_profile.copy()
+    profile.update(
+        driver="GTiff", dtype="float32", count=1, width=WIDTH, height=HEIGHT,
+        crs=EPSG, transform=TRANSFORM, nodata=None, compress="deflate",
+        predictor=3, zlevel=6, tiled=True, blockxsize=256, blockysize=256,
+        interleave="band", BIGTIFF="IF_SAFER",
+    )
+    with rasterio.open(output, "w", **profile) as dataset:
+        dataset.write(a, 1)
+        dataset.set_band_description(1, description)
+        dataset.update_tags(AREA_OR_POINT="Area", **(tags or {}))
+
+    with rasterio.open(output) as dataset:
+        reread = dataset.read(1)
+        assert_competition_grid(dataset.profile, path=output)
+        if dataset.dtypes != ("float32",):
+            raise ValueError(f"{output}: output dtype changed unexpectedly")
+        if dataset.nodata is not None:
+            raise ValueError(f"{output}: all-finite encoding must leave nodata unset")
+        if not np.isfinite(reread).all():
+            raise ValueError(f"{output}: re-read found non-finite cells")
+        if float(reread.min()) < 0.0 or float(reread.max()) > 1.0:
+            raise ValueError(f"{output}: re-read found values outside [0, 1]")
+        if not np.array_equal(reread[~valid], np.zeros(int((~valid).sum()), dtype=np.float32)):
+            raise ValueError(f"{output}: outside-footprint cells are not exactly 0.0")
+        return {
+            "path": display_path(output),
+            "bytes": output.stat().st_size,
+            "sha256": None,  # filled in by the caller's receipt step
+            "dtype": dataset.dtypes[0],
+            "bands": dataset.count,
+            "width": dataset.width,
+            "height": dataset.height,
+            "crs": dataset.crs.to_string(),
+            "transform": tuple(dataset.transform)[:6],
+            "nodata": None,
+            "encoding": "all_finite_zeros_outside",
+            "all_cells_finite": True,
+            "all_cells_in_range_0_1": True,
+            "finite_cells": int(np.isfinite(reread).sum()),
+            "nan_cells": int(np.count_nonzero(~np.isfinite(reread))),
+            "min": float(reread.min()),
+            "max": float(reread.max()),
+            "positive_cells": int(np.count_nonzero(reread > 0.0)),
+            "in_footprint_cells": int(valid.sum()),
+            "portal_range_error_immune": True,
+        }
+
+
 def write_mask(path: str | Path, values: np.ndarray, reference_profile: dict[str, Any]) -> None:
     """Write a compact uint8 footprint mask (1=in-footprint, 0=outside)."""
     output = Path(path)

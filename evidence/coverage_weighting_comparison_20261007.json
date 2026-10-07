@@ -1,0 +1,298 @@
+{
+  "generated_utc": "2026-10-07T05:46:51Z",
+  "question": "does weighting the coverage target predict the eight owner-reported live scores better than uniform weighting?",
+  "hidden_truth_px": 14027.470000000054,
+  "eligible_backbone_px": 103805,
+  "artifacts": [
+    {
+      "key": "h19_5_backbone",
+      "emitted": 121131,
+      "live": 0.1922,
+      "inverted_tpw": 6813.139427200009
+    },
+    {
+      "key": "d1_5_dotted",
+      "emitted": 60069,
+      "live": 0.2477,
+      "inverted_tpw": 5755.501715200011
+    },
+    {
+      "key": "A_d2_8",
+      "emitted": 44090,
+      "live": 0.26,
+      "inverted_tpw": 5210.393760000012
+    },
+    {
+      "key": "B_prune100",
+      "emitted": 40199,
+      "live": 0.2708,
+      "inverted_tpw": 5216.088940800012
+    },
+    {
+      "key": "C_prune200",
+      "emitted": 37654,
+      "live": 0.2778,
+      "inverted_tpw": 5209.521172800012
+    },
+    {
+      "key": "h36_rung30",
+      "emitted": 37660,
+      "live": 0.271,
+      "inverted_tpw": 5082.327496000013
+    },
+    {
+      "key": "h32_prethin_tip",
+      "emitted": 42294,
+      "live": 0.2649,
+      "inverted_tpw": 5213.437562400012
+    },
+    {
+      "key": "h33d_tip_step",
+      "emitted": 41865,
+      "live": 0.2632,
+      "inverted_tpw": 5157.397683200012
+    }
+  ],
+  "weightings": {
+    "uniform": {
+      "rho": 0.06801513031394778,
+      "rms_relative_error_pct": 1.7576507966896873,
+      "max_abs_relative_error_pct": 3.6278602203935932,
+      "per_artifact_relative_error_pct": [
+        3.6278602203935932,
+        0.6998515199472548,
+        -0.9785874532289083,
+        -1.17794206488183,
+        -1.8105213659016128,
+        -2.0503027385481465,
+        -1.0009443315104176,
+        -0.48448865151021314
+      ],
+      "coverage": {
+        "h19_5_backbone": 103805.0,
+        "d1_5_dotted": 85213.12323716735,
+        "A_d2_8": 75856.73182695934,
+        "B_prune100": 75786.76114022857,
+        "C_prune200": 75206.82023682503,
+        "h36_rung30": 73191.42627808332,
+        "h32_prethin_tip": 75883.9089305387,
+        "h33d_tip_step": 75459.83743648228
+      },
+      "worse_than_uniform_by_pct_points": 0.0
+    },
+    "dens_7px_box": {
+      "rho": 0.008569521037376399,
+      "rms_relative_error_pct": 2.633877371630363,
+      "max_abs_relative_error_pct": 5.68847077762648,
+      "per_artifact_relative_error_pct": [
+        5.68847077762648,
+        0.4943290478383751,
+        -1.5010045313356188,
+        -1.685264095163367,
+        -2.4269862242552462,
+        -2.792003219274463,
+        -1.524588671994597,
+        -1.3387959789937123
+      ],
+      "coverage": {
+        "h19_5_backbone": 840269.0,
+        "d1_5_dotted": 674944.7030703442,
+        "A_d2_8": 598888.2565522271,
+        "B_prune100": 598421.3171707133,
+        "C_prune200": 593158.7995894235,
+        "h36_rung30": 576511.6541694327,
+        "h32_prethin_tip": 599094.6356873563,
+        "h33d_tip_step": 593773.0508162028
+      },
+      "worse_than_uniform_by_pct_points": 0.8762265749406757
+    },
+    "dens_13px_box": {
+      "rho": 0.003914300375285076,
+      "rms_relative_error_pct": 2.500640952923674,
+      "max_abs_relative_error_pct": 5.302694340995249,
+      "per_artifact_relative_error_pct": [
+        5.302694340995249,
+        0.7163884101364539,
+        -1.4586971951205396,
+        -1.6484426824495553,
+        -2.3882394408173213,
+        -2.7390443179182196,
+        -1.479020184727433,
+        -1.0747785269117496
+      ],
+      "coverage": {
+        "h19_5_backbone": 1832874.0,
+        "d1_5_dotted": 1480911.7611498416,
+        "A_d2_8": 1311700.5339668705,
+        "B_prune100": 1310605.7820030511,
+        "C_prune200": 1299109.6354231955,
+        "h36_rung30": 1262836.2209281968,
+        "h32_prethin_tip": 1312196.1209121253,
+        "h33d_tip_step": 1303417.3648418486
+      },
+      "worse_than_uniform_by_pct_points": 0.7429901562339867
+    },
+    "sqrt_dens_7px_box": {
+      "rho": 0.024927566704324108,
+      "rms_relative_error_pct": 2.30472129805932,
+      "max_abs_relative_error_pct": 4.904597427619217,
+      "per_artifact_relative_error_pct": [
+        4.904597427619217,
+        0.6303108731560151,
+        -1.3133813956266278,
+        -1.5054103701343289,
+        -2.202916805127181,
+        -2.533881918701138,
+        -1.33628892394579,
+        -0.9956179893008845
+      ],
+      "coverage": {
+        "h19_5_backbone": 286722.59001704934,
+        "d1_5_dotted": 232344.3494110043,
+        "A_d2_8": 206276.10703877173,
+        "B_prune100": 206099.75525924802,
+        "C_prune200": 204382.5542961628,
+        "h36_rung30": 198717.64369485836,
+        "h32_prethin_tip": 206348.6996026996,
+        "h33d_tip_step": 204835.4644739775
+      },
+      "worse_than_uniform_by_pct_points": 0.5470705013696329
+    },
+    "log1p_dens_13px_box": {
+      "rho": 0.024527581738163263,
+      "rms_relative_error_pct": 2.1267890300450065,
+      "max_abs_relative_error_pct": 4.456958401741111,
+      "per_artifact_relative_error_pct": [
+        4.456958401741111,
+        0.7325002191154474,
+        -1.2172207984587922,
+        -1.4138554404471446,
+        -2.098143799900227,
+        -2.40164201883968,
+        -1.2385896013810604,
+        -0.7746019556232357
+      ],
+      "coverage": {
+        "h19_5_backbone": 290154.9077808057,
+        "d1_5_dotted": 236373.1100671158,
+        "A_d2_8": 209844.24059479748,
+        "B_prune100": 209655.44171567526,
+        "C_prune200": 207938.0666938243,
+        "h36_rung30": 202232.25576303725,
+        "h32_prethin_tip": 209921.406922328,
+        "h33d_tip_step": 208640.55961637152
+      },
+      "worse_than_uniform_by_pct_points": 0.36913823335531926
+    },
+    "far_from_catalogue": {
+      "rho": 0.051389937099351864,
+      "rms_relative_error_pct": 1.658643718391136,
+      "max_abs_relative_error_pct": 3.46296559763153,
+      "per_artifact_relative_error_pct": [
+        3.46296559763153,
+        0.6326451920392622,
+        -1.029381290291795,
+        -1.1757670489152814,
+        -1.3732161044078242,
+        -1.979848557906439,
+        -1.0715362259983043,
+        -0.4697388079384673
+      ],
+      "coverage": {
+        "h19_5_backbone": 137168.41271968628,
+        "d1_5_dotted": 112705.20936582368,
+        "A_d2_8": 100345.69475176647,
+        "B_prune100": 100306.79500203131,
+        "C_prune200": 99980.33621172476,
+        "h36_rung30": 96939.31126499092,
+        "h32_prethin_tip": 100361.54899991388,
+        "h33d_tip_step": 99886.70301110452
+      },
+      "worse_than_uniform_by_pct_points": -0.09900707829855127
+    },
+    "dens_7px_x_far": {
+      "rho": 0.006540830487067775,
+      "rms_relative_error_pct": 2.5615433032586057,
+      "max_abs_relative_error_pct": 5.571758871974871,
+      "per_artifact_relative_error_pct": [
+        5.571758871974871,
+        0.4383913072094462,
+        -1.5731411227716006,
+        -1.7130127371830042,
+        -1.9598500400577428,
+        -2.756128034416122,
+        -1.6127349037558432,
+        -1.3446172201697808
+      ],
+      "coverage": {
+        "h19_5_backbone": 1099669.398544453,
+        "d1_5_dotted": 883791.9505535475,
+        "A_d2_8": 784063.5716279168,
+        "B_prune100": 783805.1579226304,
+        "C_prune200": 780852.2755797191,
+        "h36_rung30": 755600.0805789889,
+        "h32_prethin_tip": 784206.0186832848,
+        "h33d_tip_step": 777890.5806990295
+      },
+      "worse_than_uniform_by_pct_points": 0.8038925065689184
+    },
+    "radiometric_ratio_corroboration": {
+      "rho": 0.04537493497750129,
+      "rms_relative_error_pct": 1.7957690236628399,
+      "max_abs_relative_error_pct": 3.699884032826551,
+      "per_artifact_relative_error_pct": [
+        3.699884032826551,
+        0.705223398237451,
+        -0.9831552596396947,
+        -1.1919164438279612,
+        -1.8873785699753565,
+        -2.102590069090199,
+        -1.006593303259412,
+        -0.47774174630142674
+      ],
+      "coverage": {
+        "h19_5_backbone": 155707.49993370593,
+        "d1_5_dotted": 127737.7226624235,
+        "A_d2_8": 113700.8240840181,
+        "B_prune100": 113585.12186398602,
+        "C_prune200": 112643.63880897225,
+        "h36_rung30": 109652.3220420594,
+        "h32_prethin_tip": 113740.31613678992,
+        "h33d_tip_step": 113118.80984489809
+      },
+      "worse_than_uniform_by_pct_points": 0.03811822697315259
+    },
+    "lidar3m_roughness_corroboration": {
+      "rho": 0.04521921937870175,
+      "rms_relative_error_pct": 1.6857001473626942,
+      "max_abs_relative_error_pct": 3.3440114669982868,
+      "per_artifact_relative_error_pct": [
+        3.3440114669982868,
+        0.9149677771151523,
+        -0.9293631175459721,
+        -1.1277915330564137,
+        -1.7531371443307953,
+        -2.1111065481986846,
+        -0.9527760136981198,
+        -0.3734016426411568
+      ],
+      "coverage": {
+        "h19_5_backbone": 155707.49976777477,
+        "d1_5_dotted": 128444.55921857522,
+        "A_d2_8": 114154.34306561566,
+        "B_prune100": 114050.22913327973,
+        "C_prune200": 113186.1892443138,
+        "h36_rung30": 110020.34568014447,
+        "h32_prethin_tip": 114194.03631387034,
+        "h33d_tip_step": 113627.34576425416
+      },
+      "worse_than_uniform_by_pct_points": -0.07195064932699302
+    }
+  },
+  "skipped": {},
+  "best_weighting": "far_from_catalogue",
+  "best_rms_relative_error_pct": 1.658643718391136,
+  "uniform_rms_relative_error_pct": 1.7576507966896873,
+  "conclusion": "uniform RMS 1.758 % vs best alternative 'far_from_catalogue' at 1.659 % on eight points - not a meaningful improvement. Every backbone-density weighting is worse (+0.37 to +0.88 percentage points). A corridor pixel is not more likely to sit near hidden truth because it has more corridor neighbours. Uniform coverage is kept.",
+  "provenance_class": "OWNER-REPORT (all eight live scores are owner-pasted, not organizer receipts)"
+}

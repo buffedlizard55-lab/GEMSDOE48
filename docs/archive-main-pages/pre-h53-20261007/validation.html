@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Blocked-fold validation · GEMSDOE48</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><div class="wrap">
+  <h1>Blocked-fold validation</h1>
+  <p>One fold protocol, two public-map proxies, and an explicit failed slot gate.</p>
+</div></header>
+<nav><div class="wrap">
+  <a href="index.html">Overview</a><a href="executive-summary.html">Summary</a>
+  <a href="method.html">Method</a><a class="active" href="validation.html">Validation</a>
+  <a href="hypotheses.html">Hypotheses</a><a href="sources.html">Sources</a><a href="irregularities.html">Irregularities</a>
+</div></nav>
+<div class="wrap">
+  <section class="hero">
+    <h2>No promotion / no weekly submission slot</h2>
+    <p>The preregistered numerical rule requires a positive mean paired DTI delta and at least three positive spatial blocks against <em>each</em> input. The rho=.5 fusion has 0/4 positive folds against tip/stepover and 0/4 against the arithmetic mean on the catalogue proxy; it loses against both inputs, the mean, and the previous full-union decision on the SGMC off-catalogue proxy too.</p>
+    <p><b>Scope:</b> the truth layers are public-map proxies, not private expert-labelled competition truth. The candidate input surfaces are frozen full-catalogue-derived products and were not reconstructed independently within each fold. Even a proxy win could not alone clear the slot gate.</p>
+  </section>
+
+  <h2 class="sec">Fold protocol (identical for all rows and both targets)</h2>
+  <ul>
+    <li>Four fixed 2×2 quadrants on the full 3,730 × 3,292 EPSG:32611, 100 m grid.</li>
+    <li>Truth is counted only in the held-out core quadrant. The evaluation domain includes that quadrant plus a 300 m Euclidean halo, clipped to the finite sample-template footprint; prediction is zero outside this domain for the metric calculation.</li>
+    <li>Distance-weighted Tversky uses the official triangular 300 m kernel, α=0.2 and β=0.8. Per-fold metric is calculated independently and the displayed mean is the unweighted average of four fold scores (not a pooled tier sweep).</li>
+    <li>All candidates are scored against the same truth mask and the same fold/domain arrays. Prediction surfaces are not retrained or rebuilt per fold.</li>
+  </ul>
+
+  <h2 class="sec">Target definitions</h2>
+  <table>
+    <tr><th>Proxy target</th><th>Positives</th><th>Construction and limitation</th></tr>
+    <tr><td>Public catalogue labels</td><td>60,988</td><td>Public owner-mirror catalogue raster clipped to the sample-template footprint. Not private expert labels; source mirrors are not organizer-authenticated.</td></tr>
+    <tr><td>SGMC off-catalogue faults (newer pinned derivative)</td><td>62,122</td><td>Positive cells in <code>data/official/derived_sgmc_faults_100m.tif</code>, inside footprint and &gt;300 m from catalogue positives. It is an owner-mirror public-map proxy, not organizer-authenticated or private truth.</td></tr>
+  </table>
+
+  <h2 class="sec">Catalogue-proxy folds</h2>
+  <table>
+    <tr><th>Candidate</th><th>NW</th><th>NE</th><th>SW</th><th>SE</th><th>Mean DTI</th></tr>
+    <tr><td>Dotted input</td><td>0.00614017</td><td>0.00856664</td><td>0.00752446</td><td>0.00509091</td><td>0.00683054</td></tr>
+    <tr><td>Tip/stepover input</td><td>0.08272042</td><td>0.10202996</td><td>0.08960076</td><td>0.07292961</td><td>0.08682019</td></tr>
+    <tr><td>Arithmetic mean</td><td>0.04399987</td><td>0.05467085</td><td>0.04824520</td><td>0.03870969</td><td>0.04640640</td></tr>
+    <tr><td>Prior α=.99 normalized belief</td><td>0.04380968</td><td>0.05443621</td><td>0.04804228</td><td>0.03854156</td><td>0.04620743</td></tr>
+    <tr><td>Prior full-union decision</td><td>0.08147706</td><td>0.10045926</td><td>0.08828044</td><td>0.07193671</td><td>0.08553837</td></tr>
+    <tr><td><b>Current ρ=.5 fusion</b></td><td>0.03087113</td><td>0.03866373</td><td>0.03377285</td><td>0.02704332</td><td>0.03258776</td></tr>
+  </table>
+  <p>The current fusion's mean paired deltas are <b>−0.05423243</b> vs tip/stepover (0/4 positive), <b>−0.01381864</b> vs arithmetic mean (0/4), and <b>−0.05295061</b> vs full-union decision (0/4). It improves over dotted only (+0.02575722, 4/4), which is insufficient.</p>
+
+  <h2 class="sec">SGMC off-catalogue folds</h2>
+  <table>
+    <tr><th>Candidate</th><th>NW</th><th>NE</th><th>SW</th><th>SE</th><th>Mean DTI</th></tr>
+    <tr><td>Dotted input</td><td>0.10182207</td><td>0.09912465</td><td>0.10746082</td><td>0.07355714</td><td>0.09549117</td></tr>
+    <tr><td>Tip/stepover input</td><td>0.10142873</td><td>0.10017174</td><td>0.10645547</td><td>0.07390835</td><td>0.09549107</td></tr>
+    <tr><td>Arithmetic mean</td><td>0.09605623</td><td>0.09240516</td><td>0.09748449</td><td>0.06907247</td><td>0.08875458</td></tr>
+    <tr><td>Prior α=.99 normalized belief</td><td>0.09602486</td><td>0.09235530</td><td>0.09744063</td><td>0.06903737</td><td>0.08871454</td></tr>
+    <tr><td>Prior full-union decision</td><td>0.10252838</td><td>0.10265624</td><td>0.10651998</td><td>0.07626204</td><td>0.09699166</td></tr>
+    <tr><td>Historical Yager alternative (not slot-cleared)</td><td>0.09147422</td><td>0.08502775</td><td>0.09113135</td><td>0.06393249</td><td>0.08289145</td></tr>
+    <tr><td><b>Current ρ=.5 Dempster fusion</b></td><td>0.07481534</td><td>0.07033302</td><td>0.07938167</td><td>0.05251519</td><td>0.06926131</td></tr>
+  </table>
+  <p>The current ρ=.5 fusion's mean paired deltas are <b>−0.02622986</b> vs dotted (0/4), <b>−0.02622977</b> vs tip/stepover (0/4), <b>−0.01949328</b> vs the arithmetic mean (0/4), and <b>−0.02773035</b> vs the prior full-union decision (0/4). It fails every paired comparison on this proxy. The Yager alternative improves over the current Dempster candidate by +0.01363015 (4/4), but still loses to dotted (−0.01259971), tip/stepover (−0.01259962), arithmetic mean (−0.00586313), and prior union (−0.01410020), each 0/4. Neither fusion is slot-cleared.</p>
+
+  <h2 class="sec">H52 candidate (2026-10-07): C + 2,000 lidar-scarp additions — same protocol, not slot-cleared</h2>
+  <table>
+    <tr><th>Candidate</th><th>NW</th><th>NE</th><th>SW</th><th>SE</th><th>Mean DTI</th></tr>
+    <tr><td>C (0.2778 dotted prune, 37,654 dots)</td><td>0.10182207</td><td>0.09912465</td><td>0.10746082</td><td>0.07355714</td><td>0.09549117</td></tr>
+    <tr><td>Prior full-union decision (47,905)</td><td>0.10252838</td><td>0.10265624</td><td>0.10651998</td><td>0.07626204</td><td>0.09699166</td></tr>
+    <tr><td>H49 Yager balanced (47,905)</td><td>0.10605341</td><td>0.10790140</td><td>0.11041352</td><td>0.07863641</td><td>0.10075119</td></tr>
+    <tr><td><b>H52: C + 2,000 lidar additions (39,654)</b></td><td>0.10200577</td><td>0.09959211</td><td>0.10802507</td><td>0.07601133</td><td><b>0.09640857</b></td></tr>
+  </table>
+  <p>Newer-SGMC: +0.000917 vs C (4/4 folds), −0.000583 vs the prior union (1/4), −0.004343 vs H49 (0/4). Raw-SGMC sensitivity: 0.09542633 (C 0.09450317, union 0.09595726, H49 0.09976836). Sweep over 500–12,000 additions, a random-placement control and a terrain-band control are in <a href="research/holdout-h52-results-20261007.md">the H52 report</a>; official-script JSONs: <a href="../evidence/holdout_h52_spatial_comparison_20261007.json">newer</a> · <a href="../evidence/holdout_h52_raw_sgmc_sensitivity_20261007.json">raw</a>. The H52 file is this session's unique artifact; it fails the pre-registered gate (does not beat H49; detector lift 1.19–2.27× by quadrant, rule ≥ 2×) and is <b>not slot-cleared</b>. Not an organizer score.</p>
+
+  <h2 class="sec">Latest-main H49 re-score: new proxy best, still no slot</h2>
+  <p>The separate H49 Yager-balanced emission was re-evaluated with the same four core-plus-300 m-halo folds, >300 m off-catalogue definition, and official DTI parameters used above. On the newer SGMC derivative it scores <b>0.100751188</b> versus <b>0.096991657</b> for the prior full-union decision, paired +0.003759531 in 4/4 folds. On the separate older raw-raster sensitivity it scores 0.099768355 versus 0.095957265 for the prior union, +0.003811091 in 4/4. The rasters/reports remain separate.</p>
+  <p>This is a post-selection re-score on related public SGMC proxy evidence, not a fresh independent blind holdout. The gain is below the live instrument's roughly 0.005 resolution; its live-anchored change bracket is −0.010 to +0.005. H49 numerically beats the former proxy best here, but it is <b>not slot-cleared</b>.</p>
+  <p>The H49 upstream TIFF stored zero outside. Its separate NaN-outside derivative preserves all in-footprint values exactly and passes local format validation; organizer acceptance remains untested: <a href="downloads/GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif">format-audited H49 TIFF</a> · <a href="../evidence/h49_submission_validation_20261006.json">format receipt</a> · <a href="research/holdout-h49-results-20261006.md">full score/caveat report</a> · <a href="../evidence/holdout_h49_spatial_comparison_20261006.json">newer-SGMC JSON</a> · <a href="../evidence/holdout_h49_raw_sgmc_sensitivity_20261006.json">raw-SGMC JSON</a>.</p>
+
+  <h2 class="sec">SGMC raster discrepancy and older-raster sensitivity</h2>
+  <p>The newer manifest-pinned derivative used above and the prior raw raster share dimensions, CRS, and transform, but differ in nodata metadata and 1,450 positive-mask cells (1,446 only in the newer raster; 4 only in the older). The lineage difference is unresolved. Full details are in <code>evidence/sgmc_raster_comparison_20261006.json</code>. The older raw raster produced a distinct same-protocol sensitivity report (<code>evidence/holdout_raw_sgmc_20261006.json</code>; 61,664 target cells): dotted 0.09450317, tip/stepover 0.09449144, arithmetic mean 0.08784120, prior union 0.09595726, Yager 0.08206068, and ρ=.5 Dempster 0.06857388. Do not combine or pool these scores with the newer-raster results above.</p>
+  <p>The archived PR #5 proxy report also used the newer raster but defined off-catalogue truth with a ≥300 m rule (63,121 cells) and full-scene quadrants. Its Yager/dotted/tip/arithmetic means were 0.08407042/0.09613246/0.09709394/0.09030297. Those scores are historical and not numerically comparable to the blocked core-plus-halo folds here.</p>
+
+  <h2 class="sec">Historical upstream protocol—do not compare its folds directly</h2>
+  <p>The merged main branch's earlier quadrant evaluator used full-grid predictions while masking truth to one quadrant. Thus predictions outside the scored quadrant could contribute false positives; this differs from the core-plus-halo domain used above. Its stored old union quadrants were below both parents in all four blocks, while its pooled SGMC tier sweep selected full union at 0.096047 (dotted 0.093965, tip 0.094245). The tier was selected from pooled off-catalogue pixels, not an independent blocked holdout; the normalized-belief gate is explicitly false. The union and α=.99 belief are now recomputed/scored above using the current semantics for a fair paired comparison against ρ=.5.</p>
+
+  <h2 class="sec">Leakage and inference limits</h2>
+  <ul>
+    <li>The H33-2-B2 owner audit describes deleting candidate predictions within 200 m of the full public catalogue. Source construction therefore had access to catalogue geometry that includes held-out areas. The source surfaces were not fold-rebuilt, so this is a conditional comparison, not leakage-free generalization.</li>
+    <li>The SGMC proxy removes cells within 300 m of catalogue labels, but this filter does not undo the source-generation leakage or create private expert truth.</li>
+    <li>The mirrored candidate, label, sample-template and SGMC TIFFs are not organizer-authenticated; the source-mirror reuse/license status is not verified. The underlying SGMC catalog is official USGS public data, but this processed raster's lineage was not rebuilt here.</li>
+    <li>No leaderboard score, hidden-test estimate, or private label result is available from these diagnostics.</li>
+  </ul>
+
+  <h2 class="sec">Receipts and rerun</h2>
+  <ul>
+    <li>Primary newer-raster paired results: <code>evidence/holdout_20261006.json</code>; older raw-raster sensitivity: <code>evidence/holdout_raw_sgmc_20261006.json</code>.</li>
+    <li>SGMC pixel/hash comparison receipt: <code>evidence/sgmc_raster_comparison_20261006.json</code>.</li>
+    <li>Protocol preregistration: <code>docs/research/hypotheses-20261006.md</code>.</li>
+    <li>Source hashes and citations: <a href="sources.html">sources and provenance</a>.</li>
+    <li>Re-run H48 after hash-verified restore/build: <code>python scripts/run_spatial_holdout.py --yager docs/downloads/gemsdoe48-h48-ds-yager-conflict-20261006.tif</code>. The pinned newer derivative is the default SGMC target.</li>
+    <li>Re-run the H49 format copy and shared-protocol scores using the commands in <a href="../README.md#reproduce">README reproduction steps</a>. The H49 reports are post-selection proxy diagnostics, not slot clearance.</li>
+  </ul>
+  <footer>GEMSDOE48 · no submission slot is cleared. Public proxy evidence is not a substitute for private, organizer-provided expert truth.</footer>
+</div>
+</body>
+</html>
