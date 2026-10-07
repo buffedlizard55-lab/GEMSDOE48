@@ -1,0 +1,71 @@
+{
+  "candidate_id": "H53-A",
+  "candidate_name": "GEMSDOE48-H53-STRIKE-COHERENCE-20261007-de35531d3867-nan-outside",
+  "construction": {
+    "addition_count": 12000,
+    "base_C_count": 37654,
+    "candidate_count": 49654,
+    "catalogue_exclusion_distance_m": 200.0,
+    "cover_band": "cover",
+    "eligible_after_catalogue_and_parent_exclusion": 582626,
+    "eligible_coherent_cells_before_distance_masks": 937424,
+    "emission": "binary 0/1 inside footprint; NaN outside",
+    "height_band": "h_gate12",
+    "minimum_cover_fraction": 0.9,
+    "minimum_effective_height_m": 0.3,
+    "minimum_support_points": 4,
+    "parent_exclusion_distance_m": 200.0,
+    "poisson_min_spacing_px": 2.8284271247461903,
+    "selected_height_max_m": 4.119999885559082,
+    "selected_height_median_m": 2.7899999618530273,
+    "selected_height_min_m": 2.2200000286102295,
+    "selected_support_count_max": 5,
+    "selected_support_count_min": 4,
+    "strike_band": "strike_at",
+    "strike_tolerance_degrees_mod_180": 15.0,
+    "window_points_including_center": 5
+  },
+  "generated_utc": "2026-10-07T04:38:47.563500+00:00",
+  "inputs": {
+    "catalogue_exclusion_mirror": {
+      "path": "data/official/labels.tif",
+      "sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093"
+    },
+    "dotted_parent_C": {
+      "path": "data/families/dotted_b2_prune_02778.tif",
+      "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9"
+    },
+    "footprint": {
+      "path": "data/source_mirrors/footprint-mask.tif",
+      "sha256": "ddadb8c96cda673b91ddaa0bbed2aa955c358a8f6196c4c4e8fa70d454dd429f"
+    },
+    "scarp_product": {
+      "path": "data/external/h52_scarp3m_100m.tif",
+      "sha256": "b5e53d67c3a7d3d1ca44ae04ae1e84d8574857da3fcd5e34ba47276d6c04b923"
+    }
+  },
+  "output": {
+    "bands": 1,
+    "bytes": 403844,
+    "dtype": "float32",
+    "nan_outside": true,
+    "path": "docs/downloads/GEMSDOE48-H53-STRIKE-COHERENCE-20261007-de35531d3867-nan-outside.tif",
+    "positive_cells": 49654,
+    "sha256": "de35531d386792da1950eac815f98db8f36304f78debb6b568138d070640d9bd"
+  },
+  "portal_note": "GEMSDOE48-H53 | C + 12k Poisson dots ranked by 500m strike-coherent 3DEP scarp support; proxy-tested research only; NOT slot-cleared.",
+  "portal_note_length": 133,
+  "preregistration": {
+    "document": "docs/research/hypotheses-h53-20261007.md",
+    "json": "evidence/hypothesis_slate_h53_20261007.json",
+    "json_sha256": "786072b2406115f4662edb1b64cd54855be5d3ca1f744731b9485d25d9ab3cf7"
+  },
+  "provenance_limits": [
+    "This is a derived product from an owner group's regional mosaic of USGS 3DEP staged tiles; this checkout re-verifies local hashes but did not directly re-fetch USGS payloads.",
+    "The source product stores a single best strike per 100 m cell; the continuity test is quantized and is not a native-resolution 500 m line trace.",
+    "The full-area public catalogue is used as a distance exclusion mask; source C is frozen and was also built using catalogue geometry, so blocked results remain conditional and potentially leaky.",
+    "The TIFF is a unique local research candidate; it is not an organizer-submitted file, score, or acceptance test."
+  ],
+  "schema_version": 1,
+  "status": "BUILT_FOR_RESEARCH_NOT_SLOT_CLEARED"
+}

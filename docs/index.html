@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="GEMSDOE48 research project: conflict-aware fault evidence fusion, downloadable GeoTIFF, blocked validation, and transparent limitations.">
+  <meta name="description" content="GEMSDOE48 research project: H53-A strike-coherent fault-candidate GeoTIFF, blocked public-proxy validation, and transparent slot decision.">
   <title>GEMSDOE48 — evidence, not certainty</title>
   <style>
     :root {
@@ -75,32 +75,38 @@
 <body>
   <header>
     <div class="wrap">
-      <div class="eyebrow">DOE GEMS Prize Challenge · research artifact · 2026-10-07 (H52 lidar session; concurrent H50/H50-B/H51 pages below)</div>
+      <div class="eyebrow">DOE GEMS Prize Challenge · research artifact · 2026-10-07 (H53-A strike-coherence session)</div>
       <h1>GEMSDOE48</h1>
       <p class="deck">A reproducible test of conflict-aware fusion for sparse fault-candidate maps—built to preserve disagreement, scored against public catalogue proxies, and gated by evidence rather than optimism.</p>
     </div>
   </header>
   <main class="wrap">
-    <section class="card" id="h52">
-      <h2>2026-10-07 — H52 unique candidate: C + 2,000 native-lidar scarp additions (not slot-cleared)</h2>
-      <p><b>This session's unique research TIFF, not a slot-cleared upload.</b> The 0.2778 dotted family (C, 37,654 dots) is kept unchanged and 2,000 Poisson-spaced dots are added on the strongest line-persistent steps found by a new 3 m lidar scarp detector run over all 700 zone-11 USGS 3DEP 1 m tiles in GitHub Actions (effective step ≥ 3.29 m inside smooth terrain, &gt; 200 m from the public catalogue and from any C dot). One band float32, EPSG:32611, 100 m, 3,730 × 3,292, values {0,1} in-footprint, NaN outside; 39,654 positives. It is byte- and pixel-distinct from every prior GEMSDOE artifact in this repository (<a href="../evidence/h52_submission_identity_20261007.json">identity receipt</a>).</p>
-      <a class="button" href="downloads/GEMSDOE48-H52-lidar-scarp-additions-20261007-38029417f6ca-nan-outside.tif" download>↓ Download H52 unique candidate GeoTIFF (NaN outside, not slot-cleared)</a>
-      <p class="file-meta">GEMSDOE48-H52-lidar-scarp-additions-20261007-38029417f6ca-nan-outside.tif<br>346,152 bytes · SHA-256 38029417f6cab01f9f56d4d3259a998affad6ae45a2a21a394682ee38b98e0c7 · <a href="downloads/GEMSDOE48-H52-lidar-scarp-additions-20261007-38029417f6ca-zeros-outside.tif" download>zeros-outside twin</a></p>
-      <div class="note">GEMSDOE48-H52 | 0.2778 dotted family + 2,000 lidar-scarp dots (3 m USGS 3DEP step detector, &gt;200 m off-catalogue); unscored research candidate.</div>
-      <p><b>Measured, same protocol as H49:</b> newer-SGMC off-catalogue proxy <b>0.096409</b> vs C 0.095491 (+0.000917, 4/4 folds), vs union 0.096992 (−0.000583), vs H49 0.100751 (−0.004343); raw-SGMC 0.095426. Random additions in the same footprint give −0.000155 at 2,000 and +0.000484 at 12,000 (control). <b>The pre-registered gate fails</b>: the candidate does not beat H49 and the detector's label-free lift is 1.19–2.27× by quadrant (pilot: 2.3–3.2×), below the ≥ 2× everywhere rule. Live-anchored change bracket for +2,000 dots: −0.006 (all empty) to +0.009 (as good as the average C dot). <b>Do not spend a slot on it.</b></p>
+    <section class="card download-card" id="h53" style="margin-bottom:24px;border-width:2px">
+      <p class="eyebrow" style="color:#41664d">2026-10-07 · H53-A · unique research GeoTIFF · spatial gate failed</p>
+      <h2>⬇ H53-A strike-coherent candidate — download, but do not upload</h2>
+      <p><b>This is a research artifact, not a cleared competition submission.</b> It keeps the 37,654 positive cells of dotted parent C and adds 12,000 Poisson-spaced points selected from the pinned regional 3DEP-derived H52 layers: height ≥ 0.30 m, cover ≥ 0.90, and strike-compatible support in at least 4/5 samples over an approximately 400–565 m trace. Additions are excluded within 200 m of the public catalogue and parent C. One-band float32, EPSG:32611, 100 m, 3,730 × 3,292; values {0,1} inside the footprint and NaN/nodata outside; 49,654 positive cells.</p>
+      <a class="button" href="downloads/GEMSDOE48-H53-STRIKE-COHERENCE-20261007-de35531d3867-nan-outside.tif" download>↓ Download H53-A research GeoTIFF (NOT slot-cleared; do not upload)</a>
+      <p class="file-meta">GEMSDOE48-H53-STRIKE-COHERENCE-20261007-DE35531D3867-NAN-OUTSIDE.tif<br>403,844 bytes · SHA-256 de35531d386792da1950eac815f98db8f36304f78debb6b568138d070640d9bd</p>
+      <div class="note">GEMSDOE48-H53 | C + 12k Poisson dots ranked by 500m strike-coherent 3DEP scarp support; proxy-tested research only; NOT slot-cleared.</div>
+      <p><b>Preregistered spatial comparison failed against H49 on both public SGMC proxies.</b> Newer SGMC off-catalogue DTI: H53-A <b>0.098110</b> vs H49 <b>0.100751</b> (−0.002641; H53 wins 1/4 folds). Older raw-SGMC sensitivity: <b>0.097086</b> vs <b>0.099768</b> (−0.002682; 1/4 folds). H53 beats the earlier full-union comparator, but not the promotion comparator H49. These are public-map proxies, not private expert labels or organizer scores. <b>No weekly slot was used or cleared.</b></p>
       <div class="diag-links">
-        <a href="research/holdout-h52-results-20261007.md">H52 sweep + controls report</a>
-        <a href="research/hypotheses-h52-20261007.md">H52 hypothesis slate (pre-registered)</a>
-        <a href="research/why-02778-and-ceiling-20261007.md">Why 0.2778 scored highest; what &gt; 0.3195 / 0.3774 needs</a>
-        <a href="../evidence/holdout_h52_spatial_comparison_20261007.json">Official-script newer-SGMC report</a>
-        <a href="../evidence/holdout_h52_raw_sgmc_sensitivity_20261007.json">Raw-SGMC sensitivity</a>
-        <a href="../evidence/h52_submission_validation_20261007.json">Local format validation</a>
-        <a href="../evidence/h52_pilot_scarp_eval_20261007.json">Pilot evaluation (2 tiles)</a>
-        <a href="../evidence/h52_region_detector_checks_20261007.json">Region-wide label-free checks</a>
-        <a href="https://github.com/buffedlizard55-lab/GEMSDOE48/actions/runs/37561683197">CI run: 700 tiles → 3 m detector</a>
-        <a href="https://github.com/buffedlizard55-lab/GEMSDOE48/actions/runs/37565284104">CI run: mosaic + commit</a>
+        <a href="research/holdout-h53-results-20261007.md">Full H53-A result and assumptions</a>
+        <a href="research/hypotheses-h53-20261007.md">Frozen H53 hypotheses slate</a>
+        <a href="../evidence/h53_vs_h49_20261007.json">Hash-checked paired H53-vs-H49 gate</a>
+        <a href="../evidence/h53_submission_validation_20261007.json">Local format audit</a>
+        <a href="../evidence/h53_submission_identity_20261007.json">Bounded local uniqueness audit</a>
+        <a href="submission-guide.html">Submission format and portal guide (reference only; not authorization)</a>
       </div>
-      <p class="small" style="margin-top:14px">What was learned: at 100 m no available layer re-ranks the dotted family's dots strongly enough to pay for a removal (best non-circular lift 1.43×, bar ≈ 2.6×); the live ladder A→B→C (0.2600→0.2708→0.2778) is exactly explained by deleting masked catalogue-adjacent dots, not by geology; C recovers ≈ 37 % of the hidden kernel mass and 0.3774 needs ≈ 50 %. Region-wide, the 3 m detector's value on bedrock-fault proxies is its terrain class (dissected piedmont band 0.7–2.5 m roughness: random dots there +0.009 on the proxy), not its step height — a v2 detector (dual-baseline step test, playa/agriculture exclusion, ≥ 500 m line tracing) is the top next step. Nothing on this page is an organizer score.</p>
+      <p class="small" style="margin-top:14px"><strong>DO NOT UPLOAD THIS TIFF.</strong> H53-A loses to H49 on both preregistered SGMC proxy comparisons. A public-proxy pass alone would not establish private-label performance; this candidate fails even that necessary gate. Organizer acceptance and global uniqueness have not been tested.</p>
+    </section>
+
+    <section class="card" id="h52-archive" style="margin-bottom:24px">
+      <p class="eyebrow" style="color:#52665c">Previous research artifact · H52 · also not slot-cleared</p>
+      <h2>Archived H52: C + 2,000 native-lidar scarp additions</h2>
+      <p>H52 retained the 37,654-cell dotted parent C and added 2,000 detections from a 3 m USGS 3DEP step detector. Its same-protocol newer-SGMC off-catalogue proxy score was 0.096409 versus H49 0.100751, so its gate also failed. This is a prior, different construction; it was not reused as H53-A.</p>
+      <a class="button" href="downloads/GEMSDOE48-H52-lidar-scarp-additions-20261007-38029417f6ca-nan-outside.tif" download>↓ Download historical H52 research TIFF (do not upload)</a>
+      <p class="file-meta">GEMSDOE48-H52-lidar-scarp-additions-20261007-38029417f6ca-nan-outside.tif<br>346,152 bytes · SHA-256 38029417f6cab01f9f56d4d3259a998affad6ae45a2a21a394682ee38b98e0c7 · <a href="downloads/GEMSDOE48-H52-lidar-scarp-additions-20261007-38029417f6ca-zeros-outside.tif" download>zeros-outside twin</a></p>
+      <div class="diag-links"><a href="research/holdout-h52-results-20261007.md">H52 results and controls</a><a href="research/hypotheses-h52-20261007.md">H52 pre-registered slate</a><a href="../evidence/h52_submission_validation_20261007.json">H52 local format validation</a></div>
     </section>
 
     <section class="card" id="h50-gdr-archive" style="margin-bottom:24px;border-color:#bfcebf">
@@ -156,8 +162,8 @@
     </section>
 
     <div class="warning">
-      <strong>NO CANDIDATE IS CLEARED FOR A SUBMISSION SLOT (re-confirmed 2026-10-07 with the H52 lidar candidate below).</strong>
-      H48 rho=.5 loses to the prior union on the shared blocked SGMC proxy. Newer-main H49 now scores 0.100751 versus 0.096992 for that prior best (+0.003760 in 4/4 folds), but this is a post-selection re-score on related public proxies; the gain is below the live instrument's roughly 0.005 resolution, and the live-anchored change bracket includes loss. H49's NaN-outside derivative passes local format validation, not organizer acceptance. Do not submit on these results alone.
+      <strong>NO CANDIDATE IS CLEARED FOR A SUBMISSION SLOT (re-confirmed 2026-10-07 with H53-A).</strong>
+      H53-A fails its preregistered gate against H49 on both the newer and older SGMC public-map proxies; H49 remains the current same-protocol proxy-best, not a proven private-label winner. H48 rho=.5 loses to the prior union on the shared blocked SGMC proxy. H49's newer-main score is 0.100751 versus 0.096992 for the prior union (+0.003760 in 4/4 folds), but this is a post-selection re-score on related public proxies; the gain is below the live instrument's roughly 0.005 resolution, and the live-anchored change bracket includes loss. Local format checks do not establish organizer acceptance. Do not submit on these results alone.
     </div>
 
 
