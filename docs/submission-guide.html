@@ -100,9 +100,9 @@ font-family:var(--mono);font-size:.78rem;overflow-wrap:anywhere;margin:10px 0}
 </div></nav>
 <main class="wrap">
 <div class="bad" role="alert"><strong>Metric correction — no weekly upload cleared.</strong>
-The H55/H56 live-equivalent projections assume <code>FPw = S − TPw</code>,
+Historical H54–H56 score projections and break-even diagnostics assume <code>FPw = S − TPw</code>,
 which is generally false: FP uses a prediction-centred maximum, TP a truth-centred one.
-Treat the 0.2843 "ceiling" and H56's 0.0649 as <em>historical surrogate outputs</em>,
+Treat H54 density-matched/live-frontier outputs, the 0.2843 "ceiling", and H56's 0.0649 as <em>historical surrogate outputs</em>,
 not verified private-label results or portal acceptance.
 <a href="research/metric-identity-erratum-20261007.md">Read the derivation and executable counterexample</a>.</div>
 
@@ -114,12 +114,11 @@ not verified private-label results or portal acceptance.
 
 <div class="bad">
 <div class="dl" id="h56" style="border:3px solid #b3541e">
-<h2>⬇ This session's unique submission (H56B graded belief) — ✅ download OK, ⛔ submit NOT recommended</h2>
+<h2>⬇ This session's unique downloadable research candidate (H56B graded belief) — ✅ download OK, ⛔ submit NOT recommended</h2>
 <p class="small" style="margin-bottom:0"><strong>GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b</strong><br>
 continuous Bel(F) in [0, 1] · single-band float32 · EPSG:32611 · 100 m ·
 3,730 × 3,292 · 791,389 positive cells · <strong>all 12,279,160 cells finite,
-whole raster inside [0, 1]</strong> — immune to the portal's
-<em>“Predicted values must be in range [0, 1]”</em> rejection.</p>
+whole raster inside [0, 1]</strong> — whole-raster range-safe in local validation. The official out-of-bounds null/NaN rule and portal behavior have not been confirmed together.</p>
 <a class="bigbtn" href="downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros-outside.tif" download>⬇ Download GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros-outside.tif
 <small>1,646,054 bytes · click to save · single band float32 · EPSG:32611 ·
 normalized combined belief Bel(F)</small></a>
@@ -127,22 +126,15 @@ normalized combined belief Bel(F)</small></a>
 content id <code>9ec0d605c45b</code> · submission name <code>GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b</code></p>
 <div class="btnrow">
 <a class="btn" href="downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros-outside.zip" download>Same file as .zip (1,572,211 B)</a>
-<a class="btn" href="downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-nan-outside.tif" download>NaN-outside twin (1,694,257 B)</a>
+<a class="btn" href="downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-nan-outside.tif" download>NaN/nodata twin — masked local audit only (1,694,269 B)</a>
 </div>
-<p class="meta">paste-ready submission note (231 characters):<br>
-<code>GEMSDOE48-H56 | Dempster belief[0,1] of dotted-C(0.2778) x tip-H33D(0.2632), metric-kernel BPA, live-anchored discounts; m(Theta) diagnostic separate; live-model proj 0.0649 -&gt; submit NOT recommended; unscored | id 9ec0d605c45b</code></p>
-<p class="meta">Dempster–Shafer diagnostic layers for a geologist and are not submissions:
+<p class="meta">paste-ready submission label/note (inspection only):<br>
+<code>GEMSDOE48-H56 | Dempster belief[0,1] of dotted-C(0.2778) x tip-H33D(0.2632), metric-kernel BPA, live-anchored discounts; m(Theta) diagnostic separate; holdout below H49 -&gt; submit NOT recommended; unscored | id 9ec0d605c45b</code></p>
+<p class="meta">Dempster–Shafer diagnostic layers (not submissions):
 <a href="downloads/diagnostics/gemsdoe48-h56-mtheta-9ec0d605c45b.tif">unassigned mass m(Θ)</a> ·
 <a href="downloads/diagnostics/gemsdoe48-h56-conflict-9ec0d605c45b.tif">raw conflict K</a> ·
 <a href="downloads/diagnostics/gemsdoe48-h56-plausibility-9ec0d605c45b.tif">plausibility Pl(F)</a></p>
-<p class="small"><strong>Why NOT recommended:</strong> pre-registered gates G2 and G3 failed
-(<code>evidence/h56_format_audit_20261007.json</code>): the live-calibrated model that reproduces all
-eight owner-reported live scores within ±1.76 % projects this graded surface at 0.0649
-(the metric's algebra pushes optimal submissions to binary {0, 1}; belief mass Σ Bel = 399,799
-pays 0.2-weight false-positive penalty over its whole 300 m kernel halo), and the blocked holdout
-loses to both parents on the SGMC off-catalogue truth. If you submit it anyway — for example to
-spend a slot measuring whether the organizer metric treats graded mass the way the published
-formula says — the six steps below apply unchanged. <strong>UNSCORED.</strong></p>
+<p class="small"><strong>Why NOT recommended:</strong> H56B scores 0.032347 / 0.070552 on the catalogue / SGMC off-catalogue public proxies, versus the same-protocol H49 reference at 0.095353 / 0.100751; it loses in all four folds on both. H56-F pruning also failed the frozen offline proxy screen. The former 0.0649 live-model projection is retired because its formula used an invalid identity for official false-positive weight. The zero-outside primary passes the whole-raster range check but does not meet the official null/NaN outside-bounds wording. The NaN/nodata twin passes a masked local-format audit, but an unmasked portal range check could reject NaN; acceptance of either variant is untested. **Do not submit or use a weekly slot.** The portal walkthrough below is retained as general instructions for a future candidate only. <strong>UNSCORED.</strong></p>
 </div>
 
 
@@ -160,8 +152,7 @@ formula says — the six steps below apply unchanged. <strong>UNSCORED.</strong>
 <p class="small" style="margin-bottom:0"><strong>GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353</strong><br>
 39,430 positive pixels · single-band float32 · EPSG:32611 · 100 m ·
 3,730 × 3,292 · values exactly {0, 1} · <strong>all 12,279,160 cells finite,
-whole raster inside [0, 1]</strong> — immune to the portal's
-<em>“Predicted values must be in range [0, 1]”</em> rejection.</p>
+whole raster inside [0, 1]</strong> — whole-raster range-safe in local validation. The official out-of-bounds null/NaN rule and portal behavior have not been confirmed together.</p>
 <a class="bigbtn" href="downloads/GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353-zeros-outside.tif" download>⬇ Download GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353-zeros-outside.tif
 <small>234,040 bytes · click to save · single band float32 · EPSG:32611 ·
 39,430 positive pixels</small></a>
@@ -172,12 +163,10 @@ content id <code>055da9855353</code> · submission name <code>GEMSDOE48-H55-cond
 <a class="btn" href="downloads/GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353-nan-outside.tif" download>NaN-outside twin (381,046 B)</a>
 <a class="btn" href="submission-guide.html">How to submit this → step by step</a>
 </div>
-<p class="meta">paste-ready submission note (202 characters):<br>
-<code>GEMSDOE48-H55 | 0.2778 core untouched + 1124 conflict-priced gap dots + 652 GDR hot-spring/well conduit anchors &gt;300 m off-catalogue | model band 0.2778-0.2880, floor 0.2727 | unscored | id 055da9855353</code></p>
+<p class="meta">Historical H55 label example (not for submission):<br>
+<code>GEMSDOE48-H55 | archived research artifact; live-model estimates retired; proxy gate failed; no slot cleared | id 055da9855353</code></p>
 <p class="meta">Dempster–Shafer diagnostic layers (not submissions): <a href="downloads/diagnostics/gemsdoe48-h55-bel-055da9855353.tif">bel</a> · <a href="downloads/diagnostics/gemsdoe48-h55-plausibility-055da9855353.tif">plausibility</a> · <a href="downloads/diagnostics/gemsdoe48-h55-mtheta-055da9855353.tif">mtheta</a> · <a href="downloads/diagnostics/gemsdoe48-h55-conflict-055da9855353.tif">conflict</a></p>
-<p class="small"><strong>Modelled live-equivalent band 0.2778 – 0.2880</strong>
-against the current best 0.2778, floor 0.2727 if every added pixel earns zero credit.
-<strong>UNSCORED.</strong> No weekly submission slot is cleared by this page.</p>
+<p class="bad"><strong>Retired model output.</strong> The former 0.2778–0.2880 “live-equivalent” band and 0.2727 floor rely on an invalid identity for official FPw. They are not score estimates or bounds. H55 remains unscored and is not slot-cleared; see the <a href="research/metric-identity-erratum-20261007.md">metric erratum</a>.</p>
 </div>
 
 <h2>Historical H55 portal steps — do not follow for H56</h2>
@@ -206,7 +195,7 @@ Required format, all verified on the written bytes: single band; <code>float32</
 
 <li><strong>Paste the distinguishing note.</strong> Copy this exactly —
 202 characters:
-<pre><code>GEMSDOE48-H55 | 0.2778 core untouched + 1124 conflict-priced gap dots + 652 GDR hot-spring/well conduit anchors &gt;300 m off-catalogue | model band 0.2778-0.2880, floor 0.2727 | unscored | id 055da9855353</code></pre>
+<p class="small"><strong>Withdrawn historical note — do not paste:</strong> <code>GEMSDOE48-H55 | archived research artifact; former live-model outputs retired; public-proxy gate failed; no weekly slot cleared | id 055da9855353</code></p>
 The submission name to quote if the form asks separately is
 <code>GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353</code>.</li>
 
@@ -283,8 +272,9 @@ lost, not a copy of a prior submission.</p>
 <h2>Do not upload these</h2>
 <p class="small">The four files under <code>docs/downloads/diagnostics/</code>
 (Bel, Plausibility, m(Θ), raw conflict K) are diagnostic layers for a geologist and are not
-submissions. They are graded in [0, 1] and would score strictly worse than their own
-binarisation, because the metric is binary-optimal. Every earlier candidate in
+submissions. They are graded in [0, 1]. The former H55 claim that every graded surface scores worse than
+its own binarisation relied on the invalid <code>FPw = S − TPw</code> derivation and is withdrawn;
+no local proof establishes an optimal binary decision for the private-label metric. Every earlier candidate in
 <code>docs/downloads/</code> (H48, H49, H50, H50-B, H51, H52) remains downloadable with its own
 receipts and its own recorded gate failure; none of them is this session's file and none is
 recommended.</p>

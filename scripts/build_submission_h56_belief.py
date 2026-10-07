@@ -19,14 +19,20 @@ Prior DS work in this repository used Dempster's rule to GATE binary dots:
   * H48-1 (build_ds.py): kernel BPA, but emitted an NMS-selected {0,1} mask.
   * H49/H53/H54/H55: DS used as a gate; every shipped artifact is {0,1} and
     additive on top of the dotted core.
-H56 ships the LITERAL normalized combined belief Bel(F) in [0,1] as the
-submission surface — the graded evidential quantity Shafer's theory defines —
-built from a basic probability assignment that (i) uses the competition's OWN
-300 m triangular kernel as evidence support, (ii) discounts each source by its
-live-anchored reliability, and (iii) carries informative ABSENCE evidence
-(on-backbone decline + the live-validated catalogue-flank rejection of the
-dotted family). The unassigned mass m(Theta) — where the two families actively
-disagree — ships as a separate diagnostic layer, not blended away.
+H56B ships the normalized combined belief Bel(F) in [0,1] as a relative-
+favorability submission surface. It is built from a basic probability assignment
+that (i) uses the competition's 300 m triangular kernel as evidence support,
+(ii) discounts each source by its live-anchored reliability, and (iii) carries
+informative absence evidence (backbone decline plus the live-validated
+catalogue-flank rejection of the dotted family).
+
+Important D-S semantics: normalized Dempster combination does NOT retain raw
+conflict K as unassigned mass; normalization discounts K. The exported canonical
+m(Theta) is residual ignorance under the specified input mass assignments and
+can be high without source disagreement. Therefore H56B exports three distinct
+diagnostics: m(Theta) (uncommitted mass), raw pre-normalization K (conflicting
+evidence), and |s_dot - s_tip| (direct disagreement between the two metric-kernel
+support fields). These should not be conflated.
 
 Frozen recipe (pre-registered below, before any scoring is read)
 ----------------------------------------------------------------
@@ -330,12 +336,17 @@ def main() -> int:
     nan_path = dl / f"{base}-nan-outside.tif"
     write_float32(zeros_path, bel, prof, nodata=None)
     nan_arr = np.where(footprint, bel, np.nan).astype(np.float32)
-    write_float32(nan_path, nan_arr, prof, nodata=None)
+    write_float32(nan_path, nan_arr, prof, nodata=float("nan"))
     with zipfile.ZipFile(dl / f"{base}-zeros-outside.zip", "w", zipfile.ZIP_DEFLATED) as z:
         z.write(zeros_path, arcname=zeros_path.name)
 
     diag_paths = {}
-    for tag, arr in [("mtheta", u), ("conflict", K), ("plausibility", (f + u))]:
+    for tag, arr in [
+        ("mtheta", u),
+        ("conflict", K),
+        ("plausibility", (f + u)),
+        ("support-disagreement", np.abs(s_d - s_t)),
+    ]:
         p = diag / f"gemsdoe48-h56-{tag}-{cid}.tif"
         out = np.where(footprint, arr, 0.0).astype(np.float32)
         write_float32(p, out, prof, nodata=None)

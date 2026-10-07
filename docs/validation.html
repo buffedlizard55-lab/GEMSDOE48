@@ -100,9 +100,9 @@ font-family:var(--mono);font-size:.78rem;overflow-wrap:anywhere;margin:10px 0}
 </div></nav>
 <main class="wrap">
 <div class="bad" role="alert"><strong>Metric correction — no weekly upload cleared.</strong>
-The H55/H56 live-equivalent projections assume <code>FPw = S − TPw</code>,
+Historical H54–H56 score projections and break-even diagnostics assume <code>FPw = S − TPw</code>,
 which is generally false: FP uses a prediction-centred maximum, TP a truth-centred one.
-Treat the 0.2843 "ceiling" and H56's 0.0649 as <em>historical surrogate outputs</em>,
+Treat H54 density-matched/live-frontier outputs, the 0.2843 "ceiling", and H56's 0.0649 as <em>historical surrogate outputs</em>,
 not verified private-label results or portal acceptance.
 <a href="research/metric-identity-erratum-20261007.md">Read the derivation and executable counterexample</a>.</div>
 <div class="bad" role="alert"><strong>Research correction — no upload cleared.</strong>
@@ -117,16 +117,16 @@ H55 fails the mass-neutral gate. Local TIFF checks are not organizer acceptance.
 <h1>H56 files fail the same-protocol H49 gate; no slot is cleared</h1>
 </header>
 
-<h2>H56B validation (this session, 2026-10-07) — graded belief: format PASS, holdout FAIL, live-model FAIL</h2>
+<h2>H56B validation (2026-10-07) — local grid/range checks pass, holdout fails, old model projection retired</h2>
 <section class="card" style="border-width:2px">
-<p>The H56B submission (normalized Dempster belief, dotted-C × tip-H33-D) went through the full battery:</p>
+<p>The H56B downloadable research artifact (normalized Dempster belief, dotted-C × tip-H33-D) went through the full battery:</p>
 <ul class="small">
-<li><strong>Format audit — PASS (10/10)</strong> <code>evidence/h56_format_audit_20261007.json</code>: CRS EPSG:32611, transform, shape 3,730 × 3,292, single band float32, all 12,279,160 cells finite, values in [0,1], max = 1, nodata unset, zeros outside footprint — immune to the portal's “Predicted values must be in range [0,1]” rejection.</li>
+<li><strong>Local grid/type/range audit — PASS (10/10 internal checks; not full organizer acceptance)</strong> <code>evidence/h56_format_audit_20261007.json</code>: CRS EPSG:32611, transform, shape 3,730 × 3,292, single band float32, all 12,279,160 cells finite, values in [0,1], max = 1, nodata unset, zeros outside footprint — whole-raster range-safe locally. The zeros-outside encoding does not meet the official null/NaN outside-bounds wording. The NaN/nodata twin matches that outside convention and passes the masked local audit, but an unmasked range validator may reject it; neither file has portal acceptance evidence.</li>
 <li><strong>Uniqueness — PASS</strong> <code>evidence/h56_uniqueness_20261007.json</code>: SHA-256 <code>4d6548d4ec07a47a25b83d28ebc05d58b57448c1507b460aed52cec395bdb6b5</code> distinct from all 67 prior downloads and every registry mirror pin; support Jaccard vs the union 0.0605 (it is the kernel halo, not a dot set); nearest prior neighbour r = 0.9907 (the H48-1 diagnostic belief field — a diagnostic, never submitted), with affine-residual structure distinct from any naive mean (see below).</li>
 <li><strong>Not the naive mean</strong> <code>evidence/build_h56_belief_receipt_20261007.json</code>: Pearson r = 0.389 against the binary mean ½(1<sub>dot</sub>+1<sub>tip</sub>) (MAE 0.0699, max |Δ| 0.823, affine-fit mean |residual| 0.120); against the normalized kernel mean r = 0.987 but the best affine fit leaves mean |residual| 0.0111 and 12.46 % of the footprint differs by &gt; 0.05 — not an affine rescaling of either average.</li>
-<li><strong>Blocked holdout — FAIL</strong> <code>evidence/holdout_h56_spatial_20261007.json</code> (H55 protocol, 4 quadrants, 300 m halo, official DTI): catalogue truth means — H56 0.0321 vs dotted 0.0070 (wins) but tip 0.0897 (loses); SGMC-off truth — H56 0.0735 vs dotted 0.0970 and tip 0.0970 (loses both). Gate requires beating both parents ≥ 3/4 folds on both truths: not met.</li>
-<li><strong>Live-model projection — FAIL</strong> <code>evidence/h56_live_model_projection_20261007.json</code>: H56 projects at <strong>0.0649</strong> (mass Σ Bel = 399,799 pays 0.2-weight FP over the whole kernel halo); sanity: the same instrument reconstructs dotted-C at 0.2728 (calibration 0.27277) and the union at 0.2588 (the H55 session's −0.0140 pricing, reproduced exactly). Even threshold-binarizing the belief at the pignistic 0.5 only reaches 0.0854 — every DS recombination of these two families is now closed by measurement.</li>
-<li><strong>Verdict banner</strong>: G1 PASS, G2 FAIL, G3 FAIL → “DOWNLOAD OK — SUBMIT NOT RECOMMENDED”, computed after the numbers existed, never before.</li>
+<li><strong>Same-protocol blocked holdout — FAIL</strong> <code>evidence/h56f_pruning_holdout_20261007.json</code>: H56B mean DTI is 0.032347 catalogue / 0.070552 SGMC-off versus H49 0.095353 / 0.100751; paired deltas are negative in all four folds on both public proxies. H56-F rungs also fail; see the <a href="research/h56f-pruning-results-20261007.md">H56-F report</a>.</li>
+<li><strong>Retired live-model projection</strong>: the prior H56 projection used an invalid identity for official FPw and is not a score estimate; see <a href="research/metric-identity-erratum-20261007.md">metric erratum</a>. The active decision uses same-protocol blocked proxy results only, which are not private-label or organizer scores.</li>
+<li><strong>Verdict</strong>: download for inspection; submit not recommended. The old live-model gate is retired (not G3 FAIL): its projection used an invalid identity for official FPw. Official null/NaN outside-bounds wording and portal acceptance remain unresolved.</li>
 </ul>
 <p class="small"><strong>Research battery (new-hypothesis validation before touching a slot)</strong>
 <code>evidence/h56_research_battery_20261007.json</code>: all-19-band screen; the previous session's
@@ -148,23 +148,8 @@ new DEMGLOW candidate measured at 0.0028 vs random control 0.0023 (dead). Full r
 <p>Receipts: <a href="../evidence/h56_decision_20261007.json">consolidated decision</a> · <a href="../evidence/h56_submission_validation_20261007.json">format</a> · <a href="../evidence/h56_diagnostics_validation_20261007.json">diagnostics</a> · <a href="../evidence/h56_uniqueness_audit_20261007.json">uniqueness/prior art</a> · <a href="research/h56-results-20261007.md">full report</a>.</p>
 
 <h2>Historical H55 mass-neutral gate — prior artifact failed</h2>
-<div class="bad"><strong>This candidate FAILS the repository's newest gate, and that is
-reported before anything favourable.</strong> A concurrent session merged
-<code>scripts/audit_candidate.py</code> (protocol <code>GEMSDOE48-GATE-2</code>, mass-neutral) while
-this one was running. Verdict <code>FAIL_MASS_NEUTRAL</code>: equal_mass_credit_density_below_incumbent (-0.00201); added_cells_below_live_break_even_bar (density-matched 0.0102 &lt; 0.0556 per cell).
-Equal-mass credit density -0.002014 against the incumbent; added-cell credit
-<strong>0.0102</strong> density-matched against the metric's own
-break-even bar of 0.0556 — 0.18× the bar. If that figure transferred
-to the live metric the score would be <strong>0.2736, −0.0042 against
-0.2778</strong>. Receipt:
-<a href="../evidence/audit_gate2_h55_20261007.json"><code>evidence/audit_gate2_h55_20261007.json</code></a>.
-<br><br>Three things are true about that test and none of them excuse the fail: it rests on the same
-SGMC proxy that an emission built directly on it scored 0.0512 live against the family's 0.26; its
-additions test returns 0.0049–0.0125 per cell for <em>every</em> candidate ever measured, including
-a graded belief field and 222,693 hedge-v2 cells, so it barely discriminates between inputs; and its
-equal-mass test uniformly subsamples a strict superset of C, which must score below C on any proxy
-where C's dots are worth more than the additions. Full reconciliation, including where the two
-instruments <em>agree</em>: §6.4 of the report.</div>
+<div class="bad"><strong>Historical H55 Gate-2 proxy audit; no slot cleared.</strong>
+The direct equal-mass public-proxy comparison recorded a −0.002014 mean difference versus the incumbent. The secondary 0.0556 threshold comparison and 0.2736 live-score translation are retired because they depend on the invalid <code>FPw = S − TPw</code> identity. Neither quantity is an official-score estimate. Receipt: <a href="../evidence/audit_gate2_h55_20261007.json"><code>evidence/audit_gate2_h55_20261007.json</code></a>.</div>
 <table><thead><tr>
 <th>GATE-2 quantity</th>
 <th>value</th>
@@ -176,7 +161,7 @@ instruments <em>agree</em>: §6.4 of the report.</div>
 <tr><td>equal-mass Δ vs incumbent</td><td><span class='neg'>-0.002014</span></td></tr>
 <tr><td>added cells</td><td>1,776</td></tr>
 <tr><td>marginal credit/cell, raw proxy (bar 0.0191)</td><td>0.045030 — passes</td></tr>
-<tr><td>marginal credit/cell, density-matched (bar 0.0556)</td><td><span class='neg'>0.010245 — FAILS</span></td></tr>
+<tr><td>marginal density-matched proxy diagnostic (historical threshold retired)</td><td>0.010245 — not a live-score estimate</td></tr>
 <tr><td>density-matched seeds</td><td>0.0128, 0.0116, 0.0086, 0.0100, 0.0083</td></tr>
 </tbody></table>
 
@@ -232,16 +217,12 @@ four folds on the SGMC-off proxy</strong> (+0.000795 against each, 4/4), and to 
 parent on both proxies in all four folds. H48, H49, H50, H50-B, H51 and H52 each lost to at least
 one parent.</div>
 
-<div class="bad"><strong>And the same proxy ranks the naive union above H55</strong> (0.096992 vs
-0.096286), while the live-calibrated model prices that union at 0.2638
-live-equivalent — -0.0140 against C, whose ingredients scored 0.2778 and
-0.2632 live. Both cannot be right. An emission built directly on this proxy scored 0.0512 live.
-That is which one to distrust.</div>
+<div class="bad"><strong>The same public proxy ranks the naive union above H55</strong> (0.096992 vs 0.096286). The former claim that a live-calibrated model priced this union at 0.2638 or −0.0140 versus C is withdrawn because the projection uses the invalid FPw identity. The direct proxy scores remain descriptive public-map measurements only; neither they nor the owner-reported parent scores establish private-label performance.</div>
 
 <p><code>slot_decision.cleared</code> is <strong>false</strong>:
 h55_conduit_conflict_priced is evaluated only against public-map proxy targets with frozen upstream surfaces; even a numeric proxy pass is not private-label evidence or a slot clearance and must also pass format, live-evidence, and review gates.</p>
 
-<h2>Format audit — PASS_LOCAL_FORMAT_AUDIT_NOT_ORGANIZER_ACCEPTANCE</h2>
+<h2>Historical H55 local format audit — not organizer acceptance</h2>
 <table><thead><tr>
 <th>property</th>
 <th>value</th>
@@ -253,7 +234,7 @@ h55_conduit_conflict_priced is evaluated only against public-map proxy targets w
 <tr><td>shape</td><td>3,730 × 3,292</td></tr>
 <tr><td>CRS / resolution</td><td>EPSG:32611 / 100 m</td></tr>
 <tr><td>geotransform</td><td><code>[100, 0, 243350, 0, −100, 4508550]</code></td></tr>
-<tr><td>outside-footprint encoding</td><td><code>zeros</code></td></tr>
+<tr><td>outside-footprint encoding</td><td><code>zeros</code> (whole-raster range-safe, but does not meet official null/NaN outside-bounds wording)</td></tr>
 <tr><td>nodata</td><td><code>unset</code></td></tr>
 <tr><td>all cells finite</td><td><span class='pill yes'>True</span></td></tr>
 <tr><td>all cells in [0, 1]</td><td><span class='pill yes'>True</span></td></tr>
@@ -321,7 +302,7 @@ recomputation to &lt; 1e-6 relative
 <h2>Test suite</h2>
 <p><code>python -m pytest -q</code> → <strong>158 passed, 3 skipped</strong> (the three skips are
 pre-existing data-dependent tests whose mirrors are absent in CI).
-<code>tests/test_h55.py</code> adds 22 tests covering the metric's binary optimality, the |G|
+<code>tests/test_h55.py</code> adds tests for historical H55 calculations; the binary-optimality interpretation is withdrawn by the metric erratum. The |G|
 identification and its 0.11 % rung self-consistency, the forward model's bounds, coverage
 monotonicity, the greedy's incremental-vs-exact coverage equality, the safety-factor prefix rule,
 dart-throw separation and determinism, the conduit tier rules including the trailing-whitespace

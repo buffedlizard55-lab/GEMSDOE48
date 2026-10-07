@@ -97,38 +97,33 @@ font-family:var(--mono);font-size:.78rem;overflow-wrap:anywhere;margin:10px 0}
 <a href="sources.html">Sources</a>
 <a href="next-steps.html">Next steps</a>
 <a href="research/h56-results-20261007.md">H56 results</a>
+<a href="research/h56f-pruning-results-20261007.md">H56-F blocked test</a>
 </div></nav>
 <main class="wrap">
 <div class="bad" role="alert"><strong>Metric correction — no weekly upload cleared.</strong>
-The H55/H56 live-equivalent projections assume <code>FPw = S − TPw</code>,
+Historical H54–H56 score projections and break-even diagnostics assume <code>FPw = S − TPw</code>,
 which is generally false: FP uses a prediction-centred maximum, TP a truth-centred one.
-Treat the 0.2843 "ceiling" and H56's 0.0649 as <em>historical surrogate outputs</em>,
+Treat H54 density-matched/live-frontier outputs, the 0.2843 "ceiling", and H56's 0.0649 as <em>historical surrogate outputs</em>,
 not verified private-label results or portal acceptance.
 <a href="research/metric-identity-erratum-20261007.md">Read the derivation and executable counterexample</a>.</div>
 
 <header style="background:none;padding:0;color:inherit">
 <p class="eyebrow" style="color:var(--muted)">GEMSDOE48 · DrivenData competition 306 · DOE GEMS Prize</p>
-<h1>The Dempster–Shafer belief of the two best families — graded, measured, and honestly labelled</h1>
+<h1>Dempster–Shafer fusion of two fault families — belief, ignorance, conflict, and an honest verdict</h1>
 <p class="deck" style="color:var(--muted)">This session did what the brief asked: combined the
 0.2778 dotted family and the 0.2632 tip/step-over family with <strong>Dempster's rule of
-combination</strong>, kept the unassigned mass m(Θ) as its own diagnostic layer instead of
-averaging disagreement away, normalized the combined belief to [0, 1], wrote it to the
-required grid, and verified it is not the naive mean of the two inputs. Then it measured the
-result with every instrument in this repository — and publishes the verdict in one banner.</p>
+combination</strong>, exported normalized Bel(F), residual ignorance m(Θ), and pre-normalization conflict K as separate layers; Dempster's rule normalizes conflict rather than transferring K into m(Θ). The belief is on the required grid and is not pixelwise equal to the naive mean. It then reports the same-protocol public-proxy results and limitations in a single verdict banner.</p>
 </header>
 
 <div class="dl" id="h56" style="border:3px solid #b3541e">
-<h2>⬇ One-click download — this session's unique submission (H56B graded belief)</h2>
+<h2>⬇ One-click download — unique H56B candidate TIFF (not cleared for submission)</h2>
 <p style="font-size:1.05rem;margin:6px 0"><strong style="color:#1c5e2e">✅ DOWNLOAD: OK</strong> —
-format-verified and byte-unique locally; portal acceptance untested. &nbsp;
-<strong style="color:#b3541e">⛔ SUBMIT: NOT RECOMMENDED</strong> — the live-calibrated forward model
-that reproduces all eight owner-reported live scores within ±1.76 % projects this graded surface at
-<strong>0.0649</strong> live-equivalent, far below the 0.2778 incumbent, and the spatially-blocked
-holdout loses to both parents on the SGMC off-catalogue truth. See the pre-registered gates below.</p>
+local grid/type/range audit passes and the file is locally byte-distinct; organizer acceptance is untested. The official specification also says cells outside bounds must be null/NaN, while this range-error-immune copy uses finite zeros there. &nbsp;
+<strong style="color:#b3541e">⛔ SUBMIT: NOT RECOMMENDED</strong> — on the same fixed-quadrant protocol as H49, H56B scores 0.032347 / 0.070552 versus H49 0.095353 / 0.100751 (catalogue / SGMC off-catalogue), lower in all four folds for both targets. The old 0.0649 live-model projection was retired because its FP identity was invalid; it is not used as a score estimate.</p>
 <p class="small" style="margin-bottom:0"><strong>GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b</strong><br>
 continuous Bel(F) in [0, 1] · single-band float32 · EPSG:32611 · 100 m ·
 3,730 × 3,292 · 791,389 positive cells · belief mass Σ Bel = 399,799.4 ·
-<strong>all 12,279,160 cells finite, whole raster inside [0, 1]</strong> — passes a local whole-raster range check; portal acceptance is untested.</p>
+<strong>all 12,279,160 cells finite, whole raster inside [0, 1]</strong> — passes a local whole-raster range check. This zeros-outside choice does not meet the official null/NaN outside-bounds wording. The NaN/nodata twin matches that outside-bounds convention and passes the masked local audit, but an unmasked portal range validator could reject NaN; portal acceptance of either encoding is untested.</p>
 <a class="bigbtn" href="downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros-outside.tif" download>⬇ Download GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros-outside.tif
 <small>1,646,054 bytes · click to save · single band float32 · EPSG:32611 ·
 normalized combined belief Bel(F)</small></a>
@@ -136,35 +131,29 @@ normalized combined belief Bel(F)</small></a>
 content id <code>9ec0d605c45b</code> · submission name <code>GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b</code></p>
 <div class="btnrow">
 <a class="btn" href="downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros-outside.zip" download>Same file as .zip (1,572,211 B)</a>
-<a class="btn" href="downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-nan-outside.tif" download>NaN-outside twin (1,694,257 B)</a>
+<a class="btn" href="downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-nan-outside.tif" download>NaN/nodata twin — masked local audit only (1,694,269 B)</a>
 <a class="btn" href="submission-guide.html">How to submit this → step by step</a>
 </div>
-<p class="meta">paste-ready submission note (231 characters):<br>
-<code>GEMSDOE48-H56 | Dempster belief[0,1] of dotted-C(0.2778) x tip-H33D(0.2632), metric-kernel BPA, live-anchored discounts; m(Theta) diagnostic separate; live-model proj 0.0649 -&gt; submit NOT recommended; unscored | id 9ec0d605c45b</code></p>
-<p class="meta">Dempster–Shafer diagnostic layers for a geologist and are not submissions:
+<p class="meta">paste-ready submission label/note (inspection only):<br>
+<code>GEMSDOE48-H56 | Dempster belief[0,1] of dotted-C(0.2778) x tip-H33D(0.2632), metric-kernel BPA, live-anchored discounts; m(Theta) diagnostic separate; holdout below H49 -&gt; submit NOT recommended; unscored | id 9ec0d605c45b</code></p>
+<p class="meta">Dempster–Shafer diagnostic layers (not submissions):
 <a href="downloads/diagnostics/gemsdoe48-h56-mtheta-9ec0d605c45b.tif">unassigned mass m(Θ)</a> ·
 <a href="downloads/diagnostics/gemsdoe48-h56-conflict-9ec0d605c45b.tif">raw conflict K</a> ·
-<a href="downloads/diagnostics/gemsdoe48-h56-plausibility-9ec0d605c45b.tif">plausibility Pl(F)</a> —
-m(Θ) ∈ [0.005, 0.664] is exactly where the two strongest independent approaches actively disagree.</p>
-<p class="small"><strong>Why the banner says what it says (pre-registered gates, computed after the numbers existed):</strong>
-G1 format — <strong>PASS</strong> (10/10 checks, <code>evidence/h56_format_audit_20261007.json</code>).
-G2 blocked holdout beats both parents ≥ 3/4 folds on both truths — <strong>FAIL</strong>
-(catalogue mean 0.0321 vs dotted 0.0070 / tip 0.0897; SGMC-off mean 0.0735 vs dotted 0.0970 / tip 0.0970,
-<code>evidence/holdout_h56_spatial_20261007.json</code>).
-G3 live-model projection ≥ 0.2778 — <strong>FAIL</strong> (0.0649; the metric's algebra pushes optimal
-submissions to binary {0, 1}, and this surface's belief mass Σ Bel = 399,799 pays 0.2-weight false-positive
-penalty over its whole kernel halo, <code>evidence/h56_live_model_projection_20261007.json</code>).
+<a href="downloads/diagnostics/gemsdoe48-h56-plausibility-9ec0d605c45b.tif">plausibility Pl(F)</a> ·
+<a href="downloads/diagnostics/gemsdoe48-h56-support-disagreement-9ec0d605c45b.tif">direct support disagreement |s_dot−s_tip|</a> —
+m(Θ) ∈ [0.005, 0.664] is residual ignorance under the chosen BPAs, not a pure disagreement map; raw conflict K is the pre-normalization conflict diagnostic.</p>
+<p class="small"><strong>Why the banner says what it says (all values in the receipt):</strong>
+G1 local grid/type/range checks — <strong>PASS</strong> (10/10 internal checks; official outside-bounds null/NaN compliance is unresolved, <code>evidence/h56_format_audit_20261007.json</code>).
+G2 same-protocol H49 comparison — <strong>FAIL</strong> (fixed-quadrant results: catalogue 0.032347 vs H49 0.095353; SGMC-off 0.070552 vs H49 0.100751; 0/4 folds higher on either, <code>evidence/h56f_pruning_holdout_20261007.json</code>). The old model-projection gate was retired because it uses an invalid identity for official FPw; do not interpret 0.0649 as a projected score.
 <strong>Not the naive mean:</strong> Pearson r = 0.389 vs the binary mean ½(1<sub>dot</sub>+1<sub>tip</sub>);
 vs the kernel mean, the best affine fit leaves mean |residual| 0.0111 and 12.46 % of the footprint differs by
 &gt; 0.05 (<code>evidence/build_h56_belief_receipt_20261007.json</code>). <strong>UNSCORED.</strong></p>
 <p class="small"><strong>Honest purpose of this file:</strong> the brief requires the combined belief,
-normalized to [0, 1], as the unique submission, with disagreement preserved rather than averaged away.
-That surface is published exactly as specified, byte-unique against all 67 prior downloads
-(<code>evidence/h56_uniqueness_20261007.json</code>). The same evidence shows the metric rewards binary
-dots, so this page tells you plainly: download it, read the m(Θ) layer, but do not spend the weekly slot
-on it while the 0.2778 core is unimproved.</p>
+normalized to [0, 1], as a research artifact, with the uncertainty and conflict diagnostics kept separate rather than blended into one number.
+That artifact is locally byte-distinct from the 67 prior downloads, but the H53 archive already contains a D-S diagnostic for the same B2 × H33-D parent pair; H56B is a parameterized graded output, not a novel fusion concept. No global uniqueness claim is supported (<code>evidence/h56_uniqueness_20261007.json</code>). The same evidence does not establish that graded belief improves score. Download for inspection, read m(Θ) as residual ignorance and raw K as conflict, but do not spend a weekly slot on it while the proxy holdout is substantially below H49.</p>
 </div>
 
+<details class="archive"><summary>Alternate H56 open-world D-S variant — preserved, not the selected canonical download</summary>
 <header style="background:none;padding:24px 0 0">
 <h1>H56 (concurrent session): a distinct open-world Dempster–Shafer download, no cleared submission</h1>
 <p class="deck" style="color:var(--muted)">The requested B2 × H33-D open-world D-S GeoTIFF is built and locally audited. It is <strong>OK to download for inspection, but do not upload or spend a slot</strong>: it loses to same-protocol H49 on both public proxy targets. The combination concept already exists in H53; H56 is a distinct mass assignment, not a new geological signal. The machine-spec Hessian-only H56-A probe also fails; the prose coherence extension remains untested.</p>
@@ -190,6 +179,10 @@ Local name <code>GEMSDOE48-H56-OWDS-B2xH33D-1f7b5a4f18db</code> · no organizer 
 <p class="meta">Diagnostics: <a href="downloads/diagnostics/GEMSDOE48-H56-OWDS-B2xH33D-20261007-1f7b5a4f18db-belief-raw.tif">raw Bel</a> · <a href="downloads/diagnostics/GEMSDOE48-H56-OWDS-B2xH33D-20261007-1f7b5a4f18db-plausibility.tif">plausibility</a> · <a href="downloads/diagnostics/GEMSDOE48-H56-OWDS-B2xH33D-20261007-1f7b5a4f18db-support-disagreement.tif">support disagreement</a> · <a href="../evidence/h56_submission_validation_20261007.json">format receipt</a> · <a href="../evidence/h56_uniqueness_audit_20261007.json">uniqueness audit</a> · <a href="../evidence/h56_decision_20261007.json">decision receipt</a></p>
 </div>
 
+</details>
+
+<details class="archive"><summary>Previous H55 and earlier-session landing content — historical archive, not current advice</summary>
+<div class="bad"><strong>Correction and status.</strong> The H55 live-equivalent band, 0.2843 “ceiling,” inverted truth quantities, 0.0556 break-even bar, and leaderboard-reachability claims below rely on the invalid <code>FPw = S − TPw</code> identity. They are not official-score estimates or bounds. The historical H55 Gate-2 receipt did record <code>FAIL_MASS_NEUTRAL</code> and a direct equal-mass public-proxy difference of −0.002014 versus its incumbent; the 0.010245 density-matched addition diagnostic is descriptive only, not a live-score threshold. No current candidate is slot-cleared. See the <a href="research/metric-identity-erratum-20261007.md">metric erratum</a>.</div>
 <div class="dl">
 <h2>⬇ Previous H55 research artifact (historical; not slot-cleared)</h2>
 <p class="small" style="margin-bottom:0"><strong>GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353</strong><br>
@@ -207,30 +200,13 @@ content id <code>055da9855353</code> · submission name <code>GEMSDOE48-H55-cond
 <a class="btn" href="submission-guide.html">How to submit this → step by step</a>
 </div>
 <p class="meta">paste-ready submission note (202 characters):<br>
-<code>GEMSDOE48-H55 | 0.2778 core untouched + 1124 conflict-priced gap dots + 652 GDR hot-spring/well conduit anchors &gt;300 m off-catalogue | model band 0.2778-0.2880, floor 0.2727 | unscored | id 055da9855353</code></p>
+<code>GEMSDOE48-H55 | historical research artifact; live-model estimates retired; public-proxy gate failed; no slot cleared | id 055da9855353</code></p>
 <p class="meta">Dempster–Shafer diagnostic layers (not submissions): <a href="downloads/diagnostics/gemsdoe48-h55-bel-055da9855353.tif">bel</a> · <a href="downloads/diagnostics/gemsdoe48-h55-plausibility-055da9855353.tif">plausibility</a> · <a href="downloads/diagnostics/gemsdoe48-h55-mtheta-055da9855353.tif">mtheta</a> · <a href="downloads/diagnostics/gemsdoe48-h55-conflict-055da9855353.tif">conflict</a></p>
-<p class="small"><strong>Modelled live-equivalent band 0.2778 – 0.2880</strong>
-against the current best 0.2778, floor 0.2727 if every added pixel earns zero credit.
-<strong>UNSCORED.</strong> No weekly submission slot is cleared by this page.</p>
+<p class="small"><strong>Retired model output.</strong> The former 0.2778–0.2880 band and 0.2727 floor are not score estimates or bounds. H55 is unscored, historical, and not slot-cleared; see the metric-identity erratum.</p>
 </div>
 
-<div class="bad"><strong>This candidate FAILS the repository's newest gate, and that is
-reported before anything favourable.</strong> A concurrent session merged
-<code>scripts/audit_candidate.py</code> (protocol <code>GEMSDOE48-GATE-2</code>, mass-neutral) while
-this one was running. Verdict <code>FAIL_MASS_NEUTRAL</code>: equal_mass_credit_density_below_incumbent (-0.00201); added_cells_below_live_break_even_bar (density-matched 0.0102 &lt; 0.0556 per cell).
-Equal-mass credit density -0.002014 against the incumbent; added-cell credit
-<strong>0.0102</strong> density-matched against the metric's own
-break-even bar of 0.0556 — 0.18× the bar. If that figure transferred
-to the live metric the score would be <strong>0.2736, −0.0042 against
-0.2778</strong>. Receipt:
-<a href="../evidence/audit_gate2_h55_20261007.json"><code>evidence/audit_gate2_h55_20261007.json</code></a>.
-<br><br>Three things are true about that test and none of them excuse the fail: it rests on the same
-SGMC proxy that an emission built directly on it scored 0.0512 live against the family's 0.26; its
-additions test returns 0.0049–0.0125 per cell for <em>every</em> candidate ever measured, including
-a graded belief field and 222,693 hedge-v2 cells, so it barely discriminates between inputs; and its
-equal-mass test uniformly subsamples a strict superset of C, which must score below C on any proxy
-where C's dots are worth more than the additions. Full reconciliation, including where the two
-instruments <em>agree</em>: §6.4 of the report.</div>
+<div class="bad"><strong>Historical H55 Gate-2 receipt — proxy evidence only; no slot.</strong>
+The receipt recorded <code>FAIL_MASS_NEUTRAL</code>. Its direct equal-mass public-proxy comparison was −0.002014 versus the incumbent. The 0.010245 density-matched added-cell diagnostic is retained as a measurement, but its former 0.0556 cutoff and 0.2736 live-score translation rely on the invalid identity and are withdrawn. These are not private-label or organizer results. Receipt: <a href="../evidence/audit_gate2_h55_20261007.json"><code>evidence/audit_gate2_h55_20261007.json</code></a>.</div>
 
 <h2>The four things this session established</h2>
 <div class="grid3">
@@ -512,6 +488,8 @@ that rejected most of them are now themselves in question.</p>
 (H48 → H52) and <a href="ds48-fusion/index.html"><code>ds48-fusion/</code></a>,
 <a href="h49/index.html"><code>h49/</code></a>, <a href="h50/index.html"><code>h50/</code></a>.
 Every earlier candidate remains downloadable; none of them is this session's file.</p>
+
+</details>
 
 </main>
 <footer class="wrap">

@@ -100,9 +100,9 @@ font-family:var(--mono);font-size:.78rem;overflow-wrap:anywhere;margin:10px 0}
 </div></nav>
 <main class="wrap">
 <div class="bad" role="alert"><strong>Metric correction — no weekly upload cleared.</strong>
-The H55/H56 live-equivalent projections assume <code>FPw = S − TPw</code>,
+Historical H54–H56 score projections and break-even diagnostics assume <code>FPw = S − TPw</code>,
 which is generally false: FP uses a prediction-centred maximum, TP a truth-centred one.
-Treat the 0.2843 "ceiling" and H56's 0.0649 as <em>historical surrogate outputs</em>,
+Treat H54 density-matched/live-frontier outputs, the 0.2843 "ceiling", and H56's 0.0649 as <em>historical surrogate outputs</em>,
 not verified private-label results or portal acceptance.
 <a href="research/metric-identity-erratum-20261007.md">Read the derivation and executable counterexample</a>.</div>
 
@@ -126,6 +126,8 @@ FPw   = Σ_x p(x) · (1 − max_g k(d(x, g)))
 FNw   = Σ_g (1 − max_x p(x) · k(d(x, g)))
 DTI   = TPw / (TPw + 0.2·FPw + 0.8·FNw)</code></pre>
 
+<details class="archive"><summary>Archived H55 derivations — superseded; score claims below are withdrawn</summary>
+<div class="bad"><strong>Metric correction:</strong> the H55 derivation uses <code>FPw = S − TPw</code>, generally false for the official prediction-centred false-positive term. Therefore its “binary optimality” result, break-even bar, hidden-truth inversion, ceiling, and reachability claims are not established for this competition metric. This block is retained as historical analysis only; see the <a href="research/metric-identity-erratum-20261007.md">executable erratum</a>.</div>
 <h2>2 · Three consequences that are exact, not approximate</h2>
 <h3>(a) The optimal submission is binary</h3>
 <p>For one cell of value <code>v</code> that is the argmax of its truth pixel with realised weight
@@ -220,13 +222,15 @@ Sandia SAND2002-0835, document the alternatives — which is why both K and m(Θ
 <p>The limit, stated plainly: because the two parents' coverage differs by 0.3 % while their masses
 differ by 11 %, and because the metric is binary-optimal, <strong>no combination rule can beat the
 better parent</strong>. Dempster–Shafer's real contribution here is structural, not arithmetic: it
-identifies <em>where</em> two independently-built approaches disagree (K &gt; 0 on
+exports raw conflict K to show the Dempster conflict mass before normalization (K &gt; 0 on
 14.70 % of the footprint), and that set is where the
 gap-closure pool is drawn from and where the conduit anchors are vetoed unless a third source
-arbitrates. The unassigned mass m(Θ) ships as its own layer exactly as the brief asks.</p>
+arbitrates. The residual ignorance m(Θ) ships separately as requested; it is not itself a direct disagreement surface, so read it alongside raw K and the two source fields.</p>
 
-<h2>8b · H56: the literal graded belief as a submission (and why it scores 0.0649)</h2>
-<p>The H56 session ships the submission the brief asks for: the <em>normalized combined belief</em>
+</details>
+
+<h2>8b · H56B: the graded belief output and its blocked-proxy failure</h2>
+<p>The H56 session ships a downloadable research artifact—not a submission-cleared prediction—with the <em>normalized combined belief</em>
 itself. Frame Θ = {F, ¬F}; per-source basic probability assignment built on the metric's own
 300 m triangular kernel <code>s_i(x) = k(d(x, D_i))</code>:</p>
 <pre><code>m_i(F)     = r_i · s_i(x)
@@ -238,10 +242,7 @@ shared h19-5 backbone and 0.2 off it, plus <code>a_dot = 1.0</code> inside 200 m
 (the live-validated flank rejection; NOT applied to the tip source). Dempster's normalized rule
 combines the two; the submission is <code>Bel(F)/max Bel(F)</code> on the footprint (zeros outside),
 and m(Θ), K, Pl ship as diagnostics (<code>scripts/build_submission_h56_belief.py</code>, frozen recipe in
-its docstring). Measured consequences: belief mass Σ Bel = 399,799; live-model projection 0.0649
-vs 0.2728 for the binary parent — §1's result (a) that the DTI-optimal submission is binary {0,1}
-is confirmed by the instrument rather than assumed, and the brief's requested artifact is published
-with exactly that label.</p>
+its docstring). Measured holdout: H56B is 0.032347 / 0.070552 on catalogue / SGMC-off public proxies, versus the same-protocol H49 reference at 0.095353 / 0.100751. The historical 0.0649 model projection is retired: it relied on the generally false identity FPw = S − TPw. These proxy results do not establish leaderboard performance.</p>
 
 <h2>9 · Reproduce</h2>
 <pre><code>python scripts/restore_h55_inputs.py                       # 7 hash-pinned mirrors, fail closed

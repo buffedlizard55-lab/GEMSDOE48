@@ -119,19 +119,18 @@ def test_primary_download_exists_and_matches_the_receipt(receipt):
 
 
 @needs_site()
-def test_pages_quote_the_receipt_numbers_verbatim(receipt, flatpages):
+def test_h55_artifact_is_archived_without_a_stale_paste_note(receipt, flatpages):
+    """Keep historical identity auditable, but never present the retired note as submit-ready."""
     name = receipt["submission_name"]
-    note = flat(receipt["paste_ready_note"])
     sha = receipt["files"]["primary_zeros_outside"]["sha256"]
-    px = f"{receipt['emission']['positive_pixels']:,}"
     for page in ("index.html", "executive-summary.html", "submission-guide.html"):
-        assert name in flatpages[page], f"{page} does not name the submission"
-    # the full digest must be on the two pages a submitter actually reads
+        assert name in flatpages[page], f"{page} does not identify the historical artifact"
     for page in ("index.html", "submission-guide.html"):
-        assert sha in flatpages[page], f"{page} does not carry the full primary SHA-256"
-    assert note in flatpages["submission-guide.html"], "the paste-ready note must be on the guide"
-    assert note in flatpages["index.html"], "the paste-ready note must be on the download card"
-    assert px in flatpages["index.html"]
+        assert sha in flatpages[page], f"{page} omits the historical SHA-256"
+        assert receipt["paste_ready_note"] not in flatpages[page]
+        assert "retired" in flatpages[page].lower() or "withdrawn" in flatpages[page].lower()
+    assert "do not paste" in flatpages["submission-guide.html"]
+    assert "FAIL_MASS_NEUTRAL" in flatpages["index.html"]
 
 
 @needs_site()
@@ -187,29 +186,37 @@ def test_irregularities_page_matches_the_markdown_record(pages):
 
 
 @needs_site()
-def test_ceiling_claim_is_present_and_negative(pages):
-    """The site must state the ceiling result, not just the candidate."""
-    text = pages["index.html"]
-    assert "0.2843" in text or "0.28435" in text
-    assert "unreachable" in text.lower() or "NO" in text
-    assert "0.3774" in text and "0.3195" in text
+def test_retired_ceiling_is_clearly_withdrawn(pages):
+    """Legacy inverse-score results must be visibly corrected, not endorsed."""
+    text = flat(pages["index.html"])
+    assert "0.2843" in text
+    assert "historical surrogate outputs" in text
+    assert "not verified private-label results" in text
+    assert "metric-identity-erratum-20261007.md" in text
+    leaderboard = flat((DOCS / "leaderboard.html").read_text())
+    assert "0.3774" in leaderboard and "0.3195" in leaderboard
+    assert "no mapping from those entries to any local raster file" in leaderboard
 
 
 GATE2 = REPO / "evidence/audit_gate2_h55_20261007.json"
 
 
 @needs_site()
-def test_the_failed_gate_is_disclosed_on_every_decision_page(pages):
-    """A failing gate must never be silently dropped from the published site."""
+def test_historical_gate_record_is_disclosed_without_retired_threshold_claims(pages):
+    """Preserve direct proxy measurements while withdrawing invalid live-score translations."""
     if not GATE2.exists():
         pytest.skip("GATE-2 receipt absent")
     gate = json.loads(GATE2.read_text())
     assert gate["verdict"].startswith("FAIL"), gate["verdict"]
     credit = f"{gate['additions']['density_matched_credit_per_cell']:.4f}"
     for page in ("index.html", "executive-summary.html", "validation.html"):
-        text = pages[page]
-        assert "FAIL_MASS_NEUTRAL" in text, f"{page} hides the GATE-2 verdict"
-        assert credit in text, f"{page} omits the density-matched added-cell credit"
-        assert "0.0556" in text or "0.05556" in text, f"{page} omits the break-even bar"
-    # and the pessimistic live-equivalent that follows from it must be shown too
-    assert "0.2736" in pages["index.html"]
+        text = flat(pages[page])
+        assert "FAIL_MASS_NEUTRAL" in text, f"{page} omits the historical receipt verdict"
+        assert credit in text, f"{page} omits the measured proxy diagnostic"
+        assert "public-proxy" in text.lower() or "public proxy" in text.lower(), page
+        assert "retired" in text.lower() or "withdrawn" in text.lower(), page
+    # The old break-even/score translation must not be presented as a live-score gate.
+    for page in ("index.html", "executive-summary.html", "validation.html"):
+        text = flat(pages[page])
+        assert "0.2736" in text
+        assert "invalid" in text.lower() and "metric-identity-erratum-20261007.md" in text

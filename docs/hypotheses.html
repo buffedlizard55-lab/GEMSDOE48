@@ -100,9 +100,9 @@ font-family:var(--mono);font-size:.78rem;overflow-wrap:anywhere;margin:10px 0}
 </div></nav>
 <main class="wrap">
 <div class="bad" role="alert"><strong>Metric correction — no weekly upload cleared.</strong>
-The H55/H56 live-equivalent projections assume <code>FPw = S − TPw</code>,
+Historical H54–H56 score projections and break-even diagnostics assume <code>FPw = S − TPw</code>,
 which is generally false: FP uses a prediction-centred maximum, TP a truth-centred one.
-Treat the 0.2843 "ceiling" and H56's 0.0649 as <em>historical surrogate outputs</em>,
+Treat H54 density-matched/live-frontier outputs, the 0.2843 "ceiling", and H56's 0.0649 as <em>historical surrogate outputs</em>,
 not verified private-label results or portal acceptance.
 <a href="research/metric-identity-erratum-20261007.md">Read the derivation and executable counterexample</a>.</div>
 
@@ -127,7 +127,7 @@ battery <a href="../evidence/h56_research_battery_20261007.json"><code>evidence/
 <td>Remove C dots where the tip family's kernel support + backbone absence drops combined Bel(F) below τ ∈ {0.99, 0.95, 0.90}</td>
 <td>Deletion of sub-bar dots is the proven lever: A→B→C gained +0.0108 deleting ~3,900 zero-credit dots; tip disagreement is the only independent estimate of the next such population</td>
 <td>Every prior fusion ADDED or re-weighted; no artifact has ever removed C dots with the other family's evidence</td>
-<td>+0.002…+0.005 if C-only dots are sub-bar, −0.003 if not / low cost, ONE live slot</td></tr>
+<td>Frozen estimate +0.002…+0.005 / low cost; <strong>offline result: rejected for slot use</strong> (0.99 rung: 0.081123 SGMC DTI vs H49 0.100751; all folds lower)</td></tr>
 <tr><td>2</td><td><strong>H56-C</strong> 3 m DEM channel-knickpoint clusters</td>
 <td>USGS 3DEP 1 m (706-tile runner pipeline already proven) → 3 m</td>
 <td>Stream extraction; knickpoints as profile second-derivative maxima &gt; 3σ; RANSAC azimuth clustering; one dot per cluster</td>
@@ -153,30 +153,21 @@ battery <a href="../evidence/h56_research_battery_20261007.json"><code>evidence/
 <td>H55-C used depth as detector conjunction; this is a sampling prior</td>
 <td>±0.001 modifier / trivial</td></tr>
 </table>
-<h3>Measured before ranking — offline results that killed two candidates without spending a slot</h3>
-<p class="small">Band screen of all 19 official bands (lift of C dots over the &gt;200 m catalogue moat;
-rank-AUC for signed bands): band 3 HG 1.264/0.576, band 19 slope 1.160/0.660, band 10 distance-to-quake
-1.441/0.532, bands 4/7/8 strain 1.08–1.10/0.52–0.54, band 14 TMI 0.954/0.509, band 15 basement 0.751/0.469,
-band 17 conductivity 0.981/0.474 (<code>evidence/h56_band_screen_20261007.json</code>). Pipeline verified by
-reproducing H55-session numbers line by line (band lifts 1.26/1.16/1.44; basement 402/535 m; C projection
-0.2728 with Cov identical to calibration at 14 decimals).</p>
+<div class="bad"><strong>Post-slate result — H56-F was tested offline before any slot.</strong>
+All frozen rungs failed H49 on both public-map proxy means and in every fold. The 0.90 rung is identical to the dotted parent; 0.95 and 0.99 remove 512 and 6,040 cells and reduce the SGMC proxy. See <a href="research/h56f-pruning-results-20261007.md">the report</a> and <a href="../evidence/h56f_pruning_holdout_20261007.json">machine receipt</a>. No weekly slot is cleared.
+</div>
+<h3>Screening records — distinguish direct proxy tests from retired model projections</h3>
+<p class="small">The 19-band screen is a descriptive, label-associated exploratory analysis (receipt <code>evidence/h56_band_screen_20261007.json</code>), not independent detector validation. The H55-session “projection” figures reproduced here were computed by the now-retired live-model identity; do not read them as score estimates or gates.</p>
 <ul class="small">
-<li><strong>H55-B strain ridges (previous session's Priority 3, implemented here):</strong> 258,369 px coherence field,
-only 5.0 % of C's dots inside; 25,837 Poisson dots score projection <strong>0.0152</strong> standalone and drag
-C+field to 0.2152 &lt; 0.2728 → ≈ 0.017 credit/dot vs the 0.0556 bar. <strong>OFFLINE FAIL.</strong></li>
-<li><strong>H56-A DEMGLOW (TMI demagnetisation lows × HG ridges):</strong> primary rung 5,944 px → 1,991 dots;
-projection <strong>0.0028</strong> vs same-mass random control 0.0023; C+field 0.2673 &lt; 0.2728.
-<strong>OFFLINE FAIL.</strong></li>
+<li><strong>H55-B strain-ridge projection:</strong> the former 0.0152 standalone / 0.2152 combined figures and 0.0556 comparison are withdrawn as score-like evidence. This candidate has no confirmed improvement on an independent public-proxy holdout.</li>
+<li><strong>H56-A machine-spec Hessian-only screen:</strong> direct four-fold proxy result is 0.014282 catalogue / 0.006531 SGMC-off versus H49 0.095353 / 0.100751; it failed in all four folds on both. The separately described coherence extension remains untested.</li>
 </ul>
-<p class="small"><strong>Validation rule carried forward:</strong> no weekly slot without (a) blocked holdout
-≥ 3/4 folds vs both parents on both truths AND (b) live-model projection ≥ 0.2778 — with one explicit
-exemption: the first rung of H56-F, whose information value (which C-dots carry credit) exceeds its
-expected score, mirroring how A→B→C was discovered.</p>
+<p class="small"><strong>Updated validation rule:</strong> no weekly slot without a frozen, same-protocol spatially blocked test that beats H49 robustly on the relevant public proxies, a leakage/provenance review, and confirmation that the exact file follows official outside-bounds formatting. The former live-model projection threshold is retired because it used the invalid FPw identity described above. Even a proxy pass would be evidence for consideration, not private-label or organizer validation. H56-F failed against H49 on both proxies in all folds; it does not justify a live slot. See <a href="research/h56f-pruning-results-20261007.md">the result report</a>.</p>
 </section>
 
 <header style="background:none;padding:24px 0 0">
 <p class="eyebrow" style="color:var(--muted)">H56 five-hypothesis slate (concurrent open-world session) · frozen 2026-10-07 before H56 scoring</p>
-<h1>H56-A Hessian-only screen failed; its coherence extension and four other ideas remain untested</h1>
+<h1>H56-A Hessian-only screen failed; its coherence extension and other hypotheses remain untested</h1>
 <p class="deck" style="color:var(--muted)">The machine-spec lead was a Hessian-only active-deformation strain-ridge screen using bands 4/7/8 and a weak earthquake-density term. Its mass-matched 37,654-cell probe scored 0.014282 on the catalogue proxy and 0.006531 on the SGMC-off proxy, far below H49. No slot is cleared. H56-B basement steps, H56-C lidar trace persistence, H56-D magnetic edges, and H56-E geochemical anomalies remain unbuilt hypotheses—not validated predictions.</p>
 </header>
 
@@ -194,6 +185,8 @@ expected score, mirroring how A→B→C was discovered.</p>
 <p><strong>H56-A scope note:</strong> the machine-readable frozen test specifies Hessian responses, but the original prose slate also mentions an unparameterized structure-tensor coherence term. The holdout applies only to the Hessian-only screen; the broader prose idea remains untested. See the <a href="research/h56-slate-erratum-20261007.md">post-score preregistration-text erratum</a>.</p>
 <p>Frozen slate: <a href="research/hypothesis-slate-h56-20261007.md">Markdown</a> · <a href="../evidence/hypothesis_slate_h56_20261007.json">machine-readable parameters and source caveats</a>. Geological hypotheses are not validator-confirmed; the cited USGS sources establish context or potential availability only.</p>
 <section class="card" id="h55-slate-preserved">
+<details class="archive"><summary>Historical H55 slate and post-hoc analysis — archived, not current advice</summary>
+<div class="bad"><strong>Metric correction:</strong> H55 score projections, the 0.2843 ceiling, 0.0556 per-pixel bar, and “unreachable” conclusions rely on the invalid <code>FPw = S − TPw</code> identity. They are withdrawn as official-score estimates. Frozen hypotheses and measurements remain for provenance only; see the <a href="research/metric-identity-erratum-20261007.md">metric erratum</a>.</div>
 <h2>Prior H55 slate — historical reference, not the current plan</h2>
 <p class="small">The ranking below was frozen by the H55 session; its rule: a candidate is only
 interesting if it can raise the corridor field's <em>dense</em> truth yield above the backbone's
@@ -249,7 +242,7 @@ Prior slates are preserved at
 <a href="research/hypotheses-h52-20261007.md">H52</a>,
 <a href="research/hypotheses-20261007.md">H50</a> and
 <a href="archive-main-pages/hypotheses-main-20261006.html">H48/H49</a>.</p>
-</section>
+</details></section>
 
 </main>
 <footer class="wrap">

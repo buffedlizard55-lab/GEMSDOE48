@@ -1,5 +1,8 @@
 # H56 hypothesis slate — five new candidates, frozen 2026-10-07, top two already measured and failed
 
+> **Subsequent metric-identity correction (2026-10-07):** This file preserves the frozen preregistration, including its original estimates and kill criteria. Do not treat its historical `live-model projection`, `FPw = S - TPw` inversion, 0.2843 ceiling, or 0.0556-per-pixel bar as official-score estimates: the identity is generally false for the competition's prediction-centred FPw and truth-centred TPw. Current H56B/H56-F decisions use the directly computed same-protocol public-map proxy results in [the H56-F report](h56f-pruning-results-20261007.md); they are not private-label validation or organizer scores. **No slot is cleared.** See the [metric erratum](metric-identity-erratum-20261007.md).
+
+
 Machine-readable twin: [`evidence/hypothesis_slate_h56_20261007.json`](../../evidence/hypothesis_slate_h56_20261007.json).
 Measured screen and battery: [`evidence/h56_research_battery_20261007.json`](../../evidence/h56_research_battery_20261007.json)
 and [`evidence/h56_band_screen_20261007.json`](../../evidence/h56_band_screen_20261007.json).

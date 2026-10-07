@@ -1,5 +1,8 @@
 # H55 hypothesis slate — five candidates, frozen 2026-10-07 before any scoring
 
+> **Subsequent metric-identity correction (2026-10-07):** This is a preserved historical H55 slate. Its inverse-score model outputs, `FPw = S - TPw` identity, 0.2843 ceiling, and universal 0.0556 threshold are not valid official-score estimates; see the [metric erratum](metric-identity-erratum-20261007.md). Use current blocked public-proxy receipts for candidate comparisons, and do not use this slate's old projections to authorize a slot.
+
+
 Machine-readable twin: [`evidence/hypothesis_slate_h55_20261007.json`](../../evidence/hypothesis_slate_h55_20261007.json).
 Each entry names the layers, the physical signature and its transform, why it should catch
 a fault **missing** from the USGS/INGENIOUS catalogue rather than one already in it, how it

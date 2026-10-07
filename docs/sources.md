@@ -1,11 +1,11 @@
 # Sources and provenance boundaries
 
-Checked or retrieved on **2026-10-06 UTC** unless noted. “Official” describes the cited catalog/page, not the provenance of locally downloaded mirrors. Metadata-level availability is not the same as coverage confirmation.
+Checked or retrieved on **2026-10-07 UTC** unless noted; historical dates remain attached to individual source snapshots. “Official” describes the cited catalog/page, not the provenance of locally downloaded mirrors. Metadata-level availability is not the same as coverage confirmation.
 
 ## Competition and data format
 
 - **Official challenge problem, label description, metric, and submission format:** [DrivenData GEMS page 967](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/). The current source says predictions are pixelwise scores in `[0,1]`, on the 100 m EPSG:32611 grid, one float32 band, and “data outside the bounds is null or nan.” The sample template has NaN nodata outside the finite footprint. Local output matches that template convention; only the organizer can establish portal acceptance.
-- **Official public leaderboard:** [leaderboard](https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/), read once on 2026-10-06 UTC. Values are participant-level display rows, not artifact-to-score links; see [`irregularities.md`](irregularities.md). The site is not polled or scraped by this project.
+- **Official public leaderboard:** [leaderboard](https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/), read once on 2026-10-07 UTC. Values are participant-level display rows, not artifact-to-score links; see [`irregularities.md`](irregularities.md). The site is not polled or scraped by this project.
 - **Terms:** [DrivenData Terms of Use](https://www.drivendata.org/termsofuse/). The checked terms restrict automated site monitoring/copying and also manual monitoring/copying without prior written consent. This repository implements no leaderboard feed.
 - **Official interpretation forum topic:** [known USGS/INGENIOUS faults and final-round labels](https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516). Revisit the source directly before basing hidden-label methodology on a forum interpretation; the present tests use only public mirror labels as catalogue proxies.
 
@@ -55,3 +55,12 @@ The sample finite mask and the mirrored labels' GDAL/nodata footprint were compa
 - **Official `training_features.tif` (19 bands):** reassembled from sibling-campaign mirror shards; the DrivenData data page requires a login, so byte identity with the organizer file could not be verified from the sandbox (`evidence/external_fetch_receipt.json`, id `official_training_features`, `verified: false`). Used only for the lift tests reported in `docs/research/hypotheses-h52-20261007.md`; it is not an input of any candidate TIFF.
 - **Organizer forum statements** (read once, 2026-10-07): known-fault pixels are masked from scoring ([community post 11516](https://community.drivendata.org/t/11516)); no further detail on the test faults will be shared and Phase 2 truth is expanded by expert review of all Phase-1 submissions ([community post 11527/7](https://community.drivendata.org/t/11527/7)).
 - **Scarp-degradation references** (physical basis of H52-1): Bucknam & Anderson (1979) *Geology* 7:11–14; Hanks, Bucknam, Lajoie & Wallace (1984) *JGR* 89:5771–5790; Hilley, DeLong, Prentice, Blisniuk & Arrowsmith (2010) *GRL* 37:L04301, doi:10.1029/2009GL042044.
+
+
+## Dempster–Shafer references and terminology correction
+
+- Dempster, A. P. (1967), [“Upper and Lower Probabilities Induced by a Multivalued Mapping,” *The Annals of Mathematical Statistics* 38(2), 325–339](https://doi.org/10.1214/aoms/1177698950).
+- Shafer, G. (1976), [*A Mathematical Theory of Evidence*](https://www.jstor.org/stable/j.ctv10vm1qb), Princeton University Press.
+- Carranza, E. J. M. et al. (2008), [“Knowledge-guided data-driven evidential belief modeling of mineral prospectivity in Cabo de Gata, SE Spain,” *International Journal of Applied Earth Observation and Geoinformation* 10(3), 374–387](https://doi.org/10.1016/j.jag.2008.02.008). This is a geological GIS application example, not validation for the GEMSDOE competition or a claim that its method outperforms weights-of-evidence in general.
+
+For the normalized Dempster combination implemented here, the pre-normalization conflict mass \(K\) is excluded by division by \(1-K\). The final \(m(\Theta)\) is the residual unassigned mass defined by the source BPAs; it is not generally a direct measure of source disagreement. Accordingly, the H56B primary belief, residual ignorance \(m(\Theta)\), and raw conflict \(K\) are distinguished in code and documentation. This definition correction is also explained in [the H56-F result note](research/h56f-pruning-results-20261007.md).

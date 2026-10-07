@@ -100,9 +100,9 @@ font-family:var(--mono);font-size:.78rem;overflow-wrap:anywhere;margin:10px 0}
 </div></nav>
 <main class="wrap">
 <div class="bad" role="alert"><strong>Metric correction — no weekly upload cleared.</strong>
-The H55/H56 live-equivalent projections assume <code>FPw = S − TPw</code>,
+Historical H54–H56 score projections and break-even diagnostics assume <code>FPw = S − TPw</code>,
 which is generally false: FP uses a prediction-centred maximum, TP a truth-centred one.
-Treat the 0.2843 "ceiling" and H56's 0.0649 as <em>historical surrogate outputs</em>,
+Treat H54 density-matched/live-frontier outputs, the 0.2843 "ceiling", and H56's 0.0649 as <em>historical surrogate outputs</em>,
 not verified private-label results or portal acceptance.
 <a href="research/metric-identity-erratum-20261007.md">Read the derivation and executable counterexample</a>.</div>
 <div class="bad" role="alert"><strong>Research correction — no upload cleared.</strong>
@@ -118,32 +118,16 @@ H55 fails the mass-neutral gate. Local TIFF checks are not organizer acceptance.
 </header>
 
 <div class="bad"><strong>Current instruction: no upload and no weekly-slot spend.</strong> H56-DS and the machine-spec Hessian-only H56-A screen both lose to same-protocol H49 on catalogue and SGMC-off public proxies, 0/4 folds. The prose slate's unparameterized coherence extension remains untested. H49 is only a proxy best, not a private-label or organizer score. The H56 GeoTIFF is downloadable for inspection, not cleared for submission; the local format pass is not portal acceptance. See <a href="research/h56-results-20261007.md">H56 results</a> and <a href="../evidence/h56_decision_20261007.json">decision receipt</a>.</div>
-<h2>H56B session priorities (this session, 2026-10-07 — supersedes the order below where they overlap)</h2>
+<h2>H56B / H56-F re-audit: no slot-cleared candidate</h2>
 <section class="card" style="border-width:2px">
+<div class="bad"><strong>Do not spend a weekly competition slot on H56B, H56-OWDS, or H56-F.</strong>
+The first-ranked H56-F pruning ladder was tested offline at fixed thresholds 0.90, 0.95, and 0.99. All rungs lose to the same-protocol H49 reference on both public-map proxies in all four folds; the 0.99 rung also removes the 6,040 C-only cells and degrades the SGMC proxy. Full table: <a href="research/h56f-pruning-results-20261007.md">H56-F report</a> · <a href="../evidence/h56f_pruning_holdout_20261007.json">receipt</a>.</div>
 <ol class="small">
-<li><strong>Spend one live slot on the H56-F removal ladder, rung τ = 0.90.</strong> The only
-candidate with positive expected information value: it is the experiment shape that produced
-0.2600→0.2708→0.2778, and it tests whether the 6,040 C-only (tip-unconfirmed) dots carry
-credit. Pre-registered kill: stop the ladder if the first rung returns below 0.2727.
-Builder: reuse <code>scripts/build_submission_h56_belief.py</code>'s BPA; emit
-<code>C ∩ {Bel ≥ τ}</code> at τ ∈ {0.90, 0.95, 0.99} as three candidate files, upload the
-mildest first. Cost: one script + one slot.</li>
-<li><strong>Owner decision on H55 or H56 as a Phase-2 probe.</strong> If the owner wants to spend a
-slot on a measurement rather than an optimization, the H56B graded belief at projected 0.0649 is
-a clean test of whether the organizer metric treats graded mass the way the published formula
-says (the returned score calibrates the metric's continuity in p — information no offline
-instrument can produce). Not recommended as an attempt to win.</li>
-<li><strong>Build H56-C (3 m DEM knickpoints)</strong> — the highest-ceiling untested detector;
-reuses the proven runner mosaic pipeline (<code>.github/workflows/dem-region-scarp.yml</code>).</li>
-<li><strong>H56-B K-residual and H56-D stepping-stone traces</strong> — cheap, local-data builds;
-validate with the battery (<code>scripts/h56_research_battery.py</code> pattern) before any slot.</li>
-<li><strong>Do not revisit</strong>: strain-band ridges (0.0152), DEMGLOW (0.0028), any additive
-or graded recombination of dotted × tip (union −0.0140, belief 0.0649, pignistic 0.0854 —
-all measured).</li>
+<li>Next offline hypothesis: H56-C 3 m DEM channel-knickpoint traces, using the staged USGS 3DEP mosaic. Freeze physical operator, source footprint, controls, and candidate budget first; source availability is not detector validation.</li>
+<li>Alternative inexpensive tests: H56-D conduit-anchor stepping-stones and H56-B radiometric K residuals, with independent lineage/coverage audits and equal-mass controls.</li>
+<li>Evaluate new candidates against H49 and parents under identical spatial blocks, plus a leakage review. If no offline candidate improves the current blocked best robustly, spend no weekly slot.</li>
+<li>Do not treat the 0.0649 H56B live-model projection, 0.2843 ceiling, or 0.0556 universal threshold as valid score evidence; the metric-identity erratum retires those inferences.</li>
 </ol>
-<p class="small">The H55 session's priorities below remain valid where not superseded: in
-particular, submitting H55 to test the conduit hypothesis and a dense second-family emission
-to re-calibrate ρ cross-family.</p>
 </section>
 
 
@@ -155,16 +139,10 @@ to re-calibrate ρ cross-family.</p>
 <li>Before any later slot decision, require a comparable spatial-block improvement, independent provenance/leakage review, and organizer format acceptance; otherwise do not upload.</li>
 </ol>
 
-<h2>Historical H55 analysis and superseded priorities</h2>
-<div class="warn"><strong>The sections below preserve H55-era reasoning.</strong> They are not current instructions and do not authorize H55 or H56 upload.</div>
+<details class="archive"><summary>Historical H55 analysis and superseded priorities — do not use for score estimates or current decisions</summary>
+<div class="bad"><strong>Correction:</strong> the former 0.2843 ceiling, 0.0556 break-even rule, and leaderboard “unreachable” claims rely on the invalid identity <code>FPw = S − TPw</code>. No score ceiling or reachability conclusion is supported by those calculations. See the <a href="research/metric-identity-erratum-20261007.md">metric erratum</a>.</div>
 <h2>The one thing that would change the outcome (H55-era analysis)</h2>
-<div class="bad"><strong>Every leaderboard position above 0.2778 is unreachable from the h19-5
-corridor field at any mass.</strong> The frontier maximum is
-0.2844 live-equivalent. #8 needs T = 5,416
-and #1 needs T = 7,077, against a dense-field total of
-6,813. The remaining work is therefore <em>not</em> better combination,
-better spacing or better pruning — all three are provably within 2 % of exhausted. It is a better
-detector.</div>
+<div class="bad"><strong>Withdrawn conclusion:</strong> the prior claim that scores above 0.2778 are unreachable from the h19-5 field is unsupported. The actual attainable score range is unknown without valid private-label evidence. The next scientific step remains a new, preregistered geological signal evaluated on spatial blocks—not a claim of a proven ceiling.</div>
 
 <h2>First, the disagreement that has to be settled</h2>
 <div class="warn"><strong>Two instruments in this repository now disagree about what a new cell is
@@ -216,6 +194,8 @@ bounds all three. The rung-D 200 – 300 m catalogue prune in particular is an i
 against a Phase-2 truth that the organizers expand by expert review of <em>all</em> Phase-1
 submissions.</li>
 </ol>
+
+</details>
 
 <h2>Limitations that block success</h2>
 <table><thead><tr>
