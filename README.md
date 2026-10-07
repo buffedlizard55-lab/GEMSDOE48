@@ -1,13 +1,19 @@
 # GEMSDOE48 — auditable Dempster-Shafer fault-surface research
 
-> **Decision: no weekly submission slot is cleared.** The H48 `rho=0.5` candidate loses to the prior union on the shared SGMC blocked diagnostic (0.069261 vs 0.096992). The newer-main H49 balanced emission now scores 0.100751 vs that 0.096992 prior-union baseline (+0.003760, 4/4 folds) on the same protocol, and the direction repeats on the separate older SGMC raster. This is a post-selection re-score on related public proxy evidence, below the live instrument's roughly 0.005 resolution, and its live-anchored change bracket is −0.010 to +0.005. A format-only NaN-outside H49 copy passes local checks; organizer acceptance remains untested. No private-label or organizer score exists, so H49 is not slot-cleared.
+> **Decision: no weekly submission slot is cleared.** The latest H50-1 v2 GeoTIFF, built from INGENIOUS 2 m probe persistence with exact-location deduplication, scores **0.003923** versus H49's **0.100751** on the primary spatial-block public proxy (paired delta **−0.096828**, **0/4** folds positive); its separate older-SGMC sensitivity is also negative (−0.095837, 0/4). V2 is a post-v1-score implementation sensitivity, not a confirmatory independent test; it fails the frozen +0.005 promotion gate. H49 itself remains un-cleared: its post-selection gain over the prior union is +0.003760 in 4/4 folds, below the preregistered +0.005 threshold, on related public proxies. No private-label or organizer score exists, and local format checks do not prove portal acceptance. Keep the competition slot unused.
 
 ## Executive summary and downloads
 
-GEMSDOE48 combines the public owner-mirror dotted and tip/step-over candidate families with reliability-discounted Dempster-Shafer mass assignments. It exports a graded belief raster plus separate residual-ignorance and raw-conflict diagnostics. A prior main-branch implementation also explored a full-confidence union decision surface; that historical result is retained and discussed below, not silently treated as a cleared submission.
+GEMSDOE48 combines public owner-mirror dotted and tip/step-over candidate families using Dempster-Shafer mass assignments, with separate ignorance and conflict diagnostics. The newer H50 research line tests public GDR shallow-temperature data. The current H50 TIFF has a unique name and no exact match in the bounded local same-grid audit (it is highly similar to its superseded v1 predecessor); its frozen spatial proxy test failed decisively. The prior H49 candidate remains the best of the measured local proxy surfaces, not a slot-cleared submission.
 
-- **H48 `rho=.5` research artifact (fails the spatial promotion gate):** `GEMSDOE48-DS-FUSION-20261006` · [`GeoTIFF`](docs/downloads/GEMSDOE48-DS-conflict-aware-fusion-20261006.tif)
+- **Current H50-1 corrected research TIFF (format pass, spatial gate failed; do not upload):** `GEMSDOE48-H50-2M-PERSIST-20261007-F12E5391BB9C-NAN` · [`Download GeoTIFF`](docs/downloads/GEMSDOE48-H50-2M-PERSIST-20261007-f12e5391bb9c-nan.tif) · [post-v1-score H50/H49 sensitivity](evidence/h50_probe_v2_exact_location_vs_h49_20261007.json)
+- **Executive submission how-to:** [`docs/submission-guide.html`](docs/submission-guide.html) — current slot decision, exact portal steps, format checklist, and limits.
+- **H50 v2 build/format/uniqueness receipts:** [build](evidence/build_h50_probe_candidate_20261007.json) · [format](evidence/h50_probe_format_validation_20261007.json) · [bounded local uniqueness](evidence/h50_probe_uniqueness_20261007.json)
+- **H50 v2 spatial-block reports:** [primary SGMC](evidence/holdout_h50_probe_v2_exact_location_20261007.json) · [older SGMC sensitivity](evidence/holdout_h50_probe_v2_exact_location_raw_sgmc_20261007.json)
+- **H50 hypotheses and source audit:** [frozen ranked slate](docs/research/hypotheses-20261007.md) · [26→31 count erratum](evidence/hypothesis_slate_20261007_errata.json) · [v1→v2 source-identity erratum](evidence/h50_implementation_errata_20261007.json) · [selected-location CSV](evidence/h50_selected_station_audit_20261007.csv)
+- **Superseded v1 H50 artifact and score:** [v1 TIFF](docs/downloads/GEMSDOE48-H50-2M-PERSIST-20261007-1997316a0102-nan.tif) · [v1 build receipt](evidence/build_h50_probe_candidate_v1_preduplicate_correction_20261007.json) · [v1 spatial comparison](evidence/h50_probe_vs_h49_v1_preduplicate_correction_20261007.json)
 - **Latest-main H49 proxy-best, still not slot-cleared:** `GEMSDOE48-H49-DS-CB-e6f08013888b-NAN` · [`NaN-outside format-audited GeoTIFF`](docs/downloads/GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif) · [`H49 same-protocol report`](docs/research/holdout-h49-results-20261006.md)
+- **H48 `rho=.5` historical research artifact (fails the spatial promotion gate):** `GEMSDOE48-DS-FUSION-20261006` · [`GeoTIFF`](docs/downloads/GEMSDOE48-DS-conflict-aware-fusion-20261006.tif)
 - **H48 diagnostics:** [`unassigned mass m(Theta)`](docs/downloads/GEMSDOE48-unassigned-mass-20261006.tif) · [`raw conflict K`](docs/downloads/GEMSDOE48-raw-conflict-K-20261006.tif)
 - **H49 audit/format receipts:** [`upstream H49 audit`](docs/downloads/gemsdoe48-h49-ds-conflict-balanced-20261006-audit.json) · [`format conversion`](evidence/h49_format_audit_20261006.json) · [`independent local format validation`](evidence/h49_submission_validation_20261006.json)
 - **Executive site:** [`docs/index.html`](docs/index.html)
@@ -17,7 +23,11 @@ GEMSDOE48 combines the public owner-mirror dotted and tip/step-over candidate fa
 - **Prior raw-SGMC sensitivity and input discrepancy audit:** [`evidence/holdout_raw_sgmc_20261006.json`](evidence/holdout_raw_sgmc_20261006.json) · [`evidence/sgmc_raster_comparison_20261006.json`](evidence/sgmc_raster_comparison_20261006.json)
 - **Previous main-branch union artifact:** linked from the [historical result record](docs/validation.html); it is not the current candidate.
 
-**Paste-ready note (129 characters):**
+**H50 tracking note (not an upload recommendation):**
+
+`GDR 2m probe repeat-persistence; 300 m buffers; research proxy only, no slot clearance.`
+
+**H48 historical paste-ready note (129 characters):**
 
 `GEMSDOE48 DS fusion | H33-2-B2 dotted + H33-D tip/step-over; rho=0.5; conflict/ignorance diagnostic; unscored research candidate.`
 
@@ -27,9 +37,27 @@ The H48 Dempster TIFF uses one `float32` band, EPSG:32611, 100 m pixels, the doc
 
 The starting brief is to autonomously build an auditable GEMS competition project; review the repository and prior work; combine the dotted-family and fault-tip/stepover surfaces with an evidence method that preserves disagreement; and generate a unique, downloadable competition-grid GeoTIFF plus separate uncertainty/disagreement diagnostics. Before any weekly submission, preregister three to five geological hypotheses with layers, physical signatures, off-catalogue rationale, differences from prior methods, ranked expected DTI/cost, verified free-data availability, and spatially blocked validation of the leading candidate. Include a project brief and repeat-use instructions, executive summary and one-click download, a unique name and paste-ready note, cited sources/limitations, at least three review passes, and a PR merged to `main` if feasible. Do not use a weekly submission slot unless a candidate beats the current spatially blocked best. Work autonomously, verify carefully, flag irregularities, and do not overstate uncertain evidence.
 
-The original owner brief is reproduced verbatim in the final section below; this paragraph distills its acceptance requirements. The frozen H48 slate is in [`docs/research/hypotheses-20261006.md`](docs/research/hypotheses-20261006.md) and [`evidence/hypothesis_slate_20261006.json`](evidence/hypothesis_slate_20261006.json). The separate mainline H49 program is retained under [`docs/h49/`](docs/h49/) with source receipts and a same-protocol H48-style re-score in [`docs/research/holdout-h49-results-20261006.md`](docs/research/holdout-h49-results-20261006.md). Its proxy gain is not an independent blind holdout or a slot clearance.
+The original owner brief is reproduced verbatim in the final section below; this paragraph distills its acceptance requirements. The frozen H48 slate is in [`docs/research/hypotheses-20261006.md`](docs/research/hypotheses-20261006.md) and [`evidence/hypothesis_slate_20261006.json`](evidence/hypothesis_slate_20261006.json). The newer H50 ranked slate and machine-readable audit are in [`docs/research/hypotheses-20261007.md`](docs/research/hypotheses-20261007.md) and [`evidence/hypothesis_slate_20261007.json`](evidence/hypothesis_slate_20261007.json); its source-count correction is preserved separately in [`evidence/hypothesis_slate_20261007_errata.json`](evidence/hypothesis_slate_20261007_errata.json). H50-1 has now been built and spatially tested; it failed the promotion gate. The separate mainline H49 program remains under [`docs/h49/`](docs/h49/) with a same-protocol report in [`docs/research/holdout-h49-results-20261006.md`](docs/research/holdout-h49-results-20261006.md); its proxy gain is not a blind test or slot clearance.
 
 ## Validation results and slot decision
+
+### New H50-1 GDR 2 m probe persistence candidate — failed, no slot
+
+The current v2 H50-1 raster is a binary 300 m-radius support surface from 1,432 selected INGENIOUS probe locations (28 repeat-persistent locations plus 1,404 positive-`2mDAB` fallback locations without two eligible repeat dates), with 29,607 positive grid cells. The builder reads the pinned probe archive and footprint mask only; it does not read labels, SGMC, fault-distance fields, or parent prediction surfaces.
+
+A post-score source-identity review found that v1 treated every DBF row as a distinct station even though station labels are reused and some repeated rows share the exact same point coordinates. V2 uses exact NAD83 source coordinates as the location key and median-aggregates same-location/same-area/date values. This did not change thresholds, but it was implemented after the v1 holdout score had been seen; v2 is therefore an **exploratory implementation sensitivity**, not an independent confirmatory test. The v1→v2 correction, counts, reports, and caveat are preserved in [`evidence/h50_implementation_errata_20261007.json`](evidence/h50_implementation_errata_20261007.json). The initial 26→31 source-count correction is separately recorded in [`evidence/hypothesis_slate_20261007_errata.json`](evidence/hypothesis_slate_20261007_errata.json).
+
+| V2 primary newer-SGMC spatial block | NW | NE | SW | SE | Mean DTI |
+|---|---:|---:|---:|---:|---:|
+| H50-1 exact-location sensitivity | 0.008280 | 0.001864 | 0.003391 | 0.002156 | 0.003923 |
+| H49 Yager-balanced proxy best | 0.106053 | 0.107901 | 0.110414 | 0.078636 | 0.100751 |
+| H50 paired delta vs H49 | −0.097773 | −0.106037 | −0.107023 | −0.076480 | **−0.096828** |
+
+V2 is below H49 in **all four** paired folds. The older raw-SGMC sensitivity repeats the failure: H50 mean 0.003931 vs H49 0.099768, delta −0.095837 (0/4 positive). On the catalogue-label proxy H50 mean is 0.015601 versus H49 0.095353. These are conditional public-map-proxy diagnostics, not organizer scores or private-label performance. The preregistered H50 promotion gate (+0.005 absolute over H49, ≥3/4 positive primary folds, and positive direction on the older raster) fails. **Do not use a competition slot.**
+
+The v2 GeoTIFF passes local format checks: single-band float32, EPSG:32611, 100 m, 3,730 × 3,292, in-footprint values in [0,1], and NaN/nodata outside. A bounded comparison against 36 other local same-grid TIFFs found no exact raster/support copy. Its nearest artifact is the superseded v1 build from this same research, with positive-support Jaccard 0.998179 (54 cells removed in v2); v2 is a corrected file variant, **not a new conceptual map relative to v1**. The local check does not establish cross-repository or organizer uniqueness or portal acceptance. Current candidate: [`GEMSDOE48-H50-2M-PERSIST-20261007-F12E5391BB9C-NAN`](docs/downloads/GEMSDOE48-H50-2M-PERSIST-20261007-f12e5391bb9c-nan.tif), SHA-256 `f12e5391bb9cd2709ae7331699bb0876cc4bf3c443f96ea8a5456c858eb67908`. See [current format receipt](evidence/h50_probe_format_validation_20261007.json), [bounded uniqueness audit](evidence/h50_probe_uniqueness_20261007.json), [v2 vs H49 comparison](evidence/h50_probe_v2_exact_location_vs_h49_20261007.json), [primary v2 report](evidence/holdout_h50_probe_v2_exact_location_20261007.json), and [separate older-raster sensitivity](evidence/holdout_h50_probe_v2_exact_location_raw_sgmc_20261007.json). V1 is retained with its [build receipt](evidence/build_h50_probe_candidate_v1_preduplicate_correction_20261007.json) and [spatial comparison](evidence/h50_probe_vs_h49_v1_preduplicate_correction_20261007.json).
+
+The repeat-probe operator is a narrow exact-date, leave-one-location-out residual-persistence test; thermal targeting itself is **not** novel: H18-5 and H49-1 already proposed related geothermal/probe features. The full four-hypothesis slate and source coverage limits are in [`docs/research/hypotheses-20261007.md`](docs/research/hypotheses-20261007.md).
 
 ### Current `rho=0.5` candidate (four fixed quadrants, catalogue-label proxy)
 
@@ -140,9 +168,18 @@ python scripts/prepare_h49_format_copy.py       # H49 format-only NaN-outside de
 python scripts/validate_submission.py docs/downloads/GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif --receipt evidence/h49_submission_validation_20261006.json
 python scripts/run_spatial_holdout.py --combined docs/downloads/GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif --candidate-name h49_yager_balanced --output evidence/holdout_h49_spatial_comparison_20261006.json
 python scripts/run_spatial_holdout.py --combined docs/downloads/GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif --candidate-name h49_yager_balanced --sgmc data/raw/sgmc_faults_100m.tif --allow-unpinned-sgmc --output evidence/holdout_h49_raw_sgmc_sensitivity_20261006.json
+
+# H50-1: pinned public probe archive is in data/external/; local research artifact only
+python scripts/build_h50_probe_candidate.py --require-pinned-mirror-sha
+python scripts/validate_submission.py docs/downloads/GEMSDOE48-H50-2M-PERSIST-20261007-f12e5391bb9c-nan.tif --receipt evidence/h50_probe_format_validation_20261007.json
+python scripts/audit_h50_candidate_uniqueness.py
+# The v2 same-fold scores are post-v1-score implementation sensitivities, not confirmatory evidence.
+python scripts/run_spatial_holdout.py --combined docs/downloads/GEMSDOE48-H50-2M-PERSIST-20261007-f12e5391bb9c-nan.tif --candidate-name h50_probe_persistence_v2_exact_location --output evidence/holdout_h50_probe_v2_exact_location_20261007.json
+python scripts/run_spatial_holdout.py --combined docs/downloads/GEMSDOE48-H50-2M-PERSIST-20261007-f12e5391bb9c-nan.tif --candidate-name h50_probe_persistence_v2_exact_location --sgmc data/raw/sgmc_faults_100m.tif --allow-unpinned-sgmc --output evidence/holdout_h50_probe_v2_exact_location_raw_sgmc_20261007.json
+python scripts/compare_h50_to_h49.py
 ```
 
-The H48 rho=.5 builder remains `scripts/build_submission.py`. H49's separate mainline generation pipeline is `scripts/build_submission_h49.py`; `scripts/prepare_h49_format_copy.py` only fixes its outside-footprint encoding and preserves all inside values. The earlier alpha=.99 builder snapshot is retained as `scripts/previous_build_submission.py`; the earlier main builder is `scripts/previous_main_build_submission.py`, and the later PR #5 main Dempster builder is preserved as `scripts/previous_main_build_submission_pr5.py.disabled`. Build and holdout receipts are dated and hash-pinned. Five review passes—including API compatibility and the follow-up against the newer SGMC derivative—are recorded in [`evidence/review_passes_20261006.md`](evidence/review_passes_20261006.md).
+The H48 rho=.5 builder remains `scripts/build_submission.py`. H49's separate mainline generation pipeline is `scripts/build_submission_h49.py`; `scripts/prepare_h49_format_copy.py` only fixes its outside-footprint encoding and preserves all inside values. The earlier alpha=.99 builder snapshot is retained as `scripts/previous_build_submission.py`; the earlier main builder is `scripts/previous_main_build_submission.py`, and the later PR #5 main Dempster builder is preserved as `scripts/previous_main_build_submission_pr5.py.disabled`. Build and holdout receipts are dated and hash-pinned. The earlier five review passes are in [`evidence/review_passes_20261006.md`](evidence/review_passes_20261006.md); eight sequential H50 review passes, including the post-score source-identity correction, format/uniqueness checks, spatial-gate failure, and final packaging review, are in [`evidence/review_passes_20261007.md`](evidence/review_passes_20261007.md).
 
 ## Sources
 
@@ -153,7 +190,8 @@ The H48 rho=.5 builder remains `scripts/build_submission.py`. H49's separate mai
 - [NASA OPERA DISP-S1](https://www.earthdata.nasa.gov/data/catalog/asf-opera-l3-disp-s1-v1-1)
 - [USGS NHD product access](https://www.usgs.gov/national-hydrography/access-national-hydrography-products) · [USGS 3DEP](https://www.usgs.gov/3d-elevation-program/about-3dep-products-services)
 - [USGS Great Basin favorability DOI 10.5066/P14EET2C](https://www.usgs.gov/data/geothermal-resource-favorability-select-features-and-predictions-united-states-great-basin)
-- Third-party owner mirrors and file hashes: [`docs/sources.md`](docs/sources.md)
+- [GDR INGENIOUS compilation, DOI 10.15121/1881483](https://gdr.openei.org/submissions/1391) · [Data.gov CC BY 4.0 catalog metadata](https://catalog.data.gov/dataset/ingenious-great-basin-regional-dataset-compilation) (asset-level terms not independently verified)
+- Third-party owner mirrors, H50 probe archive provenance, and file hashes: [`docs/sources.md`](docs/sources.md)
 
 ---
 

@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "status": "POST_V1_HOLDOUT_SOURCE_IDENTITY_CORRECTION_BEFORE_V2_HOLDOUT",
+  "recorded_utc": "2026-10-07T02:23:54.793486Z",
+  "prior_preregistration": "evidence/hypothesis_slate_20261007.json",
+  "v1_build_and_score_are_preserved": true,
+  "v1_build_receipt": "evidence/build_h50_probe_candidate_v1_preduplicate_correction_20261007.json",
+  "v1_primary_holdout": "evidence/holdout_h50_probe_v1_preduplicate_correction_20261007.json",
+  "v1_primary_holdout_utc": "2026-10-07T02:11:39.325509Z",
+  "issue": "A second code review found that v1 treated each DBF row as a distinct station. The source display Station label is reused at different coordinates, while some repeated visits/duplicate rows have identical point geometry. V1 therefore counted repeated rows at the same exact location/date more than once in the leave-one-station-out baseline.",
+  "source_only_evidence": {
+    "raw_records": 3800,
+    "distinct_exact_nad83_coordinate_locations": 3784,
+    "exact_coordinate_groups_with_multiple_rows": 13,
+    "records_beyond_first_at_exact_coordinates": 16,
+    "same_location_date_groups_with_multiple_readings": 14,
+    "extra_same_location_date_readings_collapsed_in_v2": 18,
+    "same_area_date_groups_eligible_before_and_after_exact_location_collapse": 246
+  },
+  "v2_station_identity": "Exact EPSG:4269 source-point longitude/latitude pair. The Station/Org_Stn strings are retained as descriptive labels only; no fuzzy-distance tolerance is introduced.",
+  "v2_duplicate_rule": "Aggregate all valid T2m readings for the same exact point location and same Area/exact Date by their median before counting distinct stations and computing leave-one-location-out residuals.",
+  "thresholds_or_physical_selection_rule_changed": false,
+  "v2_rebuild_utc": "2026-10-07T02:24:58.567014Z",
+  "v2_build_receipt": "evidence/build_h50_probe_candidate_20261007.json",
+  "v2_primary_holdout": "evidence/holdout_h50_probe_v2_exact_location_20261007.json",
+  "v2_older_raw_sgmc_sensitivity": "evidence/holdout_h50_probe_v2_exact_location_raw_sgmc_20261007.json",
+  "v2_paired_comparison": "evidence/h50_probe_v2_exact_location_vs_h49_20261007.json",
+  "v2_proxy_results": {
+    "primary_h50_mean_dti": 0.003922712351422865,
+    "primary_h49_mean_dti": 0.10075118848176869,
+    "primary_paired_delta": -0.09682847613034581,
+    "primary_positive_folds": 0,
+    "older_raw_h50_mean_dti": 0.0039310155834373865,
+    "older_raw_h49_mean_dti": 0.09976835524025539,
+    "older_raw_paired_delta": -0.09583733965681801,
+    "older_raw_positive_folds": 0,
+    "support_jaccard_to_superseded_v1_artifact": 0.9981794275311014
+  },
+  "post_selection_limit": "The v1 public-proxy scores were already observed before this source-identity correction was implemented. The v2 same-fold scores are exploratory implementation sensitivities, not a confirmatory independent holdout, and cannot clear a weekly competition slot. The v2 candidate also differs from v1 at only 54 positive cells in the same direction; it is a corrected file variant, not a new conceptual method."
+}
