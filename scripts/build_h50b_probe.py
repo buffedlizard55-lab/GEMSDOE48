@@ -3,9 +3,10 @@
 
 Hypothesis (preregistered in docs/research/hypotheses-20261007.md as H50-B):
 hydrothermal alteration (argillic/potassic) depresses Th/K; a low Th/K anomaly
-inside a high-K two-family disagreement corridor marks a fluid pathway where
-the dotted and tip families actively split -- structure that neither family
-alone commits to, and a candidate for faults missing from the catalogue.
+inside a high-K H50 disagreement corridor marks a possible fluid pathway where
+the B2 dotted surface and H36-1 rung30 surface disagree. H36-1 is an H19-5/rung-30
+repacking, not an actual tip/step-over family; this probe says nothing about
+the H33-D tip/step-over surface or faults missing from the catalogue.
 
 Evidence layers
 ---------------
@@ -14,8 +15,8 @@ Evidence layers
    1st-99th percentile quantisation, 0=nodata), SHA-256 pinned below.  The
    mirror's own metadata calls this "lithology/alteration proxy, not a fault
    detector" -- the corridor gate supplies the structural part.
-*  Conflict: the H50 raw conjunctive conflict K of the dotted x tip fusion
-   (recomputed from the pinned parents; identical to the H50 diagnostic layer).
+*  Conflict: the H50 raw conjunctive conflict K of the B2 x H36-1 rung30
+   fusion (recomputed from pinned parents; identical to the H50 diagnostic layer).
 
 Construction (every constant fixed before any holdout scoring)
 ---------------------------------------------------------------
@@ -67,9 +68,9 @@ CONFLICT_THRESHOLD = 0.3
 DATESTAMP = "20261007"
 SUBMISSION_NAME = "GEMSDOE48-H50B-ALTERATION-CONFLICT"
 SUBMISSION_NOTE = (
-    "GEMSDOE48 H50-B | radiometric low-Th/K anomaly inside H50 high-conflict "
-    "corridors (GeoDAWN DOI 10.5066/P93LGLVQ mirror x dotted x tip); "
-    "budget 37,654; unscored research probe."
+    "GEMSDOE48 H50-B | GeoDAWN low-Th/K anomalies in conflict corridors from "
+    "B2 x H36-1 rung30 (H19-5 repack, not tip/step-over); 37,654 budget; "
+    "negative, unscored probe."
 )
 
 
@@ -96,7 +97,7 @@ def main() -> int:
     if len(SUBMISSION_NOTE) > 200:
         raise SystemExit("submission note exceeds the portal's 200-character limit")
     require_sha(PINNED_DOTTED, SHA_DOTTED, "dotted parent")
-    require_sha(PINNED_TIP, SHA_TIP_H36, "tip parent")
+    require_sha(PINNED_TIP, SHA_TIP_H36, "H36-1 rung30 parent")
     require_sha(FOOTPRINT, SHA_FOOTPRINT, "footprint mask")
     require_sha(RADIOMETRICS, SHA_RAD, "radiometric mirror")
 
@@ -166,13 +167,15 @@ def main() -> int:
         ),
         "construction": {
             "conflict_threshold": CONFLICT_THRESHOLD,
-            "conflict_layer": "H50 raw conjunctive conflict K (dotted b2 x tip h36-1)",
+            "conflict_layer": "H50 raw conjunctive conflict K (B2 x H36-1 rung30; H19-5 repack, not tip/step-over)",
             "high_k_gate": f"radiometric K band >= in-footprint median ({k_median})",
             "anomaly": "robust z of Th/K over admissible cells, score = -z",
             "budget": budget,
             "budget_rationale": "mass-matched to the dotted parent (owner live 0.2778)",
             "rule": "binary 1 on top-budget admissible cells by anomaly score",
         },
+        # ``tip_sha256`` is retained only as a frozen H50-B schema alias for
+        # H36-1 rung30, not as a claim that H36 is the tip/step-over family.
         "inputs": {
             "radiometrics": {
                 "path": str(RADIOMETRICS.relative_to(ROOT)),

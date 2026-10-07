@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Build the unique H50 Dempster-Shafer submission: best dotted x best tip.
+"""Build the H50 Dempster-Shafer research raster: B2 dotted x H36-1 rung30.
 
 Parents (both SHA-256 pinned, verified on read):
   A  dotted family best  H33-2-B2      37,654 px  owner-reported live 0.2778
-  B  tip family best     H36-1 rung30  37,660 px  owner-reported live 0.2710
+  B  H36-1 rung30       37,660 px  owner-reported live 0.2710 (H19-5 repack; not tip/step-over)
 
 Evidence: metric-geometry kernel-credit belief surfaces (see src/gemsdoe48/ds50.py).
 Rule:     two-sided simple support masses, Shafer discounts anchored to the
@@ -48,9 +48,9 @@ SHA_FOOTPRINT = "ddadb8c96cda673b91ddaa0bbed2aa955c358a8f6196c4c4e8fa70d454dd429
 DATESTAMP = "20261007"
 SUBMISSION_NAME = "GEMSDOE48-H50-DS-B2xH36"
 SUBMISSION_NOTE = (
-    "GEMSDOE48 H50 | Dempster fusion, best dotted H33-2-B2 (0.2778) x best tip "
-    "H36-1 rung30 (0.2710); kernel-credit beliefs, live-anchored discounts; "
-    "m(Theta)+K diagnostics; unscored research candidate."
+    "GEMSDOE48 H50 | Dempster fusion: B2 dotted x H36-1 rung30 "
+    "(H19-5/rung-30 repacking; not tip/step-over); kernel-credit Bel, "
+    "m(Theta)+K diagnostics; historical, unscored research."
 )
 
 
@@ -88,7 +88,7 @@ def main() -> int:
         raise SystemExit("submission note exceeds the portal's 200-character limit")
     if not args.allow_unpinned:
         require_sha(args.dotted, SHA_DOTTED, "dotted parent")
-        require_sha(args.tip, SHA_TIP_H36, "tip parent")
+        require_sha(args.tip, SHA_TIP_H36, "H36-1 rung30 parent")
         require_sha(args.footprint, SHA_FOOTPRINT, "footprint mask")
 
     dotted_raw, dotted_profile = read_band(args.dotted)
@@ -201,6 +201,10 @@ def main() -> int:
     with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as zf:
         zf.write(primary_path, arcname=primary_path.name)
 
+    # Preserve the frozen H50 GeoTIFF tag schema for reproducibility. Its old
+    # ``tip`` field names are compatibility aliases for H36-1 rung30 only; H36
+    # is an H19-5/rung-30 repacking, not the actual tip/step-over family (see
+    # evidence/h36_parent_classification_erratum_20261007.json).
     tag_values = {
         "model": "H50 Dempster combination of kernel-credit belief surfaces",
         "reliability_dotted": str(a_dotted),
@@ -319,8 +323,8 @@ def main() -> int:
                 "owner_reported_live": ds50.LIVE_DOTTED_B2,
                 "evidence_class": "OWNER-REPORT",
             },
-            "tip_best": {
-                "family": "tip / step-over",
+            "h36_rung30": {
+                "family": "H19-5/rung-30 repacking (not tip/step-over)",
                 "id": "H36-1-rung30",
                 "path": display_path(args.tip),
                 "sha256": sha256_file(args.tip),

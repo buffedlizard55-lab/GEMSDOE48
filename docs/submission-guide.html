@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Historical H50-GDR research TIFF, bounded audits, prior-art caveats, and a no-upload format reference. Current executive summary links to the H52 session.">
+  <meta name="description" content="Historical H50-GDR research TIFF, bounded audits, prior-art caveats, and a no-upload format reference. Current executive summary links to H53-1 and H53-A, both with failed gates.">
   <title>H50-GDR archive and format guide — GEMSDOE48</title>
   <style>
     :root { color-scheme: light; --ink:#173126; --muted:#52665c; --paper:#f5f4ed; --panel:#fffefa; --line:#d7ded5; --green:#214f3d; --green-soft:#e4eee5; --amber:#fff0d7; --amber-ink:#6b4215; --red:#8e3329; --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; --sans:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
@@ -44,14 +44,14 @@
     <div class="wrap">
       <div class="eyebrow">GEMSDOE48 · archived H50-GDR research note</div>
       <h1>H50-GDR: gate failed; do not upload</h1>
-      <p>This page preserves the earlier probe TIFF, local audits, and future-use format checklist. The current main-session H52 page is the <a href="executive-summary.html">project executive summary</a>; no candidate is cleared for a weekly slot.</p>
+      <p>This page preserves the earlier H50-GDR probe TIFF, local audits, and future-use format checklist. The current H53-1 and H53-A decisions/downloads are on the <a href="index.html">project landing page</a> and <a href="executive-summary.html">executive summary</a>; both candidates failed their gates, so no candidate is cleared for a weekly slot.</p>
       <p style="margin-top:10px"><a href="index.html">← Back to the project research site</a></p>
     </div>
   </header>
   <main class="wrap">
     <section class="card alert" aria-labelledby="decision">
       <h2 id="decision">Current decision: do not use a competition slot</h2>
-      <p><strong>No candidate is cleared for a weekly slot; keep the slot unused.</strong> The later H52 native-lidar candidate also failed its gate (0.096409 vs H49 0.100751), so do not upload it. The archived H50-GDR v2 TIFF is weaker still: it passes local GeoTIFF/range checks, but scores <b>0.003923</b> versus <b>0.100751</b> for H49, a paired delta of <b>−0.096828</b> with 0/4 folds positive. V2 corrects source-location deduplication after the v1 score had been seen, so this is a post-selection implementation sensitivity, not confirmatory validation. It fails the frozen +0.005 promotion gate. No private-label score or organizer acceptance is available.</p>
+      <p><strong>No candidate is cleared for a weekly slot; keep the slot unused.</strong> H53-1, the three-source fusion, failed its gate (graded 0.071408, pignistic twin 0.089559 vs H49 0.100751). The separate H53-A strike-coherence candidate also failed against H49 on both newer and older SGMC public-map proxies (0.098110 vs 0.100751; 0.097086 vs 0.099768), so do not upload either. The previous H52 native-lidar candidate also failed (0.096409 vs H49 0.100751). The archived H50-GDR v2 TIFF is weaker still: it passes local GeoTIFF/range checks, but scores <b>0.003923</b> versus <b>0.100751</b> for H49, a paired delta of <b>−0.096828</b> with 0/4 folds positive. No private-label score or organizer acceptance is available.</p>
       <p>H49 itself remains un-cleared: its +0.003760 proxy gain over the prior union is below the preregistered +0.005 threshold and is not an independent private-label test. Keep the weekly slot unused.</p>
     </section>
 
@@ -68,7 +68,7 @@
     <section class="card" aria-labelledby="steps">
       <h2 id="steps">Upload steps — only after a candidate clears the research gate</h2>
       <ol class="steps">
-        <li><b>Choose the exact approved artifact.</b> Download one single-band GeoTIFF from the project's executive summary. Check that the candidate's status explicitly says it is cleared for consideration. The current H50-GDR file fails that condition; do not upload it.</li>
+        <li><b>Choose the exact approved artifact.</b> Download one single-band GeoTIFF from the project's executive summary. Check that the candidate's status explicitly says it is cleared for consideration. H53-1, H53-A, H52 and H50-GDR are not cleared; do not upload any of them.</li>
         <li><b>Sign in to DrivenData and open the DOE GEMS Prize Challenge.</b> Read the official <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">problem and submission-format page</a> and current competition rules. This repository cannot bypass login or upload on your behalf.</li>
         <li><b>Open the competition's submission form.</b> Choose “File to submit”, select the downloaded <code>.tif</code> (or a ZIP containing exactly one TIFF if the portal requires it), and paste the short candidate comment in the optional note field. Do not upload diagnostic TIFFs or multiple files.</li>
         <li><b>Review and submit in the portal.</b> Wait for DrivenData's file validation. Local validation does not guarantee portal acceptance. If the portal reports a CRS, shape, geotransform, nodata, or range error, stop and preserve the exact error text; do not spend another slot on a modified guess.</li>
@@ -98,7 +98,10 @@
       <ul>
         <li><a href="../README.md">README: decision, methodology, validation and limitations</a></li>
         <li><a href="research/h50-gdr-probe-slate-20261007.md">Original frozen H50-GDR probe slate and later prior-art reconciliation</a></li>
-        <li><a href="research/hypotheses-20261007.md">Current main-branch H50/H51 slate (includes related H50-C probe prior art)</a></li>
+        <li><a href="research/holdout-h53a-scarp-results-20261007.md">H53-A strike-coherence result (gate failed)</a></li>
+        <li><a href="research/hypotheses-h53a-scarp-20261007.md">H53-A slate, prior-art boundary, and source caveats</a></li>
+        <li><a href="research/hypotheses-h53-20261007.md">H53-1/H53-2 adaptive-fusion slate and raw-DEM proposal</a></li>
+        <li><a href="research/hypotheses-20261007.md">Historical H50/H51 slate (includes related H50-C probe prior art)</a></li>
         <li><a href="../evidence/h50_gdr_prior_art_errata_20261007.json">H50-C prior-art/identifier erratum</a></li>
         <li><a href="../evidence/build_h50_probe_candidate_20261007.json">H50 build receipt and input hash</a></li>
         <li><a href="../evidence/h50_selected_station_audit_20261007.csv">Selected-station audit table</a></li>

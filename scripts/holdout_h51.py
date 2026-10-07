@@ -7,7 +7,9 @@ truth sources and official metric call as ``scripts/holdout_ds50.py``
 H49 Yager/pignistic budget artifact (current proxy best) and the graded
 plausibility field (to isolate the binary-vs-graded effect).
 
-Nothing here is private-label evidence or a slot clearance.
+Nothing here is private-label evidence or a slot clearance. The frozen
+comparator key ``tip_h36_parent`` is a legacy alias for H36-1 rung30
+(H19-5/rung-30 repacking), not the actual tip/step-over family.
 """
 from __future__ import annotations
 
