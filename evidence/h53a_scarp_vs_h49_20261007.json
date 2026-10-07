@@ -10,9 +10,9 @@
   "candidate": {
     "name": "h53a_strike_coherent_12000",
     "sha256": "de35531d386792da1950eac815f98db8f36304f78debb6b568138d070640d9bd",
-    "source_report_newer": "evidence/holdout_h53_spatial_20261007.json",
+    "source_report_newer": "evidence/holdout_h53a_scarp_spatial_20261007.json",
     "source_report_newer_sha256": "e98f5150012111d3b8ef663a9d270a1f3a75a574a0332eb1e05534a53c6d6c03",
-    "source_report_older": "evidence/holdout_h53_raw_sgmc_20261007.json",
+    "source_report_older": "evidence/holdout_h53a_scarp_raw_sgmc_20261007.json",
     "source_report_older_sha256": "599430ba828a1f368eda2ae8613f168e547f2c0b99fcc451593d89bec9a20c95"
   },
   "comparisons": {
@@ -59,7 +59,7 @@
       "required_positive_folds": 3
     }
   },
-  "evaluated_utc": "2026-10-07T04:38:54.736059+00:00",
+  "evaluated_utc": "2026-10-07T04:47:23.609357+00:00",
   "limitations": [
     "Both SGMC targets are public-map proxies, not private expert test truth or organizer scores.",
     "Candidate sources were not rebuilt independently inside the spatial folds; the full public catalogue was used as an exclusion mask during construction.",

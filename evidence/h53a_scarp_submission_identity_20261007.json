@@ -1,5 +1,5 @@
 {
-  "artifacts_attempted": 58,
+  "artifacts_attempted": 65,
   "candidate": {
     "bytes": 403844,
     "path": "docs/downloads/GEMSDOE48-H53-STRIKE-COHERENCE-20261007-de35531d3867-nan-outside.tif",
@@ -18,7 +18,7 @@
     "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
     "union": 49654
   },
-  "comparable_one_band_competition_grid_artifacts": 54,
+  "comparable_one_band_competition_grid_artifacts": 61,
   "comparison_rule": "Exact in-footprint values and positive support; support Jaccard = intersection/union.",
   "comparison_scope": [
     "docs/downloads",
@@ -26,7 +26,7 @@
   ],
   "exact_positive_support_matches": 0,
   "exact_prediction_matches": 0,
-  "generated_utc": "2026-10-07T04:38:54.663765+00:00",
+  "generated_utc": "2026-10-07T04:47:13.664629+00:00",
   "maximum_positive_support_jaccard": 0.7583276271800862,
   "noncomparable_artifacts": 4,
   "per_artifact": [
@@ -302,6 +302,83 @@
       "positive_support_jaccard": 0.7575125455082161,
       "sha256": "018ca3065cedf8f0fbda6cde429c759dacfdd8c6214c4814788d3bbf3e760a2f",
       "union": 50815
+    },
+    {
+      "comparable": true,
+      "exact_in_footprint_values": false,
+      "exact_positive_support": false,
+      "intersection": 11625,
+      "path": "docs/downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-diag-conflict-AB-nan.tif",
+      "positive_cells": 740795,
+      "positive_support_jaccard": 0.014926350497673416,
+      "sha256": "cf59ad8290e4f883b6c9d0fd19871a003a4e32bede578860b56ff5815966db40",
+      "union": 778824
+    },
+    {
+      "comparable": true,
+      "exact_in_footprint_values": false,
+      "exact_positive_support": false,
+      "intersection": 49345,
+      "path": "docs/downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-diag-conflict-ABL-nan.tif",
+      "positive_cells": 1488469,
+      "positive_support_jaccard": 0.03314463271219752,
+      "sha256": "0f1be73cdcd91d82300e5182b0ffe6d4ef7bcb6114c650a663b71e3c16146d89",
+      "union": 1488778
+    },
+    {
+      "comparable": true,
+      "exact_in_footprint_values": false,
+      "exact_positive_support": false,
+      "intersection": 49654,
+      "path": "docs/downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-diag-plausibility-nan.tif",
+      "positive_cells": 5167373,
+      "positive_support_jaccard": 0.0096091379507537,
+      "sha256": "b8a2c58ad78cbe29fc90a60c64bc9928ebc29041c9771e7af5c554f69781820c",
+      "union": 5167373
+    },
+    {
+      "comparable": true,
+      "exact_in_footprint_values": false,
+      "exact_positive_support": false,
+      "intersection": 49654,
+      "path": "docs/downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-diag-unassigned-nan.tif",
+      "positive_cells": 5167373,
+      "positive_support_jaccard": 0.0096091379507537,
+      "sha256": "a765eaefedf6abeba3229c873784754928c87c284c81f8d439ce1f8da853a530",
+      "union": 5167373
+    },
+    {
+      "comparable": true,
+      "exact_in_footprint_values": false,
+      "exact_positive_support": false,
+      "intersection": 49654,
+      "path": "docs/downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-nan-outside.tif",
+      "positive_cells": 1488778,
+      "positive_support_jaccard": 0.03335218548366513,
+      "sha256": "9242c831dc103966e7ea961e342e4dce5e655b11313d349a112ece8a4d8b0d15",
+      "union": 1488778
+    },
+    {
+      "comparable": true,
+      "exact_in_footprint_values": false,
+      "exact_positive_support": false,
+      "intersection": 33385,
+      "path": "docs/downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-pignistic-twin-nan.tif",
+      "positive_cells": 37654,
+      "positive_support_jaccard": 0.619123565083545,
+      "sha256": "f644238f8c44f1a88fcf9aa73ae0da7b17b64fd67143e35aa64c38e9429c3ca5",
+      "union": 53923
+    },
+    {
+      "comparable": true,
+      "exact_in_footprint_values": false,
+      "exact_positive_support": false,
+      "intersection": 49654,
+      "path": "docs/downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-zeros-outside.tif",
+      "positive_cells": 1488778,
+      "positive_support_jaccard": 0.03335218548366513,
+      "sha256": "a5c1c4fbd53e889fe5178628fa5f25b02e920e6db434ccca63e44792f7d4bf0f",
+      "union": 1488778
     },
     {
       "comparable": true,

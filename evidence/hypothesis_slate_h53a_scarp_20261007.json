@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "slate_id": "H53",
+  "status": "FROZEN_BEFORE_H53_IMPLEMENTATION_AND_HOLDOUT_SCORING",
+  "frozen_utc": "2026-10-07T04:24:00Z",
+  "ranking_basis": "Qualitative expected value-of-information under expected DTI uncertainty and implementation cost; no numeric uplift is presumed. Top rank is the best currently testable hypothesis, not a claim of highest absolute theoretical potential.",
+  "current_holdout_best": {
+    "candidate": "H49 Yager conflict-balanced",
+    "newer_sgmc_offcatalogue_mean_dti": 0.10075118848176869,
+    "older_raw_sgmc_offcatalogue_mean_dti": 0.09976835524025539,
+    "status": "public-map proxy only; not private labels or organizer score",
+    "receipts": [
+      "evidence/holdout_h49_spatial_comparison_20261006.json",
+      "evidence/holdout_h49_raw_sgmc_sensitivity_20261006.json"
+    ]
+  },
+  "prior_h52_reference": {
+    "candidate": "C plus 12000 H52-1 lidar scarp additions",
+    "newer_sgmc_offcatalogue_mean_dti": 0.10066322025197122,
+    "delta_vs_h49": -0.00008796822979746655,
+    "receipt": "evidence/h52_candidate_sweep_20261007.json"
+  },
+  "hypotheses": [
+    {
+      "rank": 1,
+      "id": "H53-A",
+      "title": "Strike-coherent lidar scarp persistence",
+      "layers": [
+        "data/external/h52_scarp3m_100m.tif band h_gate12",
+        "data/external/h52_scarp3m_100m.tif band strike_at",
+        "data/external/h52_scarp3m_100m.tif bands cover and sigma_mean for audit only"
+      ],
+      "physical_signature": "Effective topographic step support at >=0.30 m, repeated at >=4 of 5 100 m grid samples along the center cell's mapped strike within an approximately 400-565 m spatial span; each supporting cell must agree within 15 degrees modulo 180.",
+      "off_catalogue_rationale": "A surface fault scarp should be a spatially persistent, approximately linear elevation step even where the fault trace is absent from the public catalogue. A multi-cell strike-continuity rule should suppress isolated local edges, but will not necessarily distinguish every terrace, road, or channel feature.",
+      "difference_from_implemented": "H52-1 used per-cell maximum 150 m line-persistent height at 3 m and ranked 100 m cells by height; H53-A adds strike-coherent 100 m multi-cell continuity before emission. The full raw-DEM dual-baseline H52-v2 idea is not implemented here. No H53-A implementation/result was found in this checkout; a related line-tracing step was proposed but not run in docs/next-steps.html.",
+      "expected_dti_improvement": "Unknown, likely small; no positive numeric estimate is justified. H52-1 with 12000 additions was 0.000088 below H49 on the primary proxy.",
+      "implementation_cost": "Low-medium",
+      "data_status": "Locally available 7-band regional derived product, no new external download needed; not the source 3 m DEM itself.",
+      "input_hashes": {
+        "scarp_product": "b5e53d67c3a7d3d1ca44ae04ae1e84d8574857da3fcd5e34ba47276d6c04b923",
+        "dotted_parent_C": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+        "catalogue_mirror": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+        "footprint_mask": "ddadb8c96cda673b91ddaa0bbed2aa955c358a8f6196c4c4e8fa70d454dd429f",
+        "newer_sgmc_proxy": "643cbe992ef4ba37588fb469163ed8291e3ceb23d6c1f78a3cfaa462430c2da0",
+        "older_sgmc_sensitivity": "26d142c4c93282cd94f6950ab96f22aeff59fbbea523d43d662e76fa1b161b5c",
+        "h49_comparator": "9f028289c364c071065245799d7ed131600e80e9f0d10602806b12ce34d7cae8"
+      },
+      "official_source": "https://www.usgs.gov/3d-elevation-program/about-3dep-products-services",
+      "construction": {
+        "minimum_h_gate12_m": 0.3,
+        "minimum_cover_fraction": 0.9,
+        "strike_tolerance_deg_mod_180": 15,
+        "samples_including_center": 5,
+        "minimum_supported_samples": 4,
+        "along_strike_targets_m": [100, 200],
+        "cross_track_max_m": 75,
+        "offset_grid_search_dr_dc": [-3, 3],
+        "poisson_min_spacing_px": 2.8284271247461903,
+        "exclude_within_m_of_public_catalogue": 200,
+        "exclude_within_m_of_base_C_dots": 200,
+        "base_dots": 37654,
+        "addition_budget": 12000,
+        "rank_score": "h_gate12_m * supported_samples / 5; stable descending score; ties row-major; greedily Poisson-thin in ranked order"
+      },
+      "validation_gate": "On both newer and older SGMC off-catalogue proxy reports, H53-A must exceed the same-protocol H49 mean and be higher in at least 3 of 4 paired quadrant folds. Report the catalogue-label proxy separately. A public proxy pass is necessary but not sufficient for any weekly slot; no slot will be used for this research test."
+    },
+    {
+      "rank": 2,
+      "id": "H53-B",
+      "title": "Paired channel profile breaks and lateral deflection",
+      "layers": [
+        "USGS 3DEP elevation",
+        "USGS 3D Hydrography Program channel centerlines"
+      ],
+      "physical_signature": "Along-channel slope/curvature profile breaks and repeated lateral deflections with common orientation across multiple channels.",
+      "off_catalogue_rationale": "Buried or eroded faulting can offset or warp drainage without a mapped Quaternary surface trace; repeated channel responses are more diagnostic than a single knickpoint.",
+      "difference_from_implemented": "H48-4 proposed channel profile breaks, but no channel-profile candidate was implemented in this checkout. H53-B would use channel-aligned repeated profiles rather than H52's local scarp-height detector.",
+      "expected_dti_improvement": "Low-to-moderate, terrain-dependent; unmeasured.",
+      "implementation_cost": "High",
+      "data_status": "USGS 3DEP inputs were previously obtained in CI, but no 3DHP payload or exact footprint coverage is present or audited. Parked and not considered viable until bytes, coverage, CRS, and metadata are checked.",
+      "official_source": "https://www.usgs.gov/national-hydrography/access-national-hydrography-products"
+    },
+    {
+      "rank": 3,
+      "id": "H53-C",
+      "title": "Oriented radiometric alteration-edge corridors",
+      "layers": [
+        "GeoDAWN airborne K",
+        "GeoDAWN airborne Th",
+        "GeoDAWN airborne U",
+        "GeoDAWN airborne total count"
+      ],
+      "physical_signature": "Signed cross-strike radiometric gradients and persistent anisotropic boundaries, not absolute low-Th/K anomaly amplitude.",
+      "off_catalogue_rationale": "A hydrothermal alteration boundary may persist around a concealed fluid pathway where the fault trace is absent from the known-fault inventory.",
+      "difference_from_implemented": "H50-B tested low-Th/K anomaly amplitude inside DS conflict corridors and scored 0.019135 on the SGMC proxy. H53-C would test oriented edge geometry rather than that absolute anomaly rule; related radiometric prior art exists, so no global novelty is claimed.",
+      "expected_dti_improvement": "Low/uncertain given H50-B negative result.",
+      "implementation_cost": "Low-medium",
+      "data_status": "Local owner-mirror raster exists and is hash-pinned; not organizer-authenticated. No new download needed for a local test.",
+      "input_sha256": "c22420f75999030d7cc65c9e31e50d232ea6158423bca051613a18a8b20ba682",
+      "official_source": "https://doi.org/10.5066/P93LGLVQ"
+    },
+    {
+      "rank": 4,
+      "id": "H53-D",
+      "title": "Faulted map-contact termination and juxtaposition",
+      "layers": [
+        "USGS GeMS/State Geologic Map Compilation unit polygons",
+        "USGS GeMS contacts and structural linework",
+        "independent geophysical gradient, if obtainable"
+      ],
+      "physical_signature": "Map-unit contact terminations, offsets, and juxtaposition aligned with an independent geophysical break.",
+      "off_catalogue_rationale": "Buried or unmapped faults can truncate, offset, or juxtapose map units without a Quaternary fault trace in the public catalogue.",
+      "difference_from_implemented": "H48-2 proposed related contact topology plus geophysical breaks but no vector-contact payload or test has been completed in this checkout. H53-D would use contact-network breaks rather than the existing SGMC fault raster as predictor.",
+      "expected_dti_improvement": "Unknown-to-moderate, unmeasured.",
+      "implementation_cost": "High",
+      "data_status": "Official release DOI metadata are linked in the existing source register, but payload, reuse terms, map scale, and exact footprint coverage remain unaudited. Parked and not viable until those checks pass.",
+      "official_source": "https://doi.org/10.5066/P1A3DQZK"
+    }
+  ],
+  "validation_protocol": {
+    "folds": "Four fixed geographic quadrants; held-out core plus 300 m Euclidean score-kernel halo; only truth from each core is scored.",
+    "metric": "Official distance-weighted Tversky; alpha=0.2, beta=0.8; triangular kernel radius 300 m.",
+    "primary_truth": "newer derived SGMC positives >300 m from the public catalogue, within the finite footprint",
+    "sensitivity_truth": "older raw SGMC positives >300 m from the public catalogue, reported separately",
+    "context_truth": "existing public catalogue mirror, reported separately",
+    "candidate_sources_rebuilt_per_fold": false,
+    "leakage_limitations": [
+      "H53-A reuses frozen parent C and the catalogue labels are used over the full map as a 200 m emission exclusion mask.",
+      "The SGMC truth is a public map proxy, not private expert test truth.",
+      "The newer SGMC raster is a sibling-repository derivation that was not independently rebuilt here; an older raw mirror differs in 1450 positive cells and is only a separate sensitivity.",
+      "A numeric win against public proxies alone cannot clear a weekly slot or establish an organizer score."
+    ]
+  },
+  "weekly_slot_used": false
+}

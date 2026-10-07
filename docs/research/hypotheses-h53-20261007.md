@@ -1,48 +1,99 @@
-# Preregistered research slate H53 — 2026-10-07 UTC
+# Research slate H53 — 2026-10-07 UTC (preregistered BEFORE any H53 proxy scoring)
 
-**Frozen before H53 code, map construction, or holdout scoring.** This slate is a research plan, not a claim that any candidate improves the competition score. The current project proxy-best is H49 at 0.100751 on the newer SGMC off-catalogue diagnostic and 0.099768 on the separate older-raster sensitivity; neither is an organizer score or private-label result. The immediately preceding H52-1 scarp addition at 12,000 cells scored 0.100663 on the newer proxy (−0.000088 versus H49), so no positive H53 uplift is presumed.
+**Status: preregistered.** All constants in §3 were frozen before any H53
+candidate was scored on any proxy. Label-free distribution quantiles of the
+lidar product (§3) were read to set ramp anchors; no proxy label was touched
+before freezing. The unique files built from this slate are
+`GEMSDOE48-H53-3SRC-DS-20261007-<sha8>-nan-outside.tif` (graded, primary) and
+its pignistic budget-matched binary twin. This session's work is labelled
+**H53** to avoid collisions with the concurrent H50/H50-B/H51/H52 labels.
 
-## Evidence and source boundary
+## 1. Standing results this slate builds on (all receipts in `evidence/`)
 
-- This turn re-checked the local 3DEP-derived H52 input bytes: `data/external/h52_scarp3m_100m.tif`, SHA-256 `b5e53d67c3a7d3d1ca44ae04ae1e84d8574857da3fcd5e34ba47276d6c04b923`; its receipt records 700 successful USGS 3DEP zone-11 source tiles, zero failed tiles, the tile hashes, and the GitHub Actions mosaic run. The input is a 7-band, 100 m aggregation of 3 m DEM detections—not the original DEM mosaic.
-- The product's provenance chain and official source are recorded in [`../sources.md`](../sources.md#added-2026-10-07-h52-session): USGS 3DEP staged 1 m tiles and its product/terms page. Source URLs are included for manual review. The current sandbox is restricted from directly contacting USGS/DrivenData hosts; this turn did not re-fetch those pages or DEM payloads. Local hash verification is byte identity, not an independent official-source or license audit.
-- Known input hashes for the reproducible top-candidate test: 3DEP-derived product above; C dotted parent `c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9`; public catalogue mirror `7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093`; finite-footprint mask `ddadb8c96cda673b91ddaa0bbed2aa955c358a8f6196c4c4e8fa70d454dd429f`; primary SGMC derivative `643cbe992ef4ba37588fb469163ed8291e3ceb23d6c1f78a3cfaa462430c2da0`; older SGMC sensitivity `26d142c4c93282cd94f6950ab96f22aeff59fbbea523d43d662e76fa1b161b5c`; H49 current comparator `9f028289c364c071065245799d7ed131600e80e9f0d10602806b12ce34d7cae8`.
+* The live ladder A(44,090 dots, 0.2600) → B(40,199, 0.2708) → C(37,654,
+  0.2778) is bookkeeping: both pruning steps remove catalogue-adjacent dots
+  the organizer masks from scoring, giving the same hidden-mass estimate
+  within 7.5 %. C recovers ≈ 37 % of the hidden kernel mass
+  (`docs/research/why-02778-and-ceiling-20261007.md`).
+* No two-source fusion of the existing surfaces has beaten the better parent
+  on the blocked proxies (H48 ρ=0.5, Yager, arithmetic mean, H50 graded
+  belief, H51 plausibility emission). Consolidated reading: higher live
+  scores need higher credit density (new signal), not new combinations of the
+  same two surfaces (`docs/research/h51-h50b-results-20261007.md`).
+* H52 (C + 2,000 native-lidar scarp dots) failed its gate: 0.096409 vs H49
+  0.100751 on the shared SGMC proxy; the v1 detector's region-wide value is
+  its terrain class, not its step height
+  (`docs/research/holdout-h52-results-20261007.md`).
+* Current blocked best: H49 Yager/pignistic, 0.100751 (SGMC newer,
+  >300 m off-catalogue, 4-quadrant core+halo). No organizer score exists for
+  any file in this repository; no weekly slot is cleared.
 
-## Ranked, untried hypotheses
+## 2. Ranked hypotheses (all new — none implemented in this repo or siblings)
 
-The ordering is a qualitative expected-value-of-information ranking, not a numeric DTI forecast. “Untried” means no corresponding end-to-end construction and blocked test are recorded in this checkout. Related proposals in earlier slates are identified rather than presented as globally novel.
+| Rank by expected DTI | ID | Layers / physical signature | Why off-catalogue | How it differs from prior work | Expected DTI / cost / data |
+|---:|---|---|---|---|---|
+| 1 | **H53-2 scarp detector v2** (next step, not this session) | Same USGS 3DEP 1 m tiles (zone 11 + missing zone-10 strip): dual-baseline offset consistency (±21 m AND ±42 m must agree), relative step test (0.3–1.5 m) in the smooth-basin class (σ_ctx < 0.3 m), ≥ 500 m connected-component line tracing at 3 m, playa/agricultural exclusion by strike-cardinality + NLCD cultivated classes | Rejects the canals/road cuts/terrace risers that pollute v1 heights while recovering subtle basin scarps v1's absolute-height ranking misses | v1 uses one baseline, an absolute height floor, and 150 m averaging; no sibling emits a consistency-gated relative-step map | Highest expected gain (directly targets H52's measured failure mode); medium–high cost (≈ 1 h free CI re-run). Data obtainable: USGS 3DEP public S3 bucket, no login (precedent: H52 runs 37561683197/37565284104); NLCD 2021 free from MRLC (mrlc.gov), no login |
+| 2 | **H53-1 three-source adaptive Dempster fusion** (implemented + validated this session) | (A) dotted B2 kernel-credit belief, (B) tip H36-1 kernel-credit belief, (L) line-persistent lidar scarp height `h_gate12` (σ<1.2 m gate) ramped to a graded belief; per-pixel reliability discount by terrain class (context-dependent discounting) | Lidar resolves unmapped piedmont/basin scarps invisible to the 100 m geophysics both families were built from; the discount map admits ignorance (low reliability) where the detector is unproven instead of asserting counter-evidence | First 3-source fusion anywhere in the campaign (all prior fusions are 2-source); first context-dependent (per-pixel) reliability discount (all prior builds use scalar ρ); first fusion to add new-sensor information rather than re-weight the same two surfaces | Small/uncertain gain: every 2-source fusion lost to its parents, but a new-source fusion is untested — this is the experiment. Low cost (all inputs committed and SHA-pinned) |
+| 3 | **H53-3 drainage-deflection detector on the 3 m DEM** | Same 3DEP tiles: channel long-profiles extracted from the DEM itself, aligned knickpoints, systematic lateral deflection vectors | Strike-slip or low-rate faults leave deflected channels with no preserved scarp; fluvial geometry is independent of mapped-fault proximity | H48-4 proposed this with NHDPlus vectors (never implemented); H53-3 derives channels from the 3 m DEM already in hand | Uncertain (no pilot measurement); medium–high cost. Data obtainable via the same CI path as H53-2 |
+| 4 | **H53-4 U/K halo tie-break for additions** | GeoDAWN radiometric mirror `data/source_mirrors/geodawn_rad_u8.tif` (K/Th/U/TC, official USGS DOI 10.5066/P93LGLVQ, SHA-verified): eU/K ratio as a hydrothermal-alteration halo proxy | A buried/eroded fault can keep a geochemical halo after its scarp is gone | 15GEMSDOE used alteration as a *generator*; H50-B crossed alteration with conflict corridors (negative result, 0.019); H53-4 would only *order* lidar additions, never generate or veto them | Tiny positive at best (measured 1.43× top-20 % per-dot lift, below the ≈ 2.6× removal bar); low cost (mirror committed) |
+| 5 | **H53-5 NLCD exclusion + Quaternary-alluvium validation proxy** | NLCD 2021 land-cover (cultivated/open-water classes) to mask playa/agricultural false positives; a held-out subset of public-catalogue *Quaternary* traces in alluvium (σ_ctx < 1.2 m, > 1 km from SGMC bedrock faults) as a scarp-like proxy | Removes non-tectonic linears from future additions; gives lidar candidates an instrument that does not reward bedrock faults by construction (the documented SGMC-proxy bias) | No sibling uses land-cover masking or an alluvium-conditioned proxy | ≈ Zero direct DTI; enables future validation. Low–medium cost (NLCD via CI; sandbox allowlist excludes mrlc.gov) |
 
-| Rank | Hypothesis | Layer(s) and physical signature | Why it could identify fault not in USGS/INGENIOUS | Difference from implemented work; expected DTI / cost / source status |
-|---:|---|---|---|---|
-| **1 — test now** | **H53-A: strike-coherent lidar scarp persistence** | Stored 3DEP-derived `h_gate12`, `strike_at`, `cover`; retain candidate 100 m cells with effective step ≥0.30 m, cover ≥0.90, and at least 4 of 5 strike-compatible cells along a ~400–565 m line window (±15° strike). Rank by effective step × supported fraction, then Poisson-thin to the dotted-family spacing. | A surface fault scarp should be a spatially persistent, approximately linear elevation step; isolated terrace edges, road cuts, and local roughness spikes are less likely to satisfy both repeated step support and strike coherence. The target is a plausible unmapped surface expression, not a catalogue-distance feature. | H52-1 used a maximum 150 m along-strike response at 3 m and then ranked individual 100 m cells by height. H53-A adds explicit multi-cell strike agreement and longer spatial persistence to the already aggregated product; it does **not** claim to implement the full proposed dual-baseline raw-DEM H52-v2 detector. No H53-A implementation/result was found in this checkout. **Expected DTI: unknown, likely small; prior H52-1 was just below H49. Cost: low-medium. Data: present locally; no new external payload.** |
-| 2 | **H53-B: paired channel profile breaks / lateral deflection** | USGS 3DEP elevation plus USGS 3D Hydrography Program (3DHP) channel lines; derive along-channel slope/curvature profiles and repeated lateral deflections at a common strike. | A buried or eroded fault can offset or warp drainage without a mapped Quaternary surface trace; repeated channel responses are more diagnostic than a single knickpoint. | H48-4 proposed channel profile breaks but no such feature was implemented here. This version uses channel-aligned, repeated profiles rather than the H52 scarp-height operator. **Expected DTI: low-to-moderate, terrain-dependent. Cost: high. Source: official USGS 3DEP is already represented by the local staged-tile workflow; official 3DHP access is listed at [USGS National Hydrography product access](https://www.usgs.gov/national-hydrography/access-national-hydrography-products), but no 3DHP payload or footprint coverage is present/audited. Parked—not viable until exact coverage and source bytes are checked.** |
-| 3 | **H53-C: oriented radiometric alteration-edge corridors** | GeoDAWN airborne K, Th, U, and total-count bands in `data/source_mirrors/geodawn_rad_u8.tif`; compute signed cross-strike gradients and line coherence rather than absolute low-Th/K anomaly amplitude. | A hydrothermal alteration boundary may persist around a concealed fluid pathway where the fault trace itself is absent from the known-fault inventory. | H50-B tested low-Th/K anomaly amplitude inside DS conflict corridors and was negative (0.019135 SGMC proxy); H53-C would test directional edge geometry rather than the same anomaly threshold. No H53-C operator/result is recorded, but this is related prior art—not a globally novel concept. **Expected DTI: low/uncertain given H50-B. Cost: low-medium. Data: local owner-mirror bytes hash-verified (`c22420f75999030d7cc65c9e31e50d232ea6158423bca051613a18a8b20ba682`); official upstream release DOI [10.5066/P93LGLVQ](https://doi.org/10.5066/P93LGLVQ) is linked, but this repo's mirror is not an organizer-authenticated copy. No new download needed for a local test.** |
-| 4 | **H53-D: faulted map-contact termination and juxtaposition** | USGS GeMS/State Geologic Map Compilation unit polygons and contact/structure linework; optionally compare contact breaks with an independently sourced geophysical gradient. | A buried or unmapped fault can truncate, offset, or juxtapose map units without a Quaternary trace in the public fault catalogue. | H48-2 already proposed contact topology plus geophysical breaks but no vector-contact payload or test has been completed in this checkout. H53-D would use contact-network terminations, not the existing SGMC fault raster as the predictor. **Expected DTI: unknown to moderate; cost: high. Source: USGS release DOI [10.5066/P1A3DQZK](https://doi.org/10.5066/P1A3DQZK) is listed in the source register, but payload, licensing, map scale, and exact footprint coverage remain unaudited. Parked—not viable until those checks pass.** |
+Not viable without new external data: OPERA InSAR displacement gradients
+(Earthdata login required; sandbox cannot authenticate) — recorded so it is
+not re-proposed. Geodetic strain-rate grids for dot-density modulation
+(H52-3) are blocked on the login-walled official `training_features.tif`
+unless a public strain grid (e.g. Kreemer et al. GSERM) is verified
+obtainable; not proposed as viable today.
 
-### Availability rule for ideas needing new data
+## 3. Frozen H53-1 constants (fixed before scoring; builder enforces them)
 
-A catalog page or an advertised public product is not evidence of exact footprint coverage or an obtainable usable file. H53-B and H53-D are parked until those checks are complete; they are not promoted as viable candidates. The top test H53-A requires no new external layer because the hash-pinned regional derived product is already in the checkout. H53-C can be tested from a local mirror but carries the explicit source-authenticity caveat above.
+Label-free anchors only (distribution of `data/external/h52_scarp3m_100m.tif`
+over the 3,657,635 covered in-footprint cells; no proxy labels involved):
 
-## H53-A pre-registered construction and validation gate
+* `H_LO = 1.0 m` (≈ q80 of covered `h_gate12`; above the 0.26 m median
+  small-offset noise), `H_HI = 2.8 m` (= q99; saturates the top-1 % heights,
+  max 4.12 m). Lidar belief `b_L = clip((h_gate12 − H_LO)/(H_HI − H_LO))`
+  where `cover ≥ 0.9` and finite, else 0.
+* Reliability map `a_L`: **0.75** where covered and `σ_mean < 1.2 m`
+  (54.8 % of covered cells; the class with 2.3–3.2× pilot lift and the only
+  class where the detector is evidence rather than noise — set below the
+  0.95 family ceiling because a detector is not a validated family);
+  **0.25** where covered but rough (detector unproven → mostly ignorance);
+  **0.05** where uncovered/non-finite (near-vacuous; admits ignorance).
+* Family reliabilities keep the H50 live-anchored scheme:
+  `a_A = 0.95`, `a_B = 0.95 × 0.2710/0.2778 ≈ 0.9268` [OWNER-REPORT ratio].
+* Rule: canonical normalized Dempster (Dempster 1967; Shafer 1976) applied
+  sequentially `(A ⊕ B) ⊕ L` (associative; order is documentation only).
+* Primary submission: `Bel_ABC(F) / max(footprint)` graded in [0,1], float32,
+  NaN/nodata outside. Binary twin: pignistic `BetP = Bel + m(Θ)/2` top-37,654
+  (parent-A-mass-matched budget), NaN outside.
+* Naive-mean baselines for the not-an-average check: mean of the three belief
+  surfaces and mean of the two family beliefs (both max-normalized).
 
-Before H53-A implementation, the following were frozen:
+## 4. Pre-registered H53-1 validation gate (before any slot)
 
-1. **Source feature:** `h_gate12`, `strike_at`, `cover` bands in the pinned regional 3DEP-derived raster. Decode using its declared `SCALE_*` tags; do not use catalogue or SGMC labels to calculate the scarp score.
-2. **Scarp coherence:** a cell is eligible for line support if cover ≥0.90, `h_gate12` ≥0.30 m, and strike is finite. For each cell's quantized strike, inspect one nearest integer-grid sample to each of the 100 m and 200 m along-strike targets on either side (4 neighbors plus the center). Search `dr,dc ∈ [-3,3]²`, excluding `(0,0)`, retain candidates with cross-track distance ≤75 m, and choose the unused candidate minimizing `(absolute along-distance error, cross-track distance, Euclidean distance, dr, dc)` for each target/side in that order. A support sample must also meet the step/cover conditions and differ in strike by no more than 15° modulo 180°. Require ≥4 supported samples out of the five-point window, including the center. Score = `h_gate12 × supported_count/5`. This uses the stored 100 m argmax strike and therefore is an approximation of trace continuity, not a raw-DEM line trace.
-3. **Emission:** keep C (37,654 dots) unchanged; exclude candidate centers within 200 m of the public catalogue mirror and within 200 m of a C dot; greedy Poisson spacing is 2.828427 pixels (same nominal spacing as the dotted parent). Test one preregistered budget of 12,000 additions, yielding at most 49,654 binary cells. No holdout label enters the score or ranking; the catalogue is nevertheless used as a full-area exclusion mask, so leakage is a limitation and this is not an independent blind fold reconstruction.
-4. **Primary diagnostic:** the frozen four-quadrant/core-plus-300 m-halo evaluator, with truth only in the held-out quadrant, and official DTI parameters (`α=0.2`, `β=0.8`, triangular radius 300 m). Primary proxy is newer derived SGMC cells >300 m from the catalogue; evaluate the older raw-SGMC raster separately, never pooled. Also report the existing-catalogue proxy as context.
-5. **Promotion gate:** on **both** newer and raw SGMC proxy reports, beat the H49 same-protocol mean and H49 in ≥3/4 paired folds. H49 comparators are the pinned H49 file evaluated under the identical protocol (newer 0.100751188; older 0.099768355). A numerical proxy pass is necessary, not sufficient: because both proxy sources are public maps and the construction uses frozen parent C plus a full-area catalogue exclusion, a result alone does not justify spending a competition slot. No slot will be used for this exploratory test.
-6. **Artifact rules:** if the candidate is built, write a new, one-band float32 GeoTIFF matching the template grid, with finite in-footprint values in [0,1] and NaN/nodata outside. Give it a content-derived unique filename, provide a short paste-ready note marked unscored/not slot-cleared, and run the local format and bounded uniqueness audits. This local research artifact is not a competition upload.
+1. Score the primary graded file AND the binary twin with the identical
+   4-quadrant core + 300 m halo protocol on the newer-SGMC >300 m
+   off-catalogue proxy (`scripts/run_spatial_holdout.py`), plus the
+   raw-SGMC sensitivity (`--allow-unpinned-sgmc`).
+2. Comparators: H49 (0.100751, current blocked best), prior union decision,
+   both parents, arithmetic mean.
+3. Slot rule: no slot unless a candidate beats H49 on the SGMC-newer mean
+   AND on ≥ 3/4 folds with same-direction raw-SGMC sensitivity, exactly as
+   H52's gate. Stated expectation: likely fails (all prior fusions lost to
+   their parents); the experiment's value is testing whether a *new-source*
+   fusion breaks that pattern.
+4. Regardless of outcome, publish: primary + twin + `m(Θ)`/`K_AB`/`K_(AB)L`
+   diagnostics, build receipt, uniqueness audit, format audits, and this
+   slate's results note. Label files honestly (scored-proxy values are
+   public-proxy diagnostics, never organizer scores).
 
-## H53-A measured result (append-only, after the frozen slate)
+## 5. Sources (official, read or cited with dated access)
 
-H53-A was built exactly as preregistered and then evaluated. The unique research TIFF has 49,654 cells (C plus 12,000 additions), SHA-256 `de35531d386792da1950eac815f98db8f36304f78debb6b568138d070640d9bd`. Format validation passes locally. The same-protocol results are newer SGMC 0.0981104 vs H49 0.1007512 (paired −0.0026408; 1/4 folds higher), and older raw-SGMC 0.0970865 vs H49 0.0997684 (paired −0.0026819; 1/4 folds higher). It beats the prior full-union comparator by about +0.00112 mean on each raster and in 3/4 folds, but **fails the preregistered H49 gate on both SGMC inputs**. The catalogue context is 0.0088985, expectedly poor for this off-catalogue construction because catalogue-adjacent cells were excluded. Full results: [`holdout-h53-results-20261007.md`](holdout-h53-results-20261007.md), [`evidence/h53_vs_h49_20261007.json`](../../evidence/h53_vs_h49_20261007.json), and the two standard evaluator receipts listed there. The local candidate is **not slot-cleared; no weekly slot was used**. The frozen JSON remains unchanged; this prose is the append-only result record.
-
-## Official sources for manual review
-
-- Challenge description, metric, and submission grid/format: [DrivenData problem page](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/).
-- USGS 3DEP products and terms: [USGS 3DEP program page](https://www.usgs.gov/3d-elevation-program/about-3dep-products-services) and the staged 1 m product bucket root recorded per tile in [`registry/dem_tiles_pilot.json`](../../registry/dem_tiles_pilot.json).
-- USGS hydrography product access (H53-B, not yet audited): [National Hydrography product access](https://www.usgs.gov/national-hydrography/access-national-hydrography-products).
-- USGS State Geologic Map Compilation (H53-D): [official map catalog](https://mrdata.usgs.gov/geology/state/) and [release DOI 10.5066/P1A3DQZK](https://doi.org/10.5066/P1A3DQZK).
-- GeoDAWN radiometric release (H53-C): [USGS DOI 10.5066/P93LGLVQ](https://doi.org/10.5066/P93LGLVQ); locally used owner-mirror provenance is detailed in [`docs/sources.md`](../sources.md).
-- Scarp degradation references already recorded in [`docs/sources.md`](../sources.md): Bucknam & Anderson (1979), Hanks et al. (1984), and Hilley et al. (2010, DOI 10.1029/2009GL042044). No new physical claim or direct literature text was imported in this turn.
+* Metric, labels, submission format: <https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/> (repo-held reading; sandbox allowlist excludes drivendata.org, so no fresh fetch this session — see irregularities).
+* Known-fault pixels masked from scoring: <https://community.drivendata.org/t/11516>; no further test-fault detail: <https://community.drivendata.org/t/11527/7> (prior-session reads).
+* USGS 3DEP 1 m staged products (public domain, no login): <https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/> (bucket URLs per tile in `registry/dem_tiles_pilot.json`; H52 CI precedent).
+* GeoDAWN airborne radiometrics: USGS DOI [10.5066/P93LGLVQ](https://doi.org/10.5066/P93LGLVQ) (mirror SHA `c22420f7…` restored byte-identical from GEMSDOE24).
+* Scarp physics: Bucknam & Anderson (1979) *Geology* 7, 11–14; Hanks et al. (1984) *JGR* 89, 5771–5790; Hilley et al. (2010) *GRL* 37, L04301.
+* DS theory: Dempster (1967) "Upper and Lower Probabilities Induced by a Multivalued Mapping", *Ann. Math. Statist.* 38, 325–339 (doi:10.1214/aoms/1177698950); Shafer (1976) *A Mathematical Theory of Evidence*, Princeton Univ. Press; contextual discounting: Mercier, Quost & Denœux (2005) "Contextual Discounting of Belief Functions", ECSQARU 2005, LNCS 3571 (<https://link.springer.com/chapter/10.1007/11518655_47>), refined at IPMU 2006 — discount rate varying with source context. All three verified by web search 2026-10-07.
+* NLCD 2021 Land Cover (CONUS): <https://www.mrlc.gov/> (Multi-Resolution Land Characteristics Consortium; dataset doi:10.5066/P9JZ7AO3; free direct download, no login; not fetched — sandbox allowlist excludes mrlc.gov; CI path only).

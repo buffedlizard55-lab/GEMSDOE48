@@ -16,7 +16,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_OUTPUT = ROOT / "evidence/h53_vs_h49_20261007.json"
+DEFAULT_OUTPUT = ROOT / "evidence/h53a_scarp_vs_h49_20261007.json"
 H53_NAME = "h53a_strike_coherent_12000"
 H49_NAME = "h49_yager_balanced"
 H53_SHA = "de35531d386792da1950eac815f98db8f36304f78debb6b568138d070640d9bd"
@@ -94,8 +94,8 @@ def compare(target: str, candidate_report: dict, baseline_report: dict) -> dict:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--h53-newer", type=Path, default=ROOT / "evidence/holdout_h53_spatial_20261007.json")
-    parser.add_argument("--h53-older", type=Path, default=ROOT / "evidence/holdout_h53_raw_sgmc_20261007.json")
+    parser.add_argument("--h53-newer", type=Path, default=ROOT / "evidence/holdout_h53a_scarp_spatial_20261007.json")
+    parser.add_argument("--h53-older", type=Path, default=ROOT / "evidence/holdout_h53a_scarp_raw_sgmc_20261007.json")
     parser.add_argument("--h49-newer", type=Path, default=ROOT / "evidence/holdout_h49_spatial_comparison_20261006.json")
     parser.add_argument("--h49-older", type=Path, default=ROOT / "evidence/holdout_h49_raw_sgmc_sensitivity_20261006.json")
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)

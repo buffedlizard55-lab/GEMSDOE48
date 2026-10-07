@@ -1,45 +1,135 @@
-# H53-A strike-coherent LiDAR candidate — blocked proxy result — 2026-10-07 UTC
+# H53 three-source adaptive DS — blocked results 2026-10-07 (gate FAILED, no slot)
 
-**Decision: H53-A fails its preregistered gate. No competition slot was used; do not upload this research TIFF.**
+**Decision: no weekly submission slot is cleared.** Neither the graded primary
+nor the pignistic binary twin beats H49 (0.100751) on the SGMC-newer proxy
+mean or on any single fold; the raw-SGMC sensitivity agrees in direction.
+Both files are published as unique, honestly-labelled research candidates
+with full receipts. No organizer score exists for any file in this
+repository.
 
-## Candidate and local artifact
+## 0. The brief's two questions, answered at the level of the evidence
 
-H53-A starts with the owner-reported 0.2778 dotted parent C, keeps its 37,654 cells unchanged, and appends 12,000 greedily Poisson-spaced cells selected by a 100 m strike-coherence score computed from the pinned, 3DEP-derived H52 regional raster. The new binary candidate has 49,654 positive cells. Local candidate file:
+**Why did 0.2778 win the family ladder?** Metric bookkeeping, not geology.
+A(44,090 dots, 0.2600) → B(40,199, 0.2708) → C(37,654, 0.2778) is two rounds
+of deleting dots within 200 m of the public catalogue, which the organizer
+masks from scoring — both steps independently imply the removed dots carried
+≈ zero credit (T/π = 5,073 vs 5,470, 7.5 % apart). C recovers ≈ 37 % of the
+≈ 14,300 hidden kernel mass; each added dot must carry ≥ 0.056 expected
+weight (0.2·DTI) to pay for itself. Full derivation:
+`docs/research/why-02778-and-ceiling-20261007.md`,
+`evidence/live_ladder_20261007.json`.
 
-- [`GEMSDOE48-H53-STRIKE-COHERENCE-20261007-de35531d3867-nan-outside.tif`](../downloads/GEMSDOE48-H53-STRIKE-COHERENCE-20261007-de35531d3867-nan-outside.tif)
-- SHA-256: `de35531d386792da1950eac815f98db8f36304f78debb6b568138d070640d9bd`; 403,844 bytes.
-- It is one-band float32, EPSG:32611, 100 m, 3,730 × 3,292, finite `{0,1}` inside the template footprint and NaN/nodata outside. The local format audit passes; this says nothing about DrivenData acceptance.
-- Builder [`scripts/build_h53_scarp_coherence.py`](../../scripts/build_h53_scarp_coherence.py); frozen slate [`hypotheses-h53-20261007.md`](hypotheses-h53-20261007.md) and [`evidence/hypothesis_slate_h53_20261007.json`](../../evidence/hypothesis_slate_h53_20261007.json).
-- Paste-ready note (133 characters): `GEMSDOE48-H53 | C + 12k Poisson dots ranked by 500m strike-coherent 3DEP scarp support; proxy-tested research only; NOT slot-cleared.`
+**Can we beat 0.2778 live?** Plausibly, but only with new information about
+where hidden faults are — not with a new combination of the same two
+surfaces. H53 tests exactly the most generous version of "combination":
+adding a third, new-sensor (lidar) source with terrain-adaptive reliability.
+It narrows the fusion deficit on the proxy (below) but still loses to both
+parents, both unions, and H49. The session's consolidated finding stands and
+is now stronger: **no fusion of existing surfaces — two-source or
+three-source, scalar or adaptive discount — has beaten the better parent on
+the blocked proxies. Raising the live score requires higher credit density
+(new signal: H53-2's v2 scarp detector), not better combination.**
 
-## Preregistered test result
+## 1. Candidates scored (identical folds/domain/metric as all prior runs)
 
-The exact same four geographic quadrants, held-out core + 300 m Euclidean halo, DTI parameters, truth masks, and frozen H49 TIFF were compared. The SGMC targets are public-map proxies—not private expert truth and not organizer scores. The older raw SGMC sensitivity is reported separately from the newer derived raster.
+| File | Construction | Support / mass |
+|---|---|---|
+| `GEMSDOE48-H53-3SRC-DS-20261007-9242c831-nan-outside.tif` (primary, graded) | Bel_ABC(F)/max, (B2 ⊕ H36-1) ⊕ lidar | 1,488,778 positives, mass 260,260 |
+| `…-pignistic-twin-nan.tif` (binary twin) | BetP top-37,654 (parent-A budget) | 37,654 positives |
+| `…-zeros-outside.tif` (encoding twin) | same graded values, zeros outside | not scored (identical in-footprint values) |
 
-| Proxy target | H53-A mean DTI | H49 mean DTI | Paired mean Δ (H53−H49) | H53-A folds above H49 | Gate |
-|---|---:|---:|---:|---:|---|
-| Newer derived SGMC faults >300 m from catalogue | 0.0981104 | 0.1007512 | −0.0026408 | 1/4 | **Fail** |
-| Older raw SGMC sensitivity >300 m from catalogue | 0.0970865 | 0.0997684 | −0.0026819 | 1/4 | **Fail** |
-| Public catalogue labels (context only) | 0.0088985 | 0.0953532 | −0.0864548 | 0/4 | Not a promotion target; catalogue-distance pruning makes this comparator inappropriate for off-catalogue recovery |
+Build: `scripts/build_submission_h53.py` → `evidence/build_h53_receipt_20261007.json`
+(deterministic: rebuilt byte-identical, SHA `9242c831…`). Format audits pass
+for both scored files (`evidence/h53_submission_validation_20261007.json`,
+`evidence/h53_twin_validation_20261007.json`).
 
-H53-A does beat the prior full-union comparator (0.0969917 newer / 0.0959573 older) by +0.0011187 / +0.0011292 mean DTI and in 3/4 folds, but **H49 remains the current proxy-best** and the H53-A pre-registered gate required a win over H49 on both raster definitions. This is not close enough to reinterpret as a pass. Report JSONs: [`evidence/holdout_h53_spatial_20261007.json`](../../evidence/holdout_h53_spatial_20261007.json), [`evidence/holdout_h53_raw_sgmc_20261007.json`](../../evidence/holdout_h53_raw_sgmc_20261007.json), and paired decision [`evidence/h53_vs_h49_20261007.json`](../../evidence/h53_vs_h49_20261007.json).
+## 2. SGMC-newer >300 m off-catalogue proxy (primary gate)
 
-## Interpretation
+`evidence/holdout_h53_spatial_comparison_20261007.json` (graded),
+`evidence/holdout_h53twin_spatial_comparison_20261007.json` (twin).
+H49 folds from `evidence/holdout_h49_spatial_comparison_20261006.json`
+(same protocol, same pinned truth).
 
-The result shows that adding an explicit 100 m strike-continuity filter changes the map but does **not** make the top H49 proxy score. It provides no evidence of improvement on private fault labels. A likely limitation is that the stored regional layer preserves only a single max-height strike per 100 m cell; the five-point check is not a full 3 m fault-trace reconstruction and cannot separate every scarp from terrace, channel, or anthropogenic edges. The original H52-1 region result also showed the proxy value was partly terrain-class signal, so this filtered derivative should not be treated as an independent confirmation.
+| Candidate | NW | NE | SW | SE | Mean |
+|---|---:|---:|---:|---:|---:|
+| dotted C (parent A) | 0.1018 | 0.0991 | 0.1075 | 0.0736 | 0.095491 |
+| tip H33-D (script comparator) | 0.1014 | 0.1002 | 0.1065 | 0.0739 | 0.095491 |
+| prior union B2∪H33-D | 0.1025 | 0.1027 | 0.1065 | 0.0763 | 0.096992 |
+| H49 (blocked best) | 0.1061 | 0.1079 | 0.1104 | 0.0786 | **0.100751** |
+| **H53 graded primary** | 0.0745 | 0.0905 | 0.0499 | 0.0708 | 0.071408 |
+| **H53 pignistic twin** | 0.0954 | 0.0955 | 0.0984 | 0.0689 | 0.089559 |
 
-The selection itself uses the full public catalogue as a 200 m exclusion mask, and parent C is a frozen full-catalogue-derived file. The fold scores are therefore conditional and potentially leaky, despite the core-plus-halo evaluation. The numerator truth is an owner-mirror SGMC raster; the second raster is a nonidentical older owner-mirror derivative. No public-proxy result alone clears a weekly competition slot.
+Paired deltas (mean, positive folds): primary vs H49 −0.029343 (0/4); twin
+vs H49 −0.011192 (0/4); primary vs prior union −0.025583 (0/4); twin vs
+prior union −0.007433 (0/4). **Gate fails on both criteria for both files.**
 
-## Source freshness and artifact checks
+## 3. Raw-SGMC sensitivity (same direction, do not pool)
 
-No official web pages were fetched or freshly verified during this continuation. The frozen [H53 slate](hypotheses-h53-20261007.md) records the official 3DEP, 3DHP, GeMS/SGMC, GeoDAWN and DrivenData URLs and flags which data payloads/coverage remain unverified; H53-B and H53-D remain parked.
+| Candidate | Newer mean | Raw mean |
+|---|---:|---:|
+| H53 graded primary | 0.071408 | 0.070510 |
+| H53 pignistic twin | 0.089559 | 0.088542 |
+| H49 | 0.100751 | 0.099768 |
+| prior union | 0.096992 | 0.095957 |
 
+Receipts: `evidence/holdout_h53_raw_sgmc_sensitivity_20261007.json`,
+`evidence/holdout_h53twin_raw_sgmc_sensitivity_20261007.json`.
 
-- Format receipt: [`evidence/h53_submission_validation_20261007.json`](../../evidence/h53_submission_validation_20261007.json) — `PASS_LOCAL_FORMAT_AUDIT_NOT_ORGANIZER_ACCEPTANCE`.
-- Bounded identity receipt: [`evidence/h53_submission_identity_20261007.json`](../../evidence/h53_submission_identity_20261007.json) — 54 one-band same-grid local rasters compared across `docs/downloads/` and `data/`, no exact value/support match, max positive-support Jaccard 0.7583276 to the intended parent C. This local comparison does not establish uniqueness across all linked GEMSDOE sites or organizer storage.
-- Build receipt: [`evidence/build_h53_receipt_20261007.json`](../../evidence/build_h53_receipt_20261007.json).
-- No leaderboard submission or weekly slot was used for H53-A.
+## 4. Catalogue proxy (diagnostic only; known leaky for C-derived surfaces)
 
-## Next decision
+Graded primary 0.030236, binary twin 0.007525 (twin shares 33,385/37,654
+cells with C, Jaccard 0.796 — it inherits C's catalogue-blind construction).
+H49 0.095353, prior union 0.085538. No gate uses this proxy.
 
-Keep H49 as the highest same-protocol proxy result and keep all submission slots unused. The next high-value work is not another threshold sweep on the same aggregate layer: obtain a target-appropriate independent evaluation of unmapped alluvial scarps or reprocess source 3DEP profiles with a frozen dual-baseline/line-tracing detector and a scarp-specific validation set. Candidate H53-B (3DHP channel profiles) and H53-D (GeMS contact topology) remain parked because their exact usable in-footprint source payloads are not audited. See the [frozen slate](hypotheses-h53-20261007.md) and [official source register](../sources.md).
+## 5. Cross-run fusion comparison (protocol-identical absolute means)
+
+`scripts/holdout_h51.py` asserts the same pinned SGMC truth (62,122
+positives), quadrants, halo, and metric as `run_spatial_holdout.py`, so
+absolute mean DTIs are comparable across runs:
+
+| Fusion decision surface (37,654 px unless noted) | SGMC-newer mean |
+|---|---:|
+| H53 pignistic twin (3-source: B2 × H36 × lidar) | **0.089559** |
+| H50 binary Bel-top-37,654 (2-source: B2 × H36) | 0.087161 |
+| H51 binary Pl-top-37,654 (2-source: B2 × H36) | 0.086537 |
+| H50 graded belief (2-source, diffuse) | 0.071553 |
+| H53 graded belief (3-source, diffuse) | 0.071408 |
+| tip H36-1 parent (37,660 px) | 0.093315 |
+| dotted C parent (37,654 px) | 0.095491 |
+| H49 (47,905 px) | 0.100751 |
+
+Reading: the lidar third source makes the H53 twin the best *fusion-decision*
+surface on this proxy (+0.0024 over the best 2-source twin), but it still
+loses to both parents (−0.0038 vs H36, −0.0059 vs C) and to H49 (−0.0112).
+For diffuse graded belief the third source is neutral (0.0714 vs 0.0716).
+New-sensor information helps the decision surface a little; it does not
+rescue fusion as a strategy.
+
+## 6. Disagreement diagnostics (what the geologist sees)
+
+In-footprint ranges from the build receipt: m_ABC(Θ) [0.00092, 0.030] —
+strictly positive everywhere (the RHO_MAX ceiling + per-pixel lidar discount
+keep the unassigned layer informative); K_AB max 0.88 (family-vs-family
+contradiction, the brief's disagreement layer); K_ABL max 0.75 (lidar-vs-pair
+contradiction); K_total max 0.93. Files:
+`…-diag-unassigned-nan.tif`, `…-diag-conflict-AB-nan.tif`,
+`…-diag-conflict-ABL-nan.tif`, `…-diag-plausibility-nan.tif`.
+
+Not-an-average verification (receipt): vs the 3-belief mean, Pearson 0.860,
+max |Δ| 0.469, top-37,654 Jaccard 0.550; vs the 2-family mean, Pearson 0.962,
+max |Δ| 0.386, 10.5 % of cells differ by > 0.05. The combination is
+genuinely not an average — it is simply not a better predictor than its
+parents on these proxies.
+
+## 7. Limitations (do not over-read)
+
+* Public-map proxies, not private expert truth; frozen upstream surfaces not
+  rebuilt per fold; C's catalogue-proximity prune makes catalogue-block
+  results conditional and potentially leaky (same caveats as all prior runs).
+* The SGMC proxy rewards bedrock faults by construction; lidar-friendly
+  alluvium scarps are under-weighted (see H53-5's proposed alluvium proxy).
+* Live-anchored discounts use owner-reported scores [OWNER-REPORT], never
+  organizer file-level receipts; the lidar class discounts (0.75/0.25/0.05)
+  are preregistered modelling assumptions, not calibrations.
+* Determinism is verified (byte-identical rebuild); organizer portal
+  acceptance is untested for every file here.

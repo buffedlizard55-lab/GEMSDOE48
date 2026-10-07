@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Bounded exact-value/support comparison for the H53 candidate.
+"""Bounded exact-value/support comparison for the H53-A candidate.
 
 Scans case-insensitive .tif/.tiff files below docs/downloads/ and data/, compares
 only one-band rasters on the exact competition grid, and records non-comparable rasters. This
@@ -20,7 +20,7 @@ from affine import Affine
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_CANDIDATE = ROOT / "docs/downloads/GEMSDOE48-H53-STRIKE-COHERENCE-20261007-de35531d3867-nan-outside.tif"
 DEFAULT_FOOTPRINT = ROOT / "data/source_mirrors/footprint-mask.tif"
-DEFAULT_OUTPUT = ROOT / "evidence/h53_submission_identity_20261007.json"
+DEFAULT_OUTPUT = ROOT / "evidence/h53a_scarp_submission_identity_20261007.json"
 EXPECTED_TRANSFORM = Affine(100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)
 EXPECTED_CRS = "EPSG:32611"
 EXPECTED_SHAPE = (3730, 3292)

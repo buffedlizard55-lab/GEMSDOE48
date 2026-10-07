@@ -3,8 +3,8 @@
 
 This builder does not read the SGMC holdout truth. It reads only the already
 pinned scarp product, public catalogue exclusion raster, dotted parent C, and
-finite competition footprint. See docs/research/hypotheses-h53-20261007.md and
-its frozen JSON receipt for the complete construction.
+finite competition footprint. See docs/research/hypotheses-h53a-scarp-20261007.md and
+its H53-A-specific frozen JSON receipt for the complete construction.
 """
 from __future__ import annotations
 
@@ -29,8 +29,8 @@ DEFAULT_BASE = ROOT / "data/families/dotted_b2_prune_02778.tif"
 DEFAULT_LABELS = ROOT / "data/official/labels.tif"
 DEFAULT_FOOTPRINT = ROOT / "data/source_mirrors/footprint-mask.tif"
 DEFAULT_OUTPUT_DIR = ROOT / "docs/downloads"
-DEFAULT_RECEIPT = ROOT / "evidence/build_h53_receipt_20261007.json"
-SLATE = ROOT / "evidence/hypothesis_slate_h53_20261007.json"
+DEFAULT_RECEIPT = ROOT / "evidence/build_h53a_scarp_receipt_20261007.json"
+SLATE = ROOT / "evidence/hypothesis_slate_h53a_scarp_20261007.json"
 
 PINNED_SHA256 = {
     "product": "b5e53d67c3a7d3d1ca44ae04ae1e84d8574857da3fcd5e34ba47276d6c04b923",
@@ -289,7 +289,7 @@ def main() -> int:
         "candidate_id": "H53-A",
         "generated_utc": timestamp,
         "preregistration": {
-            "document": display_path(ROOT / "docs/research/hypotheses-h53-20261007.md"),
+            "document": display_path(ROOT / "docs/research/hypotheses-h53a-scarp-20261007.md"),
             "json": display_path(SLATE),
             "json_sha256": slate_hash,
         },
