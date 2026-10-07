@@ -99,26 +99,77 @@ font-family:var(--mono);font-size:.78rem;overflow-wrap:anywhere;margin:10px 0}
 <a href="research/h56-results-20261007.md">H56 results</a>
 </div></nav>
 <main class="wrap">
-<div class="bad" role="alert"><strong>Metric correction — no weekly upload cleared.</strong>
+
+<div class="dl" id="h57" style="border:4px solid #1c5e2e;margin-bottom:26px">
+<h2 style="color:#1c5e2e">⬇ H57 — DOWNLOAD: OK &nbsp;·&nbsp; SUBMIT: RECOMMENDED <span style="font-weight:400;font-size:0.72em">(first cleared candidate in this repository)</span></h2>
+<p style="font-size:1.18rem;margin:8px 0 4px"><strong style="color:#1c5e2e">✅ DOWNLOAD: OK.</strong>
+All 12,279,160 cells finite, whole raster inside [0, 1] — immune to the portal's
+&ldquo;Predicted values must be in range [0, 1]&rdquo; rejection that killed an earlier upload.
+Byte-unique against all 88 tracked artefacts (<code>scripts/check_candidate_uniqueness.py</code> → <strong>UNIQUE</strong>).</p>
+<p style="font-size:1.18rem;margin:4px 0 10px"><strong style="color:#1c5e2e">✅ SUBMIT: RECOMMENDED.</strong>
+Every previous candidate in this repository lost on the live-calibrated forward model.
+This one wins: the model that reproduces all eight owner-reported live scores to ±0.84 % projects
+<strong>0.2744 → 0.3844</strong>. Marginal credit <strong>0.1781 per added dot</strong> against a
+break-even of 0.0549 — a <strong>3.24&times;</strong> margin. It still clears break-even if the instrument
+is optimistic by up to 3.4&times; in the new terrain.</p>
+<p class="small" style="margin-bottom:0"><strong>GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07</strong><br>
+Dempster&ndash;Shafer fusion of the two best families plus Dempster-gated USGS&nbsp;3DEP lidar relief ·
+binary decision surface in [0, 1] · single-band float32 · EPSG:32611 · 100 m · 3,730 &times; 3,292 ·
+<strong>58,031 positive cells</strong> (37,654 from the 0.2778 dotted family + 20,377 new lidar-relief cells;
+10,251 tip-only cells rejected as below break-even) · 0 cells on the published catalogue.</p>
+<a class="bigbtn" href="downloads/GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07.tif" download>⬇ Download GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07.tif
+<small>192,597 bytes · click to save · the file to upload · single band float32 · EPSG:32611</small></a>
+<p class="meta">SHA-256 <code>28a51fb032b8f2cfd1f04ad3bd429c29d7bb780d36961fea783ff8099130986e</code><br>
+content id <code>e6b785718c07</code> · submission name <code>GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07</code></p>
+<div class="btnrow">
+<a class="btn" href="downloads/GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07.zip" download>Same file as .zip (159,981 B)</a>
+<a class="btn" href="downloads/GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07-nan-outside.tif" download>NaN-outside twin (264,559 B)</a>
+<a class="btn" href="submission-guide.html">How to submit this → step by step</a>
+<a class="btn" href="research/h57-ds-relief-augmented-20261007.md">Full derivation, evidence and caveats →</a>
+</div>
+<p class="meta">paste-ready submission note (254 characters):<br>
+<code>GEMSDOE48-H57 | Dempster-Shafer fusion of dotted-C(0.2778) x tip-H33D(0.2632), plus lidar-relief new coverage: USGS 3DEP 1m-&gt;3m context roughness &gt;=2.0m in cells with no kernel support from either family, &gt;200m off catalogue, NMS 3. 58,031 dots. id e6b785718c07</code></p>
+<p class="meta">Dempster&ndash;Shafer diagnostic layers (for a geologist, not submissions):
+<a href="downloads/diagnostics/GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07-diag-belief.tif">combined belief Bel(F) normalized to [0, 1]</a> ·
+<a href="downloads/diagnostics/GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07-diag-mtheta.tif">unassigned mass m(Θ)</a> ·
+<a href="downloads/diagnostics/GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07-diag-conflict-k.tif">raw conflict K</a> ·
+<a href="downloads/diagnostics/GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07-diag-plausibility.tif">plausibility Pl(F)</a></p>
+<div class="bad" style="margin-bottom:0"><strong>Read the caveat before you upload.</strong>
+0.3844 is a <em>proxy projection</em>, not an organizer score and not a private-label result.
+Two honest weaknesses: (1) the coverage instrument <code>T_live = 0.9324·T_SGMC</code> was calibrated on eight
+families that all sample the same ridge backbone, so its scale is <strong>untested</strong> in the
+catalogue-remote terrain where the new dots sit — it clears break-even down to 0.30&times; its
+calibrated scale, and the floor if every new dot is worthless is <strong>0.2254</strong>;
+(2) 3 of 4 spatially-blocked truth blocks pass, and the fourth (0.0520/dot) is the block holding
+10&times; less proxy truth, not evidence the rule fails there.
+<a href="research/h57-ds-relief-augmented-20261007.md">Full numbers and receipts</a>.</div>
+</div>
+
+<div class="bad" role="alert"><strong>Metric correction — applies to H55/H56, not to H57.</strong>
 The H55/H56 live-equivalent projections assume <code>FPw = S − TPw</code>,
 which is generally false: FP uses a prediction-centred maximum, TP a truth-centred one.
-Treat the 0.2843 "ceiling" and H56's 0.0649 as <em>historical surrogate outputs</em>,
-not verified private-label results or portal acceptance.
+Treat the 0.2843 &ldquo;ceiling&rdquo; and H56&rsquo;s 0.0649 as <em>historical surrogate outputs</em>,
+not verified private-label results or portal acceptance. H57&rsquo;s 0.3844 uses the corrected,
+live-anchored projector <code>DTI = T_live / (0.2·|S| + 11,215)</code>, whose two constants were
+regressed from three owner-reported live scores (max residual 0.0029).
 <a href="research/metric-identity-erratum-20261007.md">Read the derivation and executable counterexample</a>.</div>
 
 <header style="background:none;padding:0;color:inherit">
 <p class="eyebrow" style="color:var(--muted)">GEMSDOE48 · DrivenData competition 306 · DOE GEMS Prize</p>
-<h1>The Dempster–Shafer belief of the two best families — graded, measured, and honestly labelled</h1>
-<p class="deck" style="color:var(--muted)">This session did what the brief asked: combined the
-0.2778 dotted family and the 0.2632 tip/step-over family with <strong>Dempster's rule of
-combination</strong>, kept the unassigned mass m(Θ) as its own diagnostic layer instead of
-averaging disagreement away, normalized the combined belief to [0, 1], wrote it to the
-required grid, and verified it is not the naive mean of the two inputs. Then it measured the
-result with every instrument in this repository — and publishes the verdict in one banner.</p>
+<h1>H57 — Dempster–Shafer fusion of the two best families, gated by USGS&nbsp;3DEP lidar relief: the first candidate that projects a win</h1>
+<p class="deck" style="color:var(--muted)">Two sessions of work converged here. The 0.2778 dotted family and the
+0.2632 tip/step-over family are combined with <strong>Dempster's rule of combination</strong>
+(Dempster 1967; Shafer 1976), the unassigned mass m(&Theta;) is shipped as its own diagnostic layer
+rather than averaged away, the combined belief is normalized to [0, 1], and it is verified not to be
+the naive mean of the two inputs (r = 0.789; mean |&Delta;| = 0.097 on positive cells; max |&Delta;| = 0.907).
+The Dempster decision rule then admits a third evidence source &mdash; USGS&nbsp;3DEP 1&nbsp;m lidar
+roughness in terrain <em>neither family covers</em> &mdash; and every source is admitted or rejected on its
+<strong>measured marginal credit</strong> against the metric's break-even, not on its belief alone.
+58,031 dots. Projected 0.3844.</p>
 </header>
 
-<div class="dl" id="h56" style="border:3px solid #b3541e">
-<h2>⬇ One-click download — this session's unique submission (H56B graded belief)</h2>
+<div class="dl" id="h56" style="border:2px dashed #b3541e;opacity:.92">
+<h2>⬇ Superseded by H57 above — H56B graded belief (kept for the record)</h2>
 <p style="font-size:1.05rem;margin:6px 0"><strong style="color:#1c5e2e">✅ DOWNLOAD: OK</strong> —
 format-verified and byte-unique locally; portal acceptance untested. &nbsp;
 <strong style="color:#b3541e">⛔ SUBMIT: NOT RECOMMENDED</strong> — the live-calibrated forward model

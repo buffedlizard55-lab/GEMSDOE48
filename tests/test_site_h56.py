@@ -26,6 +26,11 @@ PAGES = ["index.html", "executive-summary.html", "submission-guide.html"]
 
 PRIMARY_NAME = "GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros-outside.tif"
 PRIMARY_REL = f"downloads/{PRIMARY_NAME}"
+# The H57 session cleared a candidate for submission, so H57's one-click download now
+# sits above the (superseded) H56 card.  The site invariant is unchanged in substance:
+# the *cleared* candidate's download must be the first content on the page.
+CLEARED_NAME = "GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07.tif"
+CLEARED_REL = f"downloads/{CLEARED_NAME}"
 NOTE = ("GEMSDOE48-H56 | Dempster belief[0,1] of dotted-C(0.2778) x tip-H33D(0.2632), "
         "metric-kernel BPA, live-anchored discounts; m(Theta) diagnostic separate; "
         "live-model proj 0.0649 -> submit NOT recommended; unscored | id 9ec0d605c45b")
@@ -62,11 +67,13 @@ def receipts():
 def test_download_is_the_first_content_on_index_and_exec_summary(pages):
     for name in ("index.html", "executive-summary.html"):
         body = pages[name].split("<main", 1)[1]
-        link = body.index(f'href="{PRIMARY_REL}"')
+        link = body.index(f'href="{CLEARED_REL}"')
         before = body[:link]
-        assert "<table" not in before, f"{name}: a table appears before the H56 download button"
-        assert "bigbtn" in before, f"{name}: the H56 download button class is missing"
-        assert len(before) < 3500, f"{name}: too much content before the H56 one-click download"
+        assert "<table" not in before, f"{name}: a table appears before the cleared download button"
+        assert "bigbtn" in before, f"{name}: the cleared download button class is missing"
+        assert len(before) < 3500, f"{name}: too much content before the cleared one-click download"
+        assert body.index(f'href="{PRIMARY_REL}"') > link, (
+            f"{name}: the superseded H56 download must sit below the cleared H57 one")
 
 
 @needs_site()

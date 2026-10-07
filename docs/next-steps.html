@@ -99,6 +99,46 @@ font-family:var(--mono);font-size:.78rem;overflow-wrap:anywhere;margin:10px 0}
 <a href="research/h56-results-20261007.md">H56 results</a>
 </div></nav>
 <main class="wrap">
+<div class="card" style="border:3px solid #1c5e2e;margin-bottom:24px">
+<h2 style="color:#1c5e2e">H57 is cleared — what to do now</h2>
+<ol>
+<li><strong>Spend the weekly slot on H57</strong> following
+<a href="submission-guide.html">the step-by-step guide</a>. File
+<code>GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07.tif</code>, SHA-256
+<code>28a51fb032b8f2cfd1f04ad3bd429c29d7bb780d36961fea783ff8099130986e</code>. Verify the hash first.</li>
+<li><strong>Record the returned score in <code>registry/live_scores.json</code></strong> next to that
+SHA-256. That single number is the highest-value measurement available: it is the first test of the
+coverage instrument&rsquo;s scale in catalogue-remote terrain, and it settles whether the 0.3844
+projection or the 0.2254 floor is real.</li>
+<li><strong>Branch on the outcome.</strong> Near 0.38 &rarr; the instrument holds off-backbone; push the
+same gate harder (raise the roughness threshold, re-run the region scarp workflow over the remaining
+26 % of the footprint that has no 3DEP cover, and re-price). Near 0.2254 &rarr; the instrument&rsquo;s
+scale was wrong in new terrain and <em>every</em> lidar-relief candidate is retired with it; fall back
+to the 0.2778 parent and stop proposing additions.</li>
+</ol>
+<h3>Remaining work and limitations</h3>
+<ul>
+<li><strong>No DrivenData authentication in the sandbox.</strong> The agent cannot download
+<code>training_features.tif</code>, <code>labels.tif</code>, <code>sample_submission.tif</code> or
+<code>1m_DEM_links.csv</code> (the URLs redirect to login), cannot submit, and cannot read the
+leaderboard programmatically. Every live number in this repository is owner-reported. This is the
+single largest limitation and it has not changed across sessions.</li>
+<li><strong>The truth used for validation is a surrogate.</strong> <code>G</code> = SGMC-derived faults
+&cap; footprint &cap; <code>d(catalogue) &gt; 3</code> (62,122 cells). Staff have confirmed the real
+test faults come from undisclosed sources plus expert review, and that known USGS/INGENIOUS pixels
+are masked from scoring. The surrogate is calibrated (0.84 % RMS over eight families) but it is not
+the hidden truth.</li>
+<li><strong>3DEP coverage is incomplete.</strong> 48.1 % of the grid and 73.8 % of the footprint have
+any 3 m sample. The remaining 26.2 % of the footprint cannot be tested by this rule at all &mdash; a
+known blind spot, not a clean bill of health.</li>
+<li><strong>Two site tests were updated this session</strong>
+(<code>tests/test_site_h55.py</code>, <code>tests/test_site_h56.py</code>): they asserted that the
+previous session&rsquo;s download was the first content on the page. The invariant is now expressed
+against whichever candidate is cleared, and H57&rsquo;s own contract lives in
+<code>tests/test_h57.py</code>.</li>
+</ul>
+</div>
+
 <div class="bad" role="alert"><strong>Metric correction — no weekly upload cleared.</strong>
 The H55/H56 live-equivalent projections assume <code>FPw = S − TPw</code>,
 which is generally false: FP uses a prediction-centred maximum, TP a truth-centred one.
@@ -114,7 +154,7 @@ H55 fails the mass-neutral gate. Local TIFF checks are not organizer acceptance.
 
 <header style="background:none;padding:0">
 <p class="eyebrow" style="color:var(--muted)">H56 current decision · no slot cleared</p>
-<h1>H56 failed its public-proxy gate; do not submit</h1>
+<h1>H57 is cleared for the weekly slot — and what to do with the score it returns</h1>
 </header>
 
 <div class="bad"><strong>Current instruction: no upload and no weekly-slot spend.</strong> H56-DS and the machine-spec Hessian-only H56-A screen both lose to same-protocol H49 on catalogue and SGMC-off public proxies, 0/4 folds. The prose slate's unparameterized coherence extension remains untested. H49 is only a proxy best, not a private-label or organizer score. The H56 GeoTIFF is downloadable for inspection, not cleared for submission; the local format pass is not portal acceptance. See <a href="research/h56-results-20261007.md">H56 results</a> and <a href="../evidence/h56_decision_20261007.json">decision receipt</a>.</div>

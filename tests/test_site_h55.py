@@ -77,7 +77,12 @@ def test_download_is_the_first_content_on_index_and_exec_summary(receipt, pages)
     # section, but do not let it displace either H56 at the top.
     h56_receipt = REPO / "evidence/build_h56_receipt_20261007.json"
     belief_receipt = REPO / "evidence/build_h56_belief_receipt_20261007.json"
-    if h56_receipt.exists():
+    h57_receipt = REPO / "evidence/build_h57_receipt_20261007.json"
+    if h57_receipt.exists():
+        # the H57 session cleared a candidate; its download is now the first content.
+        primary = json.loads(h57_receipt.read_text())["files"][
+            "primary_zeros_outside"]["path"].split("/")[-1]
+    elif h56_receipt.exists():
         current = json.loads(h56_receipt.read_text())
         primary = current["candidate"]["primary"]["path"].split("/")[-1]
     else:

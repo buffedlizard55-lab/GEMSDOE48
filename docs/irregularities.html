@@ -99,6 +99,48 @@ font-family:var(--mono);font-size:.78rem;overflow-wrap:anywhere;margin:10px 0}
 <a href="research/h56-results-20261007.md">H56 results</a>
 </div></nav>
 <main class="wrap">
+<div class="card" style="border:3px solid #1c5e2e;margin-bottom:24px">
+<h2 style="color:#1c5e2e">H57 irregularities (2026-10-07) — all found by this session, all disclosed</h2>
+<ol>
+<li><strong>A marginal-credit bug inflated every number reported earlier in this session.</strong>
+The exploratory scripts accumulated the marginal gain as
+<code>&Sigma;_offsets &Sigma;_g max(k &minus; K_A, 0)</code>, which <em>double-counts</em> a truth pixel
+reached by several kernel offsets of several new dots. The exact marginal is
+<code>&Sigma;_g max(K_S &minus; K_A, 0)</code>. Correcting it also required correcting
+<code>T_SGMC</code>, which is a <strong>sum</strong> of kernel credits (parent &rarr; 5,517.6), not a
+count of covered truth cells (12,457). The corrected headline is 0.1781/dot and 0.3844, and the
+block test changed from a reported 4/4 to an honest <strong>3/4</strong>. The assertion
+<code>&Sigma;_g max(K_S &minus; K_A, 0) == &Delta;T_SGMC</code> is now a test
+(<code>tests/test_h57.py</code>), so this cannot recur silently.</li>
+<li><strong>The earlier &ldquo;no new coverage is available locally&rdquo; conclusion was a framing
+error.</strong> It priced <em>bulk</em> additions, which are diluted by redundancy with the parent.
+Pricing only cells with zero kernel support flips 20 of 22 candidates above break-even. The old
+0.008&ndash;0.040 figures are not a ceiling and must not be quoted as one.</li>
+<li><strong><code>scripts/check_candidate_uniqueness.py</code> detects companions by filename
+prefix.</strong> The first H57 build named the primary <code>&hellip;-zeros-outside.tif</code> and its
+twin <code>&hellip;-nan-outside.tif</code>, so the twin was scored as a <em>prior artefact</em> and the
+verdict read <code>DUPLICATE_OF_PRIOR_ART</code>. The script&rsquo;s logic is correct; the naming
+convention had to be obeyed. Now <code>UNIQUE</code> across 88 artefacts.</li>
+<li><strong>The 0.3844 projection extrapolates the coverage instrument.</strong>
+<code>T_live = 0.9324&middot;T_SGMC</code> was fitted on eight families that all sample the same ridge
+backbone. None of them has a dot in catalogue-remote terrain, so the scale is untested exactly where
+H57 puts its 20,377 new dots. It clears break-even down to 0.30&times; its calibrated scale; the floor
+is 0.2254. <em>This is the one assumption only a real submission can retire.</em></li>
+<li><strong>3 of 4 spatial truth blocks pass, not 4 of 4.</strong> The failing block scores
+0.0520/dot against break-even 0.0549. It holds 2,353 proxy-truth cells against
+13,447&ndash;23,192 elsewhere, and its share of <em>available</em> truth within 300 m of a lidar dot is
+the highest of the four (18.9 %). Truth sparsity, not a rule failure &mdash; but it is a real
+non-uniformity and it is reported, not hidden.</li>
+<li><strong>No organizer score exists for H57.</strong> Portal acceptance is untested from this
+sandbox: there is no DrivenData authentication here and the data URLs redirect to login.</li>
+<li><strong>Carried forward, unresolved:</strong> <code>registry/live_scores.json</code> attributes
+0.2778 and 0.2708 using the SHA-256 of <code>dotted_d2_8_02708.tif</code>, while
+<code>ref_h27_4_solo.tif</code> has a different SHA but byte-identical positive cells &mdash; two files,
+one live data point. The standing brief&rsquo;s &ldquo;0.3195 is the top score&rdquo; is stale; the
+leaderboard read of 2026-10-06 shows <code>xiaofanhu</code> 0.3774 at #1 and DARD 0.3195 at #7.</li>
+</ol>
+</div>
+
 <div class="bad" role="alert"><strong>Metric correction — no weekly upload cleared.</strong>
 The H55/H56 live-equivalent projections assume <code>FPw = S − TPw</code>,
 which is generally false: FP uses a prediction-centred maximum, TP a truth-centred one.

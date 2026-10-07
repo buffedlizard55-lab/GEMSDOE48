@@ -1,0 +1,32 @@
+{
+  "schema": "GEMSDOE48-candidate-uniqueness-v1",
+  "generated_utc": "2026-10-07T21:42:33Z",
+  "candidate": {
+    "file": "docs/downloads/GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07.tif",
+    "sha256": "28a51fb032b8f2cfd1f04ad3bd429c29d7bb780d36961fea783ff8099130986e",
+    "bytes": 192597,
+    "positive_cells": 58031
+  },
+  "compared_files": 88,
+  "max_overlap_excluding_companions": {
+    "file": "docs/downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-diag-plausibility-nan.tif",
+    "companion_of_same_artifact": false,
+    "sha256": "b8a2c58ad78cbe29fc90a60c64bc9928ebc29041c9771e7af5c554f69781820c",
+    "byte_identical": false,
+    "cells": 5167373,
+    "overlap_cells": 58031,
+    "jaccard": 0.011230271164864622,
+    "symmetric_difference_cells": 5109342,
+    "identical_support": false
+  },
+  "companions_of_same_artifact": [
+    "docs/downloads/GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07-nan-outside.tif",
+    "docs/downloads/diagnostics/GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07-diag-belief.tif",
+    "docs/downloads/diagnostics/GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07-diag-conflict-k.tif",
+    "docs/downloads/diagnostics/GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07-diag-mtheta.tif",
+    "docs/downloads/diagnostics/GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07-diag-plausibility.tif"
+  ],
+  "duplicates_byte_or_support_identical": [],
+  "verdict": "UNIQUE",
+  "note": "Support-level comparison (positive cells). A candidate that shares a support with an earlier artifact is not a new submission even if the bytes differ."
+}
