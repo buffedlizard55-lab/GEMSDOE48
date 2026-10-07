@@ -1,0 +1,35 @@
+{
+  "schema": "GEMSDOE48-candidate-uniqueness-v1",
+  "generated_utc": "2026-10-07T20:39:38Z",
+  "candidate": {
+    "file": "docs/downloads/GEMSDOE48-H56B-ds-belief-dotted-x-tip-20261007-126ca59c2801-nan-outside.tif",
+    "sha256": "3589e89a1ad4f78f54e6f17f9b7cdb0edb563f66aedfcdabd632ef8774968c3a",
+    "bytes": 1696746,
+    "positive_cells": 791389
+  },
+  "compared_files": 87,
+  "max_overlap_excluding_companions": {
+    "file": "docs/downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-diag-plausibility-nan.tif",
+    "companion_of_same_artifact": false,
+    "sha256": "b8a2c58ad78cbe29fc90a60c64bc9928ebc29041c9771e7af5c554f69781820c",
+    "byte_identical": false,
+    "cells": 5167373,
+    "overlap_cells": 791389,
+    "jaccard": 0.15315112727492286,
+    "symmetric_difference_cells": 4375984,
+    "identical_support": false
+  },
+  "companions_of_same_artifact": [],
+  "duplicates_byte_or_support_identical": [
+    "docs/downloads/GEMSDOE48-H56-OWDS-B2xH33D-20261007-1f7b5a4f18db-zeros-outside.tif",
+    "docs/downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-nan-outside.tif",
+    "docs/downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros-outside.tif",
+    "docs/downloads/gemsdoe48-h49-ds-conflict-balanced-20261006-belief-field.tif",
+    "docs/downloads/diagnostics/GEMSDOE48-H53-DS-RadEdge-B2xH33D-20261007-4c01fcf2ad8c-two-family-dempster-only.tif",
+    "docs/downloads/diagnostics/GEMSDOE48-H53-DS-RadEdge-B2xH33D-20261007-4c01fcf2ad8c-two-family-naive-mean.tif",
+    "docs/downloads/diagnostics/GEMSDOE48-H56-OWDS-B2xH33D-20261007-1f7b5a4f18db-belief-raw.tif",
+    "docs/downloads/diagnostics/gemsdoe48-h55-bel-055da9855353.tif"
+  ],
+  "verdict": "DUPLICATE_OF_PRIOR_ART",
+  "note": "Support-level comparison (positive cells). A candidate that shares a support with an earlier artifact is not a new submission even if the bytes differ."
+}

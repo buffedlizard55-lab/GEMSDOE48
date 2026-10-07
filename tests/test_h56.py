@@ -94,3 +94,24 @@ def test_deterministic_top_k_uses_row_major_ties():
     expected.ravel()[[1, 2]] = True
     np.testing.assert_array_equal(selected, expected)
     assert selected.sum() == 2
+
+
+def test_total_conflict_raises_in_shared_h56_and_h56b_builders():
+    """Normalized Dempster is undefined at K=1; never silently use vacuous mass."""
+    from runpy import run_path
+    from pathlib import Path
+
+    from gemsdoe48.dempster_shafer import dempster_combine
+
+    with pytest.raises(ValueError, match="total/numerical conflict"):
+        dempster_combine(np.array([1.0]), np.array([0.0]), alpha1=1.0, alpha2=1.0)
+
+    fault_only = (np.array([1.0]), np.array([0.0]), np.array([0.0]))
+    not_fault_only = (np.array([0.0]), np.array([1.0]), np.array([0.0]))
+    with pytest.raises(ValueError, match="total conflict"):
+        combine_open_world_dempster(fault_only, not_fault_only)
+
+    repo_root = Path(__file__).resolve().parents[1]
+    builder = run_path(str(repo_root / "scripts/build_submission_h56_belief.py"))
+    with pytest.raises(ValueError, match="total conflict"):
+        builder["dempster"](fault_only, not_fault_only)

@@ -238,7 +238,7 @@ def cur_tpw(p, t):
 
 
 class TestCreditBar(unittest.TestCase):
-    """The marginal-value rule: emit a dot iff its realised weight > 0.2 * DTI."""
+    """Test the special one-pixel bar separately from general raster optimality."""
 
     def test_bar_is_alpha_times_dti(self):
         for v in (0.0, 0.1, 0.2778, 0.3195, 1.0):
@@ -332,19 +332,42 @@ class TestCreditBar(unittest.TestCase):
         worse[30, 33] = 1.0
         self.assertLess(metric.dti(worse, t).dti, cur)
 
-    def test_binary_optimality_derivative_sign(self):
-        """d/dv of (T0 + v k)/(D0 + 0.2 v) has the sign of k - 0.2 DTI."""
-        T0, D0, k = 3.0, 9.0, 0.5
-        dti_val = T0 / D0
-        for v in (0.0, 0.25, 0.5, 1.0):
-            # numeric derivative of the exact rational expression
-            h = 1e-6
-            f = lambda x: (T0 + x * k) / (D0 + 0.2 * x)  # noqa: E731
-            num = (f(v + h) - f(v - h)) / (2 * h)
-            expected_sign = np.sign(k - metric.ALPHA * dti_val)
-            self.assertEqual(np.sign(num), expected_sign)
+    def test_coordinatewise_endpoint_property_on_small_rasters(self):
+        """For each graded value, one endpoint is no worse under exact DTI.
+
+        This is a numerical check of the coordinate-wise proof in the metric
+        erratum. It does not imply that thresholding a whole raster at a fixed
+        value improves its score.
+        """
+        rng = np.random.default_rng(20261007)
+        for _ in range(12):
+            truth = rng.random((5, 6)) < 0.2
+            if not truth.any():
+                truth[0, 0] = True
+            prediction = rng.random(truth.shape)
+            starting_score = metric.dti(prediction, truth).dti
+
+            for row, col in np.ndindex(prediction.shape):
+                at_zero = prediction.copy()
+                at_one = prediction.copy()
+                at_zero[row, col] = 0.0
+                at_one[row, col] = 1.0
+                score_zero = metric.dti(at_zero, truth).dti
+                score_one = metric.dti(at_one, truth).dti
+                score_current = metric.dti(prediction, truth).dti
+                self.assertGreaterEqual(max(score_zero, score_one) + 1e-12, score_current)
+
+                chosen = 0.0 if score_zero >= score_one else 1.0
+                prediction[row, col] = chosen
+                self.assertGreaterEqual(max(score_zero, score_one) + 1e-12, score_current)
+                self.assertIn(chosen, (0.0, 1.0))
+
+            self.assertTrue(np.isin(prediction, (0.0, 1.0)).all())
+            self.assertGreaterEqual(metric.dti(prediction, truth).dti + 1e-12, starting_score)
+
         self.assertEqual(
-            metric.optimal_value_is_binary(), "binary {0,1} is DTI-optimal; graded surfaces lose"
+            metric.optimal_value_is_binary(),
+            "a binary {0,1} maximizer exists; arbitrary thresholding is not guaranteed",
         )
 
 

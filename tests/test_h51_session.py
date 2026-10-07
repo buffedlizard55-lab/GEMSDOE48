@@ -144,11 +144,16 @@ class TestSessionEvidenceConsistency:
         sgmc = holdout["sgmc_offcat_results"]
         assert sgmc["h49_yager_pignistic_budget"]["mean_dti"] > sgmc["h51_plausibility_budget"]["mean_dti"]
 
-    def test_index_page_links_new_artifacts(self):
-        text = (conftest.DOCS / "index.html").read_text()
-        assert h51_primary().name in text
-        assert h50b_primary().name in text
-        assert "research/h51-h50b-results-20261007.md" in text
+    def test_current_site_routes_older_artifacts_to_history(self):
+        docs = conftest.DOCS
+        landing = (docs / "index.html").read_text()
+        archive = (docs / "archive-main-pages/pre-h55-20261007/index.html").read_text()
+        executive = (docs / "executive-summary.html").read_text()
+        assert "Historical H48–H55 surfaces" in landing
+        assert "archive-main-pages/pre-h55-20261007/index.html" in landing
+        assert h51_primary().name in archive
+        assert h50b_primary().name in archive
+        assert "research/h51-h50b-results-20261007.md" in executive
 
     def test_live_pages_have_no_broken_local_links(self):
         broken = []

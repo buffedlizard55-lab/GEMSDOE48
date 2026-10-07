@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "recorded_utc": "2026-10-07T20:47:00Z",
+  "status": "CORRECTS_RECEIPT_REFERENCE_CHRONOLOGY_AND_MEAN_STATISTIC; DOES_NOT_CHANGE_PRIOR_HISTORICAL_INPUTS",
+  "supersedes_or_clarifies": [
+    "docs/research/h56b-review-erratum-20261007.md",
+    "evidence/h56_preregistration_reconciliation_20261007.json",
+    "README.md H56B chronology summary"
+  ],
+  "correction_1_receipt_identity_and_chronology": {
+    "mislabelled_predecessor": {
+      "path": "evidence/build_h56_belief_receipt_20261007.json",
+      "generated_utc": "2026-10-07T15:17:03.929194+00:00",
+      "artifact": "docs/downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros-outside.tif",
+      "interpretation": "This is the earlier H56 zero-outside build, not the final H56B build. Its paired initial H56 holdout was evidence/holdout_h56_spatial_20261007.json at 2026-10-07T15:20:25.915773+00:00."
+    },
+    "h56b_specific_slate": {
+      "path": "evidence/hypothesis_slate_h56b_20261007.json",
+      "frozen_utc": "2026-10-07T16:00:00Z",
+      "rank_1": "H56-F absence-driven Dempster pruning ladder",
+      "contains_measured_outputs": true,
+      "interpretation": "The slate is later than the H56 predecessor build/holdout at 15:17/15:20Z, but earlier than the final H56B build/holdout. Because it incorporates measured results and specifies a different recipe, it is post-score exploration relative to the predecessor and is not a verified preregistration of the final H56B recipe."
+    },
+    "final_h56b_artifact": {
+      "path": "docs/downloads/GEMSDOE48-H56B-ds-belief-dotted-x-tip-20261007-126ca59c2801-nan-outside.tif",
+      "first_build_receipt_time_utc": "2026-10-07T17:37:10.453189+00:00",
+      "reproducible_rebuild_receipt_time_utc": "2026-10-07T20:33:02.233310+00:00",
+      "first_final_artifact_holdout_time_utc": "2026-10-07T17:38:33.864586+00:00",
+      "sha256": "3589e89a1ad4f78f54e6f17f9b7cdb0edb563f66aedfcdabd632ef8774968c3a"
+    },
+    "conclusion": "The earlier claim that the 16:00Z slate followed the final H56B build/holdout was incorrect. It followed an H56 predecessor run and preceded the final H56B artifact. No verified preregistration for the final H56B recipe is established."
+  },
+  "correction_2_kernel_mean_max_difference": {
+    "prior_build_receipt_path": "evidence/build_h56b_belief_receipt_20261007.json",
+    "prior_reported_max_abs_difference": 0.6666666865348816,
+    "prior_receipt_generated_utc": "2026-10-07T17:37:10.453189+00:00",
+    "independent_audit_max_abs_difference": 0.4172414541244507,
+    "rebuild_receipt_generated_utc": "2026-10-07T20:51:41.533725+00:00",
+    "current_build_receipt_max_abs_difference": 0.4172414541244507,
+    "current_independent_audit_max_abs_difference": 0.4172414541244507,
+    "artifact_sha256_unchanged": "3589e89a1ad4f78f54e6f17f9b7cdb0edb563f66aedfcdabd632ef8774968c3a",
+    "other_matching_comparison_values": {
+      "pearson_r": 0.9865998528364749,
+      "mae": 0.018752145476924942,
+      "fraction_footprint_diff_gt_0_05": 0.12455748791503923
+    },
+    "interpretation": "The original maximum-difference statistic was not reproduced by the independent audit. Re-running the unchanged numeric build implementation first rewrote the receipt at 20:33Z with 0.417241454, matching the independent audit; a later reproducibility run at 20:51Z retained that value after receipt metadata was corrected. Artifact bytes and other reported comparison statistics did not change. The cause of the first receipt discrepancy was not established, so the earlier value is preserved here rather than silently discarded.",
+    "first_matching_rebuild_receipt_generated_utc": "2026-10-07T20:33:02.233310+00:00",
+    "current_build_receipt_generated_utc": "2026-10-07T20:51:41.533725+00:00",
+    "current_independent_audit_utc": "2026-10-07T20:52:04.546123+00:00"
+  },
+  "correction_3_current_download_artifact_and_recommendation": {
+    "path": "docs/downloads/GEMSDOE48-H56B-NF-DS-dotted-x-tip-20261007-5bb2c03c981e-nan-outside.tif",
+    "sha256": "b9530b70065da1f5e9da82caf4f5aaba3d7175dbbbfb2851e4b2ab2dd13aa4f1",
+    "variant": "post-hoc no-catalogue-flank-absence ablation; not a new geological detector and not preregistered",
+    "local_uniqueness_scope": "No byte-hash or exact in-footprint pixel match among 105 same-grid one-band rasters searched in data/ and docs/downloads/; this is not global or organizer-side uniqueness proof.",
+    "local_holdout": {
+      "receipt": "evidence/holdout_h56b_noflank_vs_h49_currentprotocol_20261007.json",
+      "catalogue_mean_dti_h56b_noflank": 0.05630500817979947,
+      "catalogue_mean_dti_h49": 0.0953532478651188,
+      "catalogue_fold_wins": 0,
+      "sgmc_off_catalogue_mean_dti_h56b_noflank": 0.06898746210923314,
+      "sgmc_off_catalogue_mean_dti_h49": 0.10075118848176869,
+      "sgmc_fold_wins": 0
+    },
+    "recommendation": "OK to download for inspection; do not submit or spend a weekly slot. Both validation targets are public-map proxies, and the candidate loses H49 on all four folds for both targets."
+  },
+  "metric_and_portal_caveat": "The GeoTIFF is float32, EPSG:32611, finite [0,1] inside the competition footprint, and NaN/nodata outside. That matches the documented null-outside convention, but a portal validator that range-checks every array element may reject NaNs with 'Predicted values must be in range [0, 1]'; the local receipt records portal_range_error_immune=false. Organizer acceptance has not been tested."
+}

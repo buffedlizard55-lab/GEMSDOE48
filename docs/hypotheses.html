@@ -107,77 +107,24 @@ not verified private-label results or portal acceptance.
 <a href="research/metric-identity-erratum-20261007.md">Read the derivation and executable counterexample</a>.</div>
 
 <header style="background:none;padding:0">
-<p class="eyebrow" style="color:var(--muted)">Preregistered hypothesis slates · H56 (2026-10-07, current) over H55 (preserved)</p>
-<h1>Three records: H56B slate (this session), the concurrent H56 open-world slate, and the preserved H55 slate</h1>
-<p class="deck" style="color:var(--muted)">The H56 session restored the full 419 MB official
-19-band GeoDAWN raster byte-identical (SHA-256 <code>4371c82e…</code>), screened every band
-against the incumbent C, built and measured the two top offline candidates — and both
-<strong>failed their pre-registered gates</strong>, so no weekly slot was touched. Full slate:
-<a href="../docs/research/hypotheses-h56-20261007.md"><code>docs/research/hypotheses-h56-20261007.md</code></a> ·
-machine twin <a href="../evidence/hypothesis_slate_h56b_20261007.json"><code>evidence/hypothesis_slate_h56b_20261007.json</code></a> ·
-battery <a href="../evidence/h56_research_battery_20261007.json"><code>evidence/h56_research_battery_20261007.json</code></a>.</p>
+<p class="eyebrow" style="color:var(--muted)">Hypothesis audit · H56 chronology corrected · future H57 slate</p>
+<h1>H56 ranks conflict; the tested H56-A screen failed; five future hypotheses are documented</h1>
+<p class="deck" style="color:var(--muted)">The date-only main H56 slate ranks H56-A first and its Hessian-only screen fails both public proxies. A separate 16:00Z H56B slate follows an earlier H56 predecessor run (15:17 build / 15:20 holdout), but precedes final H56B (17:37 build / 17:38 holdout); it contains measurements and a different recipe, so it is not a verified preregistration of final H56B. The historical band-screen receipt records 19 bands, but the full training stack is not in the current checkout. See the <a href="research/h56b-review-erratum-20261007.md">reconciliation</a>, <a href="../evidence/h56b_review_corrections_20261007.json">correction record</a>, <a href="research/h57-hypothesis-slate-20261007.md">five-candidate H57 slate</a>, and its <a href="../evidence/hypothesis_slate_h57_20261007.json">machine record</a>.</p>
 </header>
 
-<section class="card" id="h56-slate" style="border-width:2px">
-<h2>H56 slate — five new candidates (ranked), with two already measured dead</h2>
-<table>
-<tr><th>#</th><th>Candidate</th><th>Layers</th><th>Signature / transform</th><th>Why it catches a MISSING fault</th><th>Difference from everything here</th><th>Expected ΔDTI / cost</th></tr>
-<tr><td>1</td><td><strong>H56-F</strong> absence-driven Dempster pruning ladder</td>
-<td>C (0.2778) × H33-D (0.2632), both pinned local</td>
-<td>Remove C dots where the tip family's kernel support + backbone absence drops combined Bel(F) below τ ∈ {0.99, 0.95, 0.90}</td>
-<td>Deletion of sub-bar dots is the proven lever: A→B→C gained +0.0108 deleting ~3,900 zero-credit dots; tip disagreement is the only independent estimate of the next such population</td>
-<td>Every prior fusion ADDED or re-weighted; no artifact has ever removed C dots with the other family's evidence</td>
-<td>+0.002…+0.005 if C-only dots are sub-bar, −0.003 if not / low cost, ONE live slot</td></tr>
-<tr><td>2</td><td><strong>H56-C</strong> 3 m DEM channel-knickpoint clusters</td>
-<td>USGS 3DEP 1 m (706-tile runner pipeline already proven) → 3 m</td>
-<td>Stream extraction; knickpoints as profile second-derivative maxima &gt; 3σ; RANSAC azimuth clustering; one dot per cluster</td>
-<td>Base-level perturbation leaves knickpoints upstream of any mappable scarp — including alluvium-mantled faults with no catalogue trace</td>
-<td>H52/H54 detected hillslope steps; no channel-profile operator exists in <code>src/</code></td>
-<td>+0.002…+0.010 / medium-high (~1 session)</td></tr>
-<tr><td>3</td><td><strong>H56-D</strong> conduit stepping-stone traces</td>
-<td>GDR wells/springs CSV (local) × band 3 HG</td>
-<td>Pair tier≥2 anchors within 15 cells, score segments by mean HG, emit along top segments</td>
-<td>Conduits prove existence; the connecting trace is what the 300 m kernel rewards and the surface catalogue lacks</td>
-<td>H55-A dart-threw isolated anchors; none connected them</td>
-<td>−0.001…+0.002 / low</td></tr>
-<tr><td>4</td><td><strong>H56-B</strong> radiometric K-residual halos</td>
-<td>GeoDAWN K/Th/U/TC mirror (DOI 10.5066/P93LGLVQ)</td>
-<td>Robust K~Th regression residual z ≥ 2 AND band-3 HG ≥ p75</td>
-<td>K-metasomatism persists under cover after surface expression erodes; catalogue is surface-trace only</td>
-<td>H50-B used Th/K ratios; GEMSDOE46 scarp∩radiometric; H53-RadEdge edges — a regressed residual is a different null</td>
-<td>+0.000…+0.003 / low (uint8 quantisation risk)</td></tr>
-<tr><td>5</td><td><strong>H56-E</strong> cover-gated additions</td>
-<td>Band 15 depth-to-basement as a gate on future additions</td>
-<td>Restrict additions to basement depth above the moat median; re-measure</td>
-<td>Catalogue incompleteness is maximal under thick cover; C under-emits deep basins (402.4 m vs 534.9 m moat mean, measured)</td>
-<td>H55-C used depth as detector conjunction; this is a sampling prior</td>
-<td>±0.001 modifier / trivial</td></tr>
-</table>
-<h3>Measured before ranking — offline results that killed two candidates without spending a slot</h3>
-<p class="small">Band screen of all 19 official bands (lift of C dots over the &gt;200 m catalogue moat;
-rank-AUC for signed bands): band 3 HG 1.264/0.576, band 19 slope 1.160/0.660, band 10 distance-to-quake
-1.441/0.532, bands 4/7/8 strain 1.08–1.10/0.52–0.54, band 14 TMI 0.954/0.509, band 15 basement 0.751/0.469,
-band 17 conductivity 0.981/0.474 (<code>evidence/h56_band_screen_20261007.json</code>). Pipeline verified by
-reproducing H55-session numbers line by line (band lifts 1.26/1.16/1.44; basement 402/535 m; C projection
-0.2728 with Cov identical to calibration at 14 decimals).</p>
-<ul class="small">
-<li><strong>H55-B strain ridges (previous session's Priority 3, implemented here):</strong> 258,369 px coherence field,
-only 5.0 % of C's dots inside; 25,837 Poisson dots score projection <strong>0.0152</strong> standalone and drag
-C+field to 0.2152 &lt; 0.2728 → ≈ 0.017 credit/dot vs the 0.0556 bar. <strong>OFFLINE FAIL.</strong></li>
-<li><strong>H56-A DEMGLOW (TMI demagnetisation lows × HG ridges):</strong> primary rung 5,944 px → 1,991 dots;
-projection <strong>0.0028</strong> vs same-mass random control 0.0023; C+field 0.2673 &lt; 0.2728.
-<strong>OFFLINE FAIL.</strong></li>
-</ul>
-<p class="small"><strong>Validation rule carried forward:</strong> no weekly slot without (a) blocked holdout
-≥ 3/4 folds vs both parents on both truths AND (b) live-model projection ≥ 0.2778 — with one explicit
-exemption: the first rung of H56-F, whose information value (which C-dots carry credit) exceeds its
-expected score, mirroring how A→B→C was discovered.</p>
+<section class="card" id="h56b-slate-erratum" style="border-width:2px">
+<h2>H56B-specific slate: historical post-score exploration, not a preregistered rank</h2>
+<p class="small">The <strong>15:17:03Z</strong> build and <strong>15:20:25Z</strong> holdout are for the earlier H56 zero-outside predecessor, not final H56B. The final H56B receipt is 17:37Z and its NaN-outside holdout is 17:38Z. The separate H56B slate declares a 16:00Z freeze and contains measurements: it follows the predecessor result, precedes final H56B, and describes a different recipe, so it is not a verified preregistration of final H56B. It also reuses H56-B for a different candidate than the date-only main slate (radiometric residuals here versus basement edges there). The main slate's time-of-day freeze is absent, so its ordering against H56-A's 15:21 holdout / 15:43 build receipts is unresolved. See <a href="research/h56b-review-erratum-20261007.md">full chronology and score erratum</a>, <a href="../evidence/h56_preregistration_reconciliation_20261007.json">original machine reconciliation</a>, and <a href="../evidence/h56b_review_corrections_20261007.json">correction record</a>.</p>
+<p class="small"><strong>No single verified H56B rank is being advanced.</strong> The separate H56-A machine-spec probe failed H49 on both public proxies, 0/4 folds; its prose-only structure-coherence extension was not parameterized or tested. No new detector was implemented and no slot is cleared.</p>
+<h3>Future implementation slate (five distinct, unbuilt ideas)</h3>
+<p class="small">H57-A through H57-E document each layer, physical signature, off-catalogue rationale, prior-art distinction, expected DTI uncertainty, cost, and verified local/official data status. Screening order reflects readiness only; it is not a score ranking. Some sources are partial or absent, and no candidate is slot-cleared.</p>
+<p><a class="button" href="research/h57-hypothesis-slate-20261007.md">Read the complete H57 slate and availability evidence</a> &nbsp; <a class="button" href="../evidence/hypothesis_slate_h57_20261007.json">Machine-readable slate</a></p>
 </section>
 
 <header style="background:none;padding:24px 0 0">
-<p class="eyebrow" style="color:var(--muted)">H56 five-hypothesis slate (concurrent open-world session) · frozen 2026-10-07 before H56 scoring</p>
-<h1>H56-A Hessian-only screen failed; its coherence extension and four other ideas remain untested</h1>
-<p class="deck" style="color:var(--muted)">The machine-spec lead was a Hessian-only active-deformation strain-ridge screen using bands 4/7/8 and a weak earthquake-density term. Its mass-matched 37,654-cell probe scored 0.014282 on the catalogue proxy and 0.006531 on the SGMC-off proxy, far below H49. No slot is cleared. H56-B basement steps, H56-C lidar trace persistence, H56-D magnetic edges, and H56-E geochemical anomalies remain unbuilt hypotheses—not validated predictions.</p>
+<p class="eyebrow" style="color:var(--muted)">Main machine H56 slate · declared date-only freeze 2026-10-07; exact chronology unresolved</p>
+<h1>Main H56 slate ranked H56-A first; its tested Hessian-only screen failed</h1>
+<p class="deck" style="color:var(--muted)">The machine-spec H56-A active-deformation Hessian-only probe scored 0.014282 on the catalogue proxy and 0.006531 on the SGMC-off proxy, below H49 and 0/4 folds positive on both. The machine slate stores only a date, not a verifiable time before scoring. Its prose-only structure-coherence extension remains untested. H56-B basement edges, H56-C lidar persistence, H56-D magnetic edges, and H56-E geochemistry remain unbuilt; see the new H57 slate for current data availability.</p>
 </header>
 
 <div class="bad">
@@ -194,69 +141,17 @@ expected score, mirroring how A→B→C was discovered.</p>
 <p><strong>H56-A scope note:</strong> the machine-readable frozen test specifies Hessian responses, but the original prose slate also mentions an unparameterized structure-tensor coherence term. The holdout applies only to the Hessian-only screen; the broader prose idea remains untested. See the <a href="research/h56-slate-erratum-20261007.md">post-score preregistration-text erratum</a>.</p>
 <p>Frozen slate: <a href="research/hypothesis-slate-h56-20261007.md">Markdown</a> · <a href="../evidence/hypothesis_slate_h56_20261007.json">machine-readable parameters and source caveats</a>. Geological hypotheses are not validator-confirmed; the cited USGS sources establish context or potential availability only.</p>
 <section class="card" id="h55-slate-preserved">
-<h2>Prior H55 slate — historical reference, not the current plan</h2>
-<p class="small">The ranking below was frozen by the H55 session; its rule: a candidate is only
-interesting if it can raise the corridor field's <em>dense</em> truth yield above the backbone's
-T = 6,813. Anything that merely re-ranks or re-thins the existing field is worth at most +0.0066
-and ranks last.</p>
-
-<div class="warn"><strong>Two screens were dropped before ranking, on live evidence.</strong>
-<em>Catalogue coverage per pixel</em> is not a valid screen: SGMC faults score 0.1418 against the
-backbone's 0.1007 and returned T = 1,026 live — 5× worse. The ≥ 2× “catalogue
-lift” rule that rejected H52 is therefore unsound. <em>The SGMC off-catalogue proxy</em> is not a
-model of the hidden truth: an emission built directly on it scored 0.0512 live. The only
-live-validated screen is <code>Cov(X; B_elig)</code> inside the family, and it cannot rank a new
-family at all (transfer error -38.3 %).</div>
-
-<table><thead><tr>
-<th>#</th>
-<th>id and title</th>
-<th>layer(s)</th>
-<th>physical signature and transform</th>
-<th>why it catches a MISSING fault</th>
-<th>difference from anything in the repository</th>
-<th>data obtainable?</th>
-<th>expected ΔDTI</th>
-<th>cost</th>
-<th>status</th>
-</tr></thead><tbody>
-<tr><td><strong>1</strong></td><td><strong>H55-B</strong><br><span class='small'>Active-deformation localisation ridges from the official geodetic strain and seismicity bands</span></td><td>data/raw/training_features.tif band 4 (geodetic second invariant of strain rate), band 7 (geodetic shear rate), band 8 (geodetic dilatation rate), band 16 (earthquake intensity/density), band 10 (distance to earthquake)</td><td>not the amplitude but the anisotropic LOCALISATION: multi-scale vesselness / Sato ridge filter plus structure-tensor coherence (|l1|-|l2|)^2/(|l1|+|l2|)^2 at 300-900 m, applied to log(second invariant) and to shear rate, keeping only pixels above the 95th percentile of coherence. Measured here: the raw fields are diffuse - a multi-orientation line operator separates their top 2% from background at only p90 0.0022 vs 0.0008 - so the ridge transform IS the hypothesis, not a refinement.</td><td>geodetic strain and microseismicity localise on faults that are currently slipping. A fault can be slipping and be entirely buried under basin alluvium - no scarp, no lineament, no geomorphic expression - and therefore absent from the USGS state-map compilation and from the INGENIOUS Quaternary trace inventory, both of which are mapped from surface geology. Active deformation is the only signal in the official stack that does not require surface expression.</td><td>H48-3 proposed OPERA InSAR DISP-S1 displacement gradients and was never run (&#x27;Earthdata Login required; no granules downloaded&#x27;). These bands are already inside the official competition raster, restored byte-identical this session. No file in evidence/ scores a strain-rate or seismicity surface in any form.</td><td><span class="pill yes">verified local</span><br><span class="small">official competition feature raster, restored from five hash-pinned shards at buffedlizard55-lab/GEMSDOE @ c0c06ac82178f26b94fce3397036ef8f12a2f3a0; assembled SHA-256 4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5, 418,912,844 bytes, matching registry/data_manifest_gemsdoe32.json</span></td><td>unknown but the largest available from data already in hand - the only candidate that could raise the DENSE ceiling above 6,813 rather than re-thinning below it</td><td>low-medium: one ridge-filter module, then the existing greedy coverage emitter and pre-registered budget rule; no new downloads</td><td><span class="pill no">proposed</span></td></tr>
-<tr><td><strong>2</strong></td><td><strong>H55-D</strong><br><span class='small'>3 m lidar scarp TRACES (re-test of H52 with the corrected gate)</span></td><td>data/external/h52_scarp3m_100m.tif bands h_gate12, h_all, sigma_mean, strike_at, cover; upstream USGS 3DEP 1 m DEM, 706 of 716 zone-11 tiles, block-averaged to 3 m then to 100 m in GitHub Actions</td><td>line-persistent step height selected as TRACES not points: gate h_gate12 at or above its 99th percentile INSIDE low sigma_mean (smooth terrain, so a step is not merely roughness), then require persistence along a consistent azimuth over &gt;= 5 consecutive 100 m cells, and emit one dot per ~300 m of trace. H52 emitted the top 2,000 individual detections; a fault is a line and the kernel is isotropic, so trace-level selection is a different estimator.</td><td>a 100 m DEM cannot resolve a 1-3 m Quaternary scarp at all - the relief is inside one pixel&#x27;s noise. Every 100 m layer the family uses (detrended elevation, its slope, magnetic gradients) is blind to exactly the young, alluvium-mantled basin faults that a 1 m / 3 m DEM resolves. That is the population an expert reviewer would add to a catalogue.</td><td>H52 (this repository, 2026-10-07) shipped C + 2,000 point detections and was rejected by two screens this session shows to be unsound: catalogue lift 1.19-2.27x against a &gt;= 2x rule, and &#x27;does not beat H49 on the SGMC proxy&#x27;. The re-test changes both the estimator (traces, not points) and the judge (live-calibrated cross-family recalibration, not catalogue lift).</td><td><span class="pill yes">verified local</span><br><span class="small">already committed: data/external/h52_scarp3m_100m.tif (43.8 MB) with data/external/h52_scarp3m_100m.json recording 697 merged tiles and per-tile SHA-256; upstream USGS 3D Elevation Program, https://www.usgs.gov/3d-elevation-program/about-3dep-products-services</span></td><td>highest ceiling of any candidate here - the ceiling analysis shows #1 at 0.3774 needs more truth than the entire backbone contains, and native-resolution lidar is the only data in hand that can supply it</td><td>medium: the trace-persistence filter is new code; emitter and budget rule are reused</td><td><span class="pill no">proposed</span></td></tr>
-<tr><td><strong>3</strong></td><td><strong>H55-C</strong><br><span class='small'>Buried basement steps and isostatic-gravity gradients</span></td><td>official band 15 (depth to basement surface), band 13 (isostatic gravity anomaly), bands 5/11/18 (its slope and vertical/horizontal gradients), band 17 (conductivity surface), band 6 (see irregularity IR-H55-01)</td><td>lateral second derivative of basement depth, plus horizontal-gradient magnitude and tilt angle of the isostatic gravity field, intersected with a conductivity contrast (fault gouge and hydrothermal alteration are conductive relative to unaltered basement). Basin-range normal faulting produces a sharp basement-depth step; where the range front is buried the topography is flat but gravity and basement depth still record the offset.</td><td>measured blind spot: C&#x27;s dots sit on SHALLOW basement (mean 402 m against 535 m for the moat background, lift 0.75) and on topographic HIGHS (detrended elevation +7.3 against -15.6). The family therefore systematically favours exposed range fronts. Buried basin-margin faults - a basement step with no topographic expression, in the basin fill - are precisely the population it cannot see, and precisely the population that hosts geothermal reservoirs.</td><td>H48-2 proposed &#x27;stratigraphic contact topology plus magnetic/gravity breaks&#x27; and was never implemented (&#x27;payload/coverage not audited&#x27;). No file in evidence/ scores a gravity-gradient, basement-depth or conductivity surface.</td><td><span class="pill yes">verified local</span><br><span class="small">same official competition raster as H55-B; same restore command; same pin 4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5</span></td><td>moderate</td><td>low: data in hand, transforms standard</td><td><span class="pill no">proposed</span></td></tr>
-<tr><td><strong>4</strong></td><td><strong>H55-A</strong><br><span class='small'>Hydrothermal conduit anchors from GDR well and spring temperature and chemistry</span></td><td>data/raw/external/gdr_wellspring_in_footprint.csv - GDR 1391 &#x27;Well and Spring Temperature and Chemistry&#x27;, 27,092 records; columns used: thermalclass, temp_c, geothermquartz_c, geothermchalc_c, geothermcat_c, row, col, layer, name. dist_known_fault_px is DROPPED ON READ (label-derived leakage).</td><td>direct measurement of deep fluid temperature at a point, tiered. Tier 3 = discharge class Hot (median 75.0 C, p90 171.1 C, max 296.5 C) OR any silica/calcite geothermometer &gt;= 150 C (180 records, max 269.1 C). Tier 2 = discharge &gt;= 50 C OR geothermometer &gt;= 100 C. Tier 1 = discharge &gt;= 35 C. Warm (max 38.9 C, effectively ambient) and Cold (&lt;= 20 C) are excluded as non-indicators. No smoothing: a geothermometer is already an integral along the flow path, so the point IS the evidence.</td><td>a hot spring needs a heat source, deep circulation and a permeable upflow path; in the extensional Great Basin that path is a fault. Upflow through an already-mapped, already-eroded range front is not what produces a thermal spring in a basin floor - those appear where a BURIED fault carries hot fluid up through alluvium. Measured: of 12,570 distinct grid cells holding a well or spring, 219 (1.7%) lie inside the h19-5 backbone and 11,651 (92.7%) are &gt; 200 m from the public catalogue.</td><td>H50-GDR used the INGENIOUS 2 m SOIL-temperature probe archive with a repeat-visit residual persistence operator (proxy 0.003923, failed). H52 used lidar topography. H50-B used gamma-ray spectrometry ratios. This uses well/spring DISCHARGE temperature and silica/calcite RESERVOIR geothermometry - a different physical quantity, a different source file, a static tiering operator. No prior GEMSDOE artifact of any session emits on this layer.</td><td><span class="pill yes">verified local</span><br><span class="small">Geothermal Data Registry submission 1391, INGENIOUS Great Basin Regional Dataset Compilation. DOI 10.15121/1881483. https://gdr.openei.org/submissions/1391 . Data.gov metadata https://catalog.data.gov/dataset/ingenious-great-basin-regional-dataset-compilation reports CC BY 4.0; the GDR asset-level attribution/reuse terms were NOT independently verified and are flagged rather than assumed.</span></td><td>652 anchors shipped; scenario band +0.0019 to +0.0102 live-equivalent as per-anchor credit rises from break-even (0.0556) to 0.30; worst case -0.0019, and A2&#x27;s in-family gain of +0.0019 pre-pays it (net -0.00003)</td><td>low - implemented, tested and shipped this session</td><td><span class="pill yes">shipped</span></td></tr>
-<tr><td><strong>5</strong></td><td><strong>H55-E</strong><br><span class='small'>Three-source Dempster-Shafer conjunction: Quaternary trace x conduit x strain</span></td><td>data/raw/external/gdr_qfaults_traces.csv (1,125 INGENIOUS Quaternary fault trace centroids WITH attributes slip_rate, recency, dip_direct, slip_sense, map_scale, full_length_m, clipped_length_m) x H55-A conduit tier x H55-B strain-rate ridge</td><td>CONJUNCTION not union. Extend the frame to three independent sources and admit a dot only where at least two of {a Quaternary trace with a recorded slip rate, a tier &gt;= 2 hydrothermal conduit, a strain-rate localisation ridge} agree within 300 m. slip_rate and recency are used as RELIABILITY WEIGHTS in Dempster&#x27;s discounting (a trace with slip_rate &gt; 0.2 mm/yr and recency &lt; 1,600,000 yr gets a higher alpha than an unspecified one) - the first use of the attribute columns rather than the geometry alone.</td><td>the INGENIOUS Quaternary traces are not the competition catalogue: measured catalogue coverage per pixel 0.3696, the highest of any layer tested, yet only 1.3% of the centroids fall inside the h19-5 backbone. The dropped-catalogue-lift screen says high catalogue coverage is not a reason to trust a layer on its own; the CONJUNCTION is the point. A trace with a measured slip rate AND hot fluid at the surface AND localised active strain is a fault an expert reviewer would add, and each pair alone is much weaker.</td><td>gemsdoe29-xfit-h41-union-qfaults was a plain UNION and was never live-scored. No prior artifact in any GEMSDOE session used the slip_rate / recency / slip_sense attributes, and none combined THREE sources under Dempster&#x27;s rule - every fusion in this repository has combined exactly two.</td><td><span class="pill yes">verified local</span><br><span class="small">all three inputs already local and hash-pinned: gdr_qfaults_traces.csv SHA-256 9702f2e5c382a4f472ae834d22b94990983b059677a37adfafd51c50f75e643c, plus the conduit CSV and the official raster</span></td><td>small mass (~100-400 dots), so small in both directions: worst case about -0.001, upside about +0.003 if the conjunction is real</td><td>low. Best used as a rider on H55-A once A&#x27;s live score is known, because A&#x27;s returned score is what tells us whether conduit evidence carries credit at all.</td><td><span class="pill no">proposed</span></td></tr>
-</tbody></table>
-
-<h2>Rejected before ranking, with reasons</h2>
-<table><thead><tr>
-<th>idea</th>
-<th>why rejected</th>
-</tr></thead><tbody>
-<tr><td>Coverage-optimal re-emission of the backbone (greedy max-coverage from scratch)</td><td>Already measured. The frontier maximum is n = 37,167 at model DTI 0.27932, live-equivalent 0.28435. That is the entire in-family prize: +0.00655, only 1.3x the instrument&#x27;s +/-0.0049 resolution. It also requires REMOVING C dots, forfeiting the only live-verified T in the repository. Not worth a slot on its own.</td></tr>
-<tr><td>Density-weighted or corroboration-weighted coverage</td><td>Already measured, negative, and now reproducible via scripts/compare_coverage_weightings.py -&gt; evidence/coverage_weighting_comparison_20261007.json. Nine target weightings fitted against the eight live scores: uniform RMS 1.758%; far_from_catalogue 1.659% and lidar3m roughness corroboration 1.686% (both within 0.1 percentage points, i.e. noise on eight points, and both specified post hoc); radiometric ratio corroboration 1.796%; log1p density 2.127%; sqrt density 2.305%; density 2.501-2.634%. A corridor pixel is not more likely to sit near hidden truth because it has more corridor neighbours.</td></tr>
-<tr><td>Any re-weighting or fusion of the dotted and tip families (Dempster, Yager, plausibility budget, graded belief, arithmetic mean, alpha=0.99 normalisation)</td><td>Proven impossible to help. Cov(C union h33d) = 79,153.0 at S = 47,905, priced at 0.25879 model / 0.26382 live-equivalent, i.e. -0.01398 against C. The two parents&#x27; T differ by 1% (5,209.5 vs 5,157.4) and their Cov by 0.3%, so no combination rule can produce more coverage than the union, and the union&#x27;s coverage does not pay for its mass. The metric is binary-optimal, so a re-weighting cannot beat its own binarisation.</td></tr>
-<tr><td>Pruning C&#x27;s 200-300 m catalogue-flank band (rung D, 2,171 dots)</td><td>The live ladder proves the 0-200 m band earns about zero credit but says NOTHING about 200-300 m, and 2,171 of C&#x27;s dots sit there. Removal is irreversible against a Phase-2 truth the organizers expand by expert review of ALL Phase-1 submissions. H55 is additive-only for exactly this reason. Left as an owner decision, not a recommendation.</td></tr>
-<tr><td>INGENIOUS 2 m soil-temperature probes</td><td>H50-GDR already ran a repeat-persistence operator on them: proxy 0.003923, 0/4 folds. A different operator is conceivable but the layer is shallow-soil, not deep-fluid, and H55-A&#x27;s well/spring chemistry is the stronger version of the same idea.</td></tr>
-<tr><td>OPERA InSAR DISP-S1 displacement gradients</td><td>Earthdata Login required; no granules downloadable from this sandbox. Superseded by H55-B, which uses geodetic strain-rate bands already inside the official raster with no login.</td></tr>
-<tr><td>USGS Mineral Resources Data System</td><td>Excluded upstream: updates ceased in 2011.</td></tr>
-</tbody></table>
-
-<p class="small">Full prose version with every measured number and its source:
-<a href="research/hypothesis-slate-h55-20261007.md"><code>docs/research/hypothesis-slate-h55-20261007.md</code></a>.
-Machine-readable twin:
-<a href="../evidence/hypothesis_slate_h55_20261007.json"><code>evidence/hypothesis_slate_h55_20261007.json</code></a>.
-Prior slates are preserved at
-<a href="research/hypotheses-h52-20261007.md">H52</a>,
-<a href="research/hypotheses-20261007.md">H50</a> and
-<a href="archive-main-pages/hypotheses-main-20261006.html">H48/H49</a>.</p>
+<h2>Prior H55 slate — archived; score-model interpretations withdrawn</h2>
+<div class="bad"><strong>Do not use its old ranking, score forecasts, or promotion claims.</strong> The H55 slate's hidden-truth totals, 0.2843 ceiling, “new signal required” conclusion, per-pixel credit bars, and H55-A scenario band were derived with <code>FPw=S−TPw</code>, which is generally false under the official metric. They are not private-label estimates or bounds. The source files, build receipts, and original slate remain preserved for audit only.</div>
+<p>The current unbuilt research slate is H57-A through H57-E above. Each candidate's inputs, physical signature, off-catalogue rationale, prior-art distinction, expected DTI impact, cost, and source availability are detailed in the <a href="research/h57-hypothesis-slate-20261007.md">H57 slate</a> and <a href="../evidence/hypothesis_slate_h57_20261007.json">machine-readable record</a>. H56/H55 reports remain historical and do not clear a weekly slot. See the <a href="research/metric-identity-erratum-20261007.md">metric-identity erratum</a> and <a href="irregularities.html">irregularities register</a>.</p>
+<p class="small">Historical source records: <a href="research/hypothesis-slate-h55-20261007.md">H55 slate</a> · <a href="../evidence/hypothesis_slate_h55_20261007.json">H55 machine record</a> · <a href="research/hypotheses-h56-20261007.md">H56 slate</a> · <a href="../evidence/hypothesis_slate_h56_20261007.json">H56 machine record</a> · <a href="research/hypotheses-h52-20261007.md">H52 slate</a> · <a href="research/hypotheses-20261007.md">H50 slate</a>.</p>
 </section>
 
 </main>
 <footer class="wrap">
 <p><strong>GEMSDOE48</strong> — auditable fault-surface research for DrivenData competition 306
 (DOE GEMS Prize). H55 pages built by <code>scripts/build_site_h55.py</code> from the receipts in
-<code>evidence/</code>; H56 session content added 2026-10-07 directly from
-<code>evidence/build_h56_belief_receipt_20261007.json</code> (this session) and the concurrent open-world receipts under <code>evidence/</code>.</p>
+<code>evidence/</code>; H56 session content added 2026-10-07 from the predecessor H56 receipt <code>evidence/build_h56_belief_receipt_20261007.json</code>, final with-flank H56B receipt <code>evidence/build_h56b_belief_receipt_20261007.json</code>, and later no-flank ablation receipt <code>evidence/build_h56b_noflank_receipt_20261007.json</code>.</p>
 <p class="small"><strong>No organizer score exists for any file in this repository.</strong>
 Every live number is OWNER-REPORT class: a score pasted by the repository owner, not an
 organizer receipt. Proxy numbers are computed against public map layers, not the private

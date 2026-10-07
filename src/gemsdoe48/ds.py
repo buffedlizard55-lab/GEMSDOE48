@@ -1,18 +1,14 @@
-"""Dempster-Shafer evidence combination of two independent detector families.
+"""Dempster-Shafer evidence combination for two detector-family surfaces.
 
-Why Dempster-Shafer here
-------------------------
-The two detector families in this project were built independently
-(spacing-tuned "dotted" emission; tip / step-over emission) and they agree on
-69.6 % of their pixels and disagree on ~14,700 pixels (measured, see
-evidence/family_agreement.json).  A weighted average of the two *surfaces* would
-move mass into exactly those 14,700 pixels, i.e. it would turn the one piece of
-information the two families carry -- **where they disagree** -- into a single
-blended number.  Dempster-Shafer instead keeps the two bodies of evidence
-separate and combines them through Dempster's rule of combination (Dempster,
-1967; Shafer, *A Mathematical Theory of Evidence*, 1976, ch. 3), which
-renormalises only the *conflicting* mass and leaves an explicit mass of
-unassigned belief, `m(Theta)`, on the frame itself.
+This is a mathematical combination rule, not evidence that the source layers
+are statistically independent or that the resulting map is better. The dotted
+and tip/step-over parents share substantial positive-cell overlap (measured in
+evidence/family_agreement.json); source independence is not established.
+Dempster's normalized rule (Dempster 1967; Shafer 1976) divides out raw
+conflict K. The resulting m(Theta) is residual uncommitted/ignorance mass under
+the chosen basic probability assignments, not a direct disagreement map. K is
+a separate pre-normalization diagnostic; abs(s1-s2) is another, non-mass
+support-difference diagnostic.
 
 Frame and mass functions
 ------------------------
@@ -24,48 +20,45 @@ Prospectivity Mapping in GIS*, ch. 4; Tangestani & Moore 2001).
 Each family i supplies a **belief surface** `b_i(x) in [0, 1]` built natively in
 the metric's own geometry (see `families.kernel_credit_surface`): `b_i(x)` is the
 credit the family's own committed pixels would earn if a truth pixel sat exactly
-at x, i.e. `max over family pixels y of k(d(x, y))`.  With a per-source
-reliability (discount) `a_i in (0, 1]` the mass function is the classic
-two-sided simple support function
+at x, i.e. `max over family pixels y of k(d(x, y))`. For this generic helper, a
+per-source discount parameter `a_i in (0, 1]` yields a two-sided simple support
+function. A caller must justify or calibrate `a_i`; the parameter is not
+empirical reliability merely because it is named a discount.
 
     m_i({F})    = a_i * b_i(x)
     m_i({notF}) = a_i * (1 - b_i(x))
     m_i(Theta)  = 1 - a_i
 
-which is well formed: the three masses sum to 1 for every x.  `a_i` is the
-discounting operator of Shafer (1976) section 11.2: it encodes "source i is
-reliable to degree a_i".
+The three masses sum to 1 for every x. `m(Theta)` is the source's uncommitted
+mass induced by this assignment; it is not a measure of disagreement between
+sources and does not by itself establish calibrated uncertainty.
 
 Dempster's rule and the two diagnostic layers
 ---------------------------------------------
     K(x)      = m_1({F}) m_2({notF}) + m_1({notF}) m_2({F})
     m_12(A)   = [ sum over A1 cap A2 = A of m_1(A1) m_2(A2) ] / (1 - K(x))
 
-`K` is Shafer's **conflict**.  Two consequences matter and both are reported:
+`K` is the pre-normalization conflict. Dempster's normalized rule divides the
+non-empty combined masses by `1-K`; it does not retain K as a mass in the
+result. Consequently:
 
-  1. `m_12(Theta) = m_1(Theta) m_2(Theta) / (1 - K)` is the residual
-     **unassigned belief**.  It is 0.16 at zero conflict and rises to 0.25 at
-     K = 0.36 with a = 0.6 (worked numbers in tests/test_ds.py): dropping the
-     two families' opinion of F and of notF in equal measure.  It is therefore a
-     genuine "the two approaches do not agree here" layer, and it is shipped as
-     its own raster.
-  2. `K` itself is the *unnormalised* disagreement.  Under Smets' Transferable
-     Belief Model (Smets & Kennes 1994) Dempster's normalisation is dropped and
-     `K` is kept explicitly as the mass on the empty set; Sentz & Ferson (2002,
-     Sandia SAND2002-0835) show that the normalisation is exactly where Zadeh's
-     (1984) paradox comes from.  We therefore ship BOTH layers: `m_12(Theta)`
-     (post-normalisation unassigned belief) and `K` (pre-normalisation
-     conflict), and we say in the documentation which is which.
+  1. `m_12(Theta) = m_1(Theta) m_2(Theta) / (1-K)` is residual uncommitted mass
+     under the selected assignments. The worked values (0.16 at K=0 and 0.25
+     at K=0.36 for a=0.6) demonstrate the formula, not a direct disagreement
+     interpretation or a calibrated uncertainty interval.
+  2. `K` is exported separately when needed as the pre-normalization conflict.
+     It is not a probability of contradiction. A raw support comparison such
+     as `abs(s1-s2)` is a different diagnostic and is not a D-S mass.
 
-`Bel(F) = m_12({F})` and `Pl(F) = m_12({F}) + m_12(Theta)`; the belief interval
-`[Bel, Pl]` is the honest uncertainty of the combination.
+`Bel(F) = m_12({F})` and `Pl(F) = m_12({F}) + m_12(Theta)` are outputs
+conditional on the chosen frame, assignments, discount values, and combination
+rule; they are not automatically calibrated probabilities or coverage bounds.
 
 Sensitivity / combination algebra
 ---------------------------------
-`tests/test_ds.py` verifies: masses sum to 1; commutativity (`m_12 = m_21`);
-associativity across three sources; `K = 0` and `a_i = 1` reduces exactly to
-Bayesian normalisation of `b_1 b_2`; the `(b_1, b_2) = (1, 0)` worked example;
-and monotonicity of `m_12(Theta)` in K.
+`tests/test_ds.py` verifies mass-sum invariants, commutativity, associativity,
+closed-form examples, the distinction from an arithmetic mean, input validation,
+and that total conflict raises because the normalized rule is undefined there.
 """
 
 from __future__ import annotations
@@ -98,10 +91,14 @@ class DSResult:
 
 
 def mass_function(belief_surface: np.ndarray, reliability: float) -> np.ndarray:
-    """Return the (3, H, W) mass function of a two-sided simple support function."""
-    if not (0.0 < reliability <= 1.0):
-        raise ValueError("reliability must be in (0, 1]")
-    b = np.clip(np.asarray(belief_surface, dtype=np.float64), 0.0, 1.0)
+    """Return a validated (3, ...) simple-support mass function."""
+    if not np.isfinite(reliability) or not (0.0 < reliability <= 1.0):
+        raise ValueError("discount parameter must be finite and in (0, 1]")
+    b = np.asarray(belief_surface, dtype=np.float64)
+    if not np.isfinite(b).all():
+        raise ValueError("belief surface must contain only finite values")
+    if np.any((b < 0.0) | (b > 1.0)):
+        raise ValueError("belief surface values must be in [0, 1]")
     m = np.empty((3,) + b.shape, dtype=np.float64)
     m[NF] = reliability * b
     m[NN] = reliability * (1.0 - b)
@@ -110,25 +107,38 @@ def mass_function(belief_surface: np.ndarray, reliability: float) -> np.ndarray:
 
 
 def combine_two(m1: np.ndarray, m2: np.ndarray, *, eps: float = 1e-12) -> DSResult:
-    """Dempster's rule of combination for two mass functions on {F, notF, Theta}.
+    """Apply Dempster's normalized rule; reject invalid masses and total conflict.
 
-    Exact and vectorised.  Only the four intersections that yield a non-empty
-    set are summed; the four that yield the empty set (m1({F})m2({notF}) and
-    m1({notF})m2({F}), doubled) form the conflict K.
+    `conflict` in the result is raw K before normalization. Dempster's rule
+    divides it out, so it is not retained in m(Theta). A denominator at or
+    below `eps` is rejected rather than replaced by an invented fallback.
     """
-    if m1.shape[0] != 3 or m2.shape[0] != 3:
+    m1 = np.asarray(m1, dtype=np.float64)
+    m2 = np.asarray(m2, dtype=np.float64)
+    if m1.ndim < 1 or m2.ndim < 1 or m1.shape[0] != 3 or m2.shape[0] != 3:
         raise ValueError("mass functions must have shape (3, ...)")
+    if m1.shape != m2.shape:
+        raise ValueError("mass functions must have identical shapes")
+    if not np.isfinite(eps) or eps <= 0.0:
+        raise ValueError("eps must be finite and positive")
+    for masses in (m1, m2):
+        if not np.isfinite(masses).all():
+            raise ValueError("mass functions must be finite")
+        if np.any((masses < 0.0) | (masses > 1.0)):
+            raise ValueError("each mass must be in [0, 1]")
+        if np.any(np.abs(masses.sum(axis=0) - 1.0) > 1e-10):
+            raise ValueError("mass functions must sum to one at every cell")
 
     conflict = m1[NF] * m2[NN] + m1[NN] * m2[NF]
     norm = 1.0 - conflict
-    if np.any(norm <= 0.0):
-        # Dempster's rule is undefined for total conflict; fall back to the
-        # vacuous mass on exactly those pixels and record it.
-        norm = np.where(norm <= 0.0, eps, norm)
+    if not np.isfinite(norm).all() or np.any(norm <= eps):
+        raise ValueError("Dempster normalization is undefined at total/numerical conflict")
 
     m_F = (m1[NF] * m2[NF] + m1[NF] * m2[NT] + m1[NT] * m2[NF]) / norm
     m_notF = (m1[NN] * m2[NN] + m1[NN] * m2[NT] + m1[NT] * m2[NN]) / norm
     m_theta = (m1[NT] * m2[NT]) / norm
+    if np.any(np.abs(m_F + m_notF + m_theta - 1.0) > 1e-10):
+        raise ArithmeticError("combined mass function failed its unit-sum invariant")
     return DSResult(
         m_F=m_F,
         m_notF=m_notF,

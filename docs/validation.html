@@ -106,37 +106,29 @@ Treat the 0.2843 "ceiling" and H56's 0.0649 as <em>historical surrogate outputs<
 not verified private-label results or portal acceptance.
 <a href="research/metric-identity-erratum-20261007.md">Read the derivation and executable counterexample</a>.</div>
 <div class="bad" role="alert"><strong>Research correction — no upload cleared.</strong>
-The H55 0.2843 “ceiling” and inverted truth totals rely on <code>FPw = S − TPw</code>,
-which is false in general under the official metric. They are historical model outputs,
-not private-label bounds or evidence that a new file will beat 0.2778.
-H55 fails the mass-neutral gate. Local TIFF checks are not organizer acceptance.
-<a href="research/metric-identity-erratum-20261007.md">Read the derivation and next validation steps</a>.</div>
+The H55 0.2843 “ceiling,” inverted truth totals, and live-equivalent scenarios rely on <code>FPw = S − TPw</code>, which is generally false under the official metric. They are retracted as private-label bounds or evidence that a new file will beat 0.2778. The historical GATE-2 receipt is preserved, but its threshold translation is exploratory rather than a validated promotion gate. Local TIFF checks are not organizer acceptance. <a href="research/metric-identity-erratum-20261007.md">Read the derivation and next validation steps</a>.</div>
 
 <header style="background:none;padding:0">
 <p class="eyebrow" style="color:var(--muted)">H56 validation · four fixed spatial blocks · two public proxies</p>
 <h1>H56 files fail the same-protocol H49 gate; no slot is cleared</h1>
 </header>
 
-<h2>H56B validation (this session, 2026-10-07) — graded belief: format PASS, holdout FAIL, live-model FAIL</h2>
+<h2>H56B-NF validation — format/recomputation PASS; blocked holdout FAIL; no slot</h2>
 <section class="card" style="border-width:2px">
-<p>The H56B submission (normalized Dempster belief, dotted-C × tip-H33-D) went through the full battery:</p>
+<p>Current research artifact: <code>GEMSDOE48-H56B-NF-DS-dotted-x-tip-20261007-5bb2c03c981e-nan-outside.tif</code>, SHA-256 <code>b9530b70065da1f5e9da82caf4f5aaba3d7175dbbbfb2851e4b2ab2dd13aa4f1</code>. It fuses dotted B2 and actual H33-D tip/step-over kernel supports with the earlier dotted-only catalogue-flank absence term removed. It is a post-hoc mass-assignment ablation, not a new geological detector or preregistered candidate.</p>
 <ul class="small">
-<li><strong>Format audit — PASS (10/10)</strong> <code>evidence/h56_format_audit_20261007.json</code>: CRS EPSG:32611, transform, shape 3,730 × 3,292, single band float32, all 12,279,160 cells finite, values in [0,1], max = 1, nodata unset, zeros outside footprint — immune to the portal's “Predicted values must be in range [0,1]” rejection.</li>
-<li><strong>Uniqueness — PASS</strong> <code>evidence/h56_uniqueness_20261007.json</code>: SHA-256 <code>4d6548d4ec07a47a25b83d28ebc05d58b57448c1507b460aed52cec395bdb6b5</code> distinct from all 67 prior downloads and every registry mirror pin; support Jaccard vs the union 0.0605 (it is the kernel halo, not a dot set); nearest prior neighbour r = 0.9907 (the H48-1 diagnostic belief field — a diagnostic, never submitted), with affine-residual structure distinct from any naive mean (see below).</li>
-<li><strong>Not the naive mean</strong> <code>evidence/build_h56_belief_receipt_20261007.json</code>: Pearson r = 0.389 against the binary mean ½(1<sub>dot</sub>+1<sub>tip</sub>) (MAE 0.0699, max |Δ| 0.823, affine-fit mean |residual| 0.120); against the normalized kernel mean r = 0.987 but the best affine fit leaves mean |residual| 0.0111 and 12.46 % of the footprint differs by &gt; 0.05 — not an affine rescaling of either average.</li>
-<li><strong>Blocked holdout — FAIL</strong> <code>evidence/holdout_h56_spatial_20261007.json</code> (H55 protocol, 4 quadrants, 300 m halo, official DTI): catalogue truth means — H56 0.0321 vs dotted 0.0070 (wins) but tip 0.0897 (loses); SGMC-off truth — H56 0.0735 vs dotted 0.0970 and tip 0.0970 (loses both). Gate requires beating both parents ≥ 3/4 folds on both truths: not met.</li>
-<li><strong>Live-model projection — FAIL</strong> <code>evidence/h56_live_model_projection_20261007.json</code>: H56 projects at <strong>0.0649</strong> (mass Σ Bel = 399,799 pays 0.2-weight FP over the whole kernel halo); sanity: the same instrument reconstructs dotted-C at 0.2728 (calibration 0.27277) and the union at 0.2588 (the H55 session's −0.0140 pricing, reproduced exactly). Even threshold-binarizing the belief at the pignistic 0.5 only reaches 0.0854 — every DS recombination of these two families is now closed by measurement.</li>
-<li><strong>Verdict banner</strong>: G1 PASS, G2 FAIL, G3 FAIL → “DOWNLOAD OK — SUBMIT NOT RECOMMENDED”, computed after the numbers existed, never before.</li>
+<li><strong>Artifact verification — PASS locally; organizer acceptance untested.</strong> <code>evidence/audit_h56b_noflank_artifact_20261007.json</code> verifies float32, EPSG:32611, 100 m, 3,292 × 3,730, finite-footprint values in [0,1], NaN outside, and independent recomputation. <code>evidence/h56b_noflank_format_validation_20261007.json</code> records <code>portal_range_error_immune=false</code>: a validator that range-checks every cell may reject the outside NaNs. These checks are not portal acceptance.</li>
+<li><strong>Local uniqueness scope.</strong> No exact byte or in-footprint pixel match was found among 105 same-grid one-band rasters searched in <code>data/</code> and <code>docs/downloads/</code>. This is not global or organizer-side uniqueness; identical positive support is shared with prior D-S maps. The earlier with-flank H56B file was within 1.8e-7 of the prior H56 raster and is a precision/encoding rebuild, not a meaningful new candidate. H56B-NF remains an ablation, not a new geological signal.</li>
+<li><strong>Not the arithmetic mean.</strong> <code>evidence/build_h56b_noflank_receipt_20261007.json</code>: r=0.392708 vs binary mean; r=0.992499 vs normalized kernel mean; MAE=0.018375, max |Δ|=0.417241, 12.58% differs by &gt;0.05. The high correlation is disclosed; non-identity is not evidence of improvement.</li>
+<li><strong>D-S meanings.</strong> <code>m(Θ)</code> is normalized residual uncommitted/ignorance mass, not direct disagreement. <code>K</code> is pre-normalization conflict divided out by Dempster normalization and exported separately. <code>|s_dot−s_tip|</code> is a separate support-difference diagnostic, not a D-S mass. Source independence and probability calibration are not established.</li>
+<li><strong>Matched four-fold holdout — FAIL.</strong> Higher DTI is better. Catalogue proxy: H56B-NF 0.056305 vs H49 0.095353 (Δ −0.039048; 0/4 folds win). SGMC &gt;300 m off-catalogue proxy: 0.068987 vs 0.100751 (Δ −0.031764; 0/4). Both are public-map proxies; source fields were not reconstructed independently inside folds. Receipt: <code>evidence/holdout_h56b_noflank_vs_h49_currentprotocol_20261007.json</code>.</li>
+<li><strong>Score context is not a projection.</strong> The reported 0.2778 may plausibly benefit from 300 m tapered credit and catalogue pruning; no organizer receipt links the exact local B2 bytes to that row, and this is not an identified cause. The former 0.0649 projection is invalid. No score above 0.2778 or the 0.3195 rank-7 observation is supportable for H56B-NF.</li>
+<li><strong>Verdict:</strong> OK to download for inspection; submit NOT recommended; no weekly slot cleared.</li>
 </ul>
-<p class="small"><strong>Research battery (new-hypothesis validation before touching a slot)</strong>
-<code>evidence/h56_research_battery_20261007.json</code>: all-19-band screen; the previous session's
-Priority-3 candidate (strain-rate ridges) implemented and measured at projection 0.0152 (dead);
-new DEMGLOW candidate measured at 0.0028 vs random control 0.0023 (dead). Full ranking:
-<a href="research/hypotheses-h56-20261007.md"><code>docs/research/hypotheses-h56-20261007.md</code></a>.</p>
+<p class="small">Chronology correction: the 15:17/15:20Z receipts are an earlier H56 predecessor, not final H56B. The H56B-specific 16:00Z slate is later than that predecessor run but before final H56B at 17:37/17:38Z; it contains measurements and a different recipe, so it is not a verified preregistration of final H56B. H56B-NF was built post hoc. See <a href="research/h56b-review-erratum-20261007.md">review/chronology erratum</a>, <a href="../evidence/h56b_review_corrections_20261007.json">correction record</a>, and the <a href="research/h57-hypothesis-slate-20261007.md">five-hypothesis H57 slate</a>.</p>
 </section>
 
-
-<h2>Current H56 results and output audits</h2>
+<h2>Historical H56 open-world results and output audits (distinct recipe/file)</h2>
 <div class="bad"><strong>NO SLOT CLEARED.</strong> H56-DS and H56-A fail to beat same-protocol H49 on both public proxy targets, with 0/4 folds positive. The local format and diagnostic audits are not organizer acceptance.</div>
 <table><thead><tr><th>candidate</th><th>catalogue mean</th><th>delta vs H49</th><th>positive folds</th><th>SGMC-off mean</th><th>delta vs H49</th><th>positive folds</th></tr></thead><tbody>
 <tr><td>H49 reference</td><td>0.095353</td><td>—</td><td>—</td><td>0.100751</td><td>—</td><td>—</td></tr>
@@ -147,187 +139,10 @@ new DEMGLOW candidate measured at 0.0028 vs random control 0.0023 (dead). Full r
 <p><strong>H56-DS local file audit:</strong> one-band float32, EPSG:32611, 100 m, 3,730 × 3,292; all values finite and in [0,1]; zeros outside; local validator and all five diagnostic checks pass. The 85-raster local uniqueness audit finds no hash/pixel duplicate. H53 nevertheless has the same two-family D-S concept as a diagnostic; H56 is a new open-world parameterization, not a new geological signal. It differs numerically from the arithmetic mean (Pearson 0.99668, MAE 0.01126), but top-37,654 rank Jaccard is 1.0.</p>
 <p>Receipts: <a href="../evidence/h56_decision_20261007.json">consolidated decision</a> · <a href="../evidence/h56_submission_validation_20261007.json">format</a> · <a href="../evidence/h56_diagnostics_validation_20261007.json">diagnostics</a> · <a href="../evidence/h56_uniqueness_audit_20261007.json">uniqueness/prior art</a> · <a href="research/h56-results-20261007.md">full report</a>.</p>
 
-<h2>Historical H55 mass-neutral gate — prior artifact failed</h2>
-<div class="bad"><strong>This candidate FAILS the repository's newest gate, and that is
-reported before anything favourable.</strong> A concurrent session merged
-<code>scripts/audit_candidate.py</code> (protocol <code>GEMSDOE48-GATE-2</code>, mass-neutral) while
-this one was running. Verdict <code>FAIL_MASS_NEUTRAL</code>: equal_mass_credit_density_below_incumbent (-0.00201); added_cells_below_live_break_even_bar (density-matched 0.0102 &lt; 0.0556 per cell).
-Equal-mass credit density -0.002014 against the incumbent; added-cell credit
-<strong>0.0102</strong> density-matched against the metric's own
-break-even bar of 0.0556 — 0.18× the bar. If that figure transferred
-to the live metric the score would be <strong>0.2736, −0.0042 against
-0.2778</strong>. Receipt:
-<a href="../evidence/audit_gate2_h55_20261007.json"><code>evidence/audit_gate2_h55_20261007.json</code></a>.
-<br><br>Three things are true about that test and none of them excuse the fail: it rests on the same
-SGMC proxy that an emission built directly on it scored 0.0512 live against the family's 0.26; its
-additions test returns 0.0049–0.0125 per cell for <em>every</em> candidate ever measured, including
-a graded belief field and 222,693 hedge-v2 cells, so it barely discriminates between inputs; and its
-equal-mass test uniformly subsamples a strict superset of C, which must score below C on any proxy
-where C's dots are worth more than the additions. Full reconciliation, including where the two
-instruments <em>agree</em>: §6.4 of the report.</div>
-<table><thead><tr>
-<th>GATE-2 quantity</th>
-<th>value</th>
-</tr></thead><tbody>
-<tr><td>verdict</td><td><code>FAIL_MASS_NEUTRAL</code></td></tr>
-<tr><td>proxy mean4 at own mass — incumbent</td><td>0.095607</td></tr>
-<tr><td>proxy mean4 at own mass — candidate</td><td>0.096406</td></tr>
-<tr><td>equal-mass mean4 (3 seeds)</td><td>0.093593</td></tr>
-<tr><td>equal-mass Δ vs incumbent</td><td><span class='neg'>-0.002014</span></td></tr>
-<tr><td>added cells</td><td>1,776</td></tr>
-<tr><td>marginal credit/cell, raw proxy (bar 0.0191)</td><td>0.045030 — passes</td></tr>
-<tr><td>marginal credit/cell, density-matched (bar 0.0556)</td><td><span class='neg'>0.010245 — FAILS</span></td></tr>
-<tr><td>density-matched seeds</td><td>0.0128, 0.0116, 0.0086, 0.0100, 0.0083</td></tr>
-</tbody></table>
-
-<h2>Blocked spatial holdout</h2>
-<p>Four fixed quadrants (NW/NE/SW/SE), truth restricted to the quadrant core with a 300 m scoring
-halo, official DTI parameters, <code>scripts/run_spatial_holdout.py</code> unmodified. Both truth
-sources are public map proxies, not the private expert labels.</p>
-<table><thead><tr>
-<th>surface</th>
-<th>NW</th>
-<th>NE</th>
-<th>SW</th>
-<th>SE</th>
-<th>catalogue mean</th>
-<th>SGMC-off mean</th>
-</tr></thead><tbody>
-<tr><td>dotted parent (C, live 0.2778)</td><td>0.006140</td><td>0.008567</td><td>0.007524</td><td>0.005091</td><td><strong>0.006831</strong></td><td>0.095491</td></tr>
-<tr><td>tip/step-over parent (live 0.2632)</td><td>0.082720</td><td>0.102030</td><td>0.089601</td><td>0.072930</td><td><strong>0.086820</strong></td><td>0.095491</td></tr>
-<tr><td>arithmetic mean of the two</td><td>0.044000</td><td>0.054671</td><td>0.048245</td><td>0.038710</td><td><strong>0.046406</strong></td><td>0.088755</td></tr>
-<tr><td>prior α = 0.99 belief</td><td>0.043810</td><td>0.054436</td><td>0.048042</td><td>0.038542</td><td><strong>0.046207</strong></td><td>0.088715</td></tr>
-<tr><td>prior union decision (47,905 px)</td><td>0.081477</td><td>0.100459</td><td>0.088280</td><td>0.071937</td><td><strong>0.085538</strong></td><td>0.096992</td></tr>
-<tr class="hl"><td><strong>H55 (this candidate)</strong></td><td>0.007110</td><td>0.010152</td><td>0.008517</td><td>0.005668</td><td><strong>0.007862</strong></td><td>0.096286</td></tr>
-</tbody></table>
-
-<h3>Paired gates</h3>
-<table><thead><tr>
-<th>comparison</th>
-<th>mean Δ DTI</th>
-<th>folds positive</th>
-<th>numeric gate</th>
-</tr></thead><tbody>
-<tr><td>vs dotted parent (catalogue proxy)</td><td>+0.001031</td><td>4/4</td><td><span class="pill yes">pass</span></td></tr>
-<tr><td>vs tip parent (catalogue proxy)</td><td>-0.078959</td><td>0/4</td><td><span class="pill no">fail</span></td></tr>
-<tr><td>vs arithmetic mean (catalogue proxy)</td><td>-0.038545</td><td>0/4</td><td><span class="pill no">fail</span></td></tr>
-<tr><td>vs alpha = 0.99 belief (catalogue proxy)</td><td>-0.038346</td><td>0/4</td><td><span class="pill no">fail</span></td></tr>
-<tr><td>vs prior union decision (catalogue proxy)</td><td>-0.077677</td><td>0/4</td><td><span class="pill no">fail</span></td></tr>
-<tr><td>vs dotted parent (SGMC-off proxy)</td><td>+0.000795</td><td>4/4</td><td><span class="pill yes">pass</span></td></tr>
-<tr><td>vs tip parent (SGMC-off proxy)</td><td>+0.000795</td><td>4/4</td><td><span class="pill yes">pass</span></td></tr>
-<tr><td>vs arithmetic mean (SGMC-off)</td><td>+0.007532</td><td>4/4</td><td><span class="pill yes">pass</span></td></tr>
-<tr><td>vs alpha = 0.99 belief (SGMC-off)</td><td>+0.007572</td><td>4/4</td><td><span class="pill yes">pass</span></td></tr>
-<tr><td>vs prior union decision (SGMC-off)</td><td>-0.000705</td><td>1/4</td><td><span class="pill no">fail</span></td></tr>
-</tbody></table>
-
-<div class="warn"><strong>Read the catalogue-proxy column carefully.</strong> H55 loses badly to the
-tip parent, the mean and the union on that proxy — and that is structural, not a defect. Those
-surfaces emit <em>on</em> catalogue-adjacent corridors, and the catalogue proxy's truth is the
-catalogue. C is built by deleting everything within 200 m of the catalogue, so it scores 0.0068 on
-a proxy whose truth is the catalogue while scoring 0.2778 live. H55 inherits that. The meaningful
-rows are the two against its own parents.</div>
-
-<div class="good"><strong>H55 is the first candidate in this repository to beat both parents in all
-four folds on the SGMC-off proxy</strong> (+0.000795 against each, 4/4), and to beat its dotted
-parent on both proxies in all four folds. H48, H49, H50, H50-B, H51 and H52 each lost to at least
-one parent.</div>
-
-<div class="bad"><strong>And the same proxy ranks the naive union above H55</strong> (0.096992 vs
-0.096286), while the live-calibrated model prices that union at 0.2638
-live-equivalent — -0.0140 against C, whose ingredients scored 0.2778 and
-0.2632 live. Both cannot be right. An emission built directly on this proxy scored 0.0512 live.
-That is which one to distrust.</div>
-
-<p><code>slot_decision.cleared</code> is <strong>false</strong>:
-h55_conduit_conflict_priced is evaluated only against public-map proxy targets with frozen upstream surfaces; even a numeric proxy pass is not private-label evidence or a slot clearance and must also pass format, live-evidence, and review gates.</p>
-
-<h2>Format audit — PASS_LOCAL_FORMAT_AUDIT_NOT_ORGANIZER_ACCEPTANCE</h2>
-<table><thead><tr>
-<th>property</th>
-<th>value</th>
-</tr></thead><tbody>
-<tr><td>file</td><td><code>docs/downloads/GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353-zeros-outside.tif</code></td></tr>
-<tr><td>SHA-256</td><td><code class='mono'>8f9a9d3d1ea2aed1c99e5ab5260aad9ceb10f4011c4b5a38791509261ddd284a</code></td></tr>
-<tr><td>bytes</td><td>234,040</td></tr>
-<tr><td>bands / dtype</td><td>1 / float32</td></tr>
-<tr><td>shape</td><td>3,730 × 3,292</td></tr>
-<tr><td>CRS / resolution</td><td>EPSG:32611 / 100 m</td></tr>
-<tr><td>geotransform</td><td><code>[100, 0, 243350, 0, −100, 4508550]</code></td></tr>
-<tr><td>outside-footprint encoding</td><td><code>zeros</code></td></tr>
-<tr><td>nodata</td><td><code>unset</code></td></tr>
-<tr><td>all cells finite</td><td><span class='pill yes'>True</span></td></tr>
-<tr><td>all cells in [0, 1]</td><td><span class='pill yes'>True</span></td></tr>
-<tr><td>whole-raster min / max</td><td>0.0 / 1.0</td></tr>
-<tr><td>positive cells</td><td>39,430</td></tr>
-<tr><td>portal range-error immune</td><td><span class='pill yes'>True</span></td></tr>
-</tbody></table>
-
-<h2>Uniqueness audit — PASS_LOCAL_AUDIT_NOT_ORGANIZER_ACCEPTANCE</h2>
-<p>70 rasters and every recorded hash in
-<code>data/</code>, <code>docs/downloads/</code> and <code>registry/</code> were scanned for a
-SHA-256 collision; 53 same-grid rasters were compared
-pixel-wise.</p>
-<table><thead><tr>
-<th>check</th>
-<th>result</th>
-</tr></thead><tbody>
-<tr><td>single band</td><td><span class="pill yes">pass</span></td></tr>
-<tr><td>dtype float32</td><td><span class="pill yes">pass</span></td></tr>
-<tr><td>crs epsg 32611</td><td><span class="pill yes">pass</span></td></tr>
-<tr><td>dimensions 3730x3292</td><td><span class="pill yes">pass</span></td></tr>
-<tr><td>transform 100m</td><td><span class="pill yes">pass</span></td></tr>
-<tr><td>all cells finite</td><td><span class="pill yes">pass</span></td></tr>
-<tr><td>nodata unset</td><td><span class="pill yes">pass</span></td></tr>
-<tr><td>all cells in range 0 1</td><td><span class="pill yes">pass</span></td></tr>
-<tr><td>value set is binary</td><td><span class="pill yes">pass</span></td></tr>
-<tr><td>zeros outside footprint</td><td><span class="pill yes">pass</span></td></tr>
-<tr><td>no positive outside footprint</td><td><span class="pill yes">pass</span></td></tr>
-<tr><td>no positive on catalogue</td><td><span class="pill yes">pass</span></td></tr>
-<tr><td>no positive within 200m of catalogue</td><td><span class="pill yes">pass</span></td></tr>
-<tr><td>core preserved exactly</td><td><span class="pill yes">pass</span></td></tr>
-<tr><td>core pixel count</td><td><span class="pill yes">pass</span></td></tr>
-<tr><td>no sha256 collision</td><td><span class="pill yes">pass</span></td></tr>
-<tr><td>not identical to any prior candidate</td><td><span class="pill yes">pass</span></td></tr>
-<tr><td>portal range error immune</td><td><span class="pill yes">pass</span></td></tr>
-</tbody></table>
-<h3>Closest prior artifacts by pixel-set Jaccard</h3>
-<table><thead><tr>
-<th>path</th>
-<th>its px</th>
-<th>intersection</th>
-<th>Jaccard</th>
-<th>candidate is a superset?</th>
-</tr></thead><tbody>
-<tr><td><code>data/families/dotted_b2_prune_02778.tif</code></td><td>37,654</td><td>37,654</td><td>0.9550</td><td><span class="pill warn">yes — by design</span></td></tr>
-<tr><td><code>data/raw/dotted_h33_2_b2_zeros.tif</code></td><td>37,654</td><td>37,654</td><td>0.9550</td><td><span class="pill warn">yes — by design</span></td></tr>
-<tr><td><code>docs/downloads/gemsdoe48-h48-1-ds-fusion-b2xh32tip-20261006-407bb7f4-zeros.tif</code></td><td>37,754</td><td>37,672</td><td>0.9534</td><td><span class="pill yes">no</span></td></tr>
-<tr><td><code>docs/downloads/GEMSDOE48-H52-lidar-scarp-additions-20261007-38029417f6ca-nan-outside.tif</code></td><td>39,654</td><td>37,655</td><td>0.9089</td><td><span class="pill yes">no</span></td></tr>
-<tr><td><code>docs/downloads/GEMSDOE48-H52-lidar-scarp-additions-20261007-38029417f6ca-zeros-outside.tif</code></td><td>39,654</td><td>37,655</td><td>0.9089</td><td><span class="pill yes">no</span></td></tr>
-<tr><td><code>data/families/dotted_d2_8_02708.tif</code></td><td>40,199</td><td>37,654</td><td>0.8971</td><td><span class="pill yes">no</span></td></tr>
-</tbody></table>
-<p class="small">The top match is the untouched core itself. That is the design: the core's
-live-verified T cannot be lost. The emitted set is nonetheless not identical to any prior
-candidate (<code>not_identical_to_any_prior_candidate:
-true</code>), and the file's
-SHA-256 collides with nothing in this repository.</p>
-
-<h2>Determinism</h2>
-<p>Two independent builds produced the same content id <code>055da9855353</code> and the same primary
-SHA-256. The dart-throw is seed-free (rank, then tier, then row-major index) and the greedy is
-deterministic. The incremental coverage accumulation used by the greedy matches a full
-recomputation to &lt; 1e-6 relative
-(<code>drift = 1.33e-03</code>).</p>
-
-<h2>Test suite</h2>
-<p><code>python -m pytest -q</code> → <strong>158 passed, 3 skipped</strong> (the three skips are
-pre-existing data-dependent tests whose mirrors are absent in CI).
-<code>tests/test_h55.py</code> adds 22 tests covering the metric's binary optimality, the |G|
-identification and its 0.11 % rung self-consistency, the forward model's bounds, coverage
-monotonicity, the greedy's incremental-vs-exact coverage equality, the safety-factor prefix rule,
-dart-throw separation and determinism, the conduit tier rules including the trailing-whitespace
-<code>"Hot "</code> normalisation, the leaky-column drop, Dempster's disagreement-preserving
-algebra including the K = 1 vacuous-mass fallback, the all-finite GeoTIFF writer's round trip and
-its range rejection, and the internal consistency of the build, format and uniqueness receipts.</p>
+<h2>Historical H55 model/gate interpretations — corrected</h2>
+<div class="bad"><strong>Do not use historical H55/H54 model outputs as score bounds or slot criteria.</strong> The former inferred <code>|G|</code>, <code>TPw</code>, fitted <code>rho</code>, 0.2843 “ceiling,” 0.2736 scenario, 0.0649 H56 projection, and universal 0.0556 per-cell bar relied on <code>FPw=S−TPw</code>; the official metric uses <code>FPw=S−Q</code>. Those derived claims are withdrawn. H55 build, raw public-proxy holdout, format, uniqueness, and original GATE-2 receipts remain preserved for audit; their local checks do not establish private-label performance or organizer acceptance.</div>
+<p>Historical H55 primary: <code>docs/downloads/GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353-zeros-outside.tif</code>, SHA-256 <code>8f9a9d3d1ea2aed1c99e5ab5260aad9ceb10f4011c4b5a38791509261ddd284a</code>. Its raw proxy results should be read only as public-map diagnostics on frozen upstream surfaces. The density-matched GATE-2 threshold and score translation are not a validated promotion gate.</p>
+<p>Receipts: <a href="../evidence/build_h55_receipt_20261007.json">H55 build</a> · <a href="../evidence/holdout_h55_spatial_20261007.json">H55 public-proxy holdout</a> · <a href="../evidence/h55_primary_format_audit_20261007.json">local format audit</a> · <a href="../evidence/audit_gate2_h55_20261007.json">historical GATE-2 calculation</a> · <a href="research/h55-live-model-ceiling-and-candidate-20261007.md">H55 report with correction banner</a> · <a href="research/metric-identity-erratum-20261007.md">metric-identity erratum</a>.</p>
 
 </main>
 <footer class="wrap">
