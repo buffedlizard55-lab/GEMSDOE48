@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "status": "POST_BUILD_SOURCE_COVERAGE_CORRECTION_BEFORE_HOLDOUT_SCORING",
+  "correction_utc": "2026-10-07T02:07:54.712083Z",
+  "first_candidate_build_utc": "2026-10-07T02:07:54.712083Z",
+  "first_holdout_evaluation_utc": "2026-10-07T02:11:39.325509Z",
+  "original_preregistration": "evidence/hypothesis_slate_20261007.json",
+  "original_preregistration_is_unchanged": true,
+  "issue": "The frozen slate's source-coverage audit reported 26 persistent stations based on an exploratory calculation that did not first collapse duplicate readings from the same station on the same survey date. The preregistered build rule explicitly collapses those readings by their median before computing leave-one-station-out backgrounds.",
+  "v1_source_only_count": 31,
+  "v1_build_receipt": "evidence/build_h50_probe_candidate_v1_preduplicate_correction_20261007.json",
+  "v2_corrected_source_only_count": 28,
+  "v2_build_receipt": "evidence/build_h50_probe_candidate_20261007.json",
+  "duplicate_station_date_groups_collapsed_within_v1_records": 10,
+  "thresholds_or_model_rule_changed": false,
+  "holdout_labels_or_sgmc_read_before_correction": false,
+  "impact": "The first v1 build collapsed repeated observations within each DBF row and reported 31; a later source review found additional same-coordinate duplicate rows. The exact-coordinate v2 correction reports 28 persistent locations; see evidence/h50_implementation_errata_20261007.json. Neither source-only count change altered the physical selection thresholds. This file preserves the first correction's history and does not replace the unchanged preregistration."
+}

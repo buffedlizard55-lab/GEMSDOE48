@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "status": "POST_SCORE_PRIOR_ART_RECONCILIATION_NO_CANDIDATE_CHANGE",
+  "recorded_utc": "2026-10-07T03:25:37Z",
+  "trigger": "This branch was synchronized with the newer main commit containing an additional H50-C shallow-probe hypothesis.",
+  "original_frozen_slate": "docs/research/h50-gdr-probe-slate-20261007.md",
+  "original_preregistration_json": "evidence/hypothesis_slate_20261007.json",
+  "original_preregistration_json_unchanged": true,
+  "related_merged_main_prior_art": {
+    "path": "docs/research/hypotheses-20261007.md",
+    "id": "H50-C",
+    "summary": "INGENIOUS 2 m temperature point residuals against elevation/depth intersected with family support corridors."
+  },
+  "relationship": "Same external probe dataset and broad shallow-thermal hypothesis. H50-GDR differs in exact-coordinate same-Area/date leave-one-location-out residuals, repeated-date persistence selection, 2mDAB fallback, and no family-corridor gate. These are operator differences, not concept-level novelty.",
+  "identifier_collision": "The original local candidate receipts use hypothesis_id H50-1. The merged main slate uses H50-1 for a different coarse-splay hypothesis. User-facing pages call this artifact H50-GDR; original build receipts and TIFF metadata are preserved unchanged.",
+  "post_selection_caveat": "The v1 proxy result had already been observed before the v2 exact-location correction. V2 remains an exploratory implementation sensitivity; this prior-art reconciliation does not alter thresholds, data selection, raster values, or scores and is not confirmatory evidence.",
+  "slot_cleared": false
+}

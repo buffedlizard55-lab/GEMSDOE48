@@ -1,24 +1,22 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Executive summary — how to submit H50</title><link rel="stylesheet" href="../assets/style.css"></head>
-<body><header><p>DOE GEMS Prize · DrivenData #306 · GEMSDOE48 H50 · submission runbook</p>
-<h1>Executive summary — how to submit H50</h1><nav><a href="index.html">H50 summary</a><a href="executive-summary.html">Executive summary &amp; how to submit</a><a href="method.html">Method &amp; evidence</a><a href="hypotheses.html">Hypotheses</a><a href="sources.html">Sources</a><a href="../index.html">Repository site ↗</a></nav></header><main class="wrap">
+<title>Executive summary — H50 research artifact, slot closed</title><link rel="stylesheet" href="../assets/style.css"></head>
+<body><header><p>DOE GEMS Prize · DrivenData #306 · GEMSDOE48 H50 · research runbook</p>
+<h1>H50 research artifact — slot gate closed</h1><nav><a href="index.html">H50 summary</a><a href="executive-summary.html">Executive summary &amp; how to submit</a><a href="method.html">Method &amp; evidence</a><a href="hypotheses.html">Hypotheses</a><a href="sources.html">Sources</a><a href="../index.html">Repository site ↗</a></nav></header><main class="wrap">
 
-<h2 style="margin-top:0">1 · How to submit to the competition, step by step</h2>
+<h2 style="margin-top:0">1 · Competition upload form reference (future use only)</h2>
+<div class="warn"><strong>Do not upload the H50 artifact or spend a weekly slot.</strong> H50 failed the preregistered spatial-proxy gate and is not cleared. The steps below document the portal form for future, independently cleared candidates; they are not a recommendation or authorization to submit this file.</div>
 <ol>
 <li>Open the official <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/submissions/">New submission</a> page (login required; at most the competition's stated weekly allowance).</li>
-<li>Under <em>File to submit</em>, choose either the single GeoTIFF
+<li>For a future candidate that has passed a separate slot gate, under <em>File to submit</em>, choose either the single GeoTIFF
 <code>gemsdoe48-h50-ds-b2xh36rung30-20261007-5b59e106-zeros.tif</code> (⬇ button on the <a href="index.html">H50 summary</a>) or its
 <code>.zip</code> containing exactly that one GeoTIFF. Both are accepted shapes per the portal text.</li>
 <li>Set the unique name you will use to recognize the run: <code>GEMSDOE48-H50-DS-B2xH36</code>.</li>
 <li>Paste this note (≤200 chars) into the <em>Note (optional)</em> field:<br><code>GEMSDOE48 H50 | Dempster fusion, best dotted H33-2-B2 (0.2778) x best tip H36-1 rung30 (0.2710); kernel-credit beliefs, live-anchored discounts; m(Theta)+K diagnostics; unscored research candidate.</code></li>
-<li>Submit. The portal scores distance-weighted Tversky (α=0.2, β=0.8, 300 m triangular kernel) on the private expert labels.</li>
+<li>For an independently cleared future candidate only, submit. The portal scores distance-weighted Tversky (α=0.2, β=0.8, 300 m triangular kernel) on the private expert labels. <strong>Do not submit this H50 file.</strong></li>
 </ol>
-<div class="warn"><strong>Honest recommendation.</strong> The blocked holdout does not show H50 beating
-both parents or the union on the public proxies. Per this repository's gate, a weekly slot should not be
-spent on it unless the owner consciously overrides the gate after reading section 3 of the
-<a href="index.html">summary</a>. The download exists because the project brief requires a unique,
-format-valid, downloadable DS fusion; it is not a cleared pick.</div>
+<div class="warn"><strong>Recommendation: do not submit.</strong> The blocked holdout does not show H50 beating
+both parents or the union on the public proxies. The project's standing gate requires a comparable blocked improvement before any slot is used. H50 fails that gate; no override is included in this workflow. The download is retained as a format-valid research artifact, not a cleared pick.</div>
 
 <h2>2 · The “Predicted values must be in range [0, 1]” error — why this file cannot trigger it</h2>
 <p>Two distinct failures produce that portal message: (1) writing the float32 nodata sentinel
@@ -39,7 +37,7 @@ near zero over most of the map; neither is a favorability surface.</p>
 <ol>
 <li>Re-run <code>scripts/validate_submission.py</code> on the exact bytes and keep the receipt.</li>
 <li>Confirm the SHA-256 <code>5b59e106b6e448038b96fb340c5bae39094d4558c239c437aea28b6020d5d32f</code> matches the file you upload.</li>
-<li>Confirm the weekly slot budget and that the gate override is deliberate.</li>
+<li>Confirm a candidate has beaten the current spatially blocked best under a comparable, defensible protocol. H50 has not; do not submit it.</li>
 <li>Do not confuse this file with the withdrawn v1 anchor-1.0 build (sha 2c01d212…, removed from downloads).</li>
 </ol>
 

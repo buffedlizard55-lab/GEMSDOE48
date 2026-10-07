@@ -37,6 +37,12 @@ A byte- and pixel-level comparison found the two SGMC rasters are not interchang
 
 The sample finite mask and the mirrored labels' GDAL/nodata footprint were compared by the footprint-build script before the diagnostic. The exact counts and equality result are written to `evidence/footprint_mask_receipt.json`. The `sample_submission.tif` pixel values are not treated as label truth.
 
+## H50-GDR external probe source
+
+- **Official landing:** [GDR INGENIOUS compilation, DOI 10.15121/1881483](https://gdr.openei.org/submissions/1391). The Data.gov catalog record reports CC BY 4.0; asset-level attribution/reuse terms were not independently confirmed.
+- **Local archive:** `data/external/2m_temperature_probe_INGENIOUS_regional_data.zip`, 1,080,530 bytes, SHA-256 `1301f70d230058e616ea5d34d1c7a32fabf7d49198172f376c59c89bd652eca3`. The bytes were taken from a pinned owner mirror (`GEMSDOE24`, commit `07345ea0604953d7efb858d9cfbc21e20c7aca0b`), not fetched directly from GDR during this run; the mirror hash proves local byte identity, not official authenticity.
+- **Field metadata:** the included workbook describes `T2m` as temperature in °C and `2mDAB` as 2 m temperature normalized to the area-average background; the descriptor does not separately state a unit for `2mDAB`. The H50 leave-one-station-out residuals use `T2m` in °C. Data and build details are in [`data/external/README.md`](../data/external/README.md) and [`evidence/build_h50_probe_candidate_20261007.json`](../evidence/build_h50_probe_candidate_20261007.json). The later-merged related H50-C prior-art reconciliation and local-ID collision are recorded in [`docs/research/h50-gdr-probe-slate-20261007.md`](research/h50-gdr-probe-slate-20261007.md) and [`evidence/h50_gdr_prior_art_errata_20261007.json`](../evidence/h50_gdr_prior_art_errata_20261007.json).
+
 ## Mathematical and implementation sources
 
 - Dempster's normalized rule and the metric are implemented in the repository and checked against the published formulas, not calibrated from the private test set. The official metric page specifies a triangular 300 m kernel and `alpha=0.2`, `beta=0.8`; see `src/gemsdoe48/metric.py` and its brute-force test.

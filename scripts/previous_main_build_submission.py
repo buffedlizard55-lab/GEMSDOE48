@@ -21,8 +21,7 @@ Produces, in docs/downloads/:
     would take it to [0, 1] if a reader wants that instead.
   2. `gemsdoe48-ds48-emission.tif`  the DS-ranked, off-flank emission at exactly
         the mass of the best live artifact (37,654 px).  Mass-neutral, so it
-        spends none of the live-anchored removal budget.  **Portal candidate,
-        UNSCORED.**
+        spends none of the live-anchored removal budget.  **Historical research artifact, not slot-cleared.**
   3. `gemsdoe48-ds48-mtheta.tif`    the unassigned/uncertain belief mass m12(Theta)
         -- the disagreement layer, shipped as its own raster as the brief asks.
   4. `gemsdoe48-ds48-conflict.tif`  Shafer's conflict K (= Smets' m(empty set)).

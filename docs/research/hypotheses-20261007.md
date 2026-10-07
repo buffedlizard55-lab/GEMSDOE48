@@ -114,3 +114,15 @@ holdout best (union 0.0970 SGMC offcat; H49 0.1008 on the same proxy) in ≥3/4
 folds on *both* proxy regimes, with the construction re-derived inside folds
 where feasible, and with the leakage limitation restated. The coarse splay
 band (H50-1) did not clear this and is recorded as a negative result.
+
+## Append-only related probe implementation result (after merge)
+
+The separately documented H50-GDR repeat-persistence raster uses the same
+INGENIOUS 2 m probe source as H50-C, but does **not** implement H50-C's
+family-corridor gate or elevation/depth residualization. It is therefore a
+related single-source operator test, not a completed H50-C run. Its corrected
+v2 sensitivity scored 0.003923 versus H49 0.100751 (paired −0.096828; 0/4
+positive folds) on the primary public proxy and failed the promotion gate.
+Because v2 corrected source identity after v1 scores were observed, this is not
+confirmatory evidence. See [`h50-gdr-probe-slate-20261007.md`](h50-gdr-probe-slate-20261007.md)
+and [`../../evidence/h50_gdr_prior_art_errata_20261007.json`](../../evidence/h50_gdr_prior_art_errata_20261007.json).

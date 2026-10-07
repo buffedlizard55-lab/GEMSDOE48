@@ -1,0 +1,50 @@
+{
+  "status": "PASS_LOCAL_FORMAT_AUDIT_NOT_ORGANIZER_ACCEPTANCE",
+  "file": "docs/downloads/GEMSDOE48-H50-2M-PERSIST-20261007-f12e5391bb9c-nan.tif",
+  "sha256": "f12e5391bb9cd2709ae7331699bb0876cc4bf3c443f96ea8a5456c858eb67908",
+  "bytes": 225114,
+  "dtype": "float32",
+  "bands": 1,
+  "shape": [
+    3730,
+    3292
+  ],
+  "crs": "EPSG:32611",
+  "resolution_m": [
+    100.0,
+    100.0
+  ],
+  "nodata": "NaN",
+  "finite_inside_footprint": true,
+  "nan_outside_footprint": true,
+  "finite_footprint_cells": 5167373,
+  "nan_outside_cells": 7111787,
+  "min_inside_footprint": 0.0,
+  "max_inside_footprint": 1.0,
+  "all_in_footprint_range_0_1": true,
+  "positive_cells": 29607,
+  "positive_mass": 29607.0,
+  "grid_profile": {
+    "width": 3292,
+    "height": 3730,
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ]
+  },
+  "tags": {
+    "buffer_radius_m": "300.0",
+    "build_rule_version": "v2-exact-location-key",
+    "hypothesis_id": "H50-1",
+    "model": "GDR 1391 2m probe residual persistence; source-identity correction 2026-10-07",
+    "outside_footprint": "NaN/nodata",
+    "source_archive_sha256": "1301f70d230058e616ea5d34d1c7a32fabf7d49198172f376c59c89bd652eca3",
+    "source_data_license": "GDR page-reported CC BY 4.0; verify asset attribution before redistribution",
+    "station_identity": "Exact EPSG:4269 point coordinates; median same-location same-Area/date readings",
+    "AREA_OR_POINT": "Area"
+  }
+}

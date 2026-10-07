@@ -1,0 +1,92 @@
+{
+  "evaluated_utc": "2026-10-07T02:26:37.556541+00:00",
+  "gate_checks": {
+    "both_proxy_checks_pass": false,
+    "older_raw_sensitivity_pass": false,
+    "primary_gate_pass": false
+  },
+  "interpretation_limit": "These are same-fold paired differences under the repository's conditional public-proxy protocol. They are not independent confidence intervals, leaderboard scores, or evidence of a private test score.",
+  "older_raw_sgmc_sensitivity": {
+    "candidate_mean_dti": 0.0039310155834373865,
+    "candidate_name": "h50_probe_persistence_v2_exact_location",
+    "candidate_prediction_mass_by_fold": {
+      "NE": 3950.0,
+      "NW": 15301.0,
+      "SE": 2600.0,
+      "SW": 7799.0
+    },
+    "candidate_report": "evidence/holdout_h50_probe_v2_exact_location_raw_sgmc_20261007.json",
+    "fold_delta_dti": {
+      "NE": -0.10208281661316043,
+      "NW": -0.0977734004464689,
+      "SE": -0.07647012812551504,
+      "SW": -0.10702301344212764
+    },
+    "folds_compared": [
+      "NW",
+      "NE",
+      "SW",
+      "SE"
+    ],
+    "mean_delta_dti": -0.09583733965681801,
+    "positive_folds": 0,
+    "reference_mean_dti": 0.09976835524025539,
+    "reference_name": "h49_yager_balanced",
+    "reference_prediction_mass_by_fold": {
+      "NE": 12726.0,
+      "NW": 22944.0,
+      "SE": 6437.0,
+      "SW": 6061.0
+    },
+    "reference_report": "evidence/holdout_h49_raw_sgmc_sensitivity_20261006.json",
+    "sgmc_truth_positive_cells": 61664,
+    "sgmc_truth_sha256": "26d142c4c93282cd94f6950ab96f22aeff59fbbea523d43d662e76fa1b161b5c"
+  },
+  "preregistered_numeric_gate": {
+    "primary_minimum_mean_delta_over_h49": 0.005,
+    "primary_positive_folds_minimum": 3,
+    "raw_sgmc_sensitivity_requires_positive_mean_and_at_least_3_folds": true
+  },
+  "primary_newer_sgmc": {
+    "candidate_mean_dti": 0.003922712351422865,
+    "candidate_name": "h50_probe_persistence_v2_exact_location",
+    "candidate_prediction_mass_by_fold": {
+      "NE": 3950.0,
+      "NW": 15301.0,
+      "SE": 2600.0,
+      "SW": 7799.0
+    },
+    "candidate_report": "evidence/holdout_h50_probe_v2_exact_location_20261007.json",
+    "fold_delta_dti": {
+      "NE": -0.10603717423794441,
+      "NW": -0.0977734004464689,
+      "SE": -0.07648031639484235,
+      "SW": -0.10702301344212764
+    },
+    "folds_compared": [
+      "NW",
+      "NE",
+      "SW",
+      "SE"
+    ],
+    "mean_delta_dti": -0.09682847613034581,
+    "positive_folds": 0,
+    "reference_mean_dti": 0.10075118848176869,
+    "reference_name": "h49_yager_balanced",
+    "reference_prediction_mass_by_fold": {
+      "NE": 12726.0,
+      "NW": 22944.0,
+      "SE": 6437.0,
+      "SW": 6061.0
+    },
+    "reference_report": "evidence/holdout_h49_spatial_comparison_20261006.json",
+    "sgmc_truth_positive_cells": 62122,
+    "sgmc_truth_sha256": "643cbe992ef4ba37588fb469163ed8291e3ceb23d6c1f78a3cfaa462430c2da0"
+  },
+  "schema_version": 1,
+  "slot_decision": {
+    "cleared": false,
+    "reason": "The candidate is compared only on public-map proxy labels. The proxy numerical gate failed; independently, a proxy pass would still not establish organizer/private-label performance or slot eligibility."
+  },
+  "status": "FAIL_NUMERIC_PROXY_GATE_NOT_SLOT_CLEARED"
+}

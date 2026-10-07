@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "status": "FROZEN_BEFORE_CANDIDATE_CONSTRUCTION_AND_HOLDOUT_SCORING",
+  "frozen_utc": "2026-10-07T02:05:46Z",
+  "prior_art_boundary": "Reviewed current GEMSDOE48 README/docs, archived H48/H49 research and selected 16GEMSDOE H18 records plus bounded GitHub code-search results. H18-5/H49-1 already proposed broad geothermal/2m-probe ideas, but no implementation or holdout result for the exact H50-1 repeat-survey residual-persistence operator was found. No global novelty claim is made.",
+  "ranking_basis": "Qualitative expected public-proxy value versus implementation/data cost; no numeric DTI gains assigned before a frozen holdout. H50-1 ranks first for direct observability, verified in-mask data, and low-cost falsifiability.",
+  "source_coverage_audit": {
+    "gdr_2m_temperature": {
+      "official_landing": "https://gdr.openei.org/submissions/1391",
+      "doi": "10.15121/1881483",
+      "reported_license": "CC BY 4.0",
+      "local_bytes_source": "Pinned owner mirror at buffedlizard55-lab/GEMSDOE24 commit 07345ea0604953d7efb858d9cfbc21e20c7aca0b; not downloaded directly from GDR in this sandbox.",
+      "sha256": "1301f70d230058e616ea5d34d1c7a32fabf7d49198172f376c59c89bd652eca3",
+      "archive_bytes": 1080530,
+      "records": 3800,
+      "records_on_finite_footprint": 2782,
+      "unique_pixels_for_those_records": 2700,
+      "dated_nonzero_temperature_observations": 4232,
+      "records_with_two_or_more_valid_observations": 143,
+      "repeat_records_inside_finite_footprint": 139,
+      "blank_date_nonzero_fields_flagged": 2,
+      "dated_zero_temperature_fields": 0,
+      "persistence_rule_station_count_in_footprint": 26,
+      "coverage_interpretation": "Point/sample coverage only, clustered survey design; not continuous coverage or proof of observation outside sites. Counts were computed from owner-mirror bytes and the local competition footprint mask."
+    },
+    "landsat_st": {
+      "official_catalog": "https://landsatlook.usgs.gov/stac-server/",
+      "query_date_utc": "2026-10-07",
+      "query_extent": "Approximate competition geographic bounding box -119.82,35.28,-116.23,41.83; datetime 1982-01-01/2026-10-07; Level-2 surface temperature collection.",
+      "catalogue_number_matched": 34447,
+      "returned_intersecting_item": "2026-10-05 Landsat 9 Level-2 ST item; one item only inspected.",
+      "coverage_interpretation": "Bounding-box metadata count, not unique footprint coverage or cloud-free pixel count; no image data downloaded. ST band metadata reports 100 m GSD; USGS scenes also contain QA and may have ASTER GED gaps."
+    },
+    "usgs_comcat_products": {
+      "official_api": "https://earthquake.usgs.gov/fdsnws/event/1/",
+      "query_date_utc": "2026-10-07",
+      "query_extent": "Bounding box -119.82,35.28,-116.23,41.83; 1970-01-01 through 2026-10-07; M>=2.5; earthquake events.",
+      "focal_mechanism_product_event_count": 8185,
+      "moment_tensor_product_event_count": 746,
+      "coverage_interpretation": "FDSN count endpoint result over a bounding box extending outside the footprint; product-associated event counts, not exact in-mask unique earthquakes or a spatial coverage guarantee. No event payload used."
+    },
+    "sentinel2_l2a": {
+      "official_catalog": "https://stac.dataspace.copernicus.eu/v1/",
+      "query_date_utc": "2026-10-07",
+      "query_extent": "Approximate competition geographic bounding box; datetime 2017-01-01/2026-10-07; collection sentinel-2-l2a; limit=1.",
+      "returned_item": "S2B_MSIL2A_20261006T182219_N0513_R127_T11SNV_20261006T233015",
+      "observed_assets": "The item metadata advertises SWIR B11/B12 at 20 m and optical bands; asset authorization references OIDC.",
+      "coverage_interpretation": "One bounding-box-intersecting metadata item verified, not a full-footprint item or cloud-free pixel count. No image data downloaded."
+    }
+  },
+  "hypotheses": [
+    {
+      "rank": 1,
+      "id": "H50-1",
+      "title": "Repeat-survey 2 m thermal residual persistence",
+      "layers": ["GDR 1391 2 m probe shapefile: T2m, Date, T2m_2..T2m_7 and Date_2..Date_7", "GDR 2mDAB (area-normalized background anomaly)", "competition footprint mask"],
+      "physical_signature": "Same-area, same-exact-date, leave-one-station-out positive temperature residuals repeated across distinct survey dates; 300 m point support.",
+      "off_catalogue_rationale": "Persistent shallow heat advection may mark fluid-bearing structures without a mappable surface trace.",
+      "difference_from_prior": "H18-5/H49-1 proposed broad thermal targeting, including elevation detrending and lineament collinearity. No repeat-visit, leave-one-station-out, same-survey-date persistence implementation was found; this is a specific unexecuted test, not a new-data/global-novelty claim.",
+      "expected_dti": "Unknown; qualitative moderate potential, with major sparse/clustered-sampling risk.",
+      "implementation_cost": "Low; archive parser, exact grid rasterization, and fixed four-block evaluation.",
+      "data_status": "Pinned 1.08 MB owner-mirror bytes hash-verified; official GDR landing page reports CC BY 4.0. 2,782 of 3,800 points intersect finite competition cells; 139 in-footprint stations have multiple dated readings; 26 meet the frozen persistence rule. Not organizer-authenticated.",
+      "preregistered_rule": {
+        "dated_observation": "finite nonzero T2m with a nonblank Date; zero-valued dated readings cause a flagged failure; blank-date nonzero fields are counted and excluded",
+        "baseline_group": "Area x exact date, only if >=5 distinct station records; aggregate duplicate same-station same-date readings by median",
+        "residual": "station/date median minus the median of other stations in the same Area/date group",
+        "persistent_station": "at least two eligible distinct dates, median residual >= 2 Celsius, and at least half of eligible date residuals >= 2 Celsius",
+        "fallback": "if fewer than two eligible distinct dates, include only when source 2mDAB > 0; a repeat station that has two eligible dates but fails persistence is excluded",
+        "raster": "binary 1 within 300 m of selected station coordinates, 0 elsewhere inside the finite mask, NaN/nodata outside; no label or known-fault-distance feature",
+        "radius_m": 300
+      },
+      "promotion_gate": "On newer derived SGMC off-catalogue proxy, mean DTI must exceed H49 same-protocol mean by >=0.005 absolute, with positive paired difference in >=3/4 quadrants; direction must also be positive on older raw-SGMC sensitivity. This is a conservative research gate, not a statistical CI or organizer threshold. Slot still closed without fold-independent rebuild and private/organizer evidence."
+    },
+    {
+      "rank": 2,
+      "id": "H50-2",
+      "title": "Multi-date Landsat Collection 2 surface-temperature persistence",
+      "layers": ["USGS Landsat Collection 2 Level-2 ST_B10", "QA_PIXEL / ST_QA", "elevation, vegetation and season controls"],
+      "physical_signature": "Repeated local positive surface-temperature residuals across clear-sky seasons, skeletonized into elongated coherent anomalies.",
+      "off_catalogue_rationale": "Persistent surface heating may indicate fluid pathways below alluvium despite a weak or absent scarp.",
+      "difference_from_prior": "Satellite surface-temperature time series, rather than sparse GDR 2 m probes or conductive heat-flow residuals; no Landsat ST feature workflow was found in reviewed campaign files.",
+      "expected_dti": "Unknown; qualitative moderate potential, high environmental-confounding risk.",
+      "implementation_cost": "High; multi-scene QA, seasonal normalization, emissivity and missing-data controls.",
+      "data_status": "USGS STAC bbox query returned 34,447 Level-2 ST scene records and an intersecting recent item; exact mask coverage and useful-pixel count unaudited; no payload downloaded.",
+      "source": "https://www.usgs.gov/landsat-missions/landsat-collection-2"
+    },
+    {
+      "rank": 3,
+      "id": "H50-3",
+      "title": "Fault-plane corridors from USGS ComCat focal mechanisms",
+      "layers": ["USGS ANSS ComCat event locations", "focal-mechanism nodal planes, dip and rake", "magnitude/depth/completeness controls"],
+      "physical_signature": "Spatially coherent nodal-plane orientations and event clusters mapped as fault-plane corridors, not raw event density.",
+      "off_catalogue_rationale": "Rupture-plane orientation can expose active blind fault geometry absent from a geomorphic trace inventory.",
+      "difference_from_prior": "Campaign seismicity-density features summarize event counts; this proposal uses mechanism solutions and plane kinematics. No focal-mechanism operator was found in the reviewed files.",
+      "expected_dti": "Unknown; qualitative low-to-moderate potential; active seismicity may not represent geothermal faults.",
+      "implementation_cost": "Medium; API retrieval, duplicate-origin resolution, depth/completeness filtering and spatial blocks.",
+      "data_status": "Official FDSN count endpoint returned 8,185 focal-mechanism and 746 moment-tensor product-associated events in the approximate bbox for M>=2.5 since 1970; bbox extends outside the footprint; no event payload downloaded.",
+      "source": "https://earthquake.usgs.gov/fdsnws/event/1/"
+    },
+    {
+      "rank": 4,
+      "id": "H50-4",
+      "title": "Sentinel-2 SWIR alteration boundaries",
+      "layers": ["Copernicus Sentinel-2 L2A B11/B12 SWIR and B4/B8 optical reflectance", "scene-classification/cloud masks"],
+      "physical_signature": "Published clay/iron-oxide spectral ratios composited in dry-season cloud-free scenes, followed by spatially coherent alteration-boundary extraction.",
+      "off_catalogue_rationale": "Hydrothermal mineral alteration may extend beyond visible fault scarps, particularly across exposed basin margins.",
+      "difference_from_prior": "Optical satellite reflectance/mineralogical signal rather than GeoDAWN airborne radiometric K/Th/total-count features; no Sentinel-2 implementation was found in reviewed campaign files.",
+      "expected_dti": "Unknown; qualitative low-to-moderate potential, limited by cover and lithologic ambiguity.",
+      "implementation_cost": "High; multi-date cloud/shadow handling and mineral-ratio calibration.",
+      "data_status": "Official Copernicus STAC returned one 2026 L2A item intersecting the approximate bbox and advertises 20 m B11/B12 assets. This is not full-footprint coverage; asset authorization references OIDC; no payload downloaded.",
+      "source": "https://stac.dataspace.copernicus.eu/v1/"
+    }
+  ],
+  "holdout_protocol": {
+    "geometry": "Four fixed 2x2 quadrants on the 3292 x 3730 EPSG:32611 100 m grid; held-out core plus 300 m evaluation halo.",
+    "primary_truth": "Owner-mirror on-grid USGS SGMC traces >300 m from owner-mirror catalogue cells; not organizer-authenticated and not private expert truth.",
+    "secondary_sensitivity": "Older raw owner-mirror SGMC raster, scored separately; never pooled with primary.",
+    "metric": "Official distance-weighted Tversky equations, alpha=0.2, beta=0.8, triangular radius=300 m.",
+    "current_best_receipt": "evidence/holdout_h49_spatial_comparison_20261006.json",
+    "slot_decision": "No slot is cleared by a public-proxy result; H50-1 must pass the frozen numerical gate and independent-source requirements first."
+  }
+}

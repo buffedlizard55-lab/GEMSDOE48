@@ -10,7 +10,7 @@
  "added": 2000,
  "min_added_effective_height_m": 3.2899999618530273,
  "uniqueness": {
-  "compared_files": 47,
+  "compared_files": 49,
   "identical": [],
   "overlaps": {
    "docs/downloads/GEMSDOE48-DS-conflict-aware-fusion-20261006.tif": 37654,
@@ -52,8 +52,35 @@
    "data/raw/sgmc_faults_100m.tif": 839,
    "data/raw/tip_h32_1_prethin_tip_euler.tif": 36874,
    "data/raw/tip_h33d_stepover.tif": 31614,
-   "data/source_mirrors/footprint-mask.tif": 39654
+   "data/source_mirrors/footprint-mask.tif": 39654,
+   "docs/downloads/GEMSDOE48-H50-2M-PERSIST-20261007-1997316a0102-nan.tif": 173,
+   "docs/downloads/GEMSDOE48-H50-2M-PERSIST-20261007-f12e5391bb9c-nan.tif": 172
+  },
+  "post_merge_supplemental_audit": {
+   "reason": "Post-merge comparison added the two H50-GDR TIFFs, which were absent from the original H52 identity scan.",
+   "files": [
+    {
+     "path": "docs/downloads/GEMSDOE48-H50-2M-PERSIST-20261007-1997316a0102-nan.tif",
+     "sha256": "1997316a0102909135dfa12d48e86dbc1fbe567b4d4ba3884c53ce981b2bc50c",
+     "positive_cells": 29661,
+     "positive_support_intersection_with_h52": 173,
+     "exact_in_footprint_values": false,
+     "exact_positive_support": false
+    },
+    {
+     "path": "docs/downloads/GEMSDOE48-H50-2M-PERSIST-20261007-f12e5391bb9c-nan.tif",
+     "sha256": "f12e5391bb9cd2709ae7331699bb0876cc4bf3c443f96ea8a5456c858eb67908",
+     "positive_cells": 29607,
+     "positive_support_intersection_with_h52": 172,
+     "exact_in_footprint_values": false,
+     "exact_positive_support": false
+    }
+   ],
+   "exact_prediction_matches": [],
+   "exact_positive_support_matches": [],
+   "comparison_scope": "Two additional local files; not an organizer/global uniqueness audit."
   }
  },
- "note": "renamed from H50 to H52 after the concurrent merge of other sessions' H50/H50-B/H51 artifacts into main; content and SHA-256 unchanged"
+ "note": "renamed from H50 to H52 after the concurrent merge of other sessions' H50/H50-B/H51 artifacts into main; content and SHA-256 unchanged",
+ "post_merge_note": "After H50-GDR v1/v2 were restored into the same tree, both were compared against the H52 TIFF on the same grid. Neither is an exact prediction or positive-support match; H52 output and hash are unchanged. This local supplement makes no organizer/global uniqueness claim."
 }

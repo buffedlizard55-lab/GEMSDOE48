@@ -21,12 +21,13 @@
     <a class="btn alt" href="research/holdout-h52-results-20261007.md">Read the H52 sweep and controls</a></p>
     <p><b>Paste-ready note (143 characters):</b> <code>GEMSDOE48-H52 | 0.2778 dotted family + 2,000 lidar-scarp dots (3 m USGS 3DEP step detector, &gt;200 m off-catalogue); unscored research candidate.</code></p>
     <p>C (37,654 dots of the 0.2778 family) plus 2,000 dots on the strongest 3 m lidar steps (≥ 3.29 m effective height, smooth-terrain gate, &gt; 200 m from the catalogue and from C). SHA-256 <code>38029417f6ca…</code>, 346,152 bytes, 39,654 positives, one float32 band, EPSG:32611, 100 m, 3,730 × 3,292, values in [0,1] in-footprint and NaN outside — the format the portal rejected before was out-of-range values, which this file cannot produce (<a href="../evidence/h52_submission_validation_20261007.json">local validation</a>).</p>
-    <p class="small"><b>Not slot-cleared.</b> Newer-SGMC blocked proxy 0.096409 (C 0.095491, union 0.096992, H49 0.100751); pre-registered gate fails on both criteria; live bracket for the additions −0.006 to +0.009. If a slot must be used this week for Phase-2 option value (expert review of all submissions), this is the file; otherwise keep the slot. No organizer score exists for any file here.</p>
-    <h3>How to submit (unchanged)</h3>
+    <p class="small"><b>Not slot-cleared.</b> Newer-SGMC blocked proxy 0.096409 (C 0.095491, union 0.096992, H49 0.100751); pre-registered gate fails on both criteria; live bracket for the additions −0.006 to +0.009. Keep the weekly slot unused. Do not upload H52: it fails the preregistered gate and remains below H49 on the comparable blocked proxy. No owner override or exception is in scope. No organizer score exists for any file here.</p>
+    <h3>Format and portal steps for a future cleared candidate only</h3>
+    <p class="small"><b>These steps are reference-only.</b> No current candidate is cleared; do not use a weekly slot unless a future candidate beats the spatially blocked best under the project gate.</p>
     <ol>
-      <li>Upload exactly one file: a single-band float32 GeoTIFF on the competition grid (EPSG:32611, 100 m, 3,730 rows × 3,292 columns, origin 243,350 E / 4,508,550 N). Every file in <code>downloads/</code> satisfies this; run <code>python scripts/validate_submission.py &lt;file&gt;</code> to re-check.</li>
+      <li>Only after a candidate has cleared the project gate, use exactly one single-band float32 GeoTIFF on the competition grid (EPSG:32611, 100 m, 3,730 rows × 3,292 columns, origin 243,350 E / 4,508,550 N). Re-check the exact candidate bytes with <code>python scripts/validate_submission.py &lt;file&gt;</code>; local validation is not organizer acceptance.</li>
       <li>Values must be finite and inside [0, 1] wherever the sample template is finite; outside the footprint use NaN (preferred) or 0. The earlier portal error "Predicted values must be in range [0, 1]" came from out-of-range or non-finite in-footprint cells.</li>
-      <li>Paste the note above into the submission comment; keep the file name (it encodes the SHA-256 prefix) so the leaderboard row can be tied back to this repository.</li>
+      <li>For a future cleared candidate only, paste its candidate-specific tracking note into the submission comment; preserve the exact filename and SHA-256 so any portal row can be tied to those bytes.</li>
     </ol>
   </section>
 
