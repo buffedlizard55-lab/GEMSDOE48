@@ -1,7 +1,7 @@
 """The H50 sub-site is generated from receipts, so it is tested like a build
-artifact: pages exist, are well formed, every local link resolves, the
-download is at the very top, the receipt's SHA and note appear verbatim, and
-the unscored disclaimer is on every page."""
+artifact: pages exist, are well formed, local links resolve, the historical
+TIFF download is obvious, the SHA appears, H36 is correctly classified, the
+archival note is within the portal limit, and no slot is recommended."""
 from __future__ import annotations
 
 import json
@@ -65,14 +65,24 @@ class TestH50Site(unittest.TestCase):
     def test_zip_offered_too(self):
         self.assertIn(Path(self.rec["zip_file"]).name, self.texts["index.html"])
 
-    def test_sha_and_note_and_name_appear(self):
+    def test_sha_and_corrected_archival_note_and_name_appear(self):
         for name in ("index.html", "executive-summary.html"):
             self.assertIn(self.rec["primary_sha256"], self.texts[name])
-            self.assertIn(self.rec["submission_note"], self.texts[name])
-            self.assertIn(self.rec["submission_name"], self.texts[name])
+        index = self.texts["index.html"]
+        self.assertIn(self.rec["submission_name"], index)
+        self.assertIn("H36-1 rung30", index)
+        self.assertIn("H19-5/rung-30 repacking; not tip/step-over", index)
+        self.assertIn("do not paste for submission", index)
+        # The frozen receipt's original note contains the classification error;
+        # the public archive must show the corrected note instead.
+        self.assertNotIn(self.rec["submission_note"], index)
 
-    def test_note_within_portal_limit(self):
-        self.assertLessEqual(len(self.rec["submission_note"]), 200)
+    def test_corrected_archival_note_within_portal_limit(self):
+        match = re.search(r"Corrected archival note \((\d+)/200 chars; do not paste for submission\):</strong> <code>([^<]+)</code>", self.texts["index.html"])
+        self.assertIsNotNone(match)
+        note = match.group(2)
+        self.assertLessEqual(len(note), 200)
+        self.assertEqual(int(match.group(1)), len(note))
 
     def test_every_local_href_resolves(self):
         for name in PAGES:

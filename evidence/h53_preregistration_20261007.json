@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "registered_utc": "2026-10-07T04:27:25Z",
+  "status_at_freeze": "FROZEN_BEFORE_BUILD_AND_HOLDOUT",
+  "slate": "docs/research/hypotheses-h53-20261007.md",
+  "ranking_basis": "risk-adjusted research value per implementation cost; planning priors only, not measurements",
+  "candidate_hypotheses": [
+    {
+      "rank": 1,
+      "id": "H53-1",
+      "name": "Cross-band radiometric edge coherence as a weak third D-S source",
+      "layers": ["H33-2-B2 dotted family", "H33-D tip/step-over family", "GeoDAWN K", "GeoDAWN Th", "GeoDAWN U", "GeoDAWN TC"],
+      "signature": "Masked Gaussian gradient magnitudes at sigma 1 and 3 pixels; per-band/scale P99 clipping; doubled-angle orientation coherence across the eight gradients.",
+      "off_catalogue_rationale": "Fault juxtaposition or hydrothermal alteration can create co-oriented radiometric edges where an unmapped fault lacks a catalogue trace; contacts and weathering are major confounders.",
+      "prior_art_difference": "Not H50-B's low-Th/K level anomaly inside a B2xH36 conflict corridor. Uses all-band multiscale gradients/orientation coherence and a weak radiometric BPA in a B2xH33-D fusion.",
+      "expected_proxy_dti_effect": "subjective prior near zero to small positive; broad plausible range -0.01 to +0.01; not empirically calibrated",
+      "cost": "medium-low; all raster inputs local",
+      "data_obtainability": "local GeoDAWN 4-band radiometry available; zero is nodata",
+      "decision": "test first"
+    },
+    {
+      "rank": 2,
+      "id": "H53-2",
+      "name": "USGS National Geochemical Survey pathfinder anomalies",
+      "layers": ["USGS stream sediment/soil sample locations", "As/Sb/Hg and sample-method/media fields where available"],
+      "signature": "Quality-controlled robust multielement anomaly and spatial gradient, with drainage/media/method controls.",
+      "off_catalogue_rationale": "Hydrothermal fluids can redistribute pathfinders into sediment/soil above blind or unmapped structures; stream transport, mining, lithology, sparse data, and mixed methods confound the signal.",
+      "prior_art_difference": "No geochemistry point model has been built in this repository; distinct from airborne radiometry, 2 m temperature probes, and lidar scarps.",
+      "expected_proxy_dti_effect": "potentially moderate but unquantified and high variance",
+      "cost": "medium-high; source harmonization, AOI coverage, sample media, and method QC required",
+      "data_obtainability": "USGS page lists official download packages; exact AOI count and reuse terms not checked; no payload downloaded",
+      "decision": "reserve"
+    },
+    {
+      "rank": 3,
+      "id": "H53-3",
+      "name": "GeoDAWN airborne magnetic analytic-signal/gradient ridges",
+      "layers": ["official GeoDAWN magnetic grid and metadata", "B2/H33-D for comparison"],
+      "signature": "Directional horizontal-gradient or analytic-signal ridges and edge terminations at survey-compatible resolution.",
+      "off_catalogue_rationale": "Offset magnetized units can create linear gradients beneath cover where a fault is not in the catalogue; lithologic contacts and cultural noise confound.",
+      "prior_art_difference": "Related H49 magnetic-texture proposal exists, but no analytic-signal/edge implementation or holdout receipt was found; not claimed as a new general concept.",
+      "expected_proxy_dti_effect": "potentially moderate but unquantified",
+      "cost": "high; magnetic payload/coverage/resolution and reproducible acquisition not verified",
+      "data_obtainability": "USGS GeoDAWN metadata list magnetic data; local mirror contains radiometry only",
+      "decision": "reserve"
+    }
+  ],
+  "H53_1_frozen_parameters": {
+    "parent_sha256": {
+      "h33_2_b2": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+      "h33d_tip_stepover": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757",
+      "geodawn_radiometry": "c22420f75999030d7cc65c9e31e50d232ea6158423bca051613a18a8b20ba682"
+    },
+    "grid": "EPSG:32611, 100 m, 3730x3292, exact common transform",
+    "footprint": "finite sample mask; all four GeoDAWN bands valid; zeros are nodata",
+    "family_kernel": "max_y max(1-distance(y,x)/300m,0)",
+    "family_reliabilities": {
+      "b2": 0.5,
+      "h33d": 0.5
+    },
+    "radiometric_edge": {
+      "gaussian_sigmas_pixels": [1, 3],
+      "bands": ["K", "Th", "U", "TC"],
+      "normalizer": "per-band/per-scale P99 of valid edge magnitude",
+      "orientation_coherence": "doubled-angle coherence across eight gradients",
+      "score": "mean clipped gradient magnitude multiplied by coherence, clipped to [0,1]"
+    },
+    "radiometric_bpa": {
+      "reliability": 0.25,
+      "absence_informativeness": 0.1,
+      "fault_mass": "rho*edge",
+      "not_fault_mass": "rho*(1-edge)*absence_informativeness",
+      "ignorance_mass": "1-fault_mass-not_fault_mass"
+    },
+    "combination": "canonical normalized Dempster rule, sequentially combining B2, H33-D, and radiometric BPA",
+    "diagnostics": ["post-normalization m(Theta)", "cumulative raw conjunctive conflict K", "Yager-style m(Theta)+K sensitivity, explicitly labelled"],
+    "submission": "normalized Bel(F), single-band float32 in [0,1] in footprint, NaN outside; unique SHA-addressed research artifact",
+    "not_a_mean_comparisons": ["mean(B2 kernel support,H33-D kernel support)", "mean of the three normalized evidence fields", "two-family D-S without radiometry"],
+    "hyperparameter_tuning_after_holdout": false
+  },
+  "blocked_holdout_gate": {
+    "protocol": "four fixed 2x2 quadrants; core truth only; held-out quadrant plus 300m halo; 100m grid; official triangular 300m DTI alpha=0.2 beta=0.8",
+    "primary_target": "newer derived SGMC faults >300m from public catalogue",
+    "sensitivity_targets": ["older raw-SGMC off-catalogue raster", "public catalogue proxy"],
+    "current_best_reference": {
+      "name": "H49",
+      "newer_sgmc_mean_dti": 0.100751188,
+      "public_proxy_only": true
+    },
+    "pass_conditions": [
+      "primary newer-SGMC mean delta versus H49 >= +0.005",
+      "primary newer-SGMC positive paired delta in at least 3 of 4 folds",
+      "older raw-SGMC mean delta versus H49 > 0 and positive paired delta in at least 3 of 4 folds",
+      "primary newer-SGMC improvement over both two-family D-S-only and two-family arithmetic mean"
+    ],
+    "on_failure": "archive candidate and do not consider a weekly submission slot",
+    "even_if_passes": "public proxy evidence alone is not organizer/private-label evidence or slot clearance"
+  },
+  "sensitive_scope": {
+    "no_competition_upload": true,
+    "no_leaderboard_claim_without_organizer_evidence": true,
+    "owner_reported_0_2778_not_associated_with_local_parent_bytes": true,
+    "source_independence_and_probability_calibration_not_assumed": true
+  },
+  "sources_checked": [
+    "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+    "https://data.usgs.gov/datacatalog/data/USGS:657e1d85d34e23d3533209f7",
+    "https://www.usgs.gov/publications/structural-discontinuities-and-their-control-hydrothermal-systems-great-basin-usa",
+    "https://mrdata.usgs.gov/geochem/",
+    "https://doi.org/10.1214/aoms/1177698950"
+  ]
+}

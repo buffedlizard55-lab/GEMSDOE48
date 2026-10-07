@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "audited_utc": "2026-10-07T04:53:41.658656+00:00",
+  "status": "PASS_LOCAL_FORMAT_AND_BOUNDED_UNIQUENESS_ONLY_NOT_ORGANIZER_ACCEPTANCE",
+  "candidate": {
+    "name": "GEMSDOE48-H53-DS-RadEdge-B2xH33D-4c01fcf2ad8c",
+    "path": "docs/downloads/GEMSDOE48-H53-DS-RadEdge-B2xH33D-20261007-4c01fcf2ad8c-nan-outside.tif",
+    "bytes": 17382618,
+    "sha256": "4c01fcf2ad8c1d2bd487bc4d07c85e57b2a256296586d4817b58079b0ccd7a1f",
+    "single_band_float32": true,
+    "grid": "EPSG:32611, 100 m, 3292 x 3730",
+    "in_footprint_cells": 5167373,
+    "finite_in_footprint": true,
+    "min": 0.0,
+    "max": 1.0,
+    "positive_in_footprint": 5144440,
+    "outside_is_nan": true,
+    "tags": {
+      "AREA_OR_POINT": "Area",
+      "candidate_id": "H53-1",
+      "family_reliability": "0.5",
+      "family_sources": "H33-2-B2 dotted and H33-D tip/step-over",
+      "gaussian_sigmas_pixels": "1.0,3.0",
+      "geodawn_sha256": "c22420f75999030d7cc65c9e31e50d232ea6158423bca051613a18a8b20ba682",
+      "metric_kernel": "triangular 300 m support; max-credit field",
+      "model": "Canonical normalized three-source Dempster-Shafer combination",
+      "parent_b2_sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+      "parent_h33d_sha256": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757",
+      "radiometric_absence_informativeness": "0.1",
+      "radiometric_reliability": "0.25",
+      "radiometric_source": "GeoDAWN K, Th, U, TC multiscale gradient-orientation coherence",
+      "warning": "Owner-mirror inputs; public proxy only; normalized belief is not calibrated probability; not slot-cleared."
+    }
+  },
+  "diagnostics": {
+    "mtheta_dempster": {
+      "path": "docs/downloads/diagnostics/GEMSDOE48-H53-DS-RadEdge-B2xH33D-20261007-4c01fcf2ad8c-mtheta-dempster.tif",
+      "sha256": "657da8c9928bf693cd7a78ec405eb93bce0fdaff7d987befe545fd3a968a3f12",
+      "min": 0.18768298625946045,
+      "max": 0.32773110270500183
+    },
+    "conflict_total_K": {
+      "path": "docs/downloads/diagnostics/GEMSDOE48-H53-DS-RadEdge-B2xH33D-20261007-4c01fcf2ad8c-conflict-total-K.tif",
+      "sha256": "360d771d54145f810d3a5aa4ee97550fb93b62f72351facd9b590d53a65cfc05",
+      "min": 0.0,
+      "max": 0.31083208322525024
+    },
+    "conflict_b2_h33d_K": {
+      "path": "docs/downloads/diagnostics/GEMSDOE48-H53-DS-RadEdge-B2xH33D-20261007-4c01fcf2ad8c-conflict-b2-h33d-K.tif",
+      "sha256": "6733bbde40e61bc16309d351b0c3f92c17f30aab023eaf07db80795198867096",
+      "min": 0.0,
+      "max": 0.25
+    },
+    "radiometric_edge_coherence": {
+      "path": "docs/downloads/diagnostics/GEMSDOE48-H53-DS-RadEdge-B2xH33D-20261007-4c01fcf2ad8c-radiometric-edge-coherence.tif",
+      "sha256": "067a80f2fce1227c7d0a22cce0d810f7824bdc9abffba199284a107bdc265834",
+      "min": 0.0,
+      "max": 0.9994800686836243
+    },
+    "two_family_dempster_only": {
+      "path": "docs/downloads/diagnostics/GEMSDOE48-H53-DS-RadEdge-B2xH33D-20261007-4c01fcf2ad8c-two-family-dempster-only.tif",
+      "sha256": "a0eaa98c3294a7686d26753348bca9eaf143f089a9d39d827ee19ddb7e55ffac",
+      "min": 0.0,
+      "max": 1.0
+    },
+    "two_family_naive_mean": {
+      "path": "docs/downloads/diagnostics/GEMSDOE48-H53-DS-RadEdge-B2xH33D-20261007-4c01fcf2ad8c-two-family-naive-mean.tif",
+      "sha256": "2b070e616f5494d09d39f4a35727adceb541e72a2a0471322f7b87cc1fb1dc86",
+      "min": 0.0,
+      "max": 1.0
+    }
+  },
+  "bounded_uniqueness": {
+    "comparison_universe": "top-level docs/downloads TIFFs (historical candidate/submission files) plus data/families source TIFFs; different-grid and unreadable items recorded as skipped",
+    "same_grid_files_compared": 34,
+    "exact_sha256_matches": [],
+    "exact_in_footprint_pixel_matches": [],
+    "exact_matches_found": false,
+    "closest_local_maps_by_pearson": [
+      {
+        "path": "docs/downloads/gemsdoe48-h49-ds-conflict-balanced-20261006-belief-field.tif",
+        "sha256": "6bcf9de850471535816e1a798983a329b4408d39cfa91d4c17511e7fe0158a38",
+        "pearson_in_footprint": 0.9947063430192545,
+        "exact_pixel_match": false,
+        "top_37654_jaccard": 0.9768473552959706
+      },
+      {
+        "path": "docs/downloads/gemsdoe48-ds48-belief.tif",
+        "sha256": "f7e5645f10ffb9961ad3199ff83c67cd3bc9375d75af971cf656253dae1057c5",
+        "pearson_in_footprint": 0.9849846440005593,
+        "exact_pixel_match": false,
+        "top_37654_jaccard": 0.8708667676943334
+      },
+      {
+        "path": "docs/downloads/gemsdoe48-h50-ds-b2xh36rung30-20261007-5b59e106-nan.tif",
+        "sha256": "54dfe8bd79f767370558bebc1c23366cb43e5e5a4b26c7d9d14131c8b58bdc0c",
+        "pearson_in_footprint": 0.9584047894432643,
+        "exact_pixel_match": false,
+        "top_37654_jaccard": 0.7134536188027576
+      },
+      {
+        "path": "docs/downloads/gemsdoe48-h50-ds-b2xh36rung30-20261007-5b59e106-zeros.tif",
+        "sha256": "5b59e106b6e448038b96fb340c5bae39094d4558c239c437aea28b6020d5d32f",
+        "pearson_in_footprint": 0.9584047894432643,
+        "exact_pixel_match": false,
+        "top_37654_jaccard": 0.7134536188027576
+      },
+      {
+        "path": "docs/downloads/gemsdoe48-h49-ds-conflict-balanced-20261006-unassigned-diagnostic.tif",
+        "sha256": "cd1f9d6ac726288d27c41820a4da9845a30dddbf7b25b15185df11381e523d39",
+        "pearson_in_footprint": 0.7947360055235639,
+        "exact_pixel_match": false,
+        "top_37654_jaccard": 0.0
+      }
+    ],
+    "skipped": [],
+    "scope_limit": "This bounded local-repository audit does not establish uniqueness across sibling repositories, organizer uploads, or the competition portal."
+  },
+  "not_a_mean_review": {
+    "vs_two_family_mean": {
+      "pearson_in_footprint": 0.9944608287241378,
+      "spearman_deterministic_sample": 0.6203679014770271,
+      "spearman_sample_cells": 99373,
+      "mae_in_footprint": 0.018443942070007324,
+      "max_abs_difference": 0.09653827548027039,
+      "fraction_abs_difference_gt_0_05": 0.07172213037456364,
+      "exactly_equal_cells": 22934,
+      "different_cells": 5144439,
+      "budget_matched_top_k": 37654,
+      "top_k_jaccard": 0.9768473552959706,
+      "is_pixelwise_equal": false
+    },
+    "interpretation": "The TIFF is not pixelwise the family mean, but its Pearson correlation and budget-matched top-k overlap are reported candidly; mathematical difference is not evidence of useful new ranking signal."
+  },
+  "holdout_decision": {
+    "passes_preregistered_proxy_gate": false,
+    "slot_cleared": false,
+    "reason": "The public spatial holdout is a proxy only; no organizer score or file-to-score receipt exists."
+  }
+}

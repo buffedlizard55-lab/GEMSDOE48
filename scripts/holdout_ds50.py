@@ -6,6 +6,8 @@ halo), and official metric call of ``scripts/run_spatial_holdout.py`` so the
 numbers are comparable with the 2026-10-06 reports.  Truth sources remain the
 two public owner-mirror proxies (catalogue labels; SGMC faults >300 m from the
 catalogue).  Nothing here is private-label evidence or a slot clearance.
+The frozen comparator key ``tip_h36_parent`` is a legacy schema alias for
+H36-1 rung30 (H19-5/rung-30 repacking), not the actual tip/step-over family.
 """
 from __future__ import annotations
 

@@ -4,8 +4,8 @@ Why H51 exists
 --------------
 The H50 analysis (``docs/research/h50-method-20261007.md``) showed that the
 normalized Dempster *belief* surface Bel(F) is intersection-like: it is high
-only where both families agree, so a Bel-ranked fixed-budget emission sheds
-each family's solo-supported cells and loses to both parents and to the plain
+only where both parent surfaces agree, so a Bel-ranked fixed-budget emission sheds
+parent-only supported cells and loses to both parents and to the plain
 union on the blocked public proxies.  The official metric,
 
     DTI = TPw / (TPw + 0.2*FPw + 0.8*FNw),   k(d) = max(1 - d/300 m, 0),
@@ -28,7 +28,7 @@ Plausibility is the upper bound of the Dempster-Shafer belief interval
 plausibility cells is the optimistic / interval-dominance decision rule:
 commit exactly where the hypothesis "fault" has not been positively refuted by
 the combined evidence.  Operationally, Pl(F) stays high wherever *either*
-family has support (restoring the union-like coverage that made the union
+parent surface has support (restoring the union-like coverage that made the union
 decision beat both parents on the proxies) while doubly supported cells still
 outrank single-family cells (credit-density ordering).
 
@@ -110,6 +110,8 @@ class H51Preregistration:
 
     budget: int
     dotted_reliability: float
+    # Compatibility field names: ``tip_*`` refer to H36-1 rung30, not a
+    # tip/step-over family. Frozen H51 receipts retain the legacy schema.
     tip_reliability: float
     dotted_sha256: str
     tip_sha256: str

@@ -15,8 +15,32 @@
   <a href="hypotheses.html">Hypotheses</a><a href="sources.html">Sources</a><a href="irregularities.html">Irregularities</a>
 </div></nav>
 <div class="wrap">
+  <section class="hero" id="h53">
+    <h2>Latest — H53-1 research TIFF (unique, format-audited, blocked gate failed)</h2>
+    <p><a class="btn" href="downloads/GEMSDOE48-H53-DS-RadEdge-B2xH33D-20261007-4c01fcf2ad8c-nan-outside.tif" download>Download the H53 GeoTIFF (research only; do not upload)</a>
+    <a class="btn alt" href="research/holdout-h53-results-20261007.md">Read the preregistered holdout report</a></p>
+    <p><b>Unique candidate name:</b> <code>GEMSDOE48-H53-DS-RadEdge-B2xH33D-4c01fcf2ad8c</code> · 17,382,618 bytes · SHA-256 <code>4c01fcf2ad8c1d2bd487bc4d07c85e57b2a256296586d4817b58079b0ccd7a1f</code>.</p>
+    <p>One-band float32; EPSG:32611; 100 m; 3,730 × 3,292; in-footprint [0,1], NaN outside. H53 fuses the B2 dotted and H33-D tip/step-over family supports with a weak, cross-band GeoDAWN K/Th/U/TC edge source. Separate canonical Dempster residual m(Θ) and raw conflict K diagnostics are linked from the <a href="index.html#h53">landing-page H53 card</a>.</p>
+    <p><b>Outcome:</b> newer-SGMC off-catalogue proxy DTI 0.061821 vs current H49 proxy-best 0.100751 (−0.038930; 0/4 folds positive). It also loses on the older SGMC sensitivity and slightly trails the two-family D-S-only baseline. The preregistered gate fails. <b>Do not spend a weekly slot.</b> No organizer score exists for H53 or any other file here.</p>
+    <p><b>Not an arithmetic copy, but almost the same ranking:</b> H53 differs pixelwise from the two-family mean, yet Pearson r=0.99446 and top-37,654 Jaccard=0.97685; the output assigns positive values to 99.56% of valid cells. This dense mass is a poor fit for the DTI false-positive penalty.</p>
+    <p>Research records: <a href="research/hypotheses-h53-20261007.md">frozen three-hypothesis slate</a>; <a href="research/data-availability-h53-20261007.md">post-slate official-data availability check</a> (GeoDAWN is public-domain/downloadable, but exact competition-footprint magnetic coverage remains unverified).</p>
+    <p><b>Draft portal note (171 characters; do not paste for H53):</b> <code>GEMSDOE48-H53-DS-RadEdge-B2xH33D-4c01fcf2ad8c | H33-2-B2 x H33-D plus weak GeoDAWN K/Th/U/TC edge evidence; Dempster-Shafer, unscored research candidate, not slot-cleared.</code></p>
+  </section>
+
+  <section class="hero" id="submission-steps">
+    <h2>Competition submission steps — future cleared candidates only</h2>
+    <p><b>Current status: do not submit H53 or spend a weekly slot.</b> H53 failed the frozen gate. For a future candidate only, the official challenge requests a GeoTIFF (not a ZIP requirement) on the full EPSG:32611, 100 m grid, with one float32 band, finite 0–1 values in the sample footprint and null/NaN outside. A local format pass is not organizer acceptance.</p>
+    <ol>
+      <li>First verify the candidate has beaten the current spatially blocked best under a preregistered margin and has passed the independent evidence/review gates. A public SGMC/catalogue proxy pass alone is not a leaderboard result.</li>
+      <li>Run the repository format validator on the exact, uniquely named TIFF and verify its SHA-256; do not change outside-footprint encoding or resave the file afterward.</li>
+      <li>Only after authorization, sign in to the DrivenData DOE GEMS competition portal, upload that single GeoTIFF, and optionally paste the candidate-specific ≤200-character note.</li>
+      <li>Save the portal's submitted filename, timestamp, organizer receipt/score, and the local TIFF SHA-256 together. Claim a score or leaderboard improvement only when that evidence ties the exact bytes to an organizer result.</li>
+    </ol>
+    <p><b>H53 note draft for records only (not a submission recommendation):</b> <code>GEMSDOE48-H53-DS-RadEdge-B2xH33D-4c01fcf2ad8c | H33-2-B2 x H33-D plus weak GeoDAWN K/Th/U/TC edge evidence; Dempster-Shafer, unscored research candidate, not slot-cleared.</code></p>
+  </section>
+
   <section class="hero" id="h52">
-    <h2>2026-10-07 — H52 unique candidate file (download first, read second)</h2>
+    <h2>Earlier H52 lidar candidate (unique research file; gate failed; do not upload)</h2>
     <p><a class="btn" href="downloads/GEMSDOE48-H52-lidar-scarp-additions-20261007-38029417f6ca-nan-outside.tif" download>Download GEMSDOE48-H52 GeoTIFF (NaN outside)</a>
     <a class="btn alt" href="research/holdout-h52-results-20261007.md">Read the H52 sweep and controls</a></p>
     <p><b>Paste-ready note (143 characters):</b> <code>GEMSDOE48-H52 | 0.2778 dotted family + 2,000 lidar-scarp dots (3 m USGS 3DEP step detector, &gt;200 m off-catalogue); unscored research candidate.</code></p>

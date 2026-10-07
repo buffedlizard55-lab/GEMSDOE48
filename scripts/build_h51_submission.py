@@ -70,8 +70,8 @@ SHA_H50_DIAG_PL = "cd0e07fb882927d528a6708044e4f88e63ea21ffa9e6af4b41f045f186a93
 DATESTAMP = "20261007"
 SUBMISSION_NAME = "GEMSDOE48-H51-PLAUSIBILITY-BUDGET"
 SUBMISSION_NOTE = (
-    "GEMSDOE48 H51 | binary budget emission, top-37,654 cells by DS plausibility "
-    "Pl=Bel+m(Theta); Dempster fusion of best dotted B2 x best tip H36-1; "
+    "GEMSDOE48 H51 | binary top-37,654 by DS plausibility; Dempster fusion of "
+    "B2 x H36-1 rung30 (H19-5/rung-30 repack, not tip/step-over); "
     "H50 diagnostics reused; unscored research candidate."
 )
 
@@ -107,14 +107,14 @@ def main() -> int:
         raise SystemExit("submission note exceeds the portal's 200-character limit")
     if not args.allow_unpinned:
         require_sha(PINNED_DOTTED, SHA_DOTTED, "dotted parent")
-        require_sha(PINNED_TIP, SHA_TIP_H36, "tip parent")
+        require_sha(PINNED_TIP, SHA_TIP_H36, "H36-1 rung30 parent")
         require_sha(FOOTPRINT, SHA_FOOTPRINT, "footprint mask")
 
     dotted_raw, dotted_profile = read_band(PINNED_DOTTED)
     tip_raw, tip_profile = read_band(PINNED_TIP)
     assert_competition_grid(dotted_profile, path=PINNED_DOTTED)
     assert_competition_grid(tip_profile, path=PINNED_TIP)
-    assert_same_grid(dotted_profile, tip_profile, name_a="dotted", name_b="tip h36")
+    assert_same_grid(dotted_profile, tip_profile, name_a="dotted B2", name_b="H36-1 rung30 (not tip/step-over)")
     with rasterio.open(FOOTPRINT) as fp_ds:
         assert_competition_grid(fp_ds.profile, path=FOOTPRINT)
         footprint = fp_ds.read(1) == 1
@@ -200,6 +200,9 @@ def main() -> int:
     with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as zf:
         zf.write(primary_path, arcname=primary_path.name)
 
+    # Frozen H51 TIFF tags and receipt fields retain ``tip`` compatibility
+    # aliases for the H36-1 rung30 raster. They do not classify H36 as a
+    # tip/step-over family; see the dated classification erratum.
     tag_values = {
         "model": "H51 plausibility-budget emission of the H50 Dempster fusion",
         "decision_rule": "binary top-B by Pl(F)=Bel(F)+m(Theta), B=37654",

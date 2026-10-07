@@ -1,0 +1,335 @@
+{
+  "schema_version": 1,
+  "built_utc": "2026-10-07T04:35:09.652188+00:00",
+  "status": "BUILT_RESEARCH_CANDIDATE_HOLDOUT_NOT_YET_RUN_NOT_SLOT_CLEARED",
+  "preregistration": "evidence/h53_preregistration_20261007.json",
+  "candidate": {
+    "id": "H53-1",
+    "unique_submission_name": "GEMSDOE48-H53-DS-RadEdge-B2xH33D-4c01fcf2ad8c",
+    "path": "docs/downloads/GEMSDOE48-H53-DS-RadEdge-B2xH33D-20261007-4c01fcf2ad8c-nan-outside.tif",
+    "sha256": "4c01fcf2ad8c1d2bd487bc4d07c85e57b2a256296586d4817b58079b0ccd7a1f",
+    "bytes": 17382618,
+    "portal_note_characters": 171,
+    "portal_note": "GEMSDOE48-H53-DS-RadEdge-B2xH33D-4c01fcf2ad8c | H33-2-B2 x H33-D plus weak GeoDAWN K/Th/U/TC edge evidence; Dempster-Shafer, unscored research candidate, not slot-cleared.",
+    "holdout_status": "FAILED_PREREGISTERED_PROXY_GATE",
+    "leaderboard_claim": false,
+    "slot_cleared": false,
+    "holdout_report": "evidence/holdout_h53_20261007.json",
+    "proxy_gate_summary": {
+      "newer_sgmc_mean_delta_vs_h49": -0.038930126275541696,
+      "newer_sgmc_positive_folds_vs_h49": 0,
+      "older_sgmc_mean_delta_vs_h49": -0.038669436889728695,
+      "older_sgmc_positive_folds_vs_h49": 0,
+      "newer_sgmc_gain_vs_two_family_dempster": -0.002043493907353108,
+      "newer_sgmc_gain_vs_two_family_mean": -0.0006977446444889745,
+      "passes_preregistered_proxy_gate": false
+    }
+  },
+  "inputs": {
+    "h33_2_b2": {
+      "path": "data/families/dotted_b2_prune_02778.tif",
+      "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+      "positive_cells": 37654,
+      "owner_reported_live": 0.2778,
+      "official_file_score_receipt": false
+    },
+    "h33d_tip_stepover": {
+      "path": "data/families/tip_stepover_r30_02632.tif",
+      "sha256": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757",
+      "positive_cells": 41865,
+      "owner_reported_live": 0.2632,
+      "official_file_score_receipt": false
+    },
+    "geodawn_radiometry": {
+      "path": "data/source_mirrors/geodawn_rad_u8.tif",
+      "sha256": "c22420f75999030d7cc65c9e31e50d232ea6158423bca051613a18a8b20ba682",
+      "bands": [
+        "K",
+        "Th",
+        "U",
+        "TC"
+      ],
+      "nodata": 0,
+      "valid_cells_in_footprint": 5166085,
+      "invalid_cells_in_footprint": 1288
+    },
+    "footprint": {
+      "path": "data/source_mirrors/footprint-mask.tif",
+      "sha256": "ddadb8c96cda673b91ddaa0bbed2aa955c358a8f6196c4c4e8fa70d454dd429f",
+      "valid_cells": 5167373
+    }
+  },
+  "family_overlap": {
+    "shared_cells": 31614,
+    "union_cells": 47905,
+    "jaccard": 0.6599311136624569,
+    "fraction_b2_shared": 0.839592075211133,
+    "fraction_h33d_shared": 0.755141526334647,
+    "interpretation": "High dependence is plausible; separate build pipelines do not establish statistical independence."
+  },
+  "frozen_parameters": {
+    "family_belief": "competition triangular max-credit field, radius 300 m",
+    "family_reliabilities": {
+      "B2": 0.5,
+      "H33-D": 0.5
+    },
+    "radiometric_sigma_pixels": [
+      1.0,
+      3.0
+    ],
+    "gradient_normalization": "per-band/per-scale P99 over valid edge cells",
+    "orientation": "doubled-angle coherence across eight gradients",
+    "radiometric_reliability": 0.25,
+    "radiometric_absence_informativeness": 0.1,
+    "combination": "canonical normalized Dempster-Shafer, three sources",
+    "submission": "normalized Bel(F), float32, one band, NaN outside footprint",
+    "labels_used_to_build": false,
+    "post_holdout_parameter_tuning": false
+  },
+  "edge_summary": {
+    "valid_edge_cells": 5139250,
+    "p99_gradient_by_scale_then_band": [
+      [
+        18.15369987487793,
+        16.667835235595703,
+        21.4874267578125,
+        16.81800079345703
+      ],
+      [
+        9.95145320892334,
+        9.644566535949707,
+        9.287940979003906,
+        10.089226722717285
+      ]
+    ],
+    "edge_score_quantiles_in_footprint": {
+      "0.5": 0.14361132681369781,
+      "0.9": 0.36467379331588745,
+      "0.95": 0.47244811058044434,
+      "0.99": 0.7267716526985168,
+      "1.0": 0.9994800686836243
+    },
+    "coherence_median_in_footprint": 0.6120693683624268,
+    "note": "Edge scores are normalized texture/edge evidence, not fault probabilities; edge-level geology has not been independently mapped."
+  },
+  "dempster_diagnostics": {
+    "belief_max_before_normalization": 0.8122978806495667,
+    "belief_normalization": "m(F) divided by maximum m(F) within the footprint",
+    "mtheta_is_canonical_dempster_residual": true,
+    "raw_conflict_is_separate": true,
+    "yager_sensitivity": "computed internally only; not exported. Canonical m(Theta) and raw K remain separate; no conflict-to-ignorance diagnostic is presented as Dempster m(Theta).",
+    "mass_sum_max_abs_error_in_footprint": 3.5762786865234375e-07,
+    "mean_mtheta": 0.24534541368484497,
+    "mean_raw_conflict_K": 0.04712580889463425,
+    "p95_raw_conflict_K": 0.1403392255306244
+  },
+  "not_merely_a_mean": {
+    "vs_two_family_naive_mean": {
+      "pearson_in_footprint": 0.9944608287241378,
+      "spearman_deterministic_sample": 0.6203679014770271,
+      "spearman_sample_cells": 99373,
+      "mae_in_footprint": 0.018443942070007324,
+      "max_abs_difference": 0.09653827548027039,
+      "fraction_abs_difference_gt_0_05": 0.07172213037456364,
+      "exactly_equal_cells": 22934,
+      "different_cells": 5144439,
+      "budget_matched_top_k": 37654,
+      "top_k_jaccard": 0.9768473552959706,
+      "is_pixelwise_equal": false
+    },
+    "vs_three_input_naive_mean": {
+      "pearson_in_footprint": 0.9520065683966271,
+      "spearman_deterministic_sample": 0.9954368656673273,
+      "spearman_sample_cells": 99373,
+      "mae_in_footprint": 0.04821236431598663,
+      "max_abs_difference": 0.250078022480011,
+      "fraction_abs_difference_gt_0_05": 0.3533683362900259,
+      "exactly_equal_cells": 22934,
+      "different_cells": 5144439,
+      "budget_matched_top_k": 37654,
+      "top_k_jaccard": 0.781131004470093,
+      "is_pixelwise_equal": false
+    },
+    "vs_two_family_dempster_no_radiometry": {
+      "pearson_in_footprint": 0.9960343577086872,
+      "spearman_deterministic_sample": 0.6203820468236318,
+      "spearman_sample_cells": 99373,
+      "mae_in_footprint": 0.0159226655960083,
+      "max_abs_difference": 0.11772298812866211,
+      "fraction_abs_difference_gt_0_05": 0.035713698236995856,
+      "exactly_equal_cells": 22934,
+      "different_cells": 5144439,
+      "budget_matched_top_k": 37654,
+      "top_k_jaccard": 0.9773664172246291,
+      "is_pixelwise_equal": false
+    }
+  },
+  "primary_format_checks": {
+    "single_band_float32": true,
+    "crs": "EPSG:32611",
+    "shape": [
+      3730,
+      3292
+    ],
+    "pixel_size_m": 100,
+    "in_footprint_finite": true,
+    "in_footprint_min": 0.0,
+    "in_footprint_max": 1.0,
+    "outside_footprint_nan": true,
+    "valid_cells": 5167373,
+    "all_local_checks_passed": true
+  },
+  "diagnostics": {
+    "mtheta_dempster": {
+      "path": "docs/downloads/diagnostics/GEMSDOE48-H53-DS-RadEdge-B2xH33D-20261007-4c01fcf2ad8c-mtheta-dempster.tif",
+      "bytes": 13297986,
+      "dtype": "float32",
+      "bands": 1,
+      "width": 3292,
+      "height": 3730,
+      "crs": "EPSG:32611",
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": "NaN",
+      "finite_cells": 5167373,
+      "nodata_cells": 7111787,
+      "min": 0.18768298625946045,
+      "max": 0.32773110270500183,
+      "range_0_1_with_nan_outside": true,
+      "sha256": "657da8c9928bf693cd7a78ec405eb93bce0fdaff7d987befe545fd3a968a3f12"
+    },
+    "conflict_total_K": {
+      "path": "docs/downloads/diagnostics/GEMSDOE48-H53-DS-RadEdge-B2xH33D-20261007-4c01fcf2ad8c-conflict-total-K.tif",
+      "bytes": 16301904,
+      "dtype": "float32",
+      "bands": 1,
+      "width": 3292,
+      "height": 3730,
+      "crs": "EPSG:32611",
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": "NaN",
+      "finite_cells": 5167373,
+      "nodata_cells": 7111787,
+      "min": 0.0,
+      "max": 0.31083208322525024,
+      "range_0_1_with_nan_outside": true,
+      "sha256": "360d771d54145f810d3a5aa4ee97550fb93b62f72351facd9b590d53a65cfc05"
+    },
+    "conflict_b2_h33d_K": {
+      "path": "docs/downloads/diagnostics/GEMSDOE48-H53-DS-RadEdge-B2xH33D-20261007-4c01fcf2ad8c-conflict-b2-h33d-K.tif",
+      "bytes": 2022494,
+      "dtype": "float32",
+      "bands": 1,
+      "width": 3292,
+      "height": 3730,
+      "crs": "EPSG:32611",
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": "NaN",
+      "finite_cells": 5167373,
+      "nodata_cells": 7111787,
+      "min": 0.0,
+      "max": 0.25,
+      "range_0_1_with_nan_outside": true,
+      "sha256": "6733bbde40e61bc16309d351b0c3f92c17f30aab023eaf07db80795198867096"
+    },
+    "radiometric_edge_coherence": {
+      "path": "docs/downloads/diagnostics/GEMSDOE48-H53-DS-RadEdge-B2xH33D-20261007-4c01fcf2ad8c-radiometric-edge-coherence.tif",
+      "bytes": 17160392,
+      "dtype": "float32",
+      "bands": 1,
+      "width": 3292,
+      "height": 3730,
+      "crs": "EPSG:32611",
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": "NaN",
+      "finite_cells": 5167373,
+      "nodata_cells": 7111787,
+      "min": 0.0,
+      "max": 0.9994800686836243,
+      "range_0_1_with_nan_outside": true,
+      "sha256": "067a80f2fce1227c7d0a22cce0d810f7824bdc9abffba199284a107bdc265834"
+    },
+    "two_family_dempster_only": {
+      "path": "docs/downloads/diagnostics/GEMSDOE48-H53-DS-RadEdge-B2xH33D-20261007-4c01fcf2ad8c-two-family-dempster-only.tif",
+      "bytes": 2017960,
+      "dtype": "float32",
+      "bands": 1,
+      "width": 3292,
+      "height": 3730,
+      "crs": "EPSG:32611",
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": "NaN",
+      "finite_cells": 5167373,
+      "nodata_cells": 7111787,
+      "min": 0.0,
+      "max": 1.0,
+      "range_0_1_with_nan_outside": true,
+      "sha256": "a0eaa98c3294a7686d26753348bca9eaf143f089a9d39d827ee19ddb7e55ffac"
+    },
+    "two_family_naive_mean": {
+      "path": "docs/downloads/diagnostics/GEMSDOE48-H53-DS-RadEdge-B2xH33D-20261007-4c01fcf2ad8c-two-family-naive-mean.tif",
+      "bytes": 1954384,
+      "dtype": "float32",
+      "bands": 1,
+      "width": 3292,
+      "height": 3730,
+      "crs": "EPSG:32611",
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": "NaN",
+      "finite_cells": 5167373,
+      "nodata_cells": 7111787,
+      "min": 0.0,
+      "max": 1.0,
+      "range_0_1_with_nan_outside": true,
+      "sha256": "2b070e616f5494d09d39f4a35727adceb541e72a2a0471322f7b87cc1fb1dc86"
+    }
+  },
+  "limitations": [
+    "B2 0.2778 is an owner-reported registry value; no official receipt links it to this exact local TIFF, and its local audit labels it UNSCORED.",
+    "The two family supports overlap heavily; statistical independence is not established and belief is not calibrated probability.",
+    "The radiometric edge is an indirect signature confounded by lithologic contacts, weathering, topography, quantization, and survey artifacts.",
+    "Owner-mirror family and radiometric input licensing/organizer identity are not independently verified by these hashes.",
+    "No organizer score, leaderboard result, upload, or slot clearance is asserted."
+  ]
+}

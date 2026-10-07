@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "erratum_id": "H36_PARENT_IS_NOT_THE_TIP_STEPOVER_FAMILY",
+  "recorded_utc": "2026-10-07T04:44:40Z",
+  "status": "CLASSIFICATION_CORRECTED_NO_PARENT_BYTES_OR_HISTORICAL_SCORES_CHANGED",
+  "prior_description": "Several H50/H51/H50-B records called H36-1 rung30 the best tip/step-over surface or a tip-family parent.",
+  "correction": "H36-1 rung30 is an owner-reported 0.2710 H19-5/rung-30 repacking; it is not the explicitly identified tip/step-over family. H33-D is the explicit tip/step-over surface (owner-reported 0.2632). H32-1 is a separate prethin-tip/Euler surface (owner-reported 0.2649).",
+  "evidence": [
+    {
+      "url": "https://buffedlizard55-lab.github.io/GEMSDOE28/",
+      "authority": "owner-maintained campaign page, not organizer-authenticated",
+      "observed": "H36-1 is described in the owner lineage as an H19-5/rung-30 repacking; H32-1 is separately described as tip/Euler work."
+    },
+    {
+      "path": "data/raw/receipt-h33d.json",
+      "receipt_file_sha256": "157a2fd55393da72abf2a052cd97f00fb4da7ed71a154cde02e109be3a96aa7c",
+      "primary_file": "GEMSDOE33-h33d-analog-tip-stepover-r30-20261004-cb490425926e.tif",
+      "primary_file_sha256_from_receipt": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757",
+      "observed": "The owner receipt explicitly names H33-D as a tip-protected analog/step-over construction; its primary TIFF SHA is the separate primary_file_sha256 value above."
+    },
+    {
+      "path": "registry/live_scores.json",
+      "observed": "Owner-reported IDs distinguish h36-1-rung30 (0.2710), h32-1-prethin-tip (0.2649), h33d-tip-stepover (0.2632), and h33-2-b2 (0.2778). The registry itself states these are owner reports, not organizer file-to-score receipts."
+    }
+  ],
+  "impact": {
+    "h50": "Its Dempster arithmetic, source hashes, TIFF bytes, and blocked scores remain tied to B2 x H36-1. Describing that pair as the two best dotted and tip/step-over families was incorrect; do not use H50 as validation of B2 x actual tip/step-over fusion.",
+    "h51": "Derived from the same B2 x H36-1 H50 fusion; its results are likewise specific to that pair.",
+    "h50b": "Its radiometric-conflict probe used H36-1-derived conflict corridors; its negative result is not a test of the H33-D step/over family.",
+    "h53": "Uses B2 x H33-D, selected because H33-D is the explicit tip/step-over source and is more complementary to B2 than H32-1. H32-1 is owner-reported slightly higher at 0.2649 but 97.93% of B2 cells overlap it and B2 x H32 was already explored in H48."
+  },
+  "corrected_active_descriptions": [
+    "README.md",
+    "docs/index.html",
+    "docs/research/h50-method-20261007.md",
+    "docs/research/h51-h50b-results-20261007.md",
+    "scripts/build_ds50_submission.py",
+    "scripts/build_h51_submission.py",
+    "scripts/build_h50b_probe.py",
+    "scripts/build_site_h50.py",
+    "scripts/make_ds50_figures.py",
+    "src/gemsdoe48/ds50.py",
+    "src/gemsdoe48/h51.py"
+  ],
+  "frozen_records_not_rewritten": [
+    "evidence/build_ds50_receipt_20261007.json",
+    "evidence/holdout_ds50_20261007.json",
+    "evidence/build_h51_receipt_20261007.json",
+    "evidence/holdout_h51_20261007.json",
+    "evidence/h50b_preregistration_20261007.json",
+    "evidence/holdout_h50b_20261007.json"
+  ],
+  "no_reinterpretation": [
+    "H36-1's 0.2710 owner-reported value is not invalidated; only its family classification is corrected.",
+    "No claim is made that any H32/H33-D/H36 mirror earned its owner-reported score on the organizer leaderboard without a file-specific receipt.",
+    "Separate build pipelines do not establish statistical independence."
+  ],
+  "legacy_identifier_map": {
+    "parent_classification": "Every H36-1 rung30 reference below means the H19-5/rung-30 repacking, not the actual tip/step-over family.",
+    "legacy_keys": [
+      "tip_best",
+      "tip_h36_parent",
+      "tip_sha256",
+      "source_tip_sha256",
+      "reliability_tip",
+      "LIVE_TIP_H36",
+      "tip_reliability",
+      "tip_*_sha256"
+    ],
+    "handling": "These field names persist in frozen H50/H51/H50-B receipts and compatibility APIs for provenance/schema continuity. They identify the H36-1 rung30 parent bytes; do not infer a tip/step-over family classification from the key. Active H50 page labels and selected builder comments make the mapping explicit. The H33-D receipt and H53 build use the actual tip/step-over family explicitly."
+  }
+}
