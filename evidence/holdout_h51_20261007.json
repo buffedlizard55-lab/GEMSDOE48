@@ -1,0 +1,1072 @@
+{
+  "schema_version": 1,
+  "evaluated_utc": "2026-10-07T02:29:20.883358+00:00",
+  "status": "CONDITIONAL_SPATIAL_BLOCK_DIAGNOSTIC_NOT_SLOT_CLEARED",
+  "candidate": {
+    "name": "h51_plausibility_budget",
+    "path": "docs/downloads/gemsdoe48-h51-plausibility-budget-20261007-f8fa1d08-zeros.tif",
+    "sha256": "f8fa1d0817712d34935acd70663eb14c510876598c4f70729fcd79288706120f",
+    "build_receipt": "evidence/build_h51_receipt_20261007.json",
+    "preregistered_budget": 37654
+  },
+  "fold_protocol": {
+    "geometry": "Four fixed 2x2 geographic quadrants (identical to run_spatial_holdout.py).",
+    "metric": "Official distance-weighted Tversky; alpha=0.2, beta=0.8, 300 m triangular kernel.",
+    "evaluation_domain": "Held-out quadrant plus 300 m halo, clipped to footprint; core-only truth.",
+    "candidate_retraining": false,
+    "leakage_limitation": "Frozen upstream owner-mirror surfaces; the b2 parent was catalogue-flank-pruned with full-catalogue knowledge. Results are conditional and potentially leaky."
+  },
+  "truth_sources": {
+    "catalogue": {
+      "sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+      "positive_pixels": 60988,
+      "class": "owner-mirror of public USGS/INGENIOUS catalogue labels; not the private test truth"
+    },
+    "sgmc_off_catalogue_gt_300m": {
+      "sha256": "643cbe992ef4ba37588fb469163ed8291e3ceb23d6c1f78a3cfaa462430c2da0",
+      "positive_pixels": 62122,
+      "class": "owner-mirror rasterization of USGS SGMC fault traces, >300 m from catalogue"
+    }
+  },
+  "candidates_note": {
+    "dotted_b2_parent": "binary committed pixels, H33-2-B2 (owner live 0.2778)",
+    "tip_h36_parent": "binary committed pixels, H36-1 rung30 (owner live 0.2710)",
+    "naive_mean_beliefs": "max-normalized 0.5*(b_a+b_b) kernel-credit belief surfaces",
+    "union_decision": "binary union of the two parents (49,066 px)",
+    "h50_ds_belief": "normalized Dempster belief of kernel-credit surfaces (graded)",
+    "h50_binary_bel_budget": "binary top-37,654 by H50 belief",
+    "h51_plausibility_graded": "max-normalized plausibility Pl(F) (graded sensitivity)",
+    "h51_plausibility_budget": "binary top-37,654 by plausibility (the submission)",
+    "h49_yager_pignistic_budget": "H49 Yager/pignistic budget artifact, 47,905 px (proxy best)"
+  },
+  "catalogue_proxy_results": {
+    "dotted_b2_parent": {
+      "NW": {
+        "tp": 166.3061269188496,
+        "fp": 17982.33702223734,
+        "fn": 29152.69387308115,
+        "n_truth": 29319,
+        "dti": 0.006140172240870542,
+        "coverage": 0.005672298745484143,
+        "prediction_mass": 18105.0,
+        "positive_cells": 18105,
+        "valid_domain_cells": 2457001
+      },
+      "NE": {
+        "tp": 102.89051980063647,
+        "fp": 9566.131033143483,
+        "fn": 12493.109480199364,
+        "n_truth": 12596,
+        "dti": 0.008566639707706115,
+        "coverage": 0.00816850744685904,
+        "prediction_mass": 9644.0,
+        "positive_cells": 9644,
+        "valid_domain_cells": 1372176
+      },
+      "SW": {
+        "tp": 64.3306624529001,
+        "fp": 4791.384866112941,
+        "fn": 9408.6693375471,
+        "n_truth": 9473,
+        "dti": 0.0075244561794081824,
+        "coverage": 0.006790949271920204,
+        "prediction_mass": 4837.0,
+        "positive_cells": 4837,
+        "valid_domain_cells": 570886
+      },
+      "SE": {
+        "tp": 44.472587598677805,
+        "fp": 5233.954481301147,
+        "fn": 9555.527412401323,
+        "n_truth": 9600,
+        "dti": 0.005090909927745937,
+        "coverage": 0.004632561208195604,
+        "prediction_mass": 5266.0,
+        "positive_cells": 5266,
+        "valid_domain_cells": 792240
+      },
+      "mean_dti": 0.006830544513932694
+    },
+    "tip_h36_parent": {
+      "NW": {
+        "tp": 1116.7394334878604,
+        "fp": 17472.339331555188,
+        "fn": 28202.26056651214,
+        "n_truth": 29319,
+        "dti": 0.041097368199339984,
+        "coverage": 0.03808927430976024,
+        "prediction_mass": 18019.0,
+        "positive_cells": 18019,
+        "valid_domain_cells": 2457001
+      },
+      "NE": {
+        "tp": 721.3155984489484,
+        "fp": 9380.655402717528,
+        "fn": 11874.684401551052,
+        "n_truth": 12596,
+        "dti": 0.059626685866962244,
+        "coverage": 0.05726544922586126,
+        "prediction_mass": 9739.0,
+        "positive_cells": 9739,
+        "valid_domain_cells": 1372176
+      },
+      "SW": {
+        "tp": 382.4679363859908,
+        "fp": 4656.954961371373,
+        "fn": 9090.53206361401,
+        "n_truth": 9473,
+        "dti": 0.04454405544592024,
+        "coverage": 0.04037453144579234,
+        "prediction_mass": 4837.0,
+        "positive_cells": 4837,
+        "valid_domain_cells": 570886
+      },
+      "SE": {
+        "tp": 394.7794437835116,
+        "fp": 5097.122369717005,
+        "fn": 9205.220556216489,
+        "n_truth": 9600,
+        "dti": 0.04497178607809641,
+        "coverage": 0.04112285872744913,
+        "prediction_mass": 5273.0,
+        "positive_cells": 5273,
+        "valid_domain_cells": 792240
+      },
+      "mean_dti": 0.04755997389757972
+    },
+    "naive_mean_beliefs": {
+      "NW": {
+        "tp": 1704.1598293902973,
+        "fp": 143308.6903923942,
+        "fn": 27614.840170609703,
+        "n_truth": 29319,
+        "dti": 0.032486318574909016,
+        "coverage": 0.05812475969133658,
+        "prediction_mass": 147607.1634004372,
+        "positive_cells": 367945,
+        "valid_domain_cells": 2457001
+      },
+      "NE": {
+        "tp": 1017.192933773289,
+        "fp": 76076.46348645921,
+        "fn": 11578.807066226711,
+        "n_truth": 12596,
+        "dti": 0.03989691065625231,
+        "coverage": 0.08075523450089624,
+        "prediction_mass": 78704.23830743578,
+        "positive_cells": 196139,
+        "valid_domain_cells": 1372176
+      },
+      "SW": {
+        "tp": 591.2561840687929,
+        "fp": 38088.73876341634,
+        "fn": 8881.743815931208,
+        "n_truth": 9473,
+        "dti": 0.0386078607769257,
+        "coverage": 0.062414882726569504,
+        "prediction_mass": 39520.34469471551,
+        "positive_cells": 99433,
+        "valid_domain_cells": 570886
+      },
+      "SE": {
+        "tp": 528.8441272795054,
+        "fp": 41712.54176709766,
+        "fn": 9071.155872720494,
+        "n_truth": 9600,
+        "dti": 0.03278987094617751,
+        "coverage": 0.05508792992494848,
+        "prediction_mass": 42975.66459436076,
+        "positive_cells": 107816,
+        "valid_domain_cells": 792240
+      },
+      "mean_dti": 0.035945240238566135
+    },
+    "union_decision": {
+      "NW": {
+        "tp": 1147.6833050244668,
+        "fp": 22697.519440475222,
+        "fn": 28171.316694975532,
+        "n_truth": 29319,
+        "dti": 0.04066303584069567,
+        "coverage": 0.03914469473803563,
+        "prediction_mass": 23289.0,
+        "positive_cells": 23289,
+        "valid_domain_cells": 2457001
+      },
+      "NE": {
+        "tp": 744.3913859268808,
+        "fp": 12354.722171726233,
+        "fn": 11851.608614073119,
+        "n_truth": 12596,
+        "dti": 0.05862908608372295,
+        "coverage": 0.05909744251563043,
+        "prediction_mass": 12749.0,
+        "positive_cells": 12749,
+        "valid_domain_cells": 1372176
+      },
+      "SW": {
+        "tp": 393.0594640056804,
+        "fp": 6125.4126892254135,
+        "fn": 9079.94053599432,
+        "n_truth": 9473,
+        "dti": 0.044253015668184376,
+        "coverage": 0.04149260677775577,
+        "prediction_mass": 6322.0,
+        "positive_cells": 6322,
+        "valid_domain_cells": 570886
+      },
+      "SE": {
+        "tp": 401.4369293738643,
+        "fp": 6803.678408331809,
+        "fn": 9198.563070626136,
+        "n_truth": 9600,
+        "dti": 0.04401226993959181,
+        "coverage": 0.041816346809777534,
+        "prediction_mass": 6991.0,
+        "positive_cells": 6991,
+        "valid_domain_cells": 792240
+      },
+      "mean_dti": 0.046889351883048706
+    },
+    "h50_ds_belief": {
+      "NW": {
+        "tp": 1389.6856729576714,
+        "fp": 131693.9425562867,
+        "fn": 27929.314327042328,
+        "n_truth": 29319,
+        "dti": 0.027753789274786573,
+        "coverage": 0.04739880872327403,
+        "prediction_mass": 134166.6948774536,
+        "positive_cells": 367945,
+        "valid_domain_cells": 2457001
+      },
+      "NE": {
+        "tp": 836.3953423724481,
+        "fp": 69917.77152907738,
+        "fn": 11759.604657627551,
+        "n_truth": 12596,
+        "dti": 0.034522370776009,
+        "coverage": 0.06640166262086758,
+        "prediction_mass": 71416.94419927988,
+        "positive_cells": 196139,
+        "valid_domain_cells": 1372176
+      },
+      "SW": {
+        "tp": 478.5773637098211,
+        "fp": 34937.80378736189,
+        "fn": 8994.422636290179,
+        "n_truth": 9473,
+        "dti": 0.03264138125786621,
+        "coverage": 0.050520148180071896,
+        "prediction_mass": 35771.38316872995,
+        "positive_cells": 99433,
+        "valid_domain_cells": 570886
+      },
+      "SE": {
+        "tp": 406.63637776179735,
+        "fp": 38282.86325877554,
+        "fn": 9193.363622238203,
+        "n_truth": 9600,
+        "dti": 0.026374303872707193,
+        "coverage": 0.04235795601685389,
+        "prediction_mass": 38948.76504595298,
+        "positive_cells": 107816,
+        "valid_domain_cells": 792240
+      },
+      "mean_dti": 0.030322961295342246
+    },
+    "h50_binary_bel_budget": {
+      "NW": {
+        "tp": 179.94387389082956,
+        "fp": 17868.05982425924,
+        "fn": 29139.05612610917,
+        "n_truth": 29319,
+        "dti": 0.006648631025291245,
+        "coverage": 0.006137449227150638,
+        "prediction_mass": 18003.0,
+        "positive_cells": 18003,
+        "valid_domain_cells": 2457001
+      },
+      "NE": {
+        "tp": 115.99966449456917,
+        "fp": 9599.94672551364,
+        "fn": 12480.00033550543,
+        "n_truth": 12596,
+        "dti": 0.009650563058892715,
+        "coverage": 0.009209246149140139,
+        "prediction_mass": 9693.0,
+        "positive_cells": 9693,
+        "valid_domain_cells": 1372176
+      },
+      "SW": {
+        "tp": 73.87647118704047,
+        "fp": 4768.51677525543,
+        "fn": 9399.12352881296,
+        "n_truth": 9473,
+        "dti": 0.008643678495796881,
+        "coverage": 0.007798635193396017,
+        "prediction_mass": 4821.0,
+        "positive_cells": 4821,
+        "valid_domain_cells": 570886
+      },
+      "SE": {
+        "tp": 47.884296287123796,
+        "fp": 5303.098393764016,
+        "fn": 9552.115703712876,
+        "n_truth": 9600,
+        "dti": 0.005472368086718718,
+        "coverage": 0.004987947529908728,
+        "prediction_mass": 5339.0,
+        "positive_cells": 5339,
+        "valid_domain_cells": 792240
+      },
+      "mean_dti": 0.00760381016667489
+    },
+    "h51_plausibility_graded": {
+      "NW": {
+        "tp": 1489.4065092784192,
+        "fp": 140580.32621642004,
+        "fn": 27829.59349072158,
+        "n_truth": 29319,
+        "dti": 0.028714690880488013,
+        "coverage": 0.050800044656312264,
+        "prediction_mass": 143462.8714148236,
+        "positive_cells": 2457001,
+        "valid_domain_cells": 2457001
+      },
+      "NE": {
+        "tp": 879.9398075786108,
+        "fp": 74922.53828031066,
+        "fn": 11716.06019242139,
+        "n_truth": 12596,
+        "dti": 0.03486664422814503,
+        "coverage": 0.06985867002053119,
+        "prediction_mass": 76607.98225762973,
+        "positive_cells": 1372176,
+        "valid_domain_cells": 1372176
+      },
+      "SW": {
+        "tp": 510.22047045109633,
+        "fp": 36984.38959435394,
+        "fn": 8962.779529548903,
+        "n_truth": 9473,
+        "dti": 0.03384025823766929,
+        "coverage": 0.05386049513893131,
+        "prediction_mass": 37945.447192452986,
+        "positive_cells": 570886,
+        "valid_domain_cells": 570886
+      },
+      "SE": {
+        "tp": 440.8077053958414,
+        "fp": 41147.147185402675,
+        "fn": 9159.192294604158,
+        "n_truth": 9600,
+        "dti": 0.027554630318880054,
+        "coverage": 0.04591746931206681,
+        "prediction_mass": 41940.55331215494,
+        "positive_cells": 792240,
+        "valid_domain_cells": 792240
+      },
+      "mean_dti": 0.0312440559162956
+    },
+    "h51_plausibility_budget": {
+      "NW": {
+        "tp": 180.79087704557605,
+        "fp": 17862.664918161077,
+        "fn": 29138.209122954424,
+        "n_truth": 29319,
+        "dti": 0.006680150905985985,
+        "coverage": 0.006166338451024116,
+        "prediction_mass": 17998.0,
+        "positive_cells": 17998,
+        "valid_domain_cells": 2457001
+      },
+      "NE": {
+        "tp": 118.60872613874912,
+        "fp": 9772.821071710632,
+        "fn": 12477.39127386125,
+        "n_truth": 12596,
+        "dti": 0.009838895096769683,
+        "coverage": 0.009416380290469126,
+        "prediction_mass": 9868.0,
+        "positive_cells": 9868,
+        "valid_domain_cells": 1372176
+      },
+      "SW": {
+        "tp": 72.48886923270425,
+        "fp": 4695.337898236347,
+        "fn": 9400.511130767296,
+        "n_truth": 9473,
+        "dti": 0.008496151382403385,
+        "coverage": 0.007652155519128496,
+        "prediction_mass": 4747.0,
+        "positive_cells": 4747,
+        "valid_domain_cells": 570886
+      },
+      "SE": {
+        "tp": 46.63695642345177,
+        "fp": 5209.174160752434,
+        "fn": 9553.363043576548,
+        "n_truth": 9600,
+        "dti": 0.00534143739744913,
+        "coverage": 0.004858016294109559,
+        "prediction_mass": 5244.0,
+        "positive_cells": 5244,
+        "valid_domain_cells": 792240
+      },
+      "mean_dti": 0.007589158695652046
+    },
+    "h49_yager_pignistic_budget": {
+      "NW": {
+        "tp": 2563.0005524658554,
+        "fp": 21759.66972546101,
+        "fn": 26755.999447534145,
+        "n_truth": 29319,
+        "dti": 0.09050228181646242,
+        "coverage": 0.08741773431787767,
+        "prediction_mass": 22944.0,
+        "positive_cells": 22944,
+        "valid_domain_cells": 2457001
+      },
+      "NE": {
+        "tp": 1491.7903041458371,
+        "fp": 12025.075340371868,
+        "fn": 11104.209695854162,
+        "n_truth": 12596,
+        "dti": 0.11672692451810496,
+        "coverage": 0.11843365386994578,
+        "prediction_mass": 12726.0,
+        "positive_cells": 12726,
+        "valid_domain_cells": 1372176
+      },
+      "SW": {
+        "tp": 851.7600840038215,
+        "fp": 5687.007870616726,
+        "fn": 8621.239915996179,
+        "n_truth": 9473,
+        "dti": 0.09585250528122405,
+        "coverage": 0.08991450269226449,
+        "prediction_mass": 6061.0,
+        "positive_cells": 6061,
+        "valid_domain_cells": 570886
+      },
+      "SE": {
+        "tp": 708.6911764073908,
+        "fp": 6128.101699477727,
+        "fn": 8891.30882359261,
+        "n_truth": 9600,
+        "dti": 0.07833127984468374,
+        "coverage": 0.07382199754243654,
+        "prediction_mass": 6437.0,
+        "positive_cells": 6437,
+        "valid_domain_cells": 792240
+      },
+      "mean_dti": 0.0953532478651188
+    }
+  },
+  "sgmc_offcat_results": {
+    "dotted_b2_parent": {
+      "NW": {
+        "tp": 2278.4274253446,
+        "fp": 17084.36224387496,
+        "fn": 20851.5725746554,
+        "n_truth": 23130,
+        "dti": 0.10182206897418047,
+        "coverage": 0.09850529292453956,
+        "prediction_mass": 18105.0,
+        "positive_cells": 18105,
+        "valid_domain_cells": 2457001
+      },
+      "NE": {
+        "tp": 2053.440729971507,
+        "fp": 8757.275760136814,
+        "fn": 21138.559270028494,
+        "n_truth": 23192,
+        "dti": 0.09912464643098802,
+        "coverage": 0.08854090763933715,
+        "prediction_mass": 9644.0,
+        "positive_cells": 9644,
+        "valid_domain_cells": 1372176
+      },
+      "SW": {
+        "tp": 309.58153550533325,
+        "fp": 4682.810047882023,
+        "fn": 2043.4184644946668,
+        "n_truth": 2353,
+        "dti": 0.10746081627716049,
+        "coverage": 0.13156886336818244,
+        "prediction_mass": 4837.0,
+        "positive_cells": 4837,
+        "valid_domain_cells": 570886
+      },
+      "SE": {
+        "tp": 876.1870117382703,
+        "fp": 4894.070830045559,
+        "fn": 12570.81298826173,
+        "n_truth": 13447,
+        "dti": 0.07355713913474901,
+        "coverage": 0.0651585492480308,
+        "prediction_mass": 5266.0,
+        "positive_cells": 5266,
+        "valid_domain_cells": 792240
+      },
+      "mean_dti": 0.09549116770426949
+    },
+    "tip_h36_parent": {
+      "NW": {
+        "tp": 2231.161920115578,
+        "fp": 17040.88905911561,
+        "fn": 20898.838079884423,
+        "n_truth": 23130,
+        "dti": 0.09979072306894544,
+        "coverage": 0.09646182101667004,
+        "prediction_mass": 18019.0,
+        "positive_cells": 18019,
+        "valid_domain_cells": 2457001
+      },
+      "NE": {
+        "tp": 2015.7752088031177,
+        "fp": 8883.831284594198,
+        "fn": 21176.22479119688,
+        "n_truth": 23192,
+        "dti": 0.09722300325953334,
+        "coverage": 0.08691683377040003,
+        "prediction_mass": 9739.0,
+        "positive_cells": 9739,
+        "valid_domain_cells": 1372176
+      },
+      "SW": {
+        "tp": 301.8565323819713,
+        "fp": 4689.454898811135,
+        "fn": 2051.143467618029,
+        "n_truth": 2353,
+        "dti": 0.10478719904932542,
+        "coverage": 0.12828581911685988,
+        "prediction_mass": 4837.0,
+        "positive_cells": 4837,
+        "valid_domain_cells": 570886
+      },
+      "SE": {
+        "tp": 851.2077820708961,
+        "fp": 4919.874108430686,
+        "fn": 12595.792217929104,
+        "n_truth": 13447,
+        "dti": 0.07145910875824343,
+        "coverage": 0.06330094311525962,
+        "prediction_mass": 5273.0,
+        "positive_cells": 5273,
+        "valid_domain_cells": 792240
+      },
+      "mean_dti": 0.09331500853401192
+    },
+    "naive_mean_beliefs": {
+      "NW": {
+        "tp": 3040.8139924655334,
+        "fp": 139773.0744140372,
+        "fn": 20089.186007534467,
+        "n_truth": 23130,
+        "dti": 0.06460637719997639,
+        "coverage": 0.13146623400196858,
+        "prediction_mass": 147607.1634004372,
+        "positive_cells": 367945,
+        "valid_domain_cells": 2457001
+      },
+      "NE": {
+        "tp": 2702.53591567081,
+        "fp": 72033.2034620078,
+        "fn": 20489.46408432919,
+        "n_truth": 23192,
+        "dti": 0.08067091295130058,
+        "coverage": 0.11652879939939678,
+        "prediction_mass": 78704.23830743578,
+        "positive_cells": 196139,
+        "valid_domain_cells": 1372176
+      },
+      "SW": {
+        "tp": 399.9602737420118,
+        "fp": 38366.63440577392,
+        "fn": 1953.0397262579881,
+        "n_truth": 2353,
+        "dti": 0.04150808843663331,
+        "coverage": 0.1699788668686833,
+        "prediction_mass": 39520.34469471551,
+        "positive_cells": 99433,
+        "valid_domain_cells": 570886
+      },
+      "SE": {
+        "tp": 1214.0550189099079,
+        "fp": 40085.08577001377,
+        "fn": 12232.944981090091,
+        "n_truth": 13447,
+        "dti": 0.06383907481269688,
+        "coverage": 0.0902844514694659,
+        "prediction_mass": 42975.66459436076,
+        "positive_cells": 107816,
+        "valid_domain_cells": 792240
+      },
+      "mean_dti": 0.06265611335015178
+    },
+    "union_decision": {
+      "NW": {
+        "tp": 2424.819098534048,
+        "fp": 21981.1263487958,
+        "fn": 20705.180901465952,
+        "n_truth": 23130,
+        "dti": 0.1036903780960371,
+        "coverage": 0.10483437520683303,
+        "prediction_mass": 23289.0,
+        "positive_cells": 23289,
+        "valid_domain_cells": 2457001
+      },
+      "NE": {
+        "tp": 2183.907538808513,
+        "fp": 11612.885946789756,
+        "fn": 21008.09246119149,
+        "n_truth": 23192,
+        "dti": 0.10246852958541405,
+        "coverage": 0.09416641681651056,
+        "prediction_mass": 12749.0,
+        "positive_cells": 12749,
+        "valid_domain_cells": 1372176
+      },
+      "SW": {
+        "tp": 335.22190793410283,
+        "fp": 6113.135128360528,
+        "fn": 2017.7780920658972,
+        "n_truth": 2353,
+        "dti": 0.10567918085544523,
+        "coverage": 0.142465749228263,
+        "prediction_mass": 6322.0,
+        "positive_cells": 6322,
+        "valid_domain_cells": 570886
+      },
+      "SE": {
+        "tp": 934.5845262031289,
+        "fp": 6513.506324698556,
+        "fn": 12512.415473796871,
+        "n_truth": 13447,
+        "dti": 0.07630994346770645,
+        "coverage": 0.06950134053715541,
+        "prediction_mass": 6991.0,
+        "positive_cells": 6991,
+        "valid_domain_cells": 792240
+      },
+      "mean_dti": 0.0970370080011507
+    },
+    "h50_ds_belief": {
+      "NW": {
+        "tp": 3309.802176837819,
+        "fp": 126865.94151022745,
+        "fn": 19820.19782316218,
+        "n_truth": 23130,
+        "dti": 0.07431220107845421,
+        "coverage": 0.143095641021955,
+        "prediction_mass": 134166.6948774536,
+        "positive_cells": 367945,
+        "valid_domain_cells": 2457001
+      },
+      "NE": {
+        "tp": 2941.2393776234767,
+        "fp": 65149.858391778354,
+        "fn": 20250.760622376525,
+        "n_truth": 23192,
+        "dti": 0.09142284826935511,
+        "coverage": 0.12682129085992913,
+        "prediction_mass": 71416.94419927988,
+        "positive_cells": 196139,
+        "valid_domain_cells": 1372176
+      },
+      "SW": {
+        "tp": 433.32939991685134,
+        "fp": 34693.47462231694,
+        "fn": 1919.6706000831487,
+        "n_truth": 2353,
+        "dti": 0.04864627704198489,
+        "coverage": 0.18416039095488795,
+        "prediction_mass": 35771.38316872995,
+        "positive_cells": 99433,
+        "valid_domain_cells": 570886
+      },
+      "SE": {
+        "tp": 1312.6182956576083,
+        "fp": 36268.96641265451,
+        "fn": 12134.381704342391,
+        "n_truth": 13447,
+        "dti": 0.07183015550787526,
+        "coverage": 0.09761421102532969,
+        "prediction_mass": 38948.76504595298,
+        "positive_cells": 107816,
+        "valid_domain_cells": 792240
+      },
+      "mean_dti": 0.07155287047441736
+    },
+    "h50_binary_bel_budget": {
+      "NW": {
+        "tp": 2082.4296924522214,
+        "fp": 16996.706117660255,
+        "fn": 21047.57030754778,
+        "n_truth": 23130,
+        "dti": 0.09329954382422391,
+        "coverage": 0.09003154744713451,
+        "prediction_mass": 18003.0,
+        "positive_cells": 18003,
+        "valid_domain_cells": 2457001
+      },
+      "NE": {
+        "tp": 1925.0276414178973,
+        "fp": 8781.368643686234,
+        "fn": 21266.9723585821,
+        "n_truth": 23192,
+        "dti": 0.09301951548061453,
+        "coverage": 0.08300395142367616,
+        "prediction_mass": 9693.0,
+        "positive_cells": 9693,
+        "valid_domain_cells": 1372176
+      },
+      "SW": {
+        "tp": 272.69601411609824,
+        "fp": 4671.187837419186,
+        "fn": 2080.303985883902,
+        "n_truth": 2353,
+        "dti": 0.0949770898595473,
+        "coverage": 0.11589290867662484,
+        "prediction_mass": 4821.0,
+        "positive_cells": 4821,
+        "valid_domain_cells": 570886
+      },
+      "SE": {
+        "tp": 802.1992118459283,
+        "fp": 4964.704726458638,
+        "fn": 12644.800788154073,
+        "n_truth": 13447,
+        "dti": 0.06734955132132864,
+        "coverage": 0.059656370331369696,
+        "prediction_mass": 5339.0,
+        "positive_cells": 5339,
+        "valid_domain_cells": 792240
+      },
+      "mean_dti": 0.08716142512142859
+    },
+    "h51_plausibility_graded": {
+      "NW": {
+        "tp": 3379.5821350722376,
+        "fp": 135858.62828355475,
+        "fn": 19750.417864927764,
+        "n_truth": 23130,
+        "dti": 0.0729118103079858,
+        "coverage": 0.14611250043546206,
+        "prediction_mass": 143462.8714148236,
+        "positive_cells": 2457001,
+        "valid_domain_cells": 2457001
+      },
+      "NE": {
+        "tp": 3013.229060581916,
+        "fp": 70051.32425397809,
+        "fn": 20178.770939418086,
+        "n_truth": 23192,
+        "dti": 0.09085155478690192,
+        "coverage": 0.1299253648060502,
+        "prediction_mass": 76607.98225762973,
+        "positive_cells": 1372176,
+        "valid_domain_cells": 1372176
+      },
+      "SW": {
+        "tp": 440.150947882427,
+        "fp": 36833.609752444296,
+        "fn": 1912.8490521175731,
+        "n_truth": 2353,
+        "dti": 0.04713974253388855,
+        "coverage": 0.1870594763631224,
+        "prediction_mass": 37945.447192452986,
+        "positive_cells": 570886,
+        "valid_domain_cells": 570886
+      },
+      "SE": {
+        "tp": 1354.844012502372,
+        "fp": 39098.55486088092,
+        "fn": 12092.155987497628,
+        "n_truth": 13447,
+        "dti": 0.07188157374036083,
+        "coverage": 0.10075436993399062,
+        "prediction_mass": 41940.55331215494,
+        "positive_cells": 792240,
+        "valid_domain_cells": 792240
+      },
+      "mean_dti": 0.07069617034228427
+    },
+    "h51_plausibility_budget": {
+      "NW": {
+        "tp": 2076.513909082745,
+        "fp": 16994.23690404267,
+        "fn": 21053.486090917257,
+        "n_truth": 23130,
+        "dti": 0.09304148838285722,
+        "coverage": 0.08977578508788349,
+        "prediction_mass": 17998.0,
+        "positive_cells": 17998,
+        "valid_domain_cells": 2457001
+      },
+      "NE": {
+        "tp": 1931.0640654431083,
+        "fp": 8948.285986618055,
+        "fn": 21260.935934556892,
+        "n_truth": 23192,
+        "dti": 0.09315549623184538,
+        "coverage": 0.08326423186629477,
+        "prediction_mass": 9868.0,
+        "positive_cells": 9868,
+        "valid_domain_cells": 1372176
+      },
+      "SW": {
+        "tp": 266.9750788284286,
+        "fp": 4600.499672385104,
+        "fn": 2086.0249211715713,
+        "n_truth": 2353,
+        "dti": 0.09348210752840884,
+        "coverage": 0.11346157196278309,
+        "prediction_mass": 4747.0,
+        "positive_cells": 4747,
+        "valid_domain_cells": 570886
+      },
+      "SE": {
+        "tp": 790.3646260756313,
+        "fp": 4875.580849494769,
+        "fn": 12656.635373924368,
+        "n_truth": 13447,
+        "dti": 0.0664686439018914,
+        "coverage": 0.05877627917569951,
+        "prediction_mass": 5244.0,
+        "positive_cells": 5244,
+        "valid_domain_cells": 792240
+      },
+      "mean_dti": 0.0865369340112507
+    },
+    "h49_yager_pignistic_budget": {
+      "NW": {
+        "tp": 2477.004979416913,
+        "fp": 21784.005614845555,
+        "fn": 20652.995020583086,
+        "n_truth": 23130,
+        "dti": 0.10605341428423166,
+        "coverage": 0.10709057412092145,
+        "prediction_mass": 22944.0,
+        "positive_cells": 22944,
+        "valid_domain_cells": 2457001
+      },
+      "NE": {
+        "tp": 2303.5008671562737,
+        "fp": 11669.507011754318,
+        "fn": 20888.499132843725,
+        "n_truth": 23192,
+        "dti": 0.10790140138874353,
+        "coverage": 0.0993230798187424,
+        "prediction_mass": 12726.0,
+        "positive_cells": 12726,
+        "valid_domain_cells": 1372176
+      },
+      "SW": {
+        "tp": 345.30310553328235,
+        "fp": 5879.508853461417,
+        "fn": 2007.6968944667176,
+        "n_truth": 2353,
+        "dti": 0.11041352496876927,
+        "coverage": 0.14675015109786754,
+        "prediction_mass": 6061.0,
+        "positive_cells": 6061,
+        "valid_domain_cells": 570886
+      },
+      "SE": {
+        "tp": 955.5810931077159,
+        "fp": 6015.872014221409,
+        "fn": 12491.418906892284,
+        "n_truth": 13447,
+        "dti": 0.07863641328533028,
+        "coverage": 0.0710627718530316,
+        "prediction_mass": 6437.0,
+        "positive_cells": 6437,
+        "valid_domain_cells": 792240
+      },
+      "mean_dti": 0.10075118848176869
+    }
+  },
+  "catalogue_paired_gates": {
+    "h51_plausibility_budget": {
+      "dotted_b2_parent": {
+        "fold_delta_dti": {
+          "NW": 0.0005399786651154427,
+          "NE": 0.0012722553890635677,
+          "SW": 0.000971695202995203,
+          "SE": 0.0002505274697031934
+        },
+        "mean_delta_dti": 0.0007586141817193517,
+        "positive_folds": 4,
+        "passes_numeric_gate": true
+      },
+      "tip_h36_parent": {
+        "fold_delta_dti": {
+          "NW": -0.034417217293354,
+          "NE": -0.04978779077019256,
+          "SW": -0.03604790406351685,
+          "SE": -0.039630348680647284
+        },
+        "mean_delta_dti": -0.039970815201927676,
+        "positive_folds": 0,
+        "passes_numeric_gate": false
+      },
+      "naive_mean_beliefs": {
+        "fold_delta_dti": {
+          "NW": -0.025806167668923033,
+          "NE": -0.030058015559482627,
+          "SW": -0.03011170939452231,
+          "SE": -0.02744843354872838
+        },
+        "mean_delta_dti": -0.028356081542914087,
+        "positive_folds": 0,
+        "passes_numeric_gate": false
+      },
+      "union_decision": {
+        "fold_delta_dti": {
+          "NW": -0.03398288493470969,
+          "NE": -0.048790190986953266,
+          "SW": -0.03575686428578099,
+          "SE": -0.03867083254214268
+        },
+        "mean_delta_dti": -0.03930019318739666,
+        "positive_folds": 0,
+        "passes_numeric_gate": false
+      },
+      "h50_ds_belief": {
+        "fold_delta_dti": {
+          "NW": -0.021073638368800586,
+          "NE": -0.024683475679239314,
+          "SW": -0.024145229875462824,
+          "SE": -0.021032866475258063
+        },
+        "mean_delta_dti": -0.022733802599690198,
+        "positive_folds": 0,
+        "passes_numeric_gate": false
+      },
+      "h50_binary_bel_budget": {
+        "fold_delta_dti": {
+          "NW": 3.1519880694740043e-05,
+          "NE": 0.0001883320378769683,
+          "SW": -0.0001475271133934957,
+          "SE": -0.00013093068926958804
+        },
+        "mean_delta_dti": -1.465147102284385e-05,
+        "positive_folds": 2,
+        "passes_numeric_gate": false
+      },
+      "h49_yager_pignistic_budget": {
+        "fold_delta_dti": {
+          "NW": -0.08382213091047643,
+          "NE": -0.10688802942133527,
+          "SW": -0.08735635389882067,
+          "SE": -0.07298984244723461
+        },
+        "mean_delta_dti": -0.08776408916946675,
+        "positive_folds": 0,
+        "passes_numeric_gate": false
+      }
+    }
+  },
+  "sgmc_paired_gates": {
+    "h51_plausibility_budget": {
+      "dotted_b2_parent": {
+        "fold_delta_dti": {
+          "NW": -0.00878058059132325,
+          "NE": -0.005969150199142639,
+          "SW": -0.01397870874875165,
+          "SE": -0.007088495232857608
+        },
+        "mean_delta_dti": -0.008954233693018787,
+        "positive_folds": 0,
+        "passes_numeric_gate": false
+      },
+      "tip_h36_parent": {
+        "fold_delta_dti": {
+          "NW": -0.006749234686088221,
+          "NE": -0.004067507027687961,
+          "SW": -0.011305091520916577,
+          "SE": -0.004990464856352031
+        },
+        "mean_delta_dti": -0.006778074522761197,
+        "positive_folds": 0,
+        "passes_numeric_gate": false
+      },
+      "naive_mean_beliefs": {
+        "fold_delta_dti": {
+          "NW": 0.028435111182880835,
+          "NE": 0.012484583280544803,
+          "SW": 0.05197401909177553,
+          "SE": 0.002629569089194525
+        },
+        "mean_delta_dti": 0.023880820661098923,
+        "positive_folds": 4,
+        "passes_numeric_gate": true
+      },
+      "union_decision": {
+        "fold_delta_dti": {
+          "NW": -0.010648889713179871,
+          "NE": -0.009313033353568673,
+          "SW": -0.012197073327036387,
+          "SE": -0.009841299565815045
+        },
+        "mean_delta_dti": -0.010500073989899994,
+        "positive_folds": 0,
+        "passes_numeric_gate": false
+      },
+      "h50_ds_belief": {
+        "fold_delta_dti": {
+          "NW": 0.018729287304403014,
+          "NE": 0.0017326479624902719,
+          "SW": 0.04483583048642395,
+          "SE": -0.00536151160598386
+        },
+        "mean_delta_dti": 0.014984063536833344,
+        "positive_folds": 3,
+        "passes_numeric_gate": true
+      },
+      "h50_binary_bel_budget": {
+        "fold_delta_dti": {
+          "NW": -0.00025805544136668634,
+          "NE": 0.00013598075123084918,
+          "SW": -0.0014949823311384558,
+          "SE": -0.0008809074194372352
+        },
+        "mean_delta_dti": -0.000624491110177882,
+        "positive_folds": 1,
+        "passes_numeric_gate": false
+      },
+      "h49_yager_pignistic_budget": {
+        "fold_delta_dti": {
+          "NW": -0.013011925901374441,
+          "NE": -0.01474590515689815,
+          "SW": -0.016931417440360433,
+          "SE": -0.012167769383438873
+        },
+        "mean_delta_dti": -0.014214254470517974,
+        "positive_folds": 0,
+        "passes_numeric_gate": false
+      }
+    }
+  },
+  "numeric_gate": {
+    "rule": "beat the blocked-holdout best (H49 on SGMC offcat; union on catalogue) in >=3/4 folds on BOTH proxy regimes -- hypotheses-20261007.md",
+    "sgmc_vs_h49_positive_folds": 0,
+    "sgmc_vs_h49_mean_delta": -0.014214254470517974,
+    "catalogue_vs_union_positive_folds": 0,
+    "catalogue_vs_union_mean_delta": -0.03930019318739666,
+    "passed": false
+  },
+  "slot_decision": {
+    "cleared": false,
+    "reason": "Public-map proxy targets only; frozen upstream surfaces; no organizer receipt. Even a numeric proxy win would not be private-label evidence."
+  },
+  "caveats": [
+    "Catalogue and SGMC proxies are not the private expert-labelled target.",
+    "Owner mirrors are not organizer-authenticated; reuse licenses unverified.",
+    "No leaderboard score is estimated here.",
+    "H51's budget and ranking rule were preregistered before this run; no post-hoc tuning."
+  ]
+}

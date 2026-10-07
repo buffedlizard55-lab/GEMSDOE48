@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "generated_utc": "2026-10-07T02:27:47.067620+00:00",
+  "preregistered_utc": "2026-10-07T02:27:39.238150+00:00",
+  "candidate_id": "H51",
+  "submission_status": "UNSCORED_RESEARCH_CANDIDATE",
+  "submission_name": "GEMSDOE48-H51-PLAUSIBILITY-BUDGET",
+  "submission_note": "GEMSDOE48 H51 | binary budget emission, top-37,654 cells by DS plausibility Pl=Bel+m(Theta); Dempster fusion of best dotted B2 x best tip H36-1; H50 diagnostics reused; unscored research candidate.",
+  "submission_note_length": 197,
+  "preregistration": {
+    "budget": 37654,
+    "budget_rationale": "mass-matched to the dotted parent (owner-reported live 0.2778)",
+    "rule": "binary 1 on the top-B cells ranked by combined plausibility Pl(F) = Bel(F) + m(Theta) of the canonical normalized Dempster combination of the two kernel-credit belief surfaces; 0 elsewhere",
+    "reliabilities": {
+      "dotted": 0.95,
+      "tip": 0.9267458603311736
+    },
+    "reliability_anchor": "identical to the preregistered H50 build (RHO_MAX x live-score ratio)",
+    "parents": {
+      "dotted": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+      "tip": "5556aa1438fd67376b60d5ffc99228ec09dcc11a8408298a743ccb88d6163641"
+    },
+    "no_parameter_was_tuned_on_holdout_results": true
+  },
+  "primary_file": "docs/downloads/gemsdoe48-h51-plausibility-budget-20261007-f8fa1d08-zeros.tif",
+  "primary_sha256": "f8fa1d0817712d34935acd70663eb14c510876598c4f70729fcd79288706120f",
+  "primary_bytes": 281345,
+  "zip_file": "docs/downloads/gemsdoe48-h51-plausibility-budget-20261007-f8fa1d08-zeros.zip",
+  "zip_sha256": "dc4acaad88a667f366a530788d56825278827b7a7addb6be7176bd9ac8ef7ab8",
+  "nan_outside_twin": {
+    "path": "docs/downloads/gemsdoe48-h51-plausibility-budget-20261007-f8fa1d08-nan.tif",
+    "sha256": "ce34944afa302e8a2b7e71502caf18a0d2f71d706dcb6f39397f11a237355961",
+    "bytes": 370774,
+    "purpose": "official sample-template convention (NaN/nodata outside); passes scripts/validate_submission.py"
+  },
+  "diagnostics_reused_from_h50": {
+    "plausibility": "docs/downloads/diagnostics/gemsdoe48-h50-plausibility-20261007-5b59e106.tif",
+    "conflict_K": "docs/downloads/diagnostics/gemsdoe48-h50-conflict-K-20261007-5b59e106.tif",
+    "unassigned_mTheta": "docs/downloads/diagnostics/gemsdoe48-h50-unassigned-mTheta-20261007-5b59e106.tif",
+    "note": "byte-identical to the H50 diagnostic layers because the fusion is identical; SHAs re-verified at build time"
+  },
+  "set_distances": {
+    "budget_cells": 37654,
+    "union_cells": 49066,
+    "jaccard_vs_parent_union": 0.7674153181429095,
+    "cells_in_union": 37654,
+    "cells_outside_union": 0,
+    "jaccard_vs_dotted_parent": 0.7501684910176858,
+    "jaccard_vs_tip_parent": 0.723787507724703,
+    "jaccard_vs_h50_bel_top_budget": 0.971826560536238,
+    "note": "observed: every emitted cell lies inside the parents' committed-pixel union, i.e. H51 is a budget-trimmed union -- it drops the lowest-plausibility union cells (weak single-family support) instead of adding new cells"
+  },
+  "rank_correlations": {
+    "pl_vs_naive_mean_in_footprint": 0.9754117750473472,
+    "pl_vs_algebraic_or_in_footprint": 0.9374212790607453,
+    "pl_vs_h50_belief_in_footprint": 0.999990166098075,
+    "note": "plausibility ranking is close to the DS algebraic OR (b1+b2-b1*b2), which is the point: Pl restores union-like coverage; it is not the naive mean"
+  },
+  "prior_artifact_distances": {
+    "h50_belief": {
+      "path": "docs/downloads/gemsdoe48-h50-ds-b2xh36rung30-20261007-5b59e106-zeros.tif",
+      "sha256": "5b59e106b6e448038b96fb340c5bae39094d4558c239c437aea28b6020d5d32f",
+      "jaccard_emission_vs_positive_cells": 0.04908981634667157,
+      "pearson_in_footprint": 0.4568417147606417
+    },
+    "h49_yager": {
+      "path": "docs/downloads/gemsdoe48-h49-ds-conflict-balanced-20261006-e6f08013888b.tif",
+      "sha256": "e6f08013888b625db7d187d79bb75ba36c45d068081b77a3dd405ab7eec3d472",
+      "jaccard_emission_vs_positive_cells": 0.6058370870870871,
+      "pearson_in_footprint": 0.7580755458433064
+    },
+    "h48_rho05": {
+      "path": "docs/downloads/GEMSDOE48-DS-conflict-aware-fusion-20261006.tif",
+      "sha256": "818957c0cb69caf360d445c7f7a684578c37528f363b5d84f5ae3be832e7413f",
+      "jaccard_emission_vs_positive_cells": 0.6398152407237044,
+      "pearson_in_footprint": 0.8349298083349425
+    }
+  },
+  "uniqueness": {
+    "compared_existing_tifs": 46,
+    "hash_collisions": [],
+    "new_construction": "plausibility-ranked budget emission; no prior artifact ranked by Pl(F)"
+  },
+  "format_receipt": {
+    "single_band": true,
+    "dtype_float32": true,
+    "crs": "EPSG:32611",
+    "width": 3292,
+    "height": 3730,
+    "all_finite": true,
+    "min_value": 0.0,
+    "max_value": 1.0,
+    "values_in_0_1": true,
+    "positive_pixels": 37654,
+    "zero_outside_footprint": true
+  },
+  "organizer_score": null,
+  "score_claim": "No organizer score exists for this artifact; no leaderboard projection is claimed."
+}
