@@ -1,0 +1,37 @@
+{
+ "generated_utc": "2026-10-07T15:20:25.915773+00:00",
+ "sha256": "4d6548d4ec07a47a25b83d28ebc05d58b57448c1507b460aed52cec395bdb6b5",
+ "n_compared": 67,
+ "byte_distinct_from_all_downloads": true,
+ "matches_registry_mirror_pin": false,
+ "nearest_neighbours_top5": [
+  {
+   "file": "docs/downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-nan-outside.tif",
+   "pearson_r_subsampled": 0.9999999999999999,
+   "positive_cells": 791389
+  },
+  {
+   "file": "docs/downloads/diagnostics/gemsdoe48-h48-1-belief_dempster_mF_norm01.tif",
+   "pearson_r_subsampled": 0.9907005094592207,
+   "positive_cells": 786170
+  },
+  {
+   "file": "docs/downloads/gemsdoe48-h49-ds-conflict-balanced-20261006-belief-field.tif",
+   "pearson_r_subsampled": 0.9878905497347737,
+   "positive_cells": 791389
+  },
+  {
+   "file": "docs/downloads/diagnostics/GEMSDOE48-H53-DS-RadEdge-B2xH33D-20261007-4c01fcf2ad8c-two-family-naive-mean.tif",
+   "pearson_r_subsampled": 0.9866525503425865,
+   "positive_cells": 791389
+  },
+  {
+   "file": "docs/downloads/diagnostics/gemsdoe48-h55-plausibility-055da9855353.tif",
+   "pearson_r_subsampled": 0.9856725344709583,
+   "positive_cells": 5167373
+  }
+ ],
+ "support_jaccard_vs_dotted": 0.047579635299454505,
+ "support_jaccard_vs_tip": 0.052900659473406886,
+ "support_jaccard_vs_union": 0.06053281003400351
+}

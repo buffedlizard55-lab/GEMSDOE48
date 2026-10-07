@@ -1,0 +1,110 @@
+{
+ "slate_id": "hypothesis-slate-h56-20261007",
+ "frozen_before_scoring": true,
+ "frozen_utc": "2026-10-07T16:00:00Z",
+ "prose_version": "docs/research/hypotheses-h56-20261007.md",
+ "ranking_rule": "ranked by expected live-DTI improvement times probability of obtaining it, divided by implementation cost; candidates already measured offline this session carry their measurements, not priors",
+ "measured_before_ranking": {
+  "features_restored_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+  "band_screen": "evidence/h56_band_screen_20261007.json",
+  "battery": "evidence/h56_research_battery_20261007.json",
+  "pipeline_reproductions": {
+   "band3_lift_this_session_vs_h55": [1.264, 1.26],
+   "band19_lift_this_session_vs_h55": [1.160, 1.16],
+   "band10_lift_this_session_vs_h55": [1.441, 1.44],
+   "basement_depth_at_C_vs_moat_this_session": [402.35, 534.92],
+   "basement_depth_at_C_vs_moat_h55": [402, 535],
+   "dotted_C_live_model_projection": 0.2728,
+   "dotted_C_cov_elig_vs_calibration": [75206.82023682502, 75206.82023682503]
+  },
+  "h55b_strain_ridge_offline_result": {
+   "field_px": 258369,
+   "C_dots_inside_frac": 0.0501,
+   "dots_emitted": 25837,
+   "live_projection_standalone": 0.0152,
+   "live_projection_C_plus_field": 0.2152,
+   "credit_per_dot_vs_breakeven_0.0556": 0.017,
+   "verdict": "OFFLINE_FAIL"
+  },
+  "h56a_demglow_offline_result": {
+   "ladder_px": {"z<=-1.5 & HG>=p75": 5944, "z<=-1.5 & HG>=p90": 2576, "z<=-2.0 & HG>=p75": 852, "z<=-2.0 & HG>=p90": 428},
+   "dots_emitted": 1991,
+   "live_projection_standalone": 0.0028,
+   "control_random_same_mass": 0.0023,
+   "live_projection_C_plus_field": 0.2673,
+   "verdict": "OFFLINE_FAIL"
+  }
+ },
+ "candidates": [
+  {
+   "rank": 1,
+   "id": "H56-F",
+   "name": "absence-driven Dempster pruning ladder on C",
+   "layers": "data/families/dotted_b2_prune_02778.tif (C, 0.2778) x data/families/tip_stepover_r30_02632.tif (H33-D, 0.2632)",
+   "signature_and_transform": "Dempster combined belief at each C dot using metric-kernel BPA with tip-family absence evidence; emit pruned ladders keep{Bel >= 0.90, 0.95, 0.99}",
+   "why_missing_faults": "removal of sub-break-even dots is the proven lever (A->B->C ladder +0.0108 for ~3,900 zero-credit deletions); tip disagreement is the only independent estimate of which other C dots are sub-bar",
+   "difference_from_repository": "every prior fusion was additive or re-weighting; no artifact has removed C dots using the other family's evidence",
+   "data_obtainable": "YES, both parents pinned and local",
+   "expected_dti": "+0.002 to +0.005 if half of the 6,040 C-only dots are sub-bar; -0.003 if they carry average credit",
+   "cost": "low (one script); needs ONE live slot",
+   "kill_criterion": "first rung tau=0.99...0.90; stop and declare dead if the first rung returns below 0.2727"
+  },
+  {
+   "rank": 2,
+   "id": "H56-C",
+   "name": "3 m DEM channel-knickpoint clusters",
+   "layers": "USGS 3DEP 1 m DEM via .github/workflows/dem-region-scarp.yml (706/716 zone-11 tiles already proven), block-averaged to 3 m",
+   "signature_and_transform": "stream extraction on the 3 m mosaic; knickpoints as profile second-derivative maxima above a 3-sigma noise floor; RANSAC azimuth-coherent clustering; one Poisson dot per cluster centroid",
+   "why_missing_faults": "base-level perturbation leaves knickpoints upstream of any mappable scarp, including alluvium-mantled faults with no surface trace in the USGS/INGENIOUS catalogue",
+   "difference_from_repository": "H52/H54 detected hillslope steps; no channel-profile operator exists in src/",
+   "data_obtainable": "YES, runner pipeline proven",
+   "expected_dti": "+0.002 to +0.010 if clusters carry credit",
+   "cost": "medium-high (runner mosaic + new detector, ~1 session)"
+  },
+  {
+   "rank": 3,
+   "id": "H56-D",
+   "name": "conduit stepping-stone trace propagation",
+   "layers": "data/raw/external/gdr_wellspring_in_footprint.csv x official band 3 (TMI horizontal gradient)",
+   "signature_and_transform": "pair tier>=2 anchors within 15 cells; score straight segments by mean band-3 HG; emit dots along top segments, >=300 m from C",
+   "why_missing_faults": "conduits are point evidence; the trace connecting them is what the 300 m kernel rewards and the surface-trace catalogue lacks",
+   "difference_from_repository": "H55-A dart-threw isolated anchors; no session has connected anchors into traces",
+   "data_obtainable": "YES, all inputs local",
+   "expected_dti": "-0.001 to +0.002",
+   "cost": "low",
+   "measured_input_stats": {"anchors_tier_ge2_offcat": 1005, "mean_HG_at_anchors": 28.77, "mean_HG_moat_background": 26.33}
+  },
+  {
+   "rank": 4,
+   "id": "H56-B",
+   "name": "radiometric K-residual alteration halos",
+   "layers": "data/source_mirrors/geodawn_rad_u8.tif (K/Th/U/TC, DOI 10.5066/P93LGLVQ)",
+   "signature_and_transform": "robust regression K ~ Th; residual z >= 2 AND band-3 HG >= p75 conjunction",
+   "why_missing_faults": "potassic metasomatism along buried upflow zones persists under cover; the catalogue is a surface-trace compilation",
+   "difference_from_repository": "H50-B used Th/K ratios in DS conflict corridors; GEMSDOE46 used scarp-radiometric coincidence; H53-RadEdge used radiometric edges; a lithology-regressed K residual is a different operator",
+   "data_obtainable": "YES, mirror local and hash-pinned; uint8 quantisation flagged as risk",
+   "expected_dti": "+0.000 to +0.003",
+   "cost": "low"
+  },
+  {
+   "rank": 5,
+   "id": "H56-E",
+   "name": "cover-gated additions (basement-depth prior)",
+   "layers": "official band 15 (depth to basement) as a sampling gate on any addition",
+   "signature_and_transform": "gate future additions to basement depth above the moat median; re-measure",
+   "why_missing_faults": "catalogue incompleteness is maximal under thick cover; C under-emits deep basins (402.4 m mean depth vs 534.9 m moat; 42.5% of C below moat median)",
+   "difference_from_repository": "H55-C used depth as a conjunction detector; this uses it as a sampling prior on additions",
+   "data_obtainable": "YES, band 15 in restored official raster",
+   "expected_dti": "+/-0.001 modifier",
+   "cost": "trivial"
+  }
+ ],
+ "rejected_before_ranking": [
+  {"idea": "H55-B strain-rate ridge emission", "reason": "built and measured this session: projection 0.0152 standalone, C+field 0.2152 < 0.2728; ~0.017 credit/dot vs 0.0556 bar; OFFLINE_FAIL"},
+  {"idea": "H56-A DEMGLOW emission", "reason": "built and measured this session: 1,991 dots, projection 0.0028 vs random control 0.0023; C+field 0.2673 < 0.2728; OFFLINE_FAIL"},
+  {"idea": "band-16 seismicity dots", "reason": "lift 1.082 / AUC 0.522, inside the unused-band noise band of the strain bands that just failed"},
+  {"idea": "band-17 conductivity ridge", "reason": "AUC 0.474, sign inverted vs C; conductivity conjunction owned by H55-C"},
+  {"idea": "further re-weighting or fusion of dotted x tip", "reason": "closed by three instruments: union -0.0140 (live model), graded belief 0.0649 (H56 session), parents' inverted T differ by 1%"}
+ ],
+ "validation_rule": "no weekly slot without (a) blocked holdout >= 3/4 folds vs both parents on both truths AND (b) live-model projection >= 0.2778; explicit exemption: first rung of the H56-F removal ladder, whose information value exceeds its expected score"
+}

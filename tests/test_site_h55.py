@@ -71,9 +71,12 @@ def test_relative_links_resolve(pages):
 
 @needs_site()
 def test_download_is_the_first_content_on_index_and_exec_summary(receipt, pages):
-    # H56 is the current one-click research download. Keep the H55 receipt checks
-    # below for its historical section, but do not let it displace H56 at the top.
+    # Both same-day H56 sessions (this session's H56B graded belief and the concurrent
+    # open-world OWDS candidate) are the current one-click research downloads and must sit
+    # above the preserved H55 card. Keep the H55 receipt checks below for its historical
+    # section, but do not let it displace either H56 at the top.
     h56_receipt = REPO / "evidence/build_h56_receipt_20261007.json"
+    belief_receipt = REPO / "evidence/build_h56_belief_receipt_20261007.json"
     if h56_receipt.exists():
         current = json.loads(h56_receipt.read_text())
         primary = current["candidate"]["primary"]["path"].split("/")[-1]
@@ -83,11 +86,20 @@ def test_download_is_the_first_content_on_index_and_exec_summary(receipt, pages)
         text = pages[name]
         body = text.split("<main", 1)[1]
         link = body.index(f'href="downloads/{primary}"')
-        # the only things before it are the H56 header copy and download-card lead.
+        # the only things before it are the header copy and the two download-card leads.
         before = body[:link]
         assert "<table" not in before, f"{name}: a table appears before the current download button"
         assert "bigbtn" in before, f"{name}: the current download button class is missing"
-        assert len(before) < 3000, f"{name}: too much content before the current one-click download"
+        assert len(before) < 9000, f"{name}: too much content before the current one-click download"
+        if belief_receipt.exists():
+            belief_primary = (json.loads(belief_receipt.read_text())["artifacts"]
+                              ["primary_zeros"].split("/")[-1])
+            belief_link = body.index(f'href="downloads/{belief_primary}"')
+            assert belief_link < len(body), f"{name}: H56B belief download missing"
+            h55_primary = receipt["files"]["primary_zeros_outside"]["path"].split("/")[-1]
+            h55_link = body.index(f'href="downloads/{h55_primary}"')
+            assert belief_link < h55_link and link < h55_link, (
+                f"{name}: a current H56 download must sit above the preserved H55 card")
 
 
 @needs_site()
