@@ -5,6 +5,24 @@
 reviewed sibling repos. Ranking is expected value-of-information per cost, not
 a promised gain. No candidate is promoted to a submission slot on this page.
 
+## Session-later results (added 2026-10-07, later session)
+
+- **H50-A** — not yet validated on the blocked folds; still the top slate
+  priority (implementation sketch in `docs/md/next-steps.md`).
+- **H50-B** — **tested this session, negative result.** Preregistered
+  construction (conflict K>0.3 corridor ∩ high-K gate ∩ robust-z low-Th/K,
+  budget 37,654) scored 0.015312 catalogue / 0.019135 SGMC off-catalogue,
+  far below every structure-based comparator. Receipts:
+  `evidence/h50b_preregistration_20261007.json`,
+  `evidence/holdout_h50b_20261007.json`. The GeoDAWN mirror used is committed
+  SHA-verified at `data/source_mirrors/geodawn_rad_u8.tif`.
+- **H50-C / H50-D / H50-E** — untested; H50-D's LiDAR scarp mirror is now
+  restorable via the same GitHub-mirror path used for the radiometrics.
+- **H51 (method family, added post-slate, preregistered before its own
+  scoring)** — plausibility-ranked budget emission of the H50 fusion: gate
+  failed (0.086537 SGMC / 0.007589 catalogue vs required wins over H49 and
+  the union). See `docs/research/h51-h50b-results-20261007.md`.
+
 ## H50-A — coverage-budget credit repacking on scatter-blurred family fields
 
 - **Layers:** the two frozen family surfaces, the mirrored catalogue

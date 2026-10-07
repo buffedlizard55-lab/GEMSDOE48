@@ -1,6 +1,8 @@
 # GEMSDOE48 — auditable Dempster-Shafer fault-surface research
 
 > **Decision: no weekly submission slot is cleared.** The H48 `rho=0.5` candidate loses to the prior union on the shared SGMC blocked diagnostic (0.069261 vs 0.096992). The newer-main H49 balanced emission now scores 0.100751 vs that 0.096992 prior-union baseline (+0.003760, 4/4 folds) on the same protocol, and the direction repeats on the separate older SGMC raster. This is a post-selection re-score on related public proxy evidence, below the live instrument's roughly 0.005 resolution, and its live-anchored change bracket is −0.010 to +0.005. A format-only NaN-outside H49 copy passes local checks; organizer acceptance remains untested. No private-label or organizer score exists, so H49 is not slot-cleared.
+>
+> **2026-10-07 (later session) update:** the merged H50 artifact was re-audited line by line and every checked number reproduced exactly. Two new unique constructions were preregistered and tested on the same blocked holdout: **H51** (binary plausibility-budget emission of the H50 fusion; SGMC proxy 0.086537, catalogue 0.007589 — gate not cleared) and **H50-B** (GeoDAWN low-Th/K alteration anomalies inside H50 conflict corridors, using the DOI 10.5066/P93LGLVQ mirror restored byte-identical from the GEMSDOE24 repo; 0.019135 / 0.015312 — a recorded negative result). Both are downloadable, honestly labelled research candidates; neither is recommended for upload. The session's consolidated finding: **no fusion of the two best existing surfaces beats the better parent on the proxies — raising the live score requires higher credit density (new signal), not better combination.** See [`docs/research/h51-h50b-results-20261007.md`](docs/research/h51-h50b-results-20261007.md).
 
 ## Executive summary and downloads
 
@@ -8,6 +10,9 @@ GEMSDOE48 combines the public owner-mirror dotted and tip/step-over candidate fa
 
 - **H48 `rho=.5` research artifact (fails the spatial promotion gate):** `GEMSDOE48-DS-FUSION-20261006` · [`GeoTIFF`](docs/downloads/GEMSDOE48-DS-conflict-aware-fusion-20261006.tif)
 - **Latest-main H49 proxy-best, still not slot-cleared:** `GEMSDOE48-H49-DS-CB-e6f08013888b-NAN` · [`NaN-outside format-audited GeoTIFF`](docs/downloads/GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif) · [`H49 same-protocol report`](docs/research/holdout-h49-results-20261006.md)
+- **H51 plausibility-budget emission (gate not cleared):** `GEMSDOE48-H51-PLAUSIBILITY-BUDGET` · [`zeros-outside GeoTIFF`](docs/downloads/gemsdoe48-h51-plausibility-budget-20261007-f8fa1d08-zeros.tif) · [`zip`](docs/downloads/gemsdoe48-h51-plausibility-budget-20261007-f8fa1d08-zeros.zip) · [`NaN-outside twin`](docs/downloads/gemsdoe48-h51-plausibility-budget-20261007-f8fa1d08-nan.tif) · [`build receipt`](evidence/build_h51_receipt_20261007.json) · [`blocked holdout`](evidence/holdout_h51_20261007.json)
+- **H50-B alteration-conflict probe (negative result):** `GEMSDOE48-H50B-ALTERATION-CONFLICT` · [`zeros-outside GeoTIFF`](docs/downloads/gemsdoe48-h50b-alteration-conflict-20261007-806a4ba4-zeros.tif) · [`preregistration`](evidence/h50b_preregistration_20261007.json) · [`blocked holdout`](evidence/holdout_h50b_20261007.json) · [`restored GeoDAWN radiometric mirror`](data/source_mirrors/geodawn_rad_u8.tif) (SHA-256 `c22420f7…`, official DOI 10.5066/P93LGLVQ)
+- **Session results (H51 + H50-B + H50 re-audit):** [`docs/research/h51-h50b-results-20261007.md`](docs/research/h51-h50b-results-20261007.md)
 - **H48 diagnostics:** [`unassigned mass m(Theta)`](docs/downloads/GEMSDOE48-unassigned-mass-20261006.tif) · [`raw conflict K`](docs/downloads/GEMSDOE48-raw-conflict-K-20261006.tif)
 - **H49 audit/format receipts:** [`upstream H49 audit`](docs/downloads/gemsdoe48-h49-ds-conflict-balanced-20261006-audit.json) · [`format conversion`](evidence/h49_format_audit_20261006.json) · [`independent local format validation`](evidence/h49_submission_validation_20261006.json)
 - **Executive site:** [`docs/index.html`](docs/index.html)
@@ -93,6 +98,23 @@ The H49 file was scored with the exact current four-quadrant/core-plus-300 m-hal
 
 This is not a fresh blind holdout: H49 was developed and compared using related SGMC public-proxy evidence, and the frozen upstream source rasters were not rebuilt independently within folds. Its +0.00376 gain over the former blocked best is below the roughly 0.005 resolution discussed by the live-anchored instrument, whose H49 change bracket is −0.010 to +0.005. **It beats the prior best numerically on these proxy folds, but remains not slot-cleared.** Do not submit on this result alone.
 
+### 2026-10-07 (later session): H51 plausibility-budget emission and H50-B alteration probe — both gate-failed
+
+Two new unique constructions were preregistered (constants frozen before any scoring) and evaluated with the identical folds/domain/metric. Mean DTI on the same proxies:
+
+| Candidate | Catalogue proxy | SGMC off-catalogue proxy |
+|---|---:|---:|
+| dotted H33-2-B2 (parent) | 0.006831 | 0.095491 |
+| tip H36-1 (parent) | 0.047560 | 0.093315 |
+| union decision (49,066 px) | 0.046889 | 0.097037 |
+| H50 graded belief | 0.030323 | 0.071553 |
+| H50 binary Bel-top-37,654 | 0.007604 | 0.087161 |
+| **H51 binary Pl-top-37,654** | 0.007589 | 0.086537 |
+| **H50-B alteration-conflict 37,654** | 0.015312 | 0.019135 |
+| H49 Yager/pignistic 47,905 px | **0.095353** | **0.100751** |
+
+H51 keeps the H50 fusion exactly and emits binary on the top-budget cells ranked by plausibility Pl(F) = Bel(F) + m(Θ) — the optimistic Dempster–Shafer decision bound. Its 37,654 cells all lie inside the parents' union (it is a budget-trimmed union), it is not the naive mean (Pearson 0.9754 vs 0.5·(b1+b2)), and it fails the preregistered gate (must beat H49 on SGMC and the union on catalogue in ≥3/4 folds each). H50-B crosses the restored GeoDAWN radiometric mirror (official USGS DOI 10.5066/P93LGLVQ; SHA-verified byte-identical from the GEMSDOE24 repo) with the H50 conflict corridors: a clear negative result, consistent with the mirror's own "lithology/alteration proxy, not a fault detector" caveat. Consolidated reading: three decision rules on the same two best families span 0.0076–0.0872 on SGMC while the better parent alone reaches 0.0955 — **no fusion of these surfaces beats the better parent; higher live scores need higher credit density (new signal), not new combinations.** Full report: [`docs/research/h51-h50b-results-20261007.md`](docs/research/h51-h50b-results-20261007.md). Receipts: [`evidence/build_h51_receipt_20261007.json`](evidence/build_h51_receipt_20261007.json), [`evidence/holdout_h51_20261007.json`](evidence/holdout_h51_20261007.json), [`evidence/h50b_preregistration_20261007.json`](evidence/h50b_preregistration_20261007.json), [`evidence/holdout_h50b_20261007.json`](evidence/holdout_h50b_20261007.json). No slot is cleared.
+
 ### SGMC raster discrepancy and prior-raster sensitivity
 
 The newer primary derivative is `data/official/derived_sgmc_faults_100m.tif` (SHA-256 `643cbe992ef4ba37588fb469163ed8291e3ceb23d6c1f78a3cfaa462430c2da0`, 83,593 positive cells). The prior raw mirror `data/raw/sgmc_faults_100m.tif` (SHA-256 `26d142c4c93282cd94f6950ab96f22aeff59fbbea523d43d662e76fa1b161b5c`, 82,151 positive cells) shares the spatial grid but differs in nodata metadata and 1,450 positive-mask cells (1,446 newer-only; 4 older-only). The source/derivation discrepancy is unresolved; both are public owner mirrors, neither organizer-authenticated. The full comparison is in [`evidence/sgmc_raster_comparison_20261006.json`](evidence/sgmc_raster_comparison_20261006.json).
@@ -168,6 +190,13 @@ python scripts/prepare_h49_format_copy.py       # H49 format-only NaN-outside de
 python scripts/validate_submission.py docs/downloads/GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif --receipt evidence/h49_submission_validation_20261006.json
 python scripts/run_spatial_holdout.py --combined docs/downloads/GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif --candidate-name h49_yager_balanced --output evidence/holdout_h49_spatial_comparison_20261006.json
 python scripts/run_spatial_holdout.py --combined docs/downloads/GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif --candidate-name h49_yager_balanced --sgmc data/raw/sgmc_faults_100m.tif --allow-unpinned-sgmc --output evidence/holdout_h49_raw_sgmc_sensitivity_20261006.json
+
+# 2026-10-07 (later session): H51 + H50-B (inputs already committed and SHA-pinned)
+python scripts/build_h51_submission.py          # H51 plausibility-budget emission + preregistration receipt
+python scripts/holdout_h51.py                   # blocked folds, both proxies, H49 as gate target
+python scripts/build_h50b_probe.py              # H50-B alteration-conflict probe (uses data/source_mirrors/geodawn_rad_u8.tif)
+python scripts/holdout_h50b.py                  # same protocol; negative result recorded
+python scripts/validate_submission.py docs/downloads/gemsdoe48-h51-plausibility-budget-20261007-f8fa1d08-nan.tif
 ```
 
 The H48 rho=.5 builder remains `scripts/build_submission.py`. H49's separate mainline generation pipeline is `scripts/build_submission_h49.py`; `scripts/prepare_h49_format_copy.py` only fixes its outside-footprint encoding and preserves all inside values. The earlier alpha=.99 builder snapshot is retained as `scripts/previous_build_submission.py`; the earlier main builder is `scripts/previous_main_build_submission.py`, and the later PR #5 main Dempster builder is preserved as `scripts/previous_main_build_submission_pr5.py.disabled`. Build and holdout receipts are dated and hash-pinned. Five review passes—including API compatibility and the follow-up against the newer SGMC derivative—are recorded in [`evidence/review_passes_20261006.md`](evidence/review_passes_20261006.md).
@@ -422,7 +451,7 @@ substantially (31,614 of b2's 37,654 positive pixels), so the Dempster independe
 assumption is unsupported and its layers are diagnostics, not calibrated probabilities. It also
 does not re-rank union support (Spearman ρ≈1).
 
-**Current validation (2026-10-06):** `PYTHONPATH=src .venv/bin/python -m pytest -q` — 216 passed, 3 skipped (219 collected) after reconciling the H48 and H49 suites. The suite reads local raster inputs; it does not require network access. The 120-test count above belonged to the earlier PR #6 worktree and is historical, not current.
+**Current validation (2026-10-07):** `PYTHONPATH=src .venv/bin/python -m pytest -q` — 262 passed, 3 skipped after adding the H51 and H50-B audit suites. The suite reads local raster inputs; it does not require network access. The 216- and 120-test counts above belonged to earlier snapshots and are historical, not current.
 
 **Correction.** `DS48-IR-07` in the subsite records the hexagonal covering arm as unvalidated and
 not slot-cleared; its +1.9% SGMC-side signal was within re-sampling noise.
