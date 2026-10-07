@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="A two-constant forward model fitted to eight owner-reported live scores proves the 0.2778 corridor family is capped at 0.2843, and prices one new additive candidate built on GDR hydrothermal conduit evidence.">
+<meta name="description" content="H55 research candidate, Gate-2 failure and metric-identity correction; no upload cleared.">
 <title>GEMSDOE48 — H55: live-calibrated ceiling and one unique submission</title>
 <style>
 :root{color-scheme:light;--ink:#12241d;--muted:#54665c;--paper:#f4f4ec;--panel:#fffefa;
@@ -99,24 +99,28 @@ font-family:var(--mono);font-size:.78rem;overflow-wrap:anywhere;margin:10px 0}
 <a href="research/h55-live-model-ceiling-and-candidate-20261007.md">Full report</a>
 </div></nav>
 <main class="wrap">
+<div class="bad" role="alert"><strong>Research correction — no upload cleared.</strong>
+The H55 0.2843 “ceiling” and inverted truth totals rely on <code>FPw = S − TPw</code>,
+which is false in general under the official metric. They are historical model outputs,
+not private-label bounds or evidence that a new file will beat 0.2778.
+H55 fails the mass-neutral gate. Local TIFF checks are not organizer acceptance.
+<a href="research/metric-identity-erratum-20261007.md">Read the derivation and next validation steps</a>.</div>
 
 <header style="background:none;padding:0;color:inherit">
 <p class="eyebrow" style="color:var(--muted)">GEMSDOE48 · DrivenData competition 306 · DOE GEMS Prize</p>
-<h1>A live-calibrated forward model, the family ceiling, and one unique submission</h1>
+<h1>H55 research candidate and a corrected metric audit</h1>
 <p class="deck" style="color:var(--muted)">This session stopped guessing. Eight owner-reported
 live scores were restored byte-identical from hash-pinned mirrors, inverted against the
 official metric, and used to fit a two-constant model that predicts all eight within
-<strong>±1.76 %</strong>. That model proves the 0.2778 family is finished — and it prices
-exactly one new bet.</p>
+<strong>±1.76 %</strong> in-sample. The model is assumption-dependent and does not prove a family ceiling; see the correction above.</p>
 </header>
 
 <div class="dl">
-<h2>⬇ One-click download — this session's unique submission</h2>
+<h2>⬇ Archived H55 research TIFF — NOT cleared for competition upload</h2>
 <p class="small" style="margin-bottom:0"><strong>GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353</strong><br>
 39,430 positive pixels · single-band float32 · EPSG:32611 · 100 m ·
 3,730 × 3,292 · values exactly {0, 1} · <strong>all 12,279,160 cells finite,
-whole raster inside [0, 1]</strong> — immune to the portal's
-<em>“Predicted values must be in range [0, 1]”</em> rejection.</p>
+whole raster inside [0, 1]</strong> — passes a local range audit; organizer acceptance is unverified.</p>
 <a class="bigbtn" href="downloads/GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353-zeros-outside.tif" download>⬇ Download GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353-zeros-outside.tif
 <small>234,040 bytes · click to save · single band float32 · EPSG:32611 ·
 39,430 positive pixels</small></a>
@@ -125,7 +129,7 @@ content id <code>055da9855353</code> · submission name <code>GEMSDOE48-H55-cond
 <div class="btnrow">
 <a class="btn" href="downloads/GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353-zeros-outside.zip" download>Same file as .zip (199,113 B)</a>
 <a class="btn" href="downloads/GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353-nan-outside.tif" download>NaN-outside twin (381,046 B)</a>
-<a class="btn" href="submission-guide.html">How to submit this → step by step</a>
+<a class="btn" href="submission-guide.html">Validation status and conditional upload steps</a>
 </div>
 <p class="meta">paste-ready submission note (202 characters):<br>
 <code>GEMSDOE48-H55 | 0.2778 core untouched + 1124 conflict-priced gap dots + 652 GDR hot-spring/well conduit anchors &gt;300 m off-catalogue | model band 0.2778-0.2880, floor 0.2727 | unscored | id 055da9855353</code></p>
@@ -155,9 +159,9 @@ instruments <em>agree</em>: §6.4 of the report.</div>
 
 <h2>The four things this session established</h2>
 <div class="grid3">
-<div class="metric"><strong>0.2843</strong><span><strong>the family ceiling.</strong> Greedy
+<div class="metric"><strong>0.2843</strong><span><strong>historical surrogate frontier (not a ceiling).</strong> Greedy
 maximum-coverage re-emission over the eligible backbone peaks at n = 37,167
-px. No emission drawn from this corridor field reaches 0.2888 at <em>any</em> mass.</span></div>
+px in this model. This does not bound private-label DTI.</span></div>
 <div class="metric"><strong>±1.76 %</strong><span><strong>the instrument.</strong>
 DTI = ρ·Cov/(0.2 S + 0.8 |G|) with ρ = 0.068015, |G| = 14,027,
 reproduces eight owner-reported live scores. Seven of eight inside ±2 %.</span></div>
@@ -172,10 +176,9 @@ prior session is not a model of the hidden truth.</span></div>
 <h2>Why 0.2778 won, and what it would take to beat it</h2>
 <p>The metric is a distance-weighted Tversky index with a 300 m triangular kernel and
 α = 0.2, β = 0.8 (independently corroborated by the organizers' own reference solution, which
-trains with <code>TverskyLoss(alpha=0.2, beta=0.8)</code>). For a binary emission the two
-identities <code>FPw = S − TPw</code> and <code>FNw = |G| − TPw</code> collapse it to</p>
-<pre><code>DTI = T / (0.2·S + 0.8·|G|)</code></pre>
-<p>so the score is <em>linear in recovered truth at fixed mass</em>. The 0.2778 artifact is a
+trains with <code>TverskyLoss(alpha=0.2, beta=0.8)</code>). For a binary emission, define <code>S = Σp</code>, <code>T = TPw</code>, and <code>Q = Σ_x p(x) max_g k(d(x,g))</code>. The exact identities are <code>FPw = S − Q</code> and <code>FNw = |G| − T</code>, giving</p>
+<pre><code>DTI = T / (0.2·T + 0.2·S − 0.2·Q + 0.8·|G| + ε)</code></pre>
+<p>The old inversion further assumed Q≈T, which the official metric does not guarantee. The numbers below are historical surrogate outputs, not measured hidden-truth totals. The 0.2778 artifact is a
 Poisson-disk thinning of one corridor field with every dot within 200 m of the public catalogue
 deleted. Restoring all eight live-scored members of that family and inverting gives:</p>
 <table><thead><tr>
@@ -200,29 +203,27 @@ two independent views of the truth; they are two samplings of one corridor field
 recover the same hidden mass. Thinning from 121,131 px to 37,654 px discards 23.5 % of the
 field's truth while discarding 68.9 % of its mass — a good trade, already taken.</p>
 
-<h2>The ceiling, with two separate reachability tests</h2>
+<h2>Historical surrogate reachability table — NOT a proven ceiling</h2>
 <table><thead><tr>
 <th>target</th>
 <th>DTI</th>
 <th>T needed at 37,654 px</th>
 <th>recall</th>
 <th>% above C</th>
-<th>in the dense field's yield (6,813)?</th>
-<th>by any 37,654 px subset?</th>
-<th>at ANY mass?</th>
+<th>historical dense-field model</th>
+<th>historical subset model</th>
+<th>historical mass model</th>
 </tr></thead><tbody>
-<tr><td>xiaofanhu</td><td>0.3774</td><td>7,077.3</td><td>0.505</td><td>+35.9 %</td><td><span class="pill no">NO</span></td><td><span class="pill no">NO</span></td><td><span class="pill no">NO</span></td></tr>
-<tr><td>alexoktaba</td><td>0.3345</td><td>6,272.8</td><td>0.447</td><td>+20.4 %</td><td><span class="pill yes">yes</span></td><td><span class="pill no">NO</span></td><td><span class="pill no">NO</span></td></tr>
-<tr><td>nchuzhoy</td><td>0.3262</td><td>6,117.2</td><td>0.436</td><td>+17.4 %</td><td><span class="pill yes">yes</span></td><td><span class="pill no">NO</span></td><td><span class="pill no">NO</span></td></tr>
-<tr><td>DARD</td><td>0.3195</td><td>5,991.5</td><td>0.427</td><td>+15.0 %</td><td><span class="pill yes">yes</span></td><td><span class="pill no">NO</span></td><td><span class="pill no">NO</span></td></tr>
-<tr><td>(rank 8)</td><td>0.2888</td><td>5,415.8</td><td>0.386</td><td>+4.0 %</td><td><span class="pill yes">yes</span></td><td><span class="pill no">NO</span></td><td><span class="pill no">NO</span></td></tr>
+<tr><td>xiaofanhu</td><td>0.3774</td><td>7,077.3</td><td>0.505</td><td>+35.9 %</td><td><span class="pill no">model no</span></td><td><span class="pill no">model no</span></td><td><span class="pill no">model no</span></td></tr>
+<tr><td>alexoktaba</td><td>0.3345</td><td>6,272.8</td><td>0.447</td><td>+20.4 %</td><td><span class="pill yes">yes</span></td><td><span class="pill no">model no</span></td><td><span class="pill no">model no</span></td></tr>
+<tr><td>nchuzhoy</td><td>0.3262</td><td>6,117.2</td><td>0.436</td><td>+17.4 %</td><td><span class="pill yes">yes</span></td><td><span class="pill no">model no</span></td><td><span class="pill no">model no</span></td></tr>
+<tr><td>DARD</td><td>0.3195</td><td>5,991.5</td><td>0.427</td><td>+15.0 %</td><td><span class="pill yes">yes</span></td><td><span class="pill no">model no</span></td><td><span class="pill no">model no</span></td></tr>
+<tr><td>(rank 8)</td><td>0.2888</td><td>5,415.8</td><td>0.386</td><td>+4.0 %</td><td><span class="pill yes">yes</span></td><td><span class="pill no">model no</span></td><td><span class="pill no">model no</span></td></tr>
 <tr class="hl"><td>extradr19 (this family)</td><td>0.2778</td><td>5,209.5</td><td>0.371</td><td>+0.0 %</td><td><span class="pill yes">yes</span></td><td><span class="pill yes">yes</span></td><td><span class="pill yes">yes</span></td></tr>
 </tbody></table>
-<div class="bad"><strong>The headline negative result.</strong> #1 at 0.3774 needs
+<div class="warn"><strong>Model-only comparison, not a proof.</strong> Under the historical surrogate, #1 at 0.3774 needs
 T = 7,077. The <em>dense, unthinned</em> backbone — all
-121,131 px emitted — yields T = 6,813. The leader's numerator exceeds
-the total truth content of the best corridor field in this repository. No combination rule,
-spacing sweep, re-weighting or fusion can close that gap; only a better detector can.</div>
+121,131 px emitted — yields T = 6,813. This comparison depends on Q≈T and unobserved private truth, so it cannot exclude a better emission.</div>
 
 <h2>What is shipped instead</h2>
 <p>The candidate is additive-only, because <code>TPw</code> is a maximum over emitted pixels:
@@ -435,7 +436,7 @@ Every earlier candidate remains downloadable; none of them is this session's fil
 </main>
 <footer class="wrap">
 <p><strong>GEMSDOE48</strong> — auditable fault-surface research for DrivenData competition 306
-(DOE GEMS Prize). Built 2026-10-07 06:11 UTC by
+(DOE GEMS Prize). Built 2026-10-07 16:37 UTC by
 <code>scripts/build_site_h55.py</code> directly from the receipts in <code>evidence/</code>.</p>
 <p class="small"><strong>No organizer score exists for any file in this repository.</strong>
 Every live number is OWNER-REPORT class: a score pasted by the repository owner, not an

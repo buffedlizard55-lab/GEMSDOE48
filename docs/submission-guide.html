@@ -99,21 +99,25 @@ font-family:var(--mono);font-size:.78rem;overflow-wrap:anywhere;margin:10px 0}
 <a href="research/h55-live-model-ceiling-and-candidate-20261007.md">Full report</a>
 </div></nav>
 <main class="wrap">
+<div class="bad" role="alert"><strong>Research correction — no upload cleared.</strong>
+The H55 0.2843 “ceiling” and inverted truth totals rely on <code>FPw = S − TPw</code>,
+which is false in general under the official metric. They are historical model outputs,
+not private-label bounds or evidence that a new file will beat 0.2778.
+H55 fails the mass-neutral gate. Local TIFF checks are not organizer acceptance.
+<a href="research/metric-identity-erratum-20261007.md">Read the derivation and next validation steps</a>.</div>
 
 <header style="background:none;padding:0">
 <p class="eyebrow" style="color:var(--muted)">Submission guide · step by step</p>
-<h1>Exactly how to submit this file</h1>
-<p class="deck" style="color:var(--muted)">Six steps, about four minutes. Nothing here requires
-command-line work; the file is already built, audited and zipped.</p>
+<h1>How to submit a candidate after validation and slot clearance</h1>
+<p class="deck" style="color:var(--muted)">H55 is an archived, downloadable research file. It failed Gate-2; do not use a weekly submission slot for it. These instructions apply only once a future candidate passes validation and an organizer format check.</p>
 </header>
 
 <div class="dl">
-<h2>⬇ One-click download — this session's unique submission</h2>
+<h2>⬇ Archived H55 research TIFF — NOT cleared for competition upload</h2>
 <p class="small" style="margin-bottom:0"><strong>GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353</strong><br>
 39,430 positive pixels · single-band float32 · EPSG:32611 · 100 m ·
 3,730 × 3,292 · values exactly {0, 1} · <strong>all 12,279,160 cells finite,
-whole raster inside [0, 1]</strong> — immune to the portal's
-<em>“Predicted values must be in range [0, 1]”</em> rejection.</p>
+whole raster inside [0, 1]</strong> — passes a local range audit; organizer acceptance is unverified.</p>
 <a class="bigbtn" href="downloads/GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353-zeros-outside.tif" download>⬇ Download GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353-zeros-outside.tif
 <small>234,040 bytes · click to save · single band float32 · EPSG:32611 ·
 39,430 positive pixels</small></a>
@@ -122,7 +126,7 @@ content id <code>055da9855353</code> · submission name <code>GEMSDOE48-H55-cond
 <div class="btnrow">
 <a class="btn" href="downloads/GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353-zeros-outside.zip" download>Same file as .zip (199,113 B)</a>
 <a class="btn" href="downloads/GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353-nan-outside.tif" download>NaN-outside twin (381,046 B)</a>
-<a class="btn" href="submission-guide.html">How to submit this → step by step</a>
+<a class="btn" href="submission-guide.html">Validation status and conditional upload steps</a>
 </div>
 <p class="meta">paste-ready submission note (202 characters):<br>
 <code>GEMSDOE48-H55 | 0.2778 core untouched + 1124 conflict-priced gap dots + 652 GDR hot-spring/well conduit anchors &gt;300 m off-catalogue | model band 0.2778-0.2880, floor 0.2727 | unscored | id 055da9855353</code></p>
@@ -170,7 +174,7 @@ the entire experiment.</li>
 </ol>
 
 <h2>If the portal says “Predicted values must be in range [0, 1]”</h2>
-<div class="good"><strong>This primary file cannot produce that error.</strong> All
+<div class="warn"><strong>Local range check only; portal compatibility is unverified.</strong> All
 12,279,160 cells are finite, the whole-raster minimum is 0.0
 and the maximum is 1.0, and <code>nodata</code> is unset. The audit asserts
 <code>portal_range_error_immune: true</code> on the
@@ -244,7 +248,7 @@ recommended.</p>
 </main>
 <footer class="wrap">
 <p><strong>GEMSDOE48</strong> — auditable fault-surface research for DrivenData competition 306
-(DOE GEMS Prize). Built 2026-10-07 06:11 UTC by
+(DOE GEMS Prize). Built 2026-10-07 16:37 UTC by
 <code>scripts/build_site_h55.py</code> directly from the receipts in <code>evidence/</code>.</p>
 <p class="small"><strong>No organizer score exists for any file in this repository.</strong>
 Every live number is OWNER-REPORT class: a score pasted by the repository owner, not an

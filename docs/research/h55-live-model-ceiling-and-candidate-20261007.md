@@ -1,3 +1,5 @@
+> **CORRECTION (2026-10-07):** This historical analysis assumes `FPw = S - TPw`, which is generally false under the official metric. Consequently its inverted truth mass, 0.2843 "ceiling", break-even thresholds and live-equivalent scenarios are *not* proven private-label bounds. Its underlying measurements are preserved for audit, but **do not use them to clear an upload**. Read the [metric-identity erratum](metric-identity-erratum-20261007.md) first.
+
 # H55 — a live-calibrated forward model, the family ceiling, and a conduit-anchored candidate
 
 Session date: **2026-10-07 UTC**. Candidate label: **H55**. Everything below is
@@ -596,7 +598,7 @@ The honest bracket, combining both instruments, is therefore:
 ### 6.3 Determinism
 
 Two independent builds produced the same content id `055da9855353` and the same
-primary SHA-256 `f4671759ef80479516629974b4b028f743db52ea54bc66c166cf6506694b0c72`.
+primary SHA-256 `8f9a9d3d1ea2aed1c99e5ab5260aad9ceb10f4011c4b5a38791509261ddd284a`.
 The dart-throw is seed-free (rank, then tier, then row-major index) and the greedy is
 deterministic.
 

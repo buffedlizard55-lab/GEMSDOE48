@@ -99,6 +99,12 @@ font-family:var(--mono);font-size:.78rem;overflow-wrap:anywhere;margin:10px 0}
 <a href="research/h55-live-model-ceiling-and-candidate-20261007.md">Full report</a>
 </div></nav>
 <main class="wrap">
+<div class="bad" role="alert"><strong>Research correction — no upload cleared.</strong>
+The H55 0.2843 “ceiling” and inverted truth totals rely on <code>FPw = S − TPw</code>,
+which is false in general under the official metric. They are historical model outputs,
+not private-label bounds or evidence that a new file will beat 0.2778.
+H55 fails the mass-neutral gate. Local TIFF checks are not organizer acceptance.
+<a href="research/metric-identity-erratum-20261007.md">Read the derivation and next validation steps</a>.</div>
 
 <header style="background:none;padding:0">
 <p class="eyebrow" style="color:var(--muted)">Executive summary · 2026-10-07 · H55 session</p>
@@ -106,12 +112,11 @@ font-family:var(--mono);font-size:.78rem;overflow-wrap:anywhere;margin:10px 0}
 </header>
 
 <div class="dl">
-<h2>⬇ One-click download — this session's unique submission</h2>
+<h2>⬇ Archived H55 research TIFF — NOT cleared for competition upload</h2>
 <p class="small" style="margin-bottom:0"><strong>GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353</strong><br>
 39,430 positive pixels · single-band float32 · EPSG:32611 · 100 m ·
 3,730 × 3,292 · values exactly {0, 1} · <strong>all 12,279,160 cells finite,
-whole raster inside [0, 1]</strong> — immune to the portal's
-<em>“Predicted values must be in range [0, 1]”</em> rejection.</p>
+whole raster inside [0, 1]</strong> — passes a local range audit; organizer acceptance is unverified.</p>
 <a class="bigbtn" href="downloads/GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353-zeros-outside.tif" download>⬇ Download GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353-zeros-outside.tif
 <small>234,040 bytes · click to save · single band float32 · EPSG:32611 ·
 39,430 positive pixels</small></a>
@@ -120,7 +125,7 @@ content id <code>055da9855353</code> · submission name <code>GEMSDOE48-H55-cond
 <div class="btnrow">
 <a class="btn" href="downloads/GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353-zeros-outside.zip" download>Same file as .zip (199,113 B)</a>
 <a class="btn" href="downloads/GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353-nan-outside.tif" download>NaN-outside twin (381,046 B)</a>
-<a class="btn" href="submission-guide.html">How to submit this → step by step</a>
+<a class="btn" href="submission-guide.html">Validation status and conditional upload steps</a>
 </div>
 <p class="meta">paste-ready submission note (202 characters):<br>
 <code>GEMSDOE48-H55 | 0.2778 core untouched + 1124 conflict-priced gap dots + 652 GDR hot-spring/well conduit anchors &gt;300 m off-catalogue | model band 0.2778-0.2880, floor 0.2727 | unscored | id 055da9855353</code></p>
@@ -154,22 +159,21 @@ then declined to submit. This session replaced the proxy with a <strong>forward 
 on eight owner-reported live scores</strong>. The model has two constants — the hidden truth mass
 |G| = 14,027.5 px and a coverage-to-truth ratio ρ = 0.068015 — and it
 reproduces all eight live scores with an RMS relative error of
-<strong>1.758 %</strong>. Used honestly, it settles three questions
-that were previously matters of opinion: the 0.2778 artifact is within
-<strong>1.84 %</strong> of coverage-optimal for its corridor
-field; the entire field is capped at live-equivalent <strong>0.2844</strong>
-at any mass; and the union of the two best families is worth <strong>-0.01398</strong>.
-Nothing in this repository can reach 0.2888, let alone 0.3195 or 0.3774, without a better
-detector.</p>
+<strong>1.758 %</strong> in-sample. Its historical
+surrogate frontier at 0.2844 is NOT a bound under the
+organizer's metric; the inferred |G| and the estimated union delta
+-0.01398 inherit the false Q≈T assumption. A new detector
+must be evaluated with the exact metric on untouched spatial blocks.</p>
 
 <h2>2 · The model</h2>
 <pre><code>k(d) = max(1 − d/300 m, 0)          official 300 m triangular kernel, α = 0.2, β = 0.8
-FPw  = S − TPw ,  FNw = |G| − TPw   exact for a matched binary emission
-DTI  = T / (0.2·S + 0.8·|G|)        linear in recovered truth at fixed mass
+Q    = Σ_x p(x) max_g k(d(x,g))    (prediction-centred coverage)
+FPw  = S − Q ,  FNw = |G| − T        T = TPw (truth-centred coverage)
+DTI  = T / (0.2·T + 0.2·S − 0.2·Q + 0.8·|G| + ε)
 
 T    = ρ · Cov(X)                   Cov(X) = Σ_(b ∈ B_elig) max_(x ∈ X) k(d(x,b))
 B_elig = h19-5 backbone AND &gt;200 m from the public catalogue   (103,805 px)</code></pre>
-<p>|G| is identified because <code>A_d2_8 ⊃ B_prune100 ⊃ C_prune200</code> are strictly nested
+<p>The historical surrogate treated |G| as identified because <code>A_d2_8 ⊃ B_prune100 ⊃ C_prune200</code> are strictly nested
 (verified pixel-wise, not assumed) and the removed dots are catalogue-adjacent, so all three share
 one T. Least squares gives |G| = 14,027.5; the three rungs then invert to
 T = 5,210.4 / 5,216.1 / 5,209.5, agreeing to <strong>0.11 %</strong>. That self-consistency is the
@@ -181,7 +185,7 @@ strongest single piece of evidence in the repository that catalogue-adjacent dot
 Two artifacts differing 12 % in mass (C and h32_prethin_tip) differ <strong>0.07 %</strong> in T
 and 0.9 % in Cov. Mass is noise; coverage of the corridor field is signal.</p>
 
-<h2>4 · The ceiling</h2>
+<h2>4 · Historical surrogate frontier (not an upper bound)</h2>
 <p>Greedy maximum-coverage selection over <code>B_elig</code>, traced from n = 1 to n = 45,000,
 maximises model DTI at <strong>n = 37,167</strong> with
 Cov = 76,612.8 → model DTI 0.27932 →
@@ -190,10 +194,9 @@ Cov = 75,206.8, i.e. <strong>1.84 % short
 of coverage-optimal and 0.4 % off the optimal mass</strong>. The whole remaining in-family headroom
 is +0.0066 model units against an instrument resolution of
 ±0.0049.</p>
-<div class="bad"><strong>Therefore:</strong> #8 (0.2888), #7 (0.3195), #3 (0.3262), #2 (0.3345)
-and #1 (0.3774) are all unreachable from this corridor field at any mass — and #1 needs more
-truth (T = 7,077) than the dense backbone contains in total
-(T = 6,813).</div>
+<div class="warn"><strong>Not a leaderboard reachability proof.</strong> The historical
+frontier used Q≈T and an inferred private truth mass. It cannot determine whether
+0.2888, 0.3195, or 0.3774 is reachable with a better candidate.</div>
 
 <h2>5 · Two instruments this repository relied on are contradicted by a live score</h2>
 <p><strong>The SGMC off-catalogue proxy.</strong> An emission built directly on it — 44,090 px,
@@ -342,7 +345,7 @@ give the exact downside. All eight live scores used to build the model are OWNER
 </main>
 <footer class="wrap">
 <p><strong>GEMSDOE48</strong> — auditable fault-surface research for DrivenData competition 306
-(DOE GEMS Prize). Built 2026-10-07 06:11 UTC by
+(DOE GEMS Prize). Built 2026-10-07 16:37 UTC by
 <code>scripts/build_site_h55.py</code> directly from the receipts in <code>evidence/</code>.</p>
 <p class="small"><strong>No organizer score exists for any file in this repository.</strong>
 Every live number is OWNER-REPORT class: a score pasted by the repository owner, not an

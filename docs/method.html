@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Derivation of the DTI metric algebra, the live-calibrated forward model, the coverage-frontier ceiling and the Dempster-Shafer selection rule.">
+<meta name="description" content="Official DTI identities, H55 historical surrogate limits and Dempster-Shafer diagnostics.">
 <title>GEMSDOE48 H55 — method</title>
 <style>
 :root{color-scheme:light;--ink:#12241d;--muted:#54665c;--paper:#f4f4ec;--panel:#fffefa;
@@ -99,6 +99,12 @@ font-family:var(--mono);font-size:.78rem;overflow-wrap:anywhere;margin:10px 0}
 <a href="research/h55-live-model-ceiling-and-candidate-20261007.md">Full report</a>
 </div></nav>
 <main class="wrap">
+<div class="bad" role="alert"><strong>Research correction — no upload cleared.</strong>
+The H55 0.2843 “ceiling” and inverted truth totals rely on <code>FPw = S − TPw</code>,
+which is false in general under the official metric. They are historical model outputs,
+not private-label bounds or evidence that a new file will beat 0.2778.
+H55 fails the mass-neutral gate. Local TIFF checks are not organizer acceptance.
+<a href="research/metric-identity-erratum-20261007.md">Read the derivation and next validation steps</a>.</div>
 
 <header style="background:none;padding:0">
 <p class="eyebrow" style="color:var(--muted)">Method</p>
@@ -116,16 +122,17 @@ FPw   = Σ_x p(x) · (1 − max_g k(d(x, g)))
 FNw   = Σ_g (1 − max_x p(x) · k(d(x, g)))
 DTI   = TPw / (TPw + 0.2·FPw + 0.8·FNw)</code></pre>
 
-<h2>2 · Three consequences that are exact, not approximate</h2>
+<h2>2 · Caveats on the historical selection arguments</h2>
 <h3>(a) The optimal submission is binary</h3>
 <p>For one cell of value <code>v</code> that is the argmax of its truth pixel with realised weight
 <code>k</code>: <code>d/dv[(T₀ + v·k)/(D₀ + 0.2v)] = (k·D₀ − 0.2·T₀)/(D₀ + 0.2v)²</code>, whose
 sign is that of <code>k − 0.2·DTI</code> and is <strong>independent of v</strong>. Every cell is
 pushed to 0 or 1, so a graded belief surface is strictly worse than its own binarisation. Asserted
 numerically in <code>tests/test_h55.py::test_binary_emission_is_dti_optimal</code>.</p>
-<h3>(b) An added pixel pays iff its kernel weight exceeds 0.2·DTI</h3>
-<p>0.0556 at DTI = 0.2778, i.e. 0.397 × the mean credit of a dot in the live-best artifact
-(0.1384).</p>
+<h3>(b) The 0.2·DTI threshold is conditional</h3>
+<p>An addition changes both TPw and FPw. Its break-even point depends on its actual
+incremental FPw and coverage overlap; 0.0556 is the historical surrogate threshold,
+not a universal rule for a candidate dot.</p>
 <h3>(c) Adding a pixel can never reduce TPw</h3>
 <p><code>TPw</code> is a <em>maximum</em> over emitted pixels. The only risk of an addition is the
 0.2 denominator cost, which makes the worst case of an additive candidate
@@ -133,16 +140,18 @@ numerically in <code>tests/test_h55.py::test_binary_emission_is_dti_optimal</cod
 rather than an estimate.</p>
 
 <h2>3 · The removal-regime collapse</h2>
-<pre><code>FPw = S − M ,  FNw = |G| − TPw ,  M = TPw  (to within 0.2 %)
-⟹  DTI = T / (0.2·S + 0.8·|G|)</code></pre>
-<p>Two constants remain: the hidden truth mass |G| and the numerator T. Both are unknown; both
-turn out to be recoverable.</p>
+<pre><code>Q = Σ_x p(x) max_g k(d(x,g));   FPw = S − Q
+FNw = |G| − T;                 T = TPw
+DTI = T / (0.2·T + 0.2·S − 0.2·Q + 0.8·|G| + ε)</code></pre>
+<p>The historical simplification assumed Q≈T without verifying it against hidden labels.
+Neither |G| nor T is identified from the owner-reported scores alone.</p>
 
 <h2>4 · Identifying |G| from the nested live ladder</h2>
 <p><code>A_d2_8 ⊃ B_prune100 ⊃ C_prune200</code> — verified pixel-wise, not assumed. The removed
 dots are the catalogue-adjacent ones the organizer masks out of scoring, so all three share one T
 and |G| is identified. Least squares over the triple gives
-<strong>|G| = 14,027.5 px</strong>, shared T = 5,212.0.
+<strong>model |G| = 14,027.5 px</strong>, model shared T = 5,212.0.
+These are conditional outputs, not identified private-label quantities.
 The three pairwise closed-form solutions are
 13,368, 14,089, 15,200 — a ±6 % spread
 driven entirely by the 4-decimal rounding of the owner-reported scores. The rungs then invert to
@@ -231,7 +240,7 @@ python -m pytest -q                                        # 158 passed, 3 skipp
 </main>
 <footer class="wrap">
 <p><strong>GEMSDOE48</strong> — auditable fault-surface research for DrivenData competition 306
-(DOE GEMS Prize). Built 2026-10-07 06:11 UTC by
+(DOE GEMS Prize). Built 2026-10-07 16:37 UTC by
 <code>scripts/build_site_h55.py</code> directly from the receipts in <code>evidence/</code>.</p>
 <p class="small"><strong>No organizer score exists for any file in this repository.</strong>
 Every live number is OWNER-REPORT class: a score pasted by the repository owner, not an
