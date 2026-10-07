@@ -70,6 +70,18 @@ letter-spacing:.05em;text-transform:uppercase}
 .pill.warn{background:var(--ambersoft);color:var(--amber)}
 .small{color:var(--muted);font-size:.85rem}
 @media print{nav.top{position:static}}
+
+.card{border:1px solid var(--line);border-radius:14px;padding:20px;background:var(--panel);margin:0 0 18px}
+.download-card{background:var(--soft);border-color:#bfcebf}
+.card .eyebrow,.eyebrow{color:var(--muted);text-transform:uppercase;letter-spacing:.14em;
+font-size:.72rem;font-weight:800}
+.button{display:inline-block;margin:8px 0 4px;padding:12px 18px;border-radius:8px;background:var(--green);
+color:#fff;text-decoration:none;font-weight:750}
+.button:hover{color:#fff;background:#123327}
+.file-meta{margin-top:12px;font-family:var(--mono);font-size:.76rem;overflow-wrap:anywhere;color:#3d5145}
+.note{padding:12px 14px;border-radius:9px;background:#f2f4ee;border:1px solid var(--line);
+font-family:var(--mono);font-size:.78rem;overflow-wrap:anywhere;margin:10px 0}
+.diag-links{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:12px;font-size:.88rem}
 </style>
 
 </head>
@@ -122,6 +134,24 @@ content id <code>055da9855353</code> · submission name <code>GEMSDOE48-H55-cond
 against the current best 0.2778, floor 0.2727 if every added pixel earns zero credit.
 <strong>UNSCORED.</strong> No weekly submission slot is cleared by this page.</p>
 </div>
+
+<div class="bad"><strong>This candidate FAILS the repository's newest gate, and that is
+reported before anything favourable.</strong> A concurrent session merged
+<code>scripts/audit_candidate.py</code> (protocol <code>GEMSDOE48-GATE-2</code>, mass-neutral) while
+this one was running. Verdict <code>FAIL_MASS_NEUTRAL</code>: equal_mass_credit_density_below_incumbent (-0.00201); added_cells_below_live_break_even_bar (density-matched 0.0102 &lt; 0.0556 per cell).
+Equal-mass credit density -0.002014 against the incumbent; added-cell credit
+<strong>0.0102</strong> density-matched against the metric's own
+break-even bar of 0.0556 — 0.18× the bar. If that figure transferred
+to the live metric the score would be <strong>0.2736, −0.0042 against
+0.2778</strong>. Receipt:
+<a href="../evidence/audit_gate2_h55_20261007.json"><code>evidence/audit_gate2_h55_20261007.json</code></a>.
+<br><br>Three things are true about that test and none of them excuse the fail: it rests on the same
+SGMC proxy that an emission built directly on it scored 0.0512 live against the family's 0.26; its
+additions test returns 0.0049–0.0125 per cell for <em>every</em> candidate ever measured, including
+a graded belief field and 222,693 hedge-v2 cells, so it barely discriminates between inputs; and its
+equal-mass test uniformly subsamples a strict superset of C, which must score below C on any proxy
+where C's dots are worth more than the additions. Full reconciliation, including where the two
+instruments <em>agree</em>: §6.4 of the report.</div>
 
 <h2>The four things this session established</h2>
 <div class="grid3">
@@ -237,6 +267,117 @@ is not.</div>
 <tr><td>A1 earns 0.3000 per anchor</td><td>0.28299</td><td>0.28802</td><td><span class='pos'>+0.01022</span></td></tr>
 </tbody></table>
 
+<h2>The honest bracket, combining both instruments</h2>
+<table><thead><tr>
+<th>basis</th>
+<th>live-equivalent</th>
+<th>Δ vs 0.2778</th>
+</tr></thead><tbody>
+<tr><td>GATE-2 density-matched credit (0.0102 per added cell)</td><td>0.2736</td><td><span class='neg'>−0.0042</span></td></tr>
+<tr><td>this model, every added pixel earns zero (floor)</td><td>0.2727</td><td><span class='neg'>-0.0051</span></td></tr>
+<tr><td>this model, A2 pays as priced and A1 earns zero — the central case</td><td>0.2778</td><td>-0.0000</td></tr>
+<tr><td>this model, A1 earns 0.0556 per anchor</td><td>0.2797</td><td><span class='pos'>+0.0019</span></td></tr>
+<tr><td>this model, A1 earns 0.1383 per anchor</td><td>0.2825</td><td><span class='pos'>+0.0047</span></td></tr>
+<tr><td>this model, A1 earns 0.3000 per anchor</td><td>0.2880</td><td><span class='pos'>+0.0102</span></td></tr>
+</tbody></table>
+
+
+<h2>Concurrent sessions' candidates — preserved verbatim, none recommended</h2>
+<p class="small">Three concurrent sessions merged their own H53 / H53-A / H53-RadEdge / H54
+candidates into <code>main</code> while this one was running. Their own landing cards are
+reproduced below <em>unchanged</em>, extracted at build time from
+<a href="archive-main-pages/pre-h55-merge-20261007/index.html">the archived pre-merge page</a> so
+their wording cannot be paraphrased or dropped. All of them record a failed gate and none is an
+upload recommendation. Their TIFFs and receipts remain live in <code>docs/downloads/</code> and
+<code>evidence/</code>.</p>
+<section class="card download-card" id="h54" style="margin-bottom:24px;border-width:2px">
+      <p class="eyebrow" style="color:#41664d">2026-10-07 · H54 credit-density audit + unique candidate · one-click download</p>
+      <h2>⬇ This session's unique GeoTIFF — GEMSDOE48-H54 (not slot-cleared)</h2>
+      <p><b>Why nothing is cleared, measured:</b> every earlier gate compared candidates at unequal emitted mass on a proxy whose truth is ~4.3× denser than the live hidden truth, so <b>random mass wins it</b> — C + 18,000 random cells scores 0.1189 versus C 0.0956 and H49 0.1010. The corrected mass-neutral audit (<a href="../scripts/audit_candidate.py">GATE-2</a>) shows the incumbent C has the best credit density of anything in this repository (equal-mass 0.0956 vs H49 0.0872, H51 0.0866, h16-1 0.0770, h19-5 0.0717, random 0.0670, hedge-v2 0.0582), and every documented addition of any provenance earns only 0.005–0.013 credit per cell against the metric's own 0.0556 break-even bar.</p>
+      <p>This session's unique file keeps the scored 0.2778 core (37,654 dots) untouched and adds the strongest <b>1,000</b> strictly-gated 3 m USGS 3DEP lidar-scarp dots (min 224 m off-catalogue, ≥316 m from any core dot, minimum step 3.40 m) — the smallest modelled-cost way to carry genuinely novel, lidar-visible content into the Phase-2 evaluation. Dempster–Shafer diagnostics (normalized belief, unassigned mass m(Θ), raw conflict K) ship as separate layers and the DS field is verified not to be the naive mean (Pearson 0.9743, max |Δ| 0.2706).</p>
+      <a class="button" href="downloads/GEMSDOE48-H54-ds-core-lidar-20261007-dedc43dc0167.tif" download>↓ Download H54 unique candidate GeoTIFF (NaN outside, not slot-cleared)</a>
+      <a class="button" href="downloads/GEMSDOE48-H54-ds-core-lidar-20261007-dedc43dc0167.zip" download>↓ .zip (single GeoTIFF)</a>
+      <a class="button" href="downloads/GEMSDOE48-H54-ds-core-lidar-20261007-dedc43dc0167-zeros-nan-outside.tif" download>↓ zeros-outside twin</a>
+      <p class="file-meta">GEMSDOE48-H54-ds-core-lidar-20261007-dedc43dc0167.tif<br>1,562,508 bytes · SHA-256 dedc43dc0167edcf1dca9fa1693b69153c71325d59e47218298e577cd8159fc4 · float32, EPSG:32611, 100 m, 3,730 × 3,292, 38,654 positives, NaN outside</p>
+      <div class="note">GEMSDOE48-H54 | 0.2778 dotted core (37,654 px, unchanged) + 1,000 strictly-gated 3 m lidar-scarp dots (min 224 m off-catalogue, ≥316 m from any core dot); DS m(Theta)/K diagnostics separate; unscored research candidate.</div>
+      <p><b>Measured (GATE-2):</b> equal-mass credit density −0.000748 (inside the −0.002 tolerance — the smallest penalty of any candidate); additions 0.0107 credit/cell on a density-matched truth vs the 0.0556 bar; raw-proxy mean4 0.096117 vs C 0.095491 (that +0.0006 is the mass artifact, not evidence). Modelled live bracket ≈ −0.000 to −0.003, upside only if lidar scarps carry credit the 100 m layers miss. <b>The audit does not clear it.</b></p>
+      <p><b>Frontier probe (does <i>any</i> new dot pay?):</b> under the best-calibrated truth model (<a href="../scripts/lam3_residual_probe.py">scripts/lam3_residual_probe.py</a>, fitted to the 17 owner-reported scores, rms 0.030), this candidate's additions earn <b>0.014 credit/cell</b> and H49's earn 0.022 — while a uniform random control earns 0.013 and the model's own greedy best uncovered cells reach only 0.049–0.059 against the 0.0556 bar. Max model-admissible gain from any addition: ≈ +0.000 to +0.0004. The incumbent is on the frontier of the current information set; only a genuinely new detector can move the score.</p>
+      <div class="diag-links">
+        <a href="research/credit-density-audit-20261007.md">Credit-density audit (why nothing is cleared; the corrected gate)</a>
+        <a href="../evidence/credit_density_audit_20261007.json">Audit receipt index (all candidates)</a>
+        <a href="../evidence/audit_gate2_gemsdoe48_h54_20261007.json">H54 GATE-2 receipt</a>
+        <a href="../evidence/build_h54_receipt_20261007.json">H54 build receipt</a>
+        <a href="../evidence/h54_submission_validation_20261007.json">H54 format validation</a>
+        <a href="downloads/diagnostics/gemsdoe48-h54-unassigned-mtheta-dedc43dc0167.tif" download>unassigned mass m(Θ)</a>
+        <a href="../scripts/build_submission_h54.py">builder</a>
+      </div>
+      <p class="small" style="margin-top:10px"><strong>Honest status:</strong> published because the project brief requires a unique, one-click-downloadable candidate and because Phase-2 expert labels may reward novel lidar-visible faults; <strong>not</strong> an upload recommendation. If the owner prefers a pure mass-budget position, hold the slot instead — see the audit's §6.</p>
+    </section>
+<section class="card download-card" id="h53-radedge" style="margin-bottom:24px;border-width:2px">
+      <p class="eyebrow" style="color:#41664d">H53-RadEdge-1 · requested H33-D candidate · pre-registered gate failed · do not upload</p>
+      <h2>⬇ H33-D × GeoDAWN Dempster research GeoTIFF — one-click download</h2>
+      <p>This separate candidate uses dotted H33-2-B2 (owner-reported 0.2778; exact local-file attribution unverified) and H33-D, the explicitly identified tip/step-over parent (owner-reported 0.2632), plus a weak multiscale K/Th/U/TC radiometric-edge source. H36-1 is not used here. Canonical Dempster residual m(Θ) and raw conflict K are separate diagnostics; normalized belief is not calibrated probability.</p>
+      <a class="button" href="downloads/GEMSDOE48-H53-DS-RadEdge-B2xH33D-20261007-4c01fcf2ad8c-nan-outside.tif" download>↓ Download H53-RadEdge GeoTIFF (research only; gate failed)</a>
+      <p class="file-meta">GEMSDOE48-H53-DS-RadEdge-B2xH33D-20261007-4c01fcf2ad8c-nan-outside.tif<br>17,382,618 bytes · SHA-256 4c01fcf2ad8c1d2bd487bc4d07c85e57b2a256296586d4817b58079b0ccd7a1f · float32 · EPSG:32611 · 100 m · NaN outside</p>
+      <div class="note">Draft portal note only — do not submit: GEMSDOE48-H53-DS-RadEdge-B2xH33D-4c01fcf2ad8c | H33-2-B2 x H33-D plus weak GeoDAWN K/Th/U/TC edge evidence; Dempster-Shafer, unscored research candidate, not slot-cleared.</div>
+      <p><b>Frozen result:</b> 0.061821 vs H49 0.100751 on the newer-SGMC off-catalogue proxy (−0.038930, 0/4 folds positive); older-SGMC 0.061099. It is not pixelwise equal to the two-family mean, but Pearson r=0.99446 and budget-matched top-37,654 Jaccard=0.97685; it has positive mass in 99.56% of footprint cells. <b>Gate failed; no slot.</b></p>
+      <div class="diag-links">
+        <a href="research/holdout-h53-radedge-results-20261007.md">H53-RadEdge holdout and scientific limits</a>
+        <a href="research/hypotheses-h53-radedge-20261007.md">Frozen three-hypothesis slate</a>
+        <a href="research/data-availability-geochem-magnetic-20261007.md">Post-slate official-data availability check</a>
+        <a href="../evidence/build_h53_radedge_receipt_20261007.json">Build receipt</a>
+        <a href="../evidence/holdout_h53_radedge_20261007.json">Blocked holdout JSON</a>
+        <a href="../evidence/h53_radedge_submission_validation_20261007.json">Format and bounded-uniqueness audit</a>
+        <a href="../evidence/h53_radedge_namespace_erratum_20261007.json">H53 namespace erratum</a>
+        <a href="downloads/diagnostics/GEMSDOE48-H53-DS-RadEdge-B2xH33D-20261007-4c01fcf2ad8c-mtheta-dempster.tif" download>Dempster residual m(Θ)</a>
+        <a href="downloads/diagnostics/GEMSDOE48-H53-DS-RadEdge-B2xH33D-20261007-4c01fcf2ad8c-conflict-total-K.tif" download>Raw conflict K</a>
+        <a href="downloads/diagnostics/GEMSDOE48-H53-DS-RadEdge-B2xH33D-20261007-4c01fcf2ad8c-radiometric-edge-coherence.tif" download>Radiometric edge field</a>
+        <a href="../evidence/h36_parent_classification_erratum_20261007.json">H36 classification erratum</a>
+      </div>
+    </section>
+<section class="card download-card" id="h53a" style="margin-bottom:24px;border-width:2px">
+      <p class="eyebrow" style="color:#41664d">2026-10-07 · H53-A strike-coherence candidate · distinct from H53-RadEdge-1 and H53-1 · gate failed</p>
+      <h2>⬇ H53-A research GeoTIFF — download, but do not upload</h2>
+      <p><b>This is a separate research candidate, separate from H53-RadEdge-1 and the historical H53-1 three-source Dempster fusion.</b> H53-A keeps dotted parent C's 37,654 positive cells and adds 12,000 Poisson-spaced cells selected from regional H52-derived `h_gate12`, `strike_at`, and `cover`: height ≥ 0.30 m, cover ≥ 0.90, with strike-compatible support at ≥4/5 samples along an approximately 400–565 m trace. Candidate centers are excluded within 200 m of the catalogue and C. One-band float32, EPSG:32611, 100 m, 3,730 × 3,292; {0,1} in-footprint, NaN/nodata outside; 49,654 positive cells.</p>
+      <a class="button" href="downloads/GEMSDOE48-H53-STRIKE-COHERENCE-20261007-de35531d3867-nan-outside.tif" download>↓ Download H53-A research GeoTIFF (NOT slot-cleared; do not upload)</a>
+      <p class="file-meta">GEMSDOE48-H53-STRIKE-COHERENCE-20261007-de35531d3867-nan-outside.tif<br>403,844 bytes · SHA-256 de35531d386792da1950eac815f98db8f36304f78debb6b568138d070640d9bd</p>
+      <p class="small"><b>Unique candidate name:</b> GEMSDOE48-H53-STRIKE-COHERENCE-20261007-de35531d3867-nan-outside.</p>
+      <div class="note">Draft note for archival context only — do not submit after the failed gate: GEMSDOE48-H53 | C + 12k Poisson dots ranked by 500m strike-coherent 3DEP scarp support; proxy-tested research only; NOT slot-cleared.</div>
+      <p><b>Promotion gate failed against H49.</b> Newer SGMC public proxy: H53-A <b>0.098110</b> vs H49 <b>0.100751</b> (−0.002641; H53-A higher in 1/4 folds). Older raw-SGMC sensitivity: <b>0.097086</b> vs <b>0.099768</b> (−0.002682; 1/4 folds). It beats the earlier union but not H49. These are public-map proxies, not private expert labels or organizer scores. <b>No weekly slot was used or cleared.</b></p>
+      <div class="diag-links">
+        <a href="research/holdout-h53a-scarp-results-20261007.md">H53-A blocked results and assumptions</a>
+        <a href="research/hypotheses-h53a-scarp-20261007.md">H53-A frozen slate and source caveats</a>
+        <a href="../evidence/h53a_scarp_vs_h49_20261007.json">Hash-checked H53-A / H49 gate</a>
+        <a href="../evidence/h53a_scarp_submission_validation_20261007.json">Local format audit</a>
+        <a href="../evidence/h53a_scarp_submission_identity_20261007.json">Bounded local uniqueness audit</a>
+        <a href="submission-guide.html">Portal format and upload reference (not authorization)</a>
+      </div>
+      <p class="small" style="margin-top:14px"><strong>DO NOT UPLOAD H53-A.</strong> It fails both preregistered proxy comparisons against H49. A public-proxy result alone cannot establish private-label performance. DrivenData's submission rules and USGS 3DEP page were freshly retrieved; that does not verify these exact tile payloads/coverage or portal acceptance.</p>
+    </section>
+<section class="card" id="h53">
+      <h2>Earlier H53-1 — three-source adaptive lidar fusion (historical; not slot-cleared)</h2>
+      <p><b>Historical three-source research TIFF, not a slot-cleared upload.</b> It combines dotted H33-2-B2 with H36-1 rung30 (owner-reported 0.2710; an H19-5/rung-30 repacking, <b>not</b> the actual tip/step-over family) and native 3 m lidar scarp evidence using adaptive Dempster discounting. The frozen results remain valid for this H36 parent pair, not as a test of B2 × H33-D. One band float32, EPSG:32611, 100 m, 3,730 × 3,292, graded belief in [0,1] in-footprint, NaN outside. Deterministic byte-identical rebuild. See the <a href="../evidence/h36_parent_classification_erratum_20261007.json">classification erratum</a>.</p>
+      <a class="button" href="downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-nan-outside.tif" download>↓ Download H53 unique candidate GeoTIFF (NaN outside, not slot-cleared)</a>
+      <a class="button" href="downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-nan-outside.zip" download>↓ .zip (single GeoTIFF)</a>
+      <p class="file-meta">GEMSDOE48-H53-3SRC-DS-20261007-9242c831-nan-outside.tif<br>7,042,968 bytes · SHA-256 9242c831dc103966e7ea961e342e4dce5e655b11313d349a112ece8a4d8b0d15 · <a href="downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-zeros-outside.tif" download>zeros-outside twin</a> · <a href="downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-pignistic-twin-nan.tif" download>binary pignistic twin (37,654 px)</a></p>
+      <div class="note">Corrected archival note (do not submit): GEMSDOE48-H53-3SRC-DS | B2 x H36-1 rung30 (H19-5/rung-30 repack, not tip) x lidar; adaptive D-S; unscored research, gate failed.</div>
+      <p><b>Measured, same protocol as H49:</b> newer-SGMC proxy graded <b>0.071408</b>, binary twin <b>0.089559</b> (best fusion-decision surface yet: H51 0.086537, H50-binary 0.087161) vs parents 0.0955/0.0933, union 0.096992, H49 <b>0.100751</b> — 0/4 folds vs H49 for both files; raw-SGMC agrees in direction. Not the naive mean (vs 3-belief mean: Pearson 0.86, max |Δ| 0.47, top-budget Jaccard 0.55). <b>The pre-registered gate fails: do not spend a slot.</b> Consolidated finding, now stronger: no fusion of existing surfaces — two- or three-source, scalar or adaptive — beats the better parent; higher live scores need new signal (v2 scarp detector), not better combination.</p>
+      <div class="diag-links">
+        <a href="research/holdout-h53-results-20261007.md">H53 results + gate report</a>
+        <a href="research/hypotheses-h53-20261007.md">H53 hypothesis slate (pre-registered)</a>
+        <a href="downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-diag-unassigned-nan.tif" download>unassigned mass m(Θ)</a>
+        <a href="downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-diag-conflict-AB-nan.tif" download>family conflict K_AB</a>
+        <a href="downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-diag-conflict-ABL-nan.tif" download>lidar conflict K_ABL</a>
+        <a href="downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-diag-plausibility-nan.tif" download>plausibility</a>
+        <a href="../evidence/build_h53_receipt_20261007.json">Frozen build receipt (legacy family field)</a>
+        <a href="../evidence/h36_parent_classification_erratum_20261007.json">H36 classification erratum</a>
+        <a href="../evidence/holdout_h53twin_spatial_comparison_20261007.json">Official-script newer-SGMC (twin)</a>
+        <a href="../evidence/holdout_h53_spatial_comparison_20261007.json">Official-script newer-SGMC (graded)</a>
+        <a href="../evidence/h53_submission_validation_20261007.json">Local format validation</a>
+      </div>
+      <p class="small" style="margin-top:14px">Nothing on this page is an organizer score. Organizer portal acceptance is untested for every file here.</p>
+    </section>
+
 <h2>Where to read next</h2>
 <div class="btnrow">
 <a class="btn" href="executive-summary.html">Executive summary</a>
@@ -294,7 +435,7 @@ Every earlier candidate remains downloadable; none of them is this session's fil
 </main>
 <footer class="wrap">
 <p><strong>GEMSDOE48</strong> — auditable fault-surface research for DrivenData competition 306
-(DOE GEMS Prize). Built 2026-10-07 06:02 UTC by
+(DOE GEMS Prize). Built 2026-10-07 06:11 UTC by
 <code>scripts/build_site_h55.py</code> directly from the receipts in <code>evidence/</code>.</p>
 <p class="small"><strong>No organizer score exists for any file in this repository.</strong>
 Every live number is OWNER-REPORT class: a score pasted by the repository owner, not an

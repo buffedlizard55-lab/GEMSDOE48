@@ -174,3 +174,23 @@ def test_ceiling_claim_is_present_and_negative(pages):
     assert "0.2843" in text or "0.28435" in text
     assert "unreachable" in text.lower() or "NO" in text
     assert "0.3774" in text and "0.3195" in text
+
+
+GATE2 = REPO / "evidence/audit_gate2_h55_20261007.json"
+
+
+@needs_site()
+def test_the_failed_gate_is_disclosed_on_every_decision_page(pages):
+    """A failing gate must never be silently dropped from the published site."""
+    if not GATE2.exists():
+        pytest.skip("GATE-2 receipt absent")
+    gate = json.loads(GATE2.read_text())
+    assert gate["verdict"].startswith("FAIL"), gate["verdict"]
+    credit = f"{gate['additions']['density_matched_credit_per_cell']:.4f}"
+    for page in ("index.html", "executive-summary.html", "validation.html"):
+        text = pages[page]
+        assert "FAIL_MASS_NEUTRAL" in text, f"{page} hides the GATE-2 verdict"
+        assert credit in text, f"{page} omits the density-matched added-cell credit"
+        assert "0.0556" in text or "0.05556" in text, f"{page} omits the break-even bar"
+    # and the pessimistic live-equivalent that follows from it must be shown too
+    assert "0.2736" in pages["index.html"]

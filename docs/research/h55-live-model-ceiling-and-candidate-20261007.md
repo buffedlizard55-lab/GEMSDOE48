@@ -18,6 +18,7 @@ repository**.
 | Can 0.2888 (#8), 0.3195 (#7), 0.3262, 0.3345 or 0.3774 (#1) be reached from this backbone at *any* mass? | **No — none of them.** Maximising `rho·Cov/(0.2 S + 0.8 \|G\|)` over *all* subset sizes of `B_elig` peaks at **n = 37,167, model DTI 0.2793, live-equivalent 0.2843**. Every leaderboard row above 0.2778 needs more truth than any subset of this field can deliver. |
 | Can 0.3774 (the actual #1) be reached from anything in this repository? | **No, and not even in principle.** 0.3774 needs T = 7,077 at 37,654 px. The *dense, unthinned* backbone's entire truth yield — all 121,131 px emitted — is T = 6,813. The leader's numerator exceeds the total truth content of the best corridor field in this repository. |
 | What is shipped? | `GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353` — the 0.2778 core untouched, plus 1,124 conflict-priced gap dots and 652 hydrothermal-conduit anchors (39,430 px total). Blocked proxies: **+0.001031 catalogue (4/4 folds)** and **+0.000795 SGMC-off (4/4 folds)** against the dotted parent, and **+0.000795 SGMC-off (4/4 folds)** against the tip parent — the first candidate in this repository to beat *both* parents in *every* fold on the SGMC proxy. |
+| Does it pass the repository's newest gate? | **No.** A concurrent session merged `scripts/audit_candidate.py` (protocol GEMSDOE48-GATE-2, mass-neutral) while this one was running. H55 returns `FAIL_MASS_NEUTRAL`: equal-mass credit density −0.002014 and added-cell credit 0.0102 against the metric's 0.0556 bar. §6.4 reconciles the two instruments and gives the honest bracket **0.2736 – 0.2880**. |
 | What is the honest expected live score? | Floor **0.2727** if every added pixel earns zero; **0.2778** if only the in-family additions pay; **0.2797 – 0.2880** as the conduit anchors' credit rises from break-even (0.0556) to 0.30. The addition is designed as a **measurement**: A2's modelled gain is **+0.0019** and A1's denominator cost at zero credit is **−0.0019** — they cancel to **−0.00003**, so the returned live score is a clean read on the conduit hypothesis. |
 
 ---
@@ -519,6 +520,79 @@ no SHA-256 collision with any raster or recorded hash in the repository; not ide
 to any prior candidate. Highest pixel-set Jaccard against any prior artifact is
 **0.9550** (the untouched core), so the emitted set is new.
 
+### 6.4 The repository's newer mass-neutral gate: H55 FAILS it, and what that means
+
+While this session was running, a concurrent session merged `scripts/audit_candidate.py`
+(protocol **GEMSDOE48-GATE-2**) and `docs/research/credit-density-audit-20261007.md`. That work
+is independent of mine and reaches one conclusion I reproduce exactly from a different
+direction: the SGMC off-catalogue proxy cannot certify a candidate, because **C + 18,000
+uniform-random new cells scores 0.1189 mean4 on it, beating C (0.0956) and H49 (0.1010)**. A
+ranking that a random control wins is not a ranking. That is §4.1 of this report, arrived at by
+a control experiment instead of by inverting a live score — two instruments, one conclusion.
+
+GATE-2 then replaces the unequal-mass comparison with two mass-neutral tests. Run against the H55
+primary (`evidence/audit_gate2_h55_20261007.json`, incumbent `data/families/dotted_b2_prune_02778.tif`,
+SHA-256 verified `c55bafc4…`):
+
+```
+verdict                                    FAIL_MASS_NEUTRAL
+proxy mean4, own mass   incumbent 0.095607   candidate 0.096406
+equal-mass mean4 (3 seeds)                 0.093593    delta vs incumbent  -0.002014
+added cells                                1,776
+marginal credit/cell, raw proxy            0.045030    (raw bar 0.019077)  -> passes
+marginal credit/cell, DENSITY-MATCHED      0.010245    (live bar 0.05556)  -> FAILS, 0.18x
+reasons: equal_mass_credit_density_below_incumbent (-0.00201)
+         added_cells_below_live_break_even_bar (density-matched 0.0102 < 0.0556 per cell)
+```
+
+**This is a fail and it is reported as one.** If the density-matched figure transferred to the
+live metric, H55 would score `T = 5,209.5 + 1,776 x 0.010245 = 5,227.7`, i.e.
+**DTI 0.2736, −0.0042 against C**. That is the pessimistic end of the honest bracket.
+
+Three things must be said about the test, none of which excuse the fail:
+
+1. **It rests on the same proxy §4.1 contradicts.** Density-matching corrects the proxy's
+   4.3× truth-density inflation; it does not correct the proxy's *identity*. An emission built
+   directly on SGMC-off inverts to `T = 1,026` live where the backbone family reaches 5,209 at
+   the same mass, so "credit against SGMC-off" and "credit against hidden truth" are not the same
+   quantity and their ratio is unknown.
+2. **Its additions test does not appear to discriminate between candidates.** Across every
+   candidate in `credit-density-audit-20261007.md` plus this one, density-matched added-cell
+   credit lands in **0.0049 – 0.0125** regardless of what the added cells are: 268,910 H50
+   belief cells 0.0049, 222,693 hedge-v2 cells 0.0060, 96,673 h16-1 cells 0.0077, 83,477 h19-5
+   cells 0.0050, 10,251 H49 cells 0.0125, 2,000 H52 lidar cells 0.0099, 1,776 H55 cells 0.0102.
+   Curated geophysics, curated lidar, curated hydrothermal conduits and a graded belief field all
+   score within a factor of 2.5 of each other and 4–11× below the bar. A test whose output is
+   nearly independent of its input is measuring the proxy's density, not the candidate's quality.
+3. **Its equal-mass test structurally penalises any additive candidate.** Uniformly subsampling
+   a strict superset of C to C's mass discards ≈ 4.5 % of C's own dots at random and replaces them
+   with the additions, so it must score below C on any proxy where C's dots are worth more than
+   the additions. That is a real statement *about the proxy*, and it is not a statement about
+   `TPw`, which cannot decrease under addition (§1c).
+
+**Where the two instruments agree**, and this is the part that should drive the decision:
+C is the best artifact in the repository (GATE-2's equal-mass column ranks it first at 0.095607,
+ahead of H49 0.087211, H51 0.086641, h16-1 0.077045, h19-5 0.071706, random 0.067020 and
+hedge-v2 0.058228, which is the same ordering my coverage statistic gives); no curated addition
+measured so far clears the metric's own break-even bar on any proxy; and no slot is cleared.
+
+**Where they disagree** is exactly the open question: the live-calibrated instrument prices A2's
+in-family additions at +0.0019 because it is fitted to eight live scores, while GATE-2 prices all
+1,776 additions at 0.0102/cell because it is fitted to a proxy that a live score contradicts by
+5×. Neither can be settled offline. **That is the argument for spending the slot**: the returned
+live score separates them, and §5.4's arithmetic was built so the separation is legible.
+
+The honest bracket, combining both instruments, is therefore:
+
+| basis | live-equivalent | Δ vs 0.2778 |
+|---|---:|---:|
+| GATE-2 density-matched credit (0.0102/cell) | **0.2736** | −0.0042 |
+| this model, every addition earns zero | 0.2727 | −0.0051 |
+| this model, A2 pays and A1 earns zero | **0.2778** | ±0.0000 |
+| this model, A1 at break-even credit | 0.2797 | +0.0019 |
+| this model, A1 at C's mean dot credit | 0.2825 | +0.0047 |
+| this model, A1 at 0.30 credit | **0.2880** | +0.0102 |
+
 ### 6.3 Determinism
 
 Two independent builds produced the same content id `055da9855353` and the same
@@ -566,9 +640,12 @@ reports which it found, and states the range-error exposure in the receipt.
 2. **The instrument is within-family only.** Measured out-of-family transfer error is
    −38 % on the one available test. A1's contribution is a scenario band, not a
    prediction.
-3. **A1 is unfalsified.** Nothing in this repository can estimate the credit of a
-   hydrothermal conduit anchor. Its physical case is strong; its measured case is zero.
-   §2.5 notes the bias direction favours it.
+3. **A1 is unfalsified, and the repository's newest gate says its additions are worth 0.18× the
+   break-even bar.** Nothing in this repository can estimate the credit of a hydrothermal conduit
+   anchor against the *hidden* truth. GATE-2 estimates 0.0102 per added cell against a
+   density-matched SGMC proxy; §6.4 gives three reasons that number should not be read as a live
+   prediction, and one reason it might be. The physical case for A1 is strong; the measured case is
+   contested, and the contest is the reason to submit it.
 4. **The in-family headroom (+0.0065) is only 1.3× the instrument's resolution (±0.0049).**
    The claim "C is within 1.84 % of coverage-optimal and no emission from this field
    reaches 0.2888" is robust. The claim "a greedy re-emission beats C by 0.0065" is at the

@@ -6,7 +6,9 @@ truth sources and official metric call as ``scripts/holdout_ds50.py`` /
 ``scripts/holdout_h51.py`` (2026-10-07).  The candidate surface is the
 preregistered H50-B emission; comparators are the same frozen set.
 
-Nothing here is private-label evidence or a slot clearance.
+Nothing here is private-label evidence or a slot clearance. The frozen
+comparator key ``tip_h36_parent`` is a legacy alias for H36-1 rung30
+(H19-5/rung-30 repacking), not the actual tip/step-over family.
 """
 from __future__ import annotations
 

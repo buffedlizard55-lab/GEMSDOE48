@@ -70,6 +70,18 @@ letter-spacing:.05em;text-transform:uppercase}
 .pill.warn{background:var(--ambersoft);color:var(--amber)}
 .small{color:var(--muted);font-size:.85rem}
 @media print{nav.top{position:static}}
+
+.card{border:1px solid var(--line);border-radius:14px;padding:20px;background:var(--panel);margin:0 0 18px}
+.download-card{background:var(--soft);border-color:#bfcebf}
+.card .eyebrow,.eyebrow{color:var(--muted);text-transform:uppercase;letter-spacing:.14em;
+font-size:.72rem;font-weight:800}
+.button{display:inline-block;margin:8px 0 4px;padding:12px 18px;border-radius:8px;background:var(--green);
+color:#fff;text-decoration:none;font-weight:750}
+.button:hover{color:#fff;background:#123327}
+.file-meta{margin-top:12px;font-family:var(--mono);font-size:.76rem;overflow-wrap:anywhere;color:#3d5145}
+.note{padding:12px 14px;border-radius:9px;background:#f2f4ee;border:1px solid var(--line);
+font-family:var(--mono);font-size:.78rem;overflow-wrap:anywhere;margin:10px 0}
+.diag-links{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:12px;font-size:.88rem}
 </style>
 
 </head>
@@ -101,6 +113,20 @@ and #1 needs T = 7,077, against a dense-field total of
 6,813. The remaining work is therefore <em>not</em> better combination,
 better spacing or better pruning — all three are provably within 2 % of exhausted. It is a better
 detector.</div>
+
+<h2>First, the disagreement that has to be settled</h2>
+<div class="warn"><strong>Two instruments in this repository now disagree about what a new cell is
+worth, and only a live score can settle it.</strong> The concurrent H54 session's mass-neutral
+GATE-2 audit measures every curated addition ever built here at <strong>0.0049 – 0.0125</strong>
+credit per cell against a density-matched SGMC proxy — 4× to 11× below the metric's own 0.0556
+break-even bar — and H55's 1,776 additions come in at 0.0102, so H55 fails that gate. This
+session's live-calibrated instrument prices the in-family half of the same additions at
+<strong>+0.0019</strong>, because it is fitted to eight owner-reported live scores rather than to a
+proxy. Both instruments agree on the two things that matter most: C is the best artifact in the
+repository, and the SGMC proxy cannot certify a candidate (GATE-2 shows a random control beating
+it; §4.1 of the report shows an emission built on it scoring 0.0512 live). They disagree only
+about the value of <em>new</em> signal — which is exactly the quantity no offline test in this
+repository can measure. Priority 1 below is therefore the settlement, not a refinement.</div>
 
 <h2>Ordered priorities</h2>
 <ol class="steps">
@@ -167,7 +193,7 @@ primary. Static pages are maintained alongside <code>docs/research/</code> and t
 </main>
 <footer class="wrap">
 <p><strong>GEMSDOE48</strong> — auditable fault-surface research for DrivenData competition 306
-(DOE GEMS Prize). Built 2026-10-07 06:02 UTC by
+(DOE GEMS Prize). Built 2026-10-07 06:11 UTC by
 <code>scripts/build_site_h55.py</code> directly from the receipts in <code>evidence/</code>.</p>
 <p class="small"><strong>No organizer score exists for any file in this repository.</strong>
 Every live number is OWNER-REPORT class: a score pasted by the repository owner, not an

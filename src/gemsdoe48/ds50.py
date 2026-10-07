@@ -1,26 +1,27 @@
-"""H50 -- best-x-best Dempster-Shafer fusion with metric-geometry belief surfaces.
+"""H50 -- B2 x H36-1 rung30 Dempster-Shafer fusion with metric-geometry belief surfaces.
 
 What is new relative to the earlier GEMSDOE48 fusion artifacts
 ---------------------------------------------------------------
 The 2026-10-06 H48 candidate (``scripts/build_submission.py``) combined the
 *raw sparse binary* dotted H33-2-B2 and tip H33-D surfaces with a fixed
 symmetric discount rho = 0.5 and wrote the normalized m(F).  The H49 candidate
-used a Yager conflict-transfer with a fixed budget.  Neither ever touched the
-best-scoring tip/step-over surface, H36-1 rung-30 (owner-reported live 0.2710).
+used a Yager conflict-transfer with a fixed budget.  Neither ever used H36-1 rung-30 (owner-reported live 0.2710), which is an
+H19-5/rung-30 repacking, not the actual tip/step-over surface (see the 2026-10-07
+classification erratum).
 
 H50 differs on three axes:
 
-1.  **Parents**: the best dotted-family surface (H33-2-B2, 37,654 px,
-    owner-reported live 0.2778) crossed with the best tip/step-over-family
-    surface (H36-1 rung-30, 37,660 px, owner-reported live 0.2710).  This pair
-    has not been fused in this repository or any sibling campaign page reviewed
-    on 2026-10-07.
-2.  **Evidence construction**: each family's binary committed pixels are turned
+1.  **Parents**: the dotted H33-2-B2 surface (37,654 px, owner-reported live
+    0.2778) crossed with H36-1 rung-30 (37,660 px, owner-reported live 0.2710).
+    H36 is an H19-5/rung-30 repacking, not an actual tip/step-over family; the
+    prior H50 narrative misclassified it. This B2 x H36 pair had not been fused
+    in this repository or any sibling campaign page reviewed on 2026-10-07.
+2.  **Evidence construction**: each parent's binary committed pixels are turned
     into a belief surface *in the metric's own geometry*::
 
         b_i(x) = max over committed pixels y of k(d(x, y)),   k(d) = max(1-d/300 m, 0)
 
-    i.e. ``b_i(x)`` is the credit the family would earn if a truth pixel sat at
+    i.e. ``b_i(x)`` is the metric-kernel credit of the parent surface if a truth pixel sat at
     ``x`` (``families.kernel_credit_surface``).  Belief therefore decays smoothly
     with distance from the committed dots instead of asserting hard counter-
     evidence ("not-fault") 100 m away from a dot, which is the semantic defect
@@ -29,7 +30,8 @@ H50 differs on three axes:
     source-specific reliabilities anchored to the owner-reported live scores and
     capped below perfect reliability::
 
-        a_dotted = RHO_MAX = 0.95,   a_tip = RHO_MAX * live_tip / live_dotted
+        a_dotted = RHO_MAX = 0.95,   a_H36 = RHO_MAX * live_H36 / live_dotted
+        (the retained implementation identifier ``a_tip`` is a legacy alias)
 
     A first build used ``a_dotted = 1.0``; it was rejected because it forces the
     residual unassigned mass m12(Theta) to zero identically (``m12(Theta) =
@@ -51,12 +53,12 @@ favourability mapping) with reliability ``a``::
 combined with the canonical normalized Dempster rule.  Carried forward
 diagnostics:
 
-* ``m12(Theta)`` -- residual unassigned belief; where the two strongest
-  independent families neither agree enough to commit nor disagree enough to
-  conflict.
+* ``m12(Theta)`` -- residual unassigned belief; where the two parent surfaces
+  neither agree enough to commit nor disagree enough to conflict. Statistical
+  independence of these surfaces has not been established.
 * ``K`` -- raw conjunctive conflict before normalization; where the two
-  families actively contradict each other (one commits to fault, the other to
-  not-fault).  Canonical Dempster normalization redistributes K; the layer is
+  parent surfaces actively contradict each other (one commits to fault, the
+  other to not-fault).  Canonical Dempster normalization redistributes K; the layer is
   reported separately so a geologist can see the disagreement itself.
 
 The submission surface is ``Bel(F) = m12({F})`` divided by its in-footprint
@@ -72,7 +74,10 @@ from .metric import max_credit_field
 
 # Owner-reported live scores [OWNER-REPORT] -- anchoring only, never receipts.
 LIVE_DOTTED_B2 = 0.2778
-LIVE_TIP_H36 = 0.2710
+LIVE_H36_RUNG30 = 0.2710
+# Compatibility alias retained for frozen H50/H51 scripts and tests; H36 is
+# not the actual tip/step-over family.
+LIVE_TIP_H36 = LIVE_H36_RUNG30
 
 # Preregistered reliability ceiling: no source is treated as perfectly
 # reliable.  Keeps m12(Theta) strictly positive so the unassigned-mass layer

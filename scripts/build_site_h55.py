@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import html
 import json
+import re
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -26,6 +27,8 @@ CALIB = json.loads((ROOT / "evidence/live_model_calibration_20261007.json").read
 AUDIT = json.loads((ROOT / "evidence/h55_uniqueness_audit_20261007.json").read_text())
 FORMAT = json.loads((ROOT / "evidence/h55_primary_format_audit_20261007.json").read_text())
 HOLDOUT = json.loads((ROOT / "evidence/holdout_h55_spatial_20261007.json").read_text())
+GATE2_PATH = ROOT / "evidence/audit_gate2_h55_20261007.json"
+GATE2 = json.loads(GATE2_PATH.read_text()) if GATE2_PATH.exists() else None
 SLATE = json.loads((ROOT / "evidence/hypothesis_slate_h55_20261007.json").read_text())
 
 PRIMARY = RECEIPT["files"]["primary_zeros_outside"]
@@ -138,7 +141,7 @@ def page(title: str, desc: str, body: str, extra_head: str = "") -> str:
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="{html.escape(desc)}">
 <title>{html.escape(title)}</title>
-<style>{CSS}</style>
+<style>{CSS}{CONCURRENT_CSS}</style>
 {extra_head}
 </head>
 <body>
@@ -197,6 +200,96 @@ against the current best 0.2778, floor {floor:.4f} if every added pixel earns ze
 {"" if compact else "</div>"}"""
 
 
+
+# ---------------------------------------------------------------------------
+# Concurrent sessions' landing cards, preserved verbatim
+# ---------------------------------------------------------------------------
+# Three concurrent sessions merged H53/H53-A/H53-RadEdge/H54 candidates into main while this
+# one was running, and their disclosures are load-bearing (tests/test_site_classification.py
+# asserts them).  Rather than hand-copying their HTML, the site builder extracts their own
+# <section> cards from the archived main page and injects them unchanged, so their wording can
+# never be paraphrased or silently dropped by a regeneration.
+CONCURRENT_ARCHIVE = DOCS / "archive-main-pages/pre-h55-merge-20261007"
+CONCURRENT_IDS = ("h54", "h53-radedge", "h53-a", "h53-1", "h53")
+CONCURRENT_CSS = """
+.card{border:1px solid var(--line);border-radius:14px;padding:20px;background:var(--panel);margin:0 0 18px}
+.download-card{background:var(--soft);border-color:#bfcebf}
+.card .eyebrow,.eyebrow{color:var(--muted);text-transform:uppercase;letter-spacing:.14em;
+font-size:.72rem;font-weight:800}
+.button{display:inline-block;margin:8px 0 4px;padding:12px 18px;border-radius:8px;background:var(--green);
+color:#fff;text-decoration:none;font-weight:750}
+.button:hover{color:#fff;background:#123327}
+.file-meta{margin-top:12px;font-family:var(--mono);font-size:.76rem;overflow-wrap:anywhere;color:#3d5145}
+.note{padding:12px 14px;border-radius:9px;background:#f2f4ee;border:1px solid var(--line);
+font-family:var(--mono);font-size:.78rem;overflow-wrap:anywhere;margin:10px 0}
+.diag-links{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:12px;font-size:.88rem}
+"""
+
+
+def _sections(path: Path) -> list[str]:
+    if not path.exists():
+        return []
+    text = path.read_text(encoding="utf-8", errors="ignore")
+    out, depth, start = [], 0, -1
+    for match in re.finditer(r"<section\b|</section>", text):
+        if match.group(0).startswith("<section"):
+            if depth == 0:
+                start = match.start()
+            depth += 1
+        else:
+            depth -= 1
+            if depth == 0 and start >= 0:
+                out.append(text[start:match.end()])
+                start = -1
+    return out
+
+
+def concurrent_cards(page: str, wanted: tuple[str, ...]) -> str:
+    cards = [c for c in _sections(CONCURRENT_ARCHIVE / page)
+             if any(w in c.lower() for w in wanted)]
+    if not cards:
+        return ""
+    return ("""
+<h2>Concurrent sessions' candidates — preserved verbatim, none recommended</h2>
+<p class="small">Three concurrent sessions merged their own H53 / H53-A / H53-RadEdge / H54
+candidates into <code>main</code> while this one was running. Their own landing cards are
+reproduced below <em>unchanged</em>, extracted at build time from
+<a href="archive-main-pages/pre-h55-merge-20261007/index.html">the archived pre-merge page</a> so
+their wording cannot be paraphrased or dropped. All of them record a failed gate and none is an
+upload recommendation. Their TIFFs and receipts remain live in <code>docs/downloads/</code> and
+<code>evidence/</code>.</p>
+""" + "\n".join(cards))
+
+
+def gate2_block() -> str:
+    """The concurrent session's mass-neutral gate. H55 fails it; that is stated first."""
+    if not GATE2:
+        return ""
+    em = GATE2["equal_mass"]
+    ad = GATE2["additions"]
+    t_gate2 = LM["tpw_core_inverted_from_live"] + ad["added_cells"] * ad["density_matched_credit_per_cell"]
+    dti_gate2 = t_gate2 / (0.2 * EM["candidate_cells"] if False else
+                           0.2 * GATE2["counts"]["candidate_cells"] + 0.8 * LM["hidden_truth_px"])
+    reasons = "; ".join(GATE2["reasons"])
+    return f"""<div class="bad"><strong>This candidate FAILS the repository's newest gate, and that is
+reported before anything favourable.</strong> A concurrent session merged
+<code>scripts/audit_candidate.py</code> (protocol <code>GEMSDOE48-GATE-2</code>, mass-neutral) while
+this one was running. Verdict <code>{GATE2['verdict']}</code>: {html.escape(reasons)}.
+Equal-mass credit density {em['delta_vs_incumbent']:+.6f} against the incumbent; added-cell credit
+<strong>{ad['density_matched_credit_per_cell']:.4f}</strong> density-matched against the metric's own
+break-even bar of {ad['break_even_bar_live_scaled']:.4f} — 0.18× the bar. If that figure transferred
+to the live metric the score would be <strong>{dti_gate2:.4f}, −{0.2778 - dti_gate2:.4f} against
+0.2778</strong>. Receipt:
+<a href="../evidence/audit_gate2_h55_20261007.json"><code>evidence/audit_gate2_h55_20261007.json</code></a>.
+<br><br>Three things are true about that test and none of them excuse the fail: it rests on the same
+SGMC proxy that an emission built directly on it scored 0.0512 live against the family's 0.26; its
+additions test returns 0.0049–0.0125 per cell for <em>every</em> candidate ever measured, including
+a graded belief field and 222,693 hedge-v2 cells, so it barely discriminates between inputs; and its
+equal-mass test uniformly subsamples a strict superset of C, which must score below C on any proxy
+where C's dots are worth more than the additions. Full reconciliation, including where the two
+instruments <em>agree</em>: §6.4 of the report.</div>"""
+
+
 def table(headers, rows, hl_row=None):
     out = ["<table><thead><tr>"]
     out += [f"<th>{h}</th>" for h in headers]
@@ -225,6 +318,8 @@ exactly one new bet.</p>
 </header>
 
 {download_block()}
+
+{gate2_block()}
 
 <h2>The four things this session established</h2>
 <div class="grid3">
@@ -323,6 +418,22 @@ is not.</div>
           f"{s['delta_vs_C_live_equivalent']:+.5f}</span>"]
          for s in RISK["scenario_band"] if s["credit_per_conduit_anchor"] > 0])}
 
+<h2>The honest bracket, combining both instruments</h2>
+{table(["basis", "live-equivalent", "Δ vs 0.2778"],
+       [["GATE-2 density-matched credit (0.0102 per added cell)", "0.2736", "<span class='neg'>−0.0042</span>"],
+        [f"this model, every added pixel earns zero (floor)",
+         f"{RISK['floor_all_added_pixels_zero_credit']['live_equivalent']:.4f}",
+         f"<span class='neg'>{RISK['floor_all_added_pixels_zero_credit']['delta_vs_C']:+.4f}</span>"],
+        ["this model, A2 pays as priced and A1 earns zero — the central case",
+         f"{RISK['a2_priced_a1_zero_credit']['live_equivalent']:.4f}",
+         f"{RISK['a2_priced_a1_zero_credit']['delta_vs_C']:+.4f}"]]
+      + [[f"this model, A1 earns {sc['credit_per_conduit_anchor']:.4f} per anchor",
+          f"{sc['dti_live_equivalent']:.4f}",
+          f"<span class='pos'>{sc['delta_vs_C_live_equivalent']:+.4f}</span>"]
+         for sc in RISK["scenario_band"] if sc["credit_per_conduit_anchor"] in (0.0556, 0.1383, 0.3)])}
+
+{concurrent_cards("index.html", CONCURRENT_IDS)}
+
 <h2>Where to read next</h2>
 <div class="btnrow">
 <a class="btn" href="executive-summary.html">Executive summary</a>
@@ -396,6 +507,8 @@ def build_exec() -> str:
 </header>
 
 {download_block()}
+
+{gate2_block()}
 
 <h2>1 · The one-paragraph version</h2>
 <p>Every previous session in this repository ranked candidates against public map proxies and
@@ -500,6 +613,8 @@ independent of <code>v</code>, so every cell of a graded belief surface is pushe
 graded Bel submission is strictly worse than its own binarisation. The DS structure therefore
 enters the <em>placement</em> of dots (A2's pool is the disagreement set; A1 is vetoed at maximal
 conflict unless a third independent source arbitrates) rather than the emitted values.</p>
+
+{concurrent_cards("executive-summary.html", CONCURRENT_IDS)}
 
 <h2>8 · Status</h2>
 <div class="warn"><strong>No weekly submission slot is cleared.</strong> The blocked-holdout numeric
@@ -863,6 +978,24 @@ def build_validation() -> str:
 <h1>What was tested, what passed, and what the tests are worth</h1>
 </header>
 
+<h2>The repository's newer mass-neutral gate — H55 FAILS it</h2>
+{gate2_block()}
+{table(["GATE-2 quantity", "value"],
+       [["verdict", f"<code>{GATE2['verdict']}</code>"] if GATE2 else ["verdict", "not run"],
+        ["proxy mean4 at own mass — incumbent", f"{GATE2['proxy_scores']['incumbent']['mean4']:.6f}"],
+        ["proxy mean4 at own mass — candidate", f"{GATE2['proxy_scores']['candidate']['mean4']:.6f}"],
+        ["equal-mass mean4 (3 seeds)", f"{GATE2['equal_mass']['mean4']:.6f}"],
+        ["equal-mass Δ vs incumbent", f"<span class='neg'>{GATE2['equal_mass']['delta_vs_incumbent']:+.6f}</span>"],
+        ["added cells", f"{GATE2['additions']['added_cells']:,}"],
+        ["marginal credit/cell, raw proxy (bar "
+         f"{GATE2['additions']['break_even_bar_raw_proxy']:.4f})",
+         f"{GATE2['additions']['marginal_credit_per_cell_raw_proxy']:.6f} — passes"],
+        ["marginal credit/cell, density-matched (bar "
+         f"{GATE2['additions']['break_even_bar_live_scaled']:.4f})",
+         f"<span class='neg'>{GATE2['additions']['density_matched_credit_per_cell']:.6f} — FAILS</span>"],
+        ["density-matched seeds", ", ".join(f"{v:.4f}" for v in
+            GATE2['additions']['density_matched_credit_per_cell_seeds'])]]) if GATE2 else ""}
+
 <h2>Blocked spatial holdout</h2>
 <p>Four fixed quadrants (NW/NE/SW/SE), truth restricted to the quadrant core with a 300 m scoring
 halo, official DTI parameters, <code>scripts/run_spatial_holdout.py</code> unmodified. Both truth
@@ -1046,6 +1179,20 @@ and #1 needs T = {CEIL[0]['tpw_needed_at_37654_px']:,.0f}, against a dense-field
 {TRUTH[0]['inverted_tpw']:,.0f}. The remaining work is therefore <em>not</em> better combination,
 better spacing or better pruning — all three are provably within 2 % of exhausted. It is a better
 detector.</div>
+
+<h2>First, the disagreement that has to be settled</h2>
+<div class="warn"><strong>Two instruments in this repository now disagree about what a new cell is
+worth, and only a live score can settle it.</strong> The concurrent H54 session's mass-neutral
+GATE-2 audit measures every curated addition ever built here at <strong>0.0049 – 0.0125</strong>
+credit per cell against a density-matched SGMC proxy — 4× to 11× below the metric's own 0.0556
+break-even bar — and H55's 1,776 additions come in at 0.0102, so H55 fails that gate. This
+session's live-calibrated instrument prices the in-family half of the same additions at
+<strong>+0.0019</strong>, because it is fitted to eight owner-reported live scores rather than to a
+proxy. Both instruments agree on the two things that matter most: C is the best artifact in the
+repository, and the SGMC proxy cannot certify a candidate (GATE-2 shows a random control beating
+it; §4.1 of the report shows an emission built on it scoring 0.0512 live). They disagree only
+about the value of <em>new</em> signal — which is exactly the quantity no offline test in this
+repository can measure. Priority 1 below is therefore the settlement, not a refinement.</div>
 
 <h2>Ordered priorities</h2>
 <ol class="steps">

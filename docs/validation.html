@@ -70,6 +70,18 @@ letter-spacing:.05em;text-transform:uppercase}
 .pill.warn{background:var(--ambersoft);color:var(--amber)}
 .small{color:var(--muted);font-size:.85rem}
 @media print{nav.top{position:static}}
+
+.card{border:1px solid var(--line);border-radius:14px;padding:20px;background:var(--panel);margin:0 0 18px}
+.download-card{background:var(--soft);border-color:#bfcebf}
+.card .eyebrow,.eyebrow{color:var(--muted);text-transform:uppercase;letter-spacing:.14em;
+font-size:.72rem;font-weight:800}
+.button{display:inline-block;margin:8px 0 4px;padding:12px 18px;border-radius:8px;background:var(--green);
+color:#fff;text-decoration:none;font-weight:750}
+.button:hover{color:#fff;background:#123327}
+.file-meta{margin-top:12px;font-family:var(--mono);font-size:.76rem;overflow-wrap:anywhere;color:#3d5145}
+.note{padding:12px 14px;border-radius:9px;background:#f2f4ee;border:1px solid var(--line);
+font-family:var(--mono);font-size:.78rem;overflow-wrap:anywhere;margin:10px 0}
+.diag-links{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:12px;font-size:.88rem}
 </style>
 
 </head>
@@ -92,6 +104,39 @@ letter-spacing:.05em;text-transform:uppercase}
 <p class="eyebrow" style="color:var(--muted)">Validation · four fixed spatial blocks · two public proxies</p>
 <h1>What was tested, what passed, and what the tests are worth</h1>
 </header>
+
+<h2>The repository's newer mass-neutral gate — H55 FAILS it</h2>
+<div class="bad"><strong>This candidate FAILS the repository's newest gate, and that is
+reported before anything favourable.</strong> A concurrent session merged
+<code>scripts/audit_candidate.py</code> (protocol <code>GEMSDOE48-GATE-2</code>, mass-neutral) while
+this one was running. Verdict <code>FAIL_MASS_NEUTRAL</code>: equal_mass_credit_density_below_incumbent (-0.00201); added_cells_below_live_break_even_bar (density-matched 0.0102 &lt; 0.0556 per cell).
+Equal-mass credit density -0.002014 against the incumbent; added-cell credit
+<strong>0.0102</strong> density-matched against the metric's own
+break-even bar of 0.0556 — 0.18× the bar. If that figure transferred
+to the live metric the score would be <strong>0.2736, −0.0042 against
+0.2778</strong>. Receipt:
+<a href="../evidence/audit_gate2_h55_20261007.json"><code>evidence/audit_gate2_h55_20261007.json</code></a>.
+<br><br>Three things are true about that test and none of them excuse the fail: it rests on the same
+SGMC proxy that an emission built directly on it scored 0.0512 live against the family's 0.26; its
+additions test returns 0.0049–0.0125 per cell for <em>every</em> candidate ever measured, including
+a graded belief field and 222,693 hedge-v2 cells, so it barely discriminates between inputs; and its
+equal-mass test uniformly subsamples a strict superset of C, which must score below C on any proxy
+where C's dots are worth more than the additions. Full reconciliation, including where the two
+instruments <em>agree</em>: §6.4 of the report.</div>
+<table><thead><tr>
+<th>GATE-2 quantity</th>
+<th>value</th>
+</tr></thead><tbody>
+<tr><td>verdict</td><td><code>FAIL_MASS_NEUTRAL</code></td></tr>
+<tr><td>proxy mean4 at own mass — incumbent</td><td>0.095607</td></tr>
+<tr><td>proxy mean4 at own mass — candidate</td><td>0.096406</td></tr>
+<tr><td>equal-mass mean4 (3 seeds)</td><td>0.093593</td></tr>
+<tr><td>equal-mass Δ vs incumbent</td><td><span class='neg'>-0.002014</span></td></tr>
+<tr><td>added cells</td><td>1,776</td></tr>
+<tr><td>marginal credit/cell, raw proxy (bar 0.0191)</td><td>0.045030 — passes</td></tr>
+<tr><td>marginal credit/cell, density-matched (bar 0.0556)</td><td><span class='neg'>0.010245 — FAILS</span></td></tr>
+<tr><td>density-matched seeds</td><td>0.0128, 0.0116, 0.0086, 0.0100, 0.0083</td></tr>
+</tbody></table>
 
 <h2>Blocked spatial holdout</h2>
 <p>Four fixed quadrants (NW/NE/SW/SE), truth restricted to the quadrant core with a 300 m scoring
@@ -245,7 +290,7 @@ its range rejection, and the internal consistency of the build, format and uniqu
 </main>
 <footer class="wrap">
 <p><strong>GEMSDOE48</strong> — auditable fault-surface research for DrivenData competition 306
-(DOE GEMS Prize). Built 2026-10-07 06:02 UTC by
+(DOE GEMS Prize). Built 2026-10-07 06:11 UTC by
 <code>scripts/build_site_h55.py</code> directly from the receipts in <code>evidence/</code>.</p>
 <p class="small"><strong>No organizer score exists for any file in this repository.</strong>
 Every live number is OWNER-REPORT class: a score pasted by the repository owner, not an

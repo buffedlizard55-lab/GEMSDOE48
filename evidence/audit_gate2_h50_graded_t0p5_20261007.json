@@ -1,0 +1,161 @@
+{
+  "schema": "GEMSDOE48-candidate-audit-v1",
+  "generated_utc": "2026-10-07T05:19:42.497495+00:00",
+  "protocol": "GEMSDOE48-GATE-2 (mass-neutral): equal-mass credit density vs incumbent + density-matched marginal credit of added cells vs the metric break-even bar",
+  "warning": "Public-proxy instrument only; not the private expert truth and not an organizer score. PASS does not authorize an upload by itself; it means the candidate survives the mass-neutral screen that the 2026-10-06 gate failed to apply.",
+  "candidate": {
+    "path": "docs/downloads/gemsdoe48-h50-ds-b2xh36rung30-20261007-5b59e106-nan.tif",
+    "sha256": "54dfe8bd79f767370558bebc1c23366cb43e5e5a4b26c7d9d14131c8b58bdc0c",
+    "bytes": 2170664,
+    "bands": 1,
+    "dtype": "float32",
+    "crs": "EPSG:32611",
+    "epsg": 32611,
+    "shape": [
+      3730,
+      3292
+    ],
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    "nodata": NaN
+  },
+  "incumbent": {
+    "path": "data/raw/scored/b2_02778.tif",
+    "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+    "bytes": 219065,
+    "bands": 1,
+    "dtype": "float32",
+    "crs": "EPSG:32611",
+    "epsg": 32611,
+    "shape": [
+      3730,
+      3292
+    ],
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    "nodata": null
+  },
+  "counts": {
+    "incumbent_cells": 37654,
+    "candidate_cells": 306564,
+    "added_cells": 268910,
+    "proxy_truth_pixels": 62122,
+    "density_matched_truth_pixels": 14307,
+    "break_even_bar_raw_proxy": 0.019077223415507896,
+    "break_even_bar_live_scaled": 0.05556,
+    "incumbent_live_dti_source": "owner-reported ladder anchor 0.2778 (not organizer-authenticated)"
+  },
+  "format": {
+    "bands_dtype_crs_shape_ok": true,
+    "all_finite_in_footprint": true,
+    "finite_iff_footprint": true,
+    "finite_outside_footprint_count": 0,
+    "min": 0.0,
+    "max": 1.0,
+    "values_in_0_1": true,
+    "positive_cells": 767043,
+    "total_mass": 278804.97589455824,
+    "portal_range_ok": true
+  },
+  "proxy_scores": {
+    "incumbent": {
+      "overall": 0.09538611707753948,
+      "mean4": 0.09560719376703922,
+      "folds": [
+        0.10189310723121549,
+        0.09917731187408586,
+        0.10777272725077985,
+        0.07358562871207563
+      ],
+      "tp": 5517.636846598238,
+      "truth_pixels": 62122
+    },
+    "candidate": {
+      "overall": 0.10296497983172435,
+      "mean4": 0.095603681895249,
+      "folds": [
+        0.09904668095540206,
+        0.12317986656103408,
+        0.06325795056145384,
+        0.09693022950310598
+      ],
+      "tp": 11262.658681720495,
+      "truth_pixels": 62122
+    }
+  },
+  "random_equal_mass_control": null,
+  "equal_mass": {
+    "seeds": 3,
+    "mean4": 0.07554057217425049,
+    "delta_vs_incumbent": -0.020066621592788728,
+    "per_seed": [
+      {
+        "overall": 0.07554640613276654,
+        "mean4": 0.07485889155959821,
+        "folds": [
+          0.08155920617058965,
+          0.07926338395370014,
+          0.08249891941549406,
+          0.056114056698608986
+        ],
+        "tp": 4353.648789506406,
+        "truth_pixels": 62122
+      },
+      {
+        "overall": 0.07645491210698604,
+        "mean4": 0.0759666440487124,
+        "folds": [
+          0.0831344205803195,
+          0.07853663130152963,
+          0.0836042334136248,
+          0.05859129089937567
+        ],
+        "tp": 4406.830166995525,
+        "truth_pixels": 62122
+      },
+      {
+        "overall": 0.0759774448122105,
+        "mean4": 0.07579618091444087,
+        "folds": [
+          0.08438337263926363,
+          0.07718347542550232,
+          0.0859446704627998,
+          0.05567320513019776
+        ],
+        "tp": 4379.013935297728,
+        "truth_pixels": 62122
+      }
+    ]
+  },
+  "additions": {
+    "added_cells": 268910,
+    "break_even_bar_raw_proxy": 0.019077223415507896,
+    "break_even_bar_live_scaled": 0.05556,
+    "marginal_credit_per_cell_raw_proxy": 0.021364106337147214,
+    "density_matched_credit_per_cell": 0.004936509095818089,
+    "density_matched_credit_per_cell_seeds": [
+      0.0049452890260502135,
+      0.004893134235030774,
+      0.004919200954794427,
+      0.005049884617622334,
+      0.0048750366455926975
+    ]
+  },
+  "verdict": "FAIL_MASS_NEUTRAL",
+  "reasons": [
+    "equal_mass_credit_density_below_incumbent (-0.02007)",
+    "added_cells_below_live_break_even_bar (density-matched 0.0049 < 0.0556 per cell)"
+  ]
+}
