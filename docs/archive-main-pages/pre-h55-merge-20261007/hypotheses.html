@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ranked geological hypotheses · GEMSDOE48</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><div class="wrap">
+  <h1>Ranked geological hypotheses</h1>
+  <p>Two distinct H53 experiments are recorded: the merged H53-1 three-source fusion and H53-A strike coherence; both fail their proxy gates. Their slates and labels are kept separate.</p>
+</div></header>
+<nav><div class="wrap">
+  <a href="index.html">Overview</a><a href="executive-summary.html">Summary</a>
+  <a href="method.html">Method</a><a href="validation.html">Validation</a>
+  <a class="active" href="hypotheses.html">Hypotheses</a><a href="sources.html">Sources</a><a href="irregularities.html">Irregularities</a>
+</div></nav>
+<div class="wrap">
+  <div class="note"><b>Status:</b> the H48 slate was frozen before the candidate build and holdout. H48-1 has since been tested and failed the slot gate. H48-2 through H48-5 are research proposals only; none is represented as downloaded, implemented, or validated here. Ranking reflects expected value of information per implementation cost, not probability of winning.</div>
+  <p>The detailed, timestamped preregistration and source checks are in <a href="research/hypotheses-20261006.md">the frozen H48 research slate</a>. The table below preserves its main distinctions without implying global novelty.</p>
+
+  <h2 class="sec">Main H53-1 slate — 2026-10-07 (pre-registered, then measured)</h2>
+  <p>Full slate with layers, physical signature, off-catalogue rationale, differences from prior work, cost and data status: <a href="research/hypotheses-h53-20261007.md">research/hypotheses-h53-20261007.md</a> (frozen constants: <a href="../evidence/hypothesis_slate_h53_20261007.json">hypothesis_slate_h53_20261007.json</a>). Ranking by expected DTI: <b>H53-2</b> scarp detector v2 (dual-baseline consistency, relative-step basin test, ≥ 500 m tracing; highest expected gain, needs a free CI re-run — top next step); <b>H53-1</b> three-source adaptive DS fusion (implemented this session; graded 0.071408, twin 0.089559 — gate failed; <a href="research/holdout-h53-results-20261007.md">report</a>); <b>H53-3</b> drainage-deflection detector on the 3 m DEM (untested); <b>H53-4</b> U/K halo tie-break for additions (ordering only); <b>H53-5</b> NLCD exclusion + Quaternary-alluvium proxy (validation enabler). InSAR and login-walled strain grids recorded as not viable. None of these are organizer-scored.</p>
+
+  <h2 class="sec">Separate H53-A strike-coherence slate — frozen before its own build</h2>
+  <p>This is a second, distinct H53 slate, not a continuation of H53-1's three-source fusion and not the main slate's H53-2 raw-DEM dual-baseline detector. Full independent preregistration, code/prior-art distinctions, source checks, and blocked result: <a href="research/hypotheses-h53a-scarp-20261007.md">H53-A slate</a> · <a href="research/holdout-h53a-scarp-results-20261007.md">H53-A results</a> · <a href="../evidence/h53a_scarp_vs_h49_20261007.json">paired H49 gate receipt</a>.</p>
+  <table>
+    <tr><th>Rank / hypothesis</th><th>Signature and distinction</th><th>Expected DTI / cost / availability</th></tr>
+    <tr><td><b>1 · H53-A: strike-coherent scarp persistence</b></td><td>Regional H52-derived `h_gate12`, `strike_at`, `cover`; ≥0.30 m, ≥0.90 cover, ≥4/5 compatible samples over ≈400–565 m. It extends H52-1's single-cell height ranking with multi-cell strike coherence on a stored 100 m aggregate, not the proposed raw-DEM H53-2 line tracer or H53-1 fusion.</td><td>Expected improvement unknown, likely small; low–medium cost; local product present. Measured H53-A loses to H49 on both SGMC proxies (1/4 folds higher each); gate failed, not slot-cleared.</td></tr>
+    <tr><td>2 · H53-B: paired channel profile breaks</td><td>3DEP plus 3DHP channel-aligned profiles and repeated lateral deflections.</td><td>Low–moderate, terrain-dependent; high cost; no exact 3DHP payload/coverage audit, parked.</td></tr>
+    <tr><td>3 · H53-C: oriented radiometric alteration edges</td><td>Signed cross-strike K/Th/U gradients; distinct from H50-B low-Th/K amplitude, but related prior art.</td><td>Low/uncertain after negative H50-B; low–medium cost; only local owner mirror, not organizer-authenticated.</td></tr>
+    <tr><td>4 · H53-D: contact-network terminations</td><td>USGS GeMS/SGMC unit contact truncations and juxtaposition, not the existing fault raster as predictor.</td><td>Unknown–moderate; high cost; exact payload, scale, licensing and footprint coverage unaudited, parked.</td></tr>
+  </table>
+  <p class="small">The official DrivenData, USGS 3DEP, and 3DHP pages were freshly retrieved in this continuation. This does not verify the exact 3DEP/3DHP payloads or footprint coverage used by these candidate ideas; GeMS/SGMC and GeoDAWN details remain as flagged in the frozen slate. A listing is not proof of a usable in-footprint dataset.</p>
+
+  <h2 class="sec">H52 slate — 2026-10-07 (pre-registered, then measured)</h2>
+  <p>Full slate with layers, physical signature, off-catalogue rationale, differences from prior work, cost and data status: <a href="research/hypotheses-h52-20261007.md">research/hypotheses-h52-20261007.md</a>. Ranking by expected DTI gain per cost: <b>H52-1</b> native 3 m lidar linear-scarp detector (implemented; pilot 2.3–3.2× catalogue lift, region-wide 1.2–2.3× — gate failed; <a href="research/holdout-h52-results-20261007.md">report</a>); <b>H52-2</b> U/K alteration-contrast re-ranker (measured 1.43× per-dot lift, below the ≈ 2.6× removal bar); <b>H52-3</b> strain-rate density modulation (regional only, 1.10× per dot); <b>H52-4</b> drainage-deflection/knickpoint detector on the same 3 m DEM (untested). InSAR is recorded as not viable (Earthdata login). Why the 0.2778 rung is the family's best and what 0.3195/0.3774 require: <a href="research/why-02778-and-ceiling-20261007.md">metric-algebra note</a>. None of these are organizer-scored.</p>
+
+  <h2 class="sec">Ranked H48 hypotheses</h2>
+  <table>
+    <tr><th>Rank / hypothesis</th><th>Physical signature and layers</th><th>Off-catalogue rationale / distinction from prior work</th><th>Expected DTI, cost and current data status</th></tr>
+    <tr>
+      <td><b>1 · H48-1: conflict-aware fusion</b></td>
+      <td>H33-2-B2 dotted output and H33-D tip/stepover output; discounted two-source masses with separate raw conflict K and unassigned mass.</td>
+      <td>Different candidate-generation families may identify different fault-compatible pixels. Retains one-source-only support at lower belief rather than requiring a union or consensus threshold. This is not globally new; an earlier campaign explored dual-family union support.</td>
+      <td>Improvement was unknown at preregistration; low implementation cost. Now tested: loses to tip/stepover and arithmetic mean in 4/4 catalogue folds and all SGMC fold comparisons; no slot. Inputs are unverified third-party mirrors and sparse zeros are not calibrated evidence.</td>
+    </tr>
+    <tr>
+      <td><b>2 · H48-2: contact topology / offset</b></td>
+      <td>USGS GeMS/SGMC unit-contact linework, polygon adjacency, contact termination/kink geometry, coincident magnetic or gravity-gradient breaks.</td>
+      <td>Faults can truncate or juxtapose units without appearing in a Quaternary-fault inventory. Proposed analysis is of mapped unit-contact topology, not rasterizing SGMC fault lines as predictions; scale and source-map lineage matter.</td>
+      <td>Potentially moderate, high uncertainty; medium–high cost. Official <a href="https://doi.org/10.5066/P1A3DQZK">USGS GeMS/SGMC release</a> metadata checked; payload, map scale, and exact footprint coverage not audited.</td>
+    </tr>
+    <tr>
+      <td><b>3 · H48-3: OPERA InSAR gradients</b></td>
+      <td>NASA/JPL OPERA DISP-S1 LOS displacement trends, robust temporal change points, coherence masks, across-line gradients.</td>
+      <td>A creeping or active fault may generate a persistent narrow deformation gradient without a mapped scarp. Persistence controls noise; locked or inactive faults can be missed. No InSAR time-series workflow is documented in the reviewed local campaign set; this is not a global-novelty claim.</td>
+      <td>Low–moderate public-label DTI potential; high cost. <a href="https://www.earthdata.nasa.gov/data/catalog/asf-opera-l3-disp-s1-v1-1">Official product metadata</a> checked; Earthdata Login required; no granules or exact overlap counts downloaded.</td>
+    </tr>
+    <tr>
+      <td><b>4 · H48-4: channel-profile breaks</b></td>
+      <td>USGS NHDPlus HR / 3DHP channels and 3DEP elevation; longitudinal knickpoints, paired profile breaks, and lateral channel deflection conditioned on slope/lithology.</td>
+      <td>Fault displacement may offset or steepen streams where scarps are subtle or eroded. Multiple aligned channels can reduce single-channel noise. Distinct from valley-chain/ridge occupancy: targets profile discontinuities and paired channel response.</td>
+      <td>Low–moderate, terrain-dependent; medium cost. Official <a href="https://www.usgs.gov/national-hydrography/access-national-hydrography-products">hydrography</a> and <a href="https://www.usgs.gov/3d-elevation-program/about-3dep-products-services">3DEP</a> pages checked; exact in-footprint coverage unaudited.</td>
+    </tr>
+    <tr>
+      <td><b>5 · H48-5: geothermal favorability + spread</b></td>
+      <td>USGS Great Basin favorability percentiles from 1,200 realizations, GeoDAWN footprint, and distance to known catalogue; high median plus high ensemble spread used only as a structural search prior.</td>
+      <td>Favorability may prioritize hydrothermal pathways missing from the inventory; uncertainty may identify underconstrained regions for review. It is not fault truth. Differs from reweighting the same input channels by using an independent regional model, subject to target-lineage audit.</td>
+      <td>Expected public DTI unknown, likely low–moderate; high cost. Official <a href="https://www.usgs.gov/data/geothermal-resource-favorability-select-features-and-predictions-united-states-great-basin">USGS release</a> metadata checked; ~1.22 GB package not downloaded; overlap not audited.</td>
+    </tr>
+  </table>
+
+  <h2 class="sec">Promotion requirements</h2>
+  <ul>
+    <li>Audit official-data lineage, licensing, spatial coverage, map scale, missingness, and possible target/feature leakage before modeling.</li>
+    <li>Freeze the spatial folds and scoring domain before tuning. Rebuild any training-derived source within each fold; avoid using held-out labels in feature construction or proximity pruning.</li>
+    <li>Report paired fold results against the current blocked best, both input baselines and a simple mean; no pooled tier selection as a substitute.</li>
+    <li>A public-proxy improvement is necessary evidence at most. Do not spend a slot without beating the best under comparable blocked semantics and a defensible relationship to private expert truth.</li>
+  </ul>
+  <p><a href="archive-main-pages/hypotheses-main-20261006.html">Archived upstream H49 proposal list</a> is retained for prior-art review. It is separate from this H48 preregistration and not evidence of validation.</p>
+  <footer>H48 source checks are dated 2026-10-06 UTC. DrivenData, 3DEP and 3DHP pages were retrieved during this continuation; exact tile payloads/coverage remain unaudited. Availability at a catalog page is not proof of in-footprint coverage or suitability.</footer>
+</div>
+</body>
+</html>

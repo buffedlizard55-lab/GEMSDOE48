@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -17,11 +18,14 @@ import numpy as np
 import rasterio
 from scipy.ndimage import distance_transform_edt
 
-from gemsdoe48.evidence import arithmetic_mean, combine_dempster
-from gemsdoe48.geotiff import assert_competition_grid, assert_same_grid, display_path
-from gemsdoe48.metric import distance_weighted_tversky
-
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT / "src") not in sys.path:
+    sys.path.insert(0, str(ROOT / "src"))
+
+from gemsdoe48.evidence import arithmetic_mean, combine_dempster  # noqa: E402
+from gemsdoe48.geotiff import (assert_competition_grid, assert_same_grid,  # noqa: E402
+                               display_path)
+from gemsdoe48.metric import distance_weighted_tversky  # noqa: E402
 EXPECTED_LABEL_SHA256 = "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093"
 EXPECTED_LABEL_POSITIVES = 60_988
 EXPECTED_DOTTED_SHA256 = "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9"

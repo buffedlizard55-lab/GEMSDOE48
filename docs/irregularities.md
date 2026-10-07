@@ -70,3 +70,80 @@ The two-tile pilot measured 2.3–3.2× catalogue-adjacency lift for the top-2 %
 ### Tile inventory covers UTM zone 11 only
 
 `registry/dem_tiles_pilot.json` (700 records, 661 distinct tile names — 39 tiles are staged under two 3DEP projects) omits the 16 zone-10 tiles of the competition footprint; the region product therefore covers 3.66 M of the 5.17 M footprint cells at ≥ 90 % cover (the 2 m u8 descriptors cover 3.89 M). Cells within 150 m of a tile edge are flagged invalid by design.
+
+---
+
+# Session 2026-10-07 UTC — H55 additions
+
+Machine-readable twin with the full evidence strings: [`evidence/hypothesis_slate_h55_20261007.json`](../evidence/hypothesis_slate_h55_20261007.json) → `irregularities`. Rendered: [`irregularities.html`](irregularities.html).
+
+## IR-H55-01 · Official `training_features.tif` band 6 is gamma-ray total count, and its own metadata says otherwise — *independently reproduced*
+
+The 2026-10-07 entry above is **confirmed**, with a stronger test. The official stack was restored this session byte-identical to its manifest pin (SHA-256 `4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5`, 418,912,844 bytes, 19 float32 bands). Band 6's in-file description reads *"Tilt angle or total curvature - magnetic field derivative for edge detection"* and its `data_category` tag reads `magnetic_data`. Measured over **5,164,300** in-footprint cells against the independently mirrored GeoDAWN radiometrics:
+
+| pair | Pearson r |
+|---|---:|
+| band 6 vs GeoDAWN **total count** | **0.9971** |
+| band 6 vs GeoDAWN K | 0.8817 |
+| band 6 vs the same file's own TMI (band 14) | −0.0409 |
+| band 6 vs TMI horizontal gradient (band 3) | −0.1624 |
+
+**Spearman ρ(band 6, total count) = 1.0000** on a 1-in-37 subsample. Band 6 ranges 2.95–88.57 with a median of 18.5. Severity **high**: anyone who takes band 6's description at face value builds a "magnetic tilt" feature out of radiometrics. Carried into hypothesis H55-C so it does not treat band 6 as a magnetic derivative.
+
+## IR-H55-02 · The repository's own format validator rejected the encoding used by its highest-scoring artifact
+
+`scripts/validate_submission.py` required `nodata = NaN` and raised `SystemExit` otherwise. But `data/families/dotted_b2_prune_02778.tif` — the 0.2778 live-best — is **all-finite with zeros outside and `nodata` unset**: verified by reading the bytes (0 NaN cells of 12,279,160, min 0.0, max 1.0) and corroborated by `data/raw/audit-h33-2-b2.json`, which records `nodata: null` and `validator_range_0_1_guaranteed: true`. The organizers' own reference solution (`gems-prize-reference-solution`, notebook cell 19) also writes an all-finite float32 raster with `nodata` unset and no NaN handling at all.
+
+**Action:** the validator now takes `--encoding {auto,nan,zeros}` (default `auto`), accepts either encoding, reports which it found, and states the portal exposure explicitly (`all_cells_finite`, `all_cells_in_range_0_1`, `portal_range_error_immune`, `portal_range_error_note`). A new writer `write_float32_zeros_outside` was added to `src/gemsdoe48/geotiff.py`; it re-reads the written bytes and asserts the encoding rather than trusting the in-memory array. The H55 primary uses the all-finite encoding. Severity **high**.
+
+**Root cause of the reported portal rejection:** any NaN cell makes a vectorised `np.all((v >= 0) & (v <= 1))` test evaluate to `False`, because every comparison against NaN is false — which reproduces `Predicted values must be in range [0, 1]` exactly. Both encodings have owner-reported live scores in this family tree (0.2778 zeros-outside; 0.2708 NaN-outside), so NaN-outside is not always rejected — but the all-finite encoding cannot produce the error at all and is now primary.
+
+## IR-H55-03 · The dense backbone's pixel count *and* truth yield are both misstated in this repository's own notes
+
+`knowledge/research_notes.md` and the README describe dense H19-5 as "129 k px" with "the same T, triple the FP". Measured from the restored hash-pinned mirror (SHA-256 `ec1f9b56…`): **121,131** positive pixels, and inverting its owner-reported live 0.1922 under the calibrated `|G| = 14,027.5` gives **T = 6,813.1 — 30.8 % higher than C's 5,209.5**, not equal. The FP part of the claim is correct; the T part is not.
+
+Severity **high**, because the error hid the binding constraint on the whole project: the field's *total* truth content is 6,813, and #1 at 0.3774 needs `T = 7,077` — more than the dense backbone contains. Corrected in §3.2 of [`docs/research/h55-live-model-ceiling-and-candidate-20261007.md`](research/h55-live-model-ceiling-and-candidate-20261007.md). The historical notes were left in place rather than edited, so the correction is additive and auditable.
+
+## IR-H55-04 · The SGMC off-catalogue proxy that gated every prior session is contradicted by a live score
+
+`gemsdoe29-sgmc-off-catalogue-44k` — 44,090 px at the same 2.8 px Poisson spacing as rung A, built *directly on the proxy layer* — is owner-reported at **0.0512** live, inverting to `T = 1,026.0` against the backbone family's 5,209 at the same mass. Were the proxy a good stand-in for the hidden truth, that file would have scored near 0.26.
+
+**Action:** the proxy is retained as a *relative* ranking device over surfaces that all contain the backbone, and the blocked holdout is still run and reported in full — but every gate decision that turned on it (H50, H51, H52) is reclassified as **unresolved rather than settled**. Nothing was deleted; the receipt trail is intact. Severity **high**.
+
+## IR-H55-05 · Catalogue coverage per emitted pixel does not predict live truth yield
+
+| field | px | catalogue coverage per emitted px | live T at ≈44 k px |
+|---|---:|---:|---:|
+| h19-5 backbone | 121,131 | 0.1007 | 6,813 (dense) |
+| SGMC faults | 83,593 | **0.1418** | 1,026 (at 44,090 px) |
+| GDR wells/springs, all | 12,570 | 0.1023 | not measured |
+| GDR wells/springs, *Hot* | 929 | **0.1897** | not measured |
+| INGENIOUS Quaternary fault centroids | 1,125 | **0.3696** | not measured |
+
+SGMC covers known faults 41 % more efficiently per pixel than the backbone and scores 5× worse live. **The `≥ 2× catalogue lift` rule that rejected H52 is therefore not a sound screen** and is not used anywhere in this session. Severity **high**: it means H52's rejection rests entirely on IR-H55-04 plus a rule invalidated here.
+
+## IR-H55-06 · Two different hidden-truth calibrations coexist in this repository
+
+`knowledge/research_notes.md`, `src/gemsdoe48/holdout.py` (`HIDDEN_TRUTH_PX = 12632`), `src/gemsdoe48/live_anchor.py` and `scripts/build_site_ds48.py` all use **|G| = 12,632**, derived by assuming the removed dots earned exactly the `τ = 0.05416` bar. This session's least-squares fit over the strictly nested triple A/B/C, assuming the removed dots earned **zero**, gives **|G| = 14,027.5** — and that value makes the three rungs invert to `T = 5,210.4 / 5,216.1 / 5,209.5`, self-consistent to **0.11 %**. The three pairwise closed-form solutions are 13,368 / 15,198 / 14,089, a ±6 % spread driven entirely by the 4-decimal rounding of the owner-reported scores.
+
+**Action:** both are recorded; 14,027.5 is used everywhere in H55 and the alternative derivation is stated. The older constants were *not* edited out of the historical modules, because those modules belong to prior sessions' receipts. Severity **medium**.
+
+## IR-H55-07 · A tracked local mirror and its published upstream mirror are pixel-identical but byte-different
+
+`data/raw/ref_h36_1_rung30.tif` (SHA-256 `7c74270a…`) and the GEMSDOE28 published file `gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif` (SHA-256 `5556aa14…`) have **identical emission pixel sets** (`np.array_equal` on the boolean mask, 37,660 px) and differ only in outside-footprint encoding and tags. The same holds for `data/raw/tip_h32_1_prethin_tip_euler.tif` (`26748e4b…`) versus `04d31922…` (42,294 px).
+
+**Action:** `live_model.LIVE_ARTIFACTS` now points at the restored *published* mirrors under `data/raw/scored/` so every pin is the published one, with the pixel-identity check recorded in a code comment. `scripts/calibrate_live_model.py` fails closed on any pin mismatch. Severity **low**, but it is exactly the kind of thing that makes a "verified" hash meaningless if unnoticed.
+
+## IR-H55-08 · `h52_scarp3m_100m.tif` band `facing_at` has unconfirmed units
+
+`strike_at` takes only the values 0, 1500, 3000, …, 16500 — consistent with a strike in 0.01° units quantised to 15° bins over 0–165°. `facing_at` ranges 0–10,000 with a median of 4,893. If `facing_at` were a dip direction in the same units the two should be perpendicular; the measured median deviation from perpendicularity over all 5,900,588 valid cells is **46°** (p10 8.9°, p90 81.4°), i.e. no perpendicular relationship at all.
+
+**Action:** an along-strike extension of the hydrothermal conduit anchors was designed and then **withdrawn** rather than shipped on an unverified band. Recorded as the blocker on hypothesis H55-D with the exact check required: re-read `src/gemsdoe48/scarp3m.py` and `data/external/h52_scarp3m_merge_log.txt` against the GitHub Actions run that produced the mosaic. Severity **medium** — this is a case of refusing to guess.
+
+## IR-H55-09 · The brief's "0.3195 is the highest score right now" is stale
+
+Carried forward and now answered with a measurement rather than an assertion: the single manual read of the official leaderboard on 2026-10-06 UTC (`docs/data/leaderboard_20261007.json`) shows #1 xiaofanhu **0.3774**, #2 alexoktaba 0.3345, #3 nchuzhoy 0.3262, #7 DARD **0.3195**, and the 0.2778 row belonging to `extradr19` (#13, 10 submissions). The H55 ceiling table is computed against the whole snapshot. **None of 0.2888, 0.3195, 0.3262, 0.3345 or 0.3774 is reachable from the h19-5 corridor field at any mass**; the frontier maximum is live-equivalent 0.2843. Severity **medium**.
+
+## IR-H55-10 · No organizer score exists for any file in this repository
+
+`registry/live_scores.json` holds 17 entries, all classed **OWNER-REPORT** — a score pasted by the repository owner against a SHA-256. No organizer receipt, API response or page capture links any file to any score; the local receipt for the 0.2778 artifact says `UNSCORED`. The H55 forward model, its `|G|`, its `ρ`, all eight inverted `T` values and the entire scenario band are therefore labelled OWNER-REPORT-derived wherever they appear, and no projected leaderboard position is claimed. Severity **high** — it is the single largest limitation on everything above.

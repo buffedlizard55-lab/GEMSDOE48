@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Executive summary · GEMSDOE48</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><div class="wrap">
+  <h1>Executive summary</h1>
+  <p>A reproducible, conflict-aware research candidate with an explicit no-slot decision.</p>
+</div></header>
+<nav><div class="wrap">
+  <a href="index.html">Overview</a><a class="active" href="executive-summary.html">Summary</a>
+  <a href="method.html">Method</a><a href="validation.html">Validation</a>
+  <a href="hypotheses.html">Hypotheses</a><a href="sources.html">Sources</a><a href="irregularities.html">Irregularities</a>
+</div></nav>
+<div class="wrap">
+  <section class="hero" id="h52">
+    <h2>2026-10-07 — H52 unique candidate file (download first, read second)</h2>
+    <p><a class="btn" href="downloads/GEMSDOE48-H52-lidar-scarp-additions-20261007-38029417f6ca-nan-outside.tif" download>Download GEMSDOE48-H52 GeoTIFF (NaN outside)</a>
+    <a class="btn alt" href="research/holdout-h52-results-20261007.md">Read the H52 sweep and controls</a></p>
+    <p><b>Paste-ready note (143 characters):</b> <code>GEMSDOE48-H52 | 0.2778 dotted family + 2,000 lidar-scarp dots (3 m USGS 3DEP step detector, &gt;200 m off-catalogue); unscored research candidate.</code></p>
+    <p>C (37,654 dots of the 0.2778 family) plus 2,000 dots on the strongest 3 m lidar steps (≥ 3.29 m effective height, smooth-terrain gate, &gt; 200 m from the catalogue and from C). SHA-256 <code>38029417f6ca…</code>, 346,152 bytes, 39,654 positives, one float32 band, EPSG:32611, 100 m, 3,730 × 3,292, values in [0,1] in-footprint and NaN outside — the format the portal rejected before was out-of-range values, which this file cannot produce (<a href="../evidence/h52_submission_validation_20261007.json">local validation</a>).</p>
+    <p class="small"><b>Not slot-cleared.</b> Newer-SGMC blocked proxy 0.096409 (C 0.095491, union 0.096992, H49 0.100751); pre-registered gate fails on both criteria; live bracket for the additions −0.006 to +0.009. Keep the weekly slot unused. Do not upload H52: it fails the preregistered gate and remains below H49 on the comparable blocked proxy. No owner override or exception is in scope. No organizer score exists for any file here.</p>
+    <h3>Format and portal steps for a future cleared candidate only</h3>
+    <p class="small"><b>These steps are reference-only.</b> No current candidate is cleared; do not use a weekly slot unless a future candidate beats the spatially blocked best under the project gate.</p>
+    <ol>
+      <li>Only after a candidate has cleared the project gate, use exactly one single-band float32 GeoTIFF on the competition grid (EPSG:32611, 100 m, 3,730 rows × 3,292 columns, origin 243,350 E / 4,508,550 N). Re-check the exact candidate bytes with <code>python scripts/validate_submission.py &lt;file&gt;</code>; local validation is not organizer acceptance.</li>
+      <li>Values must be finite and inside [0, 1] wherever the sample template is finite; outside the footprint use NaN (preferred) or 0. The earlier portal error "Predicted values must be in range [0, 1]" came from out-of-range or non-finite in-footprint cells.</li>
+      <li>For a future cleared candidate only, paste its candidate-specific tracking note into the submission comment; preserve the exact filename and SHA-256 so any portal row can be tied to those bytes.</li>
+    </ol>
+  </section>
+
+  <section class="hero">
+    <h2>Weekly slot decision: do not submit this candidate</h2>
+    <p>The fixed <code>rho=0.5</code> discounted-Dempster surface loses to tip/stepover and the arithmetic-mean baseline on all four spatial blocks for both public-map proxy targets. It also loses to the prior union decision on all eight comparisons. These are conditional proxy diagnostics, not private-label validation, but they are sufficient to fail the preregistered promotion gate.</p>
+    <a class="btn" href="downloads/GEMSDOE48-DS-conflict-aware-fusion-20261006.tif" download>Download candidate GeoTIFF</a>
+    <a class="btn alt" href="validation.html">Read blocked-fold results</a>
+    <p class="small">The file is supplied for inspection and reproducibility, not as a recommendation to spend a submission slot.</p>
+  </section>
+
+  <section class="hero">
+    <h2>Newer-main H49: proxy-best measured, still not slot-cleared</h2>
+    <p>On the same four-quadrant/core-plus-300 m-halo SGMC protocol, H49 scores 0.100751188 versus 0.096991657 for the prior union (+0.003759531, 4/4 folds). The separate older raw-raster report also favors H49 by +0.003811091, 4/4; do not pool the rasters. This is a post-selection re-score on related public proxy evidence, below the live instrument's roughly 0.005 resolution, and its live-anchored change range includes loss (−0.010 to +0.005).</p>
+    <p><a class="btn" href="downloads/GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif" download>Download H49 NaN-outside research TIFF</a>
+    <a class="btn alt" href="research/holdout-h49-results-20261006.md">Read the shared-protocol report</a></p>
+    <p class="small">Local format validation passes for the format-only derivative; organizer acceptance is untested. Do not spend a slot on H49 from these results alone.</p>
+  </section>
+
+  <h2 class="sec">H48 candidate at a glance</h2>
+  <table>
+    <tr><th>Artifact</th><th>Purpose</th><th>SHA-256</th></tr>
+    <tr><td><a href="downloads/GEMSDOE48-DS-conflict-aware-fusion-20261006.tif">Dempster fault belief</a></td><td>Research candidate; one-band competition-grid GeoTIFF</td><td class="mono">818957c0cb69caf360d445c7f7a684578c37528f363b5d84f5ae3be832e7413f</td></tr>
+    <tr><td><a href="downloads/GEMSDOE48-unassigned-mass-20261006.tif">Unassigned mass</a></td><td>Separate normalized residual <code>m(Theta)</code> diagnostic</td><td class="mono">975c217ef803a45041077a219ba460134a8c84c8ea9f7ffc0414ddb47cb54ccd</td></tr>
+    <tr><td><a href="downloads/GEMSDOE48-raw-conflict-K-20261006.tif">Raw conflict K</a></td><td>Separate pre-normalization conflict diagnostic</td><td class="mono">5daa6eaf7ce78603896b0696df5be67d9a71971da936e030161c3157944b576b</td></tr>
+  </table>
+  <p>The primary output is not an arithmetic mean: 47,905 in-footprint cells differ; footprint MAE is 0.00205494, and MAE restricted to the union of source positives is 0.22166091. A high correlation is expected from the large shared zero background and does not imply equality.</p>
+
+  <h2 class="sec">Local format audit</h2>
+  <table>
+    <tr><th>Check</th><th>Observed</th></tr>
+    <tr><td>Band and dtype</td><td>One band, float32</td></tr>
+    <tr><td>Grid</td><td>3,730 × 3,292; EPSG:32611; 100 m; template transform matched</td></tr>
+    <tr><td>Values in footprint</td><td>Finite, min 0, max 0.75; all in [0,1]</td></tr>
+    <tr><td>Outside footprint</td><td>NaN/nodata at all 7,111,787 outside cells; finite mask exactly matches the derived 5,167,373-cell sample-template footprint</td></tr>
+    <tr><td>Audit status</td><td>PASS local checks only; not organizer acceptance</td></tr>
+  </table>
+  <p>Receipts: <a href="../evidence/submission_validation_20261006.json">submission validation</a>, <a href="../evidence/build_receipt_20261006.json">build and distinction checks</a>, and <a href="../evidence/footprint_mask_receipt.json">footprint/template comparison</a>.</p>
+
+  <h2 class="sec">SGMC input discrepancy</h2>
+  <p>The current primary holdout uses the newer manifest-pinned derivative (83,593 positives; 62,122 at &gt;300 m from catalogue). A prior raw mirror has 82,151 positives and differs at 1,450 positive-mask cells despite matching the spatial grid. The cause is unresolved; the older raster was evaluated separately and retained as a sensitivity report. Neither raster is organizer-authenticated. See <a href="../evidence/sgmc_raster_comparison_20261006.json">comparison receipt</a>, <a href="../evidence/holdout_20261006.json">newer-raster holdout</a>, and <a href="../evidence/holdout_raw_sgmc_20261006.json">older-raster holdout</a>.</p>
+
+  <h2 class="sec">Reproduction</h2>
+  <pre class="mono">python -m pip install -e '.[dev]'
+python scripts/restore_candidate_surfaces.py
+python scripts/restore_proxy_labels.py
+python scripts/build_footprint_mask.py
+python scripts/build_submission.py
+python scripts/validate_submission.py
+python scripts/run_spatial_holdout.py --yager docs/downloads/gemsdoe48-h48-ds-yager-conflict-20261006.tif
+pytest -q</pre>
+  <p>Restore scripts verify pinned public owner-mirror hashes; they do not establish organizer provenance or licensing. For full source/data caveats, review <a href="sources.html">sources</a> and <a href="irregularities.html">irregularities</a>.</p>
+  <footer>GEMSDOE48 · no organizer score is recorded for this artifact; no weekly submission slot is cleared.</footer>
+</div>
+</body>
+</html>
