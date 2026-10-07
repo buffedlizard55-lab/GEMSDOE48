@@ -1,0 +1,419 @@
+{
+  "schema_version": 1,
+  "evaluated_utc": "2026-10-07T01:59:39.747141+00:00",
+  "hypothesis_id": "H50-5",
+  "hypothesis": "Hidden faults cluster on unmapped parallel splays of catalogue traces at 100-600 m perpendicular offset; a distance-band prior around the catalogue, optionally gated by family support, should catch off-catalogue structure.",
+  "status": "CONDITIONAL_SPATIAL_BLOCK_DIAGNOSTIC_NOT_SLOT_CLEARED",
+  "construction": {
+    "splay_band_100_600m": "binary 1 where 100 m < d(catalogue) <= 600 m, inside footprint",
+    "splay_band_x_family_corridor": "band intersected with the 1-px-dilated union corridor of both parents"
+  },
+  "catalogue_proxy_results": {
+    "splay_band_100_600m": {
+      "NW": {
+        "tp": 13478.395287833708,
+        "fp": 282028.5528034236,
+        "fn": 15840.604712166292,
+        "n_truth": 29319,
+        "dti": 0.16326250091190694,
+        "coverage": 0.45971538210149415,
+        "prediction_mass": 315201.0,
+        "positive_cells": 315201,
+        "valid_domain_cells": 2457001
+      },
+      "NE": {
+        "tp": 5868.21449391707,
+        "fp": 136296.07207749708,
+        "fn": 6727.78550608293,
+        "n_truth": 12596,
+        "dti": 0.15238293205326994,
+        "coverage": 0.46587920720205384,
+        "prediction_mass": 151348.0,
+        "positive_cells": 151348,
+        "valid_domain_cells": 1372176
+      },
+      "SW": {
+        "tp": 4330.086419954746,
+        "fp": 79876.53050790395,
+        "fn": 5142.913580045254,
+        "n_truth": 9473,
+        "dti": 0.177319224775214,
+        "coverage": 0.457097690272854,
+        "prediction_mass": 89876.0,
+        "positive_cells": 89876,
+        "valid_domain_cells": 570886
+      },
+      "SE": {
+        "tp": 4291.593004140318,
+        "fp": 82231.77763056866,
+        "fn": 5308.406995859682,
+        "n_truth": 9600,
+        "dti": 0.17176902057379856,
+        "coverage": 0.44704093793128313,
+        "prediction_mass": 91977.0,
+        "positive_cells": 91977,
+        "valid_domain_cells": 792240
+      },
+      "mean_dti": 0.16618341957854738
+    },
+    "splay_band_x_family_corridor": {
+      "NW": {
+        "tp": 2240.4033860186746,
+        "fp": 20113.512265632653,
+        "fn": 27078.596613981324,
+        "n_truth": 29319,
+        "dti": 0.08022648211032485,
+        "coverage": 0.07641472717414217,
+        "prediction_mass": 22251.0,
+        "positive_cells": 22251,
+        "valid_domain_cells": 2457001
+      },
+      "NE": {
+        "tp": 1421.2176209172258,
+        "fp": 11175.207439238962,
+        "fn": 11174.782379082775,
+        "n_truth": 12596,
+        "dti": 0.11283010709754178,
+        "coverage": 0.11283086860251078,
+        "prediction_mass": 12604.0,
+        "positive_cells": 12604,
+        "valid_domain_cells": 1372176
+      },
+      "SW": {
+        "tp": 757.5021478802857,
+        "fp": 6414.119559854587,
+        "fn": 8715.497852119714,
+        "n_truth": 9473,
+        "dti": 0.08404807682715228,
+        "coverage": 0.07996433525602087,
+        "prediction_mass": 7125.0,
+        "positive_cells": 7125,
+        "valid_domain_cells": 570886
+      },
+      "SE": {
+        "tp": 722.3998420888263,
+        "fp": 5071.577977118612,
+        "fn": 8877.600157911174,
+        "n_truth": 9600,
+        "dti": 0.08173057481316597,
+        "coverage": 0.0752499835509194,
+        "prediction_mass": 5716.0,
+        "positive_cells": 5716,
+        "valid_domain_cells": 792240
+      },
+      "mean_dti": 0.08970881021204621
+    },
+    "h50_ds_belief_reference": {
+      "NW": {
+        "tp": 1389.6856729576714,
+        "fp": 131693.9425562867,
+        "fn": 27929.314327042328,
+        "n_truth": 29319,
+        "dti": 0.027753789274786573,
+        "coverage": 0.04739880872327403,
+        "prediction_mass": 134166.6948774536,
+        "positive_cells": 367945,
+        "valid_domain_cells": 2457001
+      },
+      "NE": {
+        "tp": 836.3953423724481,
+        "fp": 69917.77152907738,
+        "fn": 11759.604657627551,
+        "n_truth": 12596,
+        "dti": 0.034522370776009,
+        "coverage": 0.06640166262086758,
+        "prediction_mass": 71416.94419927988,
+        "positive_cells": 196139,
+        "valid_domain_cells": 1372176
+      },
+      "SW": {
+        "tp": 478.5773637098211,
+        "fp": 34937.80378736189,
+        "fn": 8994.422636290179,
+        "n_truth": 9473,
+        "dti": 0.03264138125786621,
+        "coverage": 0.050520148180071896,
+        "prediction_mass": 35771.38316872995,
+        "positive_cells": 99433,
+        "valid_domain_cells": 570886
+      },
+      "SE": {
+        "tp": 406.63637776179735,
+        "fp": 38282.86325877554,
+        "fn": 9193.363622238203,
+        "n_truth": 9600,
+        "dti": 0.026374303872707193,
+        "coverage": 0.04235795601685389,
+        "prediction_mass": 38948.76504595298,
+        "positive_cells": 107816,
+        "valid_domain_cells": 792240
+      },
+      "mean_dti": 0.030322961295342246
+    },
+    "tip_h36_parent_reference": {
+      "NW": {
+        "tp": 1116.7394334878604,
+        "fp": 17472.339331555188,
+        "fn": 28202.26056651214,
+        "n_truth": 29319,
+        "dti": 0.041097368199339984,
+        "coverage": 0.03808927430976024,
+        "prediction_mass": 18019.0,
+        "positive_cells": 18019,
+        "valid_domain_cells": 2457001
+      },
+      "NE": {
+        "tp": 721.3155984489484,
+        "fp": 9380.655402717528,
+        "fn": 11874.684401551052,
+        "n_truth": 12596,
+        "dti": 0.059626685866962244,
+        "coverage": 0.05726544922586126,
+        "prediction_mass": 9739.0,
+        "positive_cells": 9739,
+        "valid_domain_cells": 1372176
+      },
+      "SW": {
+        "tp": 382.4679363859908,
+        "fp": 4656.954961371373,
+        "fn": 9090.53206361401,
+        "n_truth": 9473,
+        "dti": 0.04454405544592024,
+        "coverage": 0.04037453144579234,
+        "prediction_mass": 4837.0,
+        "positive_cells": 4837,
+        "valid_domain_cells": 570886
+      },
+      "SE": {
+        "tp": 394.7794437835116,
+        "fp": 5097.122369717005,
+        "fn": 9205.220556216489,
+        "n_truth": 9600,
+        "dti": 0.04497178607809641,
+        "coverage": 0.04112285872744913,
+        "prediction_mass": 5273.0,
+        "positive_cells": 5273,
+        "valid_domain_cells": 792240
+      },
+      "mean_dti": 0.04755997389757972
+    }
+  },
+  "sgmc_offcat_results": {
+    "splay_band_100_600m": {
+      "NW": {
+        "tp": 3510.4369700738944,
+        "fp": 304079.5970516857,
+        "fn": 19619.563029926107,
+        "n_truth": 23130,
+        "dti": 0.04386839458621253,
+        "coverage": 0.15176986468110223,
+        "prediction_mass": 315201.0,
+        "positive_cells": 315201,
+        "valid_domain_cells": 2457001
+      },
+      "NE": {
+        "tp": 2885.11510881343,
+        "fp": 142613.69269967385,
+        "fn": 20306.88489118657,
+        "n_truth": 23192,
+        "dti": 0.06054378986628325,
+        "coverage": 0.1244013068650151,
+        "prediction_mass": 151348.0,
+        "positive_cells": 151348,
+        "valid_domain_cells": 1372176
+      },
+      "SW": {
+        "tp": 874.9382304478919,
+        "fp": 86833.03695840831,
+        "fn": 1478.0617695521082,
+        "n_truth": 2353,
+        "dti": 0.045044195529627996,
+        "coverage": 0.3718394519540552,
+        "prediction_mass": 89876.0,
+        "positive_cells": 89876,
+        "valid_domain_cells": 570886
+      },
+      "SE": {
+        "tp": 1647.4173042605175,
+        "fp": 87205.5835792257,
+        "fn": 11799.582695739482,
+        "n_truth": 13447,
+        "dti": 0.05774697646738266,
+        "coverage": 0.12251188400836749,
+        "prediction_mass": 91977.0,
+        "positive_cells": 91977,
+        "valid_domain_cells": 792240
+      },
+      "mean_dti": 0.05180083911237661
+    },
+    "splay_band_x_family_corridor": {
+      "NW": {
+        "tp": 932.4989228156035,
+        "fp": 20819.748265684437,
+        "fn": 22197.501077184395,
+        "n_truth": 23130,
+        "dti": 0.04080163581964838,
+        "coverage": 0.040315560865352505,
+        "prediction_mass": 22251.0,
+        "positive_cells": 22251,
+        "valid_domain_cells": 2457001
+      },
+      "NE": {
+        "tp": 702.0759251508902,
+        "fp": 11560.738484048032,
+        "fn": 22489.92407484911,
+        "n_truth": 23192,
+        "dti": 0.03342237842770646,
+        "coverage": 0.030272332060662734,
+        "prediction_mass": 12604.0,
+        "positive_cells": 12604,
+        "valid_domain_cells": 1372176
+      },
+      "SW": {
+        "tp": 242.0608652195558,
+        "fp": 6709.4793991197985,
+        "fn": 2110.939134780444,
+        "n_truth": 2353,
+        "dti": 0.07396347651830357,
+        "coverage": 0.10287329588591407,
+        "prediction_mass": 7125.0,
+        "positive_cells": 7125,
+        "valid_domain_cells": 570886
+      },
+      "SE": {
+        "tp": 166.18797849156186,
+        "fp": 5479.318487279372,
+        "fn": 13280.812021508438,
+        "n_truth": 13447,
+        "dti": 0.013981000648790019,
+        "coverage": 0.01235874012728206,
+        "prediction_mass": 5716.0,
+        "positive_cells": 5716,
+        "valid_domain_cells": 792240
+      },
+      "mean_dti": 0.040542122853612104
+    },
+    "h50_ds_belief_reference": {
+      "NW": {
+        "tp": 3309.802176837819,
+        "fp": 126865.94151022745,
+        "fn": 19820.19782316218,
+        "n_truth": 23130,
+        "dti": 0.07431220107845421,
+        "coverage": 0.143095641021955,
+        "prediction_mass": 134166.6948774536,
+        "positive_cells": 367945,
+        "valid_domain_cells": 2457001
+      },
+      "NE": {
+        "tp": 2941.2393776234767,
+        "fp": 65149.858391778354,
+        "fn": 20250.760622376525,
+        "n_truth": 23192,
+        "dti": 0.09142284826935511,
+        "coverage": 0.12682129085992913,
+        "prediction_mass": 71416.94419927988,
+        "positive_cells": 196139,
+        "valid_domain_cells": 1372176
+      },
+      "SW": {
+        "tp": 433.32939991685134,
+        "fp": 34693.47462231694,
+        "fn": 1919.6706000831487,
+        "n_truth": 2353,
+        "dti": 0.04864627704198489,
+        "coverage": 0.18416039095488795,
+        "prediction_mass": 35771.38316872995,
+        "positive_cells": 99433,
+        "valid_domain_cells": 570886
+      },
+      "SE": {
+        "tp": 1312.6182956576083,
+        "fp": 36268.96641265451,
+        "fn": 12134.381704342391,
+        "n_truth": 13447,
+        "dti": 0.07183015550787526,
+        "coverage": 0.09761421102532969,
+        "prediction_mass": 38948.76504595298,
+        "positive_cells": 107816,
+        "valid_domain_cells": 792240
+      },
+      "mean_dti": 0.07155287047441736
+    },
+    "tip_h36_parent_reference": {
+      "NW": {
+        "tp": 2231.161920115578,
+        "fp": 17040.88905911561,
+        "fn": 20898.838079884423,
+        "n_truth": 23130,
+        "dti": 0.09979072306894544,
+        "coverage": 0.09646182101667004,
+        "prediction_mass": 18019.0,
+        "positive_cells": 18019,
+        "valid_domain_cells": 2457001
+      },
+      "NE": {
+        "tp": 2015.7752088031177,
+        "fp": 8883.831284594198,
+        "fn": 21176.22479119688,
+        "n_truth": 23192,
+        "dti": 0.09722300325953334,
+        "coverage": 0.08691683377040003,
+        "prediction_mass": 9739.0,
+        "positive_cells": 9739,
+        "valid_domain_cells": 1372176
+      },
+      "SW": {
+        "tp": 301.8565323819713,
+        "fp": 4689.454898811135,
+        "fn": 2051.143467618029,
+        "n_truth": 2353,
+        "dti": 0.10478719904932542,
+        "coverage": 0.12828581911685988,
+        "prediction_mass": 4837.0,
+        "positive_cells": 4837,
+        "valid_domain_cells": 570886
+      },
+      "SE": {
+        "tp": 851.2077820708961,
+        "fp": 4919.874108430686,
+        "fn": 12595.792217929104,
+        "n_truth": 13447,
+        "dti": 0.07145910875824343,
+        "coverage": 0.06330094311525962,
+        "prediction_mass": 5273.0,
+        "positive_cells": 5273,
+        "valid_domain_cells": 792240
+      },
+      "mean_dti": 0.09331500853401192
+    }
+  },
+  "sgmc_paired_gates": {
+    "splay_band_100_600m": {
+      "fold_delta_dti": {
+        "NW": -0.030443806492241682,
+        "NE": -0.03087905840307186,
+        "SW": -0.003602081512356893,
+        "SE": -0.014083179040492604
+      },
+      "mean_delta_dti": -0.01975203136204076,
+      "positive_folds": 0,
+      "passes_numeric_gate": false
+    },
+    "splay_band_x_family_corridor": {
+      "fold_delta_dti": {
+        "NW": -0.03351056525880583,
+        "NE": -0.058000469841648646,
+        "SW": 0.025317199476318678,
+        "SE": -0.05784915485908525
+      },
+      "mean_delta_dti": -0.03101074762080526,
+      "positive_folds": 1,
+      "passes_numeric_gate": false
+    }
+  },
+  "slot_decision": {
+    "cleared": false,
+    "reason": "proxy-only diagnostic"
+  }
+}

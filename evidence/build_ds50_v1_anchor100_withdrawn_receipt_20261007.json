@@ -1,0 +1,209 @@
+{
+  "schema_version": 1,
+  "generated_utc": "2026-10-07T01:49:06.763033+00:00",
+  "candidate_id": "H50",
+  "submission_status": "UNSCORED_RESEARCH_CANDIDATE",
+  "submission_name": "GEMSDOE48-H50-DS-B2xH36",
+  "submission_note": "GEMSDOE48 H50 | Dempster fusion, best dotted H33-2-B2 (0.2778) x best tip H36-1 rung30 (0.2710); kernel-credit beliefs, live-anchored discounts; m(Theta)+K diagnostics; unscored research candidate.",
+  "submission_note_length": 197,
+  "primary_file": "docs/downloads/gemsdoe48-h50-ds-b2xh36rung30-20261007-2c01d212-zeros.tif",
+  "primary_sha256": "2c01d21239ae7a2a5f39dc21dd5b63126f70c072d6993baf4aae1349ed86b0db",
+  "primary_bytes": 1292713,
+  "zip_file": "docs/downloads/gemsdoe48-h50-ds-b2xh36rung30-20261007-2c01d212-zeros.zip",
+  "zip_sha256": "692e79e79b82feddf0dd45d85096c248e45af6e36d173abc5bf3ef7d70919de8",
+  "encoding": "all-finite float32 in [0,1]; zeros outside footprint (portal-safe per GEMSDOE32/33 precedent)",
+  "diagnostics": {
+    "unassigned_mass_mTheta": {
+      "path": "docs/downloads/diagnostics/gemsdoe48-h50-unassigned-mTheta-20261007-2c01d212.tif",
+      "bytes": 197952,
+      "dtype": "float32",
+      "bands": 1,
+      "width": 3292,
+      "height": 3730,
+      "crs": "EPSG:32611",
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": "NaN",
+      "finite_cells": 5167373,
+      "nodata_cells": 7111787,
+      "min": 0.0,
+      "max": 0.0,
+      "range_0_1_with_nan_outside": true,
+      "sha256": "9e72f69a440e42f7f9bc48cf49749df38299d3272dc61b785cbb501a2517e9bd"
+    },
+    "conflict_K": {
+      "path": "docs/downloads/diagnostics/gemsdoe48-h50-conflict-K-20261007-2c01d212.tif",
+      "bytes": 2053466,
+      "dtype": "float32",
+      "bands": 1,
+      "width": 3292,
+      "height": 3730,
+      "crs": "EPSG:32611",
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": "NaN",
+      "finite_cells": 5167373,
+      "nodata_cells": 7111787,
+      "min": 0.0,
+      "max": 0.975521981716156,
+      "range_0_1_with_nan_outside": true,
+      "sha256": "689d6fd8dd9f9c52155fe986404547ad3f5c746fcc584c52a08e13ab884206ac"
+    },
+    "plausibility": {
+      "path": "docs/downloads/diagnostics/gemsdoe48-h50-plausibility-20261007-2c01d212.tif",
+      "bytes": 2044776,
+      "dtype": "float32",
+      "bands": 1,
+      "width": 3292,
+      "height": 3730,
+      "crs": "EPSG:32611",
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": "NaN",
+      "finite_cells": 5167373,
+      "nodata_cells": 7111787,
+      "min": 0.0,
+      "max": 1.0,
+      "range_0_1_with_nan_outside": true,
+      "sha256": "6291695239f660baef3491f766806b95c47531ed4a9c60ed0b9c511b550d31ce"
+    }
+  },
+  "parents": {
+    "dotted_best": {
+      "family": "dotted (spacing-tuned)",
+      "id": "H33-2-B2",
+      "path": "data/raw/dotted_h33_2_b2_zeros.tif",
+      "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+      "positive_pixels": 37654,
+      "owner_reported_live": 0.2778,
+      "evidence_class": "OWNER-REPORT"
+    },
+    "tip_best": {
+      "family": "tip / step-over",
+      "id": "H36-1-rung30",
+      "path": "data/source_mirrors/gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif",
+      "sha256": "5556aa1438fd67376b60d5ffc99228ec09dcc11a8408298a743ccb88d6163641",
+      "positive_pixels": 37660,
+      "owner_reported_live": 0.271,
+      "evidence_class": "OWNER-REPORT",
+      "verification": "Downloaded from the pinned GEMSDOE28 public mirror via GitHub API on 2026-10-07; SHA-256 matches registry/live_scores.json. data/raw/ref_h36_1_rung30.tif is a mask-identical format rewrite (nodata representation only), verified cell by cell."
+    }
+  },
+  "parent_overlap": {
+    "intersection_pixels": 26248,
+    "union_pixels": 49066,
+    "jaccard": 0.5349529205559859,
+    "xor_disagreement_pixels": 22818
+  },
+  "method": {
+    "belief_construction": "b_i(x) = max over committed pixels y of k(d(x,y)), k triangular 300 m (metric geometry)",
+    "mass_assignment": "m_i(F)=a_i*b_i, m_i(notF)=a_i*(1-b_i), m_i(Theta)=1-a_i",
+    "combination": "canonical normalized Dempster rule (Dempster 1967; Shafer 1976)",
+    "reliabilities": {
+      "dotted": 1.0,
+      "tip": 0.9755219582433406
+    },
+    "reliability_anchor": "owner-reported live score ratio 0.2710/0.2778 [OWNER-REPORT]; modeling assumption, not calibrated",
+    "submitted_surface": "Bel(F)=m12(F), divided by in-footprint max (identity here: max already 1.0)",
+    "assumptions": [
+      "Kernel-credit belief treats distance-decayed credit as graded evidence, avoiding the hard counter-evidence reading of sparse zeros.",
+      "Sources are not assumed statistically independent; shared regional inputs remain a risk.",
+      "Live-score anchoring of reliabilities is a documented assumption, not an estimated calibration."
+    ]
+  },
+  "discount_sensitivity": {
+    "symmetric_rho_0.5": {
+      "reliabilities": [
+        0.5,
+        0.5
+      ],
+      "pearson_vs_primary_in_footprint": 0.9771985814236023,
+      "max_abs_difference_in_footprint": 0.5555555555555556
+    },
+    "symmetric_rho_0.9": {
+      "reliabilities": [
+        0.9,
+        0.9
+      ],
+      "pearson_vs_primary_in_footprint": 0.9958214473337104,
+      "max_abs_difference_in_footprint": 0.5215311004784688
+    },
+    "tip_discount_0.90": {
+      "reliabilities": [
+        1.0,
+        0.9
+      ],
+      "pearson_vs_primary_in_footprint": 0.9992001420543918,
+      "max_abs_difference_in_footprint": 0.33492235918929014
+    }
+  },
+  "anti_average_check": {
+    "naive_mean_definition": "0.5*(b_dotted + b_tip) on the kernel-credit belief surfaces, max-normalized",
+    "pearson_in_footprint": 0.9633468437727237,
+    "spearman_in_footprint": 0.9828231728449661,
+    "mae_in_footprint": 0.015910113156794557,
+    "max_abs_difference": 0.5,
+    "fraction_cells_abs_diff_gt_0.05": 0.11400860746843705,
+    "cells_exactly_equal": 4426578,
+    "topk_emission_jaccard": 0.739134451064616,
+    "topk": 37654,
+    "is_the_average": false
+  },
+  "prior_artifact_distance": {
+    "artifact": "docs/downloads/GEMSDOE48-DS-conflict-aware-fusion-20261006.tif",
+    "sha256": "818957c0cb69caf360d445c7f7a684578c37528f363b5d84f5ae3be832e7413f",
+    "note": "H48 fused the RAW sparse b2 x h33d surfaces with symmetric rho=0.5; H50 fuses kernel-credit beliefs of b2 x h36-1 with live-anchored discounts.",
+    "pearson_vs_h50_in_footprint": 0.45371841065494706,
+    "parents_differ": true,
+    "belief_construction_differs": true,
+    "discount_scheme_differs": true
+  },
+  "uniqueness": {
+    "compared_existing_tifs": 44,
+    "hash_collisions": [],
+    "new_parent_pair": "b2 x h36-1 rung30 (no prior GEMSDOE48 artifact fused h36-1)"
+  },
+  "format_receipt": {
+    "single_band": true,
+    "dtype_float32": true,
+    "width": 3292,
+    "height": 3730,
+    "crs": "EPSG:32611",
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    "nodata": null,
+    "all_finite": true,
+    "min_value": 0.0,
+    "max_value": 1.0,
+    "values_in_0_1": true,
+    "positive_pixels": 707590,
+    "in_footprint_cells": 5167373,
+    "zero_outside_footprint": true
+  },
+  "organizer_score": null,
+  "score_claim": "No organizer score exists for this artifact; no leaderboard projection is claimed."
+}
