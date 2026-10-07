@@ -1,5 +1,7 @@
 # H53 three-source adaptive DS — blocked results 2026-10-07 (gate FAILED, no slot)
 
+> **Parent-classification erratum:** the frozen H53-1 lidar candidate uses H36-1 rung30, which is an H19-5/rung-30 repacking, not the actual tip/step-over family. Its scores and source bytes are unchanged, but it must be described as B2 × H36-1 rung30 × lidar—not as B2 × the tip family. H33-D is the explicit tip/step-over parent and is used by the separate H53-RadEdge experiment. See [`evidence/h36_parent_classification_erratum_20261007.json`](../../evidence/h36_parent_classification_erratum_20261007.json) and the [H53 namespace erratum](../../evidence/h53_radedge_namespace_erratum_20261007.json).
+
 **Decision: no weekly submission slot is cleared.** Neither the graded primary
 nor the pignistic binary twin beats H49 (0.100751) on the SGMC-newer proxy
 mean or on any single fold; the raw-SGMC sensitivity agrees in direction.
@@ -94,7 +96,7 @@ absolute mean DTIs are comparable across runs:
 | H51 binary Pl-top-37,654 (2-source: B2 × H36) | 0.086537 |
 | H50 graded belief (2-source, diffuse) | 0.071553 |
 | H53 graded belief (3-source, diffuse) | 0.071408 |
-| tip H36-1 parent (37,660 px) | 0.093315 |
+| H36-1 rung30 parent, not tip/step-over (37,660 px) | 0.093315 |
 | dotted C parent (37,654 px) | 0.095491 |
 | H49 (47,905 px) | 0.100751 |
 

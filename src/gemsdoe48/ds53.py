@@ -3,14 +3,16 @@
 What is new relative to every prior GEMSDOE48 fusion artifact
 --------------------------------------------------------------
 All earlier fusions (H48 rho=0.5, Yager, DS48, H50, H51) combine exactly two
-sources -- the dotted family and one tip/step-over surface -- with scalar
-reliability discounts.  H53 adds a third, genuinely new-sensor source and a
-per-pixel (context-dependent) discount map:
+sources -- the dotted family and one comparison-family surface -- with scalar
+reliability discounts. H50/H51 use H36-1 rung30, an H19-5/rung-30 repacking,
+not the actual tip/step-over family. H53 adds a third, genuinely new-sensor
+source and a per-pixel (context-dependent) discount map:
 
-1.  **Sources**: (A) dotted H33-2-B2 kernel-credit belief, (B) tip H36-1
-    rung-30 kernel-credit belief (the two best live parents, 0.2778 x 0.2710
-    [OWNER-REPORT]), (L) native-lidar line-persistent scarp height
-    ``h_gate12`` (3 m detector, sigma<1.2 m gate) ramped to a graded belief.
+1.  **Sources**: (A) dotted H33-2-B2 kernel-credit belief, (B) H36-1 rung-30
+    kernel-credit belief (selected owner-reported parents 0.2778 x 0.2710;
+    exact local-file attribution of 0.2778 is unverified), (L) native-lidar
+    line-persistent scarp height ``h_gate12`` (3 m detector, sigma<1.2 m gate)
+    ramped to a graded belief.
 2.  **Reliability**: the two families keep scalar live-anchored discounts
     (H50 scheme, RHO_MAX = 0.95 ceiling); the lidar source uses a
     context-dependent discount map (contextual discounting, Mercier, Quost &
@@ -59,6 +61,8 @@ from .ds50 import LIVE_DOTTED_B2, LIVE_TIP_H36, RHO_MAX, kernel_belief_surface
 
 # --- preregistered H53-1 constants (do not tune after scoring) ----------------
 A_DOTTED: float = RHO_MAX
+# Frozen API name from the original candidate; LIVE_TIP_H36 is H36-1 rung30,
+# an H19-5/rung-30 repacking, not the actual tip/step-over family.
 A_TIP: float = RHO_MAX * (LIVE_TIP_H36 / LIVE_DOTTED_B2)
 H_LO_M: float = 1.0   # ~q80 of covered h_gate12 (label-free anchor)
 H_HI_M: float = 2.8   # q99 of covered h_gate12 (label-free anchor)

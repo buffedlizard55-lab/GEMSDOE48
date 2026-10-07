@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "erratum_id": "H53_RAD_EDGE_NAMESPACE_AFTER_MAIN_MERGE",
+  "recorded_utc": "2026-10-07",
+  "reason": "The pre-merge working branch used candidate ID H53-1 for its radiometric-edge experiment. Before integration, origin/main merged a separate H53-1 lidar-fusion experiment, so the shared repository needs an unambiguous user-facing namespace.",
+  "namespace_mapping": {
+    "pre_merge_candidate_id": "H53-1",
+    "repository_candidate_id": "H53-RadEdge-1",
+    "hypothesis_ids_in_frozen_pre_merge_slate": {
+      "H53-1": "H53-RadEdge-1 (B2 x H33-D plus weak GeoDAWN radiometric-edge evidence)",
+      "H53-2": "H53-RadEdge-2 (USGS National Geochemical Survey pathfinders)",
+      "H53-3": "H53-RadEdge-3 (GeoDAWN magnetic analytic-signal / gradient ridges)"
+    },
+    "main_branch_H53_id": "H53-1, the separate three-source adaptive Dempster candidate using B2 x H36-1 rung30 x lidar; see the H36 classification erratum."
+  },
+  "radedge_artifact": {
+    "submission_name": "GEMSDOE48-H53-DS-RadEdge-B2xH33D-4c01fcf2ad8c",
+    "file": "docs/downloads/GEMSDOE48-H53-DS-RadEdge-B2xH33D-20261007-4c01fcf2ad8c-nan-outside.tif",
+    "sha256": "4c01fcf2ad8c1d2bd487bc4d07c85e57b2a256296586d4817b58079b0ccd7a1f",
+    "preregistration": "evidence/h53_preregistration_20261007.json",
+    "build_receipt": "evidence/build_h53_radedge_receipt_20261007.json",
+    "holdout_receipt": "evidence/holdout_h53_radedge_20261007.json",
+    "format_and_bounded_uniqueness_audit": "evidence/h53_radedge_submission_validation_20261007.json"
+  },
+  "disposition": "Namespace-only correction. The H53-RadEdge TIFF bytes, frozen transforms, rank, gate, holdout numbers, and diagnostics are unchanged. Receipt filenames are namespaced to avoid collision with the merged lidar candidate; internal path references were corrected without changing measurement payloads. Both the lidar H53-1 and H53-RadEdge-1 fail their preregistered proxy gates; neither is slot-cleared or uploadable on these results.",
+  "path_reference_updates": [
+    {
+      "from": "evidence/build_h53_receipt_20261007.json",
+      "to": "evidence/build_h53_radedge_receipt_20261007.json",
+      "reason": "avoid collision with the already-merged lidar H53 receipt; receipt contents otherwise preserve original measurements and hashes, with explicit path references corrected"
+    },
+    {
+      "from": "evidence/h53_submission_validation_20261007.json",
+      "to": "evidence/h53_radedge_submission_validation_20261007.json",
+      "reason": "avoid collision with the already-merged lidar H53 validation receipt"
+    },
+    {
+      "from": "evidence/holdout_h53_20261007.json",
+      "to": "evidence/holdout_h53_radedge_20261007.json",
+      "reason": "namespace the RadEdge holdout record separately"
+    },
+    {
+      "from": "docs/research/hypotheses-h53-20261007.md (pre-merge RadEdge slate path)",
+      "to": "docs/research/hypotheses-h53-radedge-20261007.md",
+      "reason": "avoid collision with the already-merged H53-1 lidar slate; the preregistration retains its original timestamp/rank/parameters and updates only the source-file pointer"
+    }
+  ]
+}

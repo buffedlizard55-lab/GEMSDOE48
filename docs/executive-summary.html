@@ -7,7 +7,7 @@
 <body>
 <header><div class="wrap">
   <h1>Executive summary</h1>
-  <p>Two distinct, reproducible H53 research candidates with explicit failed-gate/no-slot decisions.</p>
+  <p>A reproducible, conflict-aware research candidate with an explicit no-slot decision.</p>
 </div></header>
 <nav><div class="wrap">
   <a href="index.html">Overview</a><a class="active" href="executive-summary.html">Summary</a>
@@ -15,24 +15,38 @@
   <a href="hypotheses.html">Hypotheses</a><a href="sources.html">Sources</a><a href="irregularities.html">Irregularities</a>
 </div></nav>
 <div class="wrap">
+  <section class="hero" id="h53-radedge">
+    <h2>H53-RadEdge-1 — requested B2 × H33-D pairing (download, then read)</h2>
+    <p><a class="btn" href="downloads/GEMSDOE48-H53-DS-RadEdge-B2xH33D-20261007-4c01fcf2ad8c-nan-outside.tif" download>Download H53-RadEdge GeoTIFF (research only; do not upload)</a>
+    <a class="btn alt" href="research/holdout-h53-radedge-results-20261007.md">Read the blocked-holdout report</a></p>
+    <p><b>Unique candidate name:</b> <code>GEMSDOE48-H53-DS-RadEdge-B2xH33D-4c01fcf2ad8c</code> · 17,382,618 bytes · SHA-256 <code>4c01fcf2ad8c1d2bd487bc4d07c85e57b2a256296586d4817b58079b0ccd7a1f</code>.</p>
+    <p>H53-RadEdge uses B2 dotted and H33-D, the explicit tip/step-over family, plus weak multiscale GeoDAWN K/Th/U/TC edge evidence. The output is one-band float32, EPSG:32611, 100 m, [0,1] in-footprint, NaN outside. Canonical Dempster residual m(Θ) and raw conflict K are separate review rasters; Bel(F) is not calibrated probability.</p>
+    <p><b>Frozen result:</b> newer-SGMC off-catalogue proxy DTI 0.061821 vs H49 0.100751 (−0.038930; 0/4 folds positive), older-SGMC 0.061099; the preregistered gate failed. H53-RadEdge is not pixelwise the family mean, but Pearson r=0.99446 and budget-matched top-k Jaccard=0.97685; 99.56% of cells have positive mass. <b>Do not spend a weekly slot.</b></p>
+    <p><b>Draft portal note (171 characters; do not paste):</b> <code>GEMSDOE48-H53-DS-RadEdge-B2xH33D-4c01fcf2ad8c | H33-2-B2 x H33-D plus weak GeoDAWN K/Th/U/TC edge evidence; Dempster-Shafer, unscored research candidate, not slot-cleared.</code></p>
+    <p>Records: <a href="research/hypotheses-h53-radedge-20261007.md">frozen three-hypothesis slate</a> · <a href="research/data-availability-geochem-magnetic-20261007.md">post-slate data-availability check</a> · <a href="../evidence/build_h53_radedge_receipt_20261007.json">build receipt</a> · <a href="../evidence/holdout_h53_radedge_20261007.json">holdout JSON</a> · <a href="../evidence/h53_radedge_submission_validation_20261007.json">format/uniqueness audit</a> · <a href="../evidence/h53_radedge_namespace_erratum_20261007.json">namespace erratum</a>.</p>
+  </section>
+
   <section class="hero" id="h53a">
-    <h2>H53-A strike-coherence candidate — separate from H53-1; gate failed</h2>
+    <h2>H53-A strike-coherence candidate — separate from H53-RadEdge-1 and H53-1; gate failed</h2>
     <p><a class="btn" href="downloads/GEMSDOE48-H53-STRIKE-COHERENCE-20261007-de35531d3867-nan-outside.tif" download>Download H53-A research GeoTIFF (NOT slot-cleared)</a>
     <a class="btn alt" href="research/holdout-h53a-scarp-results-20261007.md">Read the H53-A/H49 result</a>
     <a class="btn alt" href="submission-guide.html">Portal format guide (reference only)</a></p>
-    <p><b>Paste-ready tracking note (133 characters):</b> <code>GEMSDOE48-H53 | C + 12k Poisson dots ranked by 500m strike-coherent 3DEP scarp support; proxy-tested research only; NOT slot-cleared.</code></p>
+    <p><b>Archival draft note only (133 characters; do not paste because the gate failed):</b> <code>GEMSDOE48-H53 | C + 12k Poisson dots ranked by 500m strike-coherent 3DEP scarp support; proxy-tested research only; NOT slot-cleared.</code></p>
+    <p><b>Unique candidate name:</b> <code>GEMSDOE48-H53-STRIKE-COHERENCE-20261007-de35531d3867-nan-outside</code>.</p>
     <p>C (37,654 cells) plus 12,000 Poisson-spaced cells from regional H52-derived `h_gate12`, `strike_at`, and `cover`, with ≥0.30 m height, ≥0.90 cover, and ≥4/5 strike-compatible support over an approximately 400–565 m trace. The candidate is a distinct binary strike-coherence filter, not H53-1's three-source Dempster fusion or H53-2's proposed raw-DEM detector. SHA-256 <code>de35531d386792da1950eac815f98db8f36304f78debb6b568138d070640d9bd</code>, 403,844 bytes, one float32 band, grid/NaN-outside format passes locally (<a href="../evidence/h53a_scarp_submission_validation_20261007.json">receipt</a>).</p>
     <p><b>Promotion gate failed against H49.</b> Newer SGMC 0.098110 vs 0.100751 (−0.002641; 1/4 folds higher); older raw-SGMC 0.097086 vs 0.099768 (−0.002682; 1/4 folds higher). These are public proxies, not private truth or organizer scores. <b>Do not upload; no weekly slot was used or cleared.</b></p>
     <p class="small">The bounded local uniqueness check is not global. DrivenData's format page and USGS 3DEP program page were freshly retrieved, but the exact source-tile payload/coverage and organizer acceptance were not independently verified. See the <a href="research/hypotheses-h53a-scarp-20261007.md">H53-A slate</a> and <a href="../evidence/h53a_scarp_submission_identity_20261007.json">identity receipt</a>.</p>
   </section>
 
+
   <section class="hero" id="h53">
-    <h2>2026-10-07 — H53-1 three-source adaptive Dempster fusion (not H53-A)</h2>
-    <p><a class="btn" href="downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-nan-outside.tif" download>Download H53-1 three-source GeoTIFF (NaN outside)</a>
+    <h2>Historical H53-1 — three-source adaptive lidar fusion (H36 parent; not slot-cleared)</h2>
+    <p><a class="btn" href="downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-nan-outside.tif" download>Download GEMSDOE48-H53 GeoTIFF (NaN outside)</a>
     <a class="btn alt" href="downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-nan-outside.zip" download>.zip (single GeoTIFF)</a>
-    <a class="btn alt" href="research/holdout-h53-results-20261007.md">Read the H53-1 fusion result + gate report</a></p>
-    <p><b>Paste-ready note (126 characters):</b> <code>GEMSDOE48-H53 | 3-source DS: dotted 0.2778 x tip 0.2710 x lidar scarp, terrain-adaptive discount; unscored research candidate.</code></p>
-    <p>Three-source Dempster combination of the two best live families (dotted 0.2778 × tip 0.2710, kernel-credit beliefs, live-anchored discounts) with native-lidar scarp belief under a terrain-adaptive reliability map. SHA-256 <code>9242c831dc10…</code>, 7,042,968 bytes, graded belief in [0,1] in-footprint and NaN outside — the format the portal rejected before was out-of-range values, which this file cannot produce (<a href="../evidence/h53_submission_validation_20261007.json">local validation</a>; organizer acceptance untested). Also: <a href="downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-pignistic-twin-nan.tif" download>binary pignistic twin</a>, <a href="downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-diag-unassigned-nan.tif" download>m(Θ)</a>, <a href="downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-diag-conflict-AB-nan.tif" download>K_AB</a>, <a href="downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-diag-conflict-ABL-nan.tif" download>K_ABL</a>.</p>
+    <a class="btn alt" href="research/holdout-h53-results-20261007.md">Read the H53 results + gate report</a></p>
+    <p><b>Corrected archival note (do not submit):</b> <code>GEMSDOE48-H53-3SRC-DS | B2 x H36-1 rung30 (H19-5/rung-30 repack, not tip) x lidar; adaptive D-S; unscored research, gate failed.</code></p>
+    <p>Three-source Dempster combination of dotted H33-2-B2 with H36-1 rung30 (owner-reported 0.2710; an H19-5/rung-30 repacking, not the actual tip/step-over family) and native-lidar scarp belief under a terrain-adaptive reliability map. This frozen result is not a test of B2 × H33-D. SHA-256 <code>9242c831dc10…</code>, 7,042,968 bytes, graded belief in [0,1] in-footprint and NaN outside — the local validator checks format only; it is not organizer acceptance (<a href="../evidence/h53_submission_validation_20261007.json">local validation</a>; organizer acceptance untested). Also: <a href="downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-pignistic-twin-nan.tif" download>binary pignistic twin</a>, <a href="downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-diag-unassigned-nan.tif" download>m(Θ)</a>, <a href="downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-diag-conflict-AB-nan.tif" download>K_AB</a>, <a href="downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-diag-conflict-ABL-nan.tif" download>K_ABL</a>.</p>
+    <p><a href="../evidence/h36_parent_classification_erratum_20261007.json">Read the H36 classification erratum</a>.</p>
     <p class="small"><b>Not slot-cleared.</b> Newer-SGMC blocked proxy: graded 0.071408, twin 0.089559 (best fusion-decision yet, still below parents 0.0955/0.0933, union 0.096992, H49 0.100751; 0/4 folds vs H49 for both). Pre-registered gate fails; raw-SGMC agrees. Keep the weekly slot unused. No organizer score exists for any file here.</p>
     <h3>Format and portal steps for a future cleared candidate only</h3>
     <p class="small"><b>These steps are reference-only.</b> No current candidate is cleared; do not use a weekly slot unless a future candidate beats the spatially blocked best under the project gate.</p>
@@ -49,7 +63,7 @@
     <p><a class="btn" href="downloads/GEMSDOE48-H52-lidar-scarp-additions-20261007-38029417f6ca-nan-outside.tif" download>Download GEMSDOE48-H52 GeoTIFF (NaN outside)</a>
     <a class="btn alt" href="research/holdout-h52-results-20261007.md">Read the H52 sweep and controls</a></p>
     <p><b>Paste-ready note (143 characters):</b> <code>GEMSDOE48-H52 | 0.2778 dotted family + 2,000 lidar-scarp dots (3 m USGS 3DEP step detector, &gt;200 m off-catalogue); unscored research candidate.</code></p>
-    <p>C (37,654 dots of the 0.2778 family) plus 2,000 dots on the strongest 3 m lidar steps (≥ 3.29 m effective height, smooth-terrain gate, &gt; 200 m from the catalogue and from C). SHA-256 <code>38029417f6ca…</code>, 346,152 bytes, 39,654 positives, one float32 band, EPSG:32611, 100 m, 3,730 × 3,292, values in [0,1] in-footprint and NaN outside — the format the portal rejected before was out-of-range values, which this file cannot produce (<a href="../evidence/h52_submission_validation_20261007.json">local validation</a>).</p>
+    <p>C (37,654 dots of the 0.2778 family) plus 2,000 dots on the strongest 3 m lidar steps (≥ 3.29 m effective height, smooth-terrain gate, &gt; 200 m from the catalogue and from C). SHA-256 <code>38029417f6ca…</code>, 346,152 bytes, 39,654 positives, one float32 band, EPSG:32611, 100 m, 3,730 × 3,292, values in [0,1] in-footprint and NaN outside — the local validator checks format only; it is not organizer acceptance (<a href="../evidence/h52_submission_validation_20261007.json">local validation</a>).</p>
     <p class="small"><b>Not slot-cleared.</b> Newer-SGMC blocked proxy 0.096409 (C 0.095491, union 0.096992, H49 0.100751); pre-registered gate fails on both criteria; live bracket for the additions −0.006 to +0.009. Keep the weekly slot unused. Do not upload H52: it fails the preregistered gate and remains below H49 on the comparable blocked proxy. No owner override or exception is in scope. No organizer score exists for any file here.</p>
     <h3>Format and portal steps for a future cleared candidate only</h3>
     <p class="small"><b>These steps are reference-only.</b> No current candidate is cleared; do not use a weekly slot unless a future candidate beats the spatially blocked best under the project gate.</p>

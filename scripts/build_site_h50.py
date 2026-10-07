@@ -27,8 +27,15 @@ BYTES = BUILD["primary_bytes"]
 FMT = BUILD["format_receipt"]
 AA = BUILD["anti_average_check"]
 PARENTS = BUILD["parents"]
+H36_PARENT = PARENTS.get("h36_rung30", PARENTS.get("tip_best"))
 METHOD = BUILD["method"]
-NOTE = BUILD["submission_note"]
+# The frozen H50 receipt preserves its original, incorrect “best tip” note.
+# The public historical page uses a corrected note and labels it non-submission.
+NOTE = (
+    "GEMSDOE48 H50 | Dempster fusion: B2 dotted x H36-1 rung30 "
+    "(H19-5/rung-30 repacking; not tip/step-over); kernel-credit Bel, "
+    "m(Theta)+K diagnostics; historical, unscored research."
+)
 UNAME = BUILD["submission_name"]
 DIAGS = BUILD["diagnostics"]
 
@@ -68,7 +75,8 @@ def holdout_table(results: dict) -> str:
         r = results[name]
         folds = " · ".join(f"{r[f]['dti']:.4f}" for f in ("NW", "NE", "SW", "SE"))
         cls = ' style="background:#edf8f3;font-weight:700"' if name == "h50_ds_belief" else ""
-        rows.append(f"<tr{cls}><td>{name}</td><td>{r['mean_dti']:.6f}</td><td>{folds}</td></tr>")
+        label = "H36-1 rung30 parent (not tip/step-over)" if name == "tip_h36_parent" else name
+        rows.append(f"<tr{cls}><td>{label}</td><td>{r['mean_dti']:.6f}</td><td>{folds}</td></tr>")
     return ('<div class="table-scroll"><table><tr><th>candidate</th><th>mean DTI</th>'
             '<th>folds NW·NE·SW·SE</th></tr>' + "".join(rows) + "</table></div>")
 
@@ -86,16 +94,16 @@ def build_index() -> str:
     mtheta = DIAGS["unassigned_mass_mTheta"]
     body = f"""
 <section class="download">
-<p class="eyebrow">1 · One-click submission file — unique research candidate</p>
-<p><a class="button" href="../downloads/{PRIMARY_NAME}" download>⬇ Download H50 submission GeoTIFF ({BYTES:,} B)</a>
-<a class="button alt" href="../downloads/{ZIP_NAME}" download>⬇ .zip (single GeoTIFF)</a>
+<p class="eyebrow">1 · One-click historical H50 research TIFF — not slot-cleared</p>
+<p><a class="button" href="../downloads/{PRIMARY_NAME}" download>⬇ Download H50 historical research GeoTIFF — do not upload ({BYTES:,} B)</a>
+<a class="button alt" href="../downloads/{ZIP_NAME}" download>⬇ archival .zip (not a submission format recommendation)</a>
 <a class="button alt" href="../downloads/{Path(BUILD['nan_outside_twin']['path']).name}" download>⬇ NaN-outside twin (official sample convention)</a></p>
 <p class="small">All three carry identical in-footprint values (SHA-audited twin). The zeros file is immune to the
 portal's "[0, 1]" range rejection by construction; the NaN twin additionally passes
 <code>scripts/validate_submission.py</code>'s official-convention audit
 (<a href="../../evidence/h50_submission_validation_20261007.json">receipt</a>).</p>
-<p><strong>Unique submission name:</strong> <code>{UNAME}</code><br>
-<strong>Paste-ready note ({len(NOTE)}/200 chars):</strong> <code>{NOTE}</code></p>
+<p><strong>Historical artifact identifier (not an authorization to submit):</strong> <code>{UNAME}</code><br>
+<strong>Corrected archival note ({len(NOTE)}/200 chars; do not paste for submission):</strong> <code>{NOTE}</code></p>
 <p class="small">SHA-256 <code>{SHA}</code> · one band float32 · {FMT['crs']} · 100 m ·
 {FMT['height']}×{FMT['width']} · in-footprint [{FMT['min_value']:.4f}, {FMT['max_value']:.4f}] ·
 all-finite, no nodata tag · zeros outside footprint · {FMT['positive_pixels']:,} positive cells</p>
@@ -105,21 +113,21 @@ all-finite, no nodata tag · zeros outside footprint · {FMT['positive_pixels']:
 <a href="../downloads/diagnostics/{Path(DIAGS['plausibility']['path']).name}" download>plausibility Pl(F)</a></p>
 </section>
 
-<div class="warn"><strong>UNSCORED — NOT SLOT-CLEARED.</strong> This file is the brief's requested
-unique Dempster–Shafer fusion of the two best families, format-verified and downloadable, but the
-blocked-holdout diagnostics below do <em>not</em> beat both parents or the union on the public
-proxies. The official public leaderboard (single read 2026-10-07) is topped by xiaofanhu at 0.3774;
+<div class="warn"><strong>UNSCORED — NOT SLOT-CLEARED; DO NOT UPLOAD.</strong> This historical
+Dempster–Shafer research variant combines B2 with H36-1 rung30 (an H19-5/rung-30 repacking, not the
+actual tip/step-over family). It is format-verified but did not beat both parents or the union on the
+blocked public proxies, and it is not the requested B2 × H33-D family test. The official public leaderboard (single read 2026-10-07) is topped by xiaofanhu at 0.3774;
 the brief's "0.3195 highest" is stale (that is rank #7, DARD). No organizer score exists for this
 artifact, and the 0.2778 row on the public board is participant extradr19 with no organizer-level
 attribution to the local mirror bytes [OWNER-REPORT].</div>
 
 <h2>2 · What the fusion preserves that averaging destroys</h2>
 <p>Parents: dotted H33-2-B2 ({PARENTS['dotted_best']['positive_pixels']:,} px, owner live
-{PARENTS['dotted_best']['owner_reported_live']:.4f}) × tip H36-1 rung30
-({PARENTS['tip_best']['positive_pixels']:,} px, owner live {PARENTS['tip_best']['owner_reported_live']:.4f});
+{PARENTS['dotted_best']['owner_reported_live']:.4f}) × H36-1 rung30 (not tip/step-over)
+({H36_PARENT['positive_pixels']:,} px, owner live {H36_PARENT['owner_reported_live']:.4f});
 intersection {BUILD['parent_overlap']['intersection_pixels']:,} / union
 {BUILD['parent_overlap']['union_pixels']:,} (Jaccard {BUILD['parent_overlap']['jaccard']:.3f}) —
-{BUILD['parent_overlap']['xor_disagreement_pixels']:,} pixels on which the two strongest approaches
+{BUILD['parent_overlap']['xor_disagreement_pixels']:,} pixels on which the two parent surfaces
 disagree. Dempster's rule carries that disagreement as unassigned mass m(Θ)
 (range 0.0037–0.0306 in footprint) and raw conflict K (max 0.8804; 11.5 % of the footprint &gt; 0.3).</p>
 <p><strong>Not the naive mean (brief's required check):</strong> Pearson {AA['pearson_in_footprint']:.4f},
@@ -144,67 +152,57 @@ with the same parents (+0.0064 mean), but loses to both parents and to the union
 <p class="small">Source: official DrivenData public leaderboard. Scores identify participants, not files;
 no row is attributed to any local artifact.</p>
 """
-    return page("GEMSDOE48 H50 — conflict-aware fusion of the two best families",
+    return page("GEMSDOE48 H50 — B2 x H36-1 rung30 research fusion (historical)",
                 "research candidate · unscored", body)
 
 
 def build_exec() -> str:
     body = f"""
-<h2 style="margin-top:0">1 · How to submit to the competition, step by step</h2>
-<ol>
-<li>Open the official <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/submissions/">New submission</a> page (login required; at most the competition's stated weekly allowance).</li>
-<li>Under <em>File to submit</em>, choose either the single GeoTIFF
-<code>{PRIMARY_NAME}</code> (⬇ button on the <a href="index.html">H50 summary</a>) or its
-<code>.zip</code> containing exactly that one GeoTIFF. Both are accepted shapes per the portal text.</li>
-<li>Set the unique name you will use to recognize the run: <code>{UNAME}</code>.</li>
-<li>Paste this note (≤200 chars) into the <em>Note (optional)</em> field:<br><code>{NOTE}</code></li>
-<li>Submit. The portal scores distance-weighted Tversky (α=0.2, β=0.8, 300 m triangular kernel) on the private expert labels.</li>
-</ol>
-<div class="warn"><strong>Honest recommendation.</strong> The blocked holdout does not show H50 beating
-both parents or the union on the public proxies. Per this repository's gate, a weekly slot should not be
-spent on it unless the owner consciously overrides the gate after reading section 3 of the
-<a href="index.html">summary</a>. The download exists because the project brief requires a unique,
-format-valid, downloadable DS fusion; it is not a cleared pick.</div>
+<h2 style="margin-top:0">H50 executive summary — historical research only</h2>
+<div class="warn"><strong>Do not upload H50 or spend a weekly slot on it.</strong> It failed the frozen spatial-proxy gate and is not a candidate for submission. The steps below are a general future-candidate checklist only; they do not authorize H50 or H53, both of which are not slot-cleared.</div>
 
-<h2>2 · The “Predicted values must be in range [0, 1]” error — why this file cannot trigger it</h2>
-<p>Two distinct failures produce that portal message: (1) writing the float32 nodata sentinel
-−3.4028235e38 through unchanged (it lies outside [0,1]; 3,061 such cells sit inside the footprint of the
-official training features), and (2) a validator treating a NaN/nodata sentinel as a prediction
-(IR-48-03). This file is re-read from disk and audited: <strong>1 band, float32, {FMT['crs']},
-100 m, {FMT['height']}×{FMT['width']}, every one of the 12,279,160 cells finite, min {FMT['min_value']:.4f},
-max {FMT['max_value']:.4f}, zero cells outside [0,1], zero NaN, no nodata tag</strong>
-(<a href="../../evidence/build_ds50_receipt_20261007.json">receipt</a>). The same all-finite convention is
-what the scored 0.27xx sibling files use.</p>
+<h2>1 · How to submit a future candidate, step by step</h2>
+<ol>
+<li>Open the official <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/submissions/">New submission</a> page (login required; respect the competition's current weekly allowance).</li>
+<li>First confirm that the candidate passed the preregistered spatial holdout gate against the current best. If it did not, stop; do not spend a slot.</li>
+<li>Use the single, one-band float32 GeoTIFF named on that candidate's landing page. The official format description specifies a raw GeoTIFF; do not substitute diagnostics or an unverified ZIP.</li>
+<li>Re-run the local validator on the exact bytes. Compare the SHA-256 with that candidate's build receipt and keep the validation record.</li>
+<li>Enter the candidate-specific unique name and short optional note exactly as shown on its landing page. Do not reuse H50's historical label or note.</li>
+<li>Check the file, name, and slot budget once more, then submit only if the gate is still cleared. Treat an organizer-reported result as the only competition score evidence.</li>
+</ol>
+<p>The current H53 card on the <a href="../index.html#h53">repository landing page</a> is explicitly marked <strong>do not upload</strong> because its frozen proxy gate failed.</p>
+
+<h2>2 · H50's local format audit (not a score or acceptance)</h2>
+<p>The archived H50 bytes have SHA-256 <code>{SHA}</code>, one band float32, {FMT['crs']}, 100 m,
+{FMT['height']}×{FMT['width']}, and in-footprint values [{FMT['min_value']:.4f}, {FMT['max_value']:.4f}].
+This is a local format audit only; no organizer file-to-score receipt exists. Its zeros-outside and
+NaN-outside variants are archival twins, not current submission recommendations. The specific portal
+message “Predicted values must be in range [0, 1]” is addressed by the finite in-footprint range check;
+this local check does not establish portal acceptance.</p>
 
 <h2>3 · What never to upload</h2>
-<p>The three diagnostics — unassigned mass m(Θ), raw conflict K, plausibility Pl(F) — are geological
-review layers, not predictions; uploading them would waste a slot. m(Θ) has range 0.0037–0.0306 and K is
-near zero over most of the map; neither is a favorability surface.</p>
-
-<h2>4 · Checklist before any upload</h2>
-<ol>
-<li>Re-run <code>scripts/validate_submission.py</code> on the exact bytes and keep the receipt.</li>
-<li>Confirm the SHA-256 <code>{SHA}</code> matches the file you upload.</li>
-<li>Confirm the weekly slot budget and that the gate override is deliberate.</li>
-<li>Do not confuse this file with the withdrawn v1 anchor-1.0 build (sha 2c01d212…, removed from downloads).</li>
-</ol>
+<p>The diagnostics — residual ignorance m(Θ), raw conflict K, plausibility Pl(F) — are review layers,
+not predictions. H50's B2 × H36-1 rung30 parent pair has high overlap, and the Dempster
+independence assumption is not established; m(Θ) is not calibrated uncertainty or probability.
+The family label on the frozen receipt is corrected in the
+<a href="../../evidence/h36_parent_classification_erratum_20261007.json">H36 classification erratum</a>.</p>
 """
-    return page("Executive summary — how to submit H50", "submission runbook", body)
+    return page("Executive summary — future submissions (H50 historical archive)", "research archive · no H50 upload", body)
 
 
 def build_method() -> str:
     body = f"""
 <h2 style="margin-top:0">1 · Construction</h2>
 <ol>
-<li>Belief surfaces in the metric's own geometry: b_i(x) = max over committed pixels y of
+<li>Credit-belief surfaces in the metric's own geometry: b_i(x) = max over committed pixels y of
 k(d(x,y)), k(d)=max(1−d/300 m,0).</li>
 <li>Two-sided simple support masses with Shafer §11.2 discounting: m_i(F)=a_i·b_i,
 m_i(notF)=a_i·(1−b_i), m_i(Θ)=1−a_i, with a_dotted={METHOD['reliabilities']['dotted']},
-a_tip={METHOD['reliabilities']['tip']:.6f} (RHO_MAX=0.95 ceiling × owner-reported live ratio
-0.2710/0.2778 [OWNER-REPORT]).</li>
+a_H36={METHOD['reliabilities']['tip']:.6f} (legacy receipt key ``tip``; H36 is an H19-5/rung-30
+repacking, not the tip/step-over family; RHO_MAX=0.95 × owner-reported ratio 0.2710/0.2778 [OWNER-REPORT]).</li>
 <li>Canonical normalized Dempster rule; submission surface Bel(F)=m12(F) divided by its
 in-footprint max (already [0,1]).</li>
-<li>Diagnostics carried forward: m12(Θ) (where the families neither agree nor fully conflict) and raw
+<li>Diagnostics carried forward: m12(Θ) (where the two parent surfaces neither agree nor fully conflict) and raw
 conjunctive conflict K (where they actively contradict; canonical normalization redistributes K, so it
 is stored separately — Zadeh-paradox transparency).</li>
 </ol>
@@ -220,9 +218,9 @@ break-even credit bar (0.2·0.26 ≈ 0.052 per dot) with 37,654 dots, 0 within 2
 ≈25 % more mean credit per pixel at matched mass — a detector improvement, not a fusion rule.</p>
 
 <h2>3 · Why DS fusion loses on the proxies (and why that is expected)</h2>
-<p>Dempster belief is intersection-like: high where both families agree, uncertain where they disagree.
+<p>Dempster belief is intersection-like: high where both parent surfaces agree, uncertain where they disagree.
 The public proxies reward cheaply covering fault traces — the union's job. Preserving disagreement is
-scientifically honest (the geologist sees where the two strongest approaches contradict) but is not by
+scientifically honest (the geologist sees where these two parent surfaces contradict) but is not by
 itself score-raising. This session's kernel-credit calibration did help against the raw-sparse recipe
 (+0.0064 mean SGMC), and H50 beats the naive mean 4/4 folds — but not the parents.</p>
 
@@ -231,7 +229,7 @@ itself score-raising. This session's kernel-credit calibration did help against 
 quantities · proxy = public-map layer, never private expert truth. No page here states or implies an
 organizer score.</p>
 """
-    return page("Method & evidence — H50 Dempster-Shafer fusion", "method", body)
+    return page("Method & evidence — H50 B2 x H36-1 rung30", "method · classification erratum", body)
 
 
 def build_hypotheses() -> str:
@@ -242,7 +240,7 @@ def build_hypotheses() -> str:
 offset band around catalogue traces (with and without a family-corridor gate) scored
 {splay_sgmc['splay_band_100_600m']['mean_dti']:.4f} / {splay_sgmc['splay_band_x_family_corridor']['mean_dti']:.4f}
 mean DTI on the SGMC off-catalogue blocked proxy versus {splay_sgmc['tip_h36_parent_reference']['mean_dti']:.4f}
-for the tip parent and 0.0970 for the union. It does not clear the gate; no slot is spent. Receipt:
+for the H36-1 rung30 parent (not tip/step-over) and 0.0970 for the union. It does not clear the gate; no slot is spent. Receipt:
 evidence/splay_probe_holdout_20261007.json.</div>
 
 <h2>2 · Ranked new hypotheses (preregistered 2026-10-07)</h2>

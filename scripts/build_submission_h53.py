@@ -2,8 +2,8 @@
 """Build the unique H53 three-source adaptive Dempster-Shafer submission.
 
 Sources (all SHA-256 pinned, verified on read):
-  A  dotted family best  H33-2-B2      37,654 px  owner-reported live 0.2778
-  B  tip family best     H36-1 rung30  37,660 px  owner-reported live 0.2710
+  A  dotted parent       H33-2-B2      37,654 px  owner-reported live 0.2778
+  B  H36-1 rung30 parent  H19-5/rung-30 repack, not tip/step-over; owner live 0.2710
   L  native-lidar scarp  h_gate12/sigma_mean/cover from data/external/h52_scarp3m_100m.tif
 
 Beliefs: metric-geometry kernel-credit surfaces for A and B (H50
@@ -56,8 +56,8 @@ SHA_FOOTPRINT = "ddadb8c96cda673b91ddaa0bbed2aa955c358a8f6196c4c4e8fa70d454dd429
 DATESTAMP = "20261007"
 SUBMISSION_NAME = "GEMSDOE48-H53-3SRC-DS"
 SUBMISSION_NOTE = (
-    "GEMSDOE48-H53 | 3-source DS: dotted 0.2778 x tip 0.2710 x lidar scarp, "
-    "terrain-adaptive discount; unscored research candidate."
+    "GEMSDOE48-H53-3SRC-DS | B2 x H36-1 rung30 (H19-5 repack, not tip) "
+    "x lidar; adaptive D-S; unscored research; gate failed."
 )
 
 # Preregistered slate (evidence/hypothesis_slate_h53_20261007.json); the builder
@@ -157,7 +157,7 @@ def main() -> int:
     check_slate()
     if not args.allow_unpinned:
         require_sha(args.dotted, SHA_DOTTED, "dotted parent")
-        require_sha(args.tip, SHA_TIP_H36, "tip parent")
+        require_sha(args.tip, SHA_TIP_H36, "H36-1 rung30 parent (not tip/step-over)")
         require_sha(args.lidar, SHA_LIDAR, "lidar product")
         require_sha(args.footprint, SHA_FOOTPRINT, "footprint mask")
 
@@ -250,6 +250,9 @@ def main() -> int:
 
     # --- write primary (NaN-outside) + twins + diagnostics --------------------
     args.outdir.mkdir(parents=True, exist_ok=True)
+    # Keep the frozen H53-1 GeoTIFF tags byte-compatible. The historical model
+    # label and ``tip`` tag names refer to H36-1 rung30 only; the classification
+    # erratum explains why they do not make this an actual tip/step-over fusion.
     tags = {
         "model": "H53 three-source Dempster combination (dotted x tip x lidar)",
         "reliability_dotted": str(ds53.A_DOTTED),
