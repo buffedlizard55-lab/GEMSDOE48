@@ -6,8 +6,7 @@ Mirrors the shape of tests/test_site_h55.py but reads the H56 evidence files:
   evidence/build_h56_belief_receipt_20261007.json
   evidence/h56_format_audit_20261007.json
   evidence/h56_uniqueness_20261007.json
-  evidence/holdout_h56_spatial_20261007.json
-  evidence/h56_live_model_projection_20261007.json
+  evidence/h56f_pruning_holdout_20261007.json
 """
 from __future__ import annotations
 
@@ -28,7 +27,7 @@ PRIMARY_NAME = "GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros
 PRIMARY_REL = f"downloads/{PRIMARY_NAME}"
 NOTE = ("GEMSDOE48-H56 | Dempster belief[0,1] of dotted-C(0.2778) x tip-H33D(0.2632), "
         "metric-kernel BPA, live-anchored discounts; m(Theta) diagnostic separate; "
-        "live-model proj 0.0649 -> submit NOT recommended; unscored | id 9ec0d605c45b")
+        "holdout below H49 -> submit NOT recommended; unscored | id 9ec0d605c45b")
 
 
 def flat(text: str) -> str:
@@ -54,7 +53,7 @@ def receipts():
         "build": json.loads((EV / "build_h56_belief_receipt_20261007.json").read_text()),
         "format": json.loads((EV / "h56_format_audit_20261007.json").read_text()),
         "uniq": json.loads((EV / "h56_uniqueness_20261007.json").read_text()),
-        "proj": json.loads((EV / "h56_live_model_projection_20261007.json").read_text()),
+        "holdout": json.loads((EV / "h56f_pruning_holdout_20261007.json").read_text()),
     }
 
 
@@ -75,22 +74,41 @@ def test_primary_file_exists_and_matches_receipt(receipts):
     path = REPO / "docs/downloads" / PRIMARY_NAME
     assert path.exists()
     assert hashlib.sha256(path.read_bytes()).hexdigest() == fmt["sha256"]
-    assert fmt["all_passed"] is True
+    assert fmt["all_passed"] is True  # local checks only
     assert all(fmt["checks"].values())
+    assert fmt["official_format_acceptance_confirmed"] is False
+    assert fmt["outside_bounds_requirement"]["primary_passes_official_null_nan_outside_requirement"] is False
+
+
+@needs_site()
+def test_nan_nodata_twin_matches_official_outside_encoding_but_is_not_portal_cleared():
+    receipt_path = EV / "h56b_nan_twin_local_validation_20261007.json"
+    receipt = json.loads(receipt_path.read_text())
+    assert receipt["status"] == "PASS_LOCAL_FORMAT_AUDIT_NOT_ORGANIZER_ACCEPTANCE"
+    path = REPO / receipt["file"]
+    assert path.exists()
+    assert hashlib.sha256(path.read_bytes()).hexdigest() == receipt["sha256"]
+    assert receipt["outside_footprint_encoding"] == "nan"
+    assert receipt["nodata"] == "NaN"
+    assert receipt["finite_inside_footprint"] is True
+    assert receipt["all_in_footprint_range_0_1"] is True
+    assert receipt["portal_range_error_immune"] is False
+    assert "portal acceptance" not in receipt["status"].lower()
 
 
 @needs_site()
 def test_verdict_banner_matches_the_gates(pages, receipts):
     """The banner must state exactly what the gates computed — never optimism."""
     verdict = receipts["format"]["verdict"]
-    assert verdict["banner"] == "DOWNLOAD OK - SUBMIT NOT RECOMMENDED"
+    assert verdict["banner"] == "DOWNLOAD OK FOR INSPECTION - SUBMIT NOT RECOMMENDED"
+    assert verdict["official_outside_bounds_rule_confirmed"] is False
+    assert verdict["submit_recommended"] is False
     idx = flat(pages["index.html"])
     assert "DOWNLOAD: OK" in idx
     assert "SUBMIT: NOT RECOMMENDED" in idx
-    # the projection quoted on the page is the receipt's projection, rounded
-    proj = verdict["reasons"]["live_projection"]
-    assert f"{proj:.4f}".rstrip("0").rstrip(".") in idx or f"{proj:.4f}" in idx
-    assert "0.2778" in idx  # the incumbent is named next to the verdict
+    assert "0.032347" in idx and "0.070552" in idx
+    assert "0.095353" in idx and "0.100751" in idx
+    assert "0.2778" in idx  # owner-reported family result is shown with caveat
 
 
 @needs_site()
@@ -120,9 +138,11 @@ def test_sha_and_name_on_index_and_guide(pages, receipts):
 def test_diagnostics_labelled_not_submissions(pages):
     for name in ("index.html", "executive-summary.html"):
         assert "not submissions" in flat(pages[name])
-    for layer in ("mtheta", "conflict", "plausibility"):
+    for layer in ("mtheta", "conflict", "plausibility", "support-disagreement"):
         p = DOCS / "downloads/diagnostics" / f"gemsdoe48-h56-{layer}-9ec0d605c45b.tif"
         assert p.exists(), f"missing diagnostic layer {layer}"
+    assert "residual ignorance" in flat(pages["index.html"])
+    assert "not a pure disagreement map" in flat(pages["index.html"])
 
 
 @needs_site()
@@ -134,3 +154,35 @@ def test_no_organizer_score_claim_on_h56_pages(pages):
         for phrase in banned:
             assert phrase not in low, f"{name} claims {phrase!r}"
         assert "UNSCORED" in text or "No organizer score exists" in text
+
+
+@needs_site()
+def test_h56f_report_matches_machine_receipt(receipts):
+    report = (DOCS / "research/h56f-pruning-results-20261007.md").read_text()
+    hold = receipts["holdout"]
+    cat = hold["results"]["catalogue_public_proxy"]["scores"]
+    sgmc = hold["results"]["SGMC_off_catalogue_gt300m_public_proxy"]["scores"]
+    h56b_cat = cat["H56B_graded_belief"]["mean_dti"]
+    h56b_sgmc = sgmc["H56B_graded_belief"]["mean_dti"]
+    assert f"| H56B graded belief | graded | {h56b_cat:.6f} | {h56b_sgmc:.6f} |" in report
+    for rung, key in (("0.90", "H56F_Bel_ge_0.90"), ("0.95", "H56F_Bel_ge_0.95"),
+                      ("0.99", "H56F_Bel_ge_0.99")):
+        cat_score = cat[key]["mean_dti"]
+        sgmc_score = sgmc[key]["mean_dti"]
+        assert f"H56-F, threshold {rung}" in report
+        assert f"| {cat_score:.6f} | {sgmc_score:.6f} |" in report
+
+
+def test_dated_leaderboard_snapshot_is_not_misreported_or_used_for_file_attribution():
+    snapshot = json.loads((DOCS / "data/leaderboard_20261007.json").read_text())
+    assert snapshot["retrieved_utc"] == "2026-10-07"
+    by_rank = {row["rank"]: row for row in snapshot["rows"]}
+    assert by_rank[1]["best_public"] == 0.3774
+    assert by_rank[7]["best_public"] == 0.3195
+    assert by_rank[13]["participant"] == "extradr19"
+    assert by_rank[13]["best_public"] == 0.2778
+    assert "not identify any local TIFF" in snapshot["attribution_warning"]
+    page = (DOCS / "leaderboard.html").read_text()
+    assert "required recovered-truth units" in page
+    assert "withdrawn" in page
+    assert "reachability" in page

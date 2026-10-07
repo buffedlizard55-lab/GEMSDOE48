@@ -2,8 +2,9 @@
 
 References
 ----------
-Dempster, A. P. (1967). "A generalization of Bayesian inference."
-Journal of the Royal Statistical Society, Series B, 30(2), 205-247.
+Dempster, A. P. (1967). "Upper and Lower Probabilities Induced by a
+Multivalued Mapping." The Annals of Mathematical Statistics, 38(2), 325–339.
+https://doi.org/10.1214/aoms/1177698950.
 
 Shafer, G. (1976). "A Mathematical Theory of Evidence."
 Princeton University Press.
@@ -37,11 +38,11 @@ m1 = (f1, n1, u1), m2 = (f2, n2, u2):
     Bel(F)  = m12(F)               (committed belief in fault)
     Pl(F)   = m12(F) + m12(Theta)  (plausibility: belief + unassigned)
 
-The unassigned mass m12(Theta) is the diagnostic disagreement layer: it
-remains explicitly represented wherever the sources do not force a
-decision, instead of being averaged away.  Conflict K marks where the two
-sources actively contradict one another (one says fault, the other says
-no-fault with committed mass).
+The combined m12(Theta) is residual ignorance under the chosen BPAs; it is
+not generally a direct disagreement layer. Normalized Dempster's rule removes
+raw conflict through division by (1-K), so K must be reported separately when
+conflict diagnostics matter. Direct disagreement between favorability inputs
+can also be summarized from the source fields themselves.
 """
 from __future__ import annotations
 
@@ -65,9 +66,8 @@ def dempster_combine(s1: np.ndarray, s2: np.ndarray,
       bel      Bel(F), combined committed belief in fault
       pl       Pl(F) = Bel + unassigned
       not_bel  Bel(N), committed belief in no-fault
-      unc      m12(Theta), unassigned / ignorance mass after combination
-      conflict K, the normalized-away conflict (active disagreement)
-      k_raw    unnormalized conflict numerator (for diagnostics)
+      unc      m12(Theta), residual unassigned / ignorance mass after combination
+      conflict K, the pre-normalization conflict mass (normalized away by the rule)
     All outputs are in [0, 1].
     """
     f1, n1, u1 = mass_from_surface(s1, alpha1)

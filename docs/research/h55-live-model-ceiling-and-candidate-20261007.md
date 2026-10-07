@@ -409,7 +409,7 @@ Bel(F) = [f₁f₂ + f₁u₂ + u₁f₂]/(1 − K)     m₁₂(Θ) = u₁u₂/(
 Measured on the shipped raster: `Bel ∈ [0, 0.84]`, `Pl ∈ [0.16, 1.0]`,
 `m(Θ) ∈ [0.16, 0.25]`, `K ∈ [0, 0.36]` with **14.70 % of the footprint in active
 conflict** (`K > 0`). `m(Θ)` attains its maximum exactly on one-sided support — the
-disagreement is carried forward as unassigned mass, not averaged away.
+m(Θ) is residual ignorance under the selected BPAs, not a direct disagreement measure; standard Dempster normalization removes raw conflict K, which is reported separately.
 
 **Not the naive mean.** Pearson(Bel, ½(b₁+b₂)) = 0.996429, mean |Δ| = 0.013470,
 max |Δ| = 0.160000, **13.71 %** of the footprint differs by more than 0.05, and the best

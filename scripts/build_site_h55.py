@@ -595,8 +595,9 @@ Bel(F) ∈ [{DS['bel_min']:.2f}, {DS['bel_max']:.2f}], Pl(F) ∈ [{DS['pl_min']:
 <strong>m(Θ) ∈ [{DS['mtheta_min']:.2f}, {DS['mtheta_max']:.2f}]</strong> and
 K ∈ [{DS['conflict_K_min']:.2f}, {DS['conflict_K_max']:.2f}] with
 <strong>{100*DS['share_of_footprint_with_K_gt_0']:.2f} % of the footprint in active conflict</strong>.
-m(Θ) attains its maximum exactly on one-sided support: the disagreement is carried forward as
-unassigned mass, not averaged away. All four graded layers ship separately under
+m(Θ) is residual ignorance under the chosen BPAs, not a direct disagreement map. Normalized
+Dempster combination removes raw conflict through division by (1−K); K is exported separately
+as the pre-normalization conflict diagnostic. All four layers ship separately under
 <code>docs/downloads/diagnostics/</code>.</p>
 <p><strong>Not the naive mean.</strong> Pearson(Bel, ½(b₁+b₂)) =
 {DS['not_the_naive_mean']['pearson_bel_vs_naive_mean']:.6f}, mean |Δ| =

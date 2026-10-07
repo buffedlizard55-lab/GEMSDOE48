@@ -1,6 +1,8 @@
 # Credit-density audit (2026-10-07): why nothing was cleared, and what a cleared candidate must show
 
-**Status:** measured audit on public proxies. **No weekly submission slot is cleared by this note.** The
+> **Subsequent metric correction:** this is a historical audit. Its direct equal-mass and raw-proxy measurements remain reproducible public-proxy observations. Its inferred live truth count/density, density-matched “live” credit, 0.0556 break-even bar, score brackets, and frontier limits rely on the invalid identity `FPw = S − TPw` and are withdrawn as private-score evidence. Do not use those calculations to clear or reject a weekly slot. See the [metric-identity erratum](metric-identity-erratum-20261007.md).
+
+**Status:** historical audit of public proxies; no weekly submission slot is cleared by this note. The
 instrument is `scripts/audit_candidate.py` (protocol `GEMSDOE48-GATE-2`); machine-readable results are in
 [`evidence/credit_density_audit_20261007.json`](../../evidence/credit_density_audit_20261007.json) and the
 per-candidate receipts it indexes.
