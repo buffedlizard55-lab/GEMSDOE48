@@ -1,0 +1,274 @@
+{
+  "schema": "GEMSDOE48-lam3-residual-probe-v1",
+  "generated_utc": "2026-10-07T05:29:43Z",
+  "question": "Would any new dot clear the metric break-even bar 0.2*DTI = 0.0556 under the best-calibrated hidden-truth density model?",
+  "method": {
+    "lam3": "a * Pl(ladder)**0.6 + (1-a) * Q(other detectors' normalized kernel credit), scaled to N; (a, N) fitted to the 17 owner-reported live ladder scores",
+    "fitted": {
+      "rms": 0.029976262675606394,
+      "a": 0.5,
+      "N": 17000.0
+    },
+    "normalizations": {
+      "ladder_mass_14307": "lam3 rescaled to the A->B->C inversion mass 14,307.4 pixels (conservative; the convention used in the audit document)",
+      "fitted_mass_17000": "lam3 at its own fitted mass N (1.188x the above)"
+    },
+    "bar_per_cell": 0.05556,
+    "evidence_class": "model + OWNER-REPORTED ladder anchors; the SGMC/catalogue proxies are not used here"
+  },
+  "model_fit_per_file": {
+    "C_b2": {
+      "mass": 37654.0,
+      "live_owner_reported": 0.2778,
+      "model_dti": 0.26686541518968954,
+      "T_model": 5639.0797152902915
+    },
+    "B_r1solo": {
+      "mass": 40199.0,
+      "live_owner_reported": 0.2708,
+      "model_dti": 0.26362858551347407,
+      "T_model": 5704.869864794476
+    },
+    "h36": {
+      "mass": 37660.0,
+      "live_owner_reported": 0.271,
+      "model_dti": 0.257555912357498,
+      "T_model": 5442.671539938647
+    },
+    "h32tip": {
+      "mass": 42294.0,
+      "live_owner_reported": 0.2649,
+      "model_dti": 0.2591258199786391,
+      "T_model": 5716.004637744804
+    },
+    "tip_h33d": {
+      "mass": 41865.0,
+      "live_owner_reported": 0.2632,
+      "model_dti": 0.2605276042873601,
+      "T_model": 5724.573049006163
+    },
+    "h19_5_dense": {
+      "mass": 121131.0,
+      "live_owner_reported": 0.1922,
+      "model_dti": 0.18436763541082207,
+      "T_model": 6973.927050576837
+    },
+    "h19_4": {
+      "mass": 123779.0,
+      "live_owner_reported": 0.1894,
+      "model_dti": 0.17846499126995896,
+      "T_model": 6845.167512152292
+    },
+    "h16_1": {
+      "mass": 123939.0,
+      "live_owner_reported": 0.1855,
+      "model_dti": 0.17112768852127536,
+      "T_model": 6569.215481417014
+    },
+    "d1_5": {
+      "mass": 60069.0,
+      "live_owner_reported": 0.2477,
+      "model_dti": 0.23820734053950302,
+      "T_model": 6101.395179110723
+    },
+    "d2_8": {
+      "mass": 44090.0,
+      "live_owner_reported": 0.26,
+      "model_dti": 0.2553464447173594,
+      "T_model": 5724.356597673763
+    },
+    "tgc_v2": {
+      "mass": 61328.0,
+      "live_owner_reported": 0.2449,
+      "model_dti": 0.23689519993241384,
+      "T_model": 6127.436483371843
+    },
+    "r13lattice": {
+      "mass": 206895.0,
+      "live_owner_reported": 0.0904,
+      "model_dti": 0.12132499646269115,
+      "T_model": 6670.326980522297
+    },
+    "hedge_v2": {
+      "mass": 227507.0,
+      "live_owner_reported": 0.1563,
+      "model_dti": 0.0786568993706271,
+      "T_model": 4648.732872463181
+    },
+    "h25ctx": {
+      "mass": 174232.0,
+      "live_owner_reported": 0.128,
+      "model_dti": 0.09295777710443577,
+      "T_model": 4503.469652712337
+    },
+    "h28ridge": {
+      "mass": 69281.0,
+      "live_owner_reported": 0.1839,
+      "model_dti": 0.13459641692864616,
+      "T_model": 3695.5061424762944
+    },
+    "ens12": {
+      "mass": 172974.0,
+      "live_owner_reported": 0.1563,
+      "model_dti": 0.09569015784131787,
+      "T_model": 4611.768019130747
+    },
+    "g9": {
+      "mass": 343816.0,
+      "live_owner_reported": 0.0107,
+      "model_dti": 0.012457845552797251,
+      "T_model": 1026.0680248341505
+    }
+  },
+  "incumbent": {
+    "file": "data/raw/scored/b2_02778.tif",
+    "cells": 37654,
+    "live_owner_reported": 0.2778,
+    "lam3_mass_covered_fraction_ladder": 0.33171057148766414
+  },
+  "additions": {
+    "H49_yager_balanced": {
+      "file": "docs/downloads/GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif",
+      "added_cells": 10251,
+      "ladder_mass_14307": {
+        "per_cell": 0.022049747601838268,
+        "T_gain": 226.0319626664441,
+        "delta_dti_vs_C": -0.013635167316967733
+      },
+      "fitted_mass_17000": {
+        "per_cell": 0.02619942891309726,
+        "T_gain": 268.57034578816,
+        "delta_dti_vs_C": -0.0120166139697917
+      },
+      "per_cell_ladder_mass": 0.022049747601838268,
+      "per_cell_fitted_mass": 0.02619942891309726,
+      "verdict": "below_bar"
+    },
+    "H52_lidar_2000": {
+      "file": "docs/downloads/GEMSDOE48-H52-lidar-scarp-additions-20261007-38029417f6ca-nan-outside.tif",
+      "added_cells": 2000,
+      "ladder_mass_14307": {
+        "per_cell": 0.014098443557843439,
+        "T_gain": 28.196887115686877,
+        "delta_dti_vs_C": -0.003707526429399227
+      },
+      "fitted_mass_17000": {
+        "per_cell": 0.016751718724809052,
+        "T_gain": 33.503437449618104,
+        "delta_dti_vs_C": -0.0034017653141665827
+      },
+      "per_cell_ladder_mass": 0.014098443557843439,
+      "per_cell_fitted_mass": 0.016751718724809052,
+      "verdict": "below_bar"
+    },
+    "H53_lidar_1000": {
+      "file": "docs/downloads/GEMSDOE48-H53-ds-core-lidar-20261007-dedc43dc0167.tif",
+      "added_cells": 1000,
+      "ladder_mass_14307": {
+        "per_cell": 0.013965278531890363,
+        "T_gain": 13.965278531890363,
+        "delta_dti_vs_C": -0.001880040788178966
+      },
+      "fitted_mass_17000": {
+        "per_cell": 0.016593492531286756,
+        "T_gain": 16.593492531286756,
+        "delta_dti_vs_C": -0.0017242480594563125
+      },
+      "per_cell_ladder_mass": 0.013965278531890363,
+      "per_cell_fitted_mass": 0.016593492531286756,
+      "verdict": "below_bar"
+    }
+  },
+  "model_optimal_residual": {
+    "top_250_lam3_residual": {
+      "ladder_mass_14307": {
+        "per_cell": 0.049823154437577614,
+        "T_gain": 12.455788609394403,
+        "delta_dti_vs_C": -2.564024143392185e-06
+      },
+      "fitted_mass_17000": {
+        "per_cell": 0.05919968865334158,
+        "T_gain": 14.799922163335395,
+        "delta_dti_vs_C": 6.877225618723282e-05
+      },
+      "per_cell_ladder_mass": 0.049823154437577614,
+      "per_cell_fitted_mass": 0.05919968865334158,
+      "dots": 250
+    },
+    "top_500_lam3_residual": {
+      "ladder_mass_14307": {
+        "per_cell": 0.04899422858646358,
+        "T_gain": 24.49711429323179,
+        "delta_dti_vs_C": -2.6840718134801822e-05
+      },
+      "fitted_mass_17000": {
+        "per_cell": 0.05821476200916004,
+        "T_gain": 29.10738100458002,
+        "delta_dti_vs_C": 0.00011402488298184466
+      },
+      "per_cell_ladder_mass": 0.04899422858646358,
+      "per_cell_fitted_mass": 0.05821476200916004,
+      "dots": 500
+    },
+    "top_1000_lam3_residual": {
+      "ladder_mass_14307": {
+        "per_cell": 0.04610082744343981,
+        "T_gain": 46.10082744343981,
+        "delta_dti_vs_C": -0.00020428242535416863
+      },
+      "fitted_mass_17000": {
+        "per_cell": 0.05477683342455475,
+        "T_gain": 54.77683342455475,
+        "delta_dti_vs_C": 6.580861414556827e-05
+      },
+      "per_cell_ladder_mass": 0.04610082744343981,
+      "per_cell_fitted_mass": 0.05477683342455475,
+      "dots": 1000
+    },
+    "top_2000_lam3_residual": {
+      "ladder_mass_14307": {
+        "per_cell": 0.040359610806255206,
+        "T_gain": 80.71922161251041,
+        "delta_dti_vs_C": -0.0009969368922214394
+      },
+      "fitted_mass_17000": {
+        "per_cell": 0.04795514095547242,
+        "T_gain": 95.91028191094483,
+        "delta_dti_vs_C": -0.000503273643567892
+      },
+      "per_cell_ladder_mass": 0.040359610806255206,
+      "per_cell_fitted_mass": 0.04795514095547242,
+      "dots": 2000
+    },
+    "top_4000_lam3_residual": {
+      "ladder_mass_14307": {
+        "per_cell": 0.03277814607957248,
+        "T_gain": 131.11258431828992,
+        "delta_dti_vs_C": -0.003486958046795524
+      },
+      "fitted_mass_17000": {
+        "per_cell": 0.03894687248226319,
+        "T_gain": 155.78748992905275,
+        "delta_dti_vs_C": -0.002631223768521873
+      },
+      "per_cell_ladder_mass": 0.03277814607957248,
+      "per_cell_fitted_mass": 0.03894687248226319,
+      "dots": 4000
+    }
+  },
+  "random_control_2000": {
+    "ladder_mass_14307": {
+      "per_cell": 0.013269712838480387,
+      "T_gain": 26.260761707352685,
+      "delta_dti_vs_C": -0.003754051756961918
+    },
+    "fitted_mass_17000": {
+      "per_cell": 0.01576702393545684,
+      "T_gain": 31.202940368269083,
+      "delta_dti_vs_C": -0.003457229240279913
+    },
+    "per_cell_ladder_mass": 0.013269712838480387,
+    "per_cell_fitted_mass": 0.01576702393545684
+  },
+  "reading": "No shipped addition reaches half the bar. Even cells the model itself ranks as the most valuable uncovered pixels reach only ~0.049-0.058 per cell (ladder / fitted mass), i.e. the incumbent is on the frontier of the current information set: only genuinely new information can move the live score, and the maximum model-admissible gain from any addition is ~+0.000-0.002 DTI."
+}

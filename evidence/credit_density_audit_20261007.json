@@ -1,0 +1,294 @@
+{
+  "schema": "GEMSDOE48-credit-density-audit-v1",
+  "generated_utc": "2026-10-07T05:30:10.630870+00:00",
+  "question": "Does any existing candidate or documented addition raise *credit density* over the incumbent dotted family (H33-2-B2, 37,654 cells, owner-reported live 0.2778) on the frozen blocked proxy?",
+  "instrument": "scripts/audit_candidate.py (GEMSDOE48-GATE-2): (1) equal-mass subsample of the candidate support to the incumbent cell count, scored on the frozen SGMC>300 m off-catalogue proxy with the repository's four-quadrant core+300 m halo protocol; (2) marginal credit per added cell on a density-matched proxy (proxy truth thinned to 14,307 cells) compared with the metric break-even bar 0.2*DTI_incumbent = 0.0556.",
+  "warning": "Public-proxy instrument only: SGMC-derived fault traces are not the private expert truth and no organizer score is implied. Equal-mass and density-matched comparisons are the mass-neutral part of the corrected gate; the 2026-10-06 gate lacked both.",
+  "incumbent": {
+    "file": "data/raw/scored/b2_02778.tif",
+    "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+    "cells": 37654,
+    "proxy_mean4": 0.095607,
+    "owner_reported_live_dti": 0.2778,
+    "live_report_source": "registry/live_scores.json (OWNER-REPORT; not organizer-authenticated)"
+  },
+  "results": [
+    {
+      "candidate_file": "data/raw/scored/gems16-h16-1-topo-geophys-baseline-ridges-20260930-df20f65e-nan.tif",
+      "candidate_sha256": "055309694ed499ca3d87e76b3f5e81c292aef6e39c418d33ff5a817aa1309bea",
+      "receipt": "evidence/audit_gate2_gems16_h16_1_topo_geophys___20261007.json",
+      "verdict": "FAIL_MASS_NEUTRAL",
+      "reasons": [
+        "equal_mass_credit_density_below_incumbent (-0.01856)",
+        "added_cells_below_live_break_even_bar (density-matched 0.0077 < 0.0556 per cell)"
+      ],
+      "candidate_cells": 123939,
+      "incumbent_cells": 37654,
+      "candidate_proxy_mean4": 0.10621219351772247,
+      "incumbent_proxy_mean4": 0.09560719376703922,
+      "equal_mass_mean4": 0.07704519796218393,
+      "equal_mass_delta_vs_incumbent": -0.01856199580485529,
+      "added_cells": 96673,
+      "added_raw_proxy_credit_per_cell": 0.03401063175565673,
+      "added_density_matched_credit_per_cell": 0.0077282104537578595,
+      "break_even_bar_live_scaled": 0.05556,
+      "support_rule": "binary >0"
+    },
+    {
+      "candidate_file": "docs/downloads/GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif",
+      "candidate_sha256": "9f028289c364c071065245799d7ed131600e80e9f0d10602806b12ce34d7cae8",
+      "receipt": "evidence/audit_gate2_gemsdoe48_h49_ds_conflict___20261007.json",
+      "verdict": "FAIL_MASS_NEUTRAL",
+      "reasons": [
+        "equal_mass_credit_density_below_incumbent (-0.00840)",
+        "added_cells_below_live_break_even_bar (density-matched 0.0125 < 0.0556 per cell)"
+      ],
+      "candidate_cells": 47905,
+      "incumbent_cells": 37654,
+      "candidate_proxy_mean4": 0.10096815209831239,
+      "incumbent_proxy_mean4": 0.09560719376703922,
+      "equal_mass_mean4": 0.08721065562448845,
+      "equal_mass_delta_vs_incumbent": -0.008396538142550772,
+      "added_cells": 10251,
+      "added_raw_proxy_credit_per_cell": 0.054994962421199445,
+      "added_density_matched_credit_per_cell": 0.012485083699758408,
+      "break_even_bar_live_scaled": 0.05556,
+      "support_rule": "binary >0"
+    },
+    {
+      "candidate_file": "docs/downloads/GEMSDOE48-H52-lidar-scarp-additions-20261007-38029417f6ca-nan-outside.tif",
+      "candidate_sha256": "38029417f6cab01f9f56d4d3259a998affad6ae45a2a21a394682ee38b98e0c7",
+      "receipt": "evidence/audit_gate2_gemsdoe48_h52_lidar_scarp___20261007.json",
+      "verdict": "FAIL_MASS_NEUTRAL",
+      "reasons": [
+        "equal_mass_credit_density_below_incumbent (-0.00243)",
+        "added_cells_below_live_break_even_bar (density-matched 0.0099 < 0.0556 per cell)"
+      ],
+      "candidate_cells": 39654,
+      "incumbent_cells": 37654,
+      "candidate_proxy_mean4": 0.09653442139673066,
+      "incumbent_proxy_mean4": 0.09560719376703922,
+      "equal_mass_mean4": 0.09318149936365692,
+      "equal_mass_delta_vs_incumbent": -0.002425694403382292,
+      "added_cells": 2000,
+      "added_raw_proxy_credit_per_cell": 0.041842888135463,
+      "added_density_matched_credit_per_cell": 0.009895826518163085,
+      "break_even_bar_live_scaled": 0.05556,
+      "support_rule": "binary >0"
+    },
+    {
+      "candidate_file": "docs/downloads/GEMSDOE48-H53-ds-core-lidar-20261007-dedc43dc0167.tif",
+      "candidate_sha256": "dedc43dc0167edcf1dca9fa1693b69153c71325d59e47218298e577cd8159fc4",
+      "receipt": "evidence/audit_gate2_gemsdoe48_h53_20261007.json",
+      "verdict": "FAIL_MASS_NEUTRAL",
+      "reasons": [
+        "added_cells_below_live_break_even_bar (density-matched 0.0107 < 0.0556 per cell)"
+      ],
+      "candidate_cells": 38654,
+      "incumbent_cells": 37654,
+      "candidate_proxy_mean4": 0.09611707034037678,
+      "incumbent_proxy_mean4": 0.09560719376703922,
+      "equal_mass_mean4": 0.09485911133611391,
+      "equal_mass_delta_vs_incumbent": -0.0007480824309253065,
+      "added_cells": 1000,
+      "added_raw_proxy_credit_per_cell": 0.043354732785373926,
+      "added_density_matched_credit_per_cell": 0.01070970644801855,
+      "break_even_bar_live_scaled": 0.05556,
+      "support_rule": "binary >0"
+    },
+    {
+      "candidate_file": "data/raw/scored/8GEMSDOE_Hedge-v2_submission.tif",
+      "candidate_sha256": "052688eafbc7a55d90caab72252a50304fe5caa8ecf973f8e791b4ae910f0792",
+      "receipt": "evidence/audit_gate2_8gemsdoe_hedge_v2_submissi__20261007.json",
+      "verdict": "FAIL_MASS_NEUTRAL",
+      "reasons": [
+        "equal_mass_credit_density_below_incumbent (-0.03738)",
+        "added_cells_below_live_break_even_bar (density-matched 0.0060 < 0.0556 per cell)"
+      ],
+      "candidate_cells": 227507,
+      "incumbent_cells": 37654,
+      "candidate_proxy_mean4": 0.09565882189225645,
+      "incumbent_proxy_mean4": 0.09560719376703922,
+      "equal_mass_mean4": 0.05822833091249429,
+      "equal_mass_delta_vs_incumbent": -0.03737886285454493,
+      "added_cells": 222693,
+      "added_raw_proxy_credit_per_cell": 0.026126090161975472,
+      "added_density_matched_credit_per_cell": 0.00598794586991731,
+      "break_even_bar_live_scaled": 0.05556,
+      "support_rule": "binary >0"
+    },
+    {
+      "candidate_file": "data/raw/scored/b2_02778.tif",
+      "candidate_sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+      "receipt": "evidence/audit_gate2_b2_02778_tif__20261007.json",
+      "verdict": "IDENTICAL_TO_INCUMBENT",
+      "reasons": [
+        "identical_support_to_incumbent"
+      ],
+      "candidate_cells": 37654,
+      "incumbent_cells": 37654,
+      "candidate_proxy_mean4": 0.09560719376703922,
+      "incumbent_proxy_mean4": 0.09560719376703922,
+      "equal_mass_mean4": 0.09560719376703923,
+      "equal_mass_delta_vs_incumbent": 0.0,
+      "added_cells": 0,
+      "added_raw_proxy_credit_per_cell": null,
+      "added_density_matched_credit_per_cell": 0.0,
+      "break_even_bar_live_scaled": 0.05556,
+      "support_rule": "binary >0"
+    },
+    {
+      "candidate_file": "docs/downloads/gemsdoe48-h50-ds-b2xh36rung30-20261007-5b59e106-nan.tif",
+      "candidate_sha256": "54dfe8bd79f767370558bebc1c23366cb43e5e5a4b26c7d9d14131c8b58bdc0c",
+      "receipt": "evidence/audit_gate2_h50_graded_t0p5_20261007.json",
+      "verdict": "FAIL_MASS_NEUTRAL",
+      "reasons": [
+        "equal_mass_credit_density_below_incumbent (-0.02007)",
+        "added_cells_below_live_break_even_bar (density-matched 0.0049 < 0.0556 per cell)"
+      ],
+      "candidate_cells": 306564,
+      "incumbent_cells": 37654,
+      "candidate_proxy_mean4": 0.095603681895249,
+      "incumbent_proxy_mean4": 0.09560719376703922,
+      "equal_mass_mean4": 0.07554057217425049,
+      "equal_mass_delta_vs_incumbent": -0.020066621592788728,
+      "added_cells": 268910,
+      "added_raw_proxy_credit_per_cell": 0.021364106337147214,
+      "added_density_matched_credit_per_cell": 0.004936509095818089,
+      "break_even_bar_live_scaled": 0.05556,
+      "support_rule": "graded t>0.5"
+    },
+    {
+      "candidate_file": "data/raw/scored/gems19-h19-5-powerlaw-budget-multiline-corroborated-20260930-e27054cf-nan.tif",
+      "candidate_sha256": "ec1f9b56b83ce33cad781ceb9f104b18fb4f2ff785263a4e89616af4aabdee8d",
+      "receipt": "evidence/audit_gate2_gems19_h19_5_powerlaw_budg__20261007.json",
+      "verdict": "FAIL_MASS_NEUTRAL",
+      "reasons": [
+        "equal_mass_credit_density_below_incumbent (-0.02390)",
+        "added_cells_below_live_break_even_bar (density-matched 0.0050 < 0.0556 per cell)"
+      ],
+      "candidate_cells": 121131,
+      "incumbent_cells": 37654,
+      "candidate_proxy_mean4": 0.09452160943079327,
+      "incumbent_proxy_mean4": 0.09560719376703922,
+      "equal_mass_mean4": 0.07170646184537365,
+      "equal_mass_delta_vs_incumbent": -0.02390073192166557,
+      "added_cells": 83477,
+      "added_raw_proxy_credit_per_cell": 0.0217591464765036,
+      "added_density_matched_credit_per_cell": 0.005030233753133504,
+      "break_even_bar_live_scaled": 0.05556,
+      "support_rule": "binary >0"
+    },
+    {
+      "candidate_file": "docs/downloads/gemsdoe48-h51-plausibility-budget-20261007-f8fa1d08-nan.tif",
+      "candidate_sha256": "ce34944afa302e8a2b7e71502caf18a0d2f71d706dcb6f39397f11a237355961",
+      "receipt": "evidence/audit_gate2_gemsdoe48_h51_plausibility__20261007.json",
+      "verdict": "FAIL_MASS_NEUTRAL",
+      "reasons": [
+        "equal_mass_credit_density_below_incumbent (-0.00897)",
+        "added_cells_below_live_break_even_bar (density-matched 0.0063 < 0.0556 per cell)"
+      ],
+      "candidate_cells": 37654,
+      "incumbent_cells": 37654,
+      "candidate_proxy_mean4": 0.08664120402856862,
+      "incumbent_proxy_mean4": 0.09560719376703922,
+      "equal_mass_mean4": 0.08664120402856862,
+      "equal_mass_delta_vs_incumbent": -0.008965989738470598,
+      "added_cells": 5375,
+      "added_raw_proxy_credit_per_cell": 0.028732785353826923,
+      "added_density_matched_credit_per_cell": 0.006302487314994945,
+      "break_even_bar_live_scaled": 0.05556,
+      "support_rule": "binary >0"
+    },
+    {
+      "candidate_file": "docs/downloads/gemsdoe48-h50-ds-b2xh36rung30-20261007-5b59e106-nan.tif",
+      "candidate_sha256": "54dfe8bd79f767370558bebc1c23366cb43e5e5a4b26c7d9d14131c8b58bdc0c",
+      "receipt": "evidence/audit_gate2_gemsdoe48_h50_ds_b2xh36run__20261007.json",
+      "verdict": "FAIL_MASS_NEUTRAL",
+      "reasons": [
+        "equal_mass_credit_density_below_incumbent (-0.01826)",
+        "added_cells_below_live_break_even_bar (density-matched 0.0039 < 0.0556 per cell)"
+      ],
+      "candidate_cells": 767043,
+      "incumbent_cells": 37654,
+      "candidate_proxy_mean4": 0.0861958225519762,
+      "incumbent_proxy_mean4": 0.09560719376703922,
+      "equal_mass_mean4": 0.07734397364952221,
+      "equal_mass_delta_vs_incumbent": -0.018263220117517007,
+      "added_cells": 729389,
+      "added_raw_proxy_credit_per_cell": 0.016908964161031804,
+      "added_density_matched_credit_per_cell": 0.003897333781194205,
+      "break_even_bar_live_scaled": 0.05556,
+      "support_rule": "binary >0"
+    }
+  ],
+  "lane_ladder_inversion": {
+    "law": "T = DTI * (ALPHA*M + BETA*N) with ALPHA=0.2, BETA=0.8, N=14307.4",
+    "rungs": [
+      {
+        "file": "d2_8_02600 (A)",
+        "cells": 44090,
+        "live": "0.2600",
+        "T_implied": 5268.6
+      },
+      {
+        "file": "b2_prune_02778 (C)",
+        "cells": 37654,
+        "live": "0.2778",
+        "T_implied": 5271.7
+      },
+      {
+        "file": "d1_5",
+        "cells": 60069,
+        "live": "0.2477",
+        "T_implied": 5811.1
+      },
+      {
+        "file": "h19_5_dense",
+        "cells": 121131,
+        "live": "0.1922",
+        "T_implied": 6856.2
+      },
+      {
+        "file": "h16_1",
+        "cells": 123939,
+        "live": "0.1855",
+        "T_implied": 6721.5
+      },
+      {
+        "file": "hedge_v2",
+        "cells": 227507,
+        "live": "0.1563",
+        "T_implied": 8901.4
+      },
+      {
+        "file": "r13lattice",
+        "cells": 206895,
+        "live": "0.0904",
+        "T_implied": 4775.1
+      }
+    ],
+    "reading": "The dotted ladder A->B->C holds T constant at ~5,270 (spread 0.1%) while removing 6,436 cells: those cells carried ~0 live credit, and every rung step was a pure mass-budget gain. Densification adds credit only at ~0.019 per cell (h19_5 extra cells vs C) - 3x below the 0.0556 break-even bar - which is why every denser submission ranks below the incumbent."
+  },
+  "frontier_probe": {
+    "receipt": "evidence/lam3_residual_probe_20261007.json",
+    "script": "scripts/lam3_residual_probe.py",
+    "one_line": "No addition can clear the 0.0556/cell break-even bar under the best-calibrated truth model: shipped additions earn 0.014-0.026 (random control 0.013-0.016) and even the model's own greedy optimum reaches only 0.049-0.059 per cell, i.e. the incumbent is on the frontier of the entire current information set."
+  },
+  "uniform_random_equal_mass_control": {
+    "receipt": "evidence/audit_gate2_random_control_20261007.json",
+    "pool_cells": 4002423,
+    "sampled_cells": 37654,
+    "overall": 0.07136879635332949,
+    "mean4": 0.06702000036811674,
+    "folds": [
+      0.06523857718267563,
+      0.074318014521189,
+      0.0451767834423655,
+      0.08334662632623682
+    ],
+    "tp": 4121.432712648064,
+    "truth_pixels": 62122,
+    "delta_vs_incumbent": -0.028587193398922475
+  }
+}

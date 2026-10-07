@@ -1,0 +1,42 @@
+{
+  "status": "PASS_LOCAL_FORMAT_AUDIT_NOT_ORGANIZER_ACCEPTANCE",
+  "file": "docs/downloads/GEMSDOE48-H53-ds-core-lidar-20261007-dedc43dc0167.tif",
+  "sha256": "dedc43dc0167edcf1dca9fa1693b69153c71325d59e47218298e577cd8159fc4",
+  "bytes": 1562508,
+  "dtype": "float32",
+  "bands": 1,
+  "shape": [
+    3730,
+    3292
+  ],
+  "crs": "EPSG:32611",
+  "resolution_m": [
+    100.0,
+    100.0
+  ],
+  "nodata": "NaN",
+  "finite_inside_footprint": true,
+  "nan_outside_footprint": true,
+  "finite_footprint_cells": 5167373,
+  "nan_outside_cells": 7111787,
+  "min_inside_footprint": 0.0,
+  "max_inside_footprint": 1.0,
+  "all_in_footprint_range_0_1": true,
+  "positive_cells": 38654,
+  "positive_mass": 38654.0,
+  "grid_profile": {
+    "width": 3292,
+    "height": 3730,
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ]
+  },
+  "tags": {
+    "AREA_OR_POINT": "Area"
+  }
+}

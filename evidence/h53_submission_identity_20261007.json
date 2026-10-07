@@ -1,0 +1,28 @@
+{
+  "schema": "GEMSDOE48-candidate-uniqueness-v1",
+  "generated_utc": "2026-10-07T05:31:27Z",
+  "candidate": {
+    "file": "docs/downloads/GEMSDOE48-H53-ds-core-lidar-20261007-dedc43dc0167.tif",
+    "sha256": "dedc43dc0167edcf1dca9fa1693b69153c71325d59e47218298e577cd8159fc4",
+    "bytes": 1562508,
+    "positive_cells": 38654
+  },
+  "compared_files": 62,
+  "max_overlap_excluding_companions": {
+    "file": "docs/downloads/GEMSDOE48-unassigned-mass-20261006.tif",
+    "companion_of_same_artifact": false,
+    "sha256": "975c217ef803a45041077a219ba460134a8c84c8ea9f7ffc0414ddb47cb54ccd",
+    "byte_identical": false,
+    "cells": 5167373,
+    "overlap_cells": 38654,
+    "jaccard": 0.007480396712217213,
+    "symmetric_difference_cells": 5128719,
+    "identical_support": false
+  },
+  "companions_of_same_artifact": [
+    "docs/downloads/GEMSDOE48-H53-ds-core-lidar-20261007-dedc43dc0167-zeros-nan-outside.tif"
+  ],
+  "duplicates_byte_or_support_identical": [],
+  "verdict": "UNIQUE",
+  "note": "Support-level comparison (positive cells). A candidate that shares a support with an earlier artifact is not a new submission even if the bytes differ."
+}

@@ -1,0 +1,160 @@
+{
+  "schema": "GEMSDOE48-candidate-audit-v1",
+  "generated_utc": "2026-10-07T05:23:03.187138+00:00",
+  "protocol": "GEMSDOE48-GATE-2 (mass-neutral): equal-mass credit density vs incumbent + density-matched marginal credit of added cells vs the metric break-even bar",
+  "warning": "Public-proxy instrument only; not the private expert truth and not an organizer score. PASS does not authorize an upload by itself; it means the candidate survives the mass-neutral screen that the 2026-10-06 gate failed to apply.",
+  "candidate": {
+    "path": "docs/downloads/GEMSDOE48-H53-ds-core-lidar-20261007-dedc43dc0167.tif",
+    "sha256": "dedc43dc0167edcf1dca9fa1693b69153c71325d59e47218298e577cd8159fc4",
+    "bytes": 1562508,
+    "bands": 1,
+    "dtype": "float32",
+    "crs": "EPSG:32611",
+    "epsg": 32611,
+    "shape": [
+      3730,
+      3292
+    ],
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    "nodata": NaN
+  },
+  "incumbent": {
+    "path": "data/raw/scored/b2_02778.tif",
+    "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+    "bytes": 219065,
+    "bands": 1,
+    "dtype": "float32",
+    "crs": "EPSG:32611",
+    "epsg": 32611,
+    "shape": [
+      3730,
+      3292
+    ],
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    "nodata": null
+  },
+  "counts": {
+    "incumbent_cells": 37654,
+    "candidate_cells": 38654,
+    "added_cells": 1000,
+    "proxy_truth_pixels": 62122,
+    "density_matched_truth_pixels": 14307,
+    "break_even_bar_raw_proxy": 0.019077223415507896,
+    "break_even_bar_live_scaled": 0.05556,
+    "incumbent_live_dti_source": "owner-reported ladder anchor 0.2778 (not organizer-authenticated)"
+  },
+  "format": {
+    "bands_dtype_crs_shape_ok": true,
+    "all_finite_in_footprint": true,
+    "finite_iff_footprint": true,
+    "finite_outside_footprint_count": 0,
+    "min": 0.0,
+    "max": 1.0,
+    "values_in_0_1": true,
+    "positive_cells": 38654,
+    "total_mass": 38654.0,
+    "portal_range_ok": true
+  },
+  "proxy_scores": {
+    "incumbent": {
+      "overall": 0.09538611707753948,
+      "mean4": 0.09560719376703922,
+      "folds": [
+        0.10189310723121549,
+        0.09917731187408586,
+        0.10777272725077985,
+        0.07358562871207563
+      ],
+      "tp": 5517.636846598238,
+      "truth_pixels": 62122
+    },
+    "candidate": {
+      "overall": 0.09579606825368454,
+      "mean4": 0.09611707034037678,
+      "folds": [
+        0.10211420840932965,
+        0.0994558722137964,
+        0.1083348805675152,
+        0.0745633201708659
+      ],
+      "tp": 5560.991579383612,
+      "truth_pixels": 62122
+    }
+  },
+  "random_equal_mass_control": null,
+  "equal_mass": {
+    "seeds": 3,
+    "mean4": 0.09485911133611391,
+    "delta_vs_incumbent": -0.0007480824309253065,
+    "per_seed": [
+      {
+        "overall": 0.09389520360456642,
+        "mean4": 0.09473789058759738,
+        "folds": [
+          0.1003088453484363,
+          0.0971839379178622,
+          0.10887078524784165,
+          0.07258799383624939
+        ],
+        "tp": 5430.658753279597,
+        "truth_pixels": 62122
+      },
+      {
+        "overall": 0.09395193823300854,
+        "mean4": 0.09465037676319711,
+        "folds": [
+          0.10027627409240049,
+          0.09717859646461834,
+          0.10801961689882066,
+          0.07312701959694896
+        ],
+        "tp": 5433.958902236074,
+        "truth_pixels": 62122
+      },
+      {
+        "overall": 0.09434457090257778,
+        "mean4": 0.09518906665754723,
+        "folds": [
+          0.10024962429934707,
+          0.09802026902026877,
+          0.10912793875159876,
+          0.07335843455897428
+        ],
+        "tp": 5457.009931709617,
+        "truth_pixels": 62122
+      }
+    ]
+  },
+  "additions": {
+    "added_cells": 1000,
+    "break_even_bar_raw_proxy": 0.019077223415507896,
+    "break_even_bar_live_scaled": 0.05556,
+    "marginal_credit_per_cell_raw_proxy": 0.043354732785373926,
+    "density_matched_credit_per_cell": 0.01070970644801855,
+    "density_matched_credit_per_cell_seeds": [
+      0.007891776870936156,
+      0.008699437148869038,
+      0.01220872524380684,
+      0.013089961588382722,
+      0.011658631388098
+    ]
+  },
+  "verdict": "FAIL_MASS_NEUTRAL",
+  "reasons": [
+    "added_cells_below_live_break_even_bar (density-matched 0.0107 < 0.0556 per cell)"
+  ]
+}
