@@ -1,0 +1,80 @@
+{
+  "baseline": {
+    "name": "h49_yager_balanced",
+    "sha256": "9f028289c364c071065245799d7ed131600e80e9f0d10602806b12ce34d7cae8",
+    "source_report_newer": "evidence/holdout_h49_spatial_comparison_20261006.json",
+    "source_report_newer_sha256": "315be905cbfc2aba3947ce3eb91dd2ecb3798d2aa2a22303bb6e3ad0f5544552",
+    "source_report_older": "evidence/holdout_h49_raw_sgmc_sensitivity_20261006.json",
+    "source_report_older_sha256": "dde8ccb15d18ab74f5362362831a1d1ed331c9108ad27788dc2bacf2dce80fc3"
+  },
+  "candidate": {
+    "name": "h53a_strike_coherent_12000",
+    "sha256": "de35531d386792da1950eac815f98db8f36304f78debb6b568138d070640d9bd",
+    "source_report_newer": "evidence/holdout_h53a_scarp_spatial_20261007.json",
+    "source_report_newer_sha256": "e98f5150012111d3b8ef663a9d270a1f3a75a574a0332eb1e05534a53c6d6c03",
+    "source_report_older": "evidence/holdout_h53a_scarp_raw_sgmc_20261007.json",
+    "source_report_older_sha256": "599430ba828a1f368eda2ae8613f168e547f2c0b99fcc451593d89bec9a20c95"
+  },
+  "comparisons": {
+    "newer_sgmc_offcatalogue": {
+      "candidate_mean_dti": 0.09811040011373477,
+      "h49_mean_dti": 0.10075118848176869,
+      "paired_fold_delta_dti": {
+        "NE": -0.006860888678613744,
+        "NW": -0.003364593340776531,
+        "SE": 0.001513472456783585,
+        "SW": -0.0018511439095289517
+      },
+      "paired_mean_delta_dti": -0.0026407883680339105,
+      "passes_preregistered_numeric_gate": false,
+      "positive_folds": 1,
+      "required_positive_folds": 3
+    },
+    "older_raw_sgmc_offcatalogue": {
+      "candidate_mean_dti": 0.09708646151622741,
+      "h49_mean_dti": 0.09976835524025539,
+      "paired_fold_delta_dti": {
+        "NE": -0.007025890201849461,
+        "NW": -0.003364593340776531,
+        "SE": 0.0015140525560430051,
+        "SW": -0.0018511439095289517
+      },
+      "paired_mean_delta_dti": -0.0026818937240279846,
+      "passes_preregistered_numeric_gate": false,
+      "positive_folds": 1,
+      "required_positive_folds": 3
+    },
+    "public_catalogue_context_only": {
+      "candidate_mean_dti": 0.008898456279061339,
+      "h49_mean_dti": 0.0953532478651188,
+      "paired_fold_delta_dti": {
+        "NE": -0.10630446915108432,
+        "NW": -0.08309353811541668,
+        "SE": -0.07024346027682518,
+        "SW": -0.08617769880090362
+      },
+      "paired_mean_delta_dti": -0.08645479158605746,
+      "passes_preregistered_numeric_gate": false,
+      "positive_folds": 0,
+      "required_positive_folds": 3
+    }
+  },
+  "evaluated_utc": "2026-10-07T04:47:23.609357+00:00",
+  "limitations": [
+    "Both SGMC targets are public-map proxies, not private expert test truth or organizer scores.",
+    "Candidate sources were not rebuilt independently inside the spatial folds; the full public catalogue was used as an exclusion mask during construction.",
+    "The older SGMC raster is a separate sensitivity and was not pooled with the newer raster.",
+    "A numerical comparison with H49 is valid only for these pinned local files and the recorded 4-quadrant/core-plus-halo protocol."
+  ],
+  "promotion_gate": {
+    "competition_slot_authorized": false,
+    "decision": "FAILED: no weekly submission slot is authorized or used. H53-A fails the mean and/or >=3/4-fold requirement against H49 on at least one SGMC proxy. Even a public-proxy pass would not alone establish private-label performance, leakage-free validation, or organizer acceptance.",
+    "newer_pass": false,
+    "numeric_proxy_gate_passed": false,
+    "older_pass": false,
+    "requirements": "H53-A must beat H49 on the mean and in >=3/4 paired folds on both newer and older SGMC off-catalogue proxy reports."
+  },
+  "schema_version": 1,
+  "status": "H53_A_GATE_FAILED_NO_SLOT_USED",
+  "weekly_slot_used": false
+}
