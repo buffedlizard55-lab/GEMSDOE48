@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "validated_utc": "2026-10-07T15:37:05.170842+00:00",
+  "status": "PASS_LOCAL_DIAGNOSTIC_FORMAT_AND_SEMANTIC_AUDIT_NOT_ORGANIZER_ACCEPTANCE",
+  "primary": {
+    "path": "docs/downloads/GEMSDOE48-H56-OWDS-B2xH33D-20261007-1f7b5a4f18db-zeros-outside.tif",
+    "sha256": "1f7b5a4f18dbc62f31b14078545332238be9289dd388d57f550d75fb5a5fe95a",
+    "source_receipt": "evidence/h56_submission_validation_20261007.json"
+  },
+  "diagnostics": {
+    "belief_raw": {
+      "path": "docs/downloads/diagnostics/GEMSDOE48-H56-OWDS-B2xH33D-20261007-1f7b5a4f18db-belief-raw.tif",
+      "sha256": "dc6a7a597a511152551dcf202ecee280429cf13e977e849058b449cf5ce36fd9",
+      "bytes": 1884910,
+      "one_band_float32": true,
+      "grid_matches_competition": true,
+      "all_cells_finite": true,
+      "all_cells_in_0_1": true,
+      "outside_footprint_all_zero": true,
+      "min_inside_footprint": 0.0,
+      "max_inside_footprint": 0.8399999737739563,
+      "zero_outside_cells": 7111787
+    },
+    "unassigned_mtheta": {
+      "path": "docs/downloads/diagnostics/GEMSDOE48-H56-OWDS-B2xH33D-20261007-1f7b5a4f18db-unassigned-mtheta.tif",
+      "sha256": "045dc7f613648fc118333e51832ae9e6b13197e85278aa83e9383586b01b46e9",
+      "bytes": 1876718,
+      "one_band_float32": true,
+      "grid_matches_competition": true,
+      "all_cells_finite": true,
+      "all_cells_in_0_1": true,
+      "outside_footprint_all_zero": true,
+      "min_inside_footprint": 0.1599999964237213,
+      "max_inside_footprint": 0.8835999965667725,
+      "zero_outside_cells": 7111787
+    },
+    "conflict_k": {
+      "path": "docs/downloads/diagnostics/GEMSDOE48-H56-OWDS-B2xH33D-20261007-1f7b5a4f18db-conflict-k.tif",
+      "sha256": "9f36769d415ff85e7ed62a610092fffb94cda970949c0087a29a38b71456d8c1",
+      "bytes": 1865368,
+      "one_band_float32": true,
+      "grid_matches_competition": true,
+      "all_cells_finite": true,
+      "all_cells_in_0_1": true,
+      "outside_footprint_all_zero": true,
+      "min_inside_footprint": 0.0,
+      "max_inside_footprint": 0.035999998450279236,
+      "zero_outside_cells": 7111787
+    },
+    "plausibility": {
+      "path": "docs/downloads/diagnostics/GEMSDOE48-H56-OWDS-B2xH33D-20261007-1f7b5a4f18db-plausibility.tif",
+      "sha256": "85c5eed333caba5bf2ff68d7e91ae6bb89c001df57ea7988d08839af9e9435ad",
+      "bytes": 1682684,
+      "one_band_float32": true,
+      "grid_matches_competition": true,
+      "all_cells_finite": true,
+      "all_cells_in_0_1": true,
+      "outside_footprint_all_zero": true,
+      "min_inside_footprint": 0.8835999965667725,
+      "max_inside_footprint": 1.0,
+      "zero_outside_cells": 7111787
+    },
+    "support_disagreement": {
+      "path": "docs/downloads/diagnostics/GEMSDOE48-H56-OWDS-B2xH33D-20261007-1f7b5a4f18db-support-disagreement.tif",
+      "sha256": "45020a3e476242f685e8b1076d37261d12e572ee19aeeee11e68a1de5be8d585",
+      "bytes": 789820,
+      "one_band_float32": true,
+      "grid_matches_competition": true,
+      "all_cells_finite": true,
+      "all_cells_in_0_1": true,
+      "outside_footprint_all_zero": true,
+      "min_inside_footprint": 0.0,
+      "max_inside_footprint": 1.0,
+      "zero_outside_cells": 7111787
+    }
+  },
+  "semantic_checks": {
+    "raw_bel_max": 0.8399999737739563,
+    "primary_equals_raw_bel_divided_by_max_within_2e_7": true,
+    "plausibility_equals_bel_plus_mtheta_within_2e_7": true,
+    "mtheta_is_separate_from_conflict": true,
+    "mean_mtheta_in_footprint": 0.8313071131706238,
+    "mean_raw_conflict_k_in_footprint": 0.002135789953172207,
+    "p95_raw_conflict_k": 0.01600000075995922,
+    "footprint_cells": 5167373
+  },
+  "definition_note": "m(Theta) is the canonical normalized Dempster residual and does not include raw conflict K; plausibility is Bel(F)+m(Theta)."
+}

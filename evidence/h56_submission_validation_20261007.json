@@ -1,0 +1,61 @@
+{
+  "status": "PASS_LOCAL_FORMAT_AUDIT_NOT_ORGANIZER_ACCEPTANCE",
+  "file": "docs/downloads/GEMSDOE48-H56-OWDS-B2xH33D-20261007-1f7b5a4f18db-zeros-outside.tif",
+  "sha256": "1f7b5a4f18dbc62f31b14078545332238be9289dd388d57f550d75fb5a5fe95a",
+  "bytes": 1888728,
+  "dtype": "float32",
+  "bands": 1,
+  "shape": [
+    3730,
+    3292
+  ],
+  "crs": "EPSG:32611",
+  "resolution_m": [
+    100.0,
+    100.0
+  ],
+  "outside_footprint_encoding": "zeros",
+  "nodata": null,
+  "finite_inside_footprint": true,
+  "nan_outside_footprint": false,
+  "zeros_outside_footprint": true,
+  "all_cells_finite": true,
+  "all_cells_in_range_0_1": true,
+  "portal_range_error_immune": true,
+  "portal_range_error_note": "the whole raster is finite and inside [0,1], so a vectorised np.all((v>=0)&(v<=1)) check cannot fail on a NaN comparison",
+  "finite_footprint_cells": 12279160,
+  "nan_outside_cells": 0,
+  "min_inside_footprint": 0.0,
+  "max_inside_footprint": 1.0,
+  "min_whole_raster": 0.0,
+  "max_whole_raster": 1.0,
+  "all_in_footprint_range_0_1": true,
+  "positive_cells": 791389,
+  "positive_mass": 377764.4988703579,
+  "grid_profile": {
+    "width": 3292,
+    "height": 3730,
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ]
+  },
+  "tags": {
+    "absence_informativeness_q": "0.1",
+    "belief_normalization": "Bel(F) divided by in-footprint maximum; relative favorability, not calibrated probability",
+    "candidate_id": "GEMSDOE48-H56-OWDS-B2xH33D",
+    "model": "Open-world discounted Dempster-Shafer combination",
+    "outside_encoding": "finite zero; nodata unset; all cells are in [0,1]",
+    "reliability_alpha_dotted": "0.6",
+    "reliability_alpha_tip": "0.6",
+    "source_dotted_sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+    "source_tip_sha256": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757",
+    "status": "research_only_no_weekly_slot_cleared",
+    "support_surface": "300 m triangular max-credit field",
+    "AREA_OR_POINT": "Area"
+  }
+}
