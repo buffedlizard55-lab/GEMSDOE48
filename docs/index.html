@@ -75,12 +75,30 @@
 <body>
   <header>
     <div class="wrap">
-      <div class="eyebrow">DOE GEMS Prize Challenge · research artifact · 2026-10-06</div>
+      <div class="eyebrow">DOE GEMS Prize Challenge · research artifact · 2026-10-07</div>
       <h1>GEMSDOE48</h1>
       <p class="deck">A reproducible test of conflict-aware fusion for sparse fault-candidate maps—built to preserve disagreement, scored against public catalogue proxies, and gated by evidence rather than optimism.</p>
     </div>
   </header>
   <main class="wrap">
+    <section class="card download-card" style="margin-bottom:24px;border-width:2px">
+      <p class="eyebrow" style="color:#41664d">2026-10-07 · H50 — unique Dempster-Shafer fusion of the two best families · one-click download</p>
+      <h2>⬇ Submission GeoTIFF — GEMSDOE48-H50-DS-B2xH36</h2>
+      <p>Best dotted family (H33-2-B2, 37,654 px, owner live 0.2778) × best tip/step-over family (H36-1 rung30, 37,660 px, owner live 0.2710), combined with Dempster's rule on metric-geometry belief surfaces; disagreement is carried as unassigned mass m(Θ) and raw conflict K instead of being averaged away. One-band float32, EPSG:32611, 100 m, 3,730 × 3,292, all-finite in [0,1], zeros outside — the same portal-safe encoding as the scored 0.27xx sibling files.</p>
+      <a class="button" href="downloads/gemsdoe48-h50-ds-b2xh36rung30-20261007-5b59e106-zeros.tif" download>↓ Download H50 submission GeoTIFF</a>
+      <a class="button" href="downloads/gemsdoe48-h50-ds-b2xh36rung30-20261007-5b59e106-zeros.zip" download>↓ .zip (single GeoTIFF)</a>
+      <a class="button" href="downloads/gemsdoe48-h50-ds-b2xh36rung30-20261007-5b59e106-nan.tif" download>↓ NaN-outside twin (official convention)</a>
+      <div class="file-meta">SHA-256 5b59e106b6e448038b96fb340c5bae39094d4558c239c437aea28b6020d5d32f · 1,453,567 bytes<br>
+      Paste-ready note: GEMSDOE48 H50 | Dempster fusion, best dotted H33-2-B2 (0.2778) x best tip H36-1 rung30 (0.2710); kernel-credit beliefs, live-anchored discounts; m(Theta)+K diagnostics; unscored research candidate.</div>
+      <div class="diag-links" style="margin-top:12px">
+        <a href="h50/index.html">H50 research sub-site</a>
+        <a href="h50/executive-summary.html">Executive summary — exactly how to submit</a>
+        <a href="downloads/diagnostics/gemsdoe48-h50-unassigned-mTheta-20261007-5b59e106.tif" download>unassigned mass m(Θ) diagnostic</a>
+        <a href="downloads/diagnostics/gemsdoe48-h50-conflict-K-20261007-5b59e106.tif" download>raw conflict K diagnostic</a>
+        <a href="research/h50-method-20261007.md">method &amp; honest results</a>
+      </div>
+      <p class="small" style="margin-top:10px"><strong>UNSCORED, NOT SLOT-CLEARED.</strong> On the blocked public proxies H50 beats the naive mean (4/4 folds) and the raw-sparse DS recipe, but loses to both parents and the union — the disagreement-preserving property is honest, not score-raising. Upload only under a deliberate owner override of the slot gate; the runbook on the executive summary page says exactly what to paste.</p>
+    </section>
     <div class="warning">
       <strong>NO CANDIDATE IS CLEARED FOR A SUBMISSION SLOT.</strong>
       H48 rho=.5 loses to the prior union on the shared blocked SGMC proxy. Newer-main H49 now scores 0.100751 versus 0.096992 for that prior best (+0.003760 in 4/4 folds), but this is a post-selection re-score on related public proxies; the gain is below the live instrument's roughly 0.005 resolution, and the live-anchored change bracket includes loss. H49's NaN-outside derivative passes local format validation, not organizer acceptance. Do not submit on these results alone.
