@@ -7,7 +7,7 @@
 <body>
 <header><div class="wrap">
   <h1>Ranked geological hypotheses</h1>
-  <p>One tested fusion experiment and four distinct, explicitly unvalidated follow-ups.</p>
+  <p>Two distinct H53 experiments are recorded: the merged H53-1 three-source fusion and H53-A strike coherence; both fail their proxy gates. Their slates and labels are kept separate.</p>
 </div></header>
 <nav><div class="wrap">
   <a href="index.html">Overview</a><a href="executive-summary.html">Summary</a>
@@ -18,8 +18,19 @@
   <div class="note"><b>Status:</b> the H48 slate was frozen before the candidate build and holdout. H48-1 has since been tested and failed the slot gate. H48-2 through H48-5 are research proposals only; none is represented as downloaded, implemented, or validated here. Ranking reflects expected value of information per implementation cost, not probability of winning.</div>
   <p>The detailed, timestamped preregistration and source checks are in <a href="research/hypotheses-20261006.md">the frozen H48 research slate</a>. The table below preserves its main distinctions without implying global novelty.</p>
 
-  <h2 class="sec">H53 slate — 2026-10-07 (pre-registered, then measured)</h2>
+  <h2 class="sec">Main H53-1 slate — 2026-10-07 (pre-registered, then measured)</h2>
   <p>Full slate with layers, physical signature, off-catalogue rationale, differences from prior work, cost and data status: <a href="research/hypotheses-h53-20261007.md">research/hypotheses-h53-20261007.md</a> (frozen constants: <a href="../evidence/hypothesis_slate_h53_20261007.json">hypothesis_slate_h53_20261007.json</a>). Ranking by expected DTI: <b>H53-2</b> scarp detector v2 (dual-baseline consistency, relative-step basin test, ≥ 500 m tracing; highest expected gain, needs a free CI re-run — top next step); <b>H53-1</b> three-source adaptive DS fusion (implemented this session; graded 0.071408, twin 0.089559 — gate failed; <a href="research/holdout-h53-results-20261007.md">report</a>); <b>H53-3</b> drainage-deflection detector on the 3 m DEM (untested); <b>H53-4</b> U/K halo tie-break for additions (ordering only); <b>H53-5</b> NLCD exclusion + Quaternary-alluvium proxy (validation enabler). InSAR and login-walled strain grids recorded as not viable. None of these are organizer-scored.</p>
+
+  <h2 class="sec">Separate H53-A strike-coherence slate — frozen before its own build</h2>
+  <p>This is a second, distinct H53 slate, not a continuation of H53-1's three-source fusion and not the main slate's H53-2 raw-DEM dual-baseline detector. Full independent preregistration, code/prior-art distinctions, source checks, and blocked result: <a href="research/hypotheses-h53a-scarp-20261007.md">H53-A slate</a> · <a href="research/holdout-h53a-scarp-results-20261007.md">H53-A results</a> · <a href="../evidence/h53a_scarp_vs_h49_20261007.json">paired H49 gate receipt</a>.</p>
+  <table>
+    <tr><th>Rank / hypothesis</th><th>Signature and distinction</th><th>Expected DTI / cost / availability</th></tr>
+    <tr><td><b>1 · H53-A: strike-coherent scarp persistence</b></td><td>Regional H52-derived `h_gate12`, `strike_at`, `cover`; ≥0.30 m, ≥0.90 cover, ≥4/5 compatible samples over ≈400–565 m. It extends H52-1's single-cell height ranking with multi-cell strike coherence on a stored 100 m aggregate, not the proposed raw-DEM H53-2 line tracer or H53-1 fusion.</td><td>Expected improvement unknown, likely small; low–medium cost; local product present. Measured H53-A loses to H49 on both SGMC proxies (1/4 folds higher each); gate failed, not slot-cleared.</td></tr>
+    <tr><td>2 · H53-B: paired channel profile breaks</td><td>3DEP plus 3DHP channel-aligned profiles and repeated lateral deflections.</td><td>Low–moderate, terrain-dependent; high cost; no exact 3DHP payload/coverage audit, parked.</td></tr>
+    <tr><td>3 · H53-C: oriented radiometric alteration edges</td><td>Signed cross-strike K/Th/U gradients; distinct from H50-B low-Th/K amplitude, but related prior art.</td><td>Low/uncertain after negative H50-B; low–medium cost; only local owner mirror, not organizer-authenticated.</td></tr>
+    <tr><td>4 · H53-D: contact-network terminations</td><td>USGS GeMS/SGMC unit contact truncations and juxtaposition, not the existing fault raster as predictor.</td><td>Unknown–moderate; high cost; exact payload, scale, licensing and footprint coverage unaudited, parked.</td></tr>
+  </table>
+  <p class="small">The official DrivenData, USGS 3DEP, and 3DHP pages were freshly retrieved in this continuation. This does not verify the exact 3DEP/3DHP payloads or footprint coverage used by these candidate ideas; GeMS/SGMC and GeoDAWN details remain as flagged in the frozen slate. A listing is not proof of a usable in-footprint dataset.</p>
 
   <h2 class="sec">H52 slate — 2026-10-07 (pre-registered, then measured)</h2>
   <p>Full slate with layers, physical signature, off-catalogue rationale, differences from prior work, cost and data status: <a href="research/hypotheses-h52-20261007.md">research/hypotheses-h52-20261007.md</a>. Ranking by expected DTI gain per cost: <b>H52-1</b> native 3 m lidar linear-scarp detector (implemented; pilot 2.3–3.2× catalogue lift, region-wide 1.2–2.3× — gate failed; <a href="research/holdout-h52-results-20261007.md">report</a>); <b>H52-2</b> U/K alteration-contrast re-ranker (measured 1.43× per-dot lift, below the ≈ 2.6× removal bar); <b>H52-3</b> strain-rate density modulation (regional only, 1.10× per dot); <b>H52-4</b> drainage-deflection/knickpoint detector on the same 3 m DEM (untested). InSAR is recorded as not viable (Earthdata login). Why the 0.2778 rung is the family's best and what 0.3195/0.3774 require: <a href="research/why-02778-and-ceiling-20261007.md">metric-algebra note</a>. None of these are organizer-scored.</p>
@@ -67,7 +78,7 @@
     <li>A public-proxy improvement is necessary evidence at most. Do not spend a slot without beating the best under comparable blocked semantics and a defensible relationship to private expert truth.</li>
   </ul>
   <p><a href="archive-main-pages/hypotheses-main-20261006.html">Archived upstream H49 proposal list</a> is retained for prior-art review. It is separate from this H48 preregistration and not evidence of validation.</p>
-  <footer>Sources were checked 2026-10-06 UTC. Availability at a catalog page is not proof of in-footprint coverage or suitability.</footer>
+  <footer>H48 source checks are dated 2026-10-06 UTC. DrivenData, 3DEP and 3DHP pages were retrieved during this continuation; exact tile payloads/coverage remain unaudited. Availability at a catalog page is not proof of in-footprint coverage or suitability.</footer>
 </div>
 </body>
 </html>

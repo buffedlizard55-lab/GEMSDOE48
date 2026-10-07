@@ -24,3 +24,12 @@
 - Ran `PYTHONPATH=src .venv/bin/python -m compileall -q scripts src tests`; it passed. Full suite: `PYTHONPATH=src .venv/bin/python -m pytest -o addopts='' -q` — **286 passed, 3 skipped, 185 subtests passed** (includes three classification/landing-page regression checks).
 
 **Final gate:** keep the competition slot unused. Neither H53 candidate has an organizer score or upload authorization.
+
+## Post-merge integration recheck — H53-A branch
+
+The subsequent H53-A merge added a separate strike-coherence research TIFF; it did not replace either H53-1 or H53-RadEdge-1. I reconciled the landing page, executive summary, method page, and README so all three candidate lines remain distinct and no H36 description calls it the tip/step-over parent. The H53-A note is marked archival/do-not-paste after its failed gate. The earlier archived H53-A preregistration/results are preserved unchanged.
+
+- Re-ran active local-link/anchor checks: **26 HTML and 28 Markdown pages passed** (archived snapshots excluded).
+- Re-ran compileall and the full test suite after integration: **307 passed, 3 skipped, 185 subtests passed**.
+- Rechecked the 0.2778 summary: the A→B→C algebra is described as consistent with catalogue-mask pruning, not proof; the exact local-B2 attribution remains unverified.
+- No candidate is slot-cleared, no organizer score is claimed, and no TIFF was uploaded.
