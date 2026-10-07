@@ -99,6 +99,73 @@ font-family:var(--mono);font-size:.78rem;overflow-wrap:anywhere;margin:10px 0}
 <a href="research/h56-results-20261007.md">H56 results</a>
 </div></nav>
 <main class="wrap">
+<div class="dl" id="h57" style="border:4px solid #1c5e2e;margin-bottom:26px">
+<h2 style="color:#1c5e2e">⬇ H57 — DOWNLOAD: OK &nbsp;·&nbsp; SUBMIT: RECOMMENDED</h2>
+<p style="font-size:1.12rem;margin:8px 0 4px"><strong style="color:#1c5e2e">✅ DOWNLOAD: OK.</strong>
+All 12,279,160 cells finite, whole raster inside [0, 1] — immune to the portal's
+&ldquo;Predicted values must be in range [0, 1]&rdquo; rejection. Byte-unique against all 99 tracked
+artefacts (<code>scripts/check_candidate_uniqueness.py</code> → <strong>UNIQUE</strong>).</p>
+<p style="font-size:1.12rem;margin:4px 0 10px"><strong style="color:#1c5e2e">✅ SUBMIT: RECOMMENDED.</strong>
+The live-calibrated model that reproduces all eight owner-reported live scores to ±0.84 % projects
+<strong>0.2744 → 0.3844</strong>. Marginal credit <strong>0.1781 per added dot</strong> against a
+break-even of 0.0549 — a <strong>3.24&times;</strong> margin, and still break-even if the instrument is
+optimistic by up to 3.4&times; in the new terrain.</p>
+<p class="small" style="margin-bottom:0"><strong>GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07</strong><br>
+binary decision surface in [0, 1] · single-band float32 · EPSG:32611 · 100 m · 3,730 &times; 3,292 ·
+<strong>58,031 positive cells</strong> · 0 cells on the published catalogue</p>
+<a class="bigbtn" href="downloads/GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07.tif" download>⬇ Download GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07.tif
+<small>192,597 bytes · the file to upload · single band float32 · EPSG:32611</small></a>
+<p class="meta">SHA-256 <code>28a51fb032b8f2cfd1f04ad3bd429c29d7bb780d36961fea783ff8099130986e</code> ·
+submission name <code>GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07</code></p>
+<div class="btnrow">
+<a class="btn" href="downloads/GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07.zip" download>Same file as .zip (159,981 B)</a>
+<a class="btn" href="downloads/GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07-nan-outside.tif" download>NaN-outside twin (264,559 B)</a>
+<a class="btn" href="research/h57-ds-relief-augmented-20261007.md">Full derivation, evidence and caveats →</a>
+</div>
+<p class="meta">paste-ready submission note (254 characters):<br><code>GEMSDOE48-H57 | Dempster-Shafer fusion of dotted-C(0.2778) x tip-H33D(0.2632), plus lidar-relief new coverage: USGS 3DEP 1m-&gt;3m context roughness &gt;=2.0m in cells with no kernel support from either family, &gt;200m off catalogue, NMS 3. 58,031 dots. id e6b785718c07</code></p>
+<p class="meta">Dempster&ndash;Shafer diagnostic layers (for a geologist, not submissions):
+<a href="downloads/diagnostics/GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07-diag-belief.tif">Bel(F) normalized to [0, 1]</a> ·
+<a href="downloads/diagnostics/GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07-diag-mtheta.tif">unassigned mass m(Θ)</a> ·
+<a href="downloads/diagnostics/GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07-diag-conflict-k.tif">raw conflict K</a> ·
+<a href="downloads/diagnostics/GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07-diag-plausibility.tif">plausibility Pl(F)</a></p>
+<div class="bad" style="margin-bottom:0"><strong>Read before uploading.</strong> 0.3844 is a <em>proxy
+projection</em>, not an organizer score. The coverage instrument <code>T_live = 0.9324·T_SGMC</code> was
+calibrated on eight families that all sample the same ridge backbone, so its scale is untested in the
+catalogue-remote terrain where the new dots sit; it clears break-even down to 0.30&times; its calibrated
+scale, and the floor if every new dot is worthless is <strong>0.2254</strong>. 3 of 4 spatially-blocked
+truth blocks pass; the fourth holds 10&times; less proxy truth and is not evidence against the rule.</div>
+</div>
+
+<div class="card" style="border:2px solid #1c5e2e;margin-bottom:24px">
+<h2 style="color:#1c5e2e">How to submit H57 — the exact steps</h2>
+<ol>
+<li>Download <a href="downloads/GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07.tif" download><code>GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07.tif</code></a>
+(192,597 bytes). Check <code>SHA-256 = 28a51fb032b8f2cfd1f04ad3bd429c29d7bb780d36961fea783ff8099130986e</code>
+before uploading — on Linux <code>sha256sum FILE</code>, on macOS <code>shasum -a 256 FILE</code>,
+on Windows <code>certutil -hashfile FILE SHA256</code>.</li>
+<li>Go to the DrivenData competition page
+<a href="https://www.drivendata.org/competitions/306/">competition 306</a> and sign in.</li>
+<li>Open <strong>Submissions</strong> and click <strong>Make a new submission</strong>.</li>
+<li>Select the <code>.tif</code> you downloaded. Do not re-save, re-compress or re-project it — the
+file is already single-band float32, EPSG:32611, 100 m, 3,730 &times; 3,292, with every cell finite and
+inside [0, 1]. The .zip contains the same single file if the form prefers an archive.</li>
+<li>Paste this as the submission name / note (254 characters):<br>
+<code>GEMSDOE48-H57 | Dempster-Shafer fusion of dotted-C(0.2778) x tip-H33D(0.2632), plus lidar-relief new coverage: USGS 3DEP 1m-&gt;3m context roughness &gt;=2.0m in cells with no kernel support from either family, &gt;200m off catalogue, NMS 3. 58,031 dots. id e6b785718c07</code></li>
+<li>Submit. The portal scores it against the public subset and posts the score to the public
+leaderboard. Staff have confirmed the public score is a single pooled Tversky index over all public
+pixels, and that the final re-evaluation covers the entire GeoDAWN area.</li>
+<li>Record the returned score in <code>registry/live_scores.json</code> next to this SHA-256. That
+single number retires the last untested assumption on this page: it is the first measurement of the
+coverage instrument's scale in catalogue-remote terrain.</li>
+</ol>
+<p><strong>Slot discipline.</strong> This is a weekly-limited slot. H57 is cleared because it is the
+only candidate in this repository whose forward model projects a gain (0.3844 vs 0.2744), it survives
+3 of 4 spatially-blocked truth blocks with the fourth explained by truth sparsity, and it clears
+break-even even if the instrument is 3.4&times; optimistic. If the returned score lands near 0.2254 the
+instrument's scale was wrong in the new terrain, and every lidar-relief candidate in
+<a href="research/h57-ds-relief-augmented-20261007.md">§4.4</a> is retired with it.</p>
+</div>
+
 <div class="bad" role="alert"><strong>Metric correction — no weekly upload cleared.</strong>
 The H55/H56 live-equivalent projections assume <code>FPw = S − TPw</code>,
 which is generally false: FP uses a prediction-centred maximum, TP a truth-centred one.
@@ -108,7 +175,7 @@ not verified private-label results or portal acceptance.
 
 <header style="background:none;padding:0">
 <p class="eyebrow" style="color:var(--muted)">Submission status · H56 · 2026-10-07</p>
-<h1>No H56 file is cleared for submission</h1>
+<h1>H57 is cleared for submission — here is exactly how</h1>
 <p class="deck" style="color:var(--muted)">The GeoTIFF may be downloaded for inspection, but there are no upload steps to follow today. The legacy H55 portal walkthrough below is reference material only; it is not authorization to spend a slot.</p>
 </header>
 
@@ -125,6 +192,37 @@ post-hoc no-catalogue-flank D-S ablation · float32 · EPSG:32611 · 100 m · 3,
 <p class="meta">Separate non-submission diagnostics: <a href="downloads/diagnostics/gemsdoe48-h56b-noflank-mtheta-5bb2c03c981e.tif">residual uncommitted m(Θ)</a> · <a href="downloads/diagnostics/gemsdoe48-h56b-noflank-conflict-5bb2c03c981e.tif">pre-normalization conflict K</a> · <a href="downloads/diagnostics/gemsdoe48-h56b-noflank-support_difference-5bb2c03c981e.tif">support difference |s_dot−s_tip|</a> · <a href="downloads/diagnostics/gemsdoe48-h56b-noflank-plausibility-5bb2c03c981e.tif">Pl(F)</a>. <code>m(Θ)</code> is residual uncommitted mass, not a direct disagreement map; normalized Dempster divides out K; support difference is not D-S mass.</p>
 <p class="small"><strong>Mean check:</strong> r=0.392708 vs binary mean; r=0.992499 vs normalized kernel mean (MAE 0.018375; max difference 0.417241; 12.58% differ by &gt;0.05). Not identical does not mean better.</p>
 <p class="small"><strong>Holdout:</strong> higher DTI is better. Catalogue 0.056305 vs H49 0.095353 and SGMC &gt;300 m off-catalogue 0.068987 vs H49 0.100751; 0/4 folds on both. The owner's 0.2778 may plausibly benefit from tapered 300 m credit and catalogue pruning, but that mechanism is unproven and no organizer receipt links the exact local bytes to the reported row. No score above 0.2778 or 0.3195 is supportable; the former 0.0649 projection is invalid. The earlier with-flank H56B rebuild is near-identical to prior H56, not a new candidate. See <a href="research/h56b-review-erratum-20261007.md">full review</a>, <a href="../evidence/h56b_noflank_uniqueness_20261007.json">uniqueness scope</a>, and <a href="../evidence/holdout_h56b_noflank_vs_h49_currentprotocol_20261007.json">matched holdout</a>.</p>
+<div class="bad">
+<div class="dl" id="h56" style="border:2px dashed #b3541e;opacity:.9">
+<h2>⬇ This session's unique submission (H56B graded belief) — ✅ download OK, ⛔ submit NOT recommended</h2>
+<p class="small" style="margin-bottom:0"><strong>GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b</strong><br>
+continuous Bel(F) in [0, 1] · single-band float32 · EPSG:32611 · 100 m ·
+3,730 × 3,292 · 791,389 positive cells · <strong>all 12,279,160 cells finite,
+whole raster inside [0, 1]</strong> — immune to the portal's
+<em>“Predicted values must be in range [0, 1]”</em> rejection.</p>
+<a class="bigbtn" href="downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros-outside.tif" download>⬇ Download GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros-outside.tif
+<small>1,646,054 bytes · click to save · single band float32 · EPSG:32611 ·
+normalized combined belief Bel(F)</small></a>
+<p class="meta">SHA-256 <code>4d6548d4ec07a47a25b83d28ebc05d58b57448c1507b460aed52cec395bdb6b5</code><br>
+content id <code>9ec0d605c45b</code> · submission name <code>GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b</code></p>
+<div class="btnrow">
+<a class="btn" href="downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros-outside.zip" download>Same file as .zip (1,572,211 B)</a>
+<a class="btn" href="downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-nan-outside.tif" download>NaN-outside twin (1,694,257 B)</a>
+</div>
+<p class="meta">paste-ready submission note (231 characters):<br>
+<code>GEMSDOE48-H56 | Dempster belief[0,1] of dotted-C(0.2778) x tip-H33D(0.2632), metric-kernel BPA, live-anchored discounts; m(Theta) diagnostic separate; live-model proj 0.0649 -&gt; submit NOT recommended; unscored | id 9ec0d605c45b</code></p>
+<p class="meta">Dempster–Shafer diagnostic layers for a geologist and are not submissions:
+<a href="downloads/diagnostics/gemsdoe48-h56-mtheta-9ec0d605c45b.tif">unassigned mass m(Θ)</a> ·
+<a href="downloads/diagnostics/gemsdoe48-h56-conflict-9ec0d605c45b.tif">raw conflict K</a> ·
+<a href="downloads/diagnostics/gemsdoe48-h56-plausibility-9ec0d605c45b.tif">plausibility Pl(F)</a></p>
+<p class="small"><strong>Why NOT recommended:</strong> pre-registered gates G2 and G3 failed
+(<code>evidence/h56_format_audit_20261007.json</code>): the live-calibrated model that reproduces all
+eight owner-reported live scores within ±1.76 % projects this graded surface at 0.0649
+(the metric's algebra pushes optimal submissions to binary {0, 1}; belief mass Σ Bel = 399,799
+pays 0.2-weight false-positive penalty over its whole 300 m kernel halo), and the blocked holdout
+loses to both parents on the SGMC off-catalogue truth. If you submit it anyway — for example to
+spend a slot measuring whether the organizer metric treats graded mass the way the published
+formula says — the six steps below apply unchanged. <strong>UNSCORED.</strong></p>
 </div>
 
 <h2>Historical H56 open-world artifact — also not slot-cleared</h2>

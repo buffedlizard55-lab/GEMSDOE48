@@ -38,14 +38,21 @@ def read_json(name: str) -> dict:
 
 
 def test_download_is_prominent_and_names_the_h56b_noflank_artifact():
+    # The H57 session cleared a candidate for submission, so the cleared H57 download is
+    # now the first content on these pages and this (not-recommended) H56B-NF research
+    # artefact sits below it. The invariant is unchanged in substance: the *cleared*
+    # candidate's one-click download must be first.
+    cleared = "GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07.tif"
     for name in ("index.html", "executive-summary.html"):
         text = (DOCS / name).read_text(encoding="utf-8")
         body = text.split("<main", 1)[1]
-        link = body.index(f'href="{PRIMARY_REL}"')
+        link = body.index(f'href="downloads/{cleared}"')
         before = body[:link]
         assert "<table" not in before
         assert "bigbtn" in before
         assert len(before) < 3500
+        assert body.index(f'href="{PRIMARY_REL}"') > link, (
+            f"{name}: the not-recommended H56B-NF download must sit below the cleared H57 one")
         assert PRIMARY_NAME in text
         assert "DOWNLOAD: OK" in flat(text)
         assert "SUBMIT: NOT RECOMMENDED" in flat(text)

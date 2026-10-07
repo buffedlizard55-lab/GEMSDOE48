@@ -1,5 +1,13 @@
 # Future hypothesis slate after H56 review — frozen 2026-10-07 17:43 UTC
 
+> **Namespace collision.** The identifiers **H57-A … H57-E** in this slate are *future, unbuilt*
+> plans. A separate same-day session built and cleared an actual submission under the bare name
+> **H57** — `GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07`, documented in
+> [`h57-ds-relief-augmented-20261007.md`](h57-ds-relief-augmented-20261007.md). That file is not
+> part of this slate and is not superseded by it. Where this slate's H57-C needs the full-area 3 m
+> DEM, the cleared H57 uses the 100 m scarp mosaic `data/external/h52_scarp3m_100m.tif`, which is
+> present locally (697 tiles, 0 merge failures).
+
 **Purpose:** document five exact, unbuilt candidate operators before any future implementation. This is a new forward plan, not a preregistration for earlier H56/H56B scores. It does not supersede historical receipts. `H57-A` to `H57-E` are namespaced to avoid the conflicting reuse of H56-B/C/D across the main and later H56 lists.
 
 The ordering below is **screening order by data/implementation readiness**, not an expected-score ranking. Expected DTI impact is an uncertain research prior only. A numeric prior is not supportable for most candidates before construction and blocked evaluation; no value below is a leaderboard projection. DTI is a similarity score (higher is better).
