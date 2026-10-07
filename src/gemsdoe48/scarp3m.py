@@ -23,6 +23,13 @@ Per pixel (3 m) we therefore compute, for a set of candidate strike orientations
     score  = H · facing^p / (σ_ctx + c)           dimensionless anomaly
 
 Everything is label-free. The catalogue is used only for evaluation.
+
+Known v1 limitations (synthetic tests in tests/test_scarp3m.py):
+  * the 60 m regional detrend absorbs ~25 % of a step, so H is an *effective* height;
+  * the far-field samples are single perpendicular samples at ±w, so a double-edged trench
+    wider than ~6 m (canal, wide road cut) registers like a step if one sample falls in it —
+    v2 should require consistent offsets at two baselines (±w and ±2w);
+  * grabens / paired antithetic scarps narrower than 2w are partly cancelled.
 """
 from __future__ import annotations
 
