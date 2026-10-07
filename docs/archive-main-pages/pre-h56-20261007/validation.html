@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="H56 spatial-block results versus the current H49 proxy best, local format/diagnostic/uniqueness audits, and explicit no-slot decision.">
-<title>GEMSDOE48 H56 — validation and slot decision</title>
+<meta name="description" content="Blocked spatial holdout on two public proxies, format audit, uniqueness audit, determinism check and test suite for the H55 candidate.">
+<title>GEMSDOE48 H55 — validation</title>
 <style>
 :root{color-scheme:light;--ink:#12241d;--muted:#54665c;--paper:#f4f4ec;--panel:#fffefa;
 --line:#d7ddd1;--green:#1d4c3a;--green2:#2f6b52;--soft:#e3eee5;--amber:#8a4a15;
@@ -96,58 +96,16 @@ font-family:var(--mono);font-size:.78rem;overflow-wrap:anywhere;margin:10px 0}
 <a href="irregularities.html">Irregularities</a>
 <a href="sources.html">Sources</a>
 <a href="next-steps.html">Next steps</a>
-<a href="research/h56-results-20261007.md">H56 results</a>
+<a href="research/h55-live-model-ceiling-and-candidate-20261007.md">Full report</a>
 </div></nav>
 <main class="wrap">
-<div class="bad" role="alert"><strong>Metric correction — no weekly upload cleared.</strong>
-The H55/H56 live-equivalent projections assume <code>FPw = S − TPw</code>,
-which is generally false: FP uses a prediction-centred maximum, TP a truth-centred one.
-Treat the 0.2843 "ceiling" and H56's 0.0649 as <em>historical surrogate outputs</em>,
-not verified private-label results or portal acceptance.
-<a href="research/metric-identity-erratum-20261007.md">Read the derivation and executable counterexample</a>.</div>
-<div class="bad" role="alert"><strong>Research correction — no upload cleared.</strong>
-The H55 0.2843 “ceiling” and inverted truth totals rely on <code>FPw = S − TPw</code>,
-which is false in general under the official metric. They are historical model outputs,
-not private-label bounds or evidence that a new file will beat 0.2778.
-H55 fails the mass-neutral gate. Local TIFF checks are not organizer acceptance.
-<a href="research/metric-identity-erratum-20261007.md">Read the derivation and next validation steps</a>.</div>
 
 <header style="background:none;padding:0">
-<p class="eyebrow" style="color:var(--muted)">H56 validation · four fixed spatial blocks · two public proxies</p>
-<h1>H56 files fail the same-protocol H49 gate; no slot is cleared</h1>
+<p class="eyebrow" style="color:var(--muted)">Validation · four fixed spatial blocks · two public proxies</p>
+<h1>What was tested, what passed, and what the tests are worth</h1>
 </header>
 
-<h2>H56B validation (this session, 2026-10-07) — graded belief: format PASS, holdout FAIL, live-model FAIL</h2>
-<section class="card" style="border-width:2px">
-<p>The H56B submission (normalized Dempster belief, dotted-C × tip-H33-D) went through the full battery:</p>
-<ul class="small">
-<li><strong>Format audit — PASS (10/10)</strong> <code>evidence/h56_format_audit_20261007.json</code>: CRS EPSG:32611, transform, shape 3,730 × 3,292, single band float32, all 12,279,160 cells finite, values in [0,1], max = 1, nodata unset, zeros outside footprint — immune to the portal's “Predicted values must be in range [0,1]” rejection.</li>
-<li><strong>Uniqueness — PASS</strong> <code>evidence/h56_uniqueness_20261007.json</code>: SHA-256 <code>4d6548d4ec07a47a25b83d28ebc05d58b57448c1507b460aed52cec395bdb6b5</code> distinct from all 67 prior downloads and every registry mirror pin; support Jaccard vs the union 0.0605 (it is the kernel halo, not a dot set); nearest prior neighbour r = 0.9907 (the H48-1 diagnostic belief field — a diagnostic, never submitted), with affine-residual structure distinct from any naive mean (see below).</li>
-<li><strong>Not the naive mean</strong> <code>evidence/build_h56_belief_receipt_20261007.json</code>: Pearson r = 0.389 against the binary mean ½(1<sub>dot</sub>+1<sub>tip</sub>) (MAE 0.0699, max |Δ| 0.823, affine-fit mean |residual| 0.120); against the normalized kernel mean r = 0.987 but the best affine fit leaves mean |residual| 0.0111 and 12.46 % of the footprint differs by &gt; 0.05 — not an affine rescaling of either average.</li>
-<li><strong>Blocked holdout — FAIL</strong> <code>evidence/holdout_h56_spatial_20261007.json</code> (H55 protocol, 4 quadrants, 300 m halo, official DTI): catalogue truth means — H56 0.0321 vs dotted 0.0070 (wins) but tip 0.0897 (loses); SGMC-off truth — H56 0.0735 vs dotted 0.0970 and tip 0.0970 (loses both). Gate requires beating both parents ≥ 3/4 folds on both truths: not met.</li>
-<li><strong>Live-model projection — FAIL</strong> <code>evidence/h56_live_model_projection_20261007.json</code>: H56 projects at <strong>0.0649</strong> (mass Σ Bel = 399,799 pays 0.2-weight FP over the whole kernel halo); sanity: the same instrument reconstructs dotted-C at 0.2728 (calibration 0.27277) and the union at 0.2588 (the H55 session's −0.0140 pricing, reproduced exactly). Even threshold-binarizing the belief at the pignistic 0.5 only reaches 0.0854 — every DS recombination of these two families is now closed by measurement.</li>
-<li><strong>Verdict banner</strong>: G1 PASS, G2 FAIL, G3 FAIL → “DOWNLOAD OK — SUBMIT NOT RECOMMENDED”, computed after the numbers existed, never before.</li>
-</ul>
-<p class="small"><strong>Research battery (new-hypothesis validation before touching a slot)</strong>
-<code>evidence/h56_research_battery_20261007.json</code>: all-19-band screen; the previous session's
-Priority-3 candidate (strain-rate ridges) implemented and measured at projection 0.0152 (dead);
-new DEMGLOW candidate measured at 0.0028 vs random control 0.0023 (dead). Full ranking:
-<a href="research/hypotheses-h56-20261007.md"><code>docs/research/hypotheses-h56-20261007.md</code></a>.</p>
-</section>
-
-
-<h2>Current H56 results and output audits</h2>
-<div class="bad"><strong>NO SLOT CLEARED.</strong> H56-DS and H56-A fail to beat same-protocol H49 on both public proxy targets, with 0/4 folds positive. The local format and diagnostic audits are not organizer acceptance.</div>
-<table><thead><tr><th>candidate</th><th>catalogue mean</th><th>delta vs H49</th><th>positive folds</th><th>SGMC-off mean</th><th>delta vs H49</th><th>positive folds</th></tr></thead><tbody>
-<tr><td>H49 reference</td><td>0.095353</td><td>—</td><td>—</td><td>0.100751</td><td>—</td><td>—</td></tr>
-<tr class="hl"><td>H56-DS open-world Bel(F)</td><td>0.054242</td><td class="neg">−0.041111</td><td>0/4</td><td>0.066070</td><td class="neg">−0.034681</td><td>0/4</td></tr>
-<tr><td>H56-A machine-spec Hessian-only probe, 37,654 cells</td><td>0.014282</td><td class="neg">−0.081071</td><td>0/4</td><td>0.006531</td><td class="neg">−0.094220</td><td>0/4</td></tr>
-</tbody></table>
-<p>Protocol: four fixed NW/NE/SW/SE quadrants; held-out core plus 300 m halo; official distance-weighted Tversky metric; separate catalogue and >300 m off-catalogue SGMC proxy. Both truth layers are public owner-mirror maps, not private expert labels; candidate source surfaces were not reconstructed independently per fold. The H56-A row applies only to the explicit machine-readable Hessian-only test: the original prose slate also mentions an unparameterized structure-coherence term, which remains untested; see the <a href="research/h56-slate-erratum-20261007.md">erratum</a>.</p>
-<p><strong>H56-DS local file audit:</strong> one-band float32, EPSG:32611, 100 m, 3,730 × 3,292; all values finite and in [0,1]; zeros outside; local validator and all five diagnostic checks pass. The 85-raster local uniqueness audit finds no hash/pixel duplicate. H53 nevertheless has the same two-family D-S concept as a diagnostic; H56 is a new open-world parameterization, not a new geological signal. It differs numerically from the arithmetic mean (Pearson 0.99668, MAE 0.01126), but top-37,654 rank Jaccard is 1.0.</p>
-<p>Receipts: <a href="../evidence/h56_decision_20261007.json">consolidated decision</a> · <a href="../evidence/h56_submission_validation_20261007.json">format</a> · <a href="../evidence/h56_diagnostics_validation_20261007.json">diagnostics</a> · <a href="../evidence/h56_uniqueness_audit_20261007.json">uniqueness/prior art</a> · <a href="research/h56-results-20261007.md">full report</a>.</p>
-
-<h2>Historical H55 mass-neutral gate — prior artifact failed</h2>
+<h2>The repository's newer mass-neutral gate — H55 FAILS it</h2>
 <div class="bad"><strong>This candidate FAILS the repository's newest gate, and that is
 reported before anything favourable.</strong> A concurrent session merged
 <code>scripts/audit_candidate.py</code> (protocol <code>GEMSDOE48-GATE-2</code>, mass-neutral) while
@@ -332,7 +290,7 @@ its range rejection, and the internal consistency of the build, format and uniqu
 </main>
 <footer class="wrap">
 <p><strong>GEMSDOE48</strong> — auditable fault-surface research for DrivenData competition 306
-(DOE GEMS Prize). Built 2026-10-07 16:37 UTC by
+(DOE GEMS Prize). Built 2026-10-07 06:11 UTC by
 <code>scripts/build_site_h55.py</code> directly from the receipts in <code>evidence/</code>.</p>
 <p class="small"><strong>No organizer score exists for any file in this repository.</strong>
 Every live number is OWNER-REPORT class: a score pasted by the repository owner, not an

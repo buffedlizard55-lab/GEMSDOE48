@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Official metric, score-attribution, feature-stack, and geology sources used for H56, with provenance and access limits.">
-<title>GEMSDOE48 H56 — sources and provenance</title>
+<meta name="description" content="External sources behind the H55 session, what each supports, and the limit of each.">
+<title>GEMSDOE48 H55 — sources</title>
 <style>
 :root{color-scheme:light;--ink:#12241d;--muted:#54665c;--paper:#f4f4ec;--panel:#fffefa;
 --line:#d7ddd1;--green:#1d4c3a;--green2:#2f6b52;--soft:#e3eee5;--amber:#8a4a15;
@@ -96,65 +96,33 @@ font-family:var(--mono);font-size:.78rem;overflow-wrap:anywhere;margin:10px 0}
 <a href="irregularities.html">Irregularities</a>
 <a href="sources.html">Sources</a>
 <a href="next-steps.html">Next steps</a>
-<a href="research/h56-results-20261007.md">H56 results</a>
+<a href="research/h55-live-model-ceiling-and-candidate-20261007.md">Full report</a>
 </div></nav>
 <main class="wrap">
-<div class="bad" role="alert"><strong>Metric correction — no weekly upload cleared.</strong>
-The H55/H56 live-equivalent projections assume <code>FPw = S − TPw</code>,
-which is generally false: FP uses a prediction-centred maximum, TP a truth-centred one.
-Treat the 0.2843 "ceiling" and H56's 0.0649 as <em>historical surrogate outputs</em>,
-not verified private-label results or portal acceptance.
-<a href="research/metric-identity-erratum-20261007.md">Read the derivation and executable counterexample</a>.</div>
-<div class="bad" role="alert"><strong>Research correction — no upload cleared.</strong>
-The H55 0.2843 “ceiling” and inverted truth totals rely on <code>FPw = S − TPw</code>,
-which is false in general under the official metric. They are historical model outputs,
-not private-label bounds or evidence that a new file will beat 0.2778.
-H55 fails the mass-neutral gate. Local TIFF checks are not organizer acceptance.
-<a href="research/metric-identity-erratum-20261007.md">Read the derivation and next validation steps</a>.</div>
 
 <header style="background:none;padding:0">
-<p class="eyebrow" style="color:var(--muted)">H56 sources, provenance, and limits</p>
-<h1>What the cited sources establish—and what they do not</h1>
+<p class="eyebrow" style="color:var(--muted)">Sources, and the limit of each</p>
+<h1>Everything external this session relied on</h1>
 </header>
-<div class="warn"><strong>H56 source status:</strong> the official competition metric, leaderboard and known-fault masking clarification are linked below and in the H56 report. The 19-band feature stack used for H56-A is a hash-pinned third-party mirror because the official data tab is login-gated here; hash verification is not organizer authentication. The magnetic and geochemical source payloads for H56-D/E were not downloaded or footprint-tested. Public geological sources support hypothesis context, not candidate performance.</div>
 <table><thead><tr>
 <th>source</th>
 <th>what it supports</th>
 <th>limit</th>
 <th>from this sandbox</th>
 </tr></thead><tbody>
-<tr><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">DrivenData competition 306 - DOE GEMS Prize, problem description page 967</a></td><td>the metric: 300 m triangular kernel, alpha = 0.2, beta = 0.8, TPw/FPw/FNw definitions; the submission format: single band float32, EPSG:32611, 100 m, 3,730 x 3,292, values in [0,1]. The data tab is login-gated here; H56-A used a separate third-party, SHA-pinned mirror.</td><td>not reachable from this sandbox and deliberately not fetched - the DrivenData terms of use prohibit robots and automatic access. Read from two independent sibling-repository transcriptions.</td><td><span class="pill no">not reachable</span></td></tr>
+<tr><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">DrivenData competition 306 - DOE GEMS Prize, problem description page 967</a></td><td>the metric: 300 m triangular kernel, alpha = 0.2, beta = 0.8, TPw/FPw/FNw definitions; the submission format: single band float32, EPSG:32611, 100 m, 3,730 x 3,292, values in [0,1]</td><td>not reachable from this sandbox and deliberately not fetched - the DrivenData terms of use prohibit robots and automatic access. Read from two independent sibling-repository transcriptions.</td><td><span class="pill no">not reachable</span></td></tr>
 <tr><td><a href="https://github.com/drivendataorg/gems-prize-reference-solution">Organizers&#x27; reference solution: gems-prize-reference-solution</a></td><td>independent corroboration of the metric weights - the notebook trains with TverskyLoss(alpha=0.2, beta=0.8, mode=&#x27;binary&#x27;). Also cell 19, which writes the submission as an ALL-FINITE float32 raster with nodata unset and no NaN handling, corroborating the primary encoding chosen here.</td><td>shallow-cloned to /tmp this session. Its data/ directory is empty; the U-Net needs data/numeric_features.tif and data/labels.tif, both login-gated. The notebook contains NO submission-format guidance beyond cell 19.</td><td><span class="pill yes">reachable</span></td></tr>
-<tr><td><a href="https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516/4">Organizer forum scoring clarification (known USGS/INGENIOUS faults)</a></td><td>source-backed context for the explanation of why the owner-reported dotted A/B/C ladder can rise after removing catalogue-adjacent predictions</td><td>it does not authenticate the local B2 TIFF or prove that its bytes earned 0.2778; see the caveats and algebra in the H56 report</td><td><span class="pill no">external source linked</span></td></tr>
 <tr><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">Official leaderboard (single manual read, 2026-10-06 UTC)</a></td><td>the ceiling table targets: #1 xiaofanhu 0.3774, #2 alexoktaba 0.3345, #3 nchuzhoy 0.3262, #7 DARD 0.3195; and the observation that the 0.2778 row belongs to extradr19 (#13, 10 submissions)</td><td>one dated manual observation, snapshot at docs/data/leaderboard_20261007.json. No score-to-file receipt. Submission counts are a participant display field, not a file identity. Stale relative to the brief&#x27;s claim that 0.3195 is the top score.</td><td><span class="pill no">not reachable</span></td></tr>
 <tr><td><a href="https://gdr.openei.org/submissions/1391">Geothermal Data Registry submission 1391 - INGENIOUS Great Basin Regional Dataset Compilation</a></td><td>the H55-A conduit layer: 27,092 well and spring records with thermalclass, temp_c and three silica/calcite geothermometers</td><td>the local bytes were restored from a pinned owner mirror (GEMSDOE24 @ 07345ea0), not fetched from the GDR landing page in this run. Data.gov metadata reports CC BY 4.0; the GDR asset-level attribution/reuse terms were NOT independently verified. Its dist_known_fault_px column is label-derived and is dropped on read.</td><td><span class="pill no">not reachable</span></td></tr>
 <tr><td><a href="https://catalog.data.gov/dataset/ingenious-great-basin-regional-dataset-compilation">Data.gov catalog record for the INGENIOUS compilation</a></td><td>the CC BY 4.0 licence statement quoted for the conduit layer</td><td>catalog metadata only; it does not carry the GDR asset-level terms.</td><td><span class="pill no">not reachable</span></td></tr>
 <tr><td><a href="https://doi.org/10.15121/1881483">DOI 10.15121/1881483</a></td><td>persistent identifier for the INGENIOUS regional dataset used by H55-A</td><td>not resolved from this sandbox.</td><td><span class="pill no">not reachable</span></td></tr>
 <tr><td><a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS GeoDAWN airborne magnetic and radiometric surveys, northwestern Great Basin, Nevada</a></td><td>provenance of the radiometric K/Th/U/TC and Th-K, U-K, U-Th, TMI-up150 mirrors used to test target weightings (all of which lost to uniform)</td><td>DOI 10.5066/P93LGLVQ. Host unreachable from this sandbox; the layers were restored from the pinned GEMSDOE24 mirror and are owner-derived u8 quantisations, not the release&#x27;s float rasters.</td><td><span class="pill no">not reachable</span></td></tr>
 <tr><td><a href="https://www.usgs.gov/3d-elevation-program/about-3dep-products-services">USGS 3D Elevation Program</a></td><td>the free official source behind the 1 m DEM tiles used to build data/external/h52_scarp3m_100m.tif (706 of 716 zone-11 tiles) and therefore hypothesis H55-D</td><td>prd-tnm.s3.amazonaws.com and earthexplorer.usgs.gov both return HTTP 000 from this sandbox. Native-resolution DEM work must run in GitHub Actions with compact products committed back.</td><td><span class="pill no">not reachable</span></td></tr>
-<tr><td><a href="https://doi.org/10.5066/P93LGLVQ">USGS GeoDAWN release, DOI 10.5066/P93LGLVQ</a></td><td>official release context for H56-D magnetic-edge and H56-C lidar-source hypotheses; USGS release metadata identifies magnetic/radiometric products and CC0 terms</td><td>the exact magnetic payload, competition-footprint overlap, resolution, and geophysical artifacts were not downloaded or checked; do not infer H56-D is implementable from the landing page alone</td><td><span class="pill warn">availability only</span></td></tr>
-<tr><td><a href="https://mrdata.usgs.gov/geochem/">USGS National Geochemical Survey</a></td><td>public geographic downloads and national packages as a possible source for H56-E geochemical anomalies</td><td>no sample payload was audited for Great Basin coverage, sample media, dates, units, detection limits, or reuse at the actual sample level</td><td><span class="pill warn">not downloaded</span></td></tr>
-<tr><td><a href="https://www.usgs.gov/publications/discovering-blind-geothermal-systems-great-basin-region-integrated-geologic-and">USGS Great Basin blind geothermal play-fairway report</a></td><td>integrated structural, geophysical, geochemical, lidar, and temperature evidence as hypothesis-generation context</td><td>regional scientific context only; it does not validate any H56 transform or score</td><td><span class="pill warn">context only</span></td></tr>
 <tr><td><a href="https://epsg.io/32611">EPSG:32611 - WGS 84 / UTM zone 11N</a></td><td>the competition grid&#x27;s coordinate reference system; 100 m pixels, transform [100, 0, 243350, 0, -100, 4508550]</td><td>none material.</td><td><span class="pill no">not reachable</span></td></tr>
 <tr><td><a href="https://en.wikipedia.org/wiki/Tversky_index">Tversky index (metric background)</a></td><td>the generalisation of Dice/Jaccard that the DTI is an instance of, and why alpha and beta weight false positives and false negatives asymmetrically</td><td>background only; the kernel weighting and the 300 m radius are the organizer&#x27;s, not the index&#x27;s.</td><td><span class="pill no">not reachable</span></td></tr>
 <tr><td><a href="https://doi.org/10.1111/j.2517-6161.1967.tb00680.x">Dempster (1967) and Shafer (1976)</a></td><td>Dempster&#x27;s rule of combination and the frame of discernment used for the Bel / Pl / m(Theta) / K layers. Shafer, &#x27;A Mathematical Theory of Evidence&#x27;, Princeton University Press, 1976.</td><td>the rule&#x27;s normalisation is exactly what produces Zadeh&#x27;s (1984) paradox; Sentz &amp; Ferson (2002), Sandia SAND2002-0835, document the alternatives. Both K and m(Theta) are therefore shipped rather than one being presented as &#x27;the&#x27; disagreement.</td><td><span class="pill no">not reachable</span></td></tr>
 <tr><td><a href="https://github.com/buffedlizard55-lab">Hash-pinned owner mirrors on GitHub</a></td><td>every input this session used: GEMSDOE24 @ 07345ea0604953d7efb858d9cfbc21e20c7aca0b (labels, existing_faults, sample_submission, dense backbone, d1.5, conduit CSV, qfault traces, GeoDAWN extensions), GEMSDOE28 (h36 rung30, h32 prethin tip), GEMSDOE29 (sgmc-off-catalogue-44k), GEMSDOE @ c0c06ac82178f26b94fce3397036ef8f12a2f3a0 (the 419 MB official feature stack in five shards)</td><td>third-party owner copies, NOT organizer-authenticated. Hash pinning establishes byte identity only; reuse licences were not verified. Fetched over gh api (GitHub egress only); raw.githubusercontent.com is not on this sandbox&#x27;s allow-list, codeload.github.com and api.github.com are.</td><td><span class="pill yes">reachable</span></td></tr>
 </tbody></table>
-<h2>H56 addendum (2026-10-07)</h2>
-<p class="small">This session re-verified two external anchors directly from the allowed hosts and
-records the checks: (1) the organizers' reference-solution notebook
-(<a href="https://github.com/drivendataorg/gems-prize-reference-solution">github.com/drivendataorg/gems-prize-reference-solution</a>,
-fetched via api.github.com) trains with <code>TverskyLoss(alpha=0.2, beta=0.8)</code> — corroborating
-the metric weights this repository implements literally in <code>src/gems48/metric.py</code> (verified
-against a brute-force reference in <code>tests/test_metric.py</code>); the notebook contains no scoring
-implementation, so the competition problem page 967 remains the metric's authoritative text
-(not reachable from this sandbox by design). (2) The 419 MB official 19-band GeoDAWN features raster
-was restored byte-identical from the pinned five-shard mirror (SHA-256
-<code>4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5</code>) and used for the
-all-band screen in <code>evidence/h56_band_screen_20261007.json</code>; per-band official descriptions
-were read from the file's own band tags. Band 6 is tagged “tilt angle or total curvature” but
-correlates 0.9971 with radiometric total count — the pre-existing irregularity IR-H48-B6, unchanged.</p>
-
 <h2>Hash-pinned mirrors actually restored this session</h2>
 <table><thead><tr>
 <th>role</th>
@@ -184,7 +152,7 @@ obtained from a pinned GitHub mirror instead, which is why H55-B and H55-C are v
 </main>
 <footer class="wrap">
 <p><strong>GEMSDOE48</strong> — auditable fault-surface research for DrivenData competition 306
-(DOE GEMS Prize). Built 2026-10-07 16:37 UTC by
+(DOE GEMS Prize). Built 2026-10-07 06:11 UTC by
 <code>scripts/build_site_h55.py</code> directly from the receipts in <code>evidence/</code>.</p>
 <p class="small"><strong>No organizer score exists for any file in this repository.</strong>
 Every live number is OWNER-REPORT class: a score pasted by the repository owner, not an

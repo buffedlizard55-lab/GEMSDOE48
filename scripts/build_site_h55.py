@@ -1351,6 +1351,11 @@ the 0.2778 leaderboard row, which belongs to <code>extradr19</code>.</p>
 
 
 def main() -> int:
+    # This builder is for archived H55 pages. Never silently overwrite the
+    # current H56 landing page or its verified one-click downloads.
+    current = DOCS / "index.html"
+    if current.exists() and "GEMSDOE48 — H56" in current.read_text(encoding="utf-8"):
+        raise SystemExit("Refusing to overwrite the current H56 site with archived H55 pages")
     pages = {
         "research.html": build_research(),
         "leaderboard.html": build_leaderboard(),

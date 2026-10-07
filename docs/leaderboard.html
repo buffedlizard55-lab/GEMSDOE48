@@ -96,9 +96,15 @@ font-family:var(--mono);font-size:.78rem;overflow-wrap:anywhere;margin:10px 0}
 <a href="irregularities.html">Irregularities</a>
 <a href="sources.html">Sources</a>
 <a href="next-steps.html">Next steps</a>
-<a href="research/h55-live-model-ceiling-and-candidate-20261007.md">Full report</a>
+<a href="research/h56-results-20261007.md">H56 results</a>
 </div></nav>
 <main class="wrap">
+<div class="bad" role="alert"><strong>Metric correction — no weekly upload cleared.</strong>
+The H55/H56 live-equivalent projections assume <code>FPw = S − TPw</code>,
+which is generally false: FP uses a prediction-centred maximum, TP a truth-centred one.
+Treat the 0.2843 "ceiling" and H56's 0.0649 as <em>historical surrogate outputs</em>,
+not verified private-label results or portal acceptance.
+<a href="research/metric-identity-erratum-20261007.md">Read the derivation and executable counterexample</a>.</div>
 <div class="bad" role="alert"><strong>Research correction — no upload cleared.</strong>
 The H55 0.2843 “ceiling” and inverted truth totals rely on <code>FPw = S − TPw</code>,
 which is false in general under the official metric. They are historical model outputs,

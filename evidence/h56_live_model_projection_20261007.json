@@ -1,0 +1,52 @@
+{
+ "generated_utc": "2026-10-07T15:20:25.915773+00:00",
+ "model": "DTI = rho*Cov(X;B_elig)/(0.2*S + 0.8*|G|), graded extension: Cov and S value-weighted",
+ "rho": 0.06801513031394778,
+ "hidden_truth_px": 14027.470000000054,
+ "eligible_backbone_px": 103805,
+ "break_even_credit_at_0.2778": 0.05556,
+ "projection_note": "In-family fitted RMS 1.76% on binary artifacts; graded surfaces extrapolate the same forward model - an extrapolation, not a measurement.",
+ "surfaces": {
+  "h56_belief": {
+   "mass_S": 399799.43456685287,
+   "cov_elig": 86992.89251033668,
+   "dti_projection": 0.06489045881963633
+  },
+  "dotted_c_binary": {
+   "mass_S": 37654.0,
+   "cov_elig": 75206.82023682502,
+   "dti_projection": 0.27277037164552526
+  },
+  "tip_h33d_binary": {
+   "mass_S": 41865.0,
+   "cov_elig": 75459.83743648228,
+   "dti_projection": 0.2619248258692251
+  },
+  "union_binary": {
+   "mass_S": 47905.0,
+   "cov_elig": 79152.98003935993,
+   "dti_projection": 0.258789908333998
+  },
+  "naive_mean_binary": {
+   "mass_S": 39759.5,
+   "cov_elig": 69296.31823476349,
+   "dti_projection": 0.24581352852257013
+  },
+  "h56_belief_binarized_at_breakeven": {
+   "mass_S": 741305.0,
+   "cov_elig": 103758.71874438447,
+   "dti_projection": 0.04425025763632329
+  },
+  "h56_belief_binarized_at_pignistic_0.5": {
+   "mass_S": 346217.0,
+   "cov_elig": 101076.79056412006,
+   "dti_projection": 0.08543738218453399
+  }
+ },
+ "sanity_check_vs_calibration": {
+  "calibrated_cov_dotted_c": 75206.82023682503,
+  "recomputed_cov_dotted_c": 75206.82023682502,
+  "rel_diff_pct": -1.93491962331915e-14
+ },
+ "h56_mass_below_breakeven_px": 50084.0
+}

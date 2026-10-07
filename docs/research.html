@@ -96,9 +96,15 @@ font-family:var(--mono);font-size:.78rem;overflow-wrap:anywhere;margin:10px 0}
 <a href="irregularities.html">Irregularities</a>
 <a href="sources.html">Sources</a>
 <a href="next-steps.html">Next steps</a>
-<a href="research/h55-live-model-ceiling-and-candidate-20261007.md">Full report</a>
+<a href="research/h56-results-20261007.md">H56 results</a>
 </div></nav>
 <main class="wrap">
+<div class="bad" role="alert"><strong>Metric correction — no weekly upload cleared.</strong>
+The H55/H56 live-equivalent projections assume <code>FPw = S − TPw</code>,
+which is generally false: FP uses a prediction-centred maximum, TP a truth-centred one.
+Treat the 0.2843 "ceiling" and H56's 0.0649 as <em>historical surrogate outputs</em>,
+not verified private-label results or portal acceptance.
+<a href="research/metric-identity-erratum-20261007.md">Read the derivation and executable counterexample</a>.</div>
 <div class="bad" role="alert"><strong>Research correction — no upload cleared.</strong>
 The H55 0.2843 “ceiling” and inverted truth totals rely on <code>FPw = S − TPw</code>,
 which is false in general under the official metric. They are historical model outputs,
@@ -110,10 +116,16 @@ H55 fails the mass-neutral gate. Local TIFF checks are not organizer acceptance.
 <p class="eyebrow" style="color:var(--muted)">Research index</p>
 <h1>Reports, in reverse chronological order</h1>
 </header>
-<h2>This session (H55, 2026-10-07)</h2>
+<h2>Current session (H56, 2026-10-07) — no slot cleared</h2>
+<ul>
+<li><a href="research/h56-results-20261007.md"><strong>H56 results: open-world D-S deliverable and failed strain-ridge test</strong></a> — the current decision, one-click GeoTIFF, prior-art resolution, arithmetic-mean comparison, same-protocol H49 holdout, source-backed 0.2778 attribution, and limitations.</li>
+<li><a href="research/hypothesis-slate-h56-20261007.md">Five-hypothesis H56 slate</a> — frozen before H56 scoring; the machine-spec Hessian-only H56-A screen was tested and failed (the prose coherence extension remains untested), while H56-B through H56-E remain unbuilt. See the <a href="research/h56-slate-erratum-20261007.md">preregistration-text erratum</a>.</li>
+<li>Receipts: <a href="../evidence/build_h56_receipt_20261007.json">D-S build</a> · <a href="../evidence/h56_decision_20261007.json">consolidated decision</a> · <a href="../evidence/holdout_h56_ds_20261007.json">D-S holdout</a> · <a href="../evidence/holdout_h56a_strain_ridge_20261007.json">strain-ridge holdout</a> · <a href="../evidence/h56_submission_validation_20261007.json">format</a> · <a href="../evidence/h56_diagnostics_validation_20261007.json">diagnostics</a> · <a href="../evidence/h56_uniqueness_audit_20261007.json">prior-art/uniqueness</a> · <a href="../evidence/review_passes_h56_20261007.md">three review passes</a>.</li>
+</ul>
+<h2>Previous session (H55, 2026-10-07)</h2>
 <ul>
 <li><a href="research/h55-live-model-ceiling-and-candidate-20261007.md"><strong>A live-calibrated
-forward model, the family ceiling, and a conduit-anchored candidate</strong></a> — the primary
+forward model, the family ceiling, and a conduit-anchored candidate</strong></a> — the H55
 report. Contains the metric algebra, the eight-artifact inversion, the coverage-frontier ceiling,
 the proxy invalidation, the H55 construction, the risk accounting and the limitations.</li>
 <li><a href="research/hypothesis-slate-h55-20261007.md">Hypothesis slate H55</a> — five candidates

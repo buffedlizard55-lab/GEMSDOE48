@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "finalized_utc": "2026-10-07T15:43:11.752562+00:00",
+  "status": "NO_SLOT_CLEARED",
+  "current_proxy_best": {
+    "candidate": {
+      "name": "h49_balanced_same_protocol_reference",
+      "path": "docs/downloads/GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif",
+      "sha256": "9f028289c364c071065245799d7ed131600e80e9f0d10602806b12ce34d7cae8"
+    },
+    "source_receipt": "evidence/holdout_h56_h49_reference_20261007.json",
+    "catalogue_mean_dti": 0.0953532478651188,
+    "sgmc_off_catalogue_mean_dti": 0.10075118848176869,
+    "not_private_truth_or_organizer_score": true
+  },
+  "H56_DS": {
+    "build_receipt": "evidence/build_h56_receipt_20261007.json",
+    "holdout_receipt": "evidence/holdout_h56_ds_20261007.json",
+    "format_receipt": "evidence/h56_submission_validation_20261007.json",
+    "uniqueness_receipt": "evidence/h56_uniqueness_audit_20261007.json",
+    "comparison_vs_h49": {
+      "catalogue_proxy": {
+        "candidate_mean_dti": 0.054242399101286275,
+        "h49_same_protocol_mean_dti": 0.0953532478651188,
+        "mean_delta_vs_h49": -0.041110848763832517,
+        "fold_delta_vs_h49": {
+          "NW": -0.04034480433608356,
+          "NE": -0.059808888145776194,
+          "SW": -0.034617013558835556,
+          "SE": -0.029672689014634733
+        },
+        "positive_folds": 0,
+        "pass_numeric_improvement": false
+      },
+      "sgmc_off_catalogue_gt_300m_proxy": {
+        "candidate_mean_dti": 0.06606974787821929,
+        "h49_same_protocol_mean_dti": 0.10075118848176869,
+        "mean_delta_vs_h49": -0.03468144060354939,
+        "fold_delta_vs_h49": {
+          "NW": -0.03906651059332465,
+          "NE": -0.021452424751424004,
+          "SW": -0.06871645932833917,
+          "SE": -0.009490367741109756
+        },
+        "positive_folds": 0,
+        "pass_numeric_improvement": false
+      }
+    },
+    "download": "docs/downloads/GEMSDOE48-H56-OWDS-B2xH33D-20261007-1f7b5a4f18db-zeros-outside.tif",
+    "download_ok": true,
+    "submission_recommendation": "DO_NOT_SUBMIT; public proxy is substantially below H49, and no private-label or organizer acceptance exists.",
+    "novelty": {
+      "not_claimed": "Dempster-Shafer, family fusion, or geological source novelty; H53 already contains the same two-family parents and a Dempster diagnostic.",
+      "resolved_difference": "H53 family diagnostic used alpha=0.50 simple-support masses m(F)=alpha*b, m(notF)=alpha*(1-b), m(Theta)=1-alpha, and H53's full three-source product adds GeoDAWN. H56 uses the frozen open-world m(notF)=alpha*0.10*(1-b), alpha=0.60 per family, then exports relative max-normalized Bel(F) with separate raw canonical m(Theta) and conflict K.",
+      "interpretation": "This is a distinct, audited parameterization/output\u2014not a relabelled H53 file or a claim of a new geological signal. The two parent masks and their high spatial dependence are unchanged."
+    },
+    "nonmean_diagnostics": {
+      "comparison_domain": "valid competition footprint cells",
+      "pearson_bel_vs_naive_mean": 0.9966787799359585,
+      "spearman_bel_vs_naive_mean_deterministic_sample": 0.9999865086016013,
+      "spearman_sample_cells": 99373,
+      "mean_absolute_difference": 0.011260947501645375,
+      "median_absolute_difference": 0.0,
+      "max_absolute_difference": 0.196502685546875,
+      "fraction_abs_difference_gt_0p05": 0.12524855472984048,
+      "exactly_equal_cells": 4407598,
+      "best_affine_fit": {
+        "slope": 1.1407826220353996,
+        "intercept": 0.002554278945895818,
+        "mean_absolute_residual": 0.006647042480264611
+      },
+      "top_37654_budget_jaccard": 1.0,
+      "is_pixelwise_equal": false
+    },
+    "outside_encoding_note": "all-finite zeros outside passed local range checks; official description also documents null/NaN outside, and organizer acceptance is untested."
+  },
+  "H56_A": {
+    "build_receipt": "evidence/h56_strain_ridge_build_20261007.json",
+    "holdout_receipt": "evidence/holdout_h56a_strain_ridge_20261007.json",
+    "comparison_vs_h49": {
+      "catalogue_proxy": {
+        "candidate_mean_dti": 0.014282279031198485,
+        "h49_same_protocol_mean_dti": 0.0953532478651188,
+        "mean_delta_vs_h49": -0.08107096883392031,
+        "fold_delta_vs_h49": {
+          "NW": -0.07017034107266108,
+          "NE": -0.10195892003249847,
+          "SW": -0.07681666836921583,
+          "SE": -0.07533794586130585
+        },
+        "positive_folds": 0,
+        "pass_numeric_improvement": false
+      },
+      "sgmc_off_catalogue_gt_300m_proxy": {
+        "candidate_mean_dti": 0.006530837806980838,
+        "h49_same_protocol_mean_dti": 0.10075118848176869,
+        "mean_delta_vs_h49": -0.09422035067478784,
+        "fold_delta_vs_h49": {
+          "NW": -0.08753842127969727,
+          "NE": -0.10169404093305284,
+          "SW": -0.11041352496876927,
+          "SE": -0.07723541551763201
+        },
+        "positive_folds": 0,
+        "pass_numeric_improvement": false
+      }
+    },
+    "download": "scratch/H56-A-strain-ridge-massmatched-20261007.tif",
+    "download_ok_for_research_only": true,
+    "submission_recommendation": "DO_NOT_SUBMIT; machine-spec mass-matched Hessian-only strain-ridge probe fails H49 on both public proxy targets.",
+    "preregistration_interpretation": "The original Markdown slate also mentioned an unspecified structure-tensor term; the explicit machine-readable frozen_test omits it and the builder did not compute it. This result applies to the Hessian-only screen, not the coherence-augmented prose idea.",
+    "preregistration_erratum": "docs/research/h56-slate-erratum-20261007.md",
+    "feature_stack_caveat": "SHA-pinned third-party mirror, not organizer-authenticated; 3,061 in-footprint cells are nodata and 1,540 valid stack cells outside the competition footprint were excluded."
+  },
+  "0_2778_attribution": {
+    "status": "OWNER_REPORTED_FAMILY_SCORE_NOT_VERIFIED_FOR_LOCAL_BYTES",
+    "explanation": "The owner-reported A\u2192B\u2192C dotted ladder (0.2600\u21920.2708\u21920.2778) is algebraically consistent with removing predictions close to the public USGS/INGENIOUS catalogue that the organizer says is masked during scoring. This is a plausible explanation, not proof that the exact local B2 TIFF earned 0.2778; the local audit says UNSCORED and no organizer file-to-score receipt exists.",
+    "primary_record": "docs/research/why-02778-and-ceiling-20261007.md",
+    "official_metric": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+    "official_mask_clarification": "https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516/4",
+    "leaderboard_observation": "The 2026-10-06 snapshot placed a 0.2778 row at rank 13; a leaderboard row does not identify these local file bytes."
+  },
+  "limitations": [
+    "Four-quadrant spatial-block outputs are conditional public-map proxy diagnostics, not private expert-label scores.",
+    "The frozen family inputs were not reconstructed independently inside each fold; the H33-2-B2 owner audit describes full-scene catalogue-distance pruning, creating potential leakage.",
+    "No organizer portal upload/acceptance, official score, or leaderboard link to the H56 file exists.",
+    "H56-DS is a distinct open-world D-S parameterization, not a new geological evidence family or concept-level novelty claim.",
+    "No weekly competition slot is cleared or recommended."
+  ]
+}

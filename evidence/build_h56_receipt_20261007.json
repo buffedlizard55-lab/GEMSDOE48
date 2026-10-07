@@ -1,0 +1,327 @@
+{
+  "schema_version": 1,
+  "status": "BUILT_AND_PUBLIC_PROXY_TESTED_NOT_SLOT_CLEARED",
+  "built_utc": "2026-10-07T15:36:58.471460+00:00",
+  "candidate": {
+    "id": "H56-DS",
+    "unique_name": "GEMSDOE48-H56-OWDS-B2xH33D-1f7b5a4f18db",
+    "primary": {
+      "path": "docs/downloads/GEMSDOE48-H56-OWDS-B2xH33D-20261007-1f7b5a4f18db-zeros-outside.tif",
+      "bytes": 1888728,
+      "sha256": "1f7b5a4f18dbc62f31b14078545332238be9289dd388d57f550d75fb5a5fe95a",
+      "dtype": "float32",
+      "bands": 1,
+      "width": 3292,
+      "height": 3730,
+      "crs": "EPSG:32611",
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": null,
+      "encoding": "all_finite_zeros_outside",
+      "all_cells_finite": true,
+      "all_cells_in_range_0_1": true,
+      "finite_cells": 12279160,
+      "nan_cells": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "positive_cells": 791389,
+      "in_footprint_cells": 5167373,
+      "portal_range_error_immune": true,
+      "content_id": "1f7b5a4f18db"
+    },
+    "portal_note_draft_do_not_submit_without_gate": "GEMSDOE48-H56-OWDS-B2xH33D-1f7b5a4f18db | q=0.10 open-world absence, alpha=0.60, metric-kernel B2 x H33-D; Bel normalized; mTheta/K separate; unscored research only, not slot-cleared.",
+    "portal_note_characters": 183,
+    "weekly_slot_cleared": false,
+    "organizer_score_exists": false
+  },
+  "inputs": {
+    "dotted_b2_prune_02778.tif": {
+      "path": "data/families/dotted_b2_prune_02778.tif",
+      "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+      "bytes": 219065,
+      "pin_matched": true
+    },
+    "tip_h33d_stepover.tif": {
+      "path": "data/raw/tip_h33d_stepover.tif",
+      "sha256": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757",
+      "bytes": 917544,
+      "pin_matched": true
+    },
+    "footprint-mask.tif": {
+      "path": "data/source_mirrors/footprint-mask.tif",
+      "sha256": "ddadb8c96cda673b91ddaa0bbed2aa955c358a8f6196c4c4e8fa70d454dd429f",
+      "bytes": 34174,
+      "pin_matched": true
+    }
+  },
+  "parents": {
+    "dotted_b2": {
+      "path": "data/families/dotted_b2_prune_02778.tif",
+      "positive_cells": 37654,
+      "owner_reported_live": 0.2778,
+      "exact_file_score_receipt": false
+    },
+    "tip_stepover_h33d": {
+      "path": "data/raw/tip_h33d_stepover.tif",
+      "positive_cells": 41865,
+      "owner_reported_live": 0.2632,
+      "exact_file_score_receipt": false
+    },
+    "footprint_cells": 5167373,
+    "overlap_cells": 31614,
+    "union_cells": 47905,
+    "jaccard": 0.6599311136624569,
+    "b2_share_in_overlap": 0.839592075211133,
+    "h33d_share_in_overlap": 0.755141526334647
+  },
+  "method": {
+    "source_model": "Each binary sparse mask is transformed to the official 300 m triangular max-credit field.",
+    "frame": "Theta = {fault, not fault}",
+    "mass_assignment": "m(F)=alpha*b; m(notF)=alpha*q*(1-b); m(Theta)=1-m(F)-m(notF)",
+    "reliability_alpha": {
+      "dotted": 0.6,
+      "tip_stepover": 0.6
+    },
+    "absence_informativeness_q": 0.1,
+    "q_interpretation": "Only 10% of a source's lack-of-support mass is assigned to not-fault; 90% remains uncommitted. This is a preregistered open-world assumption, not learned or calibrated.",
+    "combination": "Canonical normalized Dempster orthogonal sum, pixelwise.",
+    "conflict_semantics": "K is pre-normalization conflict and is not included in canonical residual m(Theta). Both are exported separately.",
+    "primary": "Bel(F) divided by its maximum inside the valid footprint, then float32; relative favorability, not calibrated probability.",
+    "outside_encoding": "all finite float32 zeros, nodata unset; selected to avoid nonfinite values in a portal-wide [0,1] check. The official problem description also documents null/NaN outside the data footprint; exact portal acceptance of this file remains untested."
+  },
+  "layers": {
+    "raw_belief_range": [
+      0.0,
+      0.84
+    ],
+    "normalized_belief_range": [
+      0.0,
+      1.0
+    ],
+    "mtheta_range": [
+      0.16000000000000003,
+      0.8835999999999999
+    ],
+    "conflict_k_range": [
+      0.0,
+      0.036
+    ],
+    "support_disagreement_range": [
+      0.0,
+      1.0
+    ],
+    "diagnostics": {
+      "belief_raw": {
+        "path": "docs/downloads/diagnostics/GEMSDOE48-H56-OWDS-B2xH33D-20261007-1f7b5a4f18db-belief-raw.tif",
+        "bytes": 1884910,
+        "sha256": "dc6a7a597a511152551dcf202ecee280429cf13e977e849058b449cf5ce36fd9",
+        "dtype": "float32",
+        "bands": 1,
+        "width": 3292,
+        "height": 3730,
+        "crs": "EPSG:32611",
+        "transform": [
+          100.0,
+          0.0,
+          243350.0,
+          0.0,
+          -100.0,
+          4508550.0
+        ],
+        "nodata": null,
+        "encoding": "all_finite_zeros_outside",
+        "all_cells_finite": true,
+        "all_cells_in_range_0_1": true,
+        "finite_cells": 12279160,
+        "nan_cells": 0,
+        "min": 0.0,
+        "max": 0.8399999737739563,
+        "positive_cells": 791389,
+        "in_footprint_cells": 5167373,
+        "portal_range_error_immune": true
+      },
+      "unassigned_mtheta": {
+        "path": "docs/downloads/diagnostics/GEMSDOE48-H56-OWDS-B2xH33D-20261007-1f7b5a4f18db-unassigned-mtheta.tif",
+        "bytes": 1876718,
+        "sha256": "045dc7f613648fc118333e51832ae9e6b13197e85278aa83e9383586b01b46e9",
+        "dtype": "float32",
+        "bands": 1,
+        "width": 3292,
+        "height": 3730,
+        "crs": "EPSG:32611",
+        "transform": [
+          100.0,
+          0.0,
+          243350.0,
+          0.0,
+          -100.0,
+          4508550.0
+        ],
+        "nodata": null,
+        "encoding": "all_finite_zeros_outside",
+        "all_cells_finite": true,
+        "all_cells_in_range_0_1": true,
+        "finite_cells": 12279160,
+        "nan_cells": 0,
+        "min": 0.0,
+        "max": 0.8835999965667725,
+        "positive_cells": 5167373,
+        "in_footprint_cells": 5167373,
+        "portal_range_error_immune": true
+      },
+      "conflict_k": {
+        "path": "docs/downloads/diagnostics/GEMSDOE48-H56-OWDS-B2xH33D-20261007-1f7b5a4f18db-conflict-k.tif",
+        "bytes": 1865368,
+        "sha256": "9f36769d415ff85e7ed62a610092fffb94cda970949c0087a29a38b71456d8c1",
+        "dtype": "float32",
+        "bands": 1,
+        "width": 3292,
+        "height": 3730,
+        "crs": "EPSG:32611",
+        "transform": [
+          100.0,
+          0.0,
+          243350.0,
+          0.0,
+          -100.0,
+          4508550.0
+        ],
+        "nodata": null,
+        "encoding": "all_finite_zeros_outside",
+        "all_cells_finite": true,
+        "all_cells_in_range_0_1": true,
+        "finite_cells": 12279160,
+        "nan_cells": 0,
+        "min": 0.0,
+        "max": 0.035999998450279236,
+        "positive_cells": 759775,
+        "in_footprint_cells": 5167373,
+        "portal_range_error_immune": true
+      },
+      "plausibility": {
+        "path": "docs/downloads/diagnostics/GEMSDOE48-H56-OWDS-B2xH33D-20261007-1f7b5a4f18db-plausibility.tif",
+        "bytes": 1682684,
+        "sha256": "85c5eed333caba5bf2ff68d7e91ae6bb89c001df57ea7988d08839af9e9435ad",
+        "dtype": "float32",
+        "bands": 1,
+        "width": 3292,
+        "height": 3730,
+        "crs": "EPSG:32611",
+        "transform": [
+          100.0,
+          0.0,
+          243350.0,
+          0.0,
+          -100.0,
+          4508550.0
+        ],
+        "nodata": null,
+        "encoding": "all_finite_zeros_outside",
+        "all_cells_finite": true,
+        "all_cells_in_range_0_1": true,
+        "finite_cells": 12279160,
+        "nan_cells": 0,
+        "min": 0.0,
+        "max": 1.0,
+        "positive_cells": 5167373,
+        "in_footprint_cells": 5167373,
+        "portal_range_error_immune": true
+      },
+      "support_disagreement": {
+        "path": "docs/downloads/diagnostics/GEMSDOE48-H56-OWDS-B2xH33D-20261007-1f7b5a4f18db-support-disagreement.tif",
+        "bytes": 789820,
+        "sha256": "45020a3e476242f685e8b1076d37261d12e572ee19aeeee11e68a1de5be8d585",
+        "dtype": "float32",
+        "bands": 1,
+        "width": 3292,
+        "height": 3730,
+        "crs": "EPSG:32611",
+        "transform": [
+          100.0,
+          0.0,
+          243350.0,
+          0.0,
+          -100.0,
+          4508550.0
+        ],
+        "nodata": null,
+        "encoding": "all_finite_zeros_outside",
+        "all_cells_finite": true,
+        "all_cells_in_range_0_1": true,
+        "finite_cells": 12279160,
+        "nan_cells": 0,
+        "min": 0.0,
+        "max": 1.0,
+        "positive_cells": 176781,
+        "in_footprint_cells": 5167373,
+        "portal_range_error_immune": true
+      }
+    }
+  },
+  "not_the_naive_mean": {
+    "comparison_domain": "valid competition footprint cells",
+    "pearson_bel_vs_naive_mean": 0.9966787799359585,
+    "spearman_bel_vs_naive_mean_deterministic_sample": 0.9999865086016013,
+    "spearman_sample_cells": 99373,
+    "mean_absolute_difference": 0.011260947501645375,
+    "median_absolute_difference": 0.0,
+    "max_absolute_difference": 0.196502685546875,
+    "fraction_abs_difference_gt_0p05": 0.12524855472984048,
+    "exactly_equal_cells": 4407598,
+    "best_affine_fit": {
+      "slope": 1.1407826220353996,
+      "intercept": 0.002554278945895818,
+      "mean_absolute_residual": 0.006647042480264611
+    },
+    "top_37654_budget_jaccard": 1.0,
+    "is_pixelwise_equal": false
+  },
+  "holdout": {
+    "status": "COMPLETED_CONDITIONAL_PUBLIC_PROXY_SPATIAL_BLOCK_TEST",
+    "h49_reference_receipt": "evidence/holdout_h56_h49_reference_20261007.json",
+    "candidate_receipt": "evidence/holdout_h56_ds_20261007.json",
+    "results_vs_h49": {
+      "catalogue_proxy": {
+        "candidate_mean_dti": 0.054242399101286275,
+        "h49_same_protocol_mean_dti": 0.0953532478651188,
+        "mean_delta_vs_h49": -0.041110848763832517,
+        "fold_delta_vs_h49": {
+          "NW": -0.04034480433608356,
+          "NE": -0.059808888145776194,
+          "SW": -0.034617013558835556,
+          "SE": -0.029672689014634733
+        },
+        "positive_folds": 0,
+        "pass_numeric_improvement": false
+      },
+      "sgmc_off_catalogue_gt_300m_proxy": {
+        "candidate_mean_dti": 0.06606974787821929,
+        "h49_same_protocol_mean_dti": 0.10075118848176869,
+        "mean_delta_vs_h49": -0.03468144060354939,
+        "fold_delta_vs_h49": {
+          "NW": -0.03906651059332465,
+          "NE": -0.021452424751424004,
+          "SW": -0.06871645932833917,
+          "SE": -0.009490367741109756
+        },
+        "positive_folds": 0,
+        "pass_numeric_improvement": false
+      }
+    },
+    "slot_decision": "NOT_CLEARED",
+    "decision_reason": "The candidate fails to beat same-protocol H49 on both public proxy targets; no private-label or organizer score exists."
+  },
+  "limitations": [
+    "The local family TIFFs are public owner mirrors; the reported 0.2778 and 0.2632 values are owner-reported and not organizer receipts for these exact bytes.",
+    "The family surfaces overlap heavily; separate construction pipelines do not establish statistical independence.",
+    "The q=0.10 absence assumption and alpha=0.60 discounts are explicit but not estimated from private truth.",
+    "The final max-normalized Bel surface is relative favorability and no longer a literal normalized BPA layer; raw Bel and m(Theta) are retained separately.",
+    "A local format audit is not organizer acceptance. The primary uses finite zeros outside although the official challenge page describes null/NaN outside; the matching-grid template and live-best encoding provide precedent, not acceptance proof."
+  ]
+}

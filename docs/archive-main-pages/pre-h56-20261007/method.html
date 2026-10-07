@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="H56 open-world Dempster-Shafer method, official metric assumptions, uncertainty diagnostics, and explicit status as a failed proxy candidate.">
-<title>GEMSDOE48 H56 — method and assumptions</title>
+<meta name="description" content="Derivation of the DTI metric algebra, the live-calibrated forward model, the coverage-frontier ceiling and the Dempster-Shafer selection rule.">
+<title>GEMSDOE48 H55 — method</title>
 <style>
 :root{color-scheme:light;--ink:#12241d;--muted:#54665c;--paper:#f4f4ec;--panel:#fffefa;
 --line:#d7ddd1;--green:#1d4c3a;--green2:#2f6b52;--soft:#e3eee5;--amber:#8a4a15;
@@ -96,25 +96,15 @@ font-family:var(--mono);font-size:.78rem;overflow-wrap:anywhere;margin:10px 0}
 <a href="irregularities.html">Irregularities</a>
 <a href="sources.html">Sources</a>
 <a href="next-steps.html">Next steps</a>
-<a href="research/h56-results-20261007.md">H56 results</a>
+<a href="research/h55-live-model-ceiling-and-candidate-20261007.md">Full report</a>
 </div></nav>
 <main class="wrap">
-<div class="bad" role="alert"><strong>Metric correction — no weekly upload cleared.</strong>
-The H55/H56 live-equivalent projections assume <code>FPw = S − TPw</code>,
-which is generally false: FP uses a prediction-centred maximum, TP a truth-centred one.
-Treat the 0.2843 "ceiling" and H56's 0.0649 as <em>historical surrogate outputs</em>,
-not verified private-label results or portal acceptance.
-<a href="research/metric-identity-erratum-20261007.md">Read the derivation and executable counterexample</a>.</div>
 
 <header style="background:none;padding:0">
 <p class="eyebrow" style="color:var(--muted)">Method</p>
 <h1>The metric, the model, and the selection rule</h1>
 </header>
 
-<div class="bad"><strong>Current H56 status: research only; no slot is cleared.</strong> The primary GeoTIFF is locally bounded and downloadable, but H56-DS and the machine-spec Hessian-only H56-A screen fail same-protocol H49 on both public-map proxies; the prose coherence extension remains untested. The method below is not an organizer score or a calibrated probability model.</div>
-<h2>Current H56 open-world Dempster–Shafer construction</h2>
-<p>Each SHA-pinned sparse parent is transformed into a 300 m triangular max-credit support field <code>b</code>. For each source, the frozen assignment is <code>m(F)=0.60·b</code>, <code>m(not F)=0.60·0.10·(1−b)</code>, and <code>m(Theta)=1−m(F)−m(not F)</code>. Only 10% of the source-weighted lack of support is assigned to not-fault; the balance is left uncommitted. The two BPAs are combined with normalized Dempster's rule. Raw <code>Bel(F)</code> is exported separately from canonical residual <code>m(Theta)</code> and raw conflict <code>K</code>; plausibility is <code>Bel(F)+m(Theta)</code>. The competition-facing primary is <code>Bel(F)/max_in_footprint(Bel(F))</code>, a relative favorability surface, not calibrated probability.</p>
-<p>This is a distinct parameterization from H53's already-existing two-family D-S diagnostic, not a new geological evidence concept. It is pixelwise different from the arithmetic mean (Pearson 0.99668; mean absolute difference 0.01126; max difference 0.19650), but the top-37,654 rank selection is identical (Jaccard 1.0). See the <a href="research/h56-results-20261007.md">full H56 report</a> and the <a href="../evidence/h56_diagnostics_validation_20261007.json">independent diagnostic audit</a>.</p>
 <h2>1 · The official metric</h2>
 <p>Transcribed by two independent sibling repositories from the organizer's problem description
 (competition 306, page 967) and corroborated independently by the organizers' own reference
@@ -143,9 +133,8 @@ numerically in <code>tests/test_h55.py::test_binary_emission_is_dti_optimal</cod
 rather than an estimate.</p>
 
 <h2>3 · The removal-regime collapse</h2>
-<pre><code>Q = Σ_x p(x) max_g k(d(x,g));   FPw = S − Q
-FNw = |G| − T;                 T = TPw
-DTI = T / (0.2·T + 0.2·S − 0.2·Q + 0.8·|G| + ε)</code></pre>
+<pre><code>FPw = S − M ,  FNw = |G| − TPw ,  M = TPw  (to within 0.2 %)
+⟹  DTI = T / (0.2·S + 0.8·|G|)</code></pre>
 <p>Two constants remain: the hidden truth mass |G| and the numerator T. Both are unknown; both
 turn out to be recoverable.</p>
 
@@ -224,24 +213,6 @@ identifies <em>where</em> two independently-built approaches disagree (K &gt; 0 
 14.70 % of the footprint), and that set is where the
 gap-closure pool is drawn from and where the conduit anchors are vetoed unless a third source
 arbitrates. The unassigned mass m(Θ) ships as its own layer exactly as the brief asks.</p>
-
-<h2>8b · H56: the literal graded belief as a submission (and why it scores 0.0649)</h2>
-<p>The H56 session ships the submission the brief asks for: the <em>normalized combined belief</em>
-itself. Frame Θ = {F, ¬F}; per-source basic probability assignment built on the metric's own
-300 m triangular kernel <code>s_i(x) = k(d(x, D_i))</code>:</p>
-<pre><code>m_i(F)     = r_i · s_i(x)
-m_i(N)     = r_i · (1 − s_i(x)) · a_i(x)
-m_i(Θ)     = 1 − m_i(F) − m_i(N)</code></pre>
-<p class="small">with live-anchored Shafer discounts <code>r_dot = 0.95</code>,
-<code>r_tip = 0.95 × 0.2632/0.2778</code>; absence informativeness <code>a_i = 0.5</code> on the
-shared h19-5 backbone and 0.2 off it, plus <code>a_dot = 1.0</code> inside 200 m of the catalogue
-(the live-validated flank rejection; NOT applied to the tip source). Dempster's normalized rule
-combines the two; the submission is <code>Bel(F)/max Bel(F)</code> on the footprint (zeros outside),
-and m(Θ), K, Pl ship as diagnostics (<code>scripts/build_submission_h56_belief.py</code>, frozen recipe in
-its docstring). Measured consequences: belief mass Σ Bel = 399,799; live-model projection 0.0649
-vs 0.2728 for the binary parent — §1's result (a) that the DTI-optimal submission is binary {0,1}
-is confirmed by the instrument rather than assumed, and the brief's requested artifact is published
-with exactly that label.</p>
 
 <h2>9 · Reproduce</h2>
 <pre><code>python scripts/restore_h55_inputs.py                       # 7 hash-pinned mirrors, fail closed

@@ -1,0 +1,247 @@
+{
+  "schema_version": 1,
+  "audited_utc": "2026-10-07T15:37:49.806406+00:00",
+  "status": "PASS_LOCAL_BYTE_AND_PIXEL_UNIQUENESS_ONLY_NOT_GLOBAL_OR_ORGANIZER_PROOF",
+  "primary": {
+    "path": "docs/downloads/GEMSDOE48-H56-OWDS-B2xH33D-20261007-1f7b5a4f18db-zeros-outside.tif",
+    "sha256": "1f7b5a4f18dbc62f31b14078545332238be9289dd388d57f550d75fb5a5fe95a",
+    "bytes": 1888728,
+    "canonicalization": "Float32 values compared only inside the official finite footprint; nodata/NaN outside is canonicalized to zero for prior rasters."
+  },
+  "search_scope": {
+    "directories": [
+      "data/",
+      "docs/downloads/"
+    ],
+    "prior_candidate_tiffs_examined_for_metadata": 90,
+    "same_grid_one_band_prior_rasters_compared": 85,
+    "multi_band_or_different_grid_files_skipped": 5
+  },
+  "result": {
+    "same_sha256_as_prior_raster": false,
+    "sha256_matches": [],
+    "pixelwise_equal_inside_footprint_to_prior_raster": false,
+    "pixelwise_matches": []
+  },
+  "known_prior_art_comparisons": {
+    "H53_two_family_dempster_diagnostic": {
+      "path": "docs/downloads/diagnostics/GEMSDOE48-H53-DS-RadEdge-B2xH33D-20261007-4c01fcf2ad8c-two-family-dempster-only.tif",
+      "sha256": "a0eaa98c3294a7686d26753348bca9eaf143f089a9d39d827ee19ddb7e55ffac",
+      "canonical_pixelwise_equal_inside_footprint": false,
+      "pearson_inside_footprint": 0.9905387740488962,
+      "spearman_inside_footprint_deterministic_sample": 0.9999262651112764,
+      "spearman_sample_cells": 99373,
+      "mean_absolute_difference": 0.015262755622145015,
+      "max_absolute_difference": 0.2520582377910614,
+      "fraction_abs_difference_gt_0p05": 0.1309613221263493,
+      "positive_cells_prior_inside_footprint": 791389,
+      "top_37654_rank_jaccard": 1.0
+    },
+    "H53_two_family_arithmetic_mean_diagnostic": {
+      "path": "docs/downloads/diagnostics/GEMSDOE48-H53-DS-RadEdge-B2xH33D-20261007-4c01fcf2ad8c-two-family-naive-mean.tif",
+      "sha256": "2b070e616f5494d09d39f4a35727adceb541e72a2a0471322f7b87cc1fb1dc86",
+      "canonical_pixelwise_equal_inside_footprint": false,
+      "pearson_inside_footprint": 0.9966787804762036,
+      "spearman_inside_footprint_deterministic_sample": 0.9999865086016013,
+      "spearman_sample_cells": 99373,
+      "mean_absolute_difference": 0.011260945950853293,
+      "max_absolute_difference": 0.196502685546875,
+      "fraction_abs_difference_gt_0p05": 0.12524855472984048,
+      "positive_cells_prior_inside_footprint": 791389,
+      "top_37654_rank_jaccard": 1.0
+    },
+    "H55_belief_diagnostic": {
+      "path": "docs/downloads/diagnostics/gemsdoe48-h55-bel-055da9855353.tif",
+      "sha256": "e9bfb8fd27989c073fc57a04cf6f0f3eca9c49b7f82dfec5c9f10e424e703a91",
+      "canonical_pixelwise_equal_inside_footprint": false,
+      "pearson_inside_footprint": 0.9882199770876702,
+      "spearman_inside_footprint_deterministic_sample": 0.9999268473514065,
+      "spearman_sample_cells": 99373,
+      "mean_absolute_difference": 0.02473135500856477,
+      "max_absolute_difference": 0.321502685546875,
+      "fraction_abs_difference_gt_0p05": 0.13707932444590318,
+      "positive_cells_prior_inside_footprint": 791389,
+      "top_37654_rank_jaccard": 1.0
+    },
+    "H49_current_blocked_best": {
+      "path": "docs/downloads/GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif",
+      "sha256": "9f028289c364c071065245799d7ed131600e80e9f0d10602806b12ce34d7cae8",
+      "canonical_pixelwise_equal_inside_footprint": false,
+      "pearson_inside_footprint": 0.38576462166678793,
+      "spearman_inside_footprint_deterministic_sample": 0.2538042623310107,
+      "spearman_sample_cells": 99373,
+      "mean_absolute_difference": 0.06646800068217572,
+      "max_absolute_difference": 0.9240271896123886,
+      "fraction_abs_difference_gt_0p05": 0.14355282655229262,
+      "positive_cells_prior_inside_footprint": 47905,
+      "top_37654_rank_jaccard": 0.5650366798977535
+    }
+  },
+  "related_same_grid_prior_rasters_sorted_by_correlation": [
+    {
+      "path": "docs/downloads/diagnostics/GEMSDOE48-H53-DS-RadEdge-B2xH33D-20261007-4c01fcf2ad8c-two-family-naive-mean.tif",
+      "sha256": "2b070e616f5494d09d39f4a35727adceb541e72a2a0471322f7b87cc1fb1dc86",
+      "canonical_pixelwise_equal_inside_footprint": false,
+      "pearson_inside_footprint": 0.9966787804762036,
+      "spearman_inside_footprint_deterministic_sample": 0.9999865086016013,
+      "spearman_sample_cells": 99373,
+      "mean_absolute_difference": 0.011260945950853293,
+      "max_absolute_difference": 0.196502685546875,
+      "fraction_abs_difference_gt_0p05": 0.12524855472984048,
+      "positive_cells_prior_inside_footprint": 791389,
+      "top_37654_rank_jaccard": 1.0
+    },
+    {
+      "path": "docs/downloads/gemsdoe48-h49-ds-conflict-balanced-20261006-belief-field.tif",
+      "sha256": "6bcf9de850471535816e1a798983a329b4408d39cfa91d4c17511e7fe0158a38",
+      "canonical_pixelwise_equal_inside_footprint": false,
+      "pearson_inside_footprint": 0.9959115005138242,
+      "spearman_inside_footprint_deterministic_sample": 0.9999261600801198,
+      "spearman_sample_cells": 99373,
+      "mean_absolute_difference": 0.011582573746307038,
+      "max_absolute_difference": 0.24630147218704224,
+      "fraction_abs_difference_gt_0p05": 0.1293852795221092,
+      "positive_cells_prior_inside_footprint": 791389,
+      "top_37654_rank_jaccard": 0.9897484675544282
+    },
+    {
+      "path": "docs/downloads/diagnostics/gemsdoe48-h55-plausibility-055da9855353.tif",
+      "sha256": "d478ccb13155d200c18b6fe6d80445992bc42228ee592578757c912dff3ff1e3",
+      "canonical_pixelwise_equal_inside_footprint": false,
+      "pearson_inside_footprint": 0.9937224057303548,
+      "spearman_inside_footprint_deterministic_sample": 0.9999751258206316,
+      "spearman_sample_cells": 99373,
+      "mean_absolute_difference": 0.1398095721529587,
+      "max_absolute_difference": 0.1599999964237213,
+      "fraction_abs_difference_gt_0p05": 0.8705593732056889,
+      "positive_cells_prior_inside_footprint": 5167373,
+      "top_37654_rank_jaccard": 1.0
+    },
+    {
+      "path": "docs/downloads/diagnostics/GEMSDOE48-H53-DS-RadEdge-B2xH33D-20261007-4c01fcf2ad8c-two-family-dempster-only.tif",
+      "sha256": "a0eaa98c3294a7686d26753348bca9eaf143f089a9d39d827ee19ddb7e55ffac",
+      "canonical_pixelwise_equal_inside_footprint": false,
+      "pearson_inside_footprint": 0.9905387740488962,
+      "spearman_inside_footprint_deterministic_sample": 0.9999262651112764,
+      "spearman_sample_cells": 99373,
+      "mean_absolute_difference": 0.015262755622145015,
+      "max_absolute_difference": 0.2520582377910614,
+      "fraction_abs_difference_gt_0p05": 0.1309613221263493,
+      "positive_cells_prior_inside_footprint": 791389,
+      "top_37654_rank_jaccard": 1.0
+    },
+    {
+      "path": "docs/downloads/diagnostics/gemsdoe48-h55-bel-055da9855353.tif",
+      "sha256": "e9bfb8fd27989c073fc57a04cf6f0f3eca9c49b7f82dfec5c9f10e424e703a91",
+      "canonical_pixelwise_equal_inside_footprint": false,
+      "pearson_inside_footprint": 0.9882199770876702,
+      "spearman_inside_footprint_deterministic_sample": 0.9999268473514065,
+      "spearman_sample_cells": 99373,
+      "mean_absolute_difference": 0.02473135500856477,
+      "max_absolute_difference": 0.321502685546875,
+      "fraction_abs_difference_gt_0p05": 0.13707932444590318,
+      "positive_cells_prior_inside_footprint": 791389,
+      "top_37654_rank_jaccard": 1.0
+    },
+    {
+      "path": "docs/downloads/GEMSDOE48-H53-DS-RadEdge-B2xH33D-20261007-4c01fcf2ad8c-nan-outside.tif",
+      "sha256": "4c01fcf2ad8c1d2bd487bc4d07c85e57b2a256296586d4817b58079b0ccd7a1f",
+      "canonical_pixelwise_equal_inside_footprint": false,
+      "pearson_inside_footprint": 0.987745686188654,
+      "spearman_inside_footprint_deterministic_sample": 0.6203549097459047,
+      "spearman_sample_cells": 99373,
+      "mean_absolute_difference": 0.029287599045664196,
+      "max_absolute_difference": 0.2930409610271454,
+      "fraction_abs_difference_gt_0p05": 0.15508228262213702,
+      "positive_cells_prior_inside_footprint": 5144440,
+      "top_37654_rank_jaccard": 0.977262583033581
+    },
+    {
+      "path": "docs/downloads/diagnostics/gemsdoe48-h48-1-belief_dempster_mF_norm01.tif",
+      "sha256": "b748e0f97738a5e3b0feaf35dab340ff1dcedd6b8d2124f2b54b5f1b0f14d7d3",
+      "canonical_pixelwise_equal_inside_footprint": false,
+      "pearson_inside_footprint": 0.9822401800151961,
+      "spearman_inside_footprint_deterministic_sample": 0.9801792204787507,
+      "spearman_sample_cells": 99373,
+      "mean_absolute_difference": 0.010354089999642312,
+      "max_absolute_difference": 0.7800552248954773,
+      "fraction_abs_difference_gt_0p05": 0.05408531569135806,
+      "positive_cells_prior_inside_footprint": 786170,
+      "top_37654_rank_jaccard": 0.8445184677182326
+    },
+    {
+      "path": "docs/downloads/diagnostics/gemsdoe48-h54-belief-normalized-dedc43dc0167.tif",
+      "sha256": "a1a26570f336e84a743e5acb451df16ede8734613f1f9a4b1d515ff69d369ba3",
+      "canonical_pixelwise_equal_inside_footprint": false,
+      "pearson_inside_footprint": 0.9602722976062568,
+      "spearman_inside_footprint_deterministic_sample": 0.9918420188359863,
+      "spearman_sample_cells": 99373,
+      "mean_absolute_difference": 0.01852049765578899,
+      "max_absolute_difference": 0.3910311236977577,
+      "fraction_abs_difference_gt_0p05": 0.1142336734739296,
+      "positive_cells_prior_inside_footprint": 777643,
+      "top_37654_rank_jaccard": 0.8989837859646469
+    },
+    {
+      "path": "docs/downloads/diagnostics/gemsdoe48-h50-plausibility-20261007-5b59e106.tif",
+      "sha256": "cd0e07fb882927d528a6708044e4f88e63ea21ffa9e6af4b41f045f186a930e0",
+      "canonical_pixelwise_equal_inside_footprint": false,
+      "pearson_inside_footprint": 0.9387014571615111,
+      "spearman_inside_footprint_deterministic_sample": 0.9666434446093135,
+      "spearman_sample_cells": 99373,
+      "mean_absolute_difference": 0.024447959044099157,
+      "max_absolute_difference": 0.784041278064251,
+      "fraction_abs_difference_gt_0p05": 0.1171394052645319,
+      "positive_cells_prior_inside_footprint": 5167373,
+      "top_37654_rank_jaccard": 0.7152879008746356
+    },
+    {
+      "path": "docs/downloads/gemsdoe48-h50-ds-b2xh36rung30-20261007-5b59e106-nan.tif",
+      "sha256": "54dfe8bd79f767370558bebc1c23366cb43e5e5a4b26c7d9d14131c8b58bdc0c",
+      "canonical_pixelwise_equal_inside_footprint": false,
+      "pearson_inside_footprint": 0.9378609262621672,
+      "spearman_inside_footprint_deterministic_sample": 0.966643324310118,
+      "spearman_sample_cells": 99373,
+      "mean_absolute_difference": 0.021831715068120327,
+      "max_absolute_difference": 0.7906393781304359,
+      "fraction_abs_difference_gt_0p05": 0.11705502970271355,
+      "positive_cells_prior_inside_footprint": 767043,
+      "top_37654_rank_jaccard": 0.7152879008746356
+    },
+    {
+      "path": "docs/downloads/gemsdoe48-h50-ds-b2xh36rung30-20261007-5b59e106-zeros.tif",
+      "sha256": "5b59e106b6e448038b96fb340c5bae39094d4558c239c437aea28b6020d5d32f",
+      "canonical_pixelwise_equal_inside_footprint": false,
+      "pearson_inside_footprint": 0.9378609262621672,
+      "spearman_inside_footprint_deterministic_sample": 0.966643324310118,
+      "spearman_sample_cells": 99373,
+      "mean_absolute_difference": 0.021831715068120327,
+      "max_absolute_difference": 0.7906393781304359,
+      "fraction_abs_difference_gt_0p05": 0.11705502970271355,
+      "positive_cells_prior_inside_footprint": 767043,
+      "top_37654_rank_jaccard": 0.7152879008746356
+    },
+    {
+      "path": "docs/downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-diag-plausibility-nan.tif",
+      "sha256": "b8a2c58ad78cbe29fc90a60c64bc9928ebc29041c9771e7af5c554f69781820c",
+      "canonical_pixelwise_equal_inside_footprint": false,
+      "pearson_inside_footprint": 0.9237055387667286,
+      "spearman_inside_footprint_deterministic_sample": 0.6100726972417161,
+      "spearman_sample_cells": 99373,
+      "mean_absolute_difference": 0.026991199353209316,
+      "max_absolute_difference": 0.8426629602909088,
+      "fraction_abs_difference_gt_0p05": 0.1197720776108092,
+      "positive_cells_prior_inside_footprint": 5167373,
+      "top_37654_rank_jaccard": 0.7371286215168851
+    }
+  ],
+  "novelty_scope": {
+    "not_claimed": "Dempster-Shafer, family fusion, or geological source novelty; H53 already contains the same two-family parents and a Dempster diagnostic.",
+    "resolved_difference": "H53 family diagnostic used alpha=0.50 simple-support masses m(F)=alpha*b, m(notF)=alpha*(1-b), m(Theta)=1-alpha, and H53's full three-source product adds GeoDAWN. H56 uses the frozen open-world m(notF)=alpha*0.10*(1-b), alpha=0.60 per family, then exports relative max-normalized Bel(F) with separate raw canonical m(Theta) and conflict K.",
+    "interpretation": "This is a distinct, audited parameterization/output\u2014not a relabelled H53 file or a claim of a new geological signal. The two parent masks and their high spatial dependence are unchanged."
+  },
+  "not_the_arithmetic_mean": {
+    "receipt": "evidence/build_h56_receipt_20261007.json",
+    "important_caveat": "The output differs numerically from the arithmetic mean, but the measured top-37,654 rank selection has Jaccard 1.0 and Spearman is near 1.0; it should not be described as a materially different rank ordering at that budget."
+  }
+}
