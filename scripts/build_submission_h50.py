@@ -109,6 +109,9 @@ def main() -> int:
     ap.add_argument("--out-dir", type=pathlib.Path, default=ROOT / "scratch/h50")
     ap.add_argument("--report", type=pathlib.Path, default=ROOT / "evidence/h50_candidate_sweep_20261007.json")
     ap.add_argument("--tag", default="")
+    ap.add_argument("--control", choices=["none", "random", "sigma_band"], default="none",
+                    help="random: ignore the height ranking and add eligible cells in random order (seed 0); "
+                         "sigma_band: random order restricted to cells with 0.7 <= sigma_mean < 2.5 m (terrain-class control)")
     args = ap.parse_args()
 
     t0 = time.time()
@@ -148,8 +151,14 @@ def main() -> int:
 
     # --- eligible additions ---
     eligible = covered & np.isfinite(height) & (height > max(args.min_height, 0.0)) & (d_cat > 200.0) & (d_C > 200.0)
+    if args.control == "sigma_band":
+        sm = layers["sigma_mean"]
+        eligible &= np.isfinite(sm) & (sm >= 0.7) & (sm < 2.5)
     rows, cols = np.nonzero(eligible)
-    order = np.argsort(-height[rows, cols], kind="stable")
+    if args.control in ("random", "sigma_band"):
+        order = np.random.default_rng(0).permutation(len(rows))
+    else:
+        order = np.argsort(-height[rows, cols], kind="stable")
     rows, cols = rows[order], cols[order]
     n_list = [int(x) for x in args.n_add.split(",") if x.strip()]
     kr, kc = poisson_thin(rows, cols, C.copy(), max(n_list), PIX_MIN_DIST)
@@ -170,7 +179,7 @@ def main() -> int:
     report = {"generated_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "tag": args.tag,
               "inputs": {"base": str(args.base), "base_sha256": sha256_file(args.base), "scarp": str(args.scarp),
                          "scarp_sha256": sha256_file(args.scarp), "layer": args.layer, "cover_min": args.cover_min,
-                         "min_height_m": args.min_height},
+                         "min_height_m": args.min_height, "control": args.control},
               "counts": {"C_dots": int(C.sum()), "covered_cells": int(covered.sum()), "eligible_cells": int(eligible.sum()),
                          "thinned_available": int(len(kr))},
               "detector_check": detector_check, "references": {}, "variants": {}}

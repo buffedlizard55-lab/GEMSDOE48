@@ -1,8 +1,21 @@
-# GEMSDOE48 — auditable Dempster-Shafer fault-surface research
+# GEMSDOE48 — auditable fault-surface research (H48 → H49 → H50)
 
-> **Decision: no weekly submission slot is cleared.** The H48 `rho=0.5` candidate loses to the prior union on the shared SGMC blocked diagnostic (0.069261 vs 0.096992). The newer-main H49 balanced emission now scores 0.100751 vs that 0.096992 prior-union baseline (+0.003760, 4/4 folds) on the same protocol, and the direction repeats on the separate older SGMC raster. This is a post-selection re-score on related public proxy evidence, below the live instrument's roughly 0.005 resolution, and its live-anchored change bracket is −0.010 to +0.005. A format-only NaN-outside H49 copy passes local checks; organizer acceptance remains untested. No private-label or organizer score exists, so H49 is not slot-cleared.
+> **Decision (2026-10-07): still no weekly submission slot is cleared.** This session's unique file, **H50 = C + 2,000 native-lidar scarp additions**, scores 0.096409 on the shared blocked newer-SGMC proxy (C 0.095491, prior union 0.096992, H49 0.100751) and fails its pre-registered gate; the live-anchored bracket of the additions is −0.006 to +0.009. The earlier H48 ρ=0.5 and H49 conclusions below are unchanged. No organizer score exists for any file in this repository.
 
-## Executive summary and downloads
+## ⬇ This session's unique submission file (H50, 2026-10-07)
+
+- **Download:** [`docs/downloads/GEMSDOE48-H50-lidar-scarp-additions-20261007-38029417f6ca-nan-outside.tif`](docs/downloads/GEMSDOE48-H50-lidar-scarp-additions-20261007-38029417f6ca-nan-outside.tif) (346,152 bytes, SHA-256 `38029417f6cab01f9f56d4d3259a998affad6ae45a2a21a394682ee38b98e0c7`; [zeros-outside twin](docs/downloads/GEMSDOE48-H50-lidar-scarp-additions-20261007-38029417f6ca-zeros-outside.tif)) — one float32 band, EPSG:32611, 100 m, 3,730 × 3,292, {0,1} in-footprint, NaN outside, 39,654 positives. Byte- and pixel-distinct from every prior GEMSDOE artifact here ([identity receipt](evidence/h50_submission_identity_20261007.json)); [local format validation](evidence/h50_submission_validation_20261007.json) passes.
+- **Paste-ready note (143 characters):** `GEMSDOE48-H50 | 0.2778 dotted family + 2,000 lidar-scarp dots (3 m USGS 3DEP step detector, >200 m off-catalogue); unscored research candidate.`
+- **What it is:** the 0.2778 dotted family C (37,654 dots, untouched) plus 2,000 Poisson-spaced dots on the strongest line-persistent steps (effective height ≥ 3.29 m inside smooth terrain) found by `src/gemsdoe48/scarp3m.py` on all 700 zone-11 USGS 3DEP 1 m tiles, block-averaged to 3 m in GitHub Actions ([extract run](https://github.com/buffedlizard55-lab/GEMSDOE48/actions/runs/37561683197), [mosaic run](https://github.com/buffedlizard55-lab/GEMSDOE48/actions/runs/37565284104)); additions are > 200 m from the public catalogue and from any C dot. Builder: `scripts/build_submission_h50.py`.
+- **Status: not slot-cleared.** Pre-registered gate ([slate §4](docs/research/hypotheses-h50-20261007.md)) fails on both criteria: it does not beat H49 on the proxy, and the detector's label-free catalogue lift is 1.19× / 2.27× / 1.53× / 1.63× by quadrant (pilot tiles: 2.3–3.2×) against a ≥ 2× rule. Random additions in the same footprint give +0.000 (control). Full sweep, controls and the pilot-vs-region discrepancy: [H50 report](docs/research/holdout-h50-results-20261007.md).
+
+### What this session established (details in `docs/research/`)
+
+1. **The live ladder is bookkeeping, not geology.** A (44,090 dots, 0.2600) → B (40,199, 0.2708) → C (37,654, 0.2778) is reproduced exactly by removing catalogue-adjacent dots that the organizer masks from scoring; both steps give the same hidden-mass estimate within 7.5 %. C recovers ≈ 37 % of the hidden kernel mass; 0.3195 needs ≈ 42 %, 0.3774 ≈ 50 % at the same mass. A dot is worth adding only if its expected kernel weight exceeds 0.2·DTI ≈ 0.056 ([why-0.2778 note](docs/research/why-02778-and-ceiling-20261007.md), [`evidence/live_ladder_20261007.json`](evidence/live_ladder_20261007.json)).
+2. **No 100 m layer can re-rank C's dots profitably.** Best non-circular per-dot lift 1.43× (U/K), bar ≈ 2.6×; the 2 m u8 lidar descriptors are negative (≤ 0.91×); official band 6 `tc` is radiometric total count, not a magnetic derivative (irregularity logged).
+3. **Native 3 m lidar is obtainable and processable for free** (two-tile pilot + 700-tile region run, ≈ 1 h wall clock on hosted runners; sandbox cannot reach USGS or artifact hosts, so compact products are committed back). The v1 detector's region-wide value on bedrock-fault proxies is its *terrain class* (random dots in the 0.7–2.5 m roughness band: +0.009 on the proxy, beating H49 by +0.0038 — a post-hoc control, not promoted), not its step height. The v2 detector is the top next step ([next steps](docs/next-steps.html)).
+
+## Executive summary and downloads (H48/H49, unchanged)
 
 GEMSDOE48 combines the public owner-mirror dotted and tip/step-over candidate families with reliability-discounted Dempster-Shafer mass assignments. It exports a graded belief raster plus separate residual-ignorance and raw-conflict diagnostics. A prior main-branch implementation also explored a full-confidence union decision surface; that historical result is retained and discussed below, not silently treated as a cleared submission.
 
@@ -140,6 +153,20 @@ python scripts/prepare_h49_format_copy.py       # H49 format-only NaN-outside de
 python scripts/validate_submission.py docs/downloads/GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif --receipt evidence/h49_submission_validation_20261006.json
 python scripts/run_spatial_holdout.py --combined docs/downloads/GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif --candidate-name h49_yager_balanced --output evidence/holdout_h49_spatial_comparison_20261006.json
 python scripts/run_spatial_holdout.py --combined docs/downloads/GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif --candidate-name h49_yager_balanced --sgmc data/raw/sgmc_faults_100m.tif --allow-unpinned-sgmc --output evidence/holdout_h49_raw_sgmc_sensitivity_20261006.json
+
+# --- H50 session (2026-10-07) ---
+python scripts/live_ladder_analysis.py                       # exact inversion of the live ladder -> evidence/live_ladder_20261007.json
+python scripts/pilot_scarp_eval.py                           # 3 m detector on the two committed pilot tiles (data/pilot/dem3m/)
+# region product: push a commit starting with "[run-scarp]" touching .github/workflows/dem-region-scarp.yml (hosted runners; ~1 h);
+# the mosaic is committed back as data/external/h50_scarp3m_100m.tif (+ .json receipt). Merge-only re-run: "[run-merge]" + registry/scarp_merge_source_run.txt
+python scripts/h50_region_checks.py                          # label-free quadrant checks -> evidence/h50_region_detector_checks_20261007.json
+python scripts/build_submission_h50.py --n-add 500,1000,2000,3000,4000,6000,8000,12000   # sweep -> evidence/h50_candidate_sweep_20261007.json, scratch/h50/*.tif
+python scripts/build_submission_h50.py --control random --tag ctrl --n-add 2000,4000,8000,12000 --report evidence/h50_control_random_sweep_20261007.json
+python scripts/build_submission_h50.py --control sigma_band --tag ctrlsig --n-add 4000,8000,12000 --report evidence/h50_control_sigma_band_sweep_20261007.json
+python scripts/h50_report.py                                 # -> docs/research/holdout-h50-results-20261007.md (controls appended by hand from the JSONs)
+python scripts/validate_submission.py docs/downloads/GEMSDOE48-H50-lidar-scarp-additions-20261007-38029417f6ca-nan-outside.tif --receipt evidence/h50_submission_validation_20261007.json
+python scripts/run_spatial_holdout.py --combined docs/downloads/GEMSDOE48-H50-lidar-scarp-additions-20261007-38029417f6ca-nan-outside.tif --candidate-name h50_lidar_additions_2000 --output evidence/holdout_h50_spatial_comparison_20261007.json
+python scripts/run_spatial_holdout.py --combined docs/downloads/GEMSDOE48-H50-lidar-scarp-additions-20261007-38029417f6ca-nan-outside.tif --candidate-name h50_lidar_additions_2000 --sgmc data/raw/sgmc_faults_100m.tif --allow-unpinned-sgmc --output evidence/holdout_h50_raw_sgmc_sensitivity_20261007.json
 ```
 
 The H48 rho=.5 builder remains `scripts/build_submission.py`. H49's separate mainline generation pipeline is `scripts/build_submission_h49.py`; `scripts/prepare_h49_format_copy.py` only fixes its outside-footprint encoding and preserves all inside values. The earlier alpha=.99 builder snapshot is retained as `scripts/previous_build_submission.py`; the earlier main builder is `scripts/previous_main_build_submission.py`, and the later PR #5 main Dempster builder is preserved as `scripts/previous_main_build_submission_pr5.py.disabled`. Build and holdout receipts are dated and hash-pinned. Five review passes—including API compatibility and the follow-up against the newer SGMC derivative—are recorded in [`evidence/review_passes_20261006.md`](evidence/review_passes_20261006.md).
