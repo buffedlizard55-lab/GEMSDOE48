@@ -11,16 +11,20 @@ on:
       res:
         description: "Output resolution in metres"
         default: "2"
+      commit_tiles:
+        description: "Comma-separated subset to commit back as compact int16 3 m copies (empty = none)"
+        default: "x42y425,x40y427"
   push:
     branches: ["arena/**"]
     paths:
       - ".github/workflows/dem-pilot.yml"
       - "scripts/dem_pilot_fetch.py"
 permissions:
-  contents: read
+  contents: write
 env:
   TILES: ${{ github.event.inputs.tiles || 'x42y425,x30y436,x41y427,x35y444,x38y420,x40y427' }}
   RES: ${{ github.event.inputs.res || '2' }}
+  COMMIT_TILES: ${{ github.event.inputs.commit_tiles || 'x42y425,x40y427' }}
 jobs:
   fetch:
     if: github.event_name == 'workflow_dispatch' || startsWith(github.event.head_commit.message, '[run-pilot]')
@@ -43,3 +47,19 @@ jobs:
           path: scratch/dem_pilot/
           retention-days: 14
           compression-level: 0
+      - name: Compact 3 m int16 copies for the sandbox (the sandbox cannot reach artifact storage)
+        if: env.COMMIT_TILES != ''
+        run: |
+          python scripts/dem_pilot_fetch.py --tiles "$COMMIT_TILES" --res 3 --compact --out data/pilot/dem3m || echo "one or more compact tiles failed (see receipt)"
+          ls -la data/pilot/dem3m
+      - name: Commit compact pilot tiles to this session branch
+        if: env.COMMIT_TILES != '' && github.ref != 'refs/heads/main'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/pilot/dem3m
+          git commit -m "Add compact 3 m pilot DEM tiles (run ${GITHUB_RUN_ID}) [skip ci]" || exit 0
+          for i in 1 2 3 4 5; do
+            git pull --rebase origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && break
+            sleep 10
+          done

@@ -49,7 +49,7 @@ def download(url: str, dest: pathlib.Path, attempts: int = 4) -> None:
     raise RuntimeError(f"download failed: {url}")
 
 
-def reduce_tile(src_path: pathlib.Path, dst_path: pathlib.Path, res: float) -> dict:
+def reduce_tile(src_path: pathlib.Path, dst_path: pathlib.Path, res: float, compact: bool = False) -> dict:
     import rasterio
     from rasterio.enums import Resampling
 
@@ -70,13 +70,27 @@ def reduce_tile(src_path: pathlib.Path, dst_path: pathlib.Path, res: float) -> d
             "z_min": float(np.nanmin(arr)) if np.isfinite(arr).any() else None,
             "z_max": float(np.nanmax(arr)) if np.isfinite(arr).any() else None,
         }
-        profile = {
-            "driver": "GTiff", "dtype": "float32", "count": 1, "height": out_h, "width": out_w,
-            "crs": src.crs, "transform": transform, "nodata": np.nan, "compress": "deflate", "predictor": 3,
-            "tiled": True, "blockxsize": 512, "blockysize": 512, "zlevel": 6,
-        }
-        with rasterio.open(dst_path, "w", **profile) as dst:
-            dst.write(arr, 1)
+        if compact:
+            # int16 decimetres relative to 1000 m: covers -2276 m .. 4276 m, 0.1 m precision.
+            q = np.where(np.isfinite(arr), np.round((arr - 1000.0) * 10.0), -32768.0)
+            q = np.clip(q, -32767, 32767).astype(np.int16)
+            meta.update({"encoding": "int16 decimetres: z_m = 1000 + value/10; nodata -32768"})
+            profile = {
+                "driver": "GTiff", "dtype": "int16", "count": 1, "height": out_h, "width": out_w,
+                "crs": src.crs, "transform": transform, "nodata": -32768, "compress": "deflate", "predictor": 2,
+                "tiled": True, "blockxsize": 512, "blockysize": 512, "zlevel": 9,
+            }
+            with rasterio.open(dst_path, "w", **profile) as dst:
+                dst.write(q, 1)
+                dst.update_tags(ENCODING="z_m = 1000 + value/10", SOURCE_URL="see dem_pilot_receipt.json")
+        else:
+            profile = {
+                "driver": "GTiff", "dtype": "float32", "count": 1, "height": out_h, "width": out_w,
+                "crs": src.crs, "transform": transform, "nodata": np.nan, "compress": "deflate", "predictor": 3,
+                "tiled": True, "blockxsize": 512, "blockysize": 512, "zlevel": 6,
+            }
+            with rasterio.open(dst_path, "w", **profile) as dst:
+                dst.write(arr, 1)
     return meta
 
 
@@ -86,6 +100,7 @@ def main() -> int:
     ap.add_argument("--out", default="scratch/dem_pilot")
     ap.add_argument("--res", type=float, default=2.0)
     ap.add_argument("--workdir", default="/tmp/dem_pilot_work")
+    ap.add_argument("--compact", action="store_true", help="write int16 decimetre GeoTIFFs (small enough to commit)")
     args = ap.parse_args()
 
     out = pathlib.Path(args.out); out.mkdir(parents=True, exist_ok=True)
@@ -102,8 +117,8 @@ def main() -> int:
                 t0 = time.time()
                 download(rec["url"], raw)
                 digest = sha256(raw)
-                dst = out / f"{tile}_{int(args.res)}m.tif"
-                meta = reduce_tile(raw, dst, args.res)
+                dst = out / f"{tile}_{args.res:g}m.tif"
+                meta = reduce_tile(raw, dst, args.res, compact=args.compact)
                 entry = {"tile": tile, "status": "ok", "url": rec["url"], "project": rec["project"],
                          "source_bytes": raw.stat().st_size, "source_sha256": digest,
                          "output": dst.name, "output_bytes": dst.stat().st_size, "output_sha256": sha256(dst),
