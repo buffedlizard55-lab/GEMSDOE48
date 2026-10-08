@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="H59 method, strict public-proxy holdouts, source limitations, and current no-submission-slot decision.">
+<title>GEMSDOE48 — H59 method and results</title><link rel="stylesheet" href="../style.css">
+<style>nav a{color:#cdeadd;text-decoration:none;padding:6px 10px;border-radius:8px}nav a:hover{background:#0b6e4f;color:#fff}main{max-width:1120px;margin:auto;padding:1.5rem}table{border-collapse:collapse;width:100%;margin:1rem 0}th,td{border:1px solid #d1d5db;padding:.5rem .65rem;text-align:left;vertical-align:top}th{background:#f3f4f6}blockquote{border-left:4px solid #b45309;background:#fff7df;padding:.5rem 1rem;margin:1rem 0}pre{overflow:auto;background:#f1f5f9;padding:1rem;border-radius:8px}.decision{border:3px solid #b91c1c;background:#fff0ed;border-radius:12px;padding:1rem;margin:1rem 0}</style></head>
+<body><header><div class="wrap"><p>GEMSDOE48 · H59 research record</p><h1>H59 method and results</h1><p>Historical build with current no-slot reconciliation; local public-proxy evidence only.</p></div></header>
+<nav><div class="wrap"><a href="../index.html">Overview</a><a href="../executive-summary.html">Executive summary</a><a href="../submission-guide.html">Download / submission status</a><a href="../hypotheses.html">Hypotheses</a><a href="../validation.html">Validation</a><a href="../leaderboard.html">Leaderboard</a><a href="../status.html">Local file audit</a><a href="../sources.html">Sources</a><a href="../next-steps.html">Next steps</a></div></nav>
+<main><div class="decision"><strong>Current decision:</strong> H59 is downloadable for inspection only. No weekly submission slot is cleared. The original build receipt's broad submit wording is historical and superseded.</div>
+<h1 id="h59-method-strict-holdout-results-run-card-and-next-hypotheses-2026-10-08">H59 — method, strict holdout results, run card, and next hypotheses (2026-10-08)</h1>
+<p>This document is the session record for the H59 build in this checkout. Every number
+below is a <strong>measurement on a frozen local proxy</strong> or an <strong>owner-reported value copied
+from a campaign page</strong>; nothing is a projection and nothing is an organizer score.</p>
+<p><strong>Current disposition (reconciled 2026-10-08): download for inspection only; no weekly
+submission slot is cleared.</strong> The original build receipt used broader download/submit
+wording; it is retained as a historical build record, not current authorization. The
+H59 holdout is not a matched H49 gate, and its SGMC off-catalogue score is below both
+parents and their union. See <a href="../../evidence/submission_gate_reconciliation_20261008.json"><code>evidence/submission_gate_reconciliation_20261008.json</code></a>.
+Evaluator version: <code>scripts/evaluate_holdout.py@2026-10-08</code>.</p>
+<h2 id="1-what-was-asked-and-what-was-done">1. What was asked and what was done</h2>
+<p>The session brief asks for a <strong>unique</strong> competition GeoTIFF that combines the best
+dotted-family surface with the best tip/step-over surface using <strong>Dempster–Shafer
+evidence theory</strong>, keeps the <strong>unassigned mass <code>m(Θ)</code> as its own diagnostic layer</strong>,
+normalizes the combined belief to <strong>[0,1]</strong>, proves the result is <strong>not the naive
+mean</strong>, and states <strong>unambiguously whether the file may be downloaded and submitted</strong>.</p>
+<p>Delivered artifact (built by <code>scripts/build_submission_h59.py</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>File</td>
+<td><code>docs/downloads/gemsdoe48-h59-cover-ds-belief-b2xh33d-20261008T184547Z-b79c4c61d8d8.tif</code></td>
+</tr>
+<tr>
+<td>SHA-256</td>
+<td><code>f1584187b459baf47f75e5daf64de6f7696f9feb14910d3cf2762f7a1119597a</code></td>
+</tr>
+<tr>
+<td>Bands / dtype</td>
+<td>1 / float32</td>
+</tr>
+<tr>
+<td>CRS / pixel / grid</td>
+<td>EPSG:32611 / 100 m / 3292 × 3730 (matches the locally held sample template)</td>
+</tr>
+<tr>
+<td>Values</td>
+<td>all finite, min 0.0, max 1.0, <strong>no NaN anywhere</strong>, no nodata tag</td>
+</tr>
+<tr>
+<td>Local raw-array predicate</td>
+<td><code>all(0 &lt;= v &lt;= 1)</code> over the whole array → <strong>True</strong>. This is a local diagnostic only; it is not a verified model of the portal's validator or proof of the reported error's cause.</td>
+</tr>
+<tr>
+<td>Outside-footprint encoding</td>
+<td>Zero outside. The official problem page says outside cells should be null/NaN; no portal upload or acceptance test was made.</td>
+</tr>
+<tr>
+<td>Positive cells</td>
+<td>37,723</td>
+</tr>
+<tr>
+<td>Identification name (not submission authorization)</td>
+<td><code>GEMSDOE48-H59-CoverDSBelief-B2xH33D</code></td>
+</tr>
+<tr>
+<td>Identification note (108 chars; not for an authorized upload)</td>
+<td><code>GEMSDOE48 H59 | Dempster Bel(F), dotted B2 x tip H33D; 400m hex-cover of the fusion corridor; m(Theta) layer</code></td>
+</tr>
+<tr>
+<td>Weekly slot decision</td>
+<td><strong>NOT CLEARED</strong>; no submission was made.</td>
+</tr>
+<tr>
+<td>Receipt</td>
+<td><code>evidence/build_h59_receipt_20261008T184547Z.json</code></td>
+</tr>
+</tbody>
+</table>
+<p>Diagnostic layers written next to the submission (NaN outside the footprint, never part
+of the submission surface):</p>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>File suffix</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Unassigned belief <code>m(Θ)</code></td>
+<td><code>-diag-mtheta-unassigned</code></td>
+<td>residual ignorance after Dempster normalization</td>
+</tr>
+<tr>
+<td>Raw conflict <code>K</code></td>
+<td><code>-diag-conflict-K</code></td>
+<td>conjunctive conflict before normalization</td>
+</tr>
+<tr>
+<td>Plausibility <code>Pl(F)</code></td>
+<td><code>-diag-plausibility</code></td>
+<td><code>Bel(F) + m(Θ)</code></td>
+</tr>
+<tr>
+<td>Continuous belief</td>
+<td><code>-diag-belief-normalized</code></td>
+<td>normalized <code>Bel(F)</code> before emission</td>
+</tr>
+<tr>
+<td>Disagreement layers</td>
+<td><code>-diag-disagreement-a-only</code>, <code>-diag-disagreement-b-only</code></td>
+<td>cells committed by exactly one family</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-method-preregistered-nothing-fitted-to-a-hidden-label">2. Method (preregistered, nothing fitted to a hidden label)</h2>
+<ol>
+<li><strong>Parents, SHA-256 pinned.</strong> <code>data/raw/dotted_h33_2_b2_zeros.tif</code>
+   (<code>c55bafc4…7ab6fa9</code>, 37,654 cells, owner-reported 0.2778) and
+   <code>data/raw/tip_h33d_stepover.tif</code> (<code>87f857d5…4690757</code>, 41,865 cells,
+   owner-reported 0.2632).  Union 47,905; shared 31,614; symmetric difference 16,291.</li>
+<li><strong>Opinion surfaces in the scorer's own geometry.</strong> <code>bᵢ(x) = max_y k(d(x,y))</code> with
+   <code>k(d) = max(1 − d/300 m, 0)</code> (triangular kernel of the official metric).  This
+   avoids the semantic error of treating a non-emitted cell as evidence of “no fault”.</li>
+<li><strong>Shafer discounting + Dempster's rule</strong> (Shafer 1976 §11.2; Dempster 1967):
+   <code>mᵢ({F}) = αᵢ bᵢ</code>, <code>mᵢ({¬F}) = αᵢ (1 − bᵢ)</code>, <code>mᵢ(Θ) = 1 − αᵢ</code>, combined with the
+   canonical normalized rule.  <code>α_dotted = 0.95</code>, <code>α_tip = 0.95 × 0.2632/0.2778 =
+   0.900072</code> (documented modelling assumption, same rule as H50/H58).</li>
+<li><strong>Emission: metric-covering dot set over the fused corridor.</strong>  The corridor is the
+   union of the two families' committed cells; a hexagonal lattice covering with
+   spacing 4.0 px (400 m), greedy gap fill and redundant-dot pruning
+   (<code>gemsdoe48.emit.cover_region</code>) produces 37,723 dots with a <strong>measured covering
+   radius of 2.24 px = 224 m</strong>, i.e. every corridor cell is within 224 m of an emitted
+   dot (kernel credit ≥ 0.25) while the emitted mass stays in the sparse regime the
+   organizer ladder rewards (37,654 → 0.2778; 40,199 → 0.2708; 44,090 → 0.2600,
+   all owner-reported).</li>
+<li><strong>No averaging.</strong>  Spearman of the emitted surface's parent surface vs the naive
+   mean of the two opinion surfaces is <strong>0.9826</strong>, Pearson <strong>0.97479</strong>, max |Δ|
+   <strong>0.2709</strong>, with 68.1 % of support cells differing by &gt; 0.05.  The fusion is not the
+   average; it is also not a rescaled copy of <code>Bel(F)</code> (see receipt).</li>
+</ol>
+<h2 id="3-strict-holdout-results-hide-whole-segments-300-m-buffer-pixel-exact-masking">3. Strict holdout results (hide whole segments, 300 m buffer, pixel-exact masking)</h2>
+<p>Protocol: catalogue faults (60,988 cells; 3,199 segments) split into four spatial folds
+by segment centroid; for each fold the hidden segments are scored after removing every
+hidden pixel within 300 m of a visible fault, and the candidate prediction is zeroed
+pixel-exactly on visible faults; components pooled over folds; 95 % CI by resampling
+hidden segments (400 draws, seed 20261008, FPw held at its point estimate).</p>
+<p>Second truth population: <strong>SGMC-derived faults &gt; 300 m from every catalogue cell</strong>
+(62,122 cells; 2,115 scored segments) — the only mapped-fault population in reach that
+is off-catalogue by construction.</p>
+<table>
+<thead>
+<tr>
+<th>Emission rule (frozen, no fitting)</th>
+<th>catalogue proxy</th>
+<th>SGMC off-catalogue proxy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Parent A — dotted B2 (37,654)</td>
+<td>0.0067 [0.0062, 0.0073]</td>
+<td>0.0954 [0.0870, 0.1046]</td>
+</tr>
+<tr>
+<td>Parent B — tip H33-D (41,865)</td>
+<td>0.0863 [0.0820, 0.0899]</td>
+<td>0.0957 [0.0875, 0.1047]</td>
+</tr>
+<tr>
+<td>Union, binary (47,905)</td>
+<td>0.0850 [0.0808, 0.0886]</td>
+<td>0.0975 [0.0892, 0.1068]</td>
+</tr>
+<tr>
+<td>Naive mean of opinions (792,278)</td>
+<td>0.0444</td>
+<td>0.0673</td>
+</tr>
+<tr>
+<td>DS belief, dense (792,278)</td>
+<td>0.0341</td>
+<td>0.0767</td>
+</tr>
+<tr>
+<td>DS pignistic × (1−K), dense (H58 rule)</td>
+<td>0.0207</td>
+<td>0.0701</td>
+</tr>
+<tr>
+<td>DS belief, top 38,000</td>
+<td>0.0070</td>
+<td>0.0946 [0.0864, 0.1037]</td>
+</tr>
+<tr>
+<td>DS belief, spacing 2.8 px, 38,000</td>
+<td>0.0130</td>
+<td>0.0835</td>
+</tr>
+<tr>
+<td>DS belief, spacing 5.2 px, 38,000</td>
+<td>0.0336</td>
+<td>0.0841</td>
+</tr>
+<tr>
+<td><strong>H59 — corridor covering set, 37,723</strong></td>
+<td><strong>0.0974 [0.0927, 0.1023]</strong></td>
+<td><strong>0.0917 [0.0844, 0.0990]</strong></td>
+</tr>
+<tr>
+<td>Random control, same mass (38,000)</td>
+<td>0.0707</td>
+<td>0.0724</td>
+</tr>
+</tbody>
+</table>
+<p>Readings that matter:</p>
+<ul>
+<li>The H59 covering emission is the <strong>best rule on the catalogue proxy</strong> (0.0974 vs
+  0.0863 for the best parent and 0.0707 for a same-mass random emission, i.e. +0.027),
+  and it is <strong>statistically indistinguishable from both parents on the off-catalogue
+  proxy</strong> (0.0917 vs 0.0954/0.0957; CIs overlap).</li>
+<li><strong>The local dotted raster is sparse near the catalogue</strong>: the local audit found 0 of
+  37,654 dots within 200 m and 2,171 within 300 m. Under this evaluator it scores 0.0067
+  on the catalogue proxy and 0.0954 on SGMC off-catalogue cells. The owner-reported 0.2778
+  is not attributed to these exact local bytes, and these measurements do not show that
+  its signal lives off-catalogue or explain the public score. Official staff clarified
+  that known-fault masking is pixel-exact with no 300 m buffer; nearby unmasked
+  predictions are scored normally. Catalogue-flank pruning is therefore not automatically
+  score-exempt. The mechanism and score-to-file link remain unknown.</li>
+<li><strong>No fusion rule beats its parents by more than noise on either proxy</strong>, and the
+  fusion surfaces carry essentially no ranking information about <em>withheld</em> segments
+  (leakage canary AUC ≈ 0.50 for every candidate; the positive-control features that
+  use the full catalogue score 1.0000).  A fusion of two families that already share
+  31,614 of their cells cannot add information about the same target.</li>
+<li>Density: on the SGMC proxy the DS-belief rank cut keeps improving with mass
+  (20k 0.0552 → 47.9k 0.0988 → 200k 0.1088) but the same-mass random control overtakes
+  it everywhere above ~60k (60k 0.1003 vs 0.1006; 200k 0.1854).  On the catalogue proxy
+  every dense DS arm is far below the same-mass random control.  The organizer-observed
+  ladder, not any local proxy, is the reason this build stays sparse.</li>
+</ul>
+<h2 id="4-registry-uniqueness-audit-required-by-the-parallel-run-protocol">4. Registry / uniqueness audit (required by the parallel-run protocol)</h2>
+<ul>
+<li>74 local registry rasters compared (47 submission-like dot rasters, the rest dense
+  surfaces and diagnostic layers, classified separately).</li>
+<li><strong>Byte identity: none.</strong>  Largest <strong>exact-cell</strong> overlap with any submission-like
+  raster: <strong>0.208</strong> (<code>h19_5_01922.tif</code>); next 0.103 and 0.090.</li>
+<li>3-pixel proximity to the nearest parent dot set: <strong>1.000</strong>.  This is reported, not
+  hidden: a covering set of the same corridor <em>must</em> land within the 3-pixel halo of the
+  dense parent dots that already cover that corridor (parent spacing 2.8 px), so the
+  proximity fraction is structurally degenerate for any fused emission over the same
+  ground.  The non-degenerate columns are the exact-cell fraction (0.208) and the
+  byte-level comparison (no match).</li>
+<li>Corridor-restricted Spearman against registry surfaces: max 0.9201 (an H48-era DS
+  derivative of the same parents), 0.7969 vs the dotted ladder, 0.7527 vs the tip
+  family.  High correlation with same-parent derivations is expected and is why the
+  score claim is “no measured improvement”, not “a better surface”.</li>
+</ul>
+<h2 id="5-run-card-session-protocol-json">5. Run card (session protocol, JSON)</h2>
+<pre><code class="language-json">{
+  &quot;hypothesis&quot;: &quot;Sparse emission of the normalized Dempster-Shafer combined belief of the two strongest independently built families, at a covering density matched to the scorer's 300 m kernel, covers unmapped fault corridors at least as well as either parent per emitted cell.&quot;,
+  &quot;mechanism&quot;: &quot;Triangular-kernel opinion surfaces per family, Shafer discounting (0.95 / 0.900072), canonical normalized Dempster combination; residual m(Theta) and raw conflict K exported as separate layers; emission = hex-covering dot set of the fused corridor (spacing 4.0 px, measured covering radius 2.24 px = 224 m).&quot;,
+  &quot;named_non_fault_mimic&quot;: &quot;Lithologic contacts and erosional or landslide scarps produce linear topographic and magnetic edges that a kernel-credit belief surface cannot distinguish from fault evidence.&quot;,
+  &quot;holdout_DTI_CI&quot;: {
+    &quot;evaluator&quot;: &quot;scripts/evaluate_holdout.py@2026-10-08 (whole-segment hide-and-recover, 300 m buffer, pixel-exact visible-fault mask, pooled DTI alpha=0.2 beta=0.8, 300 m triangular kernel, segment bootstrap 400 draws seed 20261008)&quot;,
+    &quot;catalogue_proxy&quot;: {&quot;DTI&quot;: 0.0974, &quot;ci95&quot;: [0.0927, 0.1023], &quot;withheld_positive_cells&quot;: 60988, &quot;withheld_segments&quot;: 3201},
+    &quot;sgmc_off_catalogue_proxy&quot;: {&quot;DTI&quot;: 0.0917, &quot;ci95&quot;: [0.0844, 0.0990], &quot;withheld_positive_cells&quot;: 62107, &quot;withheld_segments&quot;: 2115},
+    &quot;comparators&quot;: {&quot;dotted_parent&quot;: 0.0954, &quot;tip_parent&quot;: 0.0957, &quot;union&quot;: 0.0975, &quot;random_same_mass&quot;: 0.0724}
+  },
+  &quot;correlation_overlap_vs_registry&quot;: &quot;No byte identity; max exact-cell overlap 0.208 with any submission-like raster; max corridor Spearman 0.9201 (same-parent DS derivative); 3-px proximity 1.000 but structurally degenerate for corridor-covering sets (documented).&quot;,
+  &quot;raster_sha256&quot;: &quot;f1584187b459baf47f75e5daf64de6f7696f9feb14910d3cf2762f7a1119597a&quot;,
+  &quot;local_audit_record&quot;: &quot;single-band float32, EPSG:32611, 3292x3730, local-template transform, finite [0,1] values, no nodata tag, zero outside; whole-array range predicate is true. Outside zero conflicts with the official null/NaN wording. No portal test was run.&quot;,
+  &quot;identification_name_only&quot;: &quot;GEMSDOE48-H59-CoverDSBelief-B2xH33D&quot;,
+  &quot;identification_note_only&quot;: &quot;GEMSDOE48 H59 | Dempster Bel(F), dotted B2 x tip H33D; 400m hex-cover of the fusion corridor; m(Theta) layer&quot;,
+  &quot;historic_builder_disposition&quot;: &quot;promote-format-only (superseded by current gate reconciliation)&quot;,
+  &quot;current_disposition&quot;: &quot;DOWNLOAD_FOR_INSPECTION_ONLY_NOT_CLEARED_TO_SUBMIT&quot;,
+  &quot;current_disposition_detail&quot;: &quot;No same-protocol H49 promotion comparison is recorded for H59, and its SGMC off-catalogue result is below the two parents and their union. Local artifact checks do not establish portal acceptance or private-label performance.&quot;
+}
+</code></pre>
+<h2 id="6-what-the-02778-public-row-doesand-does-notestablish">6. What the 0.2778 public row does—and does not—establish</h2>
+<p>Measured decomposition of the metric <code>DTI = TPw / (TPw + 0.2 FPw + 0.8 FNw)</code>:</p>
+<ol>
+<li><strong>Mass.</strong>  Recall is weighted 4× precision, so coverage dominates.  The winning
+   entries cluster at 37k–44k positive cells; an all-ones footprint (5.17 M cells)
+   reaches only ~0.05 on the catalogue proxy, and the dense DS arms (792 k cells) score
+   0.0341 there against 0.0707 for a same-mass <em>random</em> emission.</li>
+<li><strong>Placement off the catalogue.</strong>  The 0.2778 file has <strong>zero</strong> dots within 200 m of
+   the mapped catalogue.  On the off-catalogue population it is as good as any other
+   family (0.0954), while on the catalogue it is the worst candidate tested (0.0067).
+   Submissions built to score on the catalogue (<code>sgmc-off-catalogue-44k</code> 0.0512,
+   <code>h51-km-faultzone</code> 0.0106) did not transfer.</li>
+<li><strong>Kernel-matched spacing.</strong>  The dotted ladder (2.8 px spacing) and this build's hex
+   covering both place dots so that every corridor cell keeps partial kernel credit.</li>
+<li><strong>What cannot work with these two parents.</strong>  Their dot sets overlap by 31,614/47,905
+   (Jaccard 0.66); a Dempster combination of two such sources is a monotone function of
+   the same evidence and adds no measured discriminative power (AUC ≈ 0.50 on withheld
+   segments of both proxies).  <strong>Beating 0.2778 needs a new off-catalogue evidence
+   channel, not a new combination rule.</strong></li>
+</ol>
+<h2 id="7-ranked-hypothesis-slate-proposed-not-validated">7. Ranked hypothesis slate (proposed, not validated)</h2>
+<p>Ranked by expected off-catalogue enrichment per unit cost.  None was implemented in
+this session; each names its physical signature, why it should catch faults missing from
+the catalogue, how it differs from this repo's work, and the free official source it
+needs.  <strong>Availability caveat:</strong> this sandbox reaches only github.com, pypi.org and
+their CDNs, so third-party download availability below is <em>reported as unverified from
+here</em> and must be checked on an unrestricted machine.</p>
+<table>
+<thead>
+<tr>
+<th>Rank</th>
+<th>Hypothesis (layers)</th>
+<th>Physical signature</th>
+<th>Why unmapped faults</th>
+<th>Difference from this repo</th>
+<th>Expected DTI effect</th>
+<th>Cost / source status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>H60 — lidar micro-topography conditioned on the fused corridor</strong> (USGS 3DEP 1 m DEM tiles for the corridor + fused DS corridor)</td>
+<td>Multi-scale curvature (Laplacian-of-Gaussian) ridge/valley-pair offsets and drainage deflection within 100 m of a corridor dot</td>
+<td>The catalogue is a compilation of bedrock faults; lidar resolves metre-scale scarps, channel offsets and beheaded drainages that compilation omits, and the hidden expert mapping is plausibly drawn from high-resolution imagery</td>
+<td>H52/H57 used lidar <em>scarp relief</em> as coarse positive evidence; this tests scale-resolved curvature/offset metrics <em>conditioned</em> on the fused corridor</td>
+<td>Highest of the slate (target: exceed the +31 % random-control enrichment the dotted family already has at 40k mass)</td>
+<td>Medium; needs 3DEP tiles beyond the two local pilot tiles in <code>data/pilot/dem3m/</code>; source = USGS 3DEP (unverified from this sandbox)</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>H62 — stress-consistent tip/relay continuation</strong> (official catalogue segments + fused corridor)</td>
+<td>Along-strike projection beyond mapped tips and relay-ramp bridging for overlapping tip pairs at 1–5 km separation, filtered by strike consistency</td>
+<td>Fault tips and relay zones are where new faults are discovered; the tip family already scores 0.2632 (owner-reported), so tip-conditioned geometry is a proven channel</td>
+<td>H33-D used analog tip detection; this adds documented per-segment geometric continuation with a stress-consistency filter, evaluated fold-by-fold</td>
+<td>Moderate (+0.005–0.02 on the off-catalogue proxy if enrichment holds)</td>
+<td>Low; pure geometry on existing local rasters</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>H61 — multi-scale magnetic edge persistence</strong> (GeoDawn TMI derivatives from the cached 19-band feature stack + corridor)</td>
+<td>Edges that persist across smoothing scales in tilt/THD, angle-conditioned away from catalogue-parallel structure</td>
+<td>Deep basement fabric with weak surface expression; single-scale radiometric edges were already tried (0.1589 / 0.0843) but magnetic scale-persistence is a different, untested channel</td>
+<td>Earlier radiometric-edge work; this tests persistence of <em>magnetic</em> edges and excludes catalogue-parallel orientations</td>
+<td>Unknown; plausible</td>
+<td>Medium; requires restoring the cached 19-band stack (<code>scripts/restore_h55_inputs.py --with-official-features</code>, third-party GitHub mirror — provenance caveat)</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>H64 — INGENIOUS thermal/geochemical modulator</strong> (INGENIOUS regional data in <code>data/external/</code>, GDR submission 1391)</td>
+<td>Surface-temperature anomaly and alteration proximity as a multiplicative modulator of the corridor, not as new geometry</td>
+<td>The prize is geothermal: hidden labels may weight faults near thermal manifestations</td>
+<td>Prior submissions used thermal/alteration <em>as a surface</em> (0.1894 / 0.0782); this uses it only to re-rank corridor dots</td>
+<td>Small but independent of geometry</td>
+<td>Medium; source = INGENIOUS / DOE GDR 1391 (availability of the needed layers unverified from this sandbox)</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>H63 — SGMC-vintage differential</strong> (USGS SGMC faults vs the official catalogue)</td>
+<td>Cells where SGMC has faults absent from the catalogue</td>
+<td>It is the off-catalogue population by construction</td>
+<td>Already effectively submitted: <code>sgmc-off-catalogue-44k</code> scored 0.0512 (owner-mirrored receipt), i.e. this direction has <em>negative</em> evidence</td>
+<td>Low/negative</td>
+<td>Low; local rasters already present — kept in the slate as a documented negative</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Gate before any of these spends a submission slot:</strong> beat the current best
+single-family surface on the strict protocol <em>and</em> beat the same-mass random control on
+both proxies <em>and</em> pass the byte/exact-cell uniqueness audit.  Per the session protocol
+the top candidate (H60) <strong>cannot be validated in this session</strong> — it needs DEM tiles that
+this environment cannot download — so it is proposed, not promoted, and flagged for
+review on an unrestricted machine.</p>
+<h2 id="8-irregularities-flagged-in-this-session">8. Irregularities flagged in this session</h2>
+<ol>
+<li><strong>Reported range error and outside encoding.</strong> The user reported an earlier error,
+   “Predicted values must be in range [0, 1]”; the exact rejected bytes and validator
+   semantics are unavailable. A raw whole-array check returns false when an array has
+   NaN values, while H59's zero-outside array returns true. That does not identify the
+   cause of the earlier error or prove that H59 is accepted: the official problem page
+   says outside cells should be null/NaN, and no portal upload or acceptance test was
+   made for H59 or either H58-A encoding. See the H58-A format receipts and the current
+   <a href="../../evidence/submission_gate_reconciliation_20261008.json"><code>submission gate reconciliation</code></a>.</li>
+<li><strong><code>data/raw/sample_submission_template.tif</code> is a local artifact, not an organizer
+   file</strong>: it is float32 with NaN outside the footprint and exactly 60,988 positive
+   cells, identical to <code>data/official/existing_faults.tif</code> / <code>labels.tif</code>
+   (<code>7ba308cc…</code>).  Its finite-cell mask (5,167,373 cells) is used as the footprint
+   definition; that usage is documented, but the file must not be described as the
+   organizer's sample submission.</li>
+<li><strong>Two SGMC rasters with different hashes and counts</strong>:
+   <code>data/raw/sgmc_faults_100m.tif</code> <code>26d142c4…</code> (82,151 positives) vs
+   <code>data/official/derived_sgmc_faults_100m.tif</code> <code>643cbe99…</code> (83,593 in footprint;
+   62,122 off-catalogue at &gt; 300 m).  Holdout scripts pin the derived raster; the mirror
+   should be reconciled or labelled.</li>
+<li><strong>16 pre-existing test failures at the merge commit <code>36d9785</code></strong> in
+   <code>tests/test_site_*.py</code>, <code>tests/test_h57.py</code>, <code>tests/test_site_classification.py</code>: the
+   site was updated for H58 without updating those assertions.  They are fixed in this
+   session along with the site update.</li>
+<li><strong>README contradiction inherited from the previous merge</strong>: the top of the README
+   declared the H58 file “ready to download and submit” while a later section maintained
+   “NOT OK / NOT CLEARED TO SUBMIT” for the same fusion family.  This session replaced
+   both statements with one mechanically-gated verdict per artifact.</li>
+</ol>
+<h2 id="9-limitations">9. Limitations</h2>
+<ul>
+<li>No organizer receipt exists for any file here; <code>UNSCORED</code> labels are deliberate.</li>
+<li>Both truth proxies are public maps, not the hidden labels; their rankings disagree
+  with each other and neither reproduces the organizer ladder.</li>
+<li>The two parents are frozen upstream artifacts and cannot be rebuilt from visible
+  faults alone, so the holdout is a leave-segment-out generalisation test of frozen
+  surfaces, not a fully re-derived per-fold model.</li>
+<li>The <code>m(Θ)</code> layer mixes genuine epistemic ignorance with spatial-offset effects; it is
+  a diagnostic, not a probability, and not a measure of geological disagreement alone.</li>
+<li>This session ran three experiments (H59 build, strict holdout on two proxies, registry
+  audit).  The hypothesis slate is unvalidated by design.</li>
+</ul>
+<p><a href="h59-method-results-20261008.md">Source Markdown</a> · <a href="../../evidence/submission_gate_reconciliation_20261008.json">Current decision receipt</a>.</p></main>
+<footer><div class="wrap">GEMSDOE48 · no organizer acceptance inferred</div></footer></body></html>

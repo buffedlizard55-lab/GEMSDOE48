@@ -1,50 +1,99 @@
-# GEMSDOE48 — auditable GEMS fault-surface research (H58; H48–H57 archived)
+# GEMSDOE48 — auditable GEMS fault-surface research (H59; H58-A/H58 archived)
 
-> **Current decision — 2026-10-08: NO WEEKLY SLOT CLEARED; NO SUBMISSION MADE.** H58-A failed its preregistered comparison with H49 on both public proxies (0/4 winning folds on each). Its GeoTIFFs are downloadable for inspection only. Local validation is not organizer acceptance. The user reports a limit of three submissions per week and confirms no slot has been used; do not spend a slot unless a comparable, spatially blocked promotion gate passes.
+> **Current decision — 2026-10-08: NO WEEKLY SUBMISSION SLOT IS CLEARED; NO SUBMISSION WAS MADE.** H59 is a unique local cover-rule fusion, but its strict hide-and-recover result is not the preregistered same-protocol H49 promotion gate required here and its SGMC score is below its parents and union. H58-A separately failed the matched H49 gate on both public proxies (0/4 winning folds each). Local format/uniqueness checks do not establish organizer acceptance. The user reports a limit of three submissions per week and confirms no slot has been used. **All local artifacts are for inspection only; do not upload or spend a slot.**
 
-This README is the project starting point. The objective remains to maximize the probability of winning with genuinely useful, auditable and original evidence, while owning the outcome honestly; a unique filename or slightly changed mass assignment is not geological novelty. Keep the brief and decision here current; use the dated research records and machine-readable evidence linked below for detail. The original owner brief is preserved verbatim in the appendix.
+## ⬇ H59 cover-rule artifact — inspection-only; not submission-cleared
+
+**Download:** [`gemsdoe48-h59-cover-ds-belief-b2xh33d-20261008T184547Z-b79c4c61d8d8.tif`](docs/downloads/gemsdoe48-h59-cover-ds-belief-b2xh33d-20261008T184547Z-b79c4c61d8d8.tif) ([zip](docs/downloads/gemsdoe48-h59-cover-ds-belief-b2xh33d-20261008T184547Z-b79c4c61d8d8.zip)) — SHA-256 `f1584187b459baf47f75e5daf64de6f7696f9feb14910d3cf2762f7a1119597a`; 37,723 positive cells. One float32 band, EPSG:32611, 100 m, 3,292 × 3,730, transform matching the locally held sample template; every value finite and in [0, 1]; nodata unset; zero outside the footprint. A local whole-array range check is true, but the zero-outside encoding differs from the official null/NaN outside wording. No portal upload was made; the prior range-error cause and organizer acceptance remain unverified.
+
+**Archived identifier (not submission authorization):** `GEMSDOE48-H59-CoverDSBelief-B2xH33D`
+
+**Short note retained for identification only (do not submit):** `GEMSDOE48 H59 | Hex-cover of DS belief corridor (B2 dotted x H33-D tip); spacing 4.0px; unique dots; UNSCORED.`
+
+**Diagnostics (research layers, NaN outside footprint — never submit these):** m(Θ) unassigned mass, conflict K, plausibility Pl(F), normalized belief, and the dotted-only / tip-only disagreement rasters in [`docs/downloads/diagnostics/`](docs/downloads/diagnostics/).
+
+**Gates (all mechanical, from [`evidence/build_h59_receipt_20261008T184547Z.json`](evidence/build_h59_receipt_20261008T184547Z.json)):** not the naive mean (Pearson 0.97479, Spearman 0.98257, max |Δ| 0.2709; 69,384 support cells where the parents disagree by >0.05); unique vs all 74 registry rasters (47 submission-like) — byte-identical to none, max exact-cell overlap 0.208, max corridor Spearman 0.9201 (both below the 0.95 / 0.99 duplicate tripwires). The earlier top-k cut of the same fusion **was** an in-lane duplicate of the dotted family (Jaccard 0.939, 100% of dots within 3 px) and was logged and deleted per protocol.
+
+**Honest score statement (HOLDOUT-DTI, evaluator `scripts/evaluate_holdout.py@2026-10-08`, segment bootstrap 400 draws):** catalogue proxy 0.0974 [0.0927, 0.1023] — best rule tested, beats the same-mass random control (0.0707); SGMC off-catalogue proxy 0.0917 [0.0844, 0.0990] — does **not** beat the parents (0.0954 / 0.0957) or their union (0.0975). No ORGANIZER-CONFIRMED score or portal acceptance exists; the file is UNSCORED. Full write-up: [H59 method & results](docs/research/h59-method-results-20261008.md). The [status feed](docs/status.html) records local checks only; it is not organizer acceptance or submission authorization.
+
+### Earlier H58 pignistic artifact (separate from H58-A; historical)
+
+[`gemsdoe48-h58-pignistic-conflict-priced-B2xH33D-20261008T175914Z-e58.tif`](docs/downloads/gemsdoe48-h58-pignistic-conflict-priced-B2xH33D-20261008T175914Z-e58.tif) — SHA-256 `5acb56d987ce30a2c332f09ed33cb00dcaeec027ac437519ca237e52e0046022`; 40,000 cells; local format checks were recorded, but the file is UNSCORED and no portal upload or organizer acceptance test was made. On the strict holdout its rule (pignistic × (1−K)) scores 0.0207 (catalogue) / 0.0701 (SGMC off-catalogue) — below the H59 cover rule on both proxies, which is why it was demoted. Receipt: [`evidence/build_h58_receipt_20261008T175914Z.json`](evidence/build_h58_receipt_20261008T175914Z.json).
+
+### H58-A positive-only D-S ablation (this PR; failed matched-H49 gate)
+
+H58-A is a separate artifact from the earlier H58 pignistic file above. It combines the same B2/H33-D geometry with positive-only simple-support masses, but its exact same-protocol H49 holdout is decisively negative: 0.055301 catalogue and 0.066341 newer SGMC off-catalogue versus H49 0.095353 / 0.100751, with 0/4 winning folds on both. **Not cleared to submit.** The bounded local audit found no exact in-footprint copy among 113 comparable local rasters, but H58-A shares support and near-identical ranking with H56-OWDS; it is not a new geological detector.
+
+- [H58-A zero-outside TIFF](docs/downloads/GEMSDOE48-H58-OWDS-POSONLY-B2xH33D-20261008-fdbb83476756-zeros-outside.tif) · SHA-256 `bbd289dd545cd772af3a88631b43233569dcbf4815c69bc5479a53fd73ca3973` · [one-TIFF ZIP](docs/downloads/GEMSDOE48-H58-OWDS-POSONLY-B2xH33D-20261008-fdbb83476756-zeros-outside.zip) · [NaN-outside alternative](docs/downloads/GEMSDOE48-H58-OWDS-POSONLY-B2xH33D-20261008-fdbb83476756-nan-outside.tif).
+- Neither variant was portal-tested. Zero-outside addresses a naive raw-array range check but differs from the official null/NaN outside convention; NaN-outside follows that wording but may trip an unmasked range validator. The old portal error's cause is unknown.
+- [Full H58-A result and fold receipt](docs/research/h58-results-20261008.md) · [frozen five-hypothesis slate](docs/research/hypotheses-h58-20261008.md) · [preregistration](evidence/hypothesis_slate_h58_20261008.json) · [bounded uniqueness receipt](evidence/h58_uniqueness_audit_20261008.json).
 
 ## Current evidence at a glance
 
-- **H58-A result:** DTI means are 0.055301 (catalogue proxy) and 0.066341 (newer SGMC off-catalogue proxy), versus the same-protocol H49 reference at 0.095353 / 0.100751. Paired differences are −0.040053 / −0.034411; H58 wins 0/4 folds on each target. The older raw-SGMC sensitivity also loses (0.065501 vs 0.099768; −0.034267, 0/4). **Gate failed decisively; no submission slot is cleared.** These public maps are not private expert labels or a score prediction. See [H58 report](docs/research/h58-results-20261008.md), [H58 fold receipt](evidence/holdout_h58_20261008.json), and [validation summary](docs/validation.html).
-- **Artifact and format:** the [all-finite zero-outside TIFF](docs/downloads/GEMSDOE48-H58-OWDS-POSONLY-B2xH33D-20261008-fdbb83476756-zeros-outside.tif) has SHA-256 `bbd289dd545cd772af3a88631b43233569dcbf4815c69bc5479a53fd73ca3973`; its [one-TIFF ZIP](docs/downloads/GEMSDOE48-H58-OWDS-POSONLY-B2xH33D-20261008-fdbb83476756-zeros-outside.zip) has SHA-256 `d0c985c23c2cd4c2aaccf252927ab35fbf6be9bd74a7c02cdb1653edb07477d1`. The [NaN-outside alternative](docs/downloads/GEMSDOE48-H58-OWDS-POSONLY-B2xH33D-20261008-fdbb83476756-nan-outside.tif) has SHA-256 `a57d3b732c2280c4c8f626ee37a54aa35fb496fde83b47df33501009eb29a294`. Both are one-band float32, 3,292 × 3,730, EPSG:32611, 100 m, with identical in-footprint values. The zero variant is all finite/in [0,1] for a raw range check; the NaN variant follows the official null/NaN outside convention. Neither was portal-tested. The cause of the previously reported “Predicted values must be in range [0, 1]” error is unknown; see the [format caveat](docs/research/h58-results-20261008.md#one-click-research-artifacts).
-- **Unique local identity, not novelty overclaim:** local name `GEMSDOE48-H58-OWDS-POSONLY-B2xH33D-20261008-fdbb83476756`; no exact byte or in-footprint pixel copy was found among 113 comparable local rasters. H58 shares exact positive support with H56-OWDS, has top-37,654 rank Jaccard 1.0 and Pearson r 0.999928 against it. Treat H58 as a positive-mass ablation over existing geometries—not a meaningfully new detector or a global-uniqueness claim. See [bounded audit](evidence/h58_uniqueness_audit_20261008.json).
-- **Dempster–Shafer construction:** for each parent, a 300 m triangular support `s` receives `m(F)=0.60s`, `m(not F)=0`, and `m(Theta)=1−0.60s`; normalized Dempster combination emits max-normalized `Bel(F)`. `K=0` by construction because neither source assigns `m(not F)`; it is not evidence of source agreement. `m(Theta)` is residual ignorance, not disagreement. Separate raw-Bel, m(Theta), K and absolute support-difference diagnostics are [linked from the report](docs/research/h58-results-20261008.md#construction-and-evidence-semantics); they are not submission alternatives.
-- **Unique name and short note (archived for identification only):** `GEMSDOE48-H58-OWDS-POSONLY-B2xH33D-20261008-fdbb83476756`. Note: `H58 positive-only D-S (alpha=0.60), B2 x H33-D; separate mTheta/K/support-difference diagnostics; proxy gate failed, research only—not cleared to submit.` Neither is permission to submit.
-- **Ranked 3–5 hypothesis slate:** H58-A positive-only D-S was tested and failed; H58-B basement-depth/gravity edge, H58-C ComCat focal-mechanism orientation, H58-D 3DEP stream-profile knickpoints, and H58-E Landsat surface-temperature persistence remain parked pending access, coverage and QA audits. No numeric DTI forecast is claimed. See the [frozen slate](docs/research/hypotheses-h58-20261008.md), [preregistration receipt](evidence/hypothesis_slate_h58_20261008.json), and [hypothesis page](docs/hypotheses.html).
+- **Public leaderboard and 0.2778 attribution:** the 2026-10-08 one-read snapshot showed #1 at 0.3774, DARD 0.3195 at #7, and `extradr19` 0.2778 at #13 ([snapshot](docs/data/leaderboard_20261008.json)). The local B2-to-row association and owner-reported 0.2600→0.2708→0.2778 ladder remain unverified. Staff clarified the known-fault mask is pixel-exact with no 300 m buffer; nearby unmasked predictions are scored normally, so catalogue-flank pruning is not automatically score-exempt. The mechanism remains unknown. See [leaderboard](docs/leaderboard.html), [mask/leaderboard correction](docs/research/leaderboard-and-mask-clarification-20261008.md), and [attribution note](docs/research/why-02778-and-ceiling-20261007.md).
+- **H49 reference:** same-protocol proxy means 0.095353 (catalogue) and 0.100751 (SGMC >300 m off-catalogue). It is a comparable public-map reference for research—not the live leaderboard leader, private truth, or a promotion/slot clearance.
+- **H58-A positive-only D-S:** failed the matched H49 gate on both public proxies (0/4 wins each). Full results and format caveats are linked above; no slot is cleared.
+- **H59 cover-rule D-S:** a distinct local artifact with a strict segment-withheld evaluation, but that evaluator is not the same-protocol H49 gate; H59 is below its parents/union on the SGMC proxy and remains inspection-only under this project's slot rule.
+- **Historical H57 slate and H57-A:** four distinct geological hypotheses were ranked with planning-only ranges, source-access caveats and a frozen public-proxy gate. Its H57-A (robust K~Th residual × TMI-up150 gradient) slightly raised the catalogue proxy, fell below H49 on SGMC, and lost to all eight descriptive same-pool random controls. **That H57-A screen emitted no TIFF.** A separate concurrent H57-RELIEF TIFF is retained for inspection only; its old `FPw = S − TPw`-based live projection and recommendation are withdrawn. See [current slate](docs/research/hypotheses-h57-20261007.md), [H57-A results](docs/research/h57-results-20261007.md), [H57-RELIEF report](docs/research/h57-ds-relief-augmented-20261007.md), and [metric erratum](docs/research/h57-relief-metric-erratum-20261007.md). The earlier 17:43 H57-A–E planning slate is distinct and unbuilt: [slate](docs/research/h57-hypothesis-slate-20261007.md), [receipt](evidence/hypothesis_slate_h57_20261007.json).
+- **H56-F:** all three preregistered Dempster-belief pruning thresholds fail H49 on both proxies. For τ=.99/.95/.90, catalogue means are 0.005337/0.006744/0.006831 and SGMC means 0.081123/0.094821/0.095491; no H56-F file or slot is cleared. See [results](docs/research/h56-pruning-ladder-results-20261007.md).
 
-## Public leaderboard and 0.2778 correction
+## 2026-10-08 repository review — fusion request is already implemented and fails promotion
 
-One official-board read on 2026-10-08 showed #1 at 0.3774, DARD's 0.3195 at #7, and `extradr19`'s 0.2778 at #13 ([dated snapshot](docs/data/leaderboard_20261008.json); [leaderboard page](docs/leaderboard.html)). The 0.2600→0.2708→0.2778 family ladder and association with local B2 remain owner-reported leads; no file-specific organizer receipt connects the public row or ladder to local bytes.
+**Current promotion decision (2026-10-08): no slot is cleared.** H59 passed local artifact identity/format audits and its own strict evaluator, but the reported test is not a matched H49 comparison and H59 is below its parents/union on the SGMC proxy. H58-A failed the direct matched-H49 gate on both proxies. These facts do not authorize a weekly competition submission. The paragraph below remains an archive of the earlier H56/H56B review only.
 
-DrivenData staff clarified that the known-fault exclusion is pixel-exact with the provided training labels: **there is no 300 m mask buffer**. Nearby unmasked predictions are scored normally against new-fault truth, which may itself lie within 300 m of a known trace. Therefore the old “catalogue-flank pruning is score-exempt” explanation is unsupported. The cause of the 0.2778 ladder and its local-file attribution remain unknown. See the [dated correction](docs/research/leaderboard-and-mask-clarification-20261008.md), [official forum clarification](https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516/4), and [attribution note](docs/research/why-02778-and-ceiling-20261007.md).
+> The dotted × tip/step-over Dempster–Shafer request is already represented by H56/H56B artifacts and audits; do not duplicate it under a new name. The maintained verdict remains **OK TO DOWNLOAD FOR INSPECTION · NOT OK / NOT CLEARED TO SUBMIT**. The local H56B comparison is highly correlated with its normalized arithmetic-mean comparator (r=0.9866), fails the same-protocol public-proxy H49 comparison, and has no recorded registry-wide correlation/dot-overlap gate or requested segment-bootstrap 95% CI. Its zero-outside version also fails the repository-recorded NaN-outside requirement. See [review, ranked next hypotheses, and run card](docs/research/review-20261008-ds-fusion.md). No new experiment or competition slot was spent in this review.
 
-## Sources, access, and current workflow
+## ⬇ H56B Dempster–Shafer artifact — clear download / submission verdict
 
-- Competition problem, metric and GeoTIFF description: [official DrivenData page](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/). Current published format is single-band float32, EPSG:32611, 100 m, values in [0,1], null/NaN outside. Local checks do not establish portal acceptance.
-- Rules: [September 2026 DOE/NLR PDF](https://docs.nlr.gov/docs/fy26osti/96647.pdf). It describes up to three platform submissions per week subject to current platform limits and requires generative-AI-use disclosure in the narrative when applicable; recheck live rules before any future submission.
-- The official [competition data tab](https://www.drivendata.org/competitions/306/competition-doe-gems/data/) redirected to login during this review; no organizer data were downloaded. Public/owner-mirrored rasters require separate provenance and reuse-rights review.
-- Official hypothesis leads: [USGS ComCat API](https://earthquake.usgs.gov/fdsnws/event/1/), [USGS 3DEP](https://www.usgs.gov/3d-elevation-program/about-3dep-products-services), [Landsat Collection 2 Surface Temperature](https://www.usgs.gov/landsat-missions/landsat-collection-2-surface-temperature), [GeoDAWN DOI 10.5066/P93LGLVQ](https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and), and [2026 GeMS-SGMC DOI 10.5066/P1A3DQZK](https://www.usgs.gov/data/geologic-map-schema-gems-version-state-geologic-map-compilation-sgmc-geodatabase-conterminous). Product availability does not prove study-area coverage or fitness for the hypothesis. Full source notes: [docs/sources.html](docs/sources.html) and [H58 report](docs/research/h58-results-20261008.md).
+**OK TO DOWNLOAD FOR INSPECTION · NOT OK / NOT CLEARED TO SUBMIT.** This is a locally distinct H56B graded Bel(F) GeoTIFF built from the owner-mirrored dotted B2 and H33-D tip/step-over families. It is not a new geological signal, and the two parents overlap substantially; independence is not established.
 
-Current reproducibility commands (use the project `.venv`; all checks are local, not organizer acceptance):
+- **Download:** [`GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros-outside.tif`](docs/downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros-outside.tif) — 1,646,054 bytes; SHA-256 `4d6548d4ec07a47a25b83d28ebc05d58b57448c1507b460aed52cec395bdb6b5`; 791,389 positive cells. One float32 band, EPSG:32611, 100 m, 3,292 × 3,730; all raster values finite and within [0,1], nodata unset. Local grid/dtype/range checks pass. The file is byte-distinct from the other local downloads; its NaN-outside twin carries the same in-footprint values. This is a bounded local artifact check, not organizer uniqueness or acceptance.
+- **Format caveat:** this primary uses finite zero outside the footprint; the public problem description also says outside values should be null/NaN. A NaN-outside twin exists, but neither file has a portal acceptance receipt. Local format checks are not official format acceptance.
+- **Same-protocol holdout:** H56B mean DTI is **0.032347** on the catalogue proxy and **0.070552** on the off-catalogue SGMC proxy, versus H49 at 0.095353 / 0.100751. Paired deltas are −0.063006 / −0.030199; 0/4 folds exceed H49 on either target. These are public-proxy diagnostics only. Details and reproducible receipt: [`docs/research/h56b-metric-erratum-20261007.md`](docs/research/h56b-metric-erratum-20261007.md) · [`evidence/holdout_h56_belief_h49_20261007.json`](evidence/holdout_h56_belief_h49_20261007.json).
+- **D-S diagnostics (not submission alternatives):** [unassigned residual m(Θ)](docs/downloads/diagnostics/gemsdoe48-h56-mtheta-9ec0d605c45b.tif) · [raw conflict K](docs/downloads/diagnostics/gemsdoe48-h56-conflict-9ec0d605c45b.tif) · [plausibility Pl(F)](docs/downloads/diagnostics/gemsdoe48-h56-plausibility-9ec0d605c45b.tif). **m(Θ) is unassigned/ignorance mass, not conflict or family disagreement; K is the separate raw conflict diagnostic.** The normalized Bel(F) is relative max-normalized favorability, not a calibrated fault probability.
+- **Not the arithmetic mean:** receipt metrics compare both the binary-mask mean and kernel-support mean; the Bel raster is not identical to either. Difference from an average is a construction check, not evidence of improved fault prediction.
+- **Projection correction:** the former H56B value 0.0649 and H55 0.2843 ceiling used the invalid identity `FPw = S − TPw`. Do not use them as score estimates or gates. The historical projection receipt is marked invalid; see the [metric-identity erratum](docs/research/metric-identity-erratum-20261007.md) and [H56B erratum](docs/research/h56b-metric-erratum-20261007.md).
 
-```bash
-.venv/bin/python scripts/validate_h58_holdout.py
-.venv/bin/python scripts/audit_h58_uniqueness.py
-.venv/bin/python scripts/validate_submission.py docs/downloads/GEMSDOE48-H58-OWDS-POSONLY-B2xH33D-20261008-fdbb83476756-zeros-outside.tif --encoding zeros --receipt evidence/h58_submission_validation_20261008.json
-.venv/bin/python scripts/validate_submission.py docs/downloads/GEMSDOE48-H58-OWDS-POSONLY-B2xH33D-20261008-fdbb83476756-nan-outside.tif --encoding nan --receipt evidence/h58_nan_submission_validation_20261008.json
-.venv/bin/python -m pytest -q
-```
+## Separate H56 open-world D-S artifact — download yes, submit no
 
-The H49 reference-reproduction check is part of `validate_h58_holdout.py`; do not weaken the frozen H58 result after seeing its negative outcome. `.github/workflows/tests.yml` runs both the test suite and this frozen H58/H49 public-proxy holdout on CI; that workflow checks reproducibility only and never submits to the competition. Keep all H48–H57 experiments as dated historical records, not as current submission recommendations.
+The concurrently developed H56-DS open-world parameterization is a separate output from H56B. It also combines B2 × H33-D by normalized Dempster rule, but uses a different open-world mass assignment. **OK TO DOWNLOAD FOR INSPECTION · NOT OK / NOT CLEARED TO SUBMIT.** It scores 0.054242 / 0.066070 against H49's 0.095353 / 0.100751 on the two public proxies and fails both. Its direct parent-support difference is distinct from the D-S masses; m(Θ) remains unassigned mass and raw K remains conflict. See [H56 results](docs/research/h56-results-20261007.md), [build receipt](evidence/build_h56_receipt_20261007.json), and [holdout receipt](evidence/holdout_h56_ds_20261007.json). No organizer score or local file-to-leaderboard link exists.
 
-## Older work, current status and project pages
+## H57-RELIEF concurrent research TIFF — download yes, submit no
 
-H49 remains the comparable local public-proxy reference only; it is not the leaderboard leader, private truth, or slot clearance. H56/H57 candidates and historical projection claims are documented for audit, but none is currently cleared. The old `FPw=S−TPw` live-score inversion, 0.2843 ceiling, 0.0649/0.3844 projections, and universal per-dot thresholds are invalid; see [metric identity erratum](docs/research/metric-identity-erratum-20261007.md). The [overview](docs/index.html), [executive summary](docs/executive-summary.html), [submission guide](docs/submission-guide.html), [method](docs/method.html), [hypotheses](docs/hypotheses.html), [validation](docs/validation.html), [leaderboard](docs/leaderboard.html), [irregularities](docs/irregularities.html), [sources](docs/sources.html), [next steps](docs/next-steps.html), and [research index](docs/research.html) provide the current-facing site.
+**OK TO DOWNLOAD FOR INSPECTION · NOT OK / NOT CLEARED TO SUBMIT. No weekly slot is cleared.** This is a separate concurrent H57 Dempster–Shafer/lidar-relief artifact—not the current branch's failed H57-A K~Th × magnetic-gradient screen or either H57-A planning slate.
+
+- **Download:** [`GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07.tif`](docs/downloads/GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07.tif) · 192,597 bytes · SHA-256 `28a51fb032b8f2cfd1f04ad3bd429c29d7bb780d36961fea783ff8099130986e` · 58,031 positive cells.
+- **Local checks only:** recorded format audit confirms one-band float32, EPSG:32611, finite values in [0,1]; the bounded local uniqueness receipt compares 99 tracked artifacts. Neither is organizer-side format acceptance or global uniqueness. Portal acceptance is untested.
+- **Metric correction:** its former 0.3844 live-score projection, 0.1781 marginal-credit claim, 0.0549 break-even, 0.2254 floor, sensitivity scenarios, and submit recommendation relied on `FPw = S − TPw` and are **INVALIDATED / FORENSIC ONLY**. The old four-block PASS labels are not a comparable H49 promotion holdout. See [H57-RELIEF report](docs/research/h57-ds-relief-augmented-20261007.md), [metric erratum](docs/research/h57-relief-metric-erratum-20261007.md), [machine-readable correction](evidence/h57_metric_identity_erratum_20261007.json), and [build receipt](evidence/build_h57_receipt_20261007.json).
+- **Dempster–Shafer diagnostics:** [unassigned/ignorance mass m(Θ)](docs/downloads/diagnostics/GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07-diag-mtheta.tif) and [raw conflict K](docs/downloads/diagnostics/GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07-diag-conflict-k.tif) are separate; neither is a calibrated probability or direct measure of family disagreement. The normalized belief is a construction output, not a prediction-quality result.
 
 ## Training-data and pipeline inventory
 
 The README previously said a single data-placement step would unlock a ready full train→inference→validate pipeline. **That statement is not supported by this checkout and is corrected here.** At the time of the inventory, `data/raw/training_features.tif`, organizer `labels.tif`, `sample_submission.tif`, and `1m_DEM_links.csv` were absent; `scripts/download_competition_data.sh`, `scripts/prepare_data.py`, and an end-to-end supervised trainer/inference pipeline are absent too. The checkout does include public/owner-mirrored rasters, a `sample_submission_template.tif`, proxy labels, metric/format/holdout tools, and two pilot DEM tiles. A 418,912,844-byte 19-band feature raster can be restored from a third-party GitHub owner mirror using `scripts/restore_h55_inputs.py --with-official-features`; that is not the organizer data page, is not currently staged, and SHA verification does not authenticate its provenance, completeness, or use rights. See [reproducible inventory](evidence/training_inventory_20261007.json) and [`scripts/audit_training_inventory.py`](scripts/audit_training_inventory.py).
+
+## Site, sources, and historical record
+
+The [overview](docs/index.html), [executive summary](docs/executive-summary.html), [submission guidance](docs/submission-guide.html), [method](docs/method.html), [hypotheses](docs/hypotheses.html), [validation](docs/validation.html), [irregularities](docs/irregularities.html), [official sources](docs/sources.html), and [next steps](docs/next-steps.html) retain the research brief, data-access checks, limitations, and no-slot verdict. Historical H48–H56 experiments are retained below for traceability; their proxy protocols and metric assumptions are not interchangeable. The original user brief is preserved verbatim in the later appendix.
+
+## Reproduce the current H56/H57 checks
+
+```bash
+./.venv/bin/python scripts/audit_training_inventory.py
+./.venv/bin/python scripts/validate_h56.py --primary docs/downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros-outside.tif
+./.venv/bin/python scripts/validate_h56_pruning_ladder.py
+./.venv/bin/python scripts/validate_h57a.py
+./.venv/bin/python -m pytest -q
+```
+
+The current-branch H57-A script writes evidence only; that candidate screen did not create a TIFF. The separate H57-RELIEF TIFF is downloadable for inspection but **NOT CLEARED TO SUBMIT**; its corrected builder no longer generates the invalid live-score projection. H56B/H56-DS are also research artifacts; **no submission slot is cleared**. Any future candidate must beat the comparable spatially blocked proxy reference, use defensible source provenance, and receive separate organizer format/acceptance verification. The old Gate-2 script's density-matching uses an invalid inferred hidden-truth count and its 0.0556 bar is not universal; do not use its prior PASS/FAIL to promote. Re-derive and validate a mass-neutral gate before any future promotion (see [`AGENTS.md`](AGENTS.md) and the [metric erratum](docs/research/metric-identity-erratum-20261007.md)).
+
+For a scratch H57-RELIEF rebuild (the builder emits no live-score projection or slot recommendation):
+
+```bash
+./.venv/bin/python scripts/build_submission_h57.py \
+  --out-dir /tmp/h57-relief-rebuild \
+  --receipt /tmp/h57-relief-build-receipt.json
+```
 
 
 ---
@@ -58,7 +107,7 @@ The README previously said a single data-placement step would unlock a ready ful
 
 ### What this session established (details in `docs/research/`)
 
-1. **The reported ladder remains an owner report, not verified local-file performance.** Owner-reported A (44,090 dots, 0.2600) → B (40,199, 0.2708) → C (37,654, 0.2778) has no established causal explanation or exact local-file association. DrivenData staff later clarified the known-fault mask is pixel-exact with no 300 m buffer; catalogue-flank predictions outside exact label pixels are not automatically score-exempt. Earlier inverse hidden-truth estimates, the 37/42/50% recovery figures, and the universal ≈0.056 per-dot bar all relied on the invalid identity `FPw = S − TPw`; they are superseded and must not be used as score estimates, scientific findings, or decision gates. See [0.2778 attribution note](docs/research/why-02778-and-ceiling-20261007.md), [mask clarification correction](docs/research/leaderboard-and-mask-clarification-20261008.md), the [metric-identity erratum](docs/research/metric-identity-erratum-20261007.md), and [historical inversion receipt](evidence/live_ladder_20261007.json).
+1. **The reported ladder remains an owner report, not verified local-file performance.** Owner-reported A (44,090 dots, 0.2600) → B (40,199, 0.2708) → C (37,654, 0.2778) is consistent with a catalogue-flank pruning explanation under the organizer's known-fault masking clarification. The exact score-to-bytes link and causal explanation remain unverified. Earlier inverse hidden-truth estimates, the 37/42/50% recovery figures, and the universal ≈0.056 per-dot bar all relied on the invalid identity `FPw = S − TPw`; they are superseded and must not be used as score estimates, scientific findings, or decision gates. See [0.2778 attribution note](docs/research/why-02778-and-ceiling-20261007.md), the [metric-identity erratum](docs/research/metric-identity-erratum-20261007.md), and [historical inversion receipt](evidence/live_ladder_20261007.json).
 2. **Historical 100 m/lidar screening did not establish a profitable way to improve B2.** Earlier per-dot lift-versus-break-even comparisons used the invalid inverted-truth threshold and are withdrawn. The individual feature/proxy measurements remain historical diagnostics only; no universal score lift or inability-to-re-rank claim is supported. The official band 6 `tc` was identified as radiometric total count, not a magnetic derivative (see [irregularities](docs/irregularities.html)).
 3. **The H52 native 3 m lidar candidate was tested and failed its frozen gates.** Two-tile pilots and the 700-tile region product produced differing, selection-sensitive catalogue-lift results; the H52 report records the region checks, same-pool controls and failure against H49. The old terrain-class/random-control observation is descriptive and not a promotion result. H52 remains a historical research artifact, not slot-cleared; see [H52 results](docs/research/holdout-h52-results-20261007.md) and [next steps](docs/next-steps.html).
 
@@ -82,14 +131,12 @@ python scripts/build_h50_probe_candidate.py \
   --require-pinned-mirror-sha
 ```
 
-## Archived H48/H49 executive summary and downloads (2026-10-06)
+## Executive summary and downloads (H48/H49, unchanged)
 
-> Historical archive only. The current H58-A artifact and no-submit decision are at the top of this README. None of the outputs in this section is cleared to submit.
-
-GEMSDOE48's earlier owner-mirror dotted and tip/step-over experiments included reliability-discounted Dempster-Shafer mass assignments. They export historical belief rasters and separate residual-ignorance/raw-conflict diagnostics. A prior main-branch implementation also explored a full-confidence union decision surface; it is retained below for traceability, not treated as a current candidate.
+GEMSDOE48 combines the public owner-mirror dotted and tip/step-over candidate families with reliability-discounted Dempster-Shafer mass assignments. It exports a graded belief raster plus separate residual-ignorance and raw-conflict diagnostics. A prior main-branch implementation also explored a full-confidence union decision surface; that historical result is retained and discussed below, not silently treated as a cleared submission.
 
 - **H48 `rho=.5` research artifact (fails the spatial promotion gate):** `GEMSDOE48-DS-FUSION-20261006` · [`GeoTIFF`](docs/downloads/GEMSDOE48-DS-conflict-aware-fusion-20261006.tif)
-- **H49 same-protocol reference (historical; not slot-cleared):** `GEMSDOE48-H49-DS-CB-e6f08013888b-NAN` · [`NaN-outside locally format-audited GeoTIFF`](docs/downloads/GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif) · [`H49 report`](docs/research/holdout-h49-results-20261006.md)
+- **Latest-main H49 proxy-best, still not slot-cleared:** `GEMSDOE48-H49-DS-CB-e6f08013888b-NAN` · [`NaN-outside format-audited GeoTIFF`](docs/downloads/GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif) · [`H49 same-protocol report`](docs/research/holdout-h49-results-20261006.md)
 - **H51 plausibility-budget emission (gate not cleared):** `GEMSDOE48-H51-PLAUSIBILITY-BUDGET` · [`zeros-outside GeoTIFF`](docs/downloads/gemsdoe48-h51-plausibility-budget-20261007-f8fa1d08-zeros.tif) · [`zip`](docs/downloads/gemsdoe48-h51-plausibility-budget-20261007-f8fa1d08-zeros.zip) · [`NaN-outside twin`](docs/downloads/gemsdoe48-h51-plausibility-budget-20261007-f8fa1d08-nan.tif) · [`build receipt`](evidence/build_h51_receipt_20261007.json) · [`blocked holdout`](evidence/holdout_h51_20261007.json)
 - **H50-B alteration-conflict probe (negative result):** `GEMSDOE48-H50B-ALTERATION-CONFLICT` · [`zeros-outside GeoTIFF`](docs/downloads/gemsdoe48-h50b-alteration-conflict-20261007-806a4ba4-zeros.tif) · [`preregistration`](evidence/h50b_preregistration_20261007.json) · [`blocked holdout`](evidence/holdout_h50b_20261007.json) · [`restored GeoDAWN radiometric mirror`](data/source_mirrors/geodawn_rad_u8.tif) (SHA-256 `c22420f7…`, official DOI 10.5066/P93LGLVQ)
 - **Session results (H51 + H50-B + H50 re-audit):** [`docs/research/h51-h50b-results-20261007.md`](docs/research/h51-h50b-results-20261007.md)
@@ -143,11 +190,9 @@ The starting brief is to autonomously build an auditable GEMS competition projec
 
 The original owner brief is reproduced verbatim in the final section below; this paragraph distills its acceptance requirements. The frozen H48 slate is in [`docs/research/hypotheses-20261006.md`](docs/research/hypotheses-20261006.md) and [`evidence/hypothesis_slate_20261006.json`](evidence/hypothesis_slate_20261006.json). The separate mainline H49 program is retained under [`docs/h49/`](docs/h49/) with source receipts and a same-protocol H48-style re-score in [`docs/research/holdout-h49-results-20261006.md`](docs/research/holdout-h49-results-20261006.md). Its proxy gain is not an independent blind holdout or a slot clearance.
 
-## Historical validation results and slot decisions (H48–H51)
+## Validation results and slot decision
 
-> These dated results are retained for audit and are superseded as the current-facing summary by the H58 result at the top of this README. H49 is reused only as the preregistered H58 comparison reference.
-
-### Historical `rho=0.5` candidate (four fixed quadrants, catalogue-label proxy)
+### Current `rho=0.5` candidate (four fixed quadrants, catalogue-label proxy)
 
 | Candidate | NW | NE | SW | SE | Mean DTI |
 |---|---:|---:|---:|---:|---:|
@@ -173,7 +218,7 @@ The newer pinned SGMC-derived raster supplies 62,122 positive cells after exclud
 
 The fusion's paired mean delta is −0.026230 vs dotted (0/4 positive), −0.026230 vs tip/stepover (0/4), −0.019493 vs arithmetic mean (0/4), and −0.027730 vs the prior union decision (0/4). The Yager alternative improves over this Dempster fusion by +0.013630 (4/4), but loses to dotted (−0.012600), tip/stepover (−0.012600), arithmetic mean (−0.005863), and prior union (−0.014100), each 0/4. Neither fusion clears a slot gate. The SGMC surface is a public-map proxy, not private expert truth; the candidate source rasters remain frozen upstream products and were not independently reconstructed per fold.
 
-### H49 same-protocol reference: re-scored, still no slot
+### Latest-main H49 candidate: re-scored, higher proxy result, still no slot
 
 Main added a distinct Yager conflict-transfer / pignistic-ranked / fixed-budget candidate with 47,905 cells. Its original TIFF is [`docs/downloads/gemsdoe48-h49-ds-conflict-balanced-20261006-e6f08013888b.tif`](docs/downloads/gemsdoe48-h49-ds-conflict-balanced-20261006-e6f08013888b.tif) (SHA-256 `e6f08013888b625db7d187d79bb75ba36c45d068081b77a3dd405ab7eec3d472`). The original uses finite zero outside the footprint. A format-only derivative, [`GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif`](docs/downloads/GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif), changes only outside pixels to NaN/nodata (SHA-256 `9f028289c364c071065245799d7ed131600e80e9f0d10602806b12ce34d7cae8`) and passes [`scripts/validate_submission.py`](scripts/validate_submission.py) locally; organizer acceptance is not tested. Its unique label is `GEMSDOE48-H49-DS-CB-e6f08013888b-NAN`.
 
@@ -223,13 +268,13 @@ The PR #5 `docs/data/proxy-validation.json` used a different SGMC evaluator: it 
 - The owner mirrors are not organizer-authenticated and their reusable license terms have not been verified. Hash pinning establishes byte identity only; confirm rights before external submission or redistribution.
 - No organizer score, hidden-test score, or projected leaderboard score is claimed.
 
-## Historical leaderboard observations and attribution limits
+## Leaderboard and attribution irregularities
 
-Earlier one-time observations dated 2026-10-06 and 2026-10-07 are retained for provenance; neither is live. The latest captured read is 2026-10-08 as summarized at the top of this README and in [`docs/data/leaderboard_20261008.json`](docs/data/leaderboard_20261008.json). The 2026-10-07 board showed xiaofanhu at 0.3774 (#1), alexoktaba at 0.3345 (#2), nchuzhoy at 0.3262 (#3), and DARD at 0.3195 (#7). The displayed 0.2778 row belonged to extradr19 (#13). The local H33-2-B2 receipt says UNSCORED; no organizer evidence links it to that row. The H33-D 0.2632 value is owner-reported, not an authenticated file-level score. The official pixel-exact-mask correction is in [`docs/research/leaderboard-and-mask-clarification-20261008.md`](docs/research/leaderboard-and-mask-clarification-20261008.md). No hidden-truth inversion or score-gain attribution is used. See [dated leaderboard page](docs/leaderboard.html), [irregularities](docs/irregularities.html), and [0.2778 attribution analysis](docs/research/why-02778-and-ceiling-20261007.md). The upstream six-hour feed is disabled and retained as `.github/workflows/feed.yml.disabled`; the retained parser cannot fetch the page.
+Two one-time manual observations are retained, dated **2026-10-06** and **2026-10-07 UTC**; neither is a live feed. The 2026-10-07 snapshot showed `xiaofanhu` at 0.3774 (#1), `alexoktaba` at 0.3345 (#2), `nchuzhoy` at 0.3262 (#3), and DARD at 0.3195 (#7)—not 0.3195 as the highest. The displayed 0.2778 row belonged to `extradr19` (#13, 11 submissions). The local H33-2-B2 receipt says “UNSCORED”; no organizer evidence links it to that 0.2778 row. The H33-D 0.2632 value is an owner-reported family/file claim, not an authenticated file-level score. No hidden-truth inversion or score-gain attribution is used. See [dated leaderboard page](docs/leaderboard.html), [current source/irregularity record](docs/irregularities.html), and [0.2778 attribution analysis](docs/research/why-02778-and-ceiling-20261007.md). This branch disables the upstream six-hour feed and preserves it as `.github/workflows/feed.yml.disabled`; the retained parser cannot fetch the page.
 
-## Historical H48/H49 method and assumptions (rho=0.5)
+## Method and assumptions
 
-The earlier H48 candidate used source value `p_i` and the preregistered symmetric discount `rho=0.5`. This is not H58's positive-only `alpha=0.60` mass assignment; see the current H58 construction at the top of the README and in `docs/research/h58-results-20261008.md`.
+For source value `p_i`, the current preregistered symmetric discount is `rho=0.5`:
 
 - `m_i(F) = rho * p_i`
 - `m_i(not F) = rho * (1 - p_i)`
@@ -239,9 +284,9 @@ The normalized Dempster result carries `m(F)`, `m(not F)`, and residual `m(Theta
 
 The previous main-branch model used alpha=.99 and max-normalized belief, then separately tested full-union emission. It is retained as prior work, not conflated with the `rho=.5` candidate. The two surfaces share 31,614 positive cells (Jaccard 0.659931); dependence is possible. Both are sparse binary emissions rather than calibrated probabilities, so treating zero as counter-evidence is an assumption. `rho=0.5` is fixed before holdout, not estimated reliability. Full formulas and diagnostics are in `src/gemsdoe48/evidence.py` and `scripts/build_submission.py`.
 
-## Historical H48 preregistered geological hypotheses (2026-10-06)
+## Preregistered geological hypotheses
 
-The ranked H48 list was frozen before that branch's implementation and scoring; it is archived, not the current slate. H58's current frozen five-hypothesis slate is linked at the top of this README.
+The ranked H48 list was frozen before this branch's implementation and scoring; expected DTI is qualitative/unknown where data do not support a number.
 
 | Rank | Hypothesis | Expected DTI / cost | Data availability checked |
 |---:|---|---|---|
@@ -253,9 +298,9 @@ The ranked H48 list was frozen before that branch's implementation and scoring; 
 
 The original H49 agenda is preserved in `docs/archive-main-pages/hypotheses-main-20261006.html`; the separate mainline H49 implementation and its receipts remain under `docs/h49/`. H49 is not a second preregistration for H48. Its post-selection re-score and the no-slot decision are documented in [`docs/research/holdout-h49-results-20261006.md`](docs/research/holdout-h49-results-20261006.md). Full source and limitation details are in [`docs/sources.md`](docs/sources.md).
 
-## Historical reproduction notes (H48–H55)
+## Reproduce
 
-Current H58 reproduction commands are listed earlier in this README. The following commands reproduce dated historical experiments only; they do not authorize submission. Requires Python 3.11+ and Rasterio-compatible GDAL wheels. The repository contains small, hash-pinned owner-mirror inputs under `data/raw/`; these are not organizer-authenticated. The build scripts verify the expected hashes.
+Requires Python 3.11+ and Rasterio-compatible GDAL wheels. The repository contains small, hash-pinned owner-mirror inputs under `data/raw/`; these are not organizer-authenticated. The build scripts verify the expected hashes.
 
 ```bash
 python -m venv .venv
@@ -324,10 +369,10 @@ python scripts/validate_submission.py docs/downloads/gemsdoe48-h51-plausibility-
 
 The H48 rho=.5 builder remains `scripts/build_submission.py`. H49's separate mainline generation pipeline is `scripts/build_submission_h49.py`; `scripts/prepare_h49_format_copy.py` only fixes its outside-footprint encoding and preserves all inside values. The earlier alpha=.99 builder snapshot is retained as `scripts/previous_build_submission.py`; the earlier main builder is `scripts/previous_main_build_submission.py`, and the later PR #5 main Dempster builder is preserved as `scripts/previous_main_build_submission_pr5.py.disabled`. Build and holdout receipts are dated and hash-pinned. Five review passes—including API compatibility and the follow-up against the newer SGMC derivative—are recorded in [`evidence/review_passes_20261006.md`](evidence/review_passes_20261006.md).
 
-## Historical source links (H48–H55; current dated sources above)
+## Sources
 
 - [Official challenge page: metric, labels, and submission format](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/)
-- [Official leaderboard](https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/) (single older read 2026-10-06 UTC; see the current dated snapshot at the top)
+- [Official leaderboard](https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/) (single read 2026-10-06 UTC; no monitor)
 - [DrivenData Terms of Use](https://www.drivendata.org/termsofuse/)
 - [USGS GeMS/SGMC DOI 10.5066/P1A3DQZK](https://doi.org/10.5066/P1A3DQZK)
 - [NASA OPERA DISP-S1](https://www.earthdata.nasa.gov/data/catalog/asf-opera-l3-disp-s1-v1-1)
@@ -337,7 +382,7 @@ The H48 rho=.5 builder remains `scripts/build_submission.py`. H49's separate mai
 
 ---
 
-> **Corrections applying to the verbatim prompt archives below (updated 2026-10-08; original wording retained):** The original prompt's claim that 0.3195 was the highest public score was stale; dated official observations show 0.3774 at #1 and 0.3195 at #7. The exact local B2-to-0.2778 score attribution is not organizer-verified. Staff clarified that the known-fault mask is pixel-exact with no 300 m buffer; nearby unmasked pixels are scored normally, so the masking rule does not establish why catalogue-flank pruning changed the reported score. D-S `m(Theta)` is residual ignorance/unassigned mass, not a direct source-disagreement map; raw `K` is conflict. The “single remaining blocker is data placement” statement is contradicted by the reproducible checkout inventory: the named training stack/labels/sample TIFF/DEM-links CSV and downloader, preparation script, and supervised train/inference pipeline are absent. Current H58 status and the failed gate are above. See [metric erratum](docs/research/metric-identity-erratum-20261007.md), [mask/leaderboard correction](docs/research/leaderboard-and-mask-clarification-20261008.md), [source/attribution note](docs/research/why-02778-and-ceiling-20261007.md), and [inventory receipt](evidence/training_inventory_20261007.json). These corrections do not rewrite historical owner prompts.
+> **Corrections applying to the verbatim prompt archives below (added 2026-10-07; original wording retained):** The original prompt's claim that 0.3195 was the highest public score was stale; the dated board showed #1 at 0.3774 and 0.3195 at #7. Its attribution of 0.2778 to the local B2 TIFF is not organizer-verified. Its wording that D-S unassigned mass directly marks source disagreement is imprecise: `m(Θ)` is residual ignorance/unassigned mass, while raw `K` is conflict. Its “single remaining blocker is data placement” statement is contradicted by the reproducible checkout inventory: the named training stack/labels/sample TIFF/DEM-links CSV and the downloader, preparation script, and supervised train/inference pipeline are absent. See the current status above, [metric erratum](docs/research/metric-identity-erratum-20261007.md), [source/attribution note](docs/research/why-02778-and-ceiling-20261007.md), and [inventory receipt](evidence/training_inventory_20261007.json). These corrections do not rewrite the historical owner prompts.
 
 ## The project brief (verbatim)
 
@@ -646,7 +691,7 @@ The following is a **historical H55-session checklist**, not the current decisio
 - *"Generate 3–5 candidate geological hypotheses"* → five were frozen in `docs/research/hypothesis-slate-h55-20261007.md` and `evidence/hypothesis_slate_h55_20261007.json`. This is a historical slate; its expected ΔDTI entries are planning claims and do not establish measured performance or source-use clearance.
 - *"0.3195 is the highest score right now"* → stale: the 2026-10-06 snapshot showed #1 at 0.3774 and 0.3195 at #7. The H55 report's claim that higher rows were unreachable from a corridor field at any mass is invalidated; see the [metric erratum](docs/research/metric-identity-erratum-20261007.md). The 2026-10-07 manual observation is at [`docs/data/leaderboard_20261007.json`](docs/data/leaderboard_20261007.json).
 - *"The submission form error 'Predicted values must be in range [0, 1]' must be addressed"* → local H55 all-finite/range validation was performed, but the portal error's cause was not confirmed and no file-specific organizer acceptance was obtained. Local checks do not resolve portal acceptance; the public null/NaN outside wording remains a separate issue for H56B. H55 itself is not cleared.
-- *"give the submission a unique name and a short note for the submit form"* → an H55 name and draft note were recorded in its build receipt, but no assertion is made that it was submitted. Current H58's unique local name and archive-only note are in the [submission guide](docs/submission-guide.html); neither is upload authorization.
+- *"give the submission a unique name and a short note for the submit form"* → an H55 name and draft note were recorded in its build receipt, but no assertion is made that it was submitted. Current H56B identification and its archive-only note are in the current [submission guide](docs/submission-guide.html); neither is upload authorization.
 - *"Create a executive summary subpage that explains exactly how to make a submission into the contest"* → current executive summary and guide exist, but steps are conditional; they explicitly say not to submit current files.
 - *"Run this task through multiple passes … create a pull request and then merge …"* → an earlier H55 pass log and PR status are historical claims for that earlier task. They do not describe the present branch's review passes or PR; current work must be reviewed and any PR handled separately.
 - *"There should be no manual input, work on your own"* → repository workflows can restore hash-pinned mirrors, but that is not organizer authentication or use clearance. No legal claim that DrivenData's terms prohibit every automated access method is made here; this repo does not automate user account access or portal uploads.
@@ -1060,7 +1105,7 @@ See below for more links and information related to the competition:
 
 [https://github.com/drivendataorg/gems-prize-reference-solution](https://github.com/drivendataorg/gems-prize-reference-solution)
 
-[https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and](https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and)
+[https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and-california](https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and-california)
 
 [https://gbcge.org/current-projects/ingenious/](https://gbcge.org/current-projects/ingenious/)
 

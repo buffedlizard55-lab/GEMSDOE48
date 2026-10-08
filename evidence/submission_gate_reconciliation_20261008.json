@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "generated_date": "2026-10-08",
+  "decision": {
+    "status": "NO_SUBMISSION_SLOT_CLEARED",
+    "submission_made_this_session": false,
+    "weekly_limit_reported_by_user": 3,
+    "slots_used_reported_by_user": 0,
+    "download_is_submission_authorization": false,
+    "reason": "The user's standing rule requires a comparable spatially blocked holdout to pass before spending any weekly submission slot. H58-A failed its matched H49 gate on both primary proxies. H59's newer evaluator does not report a matched H49 comparator, and its SGMC off-catalogue result is below both parents and their union. Neither local format checks nor public-map proxies establish organizer acceptance or private-label performance."
+  },
+  "current_inspection_artifact": {
+    "hypothesis_id": "H59",
+    "file": "docs/downloads/gemsdoe48-h59-cover-ds-belief-b2xh33d-20261008T184547Z-b79c4c61d8d8.tif",
+    "sha256": "f1584187b459baf47f75e5daf64de6f7696f9feb14910d3cf2762f7a1119597a",
+    "build_receipt": "evidence/build_h59_receipt_20261008T184547Z.json",
+    "historic_build_receipt_wording": "OK TO DOWNLOAD AND SUBMIT (format-valid, portal-safe, unique bytes and unique dot cells); no local evidence that it beats the current best",
+    "current_disposition": "DOWNLOAD_FOR_INSPECTION_ONLY_NOT_CLEARED_TO_SUBMIT",
+    "local_format_observation": "One float32 band, EPSG:32611, 100 m, organizer-template transform, all values finite in [0,1], no nodata tag, zeros outside the footprint. This is a local property check, not portal acceptance; zero outside differs from the official null/NaN outside wording.",
+    "portal_upload_or_acceptance_tested": false,
+    "name_for_identification_only": "GEMSDOE48-H59-CoverDSBelief-B2xH33D",
+    "note_for_identification_only": "GEMSDOE48 H59 | Dempster Bel(F), dotted B2 x tip H33D; 400m hex-cover of the fusion corridor; m(Theta) layer",
+    "holdout": {
+      "evaluator": "scripts/evaluate_holdout.py@2026-10-08",
+      "catalogue_dti": 0.097403,
+      "catalogue_ci95": [0.092658, 0.102263],
+      "catalogue_best_parent_dti": 0.086268,
+      "sgmc_off_catalogue_dti": 0.091687,
+      "sgmc_off_catalogue_ci95": [0.084357, 0.099039],
+      "sgmc_dotted_parent_dti": 0.095402,
+      "sgmc_tip_parent_dti": 0.095693,
+      "sgmc_union_dti": 0.097540,
+      "same_protocol_h49_comparison_reported": false,
+      "slot_gate_passed": false
+    }
+  },
+  "failed_matched_candidate": {
+    "hypothesis_id": "H58-A",
+    "name": "GEMSDOE48-H58-OWDS-POSONLY-B2xH33D-20261008-fdbb83476756",
+    "file": "docs/downloads/GEMSDOE48-H58-OWDS-POSONLY-B2xH33D-20261008-fdbb83476756-zeros-outside.tif",
+    "sha256": "bbd289dd545cd772af3a88631b43233569dcbf4815c69bc5479a53fd73ca3973",
+    "holdout_receipt": "evidence/holdout_h58_20261008.json",
+    "matched_h49_gate_passed": false,
+    "catalogue": {
+      "candidate_mean_dti": 0.055301,
+      "h49_mean_dti": 0.095353,
+      "paired_mean_delta_dti": -0.040053,
+      "positive_folds": 0,
+      "folds": 4
+    },
+    "sgmc_newer_off_catalogue": {
+      "candidate_mean_dti": 0.066341,
+      "h49_mean_dti": 0.100751,
+      "paired_mean_delta_dti": -0.034411,
+      "positive_folds": 0,
+      "folds": 4
+    },
+    "older_raw_sgmc_sensitivity": {
+      "candidate_mean_dti": 0.065501,
+      "paired_mean_delta_dti": -0.034267,
+      "positive_folds": 0,
+      "folds": 4
+    },
+    "local_uniqueness_scope": "No exact byte or in-footprint pixel match among 113 comparable local rasters; top-37,654 support Jaccard with H56-OWDS is 1.0 and Pearson correlation is 0.9999278831. This is a mass-assignment ablation, not a new geological detector or a global uniqueness proof.",
+    "portal_upload_or_acceptance_tested": false,
+    "outside_encoding_note": "The zero-outside TIFF is all-finite and in [0,1] but differs from the official null/NaN outside wording. The separate NaN-outside alternative follows that wording but may fail an unmasked raw-array range predicate. The reported portal error cause remains unverified."
+  },
+  "official_context": {
+    "submission_format_source": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+    "known_fault_mask_clarification": "https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516/4",
+    "leaderboard_snapshot": "docs/data/leaderboard_20261008.json",
+    "leaderboard_snapshot_summary": "On the 2026-10-08 read: #1 0.3774; DARD 0.3195 at #7; extradr19 0.2778 at #13. No receipt ties the 0.2778 row to the local B2 bytes.",
+    "mask_correction": "Known-fault masking is pixel-exact with no 300 m buffer. Nearby unmasked predictions are scored normally; do not assume near-catalogue pruning is score-exempt."
+  },
+  "hypothesis_slate": "docs/research/hypotheses-h58-20261008.md"
+}

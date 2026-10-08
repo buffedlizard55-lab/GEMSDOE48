@@ -35,7 +35,7 @@ Ranks prioritize the expected value of a *test that can be run and audited with 
 
 - [Competition problem description, metric and output format](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/) — previously transcribed in this repository; fresh access is not available in the current shell egress policy.
 - [Official competition data tab](https://www.drivendata.org/competitions/306/competition-doe-gems/data/) — login-gated per repository access inventory; not present in this checkout.
-- [USGS GeoDAWN release](https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and) and [DOI 10.5066/P93LGLVQ](https://doi.org/10.5066/P93LGLVQ) — official magnetic/radiometric context; not used as H58-A input.
+- [USGS GeoDAWN release](https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and-california) and [DOI 10.5066/P93LGLVQ](https://doi.org/10.5066/P93LGLVQ) — official magnetic/radiometric context; not used as H58-A input.
 - [USGS 3DEP](https://www.usgs.gov/3d-elevation-program/about-3dep-products-services) — official elevation-data access; does not by itself verify complete H58 footprint coverage.
 - [USGS ComCat](https://earthquake.usgs.gov/fdsnws/event/1/) — official event/product API; existing bbox counts do not prove local data completeness.
 - [USGS Landsat Collection 2](https://www.usgs.gov/landsat-missions/landsat-collection-2) — official catalog/product access; a catalog hit is not proof of usable scene coverage.

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="GEMSDOE48 local GeoTIFF audit and explicit no-slot submission decision.">
+<title>GEMSDOE48 — local status and format audit</title><link rel="stylesheet" href="style.css">
+<style>
+table{border-collapse:collapse;width:100%;margin:12px 0;font-size:.9rem}
+th,td{border:1px solid #d1d5db;padding:7px 9px;text-align:left;vertical-align:top}
+th{background:#f3f4f6} .mono{font-family:ui-monospace,Menlo,Consolas,monospace;word-break:break-all}
+.card{background:#f8f9fa;border:1px solid #e2e8f0;border-radius:10px;padding:16px;margin:14px 0}
+.stop{border:3px solid #b91c1c;background:#fff0ed;padding:16px;border-radius:12px}
+</style></head><body>
+<header><div class="wrap"><p>GEMSDOE48 · automatically regenerated local audit</p>
+<h1>Downloadable files, local checks, and submission decision</h1></div></header>
+<nav><div class="wrap"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a>
+<a href="submission-guide.html">Submission guide</a><a href="method.html">Method</a>
+<a href="hypotheses.html">Hypotheses</a><a href="validation.html">Validation</a>
+<a href="status.html">Status feed</a><a href="irregularities.html">Irregularities</a>
+<a href="next-steps.html">Next steps</a></div></nav>
+<main class="wrap">
+<p>Generated 2026-10-08T21:43:34.560995+00:00 by <code>scripts/build_status_feed.py</code>.
+Machine-readable record: <a href="data/status.json">docs/data/status.json</a> ·
+current decision receipt: <a href="../evidence/submission_gate_reconciliation_20261008.json">evidence/submission_gate_reconciliation_20261008.json</a>.</p>
+<div class="stop"><strong>NO WEEKLY SUBMISSION SLOT IS CLEARED.</strong>
+Downloading a file is not submission authorization. No submission was made and no portal upload or acceptance test was performed.
+The reported three-per-week limit and zero slots used are user-reported.</div>
+<section class="card"><h2>Latest inspection artifact — H59</h2>
+<p><a href="downloads/gemsdoe48-h59-cover-ds-belief-b2xh33d-20261008T184547Z-b79c4c61d8d8.tif" download>gemsdoe48-h59-cover-ds-belief-b2xh33d-20261008T184547Z-b79c4c61d8d8.tif</a><br>SHA-256 <code>f1584187b459baf47f75e5daf64de6f7696f9feb14910d3cf2762f7a1119597a</code><br>
+<strong>DOWNLOAD_FOR_INSPECTION_ONLY_NOT_CLEARED_TO_SUBMIT</strong></p>
+<p>The older build receipt uses superseded wording that implied submission clearance. It is kept as a historical build record only; the current slot decision is documented in the reconciliation receipt above.</p>
+<p>Local H59 observation: one float32 band, EPSG:32611 template grid, in-footprint values finite and in [0,1], zeros outside. This does not establish portal acceptance; zero outside differs from the official null/NaN outside wording.</p></section>
+<h2>H59 spatial holdout (public proxies only)</h2>
+<table><tr><th>Proxy</th><th>Evaluator</th><th>Withheld cells / segments</th><th>H59 pooled DTI (95% CI)</th></tr><tr><td>catalogue</td><td>evaluate_holdout.py@2026-10-08</td><td>60,932 / 3,201</td><td>0.0974 [0.0927, 0.1023]</td></tr>
+<tr><td>sgmc_offcat</td><td>evaluate_holdout.py@2026-10-08</td><td>62,107 / 2,115</td><td>0.0917 [0.0844, 0.0990]</td></tr></table>
+<p>H59 is not a matched H49 gate result. Its SGMC off-catalogue result (0.0917) is below both parents (0.0954 / 0.0957) and their union (0.0975); no weekly slot is cleared.</p>
+<h2>What this local format feed measures</h2>
+<p>“Layout checks” mean one float32 band and the same shape, CRS, and transform as the local template. “In-footprint values” are checked for finiteness and range [0,1]. “Outside encoding” is reported separately; the official problem page describes outside cells as null/NaN. “Whole-array [0,1]” is a raw NumPy-style diagnostic relevant to the reported error, not a confirmed portal rule. The reported error's cause is unknown.</p>
+<p><b>These are local byte checks only.</b> They do not emulate the organizer portal, guarantee acceptance, prove a score, or clear a submission slot.</p>
+<table><tr><th>Download</th><th>Local layout</th><th>In-footprint [0,1]</th><th>Outside encoding</th><th>Whole-array [0,1]</th></tr><tr><td class="mono"><a href="downloads/GEMSDOE48-DS-conflict-aware-fusion-20261006.tif">GEMSDOE48-DS-conflict-aware-fusion-20261006.tif</a></td><td>yes</td><td>yes</td><td>all NaN</td><td>no</td></tr>
+<tr><td class="mono"><a href="downloads/GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif">GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif</a></td><td>yes</td><td>yes</td><td>all NaN</td><td>no</td></tr>
+<tr><td class="mono"><a href="downloads/GEMSDOE48-H50-2M-PERSIST-20261007-1997316a0102-nan.tif">GEMSDOE48-H50-2M-PERSIST-20261007-1997316a0102-nan.tif</a></td><td>yes</td><td>yes</td><td>all NaN</td><td>no</td></tr>
+<tr><td class="mono"><a href="downloads/GEMSDOE48-H50-2M-PERSIST-20261007-f12e5391bb9c-nan.tif">GEMSDOE48-H50-2M-PERSIST-20261007-f12e5391bb9c-nan.tif</a></td><td>yes</td><td>yes</td><td>all NaN</td><td>no</td></tr>
+<tr><td class="mono"><a href="downloads/GEMSDOE48-H52-lidar-scarp-additions-20261007-38029417f6ca-nan-outside.tif">GEMSDOE48-H52-lidar-scarp-additions-20261007-38029417f6ca-nan-outside.tif</a></td><td>yes</td><td>yes</td><td>all NaN</td><td>no</td></tr>
+<tr><td class="mono"><a href="downloads/GEMSDOE48-H52-lidar-scarp-additions-20261007-38029417f6ca-zeros-outside.tif">GEMSDOE48-H52-lidar-scarp-additions-20261007-38029417f6ca-zeros-outside.tif</a></td><td>yes</td><td>yes</td><td>all zero</td><td>yes</td></tr>
+<tr><td class="mono"><a href="downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-diag-conflict-AB-nan.tif">GEMSDOE48-H53-3SRC-DS-20261007-9242c831-diag-conflict-AB-nan.tif</a></td><td>yes</td><td>yes</td><td>all NaN</td><td>no</td></tr>
+<tr><td class="mono"><a href="downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-diag-conflict-ABL-nan.tif">GEMSDOE48-H53-3SRC-DS-20261007-9242c831-diag-conflict-ABL-nan.tif</a></td><td>yes</td><td>yes</td><td>all NaN</td><td>no</td></tr>
+<tr><td class="mono"><a href="downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-diag-plausibility-nan.tif">GEMSDOE48-H53-3SRC-DS-20261007-9242c831-diag-plausibility-nan.tif</a></td><td>yes</td><td>yes</td><td>all NaN</td><td>no</td></tr>
+<tr><td class="mono"><a href="downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-diag-unassigned-nan.tif">GEMSDOE48-H53-3SRC-DS-20261007-9242c831-diag-unassigned-nan.tif</a></td><td>yes</td><td>yes</td><td>all NaN</td><td>no</td></tr>
+<tr><td class="mono"><a href="downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-nan-outside.tif">GEMSDOE48-H53-3SRC-DS-20261007-9242c831-nan-outside.tif</a></td><td>yes</td><td>yes</td><td>all NaN</td><td>no</td></tr>
+<tr><td class="mono"><a href="downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-pignistic-twin-nan.tif">GEMSDOE48-H53-3SRC-DS-20261007-9242c831-pignistic-twin-nan.tif</a></td><td>yes</td><td>yes</td><td>all NaN</td><td>no</td></tr>
+<tr><td class="mono"><a href="downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-zeros-outside.tif">GEMSDOE48-H53-3SRC-DS-20261007-9242c831-zeros-outside.tif</a></td><td>yes</td><td>yes</td><td>all zero</td><td>yes</td></tr>
+<tr><td class="mono"><a href="downloads/GEMSDOE48-H53-DS-RadEdge-B2xH33D-20261007-4c01fcf2ad8c-nan-outside.tif">GEMSDOE48-H53-DS-RadEdge-B2xH33D-20261007-4c01fcf2ad8c-nan-outside.tif</a></td><td>yes</td><td>yes</td><td>all NaN</td><td>no</td></tr>
+<tr><td class="mono"><a href="downloads/GEMSDOE48-H53-STRIKE-COHERENCE-20261007-de35531d3867-nan-outside.tif">GEMSDOE48-H53-STRIKE-COHERENCE-20261007-de35531d3867-nan-outside.tif</a></td><td>yes</td><td>yes</td><td>all NaN</td><td>no</td></tr>
+<tr><td class="mono"><a href="downloads/GEMSDOE48-H54-ds-core-lidar-20261007-dedc43dc0167-zeros-nan-outside.tif">GEMSDOE48-H54-ds-core-lidar-20261007-dedc43dc0167-zeros-nan-outside.tif</a></td><td>yes</td><td>yes</td><td>all zero</td><td>yes</td></tr>
+<tr><td class="mono"><a href="downloads/GEMSDOE48-H54-ds-core-lidar-20261007-dedc43dc0167.tif">GEMSDOE48-H54-ds-core-lidar-20261007-dedc43dc0167.tif</a></td><td>yes</td><td>yes</td><td>all NaN</td><td>no</td></tr>
+<tr><td class="mono"><a href="downloads/GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353-nan-outside.tif">GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353-nan-outside.tif</a></td><td>yes</td><td>yes</td><td>all NaN</td><td>no</td></tr>
+<tr><td class="mono"><a href="downloads/GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353-zeros-outside.tif">GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353-zeros-outside.tif</a></td><td>yes</td><td>yes</td><td>all zero</td><td>yes</td></tr>
+<tr><td class="mono"><a href="downloads/GEMSDOE48-H56-OWDS-B2xH33D-20261007-1f7b5a4f18db-zeros-outside.tif">GEMSDOE48-H56-OWDS-B2xH33D-20261007-1f7b5a4f18db-zeros-outside.tif</a></td><td>yes</td><td>yes</td><td>all zero</td><td>yes</td></tr>
+<tr><td class="mono"><a href="downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-nan-outside.tif">GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-nan-outside.tif</a></td><td>yes</td><td>yes</td><td>all NaN</td><td>no</td></tr>
+<tr><td class="mono"><a href="downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros-outside.tif">GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros-outside.tif</a></td><td>yes</td><td>yes</td><td>all zero</td><td>yes</td></tr>
+<tr><td class="mono"><a href="downloads/GEMSDOE48-H56B-NF-DS-dotted-x-tip-20261007-5bb2c03c981e-nan-outside.tif">GEMSDOE48-H56B-NF-DS-dotted-x-tip-20261007-5bb2c03c981e-nan-outside.tif</a></td><td>yes</td><td>yes</td><td>all NaN</td><td>no</td></tr>
+<tr><td class="mono"><a href="downloads/GEMSDOE48-H56B-ds-belief-dotted-x-tip-20261007-126ca59c2801-nan-outside.tif">GEMSDOE48-H56B-ds-belief-dotted-x-tip-20261007-126ca59c2801-nan-outside.tif</a></td><td>yes</td><td>yes</td><td>all NaN</td><td>no</td></tr>
+<tr><td class="mono"><a href="downloads/GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07-nan-outside.tif">GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07-nan-outside.tif</a></td><td>yes</td><td>yes</td><td>all NaN</td><td>no</td></tr>
+<tr><td class="mono"><a href="downloads/GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07.tif">GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07.tif</a></td><td>yes</td><td>yes</td><td>all zero</td><td>yes</td></tr>
+<tr><td class="mono"><a href="downloads/GEMSDOE48-H58-OWDS-POSONLY-B2xH33D-20261008-fdbb83476756-nan-outside.tif">GEMSDOE48-H58-OWDS-POSONLY-B2xH33D-20261008-fdbb83476756-nan-outside.tif</a></td><td>yes</td><td>yes</td><td>all NaN</td><td>no</td></tr>
+<tr><td class="mono"><a href="downloads/GEMSDOE48-H58-OWDS-POSONLY-B2xH33D-20261008-fdbb83476756-zeros-outside.tif">GEMSDOE48-H58-OWDS-POSONLY-B2xH33D-20261008-fdbb83476756-zeros-outside.tif</a></td><td>yes</td><td>yes</td><td>all zero</td><td>yes</td></tr>
+<tr><td class="mono"><a href="downloads/GEMSDOE48-raw-conflict-K-20261006.tif">GEMSDOE48-raw-conflict-K-20261006.tif</a></td><td>yes</td><td>yes</td><td>all NaN</td><td>no</td></tr>
+<tr><td class="mono"><a href="downloads/GEMSDOE48-unassigned-mass-20261006.tif">GEMSDOE48-unassigned-mass-20261006.tif</a></td><td>yes</td><td>yes</td><td>all NaN</td><td>no</td></tr>
+<tr><td class="mono"><a href="downloads/gemsdoe48-ds-belief-raw-20261006T201749Z-95897e3f8125.tif">gemsdoe48-ds-belief-raw-20261006T201749Z-95897e3f8125.tif</a></td><td>yes</td><td>yes</td><td>all zero</td><td>yes</td></tr>
+<tr><td class="mono"><a href="downloads/gemsdoe48-ds-conflict-20261006T201749Z-95897e3f8125.tif">gemsdoe48-ds-conflict-20261006T201749Z-95897e3f8125.tif</a></td><td>yes</td><td>yes</td><td>all zero</td><td>yes</td></tr>
+<tr><td class="mono"><a href="downloads/gemsdoe48-ds-dotted-x-tipstepover-20261006T201749Z-95897e3f8125-belief-zeros.tif">gemsdoe48-ds-dotted-x-tipstepover-20261006T201749Z-95897e3f8125-belief-zeros.tif</a></td><td>yes</td><td>yes</td><td>all zero</td><td>yes</td></tr>
+<tr><td class="mono"><a href="downloads/gemsdoe48-ds-dotted-x-tipstepover-20261006T201749Z-95897e3f8125-decision-zeros.tif">gemsdoe48-ds-dotted-x-tipstepover-20261006T201749Z-95897e3f8125-decision-zeros.tif</a></td><td>yes</td><td>yes</td><td>all zero</td><td>yes</td></tr>
+<tr><td class="mono"><a href="downloads/gemsdoe48-ds-plausibility-20261006T201749Z-95897e3f8125.tif">gemsdoe48-ds-plausibility-20261006T201749Z-95897e3f8125.tif</a></td><td>yes</td><td>yes</td><td>all zero</td><td>yes</td></tr>
+<tr><td class="mono"><a href="downloads/gemsdoe48-ds-unassigned-mass-20261006T201749Z-95897e3f8125.tif">gemsdoe48-ds-unassigned-mass-20261006T201749Z-95897e3f8125.tif</a></td><td>yes</td><td>yes</td><td>all zero</td><td>yes</td></tr>
+<tr><td class="mono"><a href="downloads/gemsdoe48-ds48-belief.tif">gemsdoe48-ds48-belief.tif</a></td><td>yes</td><td>yes</td><td>mixed / other</td><td>yes</td></tr>
+<tr><td class="mono"><a href="downloads/gemsdoe48-ds48-conflict.tif">gemsdoe48-ds48-conflict.tif</a></td><td>yes</td><td>yes</td><td>mixed / other</td><td>yes</td></tr>
+<tr><td class="mono"><a href="downloads/gemsdoe48-ds48-emission.tif">gemsdoe48-ds48-emission.tif</a></td><td>yes</td><td>yes</td><td>all zero</td><td>yes</td></tr>
+<tr><td class="mono"><a href="downloads/gemsdoe48-ds48-mtheta.tif">gemsdoe48-ds48-mtheta.tif</a></td><td>yes</td><td>yes</td><td>mixed / other</td><td>yes</td></tr>
+<tr><td class="mono"><a href="downloads/gemsdoe48-h48-1-ds-fusion-b2xh32tip-20261006-407bb7f4-zeros.tif">gemsdoe48-h48-1-ds-fusion-b2xh32tip-20261006-407bb7f4-zeros.tif</a></td><td>yes</td><td>yes</td><td>all zero</td><td>yes</td></tr>
+<tr><td class="mono"><a href="downloads/gemsdoe48-h48-ds-yager-conflict-20261006-unassigned-diagnostic.tif">gemsdoe48-h48-ds-yager-conflict-20261006-unassigned-diagnostic.tif</a></td><td>yes</td><td>yes</td><td>all zero</td><td>yes</td></tr>
+<tr><td class="mono"><a href="downloads/gemsdoe48-h48-ds-yager-conflict-20261006.tif">gemsdoe48-h48-ds-yager-conflict-20261006.tif</a></td><td>yes</td><td>yes</td><td>all zero</td><td>yes</td></tr>
+<tr><td class="mono"><a href="downloads/gemsdoe48-h49-ds-conflict-balanced-20261006-belief-field.tif">gemsdoe48-h49-ds-conflict-balanced-20261006-belief-field.tif</a></td><td>yes</td><td>yes</td><td>all zero</td><td>yes</td></tr>
+<tr><td class="mono"><a href="downloads/gemsdoe48-h49-ds-conflict-balanced-20261006-e6f08013888b.tif">gemsdoe48-h49-ds-conflict-balanced-20261006-e6f08013888b.tif</a></td><td>yes</td><td>yes</td><td>all zero</td><td>yes</td></tr>
+<tr><td class="mono"><a href="downloads/gemsdoe48-h49-ds-conflict-balanced-20261006-unassigned-diagnostic.tif">gemsdoe48-h49-ds-conflict-balanced-20261006-unassigned-diagnostic.tif</a></td><td>yes</td><td>yes</td><td>all zero</td><td>yes</td></tr>
+<tr><td class="mono"><a href="downloads/gemsdoe48-h50-ds-b2xh36rung30-20261007-5b59e106-nan.tif">gemsdoe48-h50-ds-b2xh36rung30-20261007-5b59e106-nan.tif</a></td><td>yes</td><td>yes</td><td>all NaN</td><td>no</td></tr>
+<tr><td class="mono"><a href="downloads/gemsdoe48-h50-ds-b2xh36rung30-20261007-5b59e106-zeros.tif">gemsdoe48-h50-ds-b2xh36rung30-20261007-5b59e106-zeros.tif</a></td><td>yes</td><td>yes</td><td>all zero</td><td>yes</td></tr>
+<tr><td class="mono"><a href="downloads/gemsdoe48-h50b-alteration-conflict-20261007-806a4ba4-nan.tif">gemsdoe48-h50b-alteration-conflict-20261007-806a4ba4-nan.tif</a></td><td>yes</td><td>yes</td><td>all NaN</td><td>no</td></tr>
+<tr><td class="mono"><a href="downloads/gemsdoe48-h50b-alteration-conflict-20261007-806a4ba4-zeros.tif">gemsdoe48-h50b-alteration-conflict-20261007-806a4ba4-zeros.tif</a></td><td>yes</td><td>yes</td><td>all zero</td><td>yes</td></tr>
+<tr><td class="mono"><a href="downloads/gemsdoe48-h51-plausibility-budget-20261007-f8fa1d08-nan.tif">gemsdoe48-h51-plausibility-budget-20261007-f8fa1d08-nan.tif</a></td><td>yes</td><td>yes</td><td>all NaN</td><td>no</td></tr>
+<tr><td class="mono"><a href="downloads/gemsdoe48-h51-plausibility-budget-20261007-f8fa1d08-zeros.tif">gemsdoe48-h51-plausibility-budget-20261007-f8fa1d08-zeros.tif</a></td><td>yes</td><td>yes</td><td>all zero</td><td>yes</td></tr>
+<tr><td class="mono"><a href="downloads/gemsdoe48-h58-continuous-pignistic-20261008T175914Z-e58.tif">gemsdoe48-h58-continuous-pignistic-20261008T175914Z-e58.tif</a></td><td>yes</td><td>yes</td><td>all NaN</td><td>no</td></tr>
+<tr><td class="mono"><a href="downloads/gemsdoe48-h58-diag-conflict-20261008T175914Z-e58.tif">gemsdoe48-h58-diag-conflict-20261008T175914Z-e58.tif</a></td><td>yes</td><td>yes</td><td>all NaN</td><td>no</td></tr>
+<tr><td class="mono"><a href="downloads/gemsdoe48-h58-diag-mtheta-20261008T175914Z-e58.tif">gemsdoe48-h58-diag-mtheta-20261008T175914Z-e58.tif</a></td><td>yes</td><td>yes</td><td>all NaN</td><td>no</td></tr>
+<tr><td class="mono"><a href="downloads/gemsdoe48-h58-diag-plausibility-20261008T175914Z-e58.tif">gemsdoe48-h58-diag-plausibility-20261008T175914Z-e58.tif</a></td><td>yes</td><td>yes</td><td>all NaN</td><td>no</td></tr>
+<tr><td class="mono"><a href="downloads/gemsdoe48-h58-pignistic-conflict-priced-B2xH33D-20261008T175914Z-e58.tif">gemsdoe48-h58-pignistic-conflict-priced-B2xH33D-20261008T175914Z-e58.tif</a></td><td>yes</td><td>yes</td><td>all zero</td><td>yes</td></tr>
+<tr><td class="mono"><a href="downloads/gemsdoe48-h59-cover-ds-belief-b2xh33d-20261008T184547Z-b79c4c61d8d8.tif">gemsdoe48-h59-cover-ds-belief-b2xh33d-20261008T184547Z-b79c4c61d8d8.tif</a></td><td>yes</td><td>yes</td><td>all zero</td><td>yes</td></tr></table>
+</main><footer><div class="wrap">GEMSDOE48 · local artifact audit · no organizer acceptance inferred</div></footer>
+</body></html>
