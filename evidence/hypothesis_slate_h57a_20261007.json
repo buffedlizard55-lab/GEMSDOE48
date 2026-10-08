@@ -1,0 +1,107 @@
+{
+  "slate_id": "hypotheses-h57-20261007",
+  "frozen_before_implementation_or_scoring": true,
+  "frozen_utc": "2026-10-07T21:18:57Z",
+  "ranking_basis": "qualitative planning range for blocked-proxy delta versus same-protocol H49, divided by engineering effort and gated by data readiness; ranges are not measured predictions or leaderboard projections",
+  "primary_candidate": "H57-A",
+  "post_freeze_corrections": [
+    {
+      "field": "candidates[0].layers",
+      "frozen_text": "current catalogue geometry for a fixed >300 m exclusion",
+      "correction": "H57-A construction uses the frozen H49 surface and excludes H49-positive cells only; it does not apply a catalogue-distance filter. The frozen_transform.eligible field already specifies H49 prediction == 0.",
+      "effect_on_frozen_transform_or_scores": "none; this corrects a contradictory layer-description string, not the preregistered transform"
+    },
+    {
+      "field": "H57-A source availability",
+      "correction": "The TMI_up150 extension was absent at freeze and later restored from the SHA-pinned owner mirror. See evidence/h57_data_access_checks_20261007.json; this does not authenticate the organizer source or establish licence rights."
+    }
+  ],
+  "promotion_gate": {
+    "reference": "same-protocol H49 surface",
+    "truths": ["catalogue proxy", "SGMC positives >300 m from the catalogue proxy"],
+    "fold_protocol": "four fixed quadrants on the full EPSG:32611 100 m grid, 300 m footprint-clipped halo, score only core-quadrant truth",
+    "pass": "mean paired delta DTI > 0 and at least 3 of 4 positive fold deltas on both truth proxies",
+    "slot_clearance": false,
+    "note": "Even a proxy pass is not private expert-label evidence, organizer acceptance, or slot authorization."
+  },
+  "candidates": [
+    {
+      "rank": 1,
+      "id": "H57-A",
+      "name": "residual potassium alteration anomaly x magnetic-gradient corroboration",
+      "layers": ["GeoDAWN radiometric K", "GeoDAWN radiometric Th", "GeoDAWN TMI_up150-derived gradient", "H49 frozen reference; H49-positive cells ineligible for additions; no catalogue-distance filter"],
+      "signature": "K enrichment conditional on Th, corroborated by magnetic gradient; lithology/contact confounding is expected",
+      "off_catalogue_rationale": "external geophysical anomalies can generate candidates absent from the public fault inventory; no catalogue-distance filter is used in feature construction",
+      "prior_art_difference": "H50-B tested low-Th/K ratio inside Dempster-conflict corridors and was negative; H53-RadEdge used radiometric-edge evidence; H57-A uses robust K~Th residuals and a TMI_up150 gradient conjunction. H56-B proposed but did not implement this operator.",
+      "expected_blocked_proxy_delta_dti_vs_h49": [0.0, 0.003],
+      "expected_range_is_measured": false,
+      "cost": "low-medium",
+      "data_access": {
+        "radiometric_mirror_present": true,
+        "radiometric_sha256": "c22420f75999030d7cc65c9e31e50d232ea6158423bca051613a18a8b20ba682",
+        "magnetic_extension_present_at_freeze": false,
+        "magnetic_extension_restore": "python scripts/restore_h55_inputs.py --only geodawn_extensions_u8",
+        "magnetic_extension_expected_sha256": "a35a9c6d2a14786f4dab85481ee59769213072f5dab5b2535ea82ae4d9bb7d9b",
+        "official_source": "https://doi.org/10.5066/P93LGLVQ",
+        "caveat": "SHA identity establishes owner-mirror integrity only; not organizer authentication or challenge-specific license review."
+      },
+      "frozen_transform": {
+        "fit": "5-iteration Huber IRLS K = intercept + slope*Th, Huber cutoff 1.345 robust residual standard deviations",
+        "residual_z": "(residual - median)/(1.4826*MAD)",
+        "anomaly_threshold": "residual_z >= 2",
+        "magnetic_threshold": "gradient magnitude > 0 and >= p75 on valid footprint cells",
+        "eligible": "valid footprint and H49 prediction == 0",
+        "rank_score": "residual_z * gradient_magnitude, descending, row-major tie break",
+        "addition_budget": 2000,
+        "output_rule": "H49 values unchanged; set selected addition pixels to 1.0"
+      }
+    },
+    {
+      "rank": 2,
+      "id": "H57-B",
+      "name": "focal-mechanism orientation lineations",
+      "layers": ["USGS ComCat event locations", "USGS ComCat focal-mechanism strike/dip/rake products"],
+      "signature": "clusters of compatible focal planes along a line, not event-density maxima",
+      "off_catalogue_rationale": "short mechanism-supported segment gaps can represent active structure absent from the generalized surface-trace inventory",
+      "prior_art_difference": "earlier seismicity work used counts/density; H57-B uses focal-mechanism orientations",
+      "expected_blocked_proxy_delta_dti_vs_h49": [0.0, 0.004],
+      "expected_range_is_measured": false,
+      "cost": "medium",
+      "data_access_check": "USGS ComCat FDSN count query returned 98 events with producttype=focal-mechanism and M>=4.5 in the competition bounding box, 1900-01-01 through 2026-10-07; only count was queried, no records inspected",
+      "official_query_url": "https://earthquake.usgs.gov/fdsnws/event/1/count?starttime=1900-01-01&endtime=2026-10-07&minlatitude=37.331&maxlatitude=40.728&minlongitude=-120.038&maxlongitude=-116.141&minmagnitude=4.5&producttype=focal-mechanism",
+      "caveat": "Sparse, completeness/magnitude/depth biased; event field completeness, mechanism product terms and within-footprint spacing are unaudited."
+    },
+    {
+      "rank": 3,
+      "id": "H57-C",
+      "name": "channel-profile knickpoint lineations",
+      "layers": ["USGS 3DEP 1 m DEM where available", "USGS 3DHP/NHD hydrography network"],
+      "signature": "repeated stream-longitudinal-profile breaks, clustered by azimuth",
+      "off_catalogue_rationale": "base-level perturbations may persist in drainage profiles upstream of a subdued or alluvium-mantled fault trace",
+      "prior_art_difference": "prior topography work used hillslope scarps; this uses channel profiles",
+      "expected_blocked_proxy_delta_dti_vs_h49": [0.002, 0.01],
+      "expected_range_is_measured": false,
+      "cost": "high",
+      "data_access_check": "USGS identifies public 3DEP/3DHP download routes and DEM availability maps; only two local 3 m pilot DEM tiles are present and exact full-footprint 1 m/channel coverage has not been checked",
+      "official_sources": ["https://www.usgs.gov/faqs/what-is-the-coverage-of-3d-elevation-program-3dep-dems", "https://www.usgs.gov/national-hydrography/access-national-hydrography-products"],
+      "caveat": "Parked; public product availability does not prove target-area coverage."
+    },
+    {
+      "rank": 4,
+      "id": "H57-D",
+      "name": "multi-element hydrothermal pathfinder residuals",
+      "layers": ["USGS National Geochemical Survey stream-sediment and soil analyses", "optional geophysical structure corridor"],
+      "signature": "within-method/media robust residual anomalies in B, Li, As, Hg",
+      "off_catalogue_rationale": "hydrothermal alteration geochemistry can mark fluid pathways associated with faults absent from generalized fault maps",
+      "prior_art_difference": "different from airborne radiometrics and from point well/spring temperature data",
+      "expected_blocked_proxy_delta_dti_vs_h49": [0.0, 0.004],
+      "expected_range_is_measured": false,
+      "cost": "high",
+      "data_access_check": "USGS NGS page exposes public national downloads (74,409-sample shapefile package; 77,212-record CSV package); target-area count, sample-method harmonization and challenge-use terms not checked",
+      "official_source": "https://mrdata.usgs.gov/geochem/",
+      "caveat": "Parked until ROI coverage, field semantics, censoring and permitted-use terms are audited."
+    }
+  ],
+  "official_metric_reference": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+  "source_checks_receipt": "evidence/h57_data_access_checks_20261007.json"
+}

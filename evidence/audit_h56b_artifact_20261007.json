@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "audited_utc": "2026-10-07T20:52:04.546123+00:00",
+  "status": "PASS_FORMAT_AND_RECOMPUTATION_NOT_VALIDITY_OR_ACCEPTANCE",
+  "input_pins": {
+    "dotted": {
+      "path": "data/families/dotted_b2_prune_02778.tif",
+      "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+      "verified": true
+    },
+    "tip": {
+      "path": "data/families/tip_stepover_r30_02632.tif",
+      "sha256": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757",
+      "verified": true
+    },
+    "backbone": {
+      "path": "data/raw/scored/h19_5_01922.tif",
+      "sha256": "ec1f9b56b83ce33cad781ceb9f104b18fb4f2ff785263a4e89616af4aabdee8d",
+      "verified": true
+    },
+    "template": {
+      "path": "data/raw/sample_submission_template.tif",
+      "sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+      "verified": true
+    },
+    "labels": {
+      "path": "data/raw/labels_catalogue.tif",
+      "sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+      "verified": true
+    },
+    "footprint_mask": {
+      "path": "data/source_mirrors/footprint-mask.tif",
+      "sha256": "ddadb8c96cda673b91ddaa0bbed2aa955c358a8f6196c4c4e8fa70d454dd429f",
+      "verified": true
+    }
+  },
+  "footprint_agreement": {
+    "template_finite_vs_labels": 0,
+    "labels_vs_pinned_footprint": 0,
+    "footprint_cells": 5167373
+  },
+  "independent_recomputation": {
+    "method": "separate implementation in this audit script; no builder module imported",
+    "bpa_mass_sum_max_abs_error": 5.205956676856971e-08,
+    "conflict_K_max_footprint": 0.8550683689108851,
+    "mtheta_min_footprint": 0.004996402262783306,
+    "mtheta_max_footprint": 0.66418836073872,
+    "primary_matches_with_atol_2e_7": true,
+    "diagnostics": {
+      "mtheta": {
+        "path": "docs/downloads/diagnostics/gemsdoe48-h56b-mtheta-126ca59c2801.tif",
+        "sha256": "18dc6b7fe0f4bf17791b2bda6b985364324f6b3c23f89303543416ee5729d6e5",
+        "matches_independent_recomputation": true,
+        "outside_is_nan": true
+      },
+      "conflict": {
+        "path": "docs/downloads/diagnostics/gemsdoe48-h56b-conflict-126ca59c2801.tif",
+        "sha256": "9606cef20d34046e9b5f6d506df642847ffae1deafe97fc9e75a07c0094a94f5",
+        "matches_independent_recomputation": true,
+        "outside_is_nan": true
+      },
+      "support_difference": {
+        "path": "docs/downloads/diagnostics/gemsdoe48-h56b-support_difference-126ca59c2801.tif",
+        "sha256": "96077b2a8875efbc47fb6f0b1d602cff25d1714b01d52ca05ed22bc141b0eba9",
+        "matches_independent_recomputation": true,
+        "outside_is_nan": true
+      }
+    }
+  },
+  "primary": {
+    "path": "docs/downloads/GEMSDOE48-H56B-ds-belief-dotted-x-tip-20261007-126ca59c2801-nan-outside.tif",
+    "sha256": "3589e89a1ad4f78f54e6f17f9b7cdb0edb563f66aedfcdabd632ef8774968c3a",
+    "dtype": "float32",
+    "crs": "EPSG:32611",
+    "width": 3292,
+    "height": 3730,
+    "nodata_is_nan": true,
+    "outside_cells_all_nan": true,
+    "finite_footprint_range": [
+      0.0,
+      1.0
+    ]
+  },
+  "not_the_arithmetic_mean": {
+    "is_identical_to_normalized_kernel_mean": false,
+    "normalized_kernel_mean_pearson_r": 0.9865998528364749,
+    "normalized_kernel_mean_mae": 0.018752145476924942,
+    "normalized_kernel_mean_max_abs_difference": 0.4172414541244507,
+    "fraction_footprint_diff_gt_0_05": 0.12455748791503923,
+    "fraction_footprint_diff_gt_0_05_count": 643635,
+    "normalized_binary_mean_pearson_r": 0.38865406305980027,
+    "is_identical_to_either_mean": false,
+    "interpretation": "not the arithmetic mean; highly correlated with the normalized kernel mean, but materially different at a minority of cells"
+  },
+  "prior_h56_zero_outside_artifact_comparison": {
+    "checked": true,
+    "old_path": "docs/downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros-outside.tif",
+    "old_sha256": "4d6548d4ec07a47a25b83d28ebc05d58b57448c1507b460aed52cec395bdb6b5",
+    "same_grid": true,
+    "inside_footprint_exactly_equal": false,
+    "inside_footprint_max_abs_difference": 1.7881393432617188e-07,
+    "comparison_scope": "only the old file's outside-zero encoding is excluded; byte identity is not expected"
+  },
+  "limitations": [
+    "This audit verifies reproducibility and geospatial file invariants, not geological truth or Dempster-Shafer assumption validity.",
+    "The parent sources overlap and source independence is not established.",
+    "Discount and absence parameters are heuristic, partly informed by owner-reported scores, and not calibrated reliabilities.",
+    "An in-range float32 EPSG:32611 GeoTIFF is not proof of portal acceptance."
+  ]
+}

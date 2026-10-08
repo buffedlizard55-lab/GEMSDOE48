@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "audited_utc": "2026-10-07T20:41:00.248784+00:00",
+  "status": "DISTINCT_BYTES_AND_NOT_EXACT_PIXELS_BUT_NEAR_IDENTICAL_TO_PRIOR_H56_REBUILD_NOT_A_NOVEL_CANDIDATE",
+  "primary": {
+    "path": "docs/downloads/GEMSDOE48-H56B-ds-belief-dotted-x-tip-20261007-126ca59c2801-nan-outside.tif",
+    "sha256": "3589e89a1ad4f78f54e6f17f9b7cdb0edb563f66aedfcdabd632ef8774968c3a",
+    "bytes": 1696746,
+    "positive_cells": 791389
+  },
+  "search_scope": {
+    "directories": [
+      "data/",
+      "docs/downloads/"
+    ],
+    "tiffs_examined_for_byte_hash": 104,
+    "same_grid_one_band_rasters_compared_in_footprint": 100,
+    "different_grid_or_multiband_files_skipped_for_pixel_comparison": 4,
+    "outside_scope": "Other repositories, other GEMSDOE sites, and organizer-held submissions are not searched."
+  },
+  "result": {
+    "same_sha256_as_any_searched_raster": false,
+    "sha256_matches": [],
+    "exact_in_footprint_pixel_match": false,
+    "exact_pixel_matches": [],
+    "same_positive_support_as_prior_rasters": [
+      "docs/downloads/GEMSDOE48-H56-OWDS-B2xH33D-20261007-1f7b5a4f18db-zeros-outside.tif",
+      "docs/downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-nan-outside.tif",
+      "docs/downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros-outside.tif",
+      "docs/downloads/diagnostics/GEMSDOE48-H53-DS-RadEdge-B2xH33D-20261007-4c01fcf2ad8c-two-family-dempster-only.tif",
+      "docs/downloads/diagnostics/GEMSDOE48-H53-DS-RadEdge-B2xH33D-20261007-4c01fcf2ad8c-two-family-naive-mean.tif",
+      "docs/downloads/diagnostics/GEMSDOE48-H56-OWDS-B2xH33D-20261007-1f7b5a4f18db-belief-raw.tif",
+      "docs/downloads/diagnostics/gemsdoe48-h55-bel-055da9855353.tif",
+      "docs/downloads/gemsdoe48-h49-ds-conflict-balanced-20261006-belief-field.tif"
+    ],
+    "prior_h56_zero_outside_comparison": {
+      "path": "docs/downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros-outside.tif",
+      "sha256": "4d6548d4ec07a47a25b83d28ebc05d58b57448c1507b460aed52cec395bdb6b5",
+      "in_footprint_exactly_equal": false,
+      "same_positive_support": true,
+      "positive_support_jaccard": 1.0,
+      "pearson_r": 0.9999999999999967,
+      "mae": 3.055105006566621e-09,
+      "max_abs_difference": 1.7881393432617188e-07,
+      "top_37654_jaccard": 1.0
+    },
+    "interpretation": "The H56B file has a distinct byte hash and is not exactly pixel-identical, but it is a same-recipe rebuild of the prior H56 surface; the in-footprint difference is at float32 rounding scale. Treat it as a reproducibility/encoding derivative, not as a meaningfully new model or a submission candidate."
+  },
+  "closest_prior_art_comparisons": [
+    {
+      "path": "docs/downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-nan-outside.tif",
+      "sha256": "8ccb337219a664eda90a5deaf4de5572e7ee776e40fdefc70410b9ec0ff0f0bc",
+      "in_footprint_exactly_equal": false,
+      "same_positive_support": true,
+      "positive_support_jaccard": 1.0,
+      "pearson_r": 0.9999999999999967,
+      "mae": 3.055105006566621e-09,
+      "max_abs_difference": 1.7881393432617188e-07,
+      "top_37654_jaccard": 1.0
+    },
+    {
+      "path": "docs/downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros-outside.tif",
+      "sha256": "4d6548d4ec07a47a25b83d28ebc05d58b57448c1507b460aed52cec395bdb6b5",
+      "in_footprint_exactly_equal": false,
+      "same_positive_support": true,
+      "positive_support_jaccard": 1.0,
+      "pearson_r": 0.9999999999999967,
+      "mae": 3.055105006566621e-09,
+      "max_abs_difference": 1.7881393432617188e-07,
+      "top_37654_jaccard": 1.0
+    },
+    {
+      "path": "docs/downloads/GEMSDOE48-H56-OWDS-B2xH33D-20261007-1f7b5a4f18db-zeros-outside.tif",
+      "sha256": "1f7b5a4f18dbc62f31b14078545332238be9289dd388d57f550d75fb5a5fe95a",
+      "in_footprint_exactly_equal": false,
+      "same_positive_support": true,
+      "positive_support_jaccard": 1.0,
+      "pearson_r": 0.9885796091336608,
+      "mae": 0.009699496390139657,
+      "max_abs_difference": 0.38849523663520813,
+      "top_37654_jaccard": 0.8989837859646469
+    },
+    {
+      "path": "docs/downloads/diagnostics/GEMSDOE48-H56-OWDS-B2xH33D-20261007-1f7b5a4f18db-belief-raw.tif",
+      "sha256": "dc6a7a597a511152551dcf202ecee280429cf13e977e849058b449cf5ce36fd9",
+      "in_footprint_exactly_equal": false,
+      "same_positive_support": true,
+      "positive_support_jaccard": 1.0,
+      "pearson_r": 0.988579609051717,
+      "mae": 0.01988673396962089,
+      "max_abs_difference": 0.3321791887283325,
+      "top_37654_jaccard": 0.8989837859646469
+    },
+    {
+      "path": "docs/downloads/gemsdoe48-h49-ds-conflict-balanced-20261006-belief-field.tif",
+      "sha256": "6bcf9de850471535816e1a798983a329b4408d39cfa91d4c17511e7fe0158a38",
+      "in_footprint_exactly_equal": false,
+      "same_positive_support": true,
+      "positive_support_jaccard": 1.0,
+      "pearson_r": 0.9878533282670382,
+      "mae": 0.01864333753196068,
+      "max_abs_difference": 0.43367260694503784,
+      "top_37654_jaccard": 0.9083191850594228
+    },
+    {
+      "path": "docs/downloads/diagnostics/GEMSDOE48-H53-DS-RadEdge-B2xH33D-20261007-4c01fcf2ad8c-two-family-naive-mean.tif",
+      "sha256": "2b070e616f5494d09d39f4a35727adceb541e72a2a0471322f7b87cc1fb1dc86",
+      "in_footprint_exactly_equal": false,
+      "same_positive_support": true,
+      "positive_support_jaccard": 1.0,
+      "pearson_r": 0.9865998527052843,
+      "mae": 0.018752145531954617,
+      "max_abs_difference": 0.4172414541244507,
+      "top_37654_jaccard": 0.8989837859646469
+    },
+    {
+      "path": "docs/downloads/diagnostics/GEMSDOE48-H53-DS-RadEdge-B2xH33D-20261007-4c01fcf2ad8c-two-family-dempster-only.tif",
+      "sha256": "a0eaa98c3294a7686d26753348bca9eaf143f089a9d39d827ee19ddb7e55ffac",
+      "in_footprint_exactly_equal": false,
+      "same_positive_support": true,
+      "positive_support_jaccard": 1.0,
+      "pearson_r": 0.9827247923862125,
+      "mae": 0.02178934995566867,
+      "max_abs_difference": 0.4727970063686371,
+      "top_37654_jaccard": 0.8989837859646469
+    },
+    {
+      "path": "docs/downloads/diagnostics/gemsdoe48-h55-bel-055da9855353.tif",
+      "sha256": "e9bfb8fd27989c073fc57a04cf6f0f3eca9c49b7f82dfec5c9f10e424e703a91",
+      "in_footprint_exactly_equal": false,
+      "same_positive_support": true,
+      "positive_support_jaccard": 1.0,
+      "pearson_r": 0.9813304444145896,
+      "mae": 0.030542897508050313,
+      "max_abs_difference": 0.5422414541244507,
+      "top_37654_jaccard": 0.8989837859646469
+    },
+    {
+      "path": "docs/downloads/diagnostics/gemsdoe48-h48-1-belief_dempster_mF_norm01.tif",
+      "sha256": "b748e0f97738a5e3b0feaf35dab340ff1dcedd6b8d2124f2b54b5f1b0f14d7d3",
+      "in_footprint_exactly_equal": false,
+      "same_positive_support": false,
+      "positive_support_jaccard": 0.9570968314205572,
+      "pearson_r": 0.9908088695669656,
+      "mae": 0.005281224445624164,
+      "max_abs_difference": 0.8838738203048706,
+      "top_37654_jaccard": 0.9323616955763112
+    },
+    {
+      "path": "docs/downloads/diagnostics/GEMSDOE48-H56-OWDS-B2xH33D-20261007-1f7b5a4f18db-plausibility.tif",
+      "sha256": "85c5eed333caba5bf2ff68d7e91ae6bb89c001df57ea7988d08839af9e9435ad",
+      "in_footprint_exactly_equal": false,
+      "same_positive_support": false,
+      "positive_support_jaccard": 0.15315112727492286,
+      "pearson_r": 0.9875088821475596,
+      "mae": 0.8153459113645687,
+      "max_abs_difference": 0.8922735694795847,
+      "top_37654_jaccard": 0.8989837859646469
+    },
+    {
+      "path": "docs/downloads/diagnostics/gemsdoe48-h55-plausibility-055da9855353.tif",
+      "sha256": "d478ccb13155d200c18b6fe6d80445992bc42228ee592578757c912dff3ff1e3",
+      "in_footprint_exactly_equal": false,
+      "same_positive_support": false,
+      "positive_support_jaccard": 0.15315112727492286,
+      "pearson_r": 0.9856139389276409,
+      "mae": 0.14605371008661452,
+      "max_abs_difference": 0.3509218096733093,
+      "top_37654_jaccard": 0.8989837859646469
+    },
+    {
+      "path": "docs/downloads/GEMSDOE48-H53-DS-RadEdge-B2xH33D-20261007-4c01fcf2ad8c-nan-outside.tif",
+      "sha256": "4c01fcf2ad8c1d2bd487bc4d07c85e57b2a256296586d4817b58079b0ccd7a1f",
+      "in_footprint_exactly_equal": false,
+      "same_positive_support": false,
+      "positive_support_jaccard": 0.15383384780462014,
+      "pearson_r": 0.980046140225948,
+      "mae": 0.03589785509009652,
+      "max_abs_difference": 0.5074721872806549,
+      "top_37654_jaccard": 0.8954468802698144
+    },
+    {
+      "path": "docs/downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-diag-plausibility-nan.tif",
+      "sha256": "b8a2c58ad78cbe29fc90a60c64bc9928ebc29041c9771e7af5c554f69781820c",
+      "in_footprint_exactly_equal": false,
+      "same_positive_support": false,
+      "positive_support_jaccard": 0.15315112727492286,
+      "pearson_r": 0.9258349078382656,
+      "mae": 0.03024348299760847,
+      "max_abs_difference": 0.9034484326839447,
+      "top_37654_jaccard": 0.7805835343074667
+    },
+    {
+      "path": "docs/downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-nan-outside.tif",
+      "sha256": "9242c831dc103966e7ea961e342e4dce5e655b11313d349a112ece8a4d8b0d15",
+      "in_footprint_exactly_equal": false,
+      "same_positive_support": false,
+      "positive_support_jaccard": 0.5045989184837657,
+      "pearson_r": 0.9250546358187582,
+      "mae": 0.028873878030523333,
+      "max_abs_difference": 0.9058860018849373,
+      "top_37654_jaccard": 0.7809625162587206
+    },
+    {
+      "path": "docs/downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-zeros-outside.tif",
+      "sha256": "a5c1c4fbd53e889fe5178628fa5f25b02e920e6db434ccca63e44792f7d4bf0f",
+      "in_footprint_exactly_equal": false,
+      "same_positive_support": false,
+      "positive_support_jaccard": 0.5045989184837657,
+      "pearson_r": 0.9250546358187582,
+      "mae": 0.028873878030523333,
+      "max_abs_difference": 0.9058860018849373,
+      "top_37654_jaccard": 0.7809625162587206
+    }
+  ],
+  "limits": [
+    "This is a repository-local search, not global uniqueness or organizer-side deduplication.",
+    "Equal positive support alone does not prove equality of continuous probability/favorability values.",
+    "Different bytes, names, or sub-ULP/one-ULP differences do not establish methodological novelty."
+  ]
+}

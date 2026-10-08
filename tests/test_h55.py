@@ -269,12 +269,11 @@ def test_dempster_belief_is_not_the_naive_mean():
     assert np.abs(out["bel"] - (slope * naive + intercept)).mean() > 1e-3
 
 
-def test_full_conflict_falls_back_to_vacuous_mass_instead_of_dividing_by_zero():
+def test_full_conflict_raises_instead_of_fabricating_vacuous_mass():
     b1 = np.array([[1.0]])
     b2 = np.array([[0.0]])
-    out = dempster_combine(b1, b2, alpha1=1.0, alpha2=1.0)
-    assert np.isfinite(out["bel"]).all() and np.isfinite(out["unc"]).all()
-    assert out["unc"][0, 0] == pytest.approx(1.0)
+    with pytest.raises(ValueError, match="total/numerical conflict"):
+        dempster_combine(b1, b2, alpha1=1.0, alpha2=1.0)
 
 
 # ---------------------------------------------------------------------------

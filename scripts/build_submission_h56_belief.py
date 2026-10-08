@@ -179,13 +179,16 @@ def bpa(support: np.ndarray, r: float, absence: np.ndarray):
 
 
 def dempster(m1, m2):
+    """Apply normalized Dempster combination; fail closed at total conflict."""
     f1, n1, u1 = m1
     f2, n2, u2 = m2
     K = f1 * n2 + n1 * f2
-    z = np.maximum(1.0 - K, 1e-9)
-    f = (f1 * f2 + f1 * u2 + u1 * f2) / z
-    n = (n1 * n2 + n1 * u2 + u1 * n2) / z
-    u = (u1 * u2) / z
+    denom = 1.0 - K
+    if not np.isfinite(denom).all() or np.any(denom <= 1e-15):
+        raise ValueError("Dempster normalization is undefined at total conflict")
+    f = (f1 * f2 + f1 * u2 + u1 * f2) / denom
+    n = (n1 * n2 + n1 * u2 + u1 * n2) / denom
+    u = (u1 * u2) / denom
     return f.astype(np.float32), n.astype(np.float32), u.astype(np.float32), K.astype(np.float32)
 
 

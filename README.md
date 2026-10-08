@@ -1,12 +1,12 @@
 # GEMSDOE48 — auditable GEMS fault-surface research (H48 → H57)
 
-> **Current decision — 2026-10-07: NO WEEKLY SLOT CLEARED.** Public-proxy results are conditional evidence only; they are not private-label scores, leaderboard scores, or organizer acceptance. The latest leading geological candidate H57-A failed the two-proxy gate. H56-F pruning also failed. Do not upload a local artifact based on these tests.
+> **Current decision — 2026-10-07: NO WEEKLY SLOT CLEARED.** Public-proxy results are conditional evidence only; they are not private-label scores, leaderboard scores, or organizer acceptance. The current branch's H57-A geological screen failed the two-proxy gate; H56-F pruning also failed. A distinct concurrent H57-RELIEF TIFF exists, but its former live projection and submit recommendation were invalidated by the metric-identity correction. **OK TO DOWNLOAD FOR INSPECTION · NOT OK / NOT CLEARED TO SUBMIT.** Do not upload a local artifact based on these tests.
 
 ## Current evidence at a glance
 
-- **Public leaderboard and 0.2778 attribution:** the 2026-10-07 manual snapshot showed #1 at **0.3774**, **0.3195 at #7**, and a **0.2778 row at #13** for `extradr19`. The owner-reported 0.2600→0.2708→0.2778 family ladder is plausibly related to catalogue-flank pruning, which is consistent with the published masking rule, but no organizer receipt connects the row or ladder to the exact local B2 TIFF bytes. The local B2 artifact is marked `UNSCORED`. See [leaderboard snapshot](docs/leaderboard.html), [machine-readable rows](docs/data/leaderboard_20261007.json), and [careful 0.2778 explanation](docs/research/why-02778-and-ceiling-20261007.md).
+- **Public leaderboard and 0.2778 attribution:** the 2026-10-07 manual snapshot showed #1 at **0.3774**, **0.3195 at #7**, and a **0.2778 row at #13** for `extradr19`. The owner-reported 0.2600→0.2708→0.2778 family ladder is plausibly related to catalogue-flank pruning, which is consistent with the published masking rule, but the attribution is **unverified at local-file level**: no organizer receipt connects the row or ladder to the exact local B2 TIFF bytes. The local B2 artifact is marked `UNSCORED`. See [leaderboard snapshot](docs/leaderboard.html), [machine-readable rows](docs/data/leaderboard_20261007.json), and [careful 0.2778 explanation](docs/research/why-02778-and-ceiling-20261007.md).
 - **H49 reference:** same-protocol proxy means 0.095353 (catalogue) and 0.100751 (SGMC >300 m off-catalogue). It is a comparable public-map reference for research—not the live leaderboard leader, private truth, or a promotion/slot clearance.
-- **H57 slate and H57-A:** four distinct, not-yet-tried geological ideas were ranked by planning-only ΔDTI and cost, with layers, physical signatures, off-catalogue rationale, prior-art differences and source-access checks. H57-A (robust K~Th radiometric residual × TMI-up150 gradient) slightly raises the catalogue proxy but falls below H49 on SGMC and loses to all eight descriptive same-pool random controls. **No H57 TIFF was generated.** See [frozen slate](docs/research/hypotheses-h57-20261007.md), [data-access receipt](evidence/h57_data_access_checks_20261007.json), and [results](docs/research/h57-results-20261007.md).
+- **Current branch H57 slate and H57-A:** four distinct geological hypotheses were ranked with planning-only ranges, source-access caveats and a frozen public-proxy gate. Its H57-A (robust K~Th residual × TMI-up150 gradient) slightly raised the catalogue proxy, fell below H49 on SGMC, and lost to all eight descriptive same-pool random controls. **That H57-A screen emitted no TIFF.** A separate concurrent H57-RELIEF TIFF is retained for inspection only; its old `FPw = S − TPw`-based live projection and recommendation are withdrawn. See [current slate](docs/research/hypotheses-h57-20261007.md), [H57-A results](docs/research/h57-results-20261007.md), [H57-RELIEF report](docs/research/h57-ds-relief-augmented-20261007.md), and [metric erratum](docs/research/h57-relief-metric-erratum-20261007.md). The earlier 17:43 H57-A–E planning slate is distinct and unbuilt: [slate](docs/research/h57-hypothesis-slate-20261007.md), [receipt](evidence/hypothesis_slate_h57_20261007.json).
 - **H56-F:** all three preregistered Dempster-belief pruning thresholds fail H49 on both proxies. For τ=.99/.95/.90, catalogue means are 0.005337/0.006744/0.006831 and SGMC means 0.081123/0.094821/0.095491; no H56-F file or slot is cleared. See [results](docs/research/h56-pruning-ladder-results-20261007.md).
 
 ## ⬇ H56B Dempster–Shafer artifact — clear download / submission verdict
@@ -23,6 +23,15 @@
 ## Separate H56 open-world D-S artifact — download yes, submit no
 
 The concurrently developed H56-DS open-world parameterization is a separate output from H56B. It also combines B2 × H33-D by normalized Dempster rule, but uses a different open-world mass assignment. **OK TO DOWNLOAD FOR INSPECTION · NOT OK / NOT CLEARED TO SUBMIT.** It scores 0.054242 / 0.066070 against H49's 0.095353 / 0.100751 on the two public proxies and fails both. Its direct parent-support difference is distinct from the D-S masses; m(Θ) remains unassigned mass and raw K remains conflict. See [H56 results](docs/research/h56-results-20261007.md), [build receipt](evidence/build_h56_receipt_20261007.json), and [holdout receipt](evidence/holdout_h56_ds_20261007.json). No organizer score or local file-to-leaderboard link exists.
+
+## H57-RELIEF concurrent research TIFF — download yes, submit no
+
+**OK TO DOWNLOAD FOR INSPECTION · NOT OK / NOT CLEARED TO SUBMIT. No weekly slot is cleared.** This is a separate concurrent H57 Dempster–Shafer/lidar-relief artifact—not the current branch's failed H57-A K~Th × magnetic-gradient screen or either H57-A planning slate.
+
+- **Download:** [`GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07.tif`](docs/downloads/GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07.tif) · 192,597 bytes · SHA-256 `28a51fb032b8f2cfd1f04ad3bd429c29d7bb780d36961fea783ff8099130986e` · 58,031 positive cells.
+- **Local checks only:** recorded format audit confirms one-band float32, EPSG:32611, finite values in [0,1]; the bounded local uniqueness receipt compares 99 tracked artifacts. Neither is organizer-side format acceptance or global uniqueness. Portal acceptance is untested.
+- **Metric correction:** its former 0.3844 live-score projection, 0.1781 marginal-credit claim, 0.0549 break-even, 0.2254 floor, sensitivity scenarios, and submit recommendation relied on `FPw = S − TPw` and are **INVALIDATED / FORENSIC ONLY**. The old four-block PASS labels are not a comparable H49 promotion holdout. See [H57-RELIEF report](docs/research/h57-ds-relief-augmented-20261007.md), [metric erratum](docs/research/h57-relief-metric-erratum-20261007.md), [machine-readable correction](evidence/h57_metric_identity_erratum_20261007.json), and [build receipt](evidence/build_h57_receipt_20261007.json).
+- **Dempster–Shafer diagnostics:** [unassigned/ignorance mass m(Θ)](docs/downloads/diagnostics/GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07-diag-mtheta.tif) and [raw conflict K](docs/downloads/diagnostics/GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07-diag-conflict-k.tif) are separate; neither is a calibrated probability or direct measure of family disagreement. The normalized belief is a construction output, not a prediction-quality result.
 
 ## Training-data and pipeline inventory
 
@@ -42,7 +51,16 @@ The [overview](docs/index.html), [executive summary](docs/executive-summary.html
 ./.venv/bin/python -m pytest -q
 ```
 
-The H57-A script writes evidence only; it does not create a TIFF. H56B/H56-DS are downloadable research artifacts but **no submission slot is cleared**. Any future candidate must beat the comparable spatially blocked proxy reference, use defensible source provenance, and receive separate organizer format/acceptance verification. The old Gate-2 script's density-matching uses an invalid inferred hidden-truth count and its 0.0556 bar is not universal; do not use its prior PASS/FAIL to promote. Re-derive and validate a mass-neutral gate before any future promotion (see [`AGENTS.md`](AGENTS.md) and the [metric erratum](docs/research/metric-identity-erratum-20261007.md)).
+The current-branch H57-A script writes evidence only; that candidate screen did not create a TIFF. The separate H57-RELIEF TIFF is downloadable for inspection but **NOT CLEARED TO SUBMIT**; its corrected builder no longer generates the invalid live-score projection. H56B/H56-DS are also research artifacts; **no submission slot is cleared**. Any future candidate must beat the comparable spatially blocked proxy reference, use defensible source provenance, and receive separate organizer format/acceptance verification. The old Gate-2 script's density-matching uses an invalid inferred hidden-truth count and its 0.0556 bar is not universal; do not use its prior PASS/FAIL to promote. Re-derive and validate a mass-neutral gate before any future promotion (see [`AGENTS.md`](AGENTS.md) and the [metric erratum](docs/research/metric-identity-erratum-20261007.md)).
+
+For a scratch H57-RELIEF rebuild (the builder emits no live-score projection or slot recommendation):
+
+```bash
+./.venv/bin/python scripts/build_submission_h57.py \
+  --out-dir /tmp/h57-relief-rebuild \
+  --receipt /tmp/h57-relief-build-receipt.json
+```
+
 
 ---
 

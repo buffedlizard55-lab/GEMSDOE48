@@ -1,5 +1,11 @@
 # Geological hypothesis slate H57 — frozen before candidate implementation
 
+> **Namespace note.** This branch's slate was frozen at 21:18 UTC. Its H57-A is the radiometric
+> K-residual × TMI-up150-gradient experiment reported in `h57-results-20261007.md`; that screen
+> failed and emitted no TIFF. It is distinct from the earlier 17:43 UTC H57-A–E planning slate in
+> `h57-hypothesis-slate-20261007.md` and from the concurrent H57-RELIEF artifact in
+> `h57-ds-relief-augmented-20261007.md`, whose old live projection is invalidated.
+
 **Frozen:** 2026-10-07 UTC, before H57-A feature extraction or holdout scoring.
 **Purpose:** rank distinct geological signal families by a qualitative planning range for blocked-proxy ΔDTI versus the current comparable reference, then by implementation cost and data readiness. These ranges are **not measured predictions, confidence intervals, or leaderboard projections**.
 **Promotion rule:** no candidate may use a weekly slot unless its exact frozen construction beats the same-protocol H49 reference on both public proxy regimes (positive mean paired ΔDTI and wins in at least 3/4 geographic folds on each). A candidate must also pass format, uniqueness, provenance/licence review, and the owner’s final decision. Public-proxy wins alone are never slot clearance.
@@ -58,8 +64,8 @@ The official competition page defines distance-weighted Tversky with a 300 m tri
 
 ## Post-freeze correction and H57-A outcome
 
-The frozen machine-readable slate's original H57-A `layers` list included the contradictory phrase “current catalogue geometry for a fixed >300 m exclusion.” The frozen transform itself correctly specifies eligibility as valid footprint and `H49 prediction == 0`; **the H57-A builder applies no catalogue-distance filter**. The eligibility mask avoids overwriting H49-positive cells. The >300 m catalogue exclusion is part of the SGMC *evaluation target*, not candidate construction. This is a text correction only; it does not change the frozen transform, budget or results. The correction is recorded in [`evidence/hypothesis_slate_h57_20261007.json`](../../evidence/hypothesis_slate_h57_20261007.json).
+The frozen machine-readable slate's original H57-A `layers` list included the contradictory phrase “current catalogue geometry for a fixed >300 m exclusion.” The frozen transform itself correctly specifies eligibility as valid footprint and `H49 prediction == 0`; **the H57-A builder applies no catalogue-distance filter**. The eligibility mask avoids overwriting H49-positive cells. The >300 m catalogue exclusion is part of the SGMC *evaluation target*, not candidate construction. This is a text correction only; it does not change the frozen transform, budget or results. The correction is recorded in [`evidence/hypothesis_slate_h57a_20261007.json`](../../evidence/hypothesis_slate_h57a_20261007.json).
 
 After freeze, `TMI_up150` was restored to the git-ignored local tree with the expected SHA-256. See [`evidence/h57_data_access_checks_20261007.json`](../../evidence/h57_data_access_checks_20261007.json). This verifies the owner-mirror bytes only—not the official USGS payload, organizer authentication, sponsor-sharing licence, or challenge-use terms.
 
-H57-A was scored according to the frozen rule; it failed the two-proxy H49 gate and did not beat same-pool random controls. **No H57 TIFF was generated and no slot is cleared.** See [`h57-results-20261007.md`](h57-results-20261007.md) and [`evidence/holdout_h57a_20261007.json`](../../evidence/holdout_h57a_20261007.json).
+H57-A was scored according to the frozen rule; it failed the two-proxy H49 gate and did not beat same-pool random controls. **This H57-A screen generated no TIFF; no slot is cleared.** See [`h57-results-20261007.md`](h57-results-20261007.md) and [`evidence/holdout_h57a_20261007.json`](../../evidence/holdout_h57a_20261007.json).

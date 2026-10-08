@@ -167,9 +167,8 @@ def test_h57_slate_and_results_are_referenced_without_claiming_success(page_text
     for code in ("H57-A", "H57-B", "H57-C", "H57-D"):
         assert code in hypotheses
     assert "H57-A" in page_text["validation.html"]
-    assert ("no h57 tiff was produced" in page_text["index.html"].lower()
-            or "no h57 tiff was made" in page_text["index.html"].lower()
-            or "no tiff was generated" in page_text["index.html"].lower())
+    assert "h57-a screen emitted no tiff" in page_text["index.html"].lower()
+    assert "a distinct h57-relief tiff exists" in page_text["index.html"].lower()
     assert "fails" in page_text["hypotheses.html"].lower()
 
 

@@ -1,0 +1,187 @@
+{
+  "candidate_id": "H57-RELIEF",
+  "slug": "GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07",
+  "content_digest12": "e6b785718c07",
+  "created_utc": "2026-10-07T21:43:27+00:00",
+  "brief": "unique Dempster-Shafer two-family fusion + Dempster-gated lidar-relief new coverage",
+  "parents": {
+    "A_dotted": {
+      "file": "data/families/dotted_b2_prune_02778.tif",
+      "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+      "dots": 37654,
+      "discount": 1.0,
+      "owner_reported_score_claim_unverified": 0.2778
+    },
+    "B_tip_stepover": {
+      "file": "data/families/tip_stepover_r30_02632.tif",
+      "sha256": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757",
+      "dots": 41865,
+      "discount": 0.947444,
+      "owner_reported_score_claim_unverified": 0.2632
+    },
+    "C_lidar_relief": {
+      "file": "data/external/h52_scarp3m_100m.tif",
+      "band": "sigma_mean",
+      "threshold_cm": 200,
+      "threshold_m": 2.0,
+      "cover_min": 50,
+      "nms_cells": 3,
+      "dots": 20377,
+      "discount": 0.95
+    }
+  },
+  "emission": {
+    "dots": 58031,
+    "from_A_only": 6040,
+    "from_A_and_B": 31614,
+    "from_C_lidar": 20377,
+    "B_only_rejected": 10251,
+    "footprint_cells": 5167373,
+    "emitted_fraction": 0.011230271164864622,
+    "on_catalogue_pixels": 0,
+    "min_dcat_cells": 2.23606797749979
+  },
+  "dempster": {
+    "bel_max": 1.0,
+    "bel_positive_cells": 764214,
+    "mtheta_mean": 0.02190503478050232,
+    "mtheta_max": 1.0,
+    "mtheta_sum": 268975.4375,
+    "conflict_K_mean": 0.03555617853999138,
+    "conflict_K_max": 0.949999988079071
+  },
+  "not_the_naive_mean": {
+    "pearson_bel_vs_binary_mean": 0.7889852949992862,
+    "spearman_bel_vs_binary_mean": 0.882106317463517,
+    "pearson_on_positive_cells": 0.7977740549733711,
+    "mean_abs_diff_vs_binary_mean": 0.006051579490303993,
+    "mean_abs_diff_on_positive_cells": 0.0970916673541069,
+    "max_abs_diff_vs_binary_mean": 0.9069142937660217,
+    "mean_abs_affine_residual_vs_kernel_mean": 0.019771125012997225,
+    "top_rank_set_jaccard_vs_A": 1.0
+  },
+  "format_checks": {
+    "single_band": true,
+    "dtype_float32": true,
+    "shape": [
+      3730,
+      3292
+    ],
+    "crs": "EPSG:32611",
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    "all_cells_finite": true,
+    "min": 0.0,
+    "max": 1.0,
+    "values_in_0_1": true,
+    "nodata": null,
+    "portal_range_error_immune": true
+  },
+  "files": {
+    "primary_zeros_outside": {
+      "path": "docs/downloads/GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07.tif",
+      "bytes": 192597,
+      "sha256": "28a51fb032b8f2cfd1f04ad3bd429c29d7bb780d36961fea783ff8099130986e"
+    },
+    "nan_outside_twin": {
+      "path": "docs/downloads/GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07-nan-outside.tif",
+      "bytes": 264559,
+      "sha256": "4e6c4ddd5a31ec39adbc84b2e547844bc4f98f752d307f694837591319ef847b"
+    },
+    "primary_zip": {
+      "path": "docs/downloads/GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07.zip",
+      "bytes": 159981,
+      "sha256": "3e35a759a2637302104b2cdeda2016494ce366386067a28fcceba85f6b1628b2"
+    },
+    "diag_belief": {
+      "path": "docs/downloads/diagnostics/GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07-diag-belief.tif",
+      "bytes": 1053085,
+      "sha256": "fe7eb41038baea535c5404adace8b062b0758babda8e0d5213351614a02cfbe3"
+    },
+    "diag_mtheta": {
+      "path": "docs/downloads/diagnostics/GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07-diag-mtheta.tif",
+      "bytes": 430951,
+      "sha256": "460ad48bd4453a91ecef85fe0c97db7ac81e9cccc51352e18c2adc410f11fede"
+    },
+    "diag_conflict-k": {
+      "path": "docs/downloads/diagnostics/GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07-diag-conflict-k.tif",
+      "bytes": 1114801,
+      "sha256": "d527678fe06e92777f4d4bce1a1833ae3c69de74c75cdee06aa4289e4f82f3c9"
+    },
+    "diag_plausibility": {
+      "path": "docs/downloads/diagnostics/GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07-diag-plausibility.tif",
+      "bytes": 1024173,
+      "sha256": "c9a83c6c8f230ae85b829933a127b65b3832b03b5eaccd8a687ce8bbf1858d5b"
+    }
+  },
+  "verdict": {
+    "download": "OK FOR INSPECTION",
+    "submit": "NOT CLEARED TO SUBMIT",
+    "basis": "Prior live-score projection and per-dot threshold were invalidated by the metric-identity correction; no comparable blocked-H49 win or organizer acceptance is established."
+  },
+  "namespace_note": "Distinct from the two same-day H57-A planning slates; see docs/research/h57-relief-metric-erratum-20261007.md.",
+  "historical_verdict_as_recorded": {
+    "download": "OK",
+    "submit": "RECOMMENDED (proxy projection only; no organizer score exists for this file)",
+    "basis": "marginal credit 0.1781/dot vs 0.0549 break-even (3.24x); 3 of 4 spatial truth blocks above break-even, the fourth holding 10x sparser proxy truth"
+  },
+  "historical_invalid_projection_forensic_only": {
+    "instrument": "T_live = 0.9324 x T_SGMC, G = SGMC-derived faults & footprint & dcat>3 (|G| = 62,122); 8-family RMS 0.84 %",
+    "projector": "DTI(S) = T_live(S) / (0.2 |S| + 11,215.3)",
+    "T_SGMC_parent": 5517.6,
+    "T_SGMC_h57": 9409.7,
+    "T_live_parent": 5144.6,
+    "T_live_h57": 8773.6,
+    "marginal_credit_per_lidar_dot": 0.1781,
+    "break_even_credit": 0.0549,
+    "DTI_parent": 0.2744,
+    "DTI_h57": 0.3844,
+    "DTI_worst_case_all_lidar_worthless": 0.2254,
+    "instrument_scale_that_breaks_even": 0.3,
+    "spatial_blocks": [
+      {
+        "block": 0,
+        "dots": 9148,
+        "credit_per_dot": 0.1318,
+        "G": 23130,
+        "pass": true
+      },
+      {
+        "block": 1,
+        "dots": 2867,
+        "credit_per_dot": 0.052,
+        "G": 2353,
+        "pass": false
+      },
+      {
+        "block": 2,
+        "dots": 4087,
+        "credit_per_dot": 0.2587,
+        "G": 23192,
+        "pass": true
+      },
+      {
+        "block": 3,
+        "dots": 4275,
+        "credit_per_dot": 0.2847,
+        "G": 13447,
+        "pass": true
+      }
+    ],
+    "block_1_explanation": "block 1 carries 2,353 proxy-truth pixels against 13,447-23,192 elsewhere; its share of available truth within 300 m of a lidar dot is the highest of the four (18.9 % vs 13.3-26.1 %), so its low credit per dot reflects truth sparsity, not a rule failure. Excluding it, credit per dot is 0.1987 over 17,510 dots."
+  },
+  "metric_projection_status": {
+    "status": "INVALIDATED_METRIC_IDENTITY_DO_NOT_USE",
+    "reason": "The historical inversion substitutes FPw = S - TPw, although the official metric defines FPw = S - Q and Q is generally unequal to TPw. These values are not live-score estimates, thresholds, ceilings, floors, or promotion evidence.",
+    "superseding_erratum": "docs/research/h57-relief-metric-erratum-20261007.md",
+    "recomputed_by_current_builder": false
+  },
+  "source_provenance_caveat": "The source/data lineage is preserved as recorded by the prior session; it was not independently re-fetched or authenticated in this correction, and use rights are not established.",
+  "dempster_semantics": "m(Theta) is residual unassigned/ignorance mass; raw K is the separate pre-normalization conflict diagnostic; neither is a calibrated probability or literal family-disagreement map."
+}

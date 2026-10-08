@@ -1,6 +1,6 @@
 {
  "session": "H56",
- "generated_utc": "2026-10-07T15:17:03.929194+00:00",
+ "generated_utc": "2026-10-07T20:52:53.716981+00:00",
  "recipe": {
   "kernel": "official triangular k(d)=max(1-d/300m,0), R=3 cells",
   "r_dotted": 0.95,
@@ -114,7 +114,8 @@
   "diagnostics": {
    "mtheta": "docs/downloads/diagnostics/gemsdoe48-h56-mtheta-9ec0d605c45b.tif",
    "conflict": "docs/downloads/diagnostics/gemsdoe48-h56-conflict-9ec0d605c45b.tif",
-   "plausibility": "docs/downloads/diagnostics/gemsdoe48-h56-plausibility-9ec0d605c45b.tif"
+   "plausibility": "docs/downloads/diagnostics/gemsdoe48-h56-plausibility-9ec0d605c45b.tif",
+   "support-disagreement": "docs/downloads/diagnostics/gemsdoe48-h56-support-disagreement-9ec0d605c45b.tif"
   },
   "diagnostics_are_submissions": false
  }

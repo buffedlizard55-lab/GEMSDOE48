@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "generated_utc": "2026-10-07T17:35:19.875824+00:00",
+  "status": "MATCHED_HOLDOUT_COMPARISON_NOT_SLOT_CLEARED",
+  "metric_direction": {
+    "metric": "official distance-weighted Tversky index (DTI)",
+    "formula": "TPw / (TPw + 0.2*FPw + 0.8*FNw + epsilon)",
+    "higher_is_better": true,
+    "source": "src/gemsdoe48/metric.py and the official problem metric page"
+  },
+  "protocol": {
+    "geometry": "Four fixed 2x2 geographic quadrants on the full EPSG:32611 grid.",
+    "metric": "Official distance-weighted Tversky equations; alpha=0.2, beta=0.8, triangular radius=300 m.",
+    "evaluation_domain": "Held-out quadrant plus a 300 m Euclidean halo, clipped to the finite survey footprint; only truth in the core quadrant is scored.",
+    "candidate_retraining": false,
+    "leakage_limitation": "These surfaces are frozen upstream owner mirrors and are not reconstructed inside each fold. The H33-2-B2 owner audit describes deleting predictions within 200 m of the full catalogue; therefore catalogue geometry was available during source construction. SGMC faults are filtered to >300 m from that catalogue, but this does not independently reconstruct or validate the source models. Both targets remain public-map proxies, not the private expert-labelled set."
+  },
+  "protocol_sha256": "657c4c6296d4b448e6f8599a86c19ee98046b160d64891a619ff0c7d6f5c56aa",
+  "receipt_inputs": {
+    "h56b": {
+      "path": "evidence/holdout_h56b_currentprotocol_20261007.json",
+      "sha256": "a5fb35d5e6f916a9b62e4b444f7410e833294eb57dcf0d237e31310f6712a447"
+    },
+    "h49": {
+      "path": "evidence/holdout_h49_currentprotocol_20261007.json",
+      "sha256": "7f9925b2cb69946c6d844ff75b2d4f02142b43e048fcb4c9474ff8e9d783e777"
+    }
+  },
+  "candidates": {
+    "h56b": {
+      "name": "h56b_belief_normalized_dempster",
+      "path": "docs/downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros-outside.tif",
+      "sha256": "4d6548d4ec07a47a25b83d28ebc05d58b57448c1507b460aed52cec395bdb6b5"
+    },
+    "h49": {
+      "name": "h49_balanced_reference",
+      "path": "docs/downloads/GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif",
+      "sha256": "9f028289c364c071065245799d7ed131600e80e9f0d10602806b12ce34d7cae8"
+    }
+  },
+  "shared_source_inputs": {
+    "dotted": {
+      "path": "data/raw/dotted_h33_2_b2_zeros.tif",
+      "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9"
+    },
+    "tip_stepover": {
+      "path": "data/raw/tip_h33d_stepover.tif",
+      "sha256": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757"
+    }
+  },
+  "shared_public_proxy_truth_sources": {
+    "catalogue": {
+      "path": "data/raw/labels_catalogue.tif",
+      "sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+      "class": "owner-mirror of existing public USGS/INGENIOUS catalogue labels",
+      "organizer_authenticated": false,
+      "positive_pixels": 60988,
+      "is_private_expert_test_truth": false
+    },
+    "sgmc_off_catalogue_gt_300m": {
+      "path": "data/official/derived_sgmc_faults_100m.tif",
+      "sha256": "643cbe992ef4ba37588fb469163ed8291e3ceb23d6c1f78a3cfaa462430c2da0",
+      "class": "owner-mirror of an on-grid rasterization of USGS SGMC fault traces",
+      "organizer_authenticated": false,
+      "positive_pixels": 62122,
+      "definition": "SGMC raster positive and within footprint, with Euclidean distance >300 m from a positive catalogue-label cell.",
+      "source_comparison_receipt": "evidence/sgmc_raster_comparison_20261006.json",
+      "prior_raw_raster_sensitivity_receipt": "evidence/holdout_raw_sgmc_20261006.json",
+      "is_private_expert_test_truth": false
+    }
+  },
+  "targets": {
+    "catalogue_proxy": {
+      "folds": {
+        "NW": {
+          "h56b_dti": 0.03045342319156948,
+          "h49_dti": 0.09050228181646242,
+          "delta_h56b_minus_h49": -0.06004885862489294,
+          "h56b_wins": false
+        },
+        "NE": {
+          "h56b_dti": 0.03450391753612355,
+          "h49_dti": 0.11672692451810496,
+          "delta_h56b_minus_h49": -0.0822230069819814,
+          "h56b_wins": false
+        },
+        "SW": {
+          "h56b_dti": 0.03675115023024228,
+          "h49_dti": 0.09585250528122405,
+          "delta_h56b_minus_h49": -0.05910135505098177,
+          "h56b_wins": false
+        },
+        "SE": {
+          "h56b_dti": 0.027679236740113515,
+          "h49_dti": 0.07833127984468374,
+          "delta_h56b_minus_h49": -0.05065204310457023,
+          "h56b_wins": false
+        }
+      },
+      "mean_h56b_dti": 0.032346931924512205,
+      "mean_h49_dti": 0.0953532478651188,
+      "mean_delta_h56b_minus_h49": -0.0630063159406066,
+      "h56b_wins": 0,
+      "fold_count": 4,
+      "higher_is_better": true,
+      "result": "H56B loses on every fold"
+    },
+    "sgmc_off_catalogue_proxy": {
+      "folds": {
+        "NW": {
+          "h56b_dti": 0.07119945785957207,
+          "h49_dti": 0.10605341428423166,
+          "delta_h56b_minus_h49": -0.03485395642465959,
+          "h56b_wins": false
+        },
+        "NE": {
+          "h56b_dti": 0.09270216191161633,
+          "h49_dti": 0.10790140138874353,
+          "delta_h56b_minus_h49": -0.015199239477127202,
+          "h56b_wins": false
+        },
+        "SW": {
+          "h56b_dti": 0.04395586545479907,
+          "h49_dti": 0.11041352496876927,
+          "delta_h56b_minus_h49": -0.0664576595139702,
+          "h56b_wins": false
+        },
+        "SE": {
+          "h56b_dti": 0.07435050338762862,
+          "h49_dti": 0.07863641328533028,
+          "delta_h56b_minus_h49": -0.0042859098977016535,
+          "h56b_wins": false
+        }
+      },
+      "mean_h56b_dti": 0.07055199715340402,
+      "mean_h49_dti": 0.10075118848176869,
+      "mean_delta_h56b_minus_h49": -0.03019919132836467,
+      "h56b_wins": 0,
+      "fold_count": 4,
+      "higher_is_better": true,
+      "result": "H56B loses on every fold"
+    }
+  },
+  "slot_decision": {
+    "cleared": false,
+    "submit_recommended": false,
+    "reason": "H56B has no fold wins versus H49 on either public-map proxy under the matched protocol; the proxies are not private expert truth and the receipts explicitly prohibit slot clearance."
+  },
+  "limitations": [
+    "Catalogue and SGMC are public-map proxies, not private competition labels.",
+    "Upstream candidate surfaces are frozen and not rebuilt independently within folds; potential leakage remains.",
+    "The SGMC mask is filtered to >300 m from the public catalogue; this is not independent private-label validation.",
+    "No score, rank, or organizer acceptance is estimated by these holdouts."
+  ]
+}

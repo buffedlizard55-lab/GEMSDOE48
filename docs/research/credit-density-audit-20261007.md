@@ -28,6 +28,6 @@ Equal-emitted-mass scores and ordinary blocked-holdout scores against the named 
 
 ## Current decision and replacement requirements
 
-**No candidate has a promotion-grade Gate-2 pass. No weekly submission slot is cleared.** The current H56B, H56 open-world, H56-F, and H57-A evidence is summarized in the [current validation page](../validation.html); those reports compare candidates with H49 on fixed public proxies and are explicitly conditional diagnostics.
+**No candidate has a promotion-grade Gate-2 pass. No weekly submission slot is cleared.** The H56B, H56 open-world, H56-F, and current-branch H57-A evidence is summarized in the [current validation page](../validation.html); those reports compare candidates with H49 on fixed public proxies and are explicitly conditional diagnostics. A separate H57-RELIEF artifact has a dedicated [metric-identity erratum](h57-relief-metric-erratum-20261007.md); its old live projection is withdrawn.
 
 Before any future Gate-2-style policy can be used for promotion, its estimand and pass rule must be re-derived without inferring private truth density from an unverified score. It must be validated against synthetic cases with known truth, checked against the exact official `T` and `Q` computations, compared on spatially blocked public proxies, and reviewed separately from portal acceptance and owner slot authorization. Until that work is completed, the legacy tool and its PASS/FAIL labels cannot clear a candidate.
