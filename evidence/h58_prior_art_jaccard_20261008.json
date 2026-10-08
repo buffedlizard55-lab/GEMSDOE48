@@ -1,0 +1,46 @@
+{
+  "any_identical_support": false,
+  "candidate": "docs/downloads/GEMSDOE48-H58-ds-belief-dotted-x-tipeuler-20261008-b92ba079-zeros-outside.tif",
+  "candidate_positive_cells": 43074,
+  "files_compared": 105,
+  "generated_utc": "2026-10-08T19:04:28+00:00",
+  "schema": "GEMSDOE48-H58-prior-art-jaccard-v1",
+  "scope": "local positive-cell support only; not organizer-side or global uniqueness",
+  "top5": [
+    {
+      "file": "data/raw/scored/h32_prethin_tip_02649.tif",
+      "identical_support": false,
+      "jaccard": 0.9818916283604959,
+      "overlap_cells": 42294,
+      "positive_cells": 42294
+    },
+    {
+      "file": "data/families/dotted_d2_8_02708.tif",
+      "identical_support": false,
+      "jaccard": 0.9125631603123564,
+      "overlap_cells": 39733,
+      "positive_cells": 40199
+    },
+    {
+      "file": "data/families/dotted_d2_8_02600.tif",
+      "identical_support": false,
+      "jaccard": 0.8883015597920277,
+      "overlap_cells": 41004,
+      "positive_cells": 44090
+    },
+    {
+      "file": "docs/downloads/gemsdoe48-h48-1-ds-fusion-b2xh32tip-20261006-407bb7f4-zeros.tif",
+      "identical_support": false,
+      "jaccard": 0.8764916190741514,
+      "overlap_cells": 37754,
+      "positive_cells": 37754
+    },
+    {
+      "file": "data/families/dotted_b2_prune_02778.tif",
+      "identical_support": false,
+      "jaccard": 0.8741700329665227,
+      "overlap_cells": 37654,
+      "positive_cells": 37654
+    }
+  ]
+}

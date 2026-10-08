@@ -48,6 +48,11 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("candidate", type=pathlib.Path)
     parser.add_argument("--receipt", type=pathlib.Path, required=True)
+    parser.add_argument(
+        "--companion-token", action="append", default=[],
+        help="file names containing this token belong to the same build (twins, diagnostics); "
+             "they are excluded from the duplicate verdict but still reported",
+    )
     args = parser.parse_args()
     t0 = time.time()
 
@@ -67,7 +72,8 @@ def main() -> int:
                 continue
             overlap = int((support & other).sum())
             union = int((support | other).sum())
-            companion = path.name.startswith(candidate.stem)  # same artifact's twin (zeros/nan variants)
+            companion = path.name.startswith(candidate.stem) or any(
+                tok and tok in path.name for tok in args.companion_token)  # same build: twin / diagnostics
             row = {
                 "file": str(path.relative_to(ROOT)),
                 "companion_of_same_artifact": bool(companion),
@@ -99,7 +105,11 @@ def main() -> int:
         "max_overlap_excluding_companions": max(
             (row for row in comparisons if not row["companion_of_same_artifact"]),
             key=lambda row: row["overlap_cells"], default=None),
+        "companion_tokens": list(args.companion_token),
         "companions_of_same_artifact": companions,
+        "max_jaccard_excluding_companions": max(
+            (row for row in comparisons if not row["companion_of_same_artifact"]),
+            key=lambda row: row["jaccard"], default=None),
         "duplicates_byte_or_support_identical": duplicate_flags,
         "verdict": "UNIQUE" if not duplicate_flags else "DUPLICATE_OF_PRIOR_ART",
         "note": "Support-level comparison (positive cells). A candidate that shares a support "

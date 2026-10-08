@@ -3,6 +3,20 @@
 <body><header><div class="wrap"><p>GEMSDOE48 · submission guide</p><h1>How to Submit the H58 TIF</h1><p>The H58 pignistic conflict-priced DS fusion is a unique, competition-format GeoTIFF ready for download and submission.</p></div></header>
 <nav><div class="wrap"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="submission-guide.html">Submission guide</a><a href="method.html">Method</a><a href="hypotheses.html">Hypotheses</a><a href="validation.html">Validation</a><a href="leaderboard.html">Leaderboard</a><a href="sources.html">Sources</a></div></nav>
 <main class="wrap">
+<div class="verdict" id="governance-conflict" style="border-color:#b91c1c">
+<strong>⚠ GOVERNANCE CONFLICT — NOT CLEARED.</strong>
+<p>The step-by-step instructions below assume a cleared submission. Under AGENTS.md no H58 file is cleared (see IR-H58-15). Do not spend a weekly slot on the current H58 files. Follow these instructions only after a written clearance.</p>
+</div>
+<section class="alert" id="h58-submission-rules"><h2>2026-10-08 · H58 file: verdict and submission rules</h2>
+<p><b>Verdict: OK TO DOWNLOAD FOR INSPECTION · NOT OK TO SUBMIT · NOT CLEARED FOR ANY WEEKLY SLOT.</b> The H58 GeoTIFF is on the <a href="index.html#h58-download">overview page</a>. The proxy evidence does not show it beats 0.2778, and the AGENTS.md gate fails.</p>
+<ol>
+<li><b>Format.</b> One band, float32, EPSG:32611, 100 m, 3,292 × 3,730, transform (100, 0, 243350, 0, −100, 4508550). Every value must be finite and in [0, 1]. This avoids the portal error "Predicted values must be in range [0, 1]" in the local audit, but organizer acceptance is untested. The official text asks for null/NaN outside the bounds; the NaN-outside twin follows that text, and the zeros primary does not. The portal's behaviour for each is unknown.</li>
+<li><b>Unique name.</b> Use a name that is not on any earlier submission, for example <code>GEMSDOE48-H58-ds-belief-dotted-x-tipeuler-20261008-b92ba079</code>. Do not reuse a name from <code>docs/downloads</code>.</li>
+<li><b>Short comment.</b> Keep it under 200 characters, for example: "GEMSDOE48 H58 | Dempster fusion, dotted B2 (owner 0.2778) x tip/Euler H32-1 (owner 0.2649); dot-supported Bel, m(Theta)+K diagnostics; unscored research."</li>
+<li><b>Before any upload.</b> Get a written slot clearance under AGENTS.md. Check the file's SHA-256 against the receipt, and re-run <code>scripts/validate_submission.py</code>.</li>
+</ol>
+<p class="small">Public leaderboard rows (2026-10-08): #1 0.3774 · #7 0.3195 · #12 0.2797 · #13 0.2778. Snapshot: <a href="data/leaderboard_20261008.json">leaderboard_20261008.json</a>.</p>
+</section>
 
 <div class="verdict-clear"><strong>✅ UNIQUE SUBMISSION — READY TO DOWNLOAD AND SUBMIT</strong>
 <p>H58 is a genuinely novel pignistic conflict-priced Dempster–Shafer fusion of the B2 dotted (0.2778) and H33-D tip/step-over (0.2632) families. All format checks pass. No organizer score exists; this is UNSCORED.</p></div>

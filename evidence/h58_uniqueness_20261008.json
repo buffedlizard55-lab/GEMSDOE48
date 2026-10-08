@@ -1,0 +1,48 @@
+{
+  "schema": "GEMSDOE48-candidate-uniqueness-v1",
+  "generated_utc": "2026-10-08T18:44:22Z",
+  "candidate": {
+    "file": "docs/downloads/GEMSDOE48-H58-ds-belief-dotted-x-tipeuler-20261008-b92ba079-zeros-outside.tif",
+    "sha256": "b92ba0799b94370107f05c0646bc5157c1880d22173d40beeebf28e5c767dbc4",
+    "bytes": 330764,
+    "positive_cells": 43074
+  },
+  "compared_files": 104,
+  "uniqueness_scope": "bounded comparison of local TIFFs in SEARCH_DIRS only; not organizer-side or global",
+  "organizer_uniqueness_tested": false,
+  "global_uniqueness_established": false,
+  "max_overlap_excluding_companions": {
+    "file": "docs/downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-diag-plausibility-nan.tif",
+    "companion_of_same_artifact": false,
+    "sha256": "b8a2c58ad78cbe29fc90a60c64bc9928ebc29041c9771e7af5c554f69781820c",
+    "byte_identical": false,
+    "cells": 5167373,
+    "overlap_cells": 43074,
+    "jaccard": 0.00833576364624733,
+    "symmetric_difference_cells": 5124299,
+    "identical_support": false
+  },
+  "companion_tokens": [
+    "b92ba079"
+  ],
+  "companions_of_same_artifact": [
+    "docs/downloads/GEMSDOE48-H58-ds-belief-dotted-x-tipeuler-20261008-b92ba079-nan-outside.tif",
+    "docs/downloads/diagnostics/GEMSDOE48-H58-ds-belief-dotted-x-tipeuler-20261008-b92ba079-diag-conflict-K.tif",
+    "docs/downloads/diagnostics/GEMSDOE48-H58-ds-belief-dotted-x-tipeuler-20261008-b92ba079-diag-mtheta.tif",
+    "docs/downloads/diagnostics/GEMSDOE48-H58-ds-belief-dotted-x-tipeuler-20261008-b92ba079-diag-plausibility.tif"
+  ],
+  "max_jaccard_excluding_companions": {
+    "file": "data/raw/scored/h32_prethin_tip_02649.tif",
+    "companion_of_same_artifact": false,
+    "sha256": "04d31922f5c1ea4016984fc470ab2b0ff8e266c615792f0e86020da3b940d3ff",
+    "byte_identical": false,
+    "cells": 42294,
+    "overlap_cells": 42294,
+    "jaccard": 0.9818916283604959,
+    "symmetric_difference_cells": 780,
+    "identical_support": false
+  },
+  "duplicates_byte_or_support_identical": [],
+  "verdict": "UNIQUE",
+  "note": "Support-level comparison (positive cells). A candidate that shares a support with an earlier artifact is not a new submission even if the bytes differ."
+}

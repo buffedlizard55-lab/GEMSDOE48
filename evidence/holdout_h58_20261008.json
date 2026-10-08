@@ -1,0 +1,198 @@
+{
+  "best_existing_full_footprint_candidate": "H49_yager_pignistic",
+  "full_footprint_dti": {
+    "B2_owner_0.2778 (parent A)": {
+      "dti": 0.09538611460482534,
+      "emitted": 37654,
+      "fnw": 56604.363297440286,
+      "fpw": 35220.77352594685,
+      "mass": 37654.0,
+      "tpw": 5517.636702559711
+    },
+    "H32-1_tip_owner_0.2649 (parent B)": {
+      "dti": 0.09475546244421566,
+      "emitted": 42294,
+      "fnw": 56553.14829667604,
+      "fpw": 39797.00957683426,
+      "mass": 42294.0,
+      "tpw": 5568.851703323959
+    },
+    "H49_yager_pignistic": {
+      "dti": 0.10152044334822281,
+      "emitted": 47765,
+      "fnw": 56040.60995478582,
+      "fpw": 44946.1481382902,
+      "mass": 47765.0,
+      "tpw": 6081.390045214186
+    },
+    "H50_style_smeared_kernel_belief (control)": {
+      "dti": 0.07659495245173001,
+      "emitted": 769098,
+      "fnw": 54052.9167078615,
+      "fpw": 270180.1907615025,
+      "mass": 287909.91322581575,
+      "tpw": 8069.083292138502
+    },
+    "H58_dot_supported_DS (this artifact)": {
+      "dti": 0.0951834608407374,
+      "emitted": 43074,
+      "fnw": 56570.86713002666,
+      "fpw": 37562.62340896629,
+      "mass": 40074.347689508955,
+      "tpw": 5551.13286997334
+    },
+    "dotted_base_0.2708": {
+      "dti": 0.09529485537964633,
+      "emitted": 40199,
+      "fnw": 56561.266232271155,
+      "fpw": 37715.902716338045,
+      "mass": 40199.0,
+      "tpw": 5560.733767728848
+    },
+    "naive_binary_mean_A_B": {
+      "dti": 0.09436658516585157,
+      "emitted": 43074,
+      "fnw": 56620.45764215842,
+      "fpw": 37508.89155139056,
+      "mass": 39974.0,
+      "tpw": 5501.542357841583
+    },
+    "tip_H33-D_0.2632": {
+      "dti": 0.09568259594212597,
+      "emitted": 41865,
+      "fnw": 56506.096222357664,
+      "fpw": 39361.366596038795,
+      "mass": 41865.0,
+      "tpw": 5615.9037776423365
+    },
+    "union_binary_A_or_B": {
+      "dti": 0.09494708216711188,
+      "emitted": 43074,
+      "fnw": 56527.731888811046,
+      "fpw": 40516.99621073881,
+      "mass": 43074.0,
+      "tpw": 5594.268111188958
+    }
+  },
+  "gate": {
+    "dot_supported_beats_B2_full_footprint": false,
+    "dot_supported_beats_H49_full_footprint": false,
+    "dot_supported_folds_above_B2": 0,
+    "required": "beat the current best comparable candidate on the proxy in >=3/4 quadrants AND full footprint, before any slot",
+    "result": "NOT CLEARED"
+  },
+  "generated_utc": "2026-10-08T18:39:37+00:00",
+  "limitations": [
+    "Proxy truth is a public SGMC map filtered by distance to the catalogue, not expert new-fault labels.",
+    "Differences among the 0.26-0.28 parents on this proxy are about 0.001-0.002 and are within proxy noise.",
+    "The owner-reported score ladder is not reproduced by this proxy; no local file-to-score link exists."
+  ],
+  "masking": "predictions on pixel-exact catalogue cells set to 0 (organizer 2026-09-21 clarification)",
+  "metric": "official distance-weighted Tversky: alpha=0.2, beta=0.8, triangular 300 m kernel (src/gemsdoe48/metric.py)",
+  "quadrant_protocol": {
+    "description": "four quadrants; core truth only; predictions inside core plus 300 m Euclidean halo",
+    "results": {
+      "B2_owner_0.2778 (parent A)": {
+        "folds_above_B2": 0,
+        "mean_delta_vs_B2": 0.0,
+        "mean_quadrant_dti": 0.09560435872160983,
+        "quadrant_dti": [
+          0.10192878789312365,
+          0.09901285478885033,
+          0.10797826214480108,
+          0.07349753005966428
+        ]
+      },
+      "H32-1_tip_owner_0.2649 (parent B)": {
+        "folds_above_B2": 0,
+        "mean_delta_vs_B2": -0.0010376478326262414,
+        "mean_quadrant_dti": 0.0945667108889836,
+        "quadrant_dti": [
+          0.10118408447159906,
+          0.09839920661434241,
+          0.10543345510781699,
+          0.07325009736217591
+        ]
+      },
+      "H49_yager_pignistic": {
+        "folds_above_B2": 4,
+        "mean_delta_vs_B2": 0.005323905609194848,
+        "mean_quadrant_dti": 0.10092826433080468,
+        "quadrant_dti": [
+          0.1062310171694,
+          0.10781927278043112,
+          0.1110764204181976,
+          0.07858634695519001
+        ]
+      },
+      "H50_style_smeared_kernel_belief (control)": {
+        "folds_above_B2": 0,
+        "mean_delta_vs_B2": -0.024575413280207896,
+        "mean_quadrant_dti": 0.07102894544140194,
+        "quadrant_dti": [
+          0.07366482408912844,
+          0.09068827620072005,
+          0.04809223224754689,
+          0.07167044922821236
+        ]
+      },
+      "H58_dot_supported_DS (this artifact)": {
+        "folds_above_B2": 0,
+        "mean_delta_vs_B2": -0.0003167495195032996,
+        "mean_quadrant_dti": 0.09528760920210654,
+        "quadrant_dti": [
+          0.10154941032301962,
+          0.09888031225183201,
+          0.1072304104216995,
+          0.073490303811875
+        ]
+      },
+      "dotted_base_0.2708": {
+        "folds_above_B2": 1,
+        "mean_delta_vs_B2": -0.0002628485907743179,
+        "mean_quadrant_dti": 0.09534151013083551,
+        "quadrant_dti": [
+          0.10166696601528052,
+          0.09911435475668764,
+          0.10714951842224228,
+          0.07343520132913162
+        ]
+      },
+      "naive_binary_mean_A_B": {
+        "folds_above_B2": 0,
+        "mean_delta_vs_B2": -0.0016288300450888922,
+        "mean_quadrant_dti": 0.09397552867652095,
+        "quadrant_dti": [
+          0.10103448239234775,
+          0.0979471636963718,
+          0.1040151619343376,
+          0.07290530668302662
+        ]
+      },
+      "tip_H33-D_0.2632": {
+        "folds_above_B2": 2,
+        "mean_delta_vs_B2": -3.4299478465088518e-06,
+        "mean_quadrant_dti": 0.09560092877376333,
+        "quadrant_dti": [
+          0.10153748372314823,
+          0.10005854668860092,
+          0.10695907369716436,
+          0.07384861098613979
+        ]
+      },
+      "union_binary_A_or_B": {
+        "folds_above_B2": 0,
+        "mean_delta_vs_B2": -0.000736321189949693,
+        "mean_quadrant_dti": 0.09486803753166013,
+        "quadrant_dti": [
+          0.10113846968032834,
+          0.09874659569168394,
+          0.10614204229749548,
+          0.0734450424571328
+        ]
+      }
+    }
+  },
+  "schema": "GEMSDOE48-H58-proxy-v1",
+  "truth": "SGMC off-catalogue public-map proxy: derived SGMC cells >300 m from the public catalogue (62,122 px). NOT the organizer's new-fault labels."
+}

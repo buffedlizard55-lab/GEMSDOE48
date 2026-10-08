@@ -1,5 +1,7 @@
 # GEMSDOE48 — auditable GEMS fault-surface research (H48 → H58)
 
+> **⚠ GOVERNANCE CONFLICT (IR-H58-15) — all H58 files: OK TO DOWNLOAD FOR INSPECTION · NOT OK / NOT CLEARED TO SUBMIT.** `main` carries two H58 verdicts. The "Download and submit" decision below (commit 4f6d028, B2 × H33-D pignistic file) conflicts with AGENTS.md and with the 2026-10-08 review (commit 909c09f). Until the repository owner resolves this, no H58 file is cleared for a weekly slot. Public proxies are not private-label or organizer evidence.
+
 > **Current decision — 2026-10-08: H58 PIGNISTIC CONFLICT-PRICED DS FUSION — UNIQUE SUBMISSION GENERATED.** The H58 artifact combines the genuine dotted B2 family (0.2778, 37,654 px) and the genuine tip/step-over H33-D family (0.2632, 41,865 px) via Dempster's rule with pignistic probability output weighted by conflict-price (1−K). Budget-constrained to 40,000 positive cells. All format checks pass; the file cannot trigger the portal "Predicted values must be in range [0, 1]" error. **Download and submit from the [site](https://buffedlizard55-lab.github.io/GEMSDOE48/docs/index.html).** No organizer score exists; this is UNSCORED.
 
 ## ⬇ ONE-CLICK SUBMISSION FILE
@@ -13,6 +15,22 @@
 **Diagnostics:** [m(Θ)](docs/downloads/gemsdoe48-h58-diag-mtheta-20261008T175914Z-e58.tif) · [conflict K](docs/downloads/gemsdoe48-h58-diag-conflict-20261008T175914Z-e58.tif) · [Pl(F)](docs/downloads/gemsdoe48-h58-diag-plausibility-20261008T175914Z-e58.tif) · [continuous surface](docs/downloads/gemsdoe48-h58-continuous-pignistic-20261008T175914Z-e58.tif)
 
 **Distinctness:** not the naive mean (Pearson 0.969, Spearman 0.998, max |Δ| 0.500); not identical to budget-emitted raw Bel(F) (Pearson 0.985). Build receipt: [`evidence/build_h58_receipt_20261008T175914Z.json`](evidence/build_h58_receipt_20261008T175914Z.json).
+
+## ⬇ 2026-10-08 session — H58 unique GeoTIFF: download yes, submit NO
+
+**Verdict: OK TO DOWNLOAD FOR INSPECTION. NOT OK TO SUBMIT. NOT CLEARED FOR ANY WEEKLY SLOT.**
+
+- **Download (primary, all-finite, zeros outside):** [`GEMSDOE48-H58-ds-belief-dotted-x-tipeuler-20261008-b92ba079-zeros-outside.tif`](docs/downloads/GEMSDOE48-H58-ds-belief-dotted-x-tipeuler-20261008-b92ba079-zeros-outside.tif) · 330,764 bytes · SHA-256 `b92ba0799b94370107f05c0646bc5157c1880d22173d40beeebf28e5c767dbc4` · float32, one band, EPSG:32611, 100 m, 3,292 × 3,730, values in [0,1], 43,074 positive cells.
+- **NaN-outside twin (same values; the official text asks for null/NaN outside):** [`…-nan-outside.tif`](docs/downloads/GEMSDOE48-H58-ds-belief-dotted-x-tipeuler-20261008-b92ba079-nan-outside.tif) · SHA-256 `784dda688cbab572084f1e432aeb0acd3adb72b1a41d9387bc341d159249a548`. Portal acceptance of either encoding is **untested**.
+- **Unique submission name:** `GEMSDOE48-H58-ds-belief-dotted-x-tipeuler-20261008-b92ba079`. **Short comment:** "GEMSDOE48 H58 | Dempster fusion, dotted B2 (owner 0.2778) x tip/Euler H32-1 (owner 0.2649); dot-supported Bel, m(Theta)+K diagnostics; unscored research."
+- **Why not submit:** on the public SGMC off-catalogue proxy (official metric, catalogue masked) it scores 0.09518 full-footprint against 0.09539 for B2, 0.10152 for H49, and 0.09541 for the prior H48-1 file. It wins 0 of 4 quadrants against B2 and is below B2 at both sparse truth densities. It does not clear the AGENTS.md gate. Proxies are not private-label or organizer evidence.
+- **What is new:** the Dempster rule runs on the union of committed dots only, so the 300 m halos are not submitted. Unassigned mass m(Θ) and conflict K are published as separate diagnostic layers. The file is byte-unique and value-distinct, but its emission footprint has Jaccard 0.87–0.98 with the top five existing family files, so it is not a new geological footprint.
+- **Correction:** the B2 × tip H32-1 pairing and the flank rule were already in **H48-1** (2026-10-06). A flank-pruned DS variant (H58-B) duplicated H48-1 (Jaccard 0.982), was removed, and is recorded only as an exploratory result.
+- **Why 0.2778 scored well (verified geometry, unverified magnitude):** B2 is the 0.2708 base minus its 2,545 dots 141–200 m from the catalogue, and it has zero dots within 200 m. The same flank rule lifts tip H32-1 from 0.09476 to 0.09534 on the proxy. The proxy reproduces the direction but under a fifth of the owner's +0.0070 step. Full analysis: [`docs/research/h58-results-20261008.md`](docs/research/h58-results-20261008.md).
+- **Gravity-edge test (H58-G1, preregistered):** NOT CLEARED; precision at matched mass is at chance. See [`docs/research/h58-gravity-edge-preregistration-20261008.md`](docs/research/h58-gravity-edge-preregistration-20261008.md).
+- **Hypotheses and research:** [`docs/research/h58-hypothesis-slate-20261008.md`](docs/research/h58-hypothesis-slate-20261008.md) · [`docs/research/geothermal-fault-discovery-research-20261008.md`](docs/research/geothermal-fault-discovery-research-20261008.md)
+- **Irregularities (IR-H58-01 to 14):** [`docs/irregularities.md`](docs/irregularities.md). Leaderboard snapshot 2026-10-08: [`docs/data/leaderboard_20261008.json`](docs/data/leaderboard_20261008.json). #1 0.3774; #7 0.3195; #13 0.2778; #12 0.2797.
+- **Standing brief:** the verbatim brief is in the appendix below. Read it every session. Its Core Values, *Maximize P(Win)* and *Own the Outcome*, are the decision frame for this work.
 
 ## Current evidence at a glance
 

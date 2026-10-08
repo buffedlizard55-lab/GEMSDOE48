@@ -1,0 +1,179 @@
+{
+  "density_12632_provenance": "value from the withdrawn repository inversion (docs/research/metric-identity-erratum-20261007.md); sensitivity grid point only",
+  "generated_utc": "2026-10-08T18:08:45+00:00",
+  "grid": {
+    "12632": {
+      "B2_beats_dotted_base_seeds": 3,
+      "B2_minus_dotted_base_mean": 0.0012371254681365744,
+      "H49_minus_B2_mean": -0.00040629211636784385,
+      "H58_minus_B2_mean": -0.001325379838484508,
+      "mean_dti": {
+        "B2_owner_0.2778": 0.06379504765997895,
+        "H32-1_tip_owner_0.2649": 0.061193155405848264,
+        "H49_yager_pignistic": 0.0633887555436111,
+        "H58_dot_supported_DS": 0.06246966782149444,
+        "dotted_base_0.2708": 0.06255792219184238
+      },
+      "per_seed_dti": {
+        "B2_owner_0.2778": [
+          0.06406586488815566,
+          0.06331680361556905,
+          0.06400247447621216
+        ],
+        "H32-1_tip_owner_0.2649": [
+          0.06146988104878208,
+          0.060671701170810936,
+          0.06143788399795176
+        ],
+        "H49_yager_pignistic": [
+          0.06320266225731636,
+          0.06311916795810386,
+          0.06384443641541311
+        ],
+        "H58_dot_supported_DS": [
+          0.06275258724637758,
+          0.0619730447714168,
+          0.06268337144668895
+        ],
+        "dotted_base_0.2708": [
+          0.062764681921886,
+          0.062131133089739214,
+          0.06277795156390192
+        ]
+      },
+      "seeds": [
+        1,
+        2,
+        3
+      ],
+      "truth_px_per_draw": 12632
+    },
+    "25000": {
+      "B2_beats_dotted_base_seeds": 3,
+      "B2_minus_dotted_base_mean": 0.0008528500482408904,
+      "H49_minus_B2_mean": 0.002288250448994958,
+      "H58_minus_B2_mean": -0.0008945428182356163,
+      "mean_dti": {
+        "B2_owner_0.2778": 0.08119109001996289,
+        "H32-1_tip_owner_0.2649": 0.07926409183082127,
+        "H49_yager_pignistic": 0.08347934046895784,
+        "H58_dot_supported_DS": 0.08029654720172726,
+        "dotted_base_0.2708": 0.080338239971722
+      },
+      "per_seed_dti": {
+        "B2_owner_0.2778": [
+          0.08090368562058421,
+          0.08078583689326989,
+          0.08188374754603454
+        ],
+        "H32-1_tip_owner_0.2649": [
+          0.07897688554120934,
+          0.07892331265590932,
+          0.07989207729534516
+        ],
+        "H49_yager_pignistic": [
+          0.08285911842324827,
+          0.08335990378216189,
+          0.08421899920146336
+        ],
+        "H58_dot_supported_DS": [
+          0.08000869214704392,
+          0.0799121273942982,
+          0.08096882206383967
+        ],
+        "dotted_base_0.2708": [
+          0.08002658814577832,
+          0.0799499967902092,
+          0.08103813497917846
+        ]
+      },
+      "seeds": [
+        1,
+        2,
+        3
+      ],
+      "truth_px_per_draw": 25000
+    },
+    "62122": {
+      "B2_beats_dotted_base_seeds": 3,
+      "B2_minus_dotted_base_mean": 9.125922517901064e-05,
+      "H49_minus_B2_mean": 0.006134328743397477,
+      "H58_minus_B2_mean": -0.00020265376408794278,
+      "mean_dti": {
+        "B2_owner_0.2778": 0.09538611460482534,
+        "H32-1_tip_owner_0.2649": 0.09475546244421566,
+        "H49_yager_pignistic": 0.10152044334822281,
+        "H58_dot_supported_DS": 0.09518346084073741,
+        "dotted_base_0.2708": 0.09529485537964633
+      },
+      "per_seed_dti": {
+        "B2_owner_0.2778": [
+          0.09538611460482534,
+          0.09538611460482534,
+          0.09538611460482534
+        ],
+        "H32-1_tip_owner_0.2649": [
+          0.09475546244421566,
+          0.09475546244421566,
+          0.09475546244421566
+        ],
+        "H49_yager_pignistic": [
+          0.10152044334822281,
+          0.10152044334822281,
+          0.10152044334822281
+        ],
+        "H58_dot_supported_DS": [
+          0.0951834608407374,
+          0.0951834608407374,
+          0.0951834608407374
+        ],
+        "dotted_base_0.2708": [
+          0.09529485537964633,
+          0.09529485537964633,
+          0.09529485537964633
+        ]
+      },
+      "seeds": "full (no subsampling)",
+      "truth_px_per_draw": 62122
+    }
+  },
+  "limitations": [
+    "The truth is a public map proxy; hidden expert labels may differ in density and location.",
+    "Random subsamples are not spatial blocks; this is a density sensitivity, not a blocked holdout."
+  ],
+  "masking": "predictions on pixel-exact catalogue cells set to 0",
+  "metric": "official distance-weighted Tversky, alpha=0.2, beta=0.8, 300 m triangular kernel; full footprint",
+  "pinned_inputs": {
+    "H49_yager_pignistic": {
+      "path": "docs/downloads/GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif",
+      "sha256": "9f028289c364c071065245799d7ed131600e80e9f0d10602806b12ce34d7cae8"
+    },
+    "catalogue": {
+      "path": "data/official/labels.tif",
+      "sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093"
+    },
+    "dotted_b2": {
+      "path": "data/raw/dotted_h33_2_b2_zeros.tif",
+      "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9"
+    },
+    "dotted_base_0.2708": {
+      "path": "data/families/dotted_d2_8_02708.tif",
+      "sha256": "ab02300152248fdda04e988e2cd2a0c13f35eec42fcf670a15e8b76b19e24a73"
+    },
+    "footprint": {
+      "path": "data/source_mirrors/footprint-mask.tif",
+      "sha256": "ddadb8c96cda673b91ddaa0bbed2aa955c358a8f6196c4c4e8fa70d454dd429f"
+    },
+    "sgmc": {
+      "path": "data/official/derived_sgmc_faults_100m.tif",
+      "sha256": "643cbe992ef4ba37588fb469163ed8291e3ceb23d6c1f78a3cfaa462430c2da0"
+    },
+    "tip_h32_1": {
+      "path": "data/raw/scored/h32_prethin_tip_02649.tif",
+      "sha256": "04d31922f5c1ea4016984fc470ab2b0ff8e266c615792f0e86020da3b940d3ff"
+    }
+  },
+  "reading": "The B2-minus-0.2708 pruning gain and the H49-minus-B2 difference both change with truth density, so proxy rankings are density-dependent and cannot select a leaderboard candidate.",
+  "schema": "GEMSDOE48-H58-density-sensitivity-v1",
+  "truth": "public SGMC off-catalogue proxy (62,122 px full), random subsamples at 25,000 and 12,632 px"
+}
