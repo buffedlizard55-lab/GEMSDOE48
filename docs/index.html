@@ -54,44 +54,67 @@ small,.small{font-size:.85rem;color:#555}
 <a href="irregularities.html">Irregularities</a>
 <a href="sources.html">Sources</a>
 <a href="next-steps.html">Next steps</a>
+<a href="status.html">Status feed</a>
 <a href="research.html">Research index</a>
 </div></nav>
 <main class="wrap">
 
 <!-- ==================== ONE-CLICK DOWNLOAD ==================== -->
 <div class="verdict-clear">
-<strong>✅ UNIQUE SUBMISSION — READY TO DOWNLOAD AND SUBMIT</strong>
-<p>This is a unique, competition-format GeoTIFF. It is the first-ever pignistic conflict-priced Dempster–Shafer fusion of the genuine dotted B2 family (0.2778) and the genuine tip/step-over H33-D family (0.2632). Download below, then upload to the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">DrivenData submission page</a>.</p>
+<strong>✅ PRIMARY SUBMISSION FILE — OK TO DOWNLOAD AND SUBMIT</strong>
+<p><b>gemsdoe48-h59-cover-ds-belief-b2xh33d-20261008T184547Z-b79c4c61d8d8.tif</b> passes every format gate the DrivenData portal applies: one band,
+float32, EPSG:32611, 3292 × 3730, 100 m, transform identical to the organizer template,
+all values finite, every value in [0, 1], no nodata tag. The portal predicate
+<code>all(0 ≤ v ≤ 1)</code> evaluates <b>True</b> on the whole array, so the file
+<b>cannot</b> trigger <i>"Predicted values must be in range [0, 1]"</i>.
+<a href="status.html">Status feed: every download checked automatically →</a></p>
+<p class="alert"><b>⚠ Honest score statement:</b> this file is <b>unscored</b>. The strict
+hide-and-recover holdout measured in this repo shows the Dempster–Shafer fusion does
+<b>not</b> beat its own parents beyond noise on either public proxy
+(catalogue proxy 0.0974 vs 0.0863 parent; off-catalogue proxy 0.0917 vs 0.0954/0.0957
+parents), and the dotted parent (owner-reported 0.2778) remains the best-evidenced
+surface. Submit this file if you want a unique, format-perfect fusion artifact; do
+<b>not</b> expect it to lift the leaderboard by itself.
+<a href="research/h59-method-results-20261008.html">Full method, gates and receipts →</a></p>
 </div>
 
 <section class="hero-submit" id="submission-download">
 <h2>⬇ ONE-CLICK SUBMISSION FILE</h2>
 
-<a class="button big" href="downloads/gemsdoe48-h58-pignistic-conflict-priced-B2xH33D-20261008T175914Z-e58.tif" download>⬇ Download Submission TIF</a>
-<a class="button alt" href="downloads/gemsdoe48-h58-pignistic-conflict-priced-B2xH33D-20261008T175914Z-e58.zip" download>Download .zip</a>
+<a class="button big" href="downloads/gemsdoe48-h59-cover-ds-belief-b2xh33d-20261008T184547Z-b79c4c61d8d8.tif" download>⬇ Download Submission TIF (37,723 dots)</a>
+<a class="button alt" href="downloads/gemsdoe48-h59-cover-ds-belief-b2xh33d-20261008T184547Z-b79c4c61d8d8.zip" download>Download .zip</a>
 
-<p><b>Filename:</b> <code>gemsdoe48-h58-pignistic-conflict-priced-B2xH33D-20261008T175914Z-e58.tif</code></p>
+<p><b>Filename:</b> <code>gemsdoe48-h59-cover-ds-belief-b2xh33d-20261008T184547Z-b79c4c61d8d8.tif</code><br>
+<b>Size:</b> 117,434 bytes · <b>SHA-256:</b> <code>f1584187b459baf47f75e5daf64de6f7696f9feb14910d3cf2762f7a1119597a</code></p>
 
 <p><b>Unique submission name to paste in the portal:</b></p>
-<div class="copy-box" title="Click to select">GEMSDOE48-H58-PignisticConflictPriced-B2xH33D</div>
+<div class="copy-box" title="Click to select">GEMSDOE48-H59-CoverDSBelief-B2xH33D</div>
 
-<p><b>Note to paste in the portal's "Note (optional)" field (148/200 characters):</b></p>
-<div class="copy-box" title="Click to select">GEMSDOE48 H58 | Pignistic BetP(F)*(1-K) of B2 dotted x H33-D tip/stepover; kernel-credit belief, reliability discounts; unique DS variant; UNSCORED.</div>
+<p><b>Note to paste in the portal's "Note (optional)" field (108/200 characters):</b></p>
+<div class="copy-box" title="Click to select">GEMSDOE48 H59 | Dempster Bel(F), dotted B2 x tip H33D; 400m hex-cover of the fusion corridor; m(Theta) layer</div>
 
 <table>
 <tr><th>Property</th><th>Value</th></tr>
 <tr><td>Bands</td><td>1 (single band)</td></tr>
 <tr><td>Data type</td><td>float32</td></tr>
 <tr><td>CRS</td><td>EPSG:32611 (WGS 84 / UTM zone 11N)</td></tr>
-<tr><td>Pixel size</td><td>100 m × 100 m</td></tr>
-<tr><td>Grid</td><td>3,292 columns × 3,730 rows</td></tr>
-<tr><td>Value range</td><td>[0.0, 1.0] — all finite, zero NaN</td></tr>
-<tr><td>Nodata</td><td>None (all cells finite)</td></tr>
-<tr><td>Positive pixels</td><td>40,000</td></tr>
-<tr><td>SHA-256</td><td><code>5acb56d987ce30a2c332f09ed33cb00dcaeec027ac437519ca237e52e0046022</code></td></tr>
+<tr><td>Pixel size / grid</td><td>100 m × 100 m · 3,292 columns × 3,730 rows</td></tr>
+<tr><td>Transform</td><td>identical to the organizer template ✓</td></tr>
+<tr><td>Value range</td><td>[0.0, 1.0] — all finite, <b>zero NaN</b></td></tr>
+<tr><td>Nodata tag</td><td>none (all cells finite) ✓</td></tr>
+<tr><td>Positive cells</td><td>37,723</td></tr>
+<tr><td>Emission rule</td><td>Dempster belief corridor, hex-covering, spacing 4.0 px, measured covering radius 2.24 px (224 m)</td></tr>
+<tr><td>Uniqueness</td><td>no byte identity with any of 74 local registry rasters; max exact-cell overlap 0.208 (47 submission-like rasters compared); corridor Spearman max 0.9201</td></tr>
+<tr><td>Not the naive mean</td><td>Pearson 0.97479 · Spearman 0.98257 · max |Δ| 0.2709 · 4,264 emitted dots sit on cells where the two families disagree</td></tr>
+<tr><td>Disagreement layer</td><td><code>diagnostics/gemsdoe48-h59-cover-ds-belief-b2xh33d-20261008T184547Z-b79c4c61d8d8-diag-mtheta-unassigned-…tif</code> (m(Θ)), <code>-diag-conflict-K</code>, <code>-diag-plausibility</code>, and the a-only / b-only disagreement rasters</td></tr>
 </table>
 
-<p class="small"><b>Format verification:</b> all checks pass — single band ✓, float32 ✓, EPSG:32611 ✓, 3292×3730 ✓, 100m ✓, all values in [0,1] ✓, all finite ✓, no nodata tag ✓. This file cannot trigger the <code>"Predicted values must be in range [0, 1]"</code> portal error because every cell is finite and in [0,1] with no nodata sentinel.</p>
+<p class="small"><b>Why this file is what it is:</b> the brief asks for the best dotted family
+(H33-2-B2, owner-reported 0.2778) combined with the best tip/step-over family (H33-D,
+owner-reported 0.2632) by Dempster's rule, with the unassigned mass carried as its own
+diagnostic layer, and for proof the result is not the average. All four requirements are
+implemented and gated above; the only claim that is <b>not</b> made is a score improvement,
+because the measured evidence does not support one.</p>
 </section>
 
 <!-- ==================== HOW TO SUBMIT ==================== -->

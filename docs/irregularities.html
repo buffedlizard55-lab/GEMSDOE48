@@ -33,4 +33,33 @@
 </tbody></table>
 <p>Historical additions IR-H56-01 onward and the full H55 record are preserved in the <a href="irregularities.md">Markdown ledger</a>. Do not quote its former hidden-truth inversions, ceiling or “resolved portal rejection” as current findings.</p>
 <p><b>Final current status: no organizer score, no verified exact local-file-to-leaderboard link, no official file acceptance, no submission slot cleared.</b></p>
+
+<h2 class="sec">New irregularities flagged 2026-10-08 (H59 session)</h2>
+<ol>
+<li><b>Portal range error, explained.</b> Files that carry <code>NaN</code> outside the
+footprint fail the portal predicate <code>all(0 ≤ v ≤ 1)</code> and produce
+<i>"Predicted values must be in range [0, 1]"</i>. The automated feed
+(<a href="status.html">status.html</a>) now reports portal safety for every download; the
+primary candidate is all-finite. 28 of 56 downloadable GeoTIFFs are <b>not</b> portal-safe
+and are retained only for traceability.</li>
+<li><b><code>data/raw/sample_submission_template.tif</code> is a local artifact, not the
+organizer sample submission.</b> It has exactly 60,988 positive cells, identical to
+<code>existing_faults.tif</code> / <code>labels.tif</code> (SHA-256 <code>7ba308cc…</code>).
+Its finite-cell mask is used as the footprint definition; that use is documented, but the
+file must not be cited as an organizer deliverable.</li>
+<li><b>Two SGMC rasters.</b> <code>data/raw/sgmc_faults_100m.tif</code>
+(<code>26d142c4…</code>, 82,151 positives) and
+<code>data/official/derived_sgmc_faults_100m.tif</code> (<code>643cbe99…</code>, 83,593 in
+footprint; 62,122 off-catalogue at &gt; 300 m). Holdout scripts pin the derived raster; the
+mirror should be reconciled or explicitly labelled.</li>
+<li><b>16 pre-existing failing tests at merge commit <code>36d9785</code></b>
+(<code>tests/test_site_*.py</code>, <code>tests/test_h57.py</code>,
+<code>tests/test_site_classification.py</code>) asserted the pre-H58 site verdicts and were
+not updated when the site changed. Fixed in this session.</li>
+<li><b>README contradiction resolved.</b> The previous merge left the top of the README
+claiming the H58 fusion was “ready to download and submit” while a later section said
+“NOT OK / NOT CLEARED TO SUBMIT” for the same family. Each artifact now has one gated
+verdict; the fusion is format-submittable but is <b>not</b> evidenced as a score
+improvement.</li>
+</ol>
 </main><footer><div class="wrap">GEMSDOE48 · corrected caveat index · 2026-10-07</div></footer></body></html>

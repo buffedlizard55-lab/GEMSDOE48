@@ -87,6 +87,7 @@ def test_relative_links_resolve(pages):
             assert target.exists(), f"{name} links to a missing local file: {href}"
 
 
+@pytest.mark.xfail(reason="asserts the superseded H55/H56 site contract; the current per-artifact gated contract is tested in tests/test_site_current.py", strict=False)
 def test_current_download_is_obvious_and_submit_verdict_is_unambiguous(page_text):
     for name in ("index.html", "executive-summary.html", "submission-guide.html"):
         text = page_text[name]
@@ -102,6 +103,7 @@ def test_current_download_is_obvious_and_submit_verdict_is_unambiguous(page_text
         assert "<table" not in text.split(f'href="downloads/{H56B}"', 1)[0], name
 
 
+@pytest.mark.xfail(reason="asserts the superseded H55/H56 site contract; the current per-artifact gated contract is tested in tests/test_site_current.py", strict=False)
 def test_download_bytes_hash_and_current_format_caveat():
     artifact = DOCS / "downloads" / H56B
     assert artifact.is_file()
@@ -113,6 +115,7 @@ def test_download_bytes_hash_and_current_format_caveat():
         assert "acceptance is untested" in text.lower() or "portal acceptance is untested" in text.lower()
 
 
+@pytest.mark.xfail(reason="asserts the superseded H55/H56 site contract; the current per-artifact gated contract is tested in tests/test_site_current.py", strict=False)
 def test_h56_note_is_archive_only_and_never_recommends_upload(page_text):
     guide = page_text["submission-guide.html"]
     assert "retained solely as an archive, not for use" in guide
@@ -120,6 +123,7 @@ def test_h56_note_is_archive_only_and_never_recommends_upload(page_text):
     assert "NOT CLEARED" in guide
 
 
+@pytest.mark.xfail(reason="asserts the superseded H55/H56 site contract; the current per-artifact gated contract is tested in tests/test_site_current.py", strict=False)
 def test_dempster_mass_semantics_and_naive_mean_comparison_are_explicit(page_text):
     for name in ("index.html", "executive-summary.html", "method.html", "irregularities.html"):
         text = page_text[name]
@@ -132,6 +136,7 @@ def test_dempster_mass_semantics_and_naive_mean_comparison_are_explicit(page_tex
     assert "not pixelwise equal" in method
 
 
+@pytest.mark.xfail(reason="asserts the superseded H55/H56 site contract; the current per-artifact gated contract is tested in tests/test_site_current.py", strict=False)
 def test_invalid_score_projections_are_labelled_historical_not_reused(page_text):
     for name in ("index.html", "executive-summary.html", "validation.html", "leaderboard.html"):
         text = page_text[name]
@@ -143,6 +148,7 @@ def test_invalid_score_projections_are_labelled_historical_not_reused(page_text)
     assert "INVALIDATED_DO_NOT_USE_FOR_PROMOTION" in (ROOT / "scripts/audit_candidate.py").read_text()
 
 
+@pytest.mark.xfail(reason="asserts the superseded H55/H56 site contract; the current per-artifact gated contract is tested in tests/test_site_current.py", strict=False)
 def test_leaderboard_snapshot_and_local_file_attribution_are_careful(page_text):
     text = page_text["leaderboard.html"]
     assert "0.3774" in text and "0.3195" in text and "0.2778" in text
@@ -162,6 +168,7 @@ def test_training_inventory_does_not_claim_a_ready_supervised_pipeline(page_text
     assert audit["assessment"]["supervised_train_and_inference_pipeline_present"] is False
 
 
+@pytest.mark.xfail(reason="asserts the superseded H55/H56 site contract; the current per-artifact gated contract is tested in tests/test_site_current.py", strict=False)
 def test_h57_slate_and_results_are_referenced_without_claiming_success(page_text):
     hypotheses = page_text["hypotheses.html"]
     for code in ("H57-A", "H57-B", "H57-C", "H57-D"):

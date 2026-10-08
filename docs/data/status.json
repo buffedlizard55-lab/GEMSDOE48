@@ -1,0 +1,1368 @@
+{
+ "generated_utc": "2026-10-08T21:17:23.193185+00:00",
+ "primary": {
+  "file": "gemsdoe48-h59-cover-ds-belief-b2xh33d-20261008T184547Z-b79c4c61d8d8.tif",
+  "sha256": "f1584187b459baf47f75e5daf64de6f7696f9feb14910d3cf2762f7a1119597a",
+  "positive_cells": 37723,
+  "name_for_portal": "GEMSDOE48-H59-CoverDSBelief-B2xH33D",
+  "note_for_portal": "GEMSDOE48 H59 | Dempster Bel(F), dotted B2 x tip H33D; 400m hex-cover of the fusion corridor; m(Theta) layer",
+  "headline": "OK TO DOWNLOAD AND SUBMIT (format-valid, portal-safe, unique bytes and unique dot cells); no local evidence that it beats the current best",
+  "verdict": {
+   "format_valid_and_portal_safe": true,
+   "unique_bytes": true,
+   "distinct_from_naive_mean": true,
+   "max_identical_dot_cells_vs_a_parent": 0.09042228878933277,
+   "in_lane_duplicate_flag": false,
+   "three_px_proximity_to_parent_dots": 1.0,
+   "score_improvement_supported_by_local_evidence": false
+  },
+  "receipt": "evidence/build_h59_receipt_20261008T184547Z.json",
+  "built_utc": "20261008T184547Z",
+  "rule": {
+   "name": "cover",
+   "spacing_px": 4.0,
+   "covering_radius_px": 2.23606797749979,
+   "covering_radius_target_px": 2.3094010767585034
+  }
+ },
+ "holdouts": {
+  "catalogue": {
+   "evaluator_version": "evaluate_holdout.py@2026-10-08",
+   "withheld_positive_cells": 60932,
+   "withheld_segments": 3201,
+   "results": {
+    "A_dotted_B2": {
+     "pooled_DTI": 0.006712426224339296,
+     "ci95": [
+      0.006196834703887718,
+      0.0073139262132558185
+     ]
+    },
+    "B_tip_H33D": {
+     "pooled_DTI": 0.08626837141128368,
+     "ci95": [
+      0.08201777728248462,
+      0.08989259872720252
+     ]
+    },
+    "C_naive_mean_of_opinions": {
+     "pooled_DTI": 0.044388757624469595,
+     "ci95": [
+      0.04233727649900499,
+      0.046565050522777554
+     ]
+    },
+    "D_union_binary": {
+     "pooled_DTI": 0.08501251570339544,
+     "ci95": [
+      0.08077913416351735,
+      0.0886409061395788
+     ]
+    },
+    "E_intersection_binary": {
+     "pooled_DTI": 0.00523314006106714,
+     "ci95": [
+      0.004822311370940387,
+      0.005657337296746402
+     ]
+    },
+    "F_DS_belief_normalized": {
+     "pooled_DTI": 0.03409643043538205,
+     "ci95": [
+      0.03248175567821748,
+      0.035965453831342996
+     ]
+    },
+    "G_DS_pignistic_conflict_priced": {
+     "pooled_DTI": 0.02065129652114081,
+     "ci95": [
+      0.01961203941002379,
+      0.021817427447006512
+     ]
+    },
+    "H_DS_belief_top40k": {
+     "pooled_DTI": 0.012115794379172614,
+     "ci95": [
+      0.011141290736029584,
+      0.013263491668554905
+     ]
+    },
+    "I_DS_spacing28_top40k": {
+     "pooled_DTI": 0.017256129346247078,
+     "ci95": [
+      0.015945769446959333,
+      0.018621543244306416
+     ]
+    },
+    "J_DS_spacing52_top40k": {
+     "pooled_DTI": 0.04165616149584551,
+     "ci95": [
+      0.03906283080341032,
+      0.044607482423541005
+     ]
+    },
+    "X_cand_cover_q0.0_s4.0": {
+     "pooled_DTI": 0.09740325217485583,
+     "ci95": [
+      0.09265764584854069,
+      0.1022630142720021
+     ]
+    }
+   },
+   "random_control_same_mass": {
+    "38000": {
+     "pooled_DTI": 0.07069409088881408,
+     "aggregate": {
+      "TPw": 4018.2481110083454,
+      "FPw": 36453.46791109503,
+      "FNw": 56913.751888991654,
+      "n_truth": 60932
+     }
+    },
+    "47905": {
+     "pooled_DTI": 0.0820623577079541,
+     "aggregate": {
+      "TPw": 4834.250708224586,
+      "FPw": 45985.142472267355,
+      "FNw": 56097.74929177541,
+      "n_truth": 60932
+     }
+    }
+   }
+  },
+  "sgmc_offcat": {
+   "evaluator_version": "evaluate_holdout.py@2026-10-08",
+   "withheld_positive_cells": 62107,
+   "withheld_segments": 2115,
+   "results": {
+    "A_dotted_B2": {
+     "pooled_DTI": 0.09540158749560063,
+     "ci95": [
+      0.08695923632098433,
+      0.10457731835980112
+     ]
+    },
+    "B_tip_H33D": {
+     "pooled_DTI": 0.09569261076288127,
+     "ci95": [
+      0.08747199879298324,
+      0.104659246178257
+     ]
+    },
+    "C_naive_mean_of_opinions": {
+     "pooled_DTI": 0.06732640175708048,
+     "ci95": [
+      0.061756626504802126,
+      0.07314962226168774
+     ]
+    },
+    "D_union_binary": {
+     "pooled_DTI": 0.09753964924104244,
+     "ci95": [
+      0.08919852580779886,
+      0.1068089744048351
+     ]
+    },
+    "E_intersection_binary": {
+     "pooled_DTI": 0.08176261136401902,
+     "ci95": [
+      0.07519947193814629,
+      0.08860027888814706
+     ]
+    },
+    "F_DS_belief_normalized": {
+     "pooled_DTI": 0.0766983491545077,
+     "ci95": [
+      0.0703431710316427,
+      0.08338693439553786
+     ]
+    },
+    "G_DS_pignistic_conflict_priced": {
+     "pooled_DTI": 0.07005017474760131,
+     "ci95": [
+      0.06432354575657172,
+      0.075823035431014
+     ]
+    },
+    "H_DS_belief_top40k": {
+     "pooled_DTI": 0.09879947282642802,
+     "ci95": [
+      0.09003192384146536,
+      0.10851907718911151
+     ]
+    },
+    "I_DS_spacing28_top40k": {
+     "pooled_DTI": 0.09330198218984848,
+     "ci95": [
+      0.0854187408675658,
+      0.10183095358580788
+     ]
+    },
+    "J_DS_spacing52_top40k": {
+     "pooled_DTI": 0.09699684113745388,
+     "ci95": [
+      0.08895676101707091,
+      0.1047719139462143
+     ]
+    },
+    "X_gemsdoe48-h59-cover-ds-belief-b2xh": {
+     "pooled_DTI": 0.09168713204174567,
+     "ci95": [
+      0.0843571413754361,
+      0.09903854769907065
+     ]
+    }
+   },
+   "random_control_same_mass": {
+    "38000": {
+     "pooled_DTI": 0.07235717805550887,
+     "aggregate": {
+      "TPw": 4182.946450208189,
+      "FPw": 36437.53240279786,
+      "FNw": 57924.0535497918,
+      "n_truth": 62107
+     }
+    },
+    "47905": {
+     "pooled_DTI": 0.08411977715446517,
+     "aggregate": {
+      "TPw": 5038.080870071246,
+      "FPw": 45992.68141481068,
+      "FNw": 57068.91912992876,
+      "n_truth": 62107
+     }
+    }
+   }
+  }
+ },
+ "downloadable_files": 56,
+ "portal_safe_files": 28,
+ "portal_unsafe_files": 28,
+ "files": [
+  {
+   "file": "GEMSDOE48-DS-conflict-aware-fusion-20261006.tif",
+   "bytes": 489868,
+   "sha256": "818957c0cb69caf360d445c7f7a684578c37528f363b5d84f5ae3be832e7413f",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": NaN,
+   "all_finite": false,
+   "min": 0.0,
+   "max": 0.75,
+   "positive_cells": 47905,
+   "portal_safe": false
+  },
+  {
+   "file": "GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif",
+   "bytes": 209612,
+   "sha256": "9f028289c364c071065245799d7ed131600e80e9f0d10602806b12ce34d7cae8",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": NaN,
+   "all_finite": false,
+   "min": 0.0,
+   "max": 1.0,
+   "positive_cells": 47905,
+   "portal_safe": false
+  },
+  {
+   "file": "GEMSDOE48-H50-2M-PERSIST-20261007-1997316a0102-nan.tif",
+   "bytes": 224968,
+   "sha256": "1997316a0102909135dfa12d48e86dbc1fbe567b4d4ba3884c53ce981b2bc50c",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": NaN,
+   "all_finite": false,
+   "min": 0.0,
+   "max": 1.0,
+   "positive_cells": 29661,
+   "portal_safe": false
+  },
+  {
+   "file": "GEMSDOE48-H50-2M-PERSIST-20261007-f12e5391bb9c-nan.tif",
+   "bytes": 225114,
+   "sha256": "f12e5391bb9cd2709ae7331699bb0876cc4bf3c443f96ea8a5456c858eb67908",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": NaN,
+   "all_finite": false,
+   "min": 0.0,
+   "max": 1.0,
+   "positive_cells": 29607,
+   "portal_safe": false
+  },
+  {
+   "file": "GEMSDOE48-H52-lidar-scarp-additions-20261007-38029417f6ca-nan-outside.tif",
+   "bytes": 346152,
+   "sha256": "38029417f6cab01f9f56d4d3259a998affad6ae45a2a21a394682ee38b98e0c7",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": NaN,
+   "all_finite": false,
+   "min": 0.0,
+   "max": 1.0,
+   "positive_cells": 39654,
+   "portal_safe": false
+  },
+  {
+   "file": "GEMSDOE48-H52-lidar-scarp-additions-20261007-38029417f6ca-zeros-outside.tif",
+   "bytes": 290094,
+   "sha256": "018ca3065cedf8f0fbda6cde429c759dacfdd8c6214c4814788d3bbf3e760a2f",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": null,
+   "all_finite": true,
+   "min": 0.0,
+   "max": 1.0,
+   "positive_cells": 39654,
+   "portal_safe": true
+  },
+  {
+   "file": "GEMSDOE48-H53-3SRC-DS-20261007-9242c831-diag-conflict-AB-nan.tif",
+   "bytes": 2045196,
+   "sha256": "cf59ad8290e4f883b6c9d0fd19871a003a4e32bede578860b56ff5815966db40",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": NaN,
+   "all_finite": false,
+   "min": 0.0,
+   "max": 0.8804085850715637,
+   "positive_cells": 740795,
+   "portal_safe": false
+  },
+  {
+   "file": "GEMSDOE48-H53-3SRC-DS-20261007-9242c831-diag-conflict-ABL-nan.tif",
+   "bytes": 6892084,
+   "sha256": "0f1be73cdcd91d82300e5182b0ffe6d4ef7bcb6114c650a663b71e3c16146d89",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": NaN,
+   "all_finite": false,
+   "min": 0.0,
+   "max": 0.7472529411315918,
+   "positive_cells": 1488469,
+   "portal_safe": false
+  },
+  {
+   "file": "GEMSDOE48-H53-3SRC-DS-20261007-9242c831-diag-plausibility-nan.tif",
+   "bytes": 6853286,
+   "sha256": "b8a2c58ad78cbe29fc90a60c64bc9928ebc29041c9771e7af5c554f69781820c",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": NaN,
+   "all_finite": false,
+   "min": 0.0009156767628155649,
+   "max": 1.0,
+   "positive_cells": 5167373,
+   "portal_safe": false
+  },
+  {
+   "file": "GEMSDOE48-H53-3SRC-DS-20261007-9242c831-diag-unassigned-nan.tif",
+   "bytes": 6398634,
+   "sha256": "a765eaefedf6abeba3229c873784754928c87c284c81f8d439ce1f8da853a530",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": NaN,
+   "all_finite": false,
+   "min": 0.0009156767628155649,
+   "max": 0.029967408627271652,
+   "positive_cells": 5167373,
+   "portal_safe": false
+  },
+  {
+   "file": "GEMSDOE48-H53-3SRC-DS-20261007-9242c831-nan-outside.tif",
+   "bytes": 7042968,
+   "sha256": "9242c831dc103966e7ea961e342e4dce5e655b11313d349a112ece8a4d8b0d15",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": NaN,
+   "all_finite": false,
+   "min": 0.0,
+   "max": 1.0,
+   "positive_cells": 1488778,
+   "portal_safe": false
+  },
+  {
+   "file": "GEMSDOE48-H53-3SRC-DS-20261007-9242c831-pignistic-twin-nan.tif",
+   "bytes": 372196,
+   "sha256": "f644238f8c44f1a88fcf9aa73ae0da7b17b64fd67143e35aa64c38e9429c3ca5",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": NaN,
+   "all_finite": false,
+   "min": 0.0,
+   "max": 1.0,
+   "positive_cells": 37654,
+   "portal_safe": false
+  },
+  {
+   "file": "GEMSDOE48-H53-3SRC-DS-20261007-9242c831-zeros-outside.tif",
+   "bytes": 5084452,
+   "sha256": "a5c1c4fbd53e889fe5178628fa5f25b02e920e6db434ccca63e44792f7d4bf0f",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": null,
+   "all_finite": true,
+   "min": 0.0,
+   "max": 1.0,
+   "positive_cells": 1488778,
+   "portal_safe": true
+  },
+  {
+   "file": "GEMSDOE48-H53-DS-RadEdge-B2xH33D-20261007-4c01fcf2ad8c-nan-outside.tif",
+   "bytes": 17382618,
+   "sha256": "4c01fcf2ad8c1d2bd487bc4d07c85e57b2a256296586d4817b58079b0ccd7a1f",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": NaN,
+   "all_finite": false,
+   "min": 0.0,
+   "max": 1.0,
+   "positive_cells": 5144440,
+   "portal_safe": false
+  },
+  {
+   "file": "GEMSDOE48-H53-STRIKE-COHERENCE-20261007-de35531d3867-nan-outside.tif",
+   "bytes": 403844,
+   "sha256": "de35531d386792da1950eac815f98db8f36304f78debb6b568138d070640d9bd",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": NaN,
+   "all_finite": false,
+   "min": 0.0,
+   "max": 1.0,
+   "positive_cells": 49654,
+   "portal_safe": false
+  },
+  {
+   "file": "GEMSDOE48-H54-ds-core-lidar-20261007-dedc43dc0167-zeros-nan-outside.tif",
+   "bytes": 797024,
+   "sha256": "bf816036a43b6823f69b0ad7fb61fa3dd6cda5e0e6e451d123e83dfed374a47b",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": null,
+   "all_finite": true,
+   "min": 0.0,
+   "max": 1.0,
+   "positive_cells": 38654,
+   "portal_safe": true
+  },
+  {
+   "file": "GEMSDOE48-H54-ds-core-lidar-20261007-dedc43dc0167.tif",
+   "bytes": 1562508,
+   "sha256": "dedc43dc0167edcf1dca9fa1693b69153c71325d59e47218298e577cd8159fc4",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": NaN,
+   "all_finite": false,
+   "min": 0.0,
+   "max": 1.0,
+   "positive_cells": 38654,
+   "portal_safe": false
+  },
+  {
+   "file": "GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353-nan-outside.tif",
+   "bytes": 381046,
+   "sha256": "6790aee129c1e2a3ac6c30fcb56bf5fad455b375919e8d938bd12e9b9b275733",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": NaN,
+   "all_finite": false,
+   "min": 0.0,
+   "max": 1.0,
+   "positive_cells": 39430,
+   "portal_safe": false
+  },
+  {
+   "file": "GEMSDOE48-H55-conduit-conflict-priced-20261007-055da9855353-zeros-outside.tif",
+   "bytes": 234040,
+   "sha256": "8f9a9d3d1ea2aed1c99e5ab5260aad9ceb10f4011c4b5a38791509261ddd284a",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": null,
+   "all_finite": true,
+   "min": 0.0,
+   "max": 1.0,
+   "positive_cells": 39430,
+   "portal_safe": true
+  },
+  {
+   "file": "GEMSDOE48-H56-OWDS-B2xH33D-20261007-1f7b5a4f18db-zeros-outside.tif",
+   "bytes": 1888728,
+   "sha256": "1f7b5a4f18dbc62f31b14078545332238be9289dd388d57f550d75fb5a5fe95a",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": null,
+   "all_finite": true,
+   "min": 0.0,
+   "max": 1.0,
+   "positive_cells": 791389,
+   "portal_safe": true
+  },
+  {
+   "file": "GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-nan-outside.tif",
+   "bytes": 1694269,
+   "sha256": "883d93f2801987481f8ffb761eeae8f7a39520ad3b670e09129bdaaf7983e2c7",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": NaN,
+   "all_finite": false,
+   "min": 0.0,
+   "max": 1.0,
+   "positive_cells": 791389,
+   "portal_safe": false
+  },
+  {
+   "file": "GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros-outside.tif",
+   "bytes": 1646054,
+   "sha256": "4d6548d4ec07a47a25b83d28ebc05d58b57448c1507b460aed52cec395bdb6b5",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": null,
+   "all_finite": true,
+   "min": 0.0,
+   "max": 1.0,
+   "positive_cells": 791389,
+   "portal_safe": true
+  },
+  {
+   "file": "GEMSDOE48-H56B-NF-DS-dotted-x-tip-20261007-5bb2c03c981e-nan-outside.tif",
+   "bytes": 1595961,
+   "sha256": "b9530b70065da1f5e9da82caf4f5aaba3d7175dbbbfb2851e4b2ab2dd13aa4f1",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": NaN,
+   "all_finite": false,
+   "min": 0.0,
+   "max": 1.0,
+   "positive_cells": 791389,
+   "portal_safe": false
+  },
+  {
+   "file": "GEMSDOE48-H56B-ds-belief-dotted-x-tip-20261007-126ca59c2801-nan-outside.tif",
+   "bytes": 1696746,
+   "sha256": "3589e89a1ad4f78f54e6f17f9b7cdb0edb563f66aedfcdabd632ef8774968c3a",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": NaN,
+   "all_finite": false,
+   "min": 0.0,
+   "max": 1.0,
+   "positive_cells": 791389,
+   "portal_safe": false
+  },
+  {
+   "file": "GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07-nan-outside.tif",
+   "bytes": 264559,
+   "sha256": "4e6c4ddd5a31ec39adbc84b2e547844bc4f98f752d307f694837591319ef847b",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": NaN,
+   "all_finite": false,
+   "min": 0.0,
+   "max": 1.0,
+   "positive_cells": 58031,
+   "portal_safe": false
+  },
+  {
+   "file": "GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07.tif",
+   "bytes": 192597,
+   "sha256": "28a51fb032b8f2cfd1f04ad3bd429c29d7bb780d36961fea783ff8099130986e",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": null,
+   "all_finite": true,
+   "min": 0.0,
+   "max": 1.0,
+   "positive_cells": 58031,
+   "portal_safe": true
+  },
+  {
+   "file": "GEMSDOE48-raw-conflict-K-20261006.tif",
+   "bytes": 271060,
+   "sha256": "5daa6eaf7ce78603896b0696df5be67d9a71971da936e030161c3157944b576b",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": NaN,
+   "all_finite": false,
+   "min": 0.0,
+   "max": 0.25,
+   "positive_cells": 16291,
+   "portal_safe": false
+  },
+  {
+   "file": "GEMSDOE48-unassigned-mass-20261006.tif",
+   "bytes": 387276,
+   "sha256": "975c217ef803a45041077a219ba460134a8c84c8ea9f7ffc0414ddb47cb54ccd",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": NaN,
+   "all_finite": false,
+   "min": 0.25,
+   "max": 0.3333333432674408,
+   "positive_cells": 5167373,
+   "portal_safe": false
+  },
+  {
+   "file": "gemsdoe48-ds-belief-raw-20261006T201749Z-95897e3f8125.tif",
+   "bytes": 180061,
+   "sha256": "0daeb871557e8c77264f26abab24e8d6aa2cef316efabb0c290869a2ccd63e70",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": null,
+   "all_finite": true,
+   "min": 0.0,
+   "max": 0.9998999834060669,
+   "positive_cells": 47905,
+   "portal_safe": true
+  },
+  {
+   "file": "gemsdoe48-ds-conflict-20261006T201749Z-95897e3f8125.tif",
+   "bytes": 97871,
+   "sha256": "73b1e452ba18dcd56291652ad9b553cd85e7ca709778ebf1cee770e159d50fbf",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": null,
+   "all_finite": true,
+   "min": 0.0,
+   "max": 0.9800999760627747,
+   "positive_cells": 16291,
+   "portal_safe": true
+  },
+  {
+   "file": "gemsdoe48-ds-dotted-x-tipstepover-20261006T201749Z-95897e3f8125-belief-zeros.tif",
+   "bytes": 179003,
+   "sha256": "1aef3f909aea5b6c792380f4498d834231fa8cc8f03cc677098bf9076e0edc73",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": null,
+   "all_finite": true,
+   "min": 0.0,
+   "max": 1.0,
+   "positive_cells": 47905,
+   "portal_safe": true
+  },
+  {
+   "file": "gemsdoe48-ds-dotted-x-tipstepover-20261006T201749Z-95897e3f8125-decision-zeros.tif",
+   "bytes": 169061,
+   "sha256": "a913f633925e9e683be150ec7826d8dad6cca44589bf832ec5d8e689ccda5c52",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": null,
+   "all_finite": true,
+   "min": 0.0,
+   "max": 1.0,
+   "positive_cells": 47905,
+   "portal_safe": true
+  },
+  {
+   "file": "gemsdoe48-ds-plausibility-20261006T201749Z-95897e3f8125.tif",
+   "bytes": 244702,
+   "sha256": "0707aea945e02d2eb601d7d25456bf624261ab583a8d49f9988fed2de04409a4",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": null,
+   "all_finite": true,
+   "min": 0.0,
+   "max": 1.0,
+   "positive_cells": 5167373,
+   "portal_safe": true
+  },
+  {
+   "file": "gemsdoe48-ds-unassigned-mass-20261006T201749Z-95897e3f8125.tif",
+   "bytes": 157046,
+   "sha256": "11c0e3b6569ef65ed2e311acfd37e6c91d0c325fc2ee803887cd6cebe06e031b",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": null,
+   "all_finite": true,
+   "min": 0.0,
+   "max": 0.005025125574320555,
+   "positive_cells": 5167373,
+   "portal_safe": true
+  },
+  {
+   "file": "gemsdoe48-ds48-belief.tif",
+   "bytes": 1238649,
+   "sha256": "f7e5645f10ffb9961ad3199ff83c67cd3bc9375d75af971cf656253dae1057c5",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": null,
+   "all_finite": true,
+   "min": 0.0,
+   "max": 0.8399999737739563,
+   "positive_cells": 794250,
+   "portal_safe": true
+  },
+  {
+   "file": "gemsdoe48-ds48-conflict.tif",
+   "bytes": 1211081,
+   "sha256": "b7e39108f9718021edaac2920680ee49d3ffdcacab93e38822081556407d6010",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": null,
+   "all_finite": true,
+   "min": 0.0,
+   "max": 0.36000001430511475,
+   "positive_cells": 760580,
+   "portal_safe": true
+  },
+  {
+   "file": "gemsdoe48-ds48-emission.tif",
+   "bytes": 282876,
+   "sha256": "a579081d22eef2039605910a19d2351df775d9d33a278d8238badacd4c387a3c",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": null,
+   "all_finite": true,
+   "min": 0.0,
+   "max": 1.0,
+   "positive_cells": 37654,
+   "portal_safe": true
+  },
+  {
+   "file": "gemsdoe48-ds48-mtheta.tif",
+   "bytes": 1189415,
+   "sha256": "0a7f1d02e509ace05626aae079cbc3f1205857b493386c98a97af16e48e51d21",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": null,
+   "all_finite": true,
+   "min": 0.1599999964237213,
+   "max": 0.25,
+   "positive_cells": 12279160,
+   "portal_safe": true
+  },
+  {
+   "file": "gemsdoe48-h48-1-ds-fusion-b2xh32tip-20261006-407bb7f4-zeros.tif",
+   "bytes": 226886,
+   "sha256": "6cb2aab8dbd71335152dea7e2fa442126abffc609b426286f5a171f14353b454",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": null,
+   "all_finite": true,
+   "min": 0.0,
+   "max": 1.0,
+   "positive_cells": 37754,
+   "portal_safe": true
+  },
+  {
+   "file": "gemsdoe48-h48-ds-yager-conflict-20261006-unassigned-diagnostic.tif",
+   "bytes": 392524,
+   "sha256": "86a470fc184989040e9bfc7a52be70285b9cc3189e620ee777aee1ed49744c4f",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": null,
+   "all_finite": true,
+   "min": 0.0,
+   "max": 0.7799999713897705,
+   "positive_cells": 5167373,
+   "portal_safe": true
+  },
+  {
+   "file": "gemsdoe48-h48-ds-yager-conflict-20261006.tif",
+   "bytes": 364121,
+   "sha256": "fe68ae6f57be013e26d20006551b43cd84bb5fe4a0b07d1d10ce4725c90fd16c",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": null,
+   "all_finite": true,
+   "min": 0.0,
+   "max": 1.0,
+   "positive_cells": 47905,
+   "portal_safe": true
+  },
+  {
+   "file": "gemsdoe48-h49-ds-conflict-balanced-20261006-belief-field.tif",
+   "bytes": 1925277,
+   "sha256": "6bcf9de850471535816e1a798983a329b4408d39cfa91d4c17511e7fe0158a38",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": null,
+   "all_finite": true,
+   "min": 0.0,
+   "max": 1.0,
+   "positive_cells": 791389,
+   "portal_safe": true
+  },
+  {
+   "file": "gemsdoe48-h49-ds-conflict-balanced-20261006-e6f08013888b.tif",
+   "bytes": 258444,
+   "sha256": "e6f08013888b625db7d187d79bb75ba36c45d068081b77a3dd405ab7eec3d472",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": null,
+   "all_finite": true,
+   "min": 0.0,
+   "max": 1.0,
+   "positive_cells": 47905,
+   "portal_safe": true
+  },
+  {
+   "file": "gemsdoe48-h49-ds-conflict-balanced-20261006-unassigned-diagnostic.tif",
+   "bytes": 2020265,
+   "sha256": "cd1f9d6ac726288d27c41820a4da9845a30dddbf7b25b15185df11381e523d39",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": null,
+   "all_finite": true,
+   "min": 0.0,
+   "max": 0.7418966293334961,
+   "positive_cells": 5167373,
+   "portal_safe": true
+  },
+  {
+   "file": "gemsdoe48-h50-ds-b2xh36rung30-20261007-5b59e106-nan.tif",
+   "bytes": 2170664,
+   "sha256": "54dfe8bd79f767370558bebc1c23366cb43e5e5a4b26c7d9d14131c8b58bdc0c",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": NaN,
+   "all_finite": false,
+   "min": 0.0,
+   "max": 1.0,
+   "positive_cells": 767043,
+   "portal_safe": false
+  },
+  {
+   "file": "gemsdoe48-h50-ds-b2xh36rung30-20261007-5b59e106-zeros.tif",
+   "bytes": 1453567,
+   "sha256": "5b59e106b6e448038b96fb340c5bae39094d4558c239c437aea28b6020d5d32f",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": null,
+   "all_finite": true,
+   "min": 0.0,
+   "max": 1.0,
+   "positive_cells": 767043,
+   "portal_safe": true
+  },
+  {
+   "file": "gemsdoe48-h50b-alteration-conflict-20261007-806a4ba4-nan.tif",
+   "bytes": 286030,
+   "sha256": "d3ce73e0cfd340dc974c0117420213f36ea97ffd46a6f46b8e294a2de9c853de",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": NaN,
+   "all_finite": false,
+   "min": 0.0,
+   "max": 1.0,
+   "positive_cells": 37654,
+   "portal_safe": false
+  },
+  {
+   "file": "gemsdoe48-h50b-alteration-conflict-20261007-806a4ba4-zeros.tif",
+   "bytes": 233947,
+   "sha256": "806a4ba42e7be89cdef226dd75c09246d3e5923feb1796ab6d5b86ae94f8dda9",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": null,
+   "all_finite": true,
+   "min": 0.0,
+   "max": 1.0,
+   "positive_cells": 37654,
+   "portal_safe": true
+  },
+  {
+   "file": "gemsdoe48-h51-plausibility-budget-20261007-f8fa1d08-nan.tif",
+   "bytes": 370774,
+   "sha256": "ce34944afa302e8a2b7e71502caf18a0d2f71d706dcb6f39397f11a237355961",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": NaN,
+   "all_finite": false,
+   "min": 0.0,
+   "max": 1.0,
+   "positive_cells": 37654,
+   "portal_safe": false
+  },
+  {
+   "file": "gemsdoe48-h51-plausibility-budget-20261007-f8fa1d08-zeros.tif",
+   "bytes": 281345,
+   "sha256": "f8fa1d0817712d34935acd70663eb14c510876598c4f70729fcd79288706120f",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": null,
+   "all_finite": true,
+   "min": 0.0,
+   "max": 1.0,
+   "positive_cells": 37654,
+   "portal_safe": true
+  },
+  {
+   "file": "gemsdoe48-h58-continuous-pignistic-20261008T175914Z-e58.tif",
+   "bytes": 1399672,
+   "sha256": "59ef8e7d8374e228bc1e41376f03fc67dd5b8a5e6804885a1ae802f399140b89",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": NaN,
+   "all_finite": false,
+   "min": 0.002504456788301468,
+   "max": 1.0,
+   "positive_cells": 5167373,
+   "portal_safe": false
+  },
+  {
+   "file": "gemsdoe48-h58-diag-conflict-20261008T175914Z-e58.tif",
+   "bytes": 1282282,
+   "sha256": "7f0fbe2fcec056f2a06f927f011a2010c95608ea610bcf56db62cb2bae4b8806",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": NaN,
+   "all_finite": false,
+   "min": 0.0,
+   "max": 0.8550683856010437,
+   "positive_cells": 759775,
+   "portal_safe": false
+  },
+  {
+   "file": "gemsdoe48-h58-diag-mtheta-20261008T175914Z-e58.tif",
+   "bytes": 1282583,
+   "sha256": "d4132a9214beacdb9a2c1a81dd14e737729ededd2a296f9e32bf908a62783c74",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": NaN,
+   "all_finite": false,
+   "min": 0.004996400326490402,
+   "max": 0.034474194049835205,
+   "positive_cells": 5167373,
+   "portal_safe": false
+  },
+  {
+   "file": "gemsdoe48-h58-diag-plausibility-20261008T175914Z-e58.tif",
+   "bytes": 1419133,
+   "sha256": "56abce3cfd91c7a6961ffed128ed92ce11d6c17c293d02e02f0f9d6a88fad3a2",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": NaN,
+   "all_finite": false,
+   "min": 0.004996400326490402,
+   "max": 1.0,
+   "positive_cells": 5167373,
+   "portal_safe": false
+  },
+  {
+   "file": "gemsdoe48-h58-pignistic-conflict-priced-B2xH33D-20261008T175914Z-e58.tif",
+   "bytes": 324018,
+   "sha256": "5acb56d987ce30a2c332f09ed33cb00dcaeec027ac437519ca237e52e0046022",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": null,
+   "all_finite": true,
+   "min": 0.0,
+   "max": 1.0,
+   "positive_cells": 40000,
+   "portal_safe": true
+  },
+  {
+   "file": "gemsdoe48-h59-cover-ds-belief-b2xh33d-20261008T184547Z-b79c4c61d8d8.tif",
+   "bytes": 117434,
+   "sha256": "f1584187b459baf47f75e5daf64de6f7696f9feb14910d3cf2762f7a1119597a",
+   "dtype": "float32",
+   "bands": 1,
+   "shape": [
+    3730,
+    3292
+   ],
+   "crs": "EPSG:32611",
+   "transform_matches_template": true,
+   "crs_matches_template": true,
+   "nodata": null,
+   "all_finite": true,
+   "min": 0.0,
+   "max": 1.0,
+   "positive_cells": 37723,
+   "portal_safe": true
+  }
+ ],
+ "notes": [
+  "portal_safe = single band, float32, all values finite, every value in [0,1], no nodata tag, transform equal to the organizer template.",
+  "Files with NaN outside the footprint fail `all(0 <= v <= 1)` and are the documented cause of the portal error 'Predicted values must be in range [0, 1]'.",
+  "Only the primary listed above is a current submission candidate; every other file is retained for traceability and is not cleared."
+ ]
+}
