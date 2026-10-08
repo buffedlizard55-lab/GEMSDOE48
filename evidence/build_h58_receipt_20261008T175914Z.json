@@ -1,0 +1,69 @@
+{
+  "hypothesis": "H58 pignistic conflict-priced DS fusion",
+  "description": "Pignistic probability BetP(F) = Bel(F) + m(\u0398)/2 weighted by (1\u2212K) where K is raw conjunctive conflict. Unlike all prior GEMSDOE48 fusions (which output raw Bel(F)), this carries disagreement INTO the submission surface itself.",
+  "timestamp": "20261008T175914Z",
+  "parents": {
+    "A": {
+      "id": "H33-2-B2",
+      "family": "dotted",
+      "path": "/home/user/GEMSDOE48/data/raw/dotted_h33_2_b2_zeros.tif",
+      "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+      "owner_reported_live": 0.2778,
+      "positive_pixels": 37654
+    },
+    "B": {
+      "id": "H33-D",
+      "family": "tip/stepover",
+      "path": "/home/user/GEMSDOE48/data/raw/tip_h33d_stepover.tif",
+      "sha256": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757",
+      "owner_reported_live": 0.2632,
+      "positive_pixels": 41865
+    }
+  },
+  "overlap": {
+    "shared_pixels": 31614,
+    "union_pixels": 47905,
+    "jaccard": 0.6599311136624569
+  },
+  "parameters": {
+    "RHO_MAX": 0.95,
+    "alpha_A": 0.95,
+    "alpha_B": 0.9000719942404607,
+    "kernel": "triangular k(d) = max(1-d/300m, 0)",
+    "evidence": "metric-geometry kernel-credit belief surface",
+    "combination": "canonical normalized Dempster rule",
+    "output": "BetP(F) * (1 - K), normalized to [0,1]"
+  },
+  "distinctness": {
+    "pearson_vs_naive_mean": 0.9686308674738388,
+    "spearman_vs_naive_mean": 0.9980588135221288,
+    "max_abs_diff_vs_naive_mean": 0.5,
+    "pearson_vs_raw_belief": 0.9852468013709172,
+    "pearson_vs_betp_alone": 0.9851397279476523,
+    "is_distinct": true
+  },
+  "submission": {
+    "filename": "gemsdoe48-h58-pignistic-conflict-priced-B2xH33D-20261008T175914Z-e58.tif",
+    "sha256": "5acb56d987ce30a2c332f09ed33cb00dcaeec027ac437519ca237e52e0046022",
+    "positive_pixels": 40000,
+    "all_finite": true,
+    "value_range": [
+      0.0,
+      1.0
+    ],
+    "grid": {
+      "width": 3292,
+      "height": 3730,
+      "crs": "EPSG:32611",
+      "pixel_size_m": 100.0
+    }
+  },
+  "diagnostics": {
+    "mtheta_file": "gemsdoe48-h58-diag-mtheta-20261008T175914Z-e58.tif",
+    "conflict_file": "gemsdoe48-h58-diag-conflict-20261008T175914Z-e58.tif",
+    "plausibility_file": "gemsdoe48-h58-diag-plausibility-20261008T175914Z-e58.tif"
+  },
+  "status": "UNSCORED \u2014 research artifact; no organizer score exists",
+  "note_for_submission_form": "GEMSDOE48 H58 | Pignistic BetP(F)*(1-K) of B2 dotted x H33-D tip/stepover; kernel-credit belief, reliability discounts; unique DS variant; UNSCORED.",
+  "submission_name": "GEMSDOE48-H58-PignisticConflictPriced-B2xH33D"
+}
