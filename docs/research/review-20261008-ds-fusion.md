@@ -61,3 +61,31 @@ Ranking is a qualitative research priority, **not a predicted score**. No additi
 5. Preserve output names and verdicts; a unique byte sequence is not evidence of novel science, improved DTI, permission to submit, or organizer acceptance.
 
 Official/manual-review references recorded by the project: [DrivenData competition overview](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/), [DrivenData data page](https://www.drivendata.org/competitions/306/competition-doe-gems/data/), [GEMS reference solution](https://github.com/drivendataorg/gems-prize-reference-solution), [USGS GeoDawn data](https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and), [INGENIOUS](https://gbcge.org/current-projects/ingenious/), and [DOE GDR submission 1391](https://gdr.openei.org/submissions/1391). This is a repository evidence review, not a fresh verification of every live webpage or data download.
+
+---
+
+## Addendum — 2026-10-08 (later the same day, H59 session)
+
+This review's run-card verdict (**negative**, for the H56/H56B artifacts) stands unchanged for those artifacts.
+Its forward-looking conclusions were, however, **superseded later the same day** by the H59 session, which implemented
+exactly the gates this review listed as missing:
+
+- the whole-fault-segment buffered hide-and-recover evaluator with pixel-exact masking, pooled components,
+  per-feature leakage canaries (positive controls AUC 1.0000; real canaries 0.49–0.50) and segment-bootstrap 95% CIs
+  now exists at `scripts/evaluate_holdout.py` with receipts `evidence/holdout59_catalogue.json` and
+  `evidence/holdout59_sgmc_offcat.json`;
+- the registry-wide correlation and dot-overlap audit now exists and is applied mechanically in
+  `scripts/build_submission_h59.py` (74 rasters, 47 submission-like; both duplicate tripwires evaluated);
+- a top-k cut of the fusion was caught by that tripwire as an in-lane duplicate of the dotted family
+  (Jaccard 0.939; 100% of dots within 3 px) and was logged and deleted — confirming this review's warning;
+- a **distinct** emission rule (hex-covering of the fused belief corridor, spacing 4.0 px, 37,723 dots) passed
+  every gate and is the current primary artifact:
+  `docs/downloads/gemsdoe48-h59-cover-ds-belief-b2xh33d-20261008T184547Z-b79c4c61d8d8.tif`
+  (SHA-256 `f1584187b459baf47f75e5daf64de6f7696f9feb14910d3cf2762f7a1119597a`), verdict
+  "OK TO DOWNLOAD AND SUBMIT (format-valid, portal-safe, unique bytes and unique dot cells);
+  no local evidence that it beats the current best."
+
+So: "do not duplicate the fusion under a new name" remains correct for rank-cut variants; the cover-rule artifact is
+not a duplicate under the measured tripwires and carries its own honest-negative score statement
+(HOLDOUT-DTI 0.0974 [0.0927, 0.1023] catalogue / 0.0917 [0.0844, 0.0990] SGMC off-catalogue; UNSCORED by the organizer).
+Full record: [h59-method-results-20261008.md](h59-method-results-20261008.md).

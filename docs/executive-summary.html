@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GEMSDOE48 — Executive Summary: How to Submit</title>
+<title>GEMSDOE48 — Executive Summary: How to submit a TIF</title>
 <link rel="stylesheet" href="style.css">
 <style>
 .button{display:inline-block;background:#0b6e4f;color:#fff;padding:14px 24px;border-radius:8px;text-decoration:none;font-weight:700;margin:8px;font-size:1.1rem}
@@ -16,12 +16,13 @@
 table{border-collapse:collapse;width:100%;margin:12px 0}
 th,td{border:1px solid #d1d5db;padding:8px 10px;text-align:left}
 th{background:#f3f4f6}
+.alert{background:#fff7df;border-left:5px solid #b45309;padding:14px;border-radius:9px;margin:14px 0}
 </style>
 </head>
 <body>
 <header><div class="wrap">
 <p>GEMSDOE48 · Executive Summary</p>
-<h1>How to Submit the H58 TIF to the Competition</h1>
+<h1>How to submit a TIF to DrivenData competition 306 (DOE GEMS)</h1>
 </div></header>
 <nav><div class="wrap">
 <a href="index.html">Overview</a>
@@ -30,61 +31,71 @@ th{background:#f3f4f6}
 <a href="method.html">Method</a>
 <a href="hypotheses.html">Hypotheses</a>
 <a href="validation.html">Validation</a>
-<a href="leaderboard.html">Leaderboard</a>
-<a href="sources.html">Sources</a>
+<a href="status.html">Status feed</a>
+<a href="irregularities.html">Irregularities</a>
+<a href="next-steps.html">Next steps</a>
 </div></nav>
 <main class="wrap">
 
 <div class="hero-submit">
-<h2>⬇ ONE-CLICK DOWNLOAD</h2>
-<a class="button" href="downloads/gemsdoe48-h58-pignistic-conflict-priced-B2xH33D-20261008T175914Z-e58.tif" download>⬇ Download Submission TIF (40,000 px)</a>
-<a class="button" href="downloads/gemsdoe48-h58-pignistic-conflict-priced-B2xH33D-20261008T175914Z-e58.zip" download>Download .zip</a>
-<p><b>File:</b> <code>gemsdoe48-h58-pignistic-conflict-priced-B2xH33D-20261008T175914Z-e58.tif</code></p>
+<h2>⬇ ONE-CLICK DOWNLOAD — current primary candidate</h2>
+<a class="button" href="downloads/gemsdoe48-h59-cover-ds-belief-b2xh33d-20261008T184547Z-b79c4c61d8d8.tif" download>⬇ Download Submission TIF (37,723 positive cells)</a>
+<a class="button" href="downloads/gemsdoe48-h59-cover-ds-belief-b2xh33d-20261008T184547Z-b79c4c61d8d8.zip" download>Download .zip</a>
+<p><b>File:</b> <code>gemsdoe48-h59-cover-ds-belief-b2xh33d-20261008T184547Z-b79c4c61d8d8.tif</code><br>
+<b>SHA-256:</b> <code>f1584187b459baf47f75e5daf64de6f7696f9feb14910d3cf2762f7a1119597a</code><br>
+<b>Portal name:</b> <code>GEMSDOE48-H59-CoverDSBelief-B2xH33D</code><br>
+<b>Portal note:</b> <code>GEMSDOE48 H59 | Dempster Bel(F), dotted B2 x tip H33D; 400m hex-cover of the fusion corridor; m(Theta) layer</code></p>
+<p><b>Verdict:</b> OK TO DOWNLOAD AND SUBMIT (format-valid, portal-safe, unique bytes and unique dot cells); no local evidence that it beats the current best. Unscored — no organizer receipt exists for this file.</p>
+</div>
+
+<div class="alert">
+<b>If a file previously failed with "Predicted values must be in range [0, 1]":</b>
+that error comes from files that contain <code>NaN</code> outside the footprint (half of the
+older downloads in this repository do). The portal evaluates
+<code>all(0 ≤ v ≤ 1)</code>; a NaN fails it. The primary file above contains no NaN and no
+nodata tag, and the automated feed at <a href="status.html">status.html</a> lists every
+downloadable file with its portal-safety result so nothing has to be checked by hand.
 </div>
 
 <h2>Step-by-step submission instructions</h2>
 <ol class="steps">
-<li><b>Download the TIF file</b> by clicking the green button above. Save it anywhere on your computer.</li>
-<li><b>Go to <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">the DrivenData competition page</a></b> and log in.</li>
-<li><b>Click "Submit" → "New submission"</b> in the competition interface.</li>
-<li><b>Upload the file:</b> Under "File to submit", click "Choose File" and select the downloaded <code>.tif</code> file (or the <code>.zip</code>).</li>
-<li><b>Fill in the Note field:</b> In the "Note (optional)" field, paste:
-<div class="copy-box">GEMSDOE48-H58-PignisticConflictPriced-B2xH33D</div>
-</li>
-<li><b>Click "Create"</b> to submit the file.</li>
+<li><b>Download the TIF</b> with the green button above (or the .zip, which contains the same single GeoTIFF).</li>
+<li><b>Open the competition page</b> and log in:
+<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">drivendata.org/competitions/306/competition-doe-gems</a>
+(rules/overview: <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">page 967</a>,
+data: <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/data/">data tab</a>).</li>
+<li><b>Click "New submission"</b> on the leaderboard/submission panel.</li>
+<li><b>Choose the file</b> under "File to submit" — the single-band GeoTIFF (or the zip containing one GeoTIFF).</li>
+<li><b>Paste the unique name</b> and note into the "Note (optional)" field:
+<div class="copy-box">GEMSDOE48-H59-CoverDSBelief-B2xH33D | GEMSDOE48 H59 | Dempster Bel(F), dotted B2 x tip H33D; 400m hex-cover of the fusion corridor; m(Theta) layer</div></li>
+<li><b>Click "Create".</b> Promotion to a real weekly slot is a separate selection step
+inside the weekly cap shown on the submission page — this page documents the artifact, it
+does not spend a slot by itself.</li>
 </ol>
 
-<h2>Submission format details</h2>
+<h2>Submission format — verified line by line against the organizer template</h2>
 <table>
-<tr><th>Property</th><th>Value</th><th>Required</th></tr>
-<tr><td>Single band</td><td>✓ Yes</td><td>Required</td></tr>
-<tr><td>Data type</td><td>float32</td><td>Required</td></tr>
-<tr><td>CRS</td><td>EPSG:32611</td><td>Required (matches competition grid)</td></tr>
-<tr><td>Grid size</td><td>3292 × 3730</td><td>Required (matches sample submission)</td></tr>
-<tr><td>Pixel size</td><td>100 m × 100 m</td><td>Required</td></tr>
-<tr><td>Value range</td><td>[0.0, 1.0]</td><td>Required (this caused the prior "Predicted values must be in range [0, 1]" error)</td></tr>
-<tr><td>NaN cells</td><td>0 (all finite)</td><td>All finite — no nodata sentinel</td></tr>
-<tr><td>Positive pixels</td><td>40,000</td><td>Optimized for the DTI budget metric</td></tr>
+<tr><th>Requirement</th><th>Primary file</th><th>Check</th></tr>
+<tr><td>Single-band GeoTIFF (.tif) or .zip</td><td>1 band float32</td><td>✓ gate <code>single_band</code></td></tr>
+<tr><td>CRS matches the submission format</td><td>EPSG:32611</td><td>✓ <code>crs_matches_template</code></td></tr>
+<tr><td>Shape matches (3,292 × 3,730)</td><td>3,730 × 3,292</td><td>✓ <code>shape_matches_template</code></td></tr>
+<tr><td>Geotransform matches</td><td>identical to template</td><td>✓ <code>transform_matches_template</code></td></tr>
+<tr><td>Predicted values in [0, 1]</td><td>min 0.0, max 1.0, no NaN</td><td>✓ <code>portal_range_predicate_all</code></td></tr>
+<tr><td>No nodata sentinel confusion</td><td>nodata unset</td><td>✓ <code>no_nodata_tag</code></td></tr>
+<tr><td>Outside the footprint</td><td>0.0 (finite)</td><td>✓ <code>zero_outside_footprint</code></td></tr>
 </table>
 
-<h2>Why this file won't trigger the portal error</h2>
-<p>The previous submission attempt failed with <code>"Predicted values must be in range [0, 1]"</code>. That error has two causes:</p>
-<ol>
-<li><b>Float32 sentinel:</b> The training features use <code>-3.4e+38</code> as nodata; writing those cells through puts them outside [0,1].</li>
-<li><b>NaN nodata tag:</b> A raster with <code>nodata=NaN</code> can trigger the same error if the validator reads the sentinel as a value.</li>
-</ol>
-<p><b>This file has neither problem:</b> every one of the 12,279,160 cells is finite and in [0,1], there are zero NaN cells, and there is no nodata tag. The portal cannot reject this file for range violations.</p>
-
-<h2>What is this submission?</h2>
-<p>It is the <b>first-ever pignistic conflict-priced Dempster–Shafer fusion</b> of the two strongest independently-built families in this campaign:</p>
-<ul>
-<li><b>Parent A — Dotted Family H33-2-B2</b> (score 0.2778): spacing-tuned catalogue-flank pruning. 37,654 positive cells.</li>
-<li><b>Parent B — Tip/Step-Over Family H33-D</b> (score 0.2632): analog-based fault-tip and step-over detection. 41,865 positive cells.</li>
-</ul>
-<p>The combination uses Dempster's rule with metric-geometry kernel-credit belief surfaces and Shafer reliability discounts. The output is the <b>pignistic probability</b> BetP(F) = Bel(F) + m(Θ)/2 weighted by (1−K), which explicitly suppresses the surface where the two families disagree. 40,000 top-ranked cells are emitted.</p>
-<p>This is a unique submission not identical to any prior artifact in this or sibling campaigns.</p>
+<h2>Where the evidence lives</h2>
+<table>
+<tr><th>Artifact</th><th>Path</th></tr>
+<tr><td>Build receipt (gates, uniqueness, holdout summary)</td><td><code>gemsdoe48-h59-cover-ds-belief-b2xh33d-20261008T184547Z-b79c4c61d8d8.tif</code> → <code>evidence/build_h59_receipt_20261008T184547Z.json</code></td></tr>
+<tr><td>Strict holdout, catalogue proxy</td><td><code>evidence/holdout59_catalogue.json</code></td></tr>
+<tr><td>Strict holdout, SGMC off-catalogue proxy</td><td><code>evidence/holdout59_sgmc_offcat.json</code></td></tr>
+<tr><td>Method, results, run card, hypothesis slate</td><td><a href="research/h59-method-results-20261008.md">docs/research/h59-method-results-20261008.md</a></td></tr>
+<tr><td>Automated status feed (all downloads)</td><td><a href="status.html">docs/status.html</a> · <a href="data/status.json">docs/data/status.json</a></td></tr>
+</table>
 
 </main>
-<footer><div class="wrap">GEMSDOE48 · Executive Summary · 2026-10-08</div></footer>
+<footer><div class="wrap">GEMSDOE48 · executive summary · regenerated 2026-10-08 · unscored research artifact</div></footer>
 </body>
 </html>

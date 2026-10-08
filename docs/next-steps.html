@@ -1,7 +1,8 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="GEMSDOE48 prioritized research next steps, including Gate-2, spatially blocked holdouts and the current no-submit status."><title>GEMSDOE48 — next steps</title><link rel="stylesheet" href="style.css"><style>nav a{color:#cdeadd;text-decoration:none;padding:6px 10px;border-radius:8px}nav a:hover{background:#0b6e4f;color:#fff}.verdict{border:3px solid #b91c1c;background:#fff0ed;padding:18px;border-radius:14px;margin:20px 0}.alert{background:#fff7df;border-left:5px solid #b45309;padding:14px;border-radius:9px;margin:14px 0}.steps li{margin:1em 0}</style></head>
 <body><header><div class="wrap"><p>GEMSDOE48 · decision log</p><h1>Next steps</h1><p>Priorities that respect the failed tests, proxy limitations and mass-neutral promotion gate.</p></div></header>
-<nav><div class="wrap"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="submission-guide.html">Submission guide</a><a href="method.html">Method</a><a href="hypotheses.html">Hypotheses</a><a href="validation.html">Validation</a><a href="leaderboard.html">Leaderboard</a><a href="irregularities.html">Irregularities</a><a href="sources.html">Sources</a><a href="next-steps.html">Next steps</a></div></nav>
+<nav><div class="wrap"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="submission-guide.html">Submission guide</a><a href="method.html">Method</a><a href="hypotheses.html">Hypotheses</a>
+<a href="status.html">Status feed</a><a href="validation.html">Validation</a><a href="leaderboard.html">Leaderboard</a><a href="irregularities.html">Irregularities</a><a href="sources.html">Sources</a><a href="next-steps.html">Next steps</a></div></nav>
 <main class="wrap">
 <div class="verdict"><strong>Current action: do not upload; do not spend a weekly slot.</strong> H56B, H56 open-world D-S and the H56-F threshold rungs lose to H49 on both public proxies. H57-A fails its second-proxy criterion and random-addition controls. No candidate is cleared.</div>
 <ol class="steps">
@@ -15,4 +16,25 @@
 </ol>
 <div class="alert"><b>Candidate promotion rule:</b> no upload unless the candidate beats the current comparable holdout best under the same spatially blocked semantics, passes a re-derived and validated Gate-2, has defensible source construction and receives an explicit owner slot decision. The historical Gate-2 script is not a current clearance. Even after local gates, only a file-specific organizer response can establish acceptance or connect a returned score to local bytes.</div>
 <p><b>Present status remains unchanged: no local organizer score, no verified file-to-leaderboard link, no weekly slot cleared.</b></p>
+
+<h2 class="sec">Next steps after the H59 session (2026-10-08)</h2>
+<ol>
+<li><b>Validate the slate on an unrestricted machine.</b> H60 (lidar micro-topography
+conditioned on the fused corridor) is the only candidate with a plausible route past the
+current ceiling; it needs USGS 3DEP tiles for the corridor. Run it through
+<code>scripts/evaluate_holdout.py</code> (both truths) and require: beat the best parent
+<b>and</b> the same-mass random control on both proxies before any submission slot.</li>
+<li><b>Rebuild the budget gate on real evidence.</b> The old 0.0556 break-even bar and
+<code>FPw = S − TPw</code> projection are invalid. Use the same-mass random control in the
+new receipts as the gate: a candidate must beat its own random control at the same emitted
+mass on the catalogue proxy and on the SGMC off-catalogue proxy.</li>
+<li><b>Re-derive the parents per fold.</b> The current protocol tests frozen surfaces.
+A fully compliant hide-and-recover run must rebuild the dotted/tip families from visible
+faults only; that needs the generators, which are not in this checkout.</li>
+<li><b>Reconcile the two SGMC rasters and re-pin SHAs</b> in
+<code>scripts/run_spatial_holdout.py</code> and the H59 evaluator.</li>
+<li><b>Keep the status feed current.</b> Re-run
+<code>python3 scripts/build_status_feed.py</code> after every build so the site never
+requires manual inspection of downloads.</li>
+</ol>
 </main><footer><div class="wrap">GEMSDOE48 · next decision checkpoint after source-access audit and blocked test · 2026-10-07</div></footer></body></html>

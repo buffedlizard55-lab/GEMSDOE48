@@ -1,7 +1,8 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="H57 ranked geological hypotheses with expected proxy DTI ranges, cost, source access checks, and H57-A outcome."><title>GEMSDOE48 — geological hypotheses</title><link rel="stylesheet" href="style.css"><style>nav a{color:#cdeadd;text-decoration:none;padding:6px 10px;border-radius:8px}nav a:hover{background:#0b6e4f;color:#fff}.alert{background:#fff7df;border-left:5px solid #b45309;padding:14px;border-radius:9px;margin:14px 0}.failed{color:#8d3227;font-weight:800}.columns{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}</style></head>
 <body><header><div class="wrap"><p>GEMSDOE48 · H57 planning slate</p><h1>Four distinct geological hypotheses</h1><p>Ranges are planning priors for public-proxy ΔDTI versus H49; they are not measured gains or leaderboard predictions.</p></div></header>
-<nav><div class="wrap"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="submission-guide.html">Submission guide</a><a href="method.html">Method</a><a href="hypotheses.html">Hypotheses</a><a href="validation.html">Validation</a><a href="leaderboard.html">Leaderboard</a><a href="irregularities.html">Irregularities</a><a href="sources.html">Sources</a><a href="next-steps.html">Next steps</a></div></nav>
+<nav><div class="wrap"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="submission-guide.html">Submission guide</a><a href="method.html">Method</a><a href="hypotheses.html">Hypotheses</a>
+<a href="status.html">Status feed</a><a href="validation.html">Validation</a><a href="leaderboard.html">Leaderboard</a><a href="irregularities.html">Irregularities</a><a href="sources.html">Sources</a><a href="next-steps.html">Next steps</a></div></nav>
 <main class="wrap">
 <div class="alert"><b>Decision:</b> this branch's H57-A was tested as preregistered and failed the two-proxy gate; that screen emitted no TIFF. A separate concurrent H57-RELIEF TIFF exists but its prior live projection and submit recommendation were invalidated. <b>No submission slot is cleared.</b> The remaining three ideas are parked pending coverage, field and use-term audits. See <a href="research/h57-results-20261007.md">H57-A results</a>, <a href="research/h57-ds-relief-augmented-20261007.md">H57-RELIEF report</a>, and its <a href="research/h57-relief-metric-erratum-20261007.md">metric erratum</a>.</div>
 <p>The slate was frozen 2026-10-07 before H57-A feature extraction or holdout scoring. Rank was qualitative, based on potential, cost and data readiness. The exact freeze, post-freeze source restore record and text correction are in <a href="research/hypotheses-h57-20261007.md">the full H57 slate</a>, <a href="../evidence/hypothesis_slate_h57a_20261007.json">the machine-readable preregistration</a> and <a href="../evidence/h57_data_access_checks_20261007.json">the data-access receipt</a>.</p>
@@ -21,4 +22,31 @@
 <h2 class="sec">Sources and caveats</h2>
 <ul><li><a href="https://doi.org/10.5066/P93LGLVQ">USGS GeoDAWN</a> · <a href="https://earthquake.usgs.gov/fdsnws/event/1/">USGS ComCat</a> · <a href="https://www.usgs.gov/faqs/what-is-the-coverage-of-3d-elevation-program-3dep-dems">3DEP coverage</a> · <a href="https://www.usgs.gov/national-hydrography/access-national-hydrography-products">3DHP</a> · <a href="https://mrdata.usgs.gov/geochem/">USGS NGS</a>.</li><li>Public products being downloadable does not show complete target-area coverage, challenge-use rights, or sponsor-sharing permissions.</li><li>Public-proxy results do not establish private expert-label or leaderboard performance. No organizer score exists for any local artifact and no weekly slot is cleared.</li></ul>
 <p>Historical slate and results: <a href="research/hypotheses-h57-20261007.md">H57 preregistration</a> · <a href="research/h57-results-20261007.md">H57-A results</a> · <a href="research/hypotheses-h56-20261007.md">H56B slate</a> · <a href="research/hypothesis-slate-h56-20261007.md">concurrent H56 slate</a>.</p>
+
+<h2 class="sec">H59 hypothesis slate — ranked, unvalidated (2026-10-08)</h2>
+<p>The measured evidence says the binding constraint is <b>new off-catalogue evidence</b>,
+not a new combination rule: a Dempster combination of two families that already share
+31,614 of their 47,905 cells cannot add information about the same target. The slate below
+is ranked by expected off-catalogue enrichment per unit cost; none of it has been built
+yet, and the top item needs DEM tiles this environment cannot download. Full descriptions,
+sources and availability caveats: <a href="research/h59-method-results-20261008.md">H59
+method &amp; results</a>, §7.</p>
+<table>
+<tr><th>#</th><th>Hypothesis</th><th>Signature / why unmapped faults</th><th>Cost</th></tr>
+<tr><td>1</td><td><b>H60 — lidar micro-topography conditioned on the fused corridor</b></td>
+<td>Multi-scale curvature offsets and drainage deflection within ~100 m of a corridor dot; compilation maps miss metre-scale scarps that high-resolution expert mapping captures</td>
+<td>Medium — USGS 3DEP tiles (availability unverified from this sandbox)</td></tr>
+<tr><td>2</td><td><b>H62 — stress-consistent tip/relay continuation</b></td>
+<td>Along-strike projections past mapped tips and relay bridging between overlapping tip pairs; the tip family already scored 0.2632 owner-reported</td>
+<td>Low — geometry on local rasters only</td></tr>
+<tr><td>3</td><td><b>H61 — multi-scale magnetic edge persistence</b></td>
+<td>Edges persistent across smoothing scales in TMI derivatives, angle-filtered away from catalogue-parallel structure</td>
+<td>Medium — cached 19-band stack restore (third-party mirror caveat)</td></tr>
+<tr><td>4</td><td><b>H64 — INGENIOUS thermal/geochemical modulator</b></td>
+<td>Thermal/alteration proximity re-ranks corridor dots instead of adding geometry</td>
+<td>Medium — INGENIOUS / DOE GDR 1391 (availability unverified)</td></tr>
+<tr><td>5</td><td><b>H63 — SGMC-vintage differential</b> (kept as documented negative)</td>
+<td>SGMC faults absent from the catalogue — already effectively submitted as <code>sgmc-off-catalogue-44k</code>, owner-reported 0.0512</td>
+<td>Low — negative evidence</td></tr>
+</table>
 </main><footer><div class="wrap">GEMSDOE48 research-only hypothesis slate · 2026-10-07</div></footer></body></html>
