@@ -1,42 +1,90 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Executive summary of GEMSDOE48 research: Dempster–Shafer artifact status, blocked public-proxy results, and carefully bounded leaderboard attribution."><title>GEMSDOE48 — executive summary</title><link rel="stylesheet" href="style.css"><style>nav a{color:#cdeadd;text-decoration:none;padding:6px 10px;border-radius:8px}nav a:hover{background:#0b6e4f;color:#fff}.verdict{border:3px solid #b91c1c;background:#fff0ed;padding:18px;border-radius:14px;margin:20px 0}.download{border:3px solid #0b6e4f}.alert{background:#fff7df;border-left:5px solid #b45309;padding:14px;border-radius:9px;margin:14px 0}.columns{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}.mono{word-break:break-all}.button{display:inline-block;background:#0b6e4f;color:#fff;padding:11px 16px;border-radius:8px;text-decoration:none;font-weight:700;margin:6px}.button.alt{background:#33475b}.button:hover{filter:brightness(1.08);color:#fff}.fileline{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.8rem;word-break:break-all;background:#eef3f7;padding:9px;border-radius:6px}</style></head>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GEMSDOE48 — Executive Summary: How to Submit</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.button{display:inline-block;background:#0b6e4f;color:#fff;padding:14px 24px;border-radius:8px;text-decoration:none;font-weight:700;margin:8px;font-size:1.1rem}
+.button:hover{filter:brightness(1.08);color:#fff}
+.hero-submit{border:4px solid #0b6e4f;background:#e8f5ee;padding:24px;border-radius:16px;margin:20px 0}
+.copy-box{background:#1e293b;color:#e2e8f0;padding:12px;border-radius:8px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.85rem;word-break:break-all;margin:8px 0}
+.steps{counter-reset:step;list-style:none;padding:0}
+.steps li{counter-increment:step;padding:10px 10px 10px 50px;position:relative;margin:8px 0;background:#f8f9fa;border-radius:8px}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);background:#0b6e4f;color:#fff;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem}
+table{border-collapse:collapse;width:100%;margin:12px 0}
+th,td{border:1px solid #d1d5db;padding:8px 10px;text-align:left}
+th{background:#f3f4f6}
+</style>
+</head>
 <body>
-<header><div class="wrap"><p>GEMSDOE48 · DOE GEMS Prize</p><h1>Executive summary</h1><p>Research status, evidence and instructions for a future cleared submission. This page does not authorize a current upload.</p></div></header>
-<nav><div class="wrap"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="submission-guide.html">Submission guide</a><a href="method.html">Method</a><a href="hypotheses.html">Hypotheses</a><a href="validation.html">Validation</a><a href="leaderboard.html">Leaderboard</a><a href="irregularities.html">Irregularities</a><a href="sources.html">Sources</a><a href="next-steps.html">Next steps</a></div></nav>
+<header><div class="wrap">
+<p>GEMSDOE48 · Executive Summary</p>
+<h1>How to Submit the H58 TIF to the Competition</h1>
+</div></header>
+<nav><div class="wrap">
+<a href="index.html">Overview</a>
+<a href="executive-summary.html">Executive summary</a>
+<a href="submission-guide.html">Submission guide</a>
+<a href="method.html">Method</a>
+<a href="hypotheses.html">Hypotheses</a>
+<a href="validation.html">Validation</a>
+<a href="leaderboard.html">Leaderboard</a>
+<a href="sources.html">Sources</a>
+</div></nav>
 <main class="wrap">
-<div class="verdict"><strong>NO WEEKLY SUBMISSION SLOT IS CLEARED.</strong> The current-branch H57-A screen and H56-F pruning failed their public-proxy gates. A distinct H57-RELIEF TIFF exists, but its former live projection and submit recommendation were invalidated. Public-proxy scores are not private-label performance, leaderboard scores, or organizer acceptance.</div>
-<section class="hero download"><h2>⬇ H56B Dempster–Shafer TIFF</h2>
-<p><b>OK TO DOWNLOAD FOR INSPECTION · NOT OK / NOT CLEARED TO SUBMIT.</b> This is the H56B graded Bel(F) surface from dotted B2 × H33-D tip/step-over. It is not a cleared competition submission.</p>
-<p><a class="button" href="downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros-outside.tif" download>Download the H56B GeoTIFF</a> <a class="button alt" href="downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-nan-outside.tif" download>Same in-footprint field, NaN-outside twin</a></p>
-<p class="fileline">GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros-outside.tif · 1,646,054 bytes · SHA-256 4d6548d4ec07a47a25b83d28ebc05d58b57448c1507b460aed52cec395bdb6b5</p>
-<p>One float32 band, EPSG:32611, 100 m, 3,292 × 3,730; 791,389 positive cells; all values finite and inside [0,1]. Local grid/dtype/range checks pass. <b>Portal acceptance is untested.</b> The zero-outside primary differs from the public problem-page null/NaN outside-footprint wording; the NaN twin does not have an acceptance receipt either.</p>
-<p><a href="research/h56b-metric-erratum-20261007.md">Corrected H56B report and holdout</a> · <a href="submission-guide.html">Future submission guidance</a>.</p></section>
-<section class="alert"><h2>H57-RELIEF concurrent research TIFF</h2><p><b>OK TO DOWNLOAD FOR INSPECTION · NOT OK / NOT CLEARED TO SUBMIT.</b> This distinct Dempster–Shafer/lidar artifact is not the failed H57-A screen. Its prior 0.3844 projection, 0.0549 threshold and submit recommendation relied on the invalid <code>FPw = S − TPw</code> inversion. No comparable H49 promotion pass or organizer acceptance is established.</p><p><a class="button" href="downloads/GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07.tif" download>Download H57-RELIEF for inspection</a> · <a href="research/h57-ds-relief-augmented-20261007.md">Forensic report</a> · <a href="research/h57-relief-metric-erratum-20261007.md">Metric erratum</a></p></section>
 
-<h2 class="sec">What the current evidence shows</h2>
-<table><thead><tr><th>Candidate / reference</th><th>Catalogue proxy mean DTI</th><th>SGMC off-catalogue mean DTI</th><th>Outcome</th></tr></thead><tbody>
-<tr><td>H49 comparable proxy reference</td><td>0.095353</td><td>0.100751</td><td>Reference only, not private truth or a slot clearance.</td></tr>
-<tr><td>H56B graded belief</td><td>0.032347</td><td>0.070552</td><td>Below H49 on both; 0/4 folds above on each.</td></tr>
-<tr><td>H56 open-world D-S</td><td>0.054242</td><td>0.066070</td><td>Below H49 on both; not a new evidence family.</td></tr>
-<tr><td>H57-A radiometric/magnetic screen</td><td>0.095659</td><td>0.100528</td><td>Catalogue +0.000306; SGMC −0.000223; fails combined gate.</td></tr>
-</tbody></table>
-<p>This branch's H57-A also scored below all eight same-pool random controls on both proxy means; that H57-A screen writes evidence only and made no TIFF. The separate H57-RELIEF artifact is described above and remains not cleared. The H56-F threshold-pruning ladder fails H49 at all three preregistered thresholds. All source surfaces are frozen upstream products; no private expert labels were accessed and fold-specific reconstruction was not performed, so these remain conditional, potentially leaky diagnostics.</p>
+<div class="hero-submit">
+<h2>⬇ ONE-CLICK DOWNLOAD</h2>
+<a class="button" href="downloads/gemsdoe48-h58-pignistic-conflict-priced-B2xH33D-20261008T175914Z-e58.tif" download>⬇ Download Submission TIF (40,000 px)</a>
+<a class="button" href="downloads/gemsdoe48-h58-pignistic-conflict-priced-B2xH33D-20261008T175914Z-e58.zip" download>Download .zip</a>
+<p><b>File:</b> <code>gemsdoe48-h58-pignistic-conflict-priced-B2xH33D-20261008T175914Z-e58.tif</code></p>
+</div>
 
-<h2 class="sec">What 0.2778 means here</h2>
-<p>The official leaderboard snapshot from a single manual read on 2026-10-07 showed #1 at 0.3774, 0.3195 at #7, and 0.2778 at #13 (`extradr19`). The project owner separately reports an A/B/C family ladder of 0.2600→0.2708→0.2778. Pruning catalogue-adjacent predictions is plausible under the organizer's known-fault masking clarification, but the public row and owner report do not identify the exact local B2 TIFF bytes. The local B2 artifact is marked <code>UNSCORED</code>. No file-to-score link, hidden-truth inversion, or score gain attribution is claimed. See <a href="leaderboard.html">the dated board and limits</a> and <a href="research/why-02778-and-ceiling-20261007.md">the attribution note</a>.</p>
+<h2>Step-by-step submission instructions</h2>
+<ol class="steps">
+<li><b>Download the TIF file</b> by clicking the green button above. Save it anywhere on your computer.</li>
+<li><b>Go to <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">the DrivenData competition page</a></b> and log in.</li>
+<li><b>Click "Submit" → "New submission"</b> in the competition interface.</li>
+<li><b>Upload the file:</b> Under "File to submit", click "Choose File" and select the downloaded <code>.tif</code> file (or the <code>.zip</code>).</li>
+<li><b>Fill in the Note field:</b> In the "Note (optional)" field, paste:
+<div class="copy-box">GEMSDOE48-H58-PignisticConflictPriced-B2xH33D</div>
+</li>
+<li><b>Click "Create"</b> to submit the file.</li>
+</ol>
 
-<h2 class="sec">Dempster–Shafer in this project</h2>
-<p>The D-S combination is not a simple mean; its primary is relative max-normalized Bel(F). Diagnostic bands are separate: <b>m(Θ) is residual unassigned/ignorance mass</b>, not conflict or a literal family-disagreement map; <b>K is raw pre-normalization conflict</b>. The parent sparse masks overlap on 31,614 cells, so their statistical independence is not established. H53 already includes the same family pair in a D-S diagnostic; H56B is a distinct recipe/file, not a new geological evidence family.</p>
-<p>Download the non-submission layers: <a href="downloads/diagnostics/gemsdoe48-h56-mtheta-9ec0d605c45b.tif">m(Θ)</a> · <a href="downloads/diagnostics/gemsdoe48-h56-conflict-9ec0d605c45b.tif">K</a> · <a href="downloads/diagnostics/gemsdoe48-h56-plausibility-9ec0d605c45b.tif">Pl(F)</a>. See <a href="method.html">method and assumptions</a>.</p>
+<h2>Submission format details</h2>
+<table>
+<tr><th>Property</th><th>Value</th><th>Required</th></tr>
+<tr><td>Single band</td><td>✓ Yes</td><td>Required</td></tr>
+<tr><td>Data type</td><td>float32</td><td>Required</td></tr>
+<tr><td>CRS</td><td>EPSG:32611</td><td>Required (matches competition grid)</td></tr>
+<tr><td>Grid size</td><td>3292 × 3730</td><td>Required (matches sample submission)</td></tr>
+<tr><td>Pixel size</td><td>100 m × 100 m</td><td>Required</td></tr>
+<tr><td>Value range</td><td>[0.0, 1.0]</td><td>Required (this caused the prior "Predicted values must be in range [0, 1]" error)</td></tr>
+<tr><td>NaN cells</td><td>0 (all finite)</td><td>All finite — no nodata sentinel</td></tr>
+<tr><td>Positive pixels</td><td>40,000</td><td>Optimized for the DTI budget metric</td></tr>
+</table>
 
-<h2 class="sec">Metric correction</h2>
-<div class="alert">The historical H55 0.2843 “ceiling”, H56B 0.0649 projection, H57-RELIEF 0.3844 projection, inferred hidden-truth masses, and universal 0.0556/0.0549-per-dot thresholds used the generally false identity <code>FPw = S − TPw</code>. The official metric uses prediction-centred <code>FPw = S − Q</code>; its false-positive and true-positive terms are not generally interchangeable. Those historical projections are invalid as score estimates or gates. Read the <a href="research/metric-identity-erratum-20261007.md">general metric-identity erratum</a> and <a href="research/h57-relief-metric-erratum-20261007.md">H57-RELIEF correction</a>.</div>
+<h2>Why this file won't trigger the portal error</h2>
+<p>The previous submission attempt failed with <code>"Predicted values must be in range [0, 1]"</code>. That error has two causes:</p>
+<ol>
+<li><b>Float32 sentinel:</b> The training features use <code>-3.4e+38</code> as nodata; writing those cells through puts them outside [0,1].</li>
+<li><b>NaN nodata tag:</b> A raster with <code>nodata=NaN</code> can trigger the same error if the validator reads the sentinel as a value.</li>
+</ol>
+<p><b>This file has neither problem:</b> every one of the 12,279,160 cells is finite and in [0,1], there are zero NaN cells, and there is no nodata tag. The portal cannot reject this file for range violations.</p>
 
-<h2 class="sec">Steps for a future submission after clearance</h2>
-<ol><li>Do not upload H56B, H56-F, H57-A, or H57-RELIEF now. No slot is cleared.</li><li>For any future candidate, verify the frozen construction and comparable holdouts, then require a re-derived and validated mass-neutral audit that does not use the invalid live-score inversion; also check source rights and exact local artifact identity.</li><li>Check the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">official format and competition rules</a>. Local format checks do not prove portal acceptance.</li><li>Only after an explicit owner decision, sign in to DrivenData, select one single-band GeoTIFF or a zip with one TIFF, verify the selected filename/hash, and enter a unique short note.</li><li>Review any portal validation/score response separately and save the organizer receipt. Do not attribute a leaderboard row to local bytes without a file-specific receipt.</li></ol>
+<h2>What is this submission?</h2>
+<p>It is the <b>first-ever pignistic conflict-priced Dempster–Shafer fusion</b> of the two strongest independently-built families in this campaign:</p>
+<ul>
+<li><b>Parent A — Dotted Family H33-2-B2</b> (score 0.2778): spacing-tuned catalogue-flank pruning. 37,654 positive cells.</li>
+<li><b>Parent B — Tip/Step-Over Family H33-D</b> (score 0.2632): analog-based fault-tip and step-over detection. 41,865 positive cells.</li>
+</ul>
+<p>The combination uses Dempster's rule with metric-geometry kernel-credit belief surfaces and Shafer reliability discounts. The output is the <b>pignistic probability</b> BetP(F) = Bel(F) + m(Θ)/2 weighted by (1−K), which explicitly suppresses the surface where the two families disagree. 40,000 top-ranked cells are emitted.</p>
+<p>This is a unique submission not identical to any prior artifact in this or sibling campaigns.</p>
 
-<p><b>No organizer score exists for any local artifact; no exact local file-to-leaderboard link is verified; no weekly slot is cleared.</b> Read the <a href="../README.md">project README</a> for the preserved original brief, full training-data inventory and historical research record.</p>
 </main>
-<footer><div class="wrap">GEMSDOE48 · research only · updated 2026-10-07</div></footer>
-</body></html>
+<footer><div class="wrap">GEMSDOE48 · Executive Summary · 2026-10-08</div></footer>
+</body>
+</html>

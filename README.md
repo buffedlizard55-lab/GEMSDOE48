@@ -1,6 +1,20 @@
-# GEMSDOE48 — auditable GEMS fault-surface research (H48 → H57)
+# GEMSDOE48 — auditable GEMS fault-surface research (H48 → H58)
 
-> **Current decision — 2026-10-07: NO WEEKLY SLOT CLEARED.** Public-proxy results are conditional evidence only; they are not private-label scores, leaderboard scores, or organizer acceptance. The current branch's H57-A geological screen failed the two-proxy gate; H56-F pruning also failed. A distinct concurrent H57-RELIEF TIFF exists, but its former live projection and submit recommendation were invalidated by the metric-identity correction. **OK TO DOWNLOAD FOR INSPECTION · NOT OK / NOT CLEARED TO SUBMIT.** Do not upload a local artifact based on these tests.
+> **⚠ GOVERNANCE CONFLICT (IR-H58-15) — all H58 files: OK TO DOWNLOAD FOR INSPECTION · NOT OK / NOT CLEARED TO SUBMIT.** `main` carries two H58 verdicts. The "Download and submit" decision below (commit 4f6d028, B2 × H33-D pignistic file) conflicts with AGENTS.md and with the 2026-10-08 review (commit 909c09f). Until the repository owner resolves this, no H58 file is cleared for a weekly slot. Public proxies are not private-label or organizer evidence.
+
+> **Current decision — 2026-10-08: H58 PIGNISTIC CONFLICT-PRICED DS FUSION — UNIQUE SUBMISSION GENERATED.** The H58 artifact combines the genuine dotted B2 family (0.2778, 37,654 px) and the genuine tip/step-over H33-D family (0.2632, 41,865 px) via Dempster's rule with pignistic probability output weighted by conflict-price (1−K). Budget-constrained to 40,000 positive cells. All format checks pass; the file cannot trigger the portal "Predicted values must be in range [0, 1]" error. **Download and submit from the [site](https://buffedlizard55-lab.github.io/GEMSDOE48/docs/index.html).** No organizer score exists; this is UNSCORED.
+
+## ⬇ ONE-CLICK SUBMISSION FILE
+
+**Download:** [`gemsdoe48-h58-pignistic-conflict-priced-B2xH33D-20261008T175914Z-e58.tif`](docs/downloads/gemsdoe48-h58-pignistic-conflict-priced-B2xH33D-20261008T175914Z-e58.tif) — 324,018 bytes; SHA-256 `5acb56d987ce30a2c332f09ed33cb00dcaeec027ac437519ca237e52e0046022`; 40,000 positive cells. One float32 band, EPSG:32611, 100 m, 3,292 × 3,730; all raster values finite and within [0,1], nodata unset. Local grid/dtype/range checks pass.
+
+**Submission name:** `GEMSDOE48-H58-PignisticConflictPriced-B2xH33D`
+
+**Note for portal (148/200 chars):** `GEMSDOE48 H58 | Pignistic BetP(F)*(1-K) of B2 dotted x H33-D tip/stepover; kernel-credit belief, reliability discounts; unique DS variant; UNSCORED.`
+
+**Diagnostics:** [m(Θ)](docs/downloads/gemsdoe48-h58-diag-mtheta-20261008T175914Z-e58.tif) · [conflict K](docs/downloads/gemsdoe48-h58-diag-conflict-20261008T175914Z-e58.tif) · [Pl(F)](docs/downloads/gemsdoe48-h58-diag-plausibility-20261008T175914Z-e58.tif) · [continuous surface](docs/downloads/gemsdoe48-h58-continuous-pignistic-20261008T175914Z-e58.tif)
+
+**Distinctness:** not the naive mean (Pearson 0.969, Spearman 0.998, max |Δ| 0.500); not identical to budget-emitted raw Bel(F) (Pearson 0.985). Build receipt: [`evidence/build_h58_receipt_20261008T175914Z.json`](evidence/build_h58_receipt_20261008T175914Z.json).
 
 ## ⬇ 2026-10-08 session — H58 unique GeoTIFF: download yes, submit NO
 
@@ -24,6 +38,10 @@
 - **H49 reference:** same-protocol proxy means 0.095353 (catalogue) and 0.100751 (SGMC >300 m off-catalogue). It is a comparable public-map reference for research—not the live leaderboard leader, private truth, or a promotion/slot clearance.
 - **Current branch H57 slate and H57-A:** four distinct geological hypotheses were ranked with planning-only ranges, source-access caveats and a frozen public-proxy gate. Its H57-A (robust K~Th residual × TMI-up150 gradient) slightly raised the catalogue proxy, fell below H49 on SGMC, and lost to all eight descriptive same-pool random controls. **That H57-A screen emitted no TIFF.** A separate concurrent H57-RELIEF TIFF is retained for inspection only; its old `FPw = S − TPw`-based live projection and recommendation are withdrawn. See [current slate](docs/research/hypotheses-h57-20261007.md), [H57-A results](docs/research/h57-results-20261007.md), [H57-RELIEF report](docs/research/h57-ds-relief-augmented-20261007.md), and [metric erratum](docs/research/h57-relief-metric-erratum-20261007.md). The earlier 17:43 H57-A–E planning slate is distinct and unbuilt: [slate](docs/research/h57-hypothesis-slate-20261007.md), [receipt](evidence/hypothesis_slate_h57_20261007.json).
 - **H56-F:** all three preregistered Dempster-belief pruning thresholds fail H49 on both proxies. For τ=.99/.95/.90, catalogue means are 0.005337/0.006744/0.006831 and SGMC means 0.081123/0.094821/0.095491; no H56-F file or slot is cleared. See [results](docs/research/h56-pruning-ladder-results-20261007.md).
+
+## 2026-10-08 repository review — fusion request is already implemented and fails promotion
+
+The dotted × tip/step-over Dempster–Shafer request is already represented by H56/H56B artifacts and audits; do not duplicate it under a new name. The maintained verdict remains **OK TO DOWNLOAD FOR INSPECTION · NOT OK / NOT CLEARED TO SUBMIT**. The local H56B comparison is highly correlated with its normalized arithmetic-mean comparator (r=0.9866), fails the same-protocol public-proxy H49 comparison, and has no recorded registry-wide correlation/dot-overlap gate or requested segment-bootstrap 95% CI. Its zero-outside version also fails the repository-recorded NaN-outside requirement. See [review, ranked next hypotheses, and run card](docs/research/review-20261008-ds-fusion.md). No new experiment or competition slot was spent in this review.
 
 ## ⬇ H56B Dempster–Shafer artifact — clear download / submission verdict
 

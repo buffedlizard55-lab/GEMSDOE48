@@ -2,8 +2,8 @@
   "any_identical_support": false,
   "candidate": "docs/downloads/GEMSDOE48-H58-ds-belief-dotted-x-tipeuler-20261008-b92ba079-zeros-outside.tif",
   "candidate_positive_cells": 43074,
-  "files_compared": 100,
-  "generated_utc": "2026-10-08T18:44:51+00:00",
+  "files_compared": 105,
+  "generated_utc": "2026-10-08T19:04:28+00:00",
   "schema": "GEMSDOE48-H58-prior-art-jaccard-v1",
   "scope": "local positive-cell support only; not organizer-side or global uniqueness",
   "top5": [

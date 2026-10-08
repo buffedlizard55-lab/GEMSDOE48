@@ -213,3 +213,33 @@ irregularity to be flagged.
 ## IR-H58-14 · Process: output-name variable shadowing (caught, fixed)
 
 **Severity: low.** During the first H58 build, a loop variable reused the name `name`, which made the output files `both-…` and wrote the wrong receipt names. It was caught by listing the output directory, the bad files were deleted, and both variants were rebuilt. The shipped H58-A bytes are the same as the first correct build (SHA-256 prefix `b92ba079`). No shipped file was affected.
+
+## IR-H58-15 · Two H58 verdicts and two different "H58" files on `main`
+
+**Severity: high (governance).** After the H58 work in this branch was started, `main` received commit `4f6d028` ("H58: unique pignistic conflict-priced DS fusion of B2×H33-D"). Its top-page decision, README section and `docs/index.html` box read "✅ UNIQUE SUBMISSION — READY TO DOWNLOAD AND SUBMIT" and "Download and submit from the site". Commit `909c09f` on `main`, "Document DS fusion review and negative promotion decision", restates the maintained verdict: **OK TO DOWNLOAD FOR INSPECTION · NOT OK / NOT CLEARED TO SUBMIT**. AGENTS.md requires that a candidate beat the comparable proxy best and have a leakage-defensible source before a slot is spent. The pignistic file's proxy numbers (in its own receipt `evidence/build_h58_receipt_20261008T175914Z.json`) have not been checked against that gate in this branch. The two files also share the label "H58". This branch's files are named `GEMSDOE48-H58-ds-belief-dotted-x-tipeuler-20261008-b92ba079`. Resolution in this branch: the conflicting pages keep their content and carry a visible **NOT CLEARED** banner (README top, `docs/index.html`, `docs/submission-guide.html`). The repository owner must decide which verdict stands before any upload. This entry is not resolved by the agent.
+
+## IR-H58-16 · Overclaims in the pignistic H58 documentation
+
+**Severity: medium.** The pignistic documentation on `main` says the file "cannot trigger the portal 'Predicted values must be in range [0, 1]' error" and is "Portal range-error immune", and it calls the artifact "the first-ever" and "unique". The local validator in this branch (`scripts/validate_submission.py`) reports only a local property of the all-finite bytes. It states that organizer acceptance is untested. The same applies to the first artifact in this branch. The same wording needs a qualifier. "Unique" here means byte-distinct in the local scan, not organizer-side unique.
+
+## IR-H58-17 · Fifteen pre-existing test failures on `main` (not introduced by H58)
+
+**Severity: high (repository hygiene).** On `origin/main` at 36d9785, `python -m pytest -q` has **16** failing tests. The merge of `main` into this branch leaves **15** failing and fixes one (`test_h53_radedge_is_retained_as_archival_failed_research_not_current_cta`). It introduces no new failures. The 15 are site-text and classification tests that check H55/H56/H57 wording on pages rewritten in `main` commits 4f6d028 and later. The tests were not weakened or edited in this branch. Repair must be done by the owner, either by restoring the wording or by updating the tests. The failing tests:
+
+- `tests/test_h57.py::test_entry_pages_do_not_clear_the_h57_relief_artifact[executive-summary.html]`
+- `tests/test_h57.py::test_entry_pages_do_not_clear_the_h57_relief_artifact[index.html]`
+- `tests/test_h57.py::test_entry_pages_do_not_clear_the_h57_relief_artifact[submission-guide.html]`
+- `tests/test_site_classification.py::test_executive_summary_separates_failed_candidates_from_future_guidance`
+- `tests/test_site_h55.py::test_current_download_is_obvious_and_submit_verdict_is_unambiguous`
+- `tests/test_site_h55.py::test_dempster_mass_semantics_and_naive_mean_comparison_are_explicit`
+- `tests/test_site_h55.py::test_download_bytes_hash_and_current_format_caveat`
+- `tests/test_site_h55.py::test_h56_note_is_archive_only_and_never_recommends_upload`
+- `tests/test_site_h55.py::test_h57_slate_and_results_are_referenced_without_claiming_success`
+- `tests/test_site_h55.py::test_invalid_score_projections_are_labelled_historical_not_reused`
+- `tests/test_site_h55.py::test_leaderboard_snapshot_and_local_file_attribution_are_careful`
+- `tests/test_site_h56.py::test_current_download_is_top_level_and_not_replaced_by_historical_h55`
+- `tests/test_site_h56.py::test_h56_status_caveat_and_sha_are_on_submitter_pages`
+- `tests/test_site_h56.py::test_h56b_diagnostics_are_separate_layers_not_submission_alternatives`
+- `tests/test_site_h56.py::test_no_h56_page_claims_private_label_or_organizer_acceptance`
+
+H58 tests (`tests/test_h58_ds.py`) all pass.
