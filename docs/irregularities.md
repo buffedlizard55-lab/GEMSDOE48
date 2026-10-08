@@ -157,3 +157,59 @@ runs, fixed (reference-solution convention `X[X < −1e38] = NaN`), and the fina
 produced by the corrected script only. No published number used a contaminated value. Severity
 **low** (process caught its own defect), recorded because the brief requires every
 irregularity to be flagged.
+
+## IR-H58-01 · A "new" pairing was not new (H48-1 already fused B2 × tip H32-1 with the flank rule)
+
+**Severity: high (process).** On 2026-10-08 I first described the B2 × tip H32-1 Dempster pairing as untried. It was already built as `docs/downloads/gemsdoe48-h48-1-ds-fusion-b2xh32tip-20261006-407bb7f4-zeros.tif` (H48-1, 37,754 binary dots, zero within 200 m of the catalogue; receipt `docs/downloads/receipt-…json`). The first scan missed it. Corrected in [`h58-results-20261008.md`](research/h58-results-20261008.md) §2. A flank-pruned DS variant (H58-B) was built and then **removed**: its support has Jaccard 0.982 with H48-1, so it is not unique. Its scores are kept, labelled as a duplicate, in `evidence/h58_flank_transfer_explore_20261008.json`.
+
+## IR-H58-02 · The repository's "catalogue proxy" scores the faults the organizers mask
+
+**Severity: high.** The organizers mask pixel-exact known faults from scoring (forum clarification, 2026-09-21). The catalogue proxy (`src/gemsdoe48/holdout.py` docstring, and the "catalogue labels" rows in `docs/research/h57-results-20261007.md` and the H49 reference) uses the catalogue itself as truth, so it scores recovery of the very pixels that are excluded. It cannot measure new-fault prediction. The SGMC off-catalogue proxy is the closer target, but it is also a public map and not expert labels. Preserved for history. Do not use the catalogue proxy as a gate.
+
+## IR-H58-03 · Leaderboard snapshot disagrees with the live page for ranks #4–#6, and the board is moving
+
+**Severity: medium.** The repository snapshot `docs/data/leaderboard_20261007.json` disagrees with the live page for ranks #4–#6. On 2026-10-08 the live page showed joeyfezster 0.3260 (#4), kinghorton42 0.3222 (#5), and Batik Shirt Brothers 0.3221 (#6). The new verified snapshot is [`docs/data/leaderboard_20261008.json`](data/leaderboard_20261008.json) (rows #1–#22; row #23 cut off in the read). Ranks change between reads, so every leaderboard claim needs a dated snapshot.
+
+## IR-H58-04 · Stale "highest score" framing and an unlinked 0.2778 row
+
+**Severity: medium.** The brief describes 0.3195 as the highest score. On 2026-10-08 it is rank #7. Rank #1 is 0.3774. The 0.2778 row is `extradr19` at #13. Rank #12 (`op01`, 0.2797, submitted about 10 min before the read) is above it. No local file is proven to be the submission behind the 0.2778 row (see IR-H55-01 for the original caveat).
+
+## IR-H58-05 · `data/raw/sample_submission_template.tif` is not an all-absence sample
+
+**Severity: medium.** The repository treats this file as a sample. It contains **60,988 positive cells, exactly the catalogue** (`np.array_equal(template > 0, labels > 0)` is true). The official sample is described as predicting total absence. Anyone who builds from this template inherits the known-fault mask. Verify against the organizers' own sample before relying on it.
+
+## IR-H58-06 · "Immune to the portal's range error" is an overclaim
+
+**Severity: medium.** `docs/research/h51-h50b-results-20261007.md` says the zeros primary "is immune to the portal's ‘Predicted values must be in range [0, 1]’ rejection by construction". The H58 validator records `portal_range_error_immune: true` only for the all-finite file, and only as a local statement. The NaN twin is recorded as `false`. Neither encoding has portal acceptance evidence. The official text asks for null/NaN outside the bounds, and a zeros encoding does not follow that text.
+
+## IR-H58-07 · A withdrawn density constant is still the holdout default
+
+**Severity: medium.** `src/gemsdoe48/holdout.py` still defines `HIDDEN_TRUTH_PX = 12632` and uses `HIDDEN_DENSITY` as the default in `evaluate_pair`. The metric-identity erratum withdrew the inversion that produced this number. The constant is still in code. It should be removed or labelled as a sensitivity grid point, not a measured density.
+
+## IR-H58-08 · Name collision: "H56-B" means two things
+
+**Severity: low.** `docs/research/hypotheses-h56-20261007.md` plans **H56-B**, a basement-step gravity signal. The DS artifact `GEMSDOE48-H56B` is a different object. Use the full names in any new record.
+
+## IR-H58-09 · Gravity-edge preregistration: budget infeasible; mask mismatch
+
+**Severity: low, but it changes the comparison.** The frozen budget of 37,654 could not be met. Only 12,600 eligible off-catalogue maxima exist. The emitted mass is one-third of the budget, so the comparison is not mass-matched. In addition, band 13 has 3,061 footprint cells without a finite gravity value. The preregistration's exclusion rule (step 1) handles them, and the count is recorded. Result: NOT CLEARED. The exploratory mass-matched check at 12,600 cells is labelled as post-gate. Receipt: `evidence/h58_gravity_edge_holdout_20261008.json`.
+
+## IR-H58-10 · The owner's pruning gain is not reproduced by the proxy
+
+**Severity: high for attribution.** The owner ladder gives +0.0070 for the 0.2708 → 0.2778 step (flank pruning). On the SGMC off-catalogue proxy the same step gives +0.00009 at 62,122 px, +0.00085 at 25,000 px and +0.00124 at 12,632 px. The direction is reproduced, but the magnitude is not, at any tested density. Possible causes, none verified: the hidden truth is much sparser or located differently; the owner's numbers are not comparable; or flank dots carry damage-zone credit the proxy cannot see. The explanation stays open.
+
+## IR-H58-11 · The Dempster output ranks almost like the average inside its support
+
+**Severity: medium.** The brief asks that the combination not be the naive average. Inside the emission support, H58-A's Spearman against the kernel-credit mean is **0.99998**, and the top-37,654 Jaccard is 0.984. The disagreement is visible in magnitudes (mean absolute difference 0.0226, maximum 0.270) and in the separate K and m(Θ) layers, not in the ranking. Disclosed in `evidence/build_h58_receipt_20261008.json` (`not_average_checks`) and in the results note §5.
+
+## IR-H58-12 · The uniqueness checker's companion rule and maximum are weak
+
+**Severity: low (tooling).** `scripts/check_candidate_uniqueness.py` identified companion files by name prefix only, so a candidate's NaN twin and its diagnostic layers were flagged as duplicates of the candidate. It also reported the maximum by raw overlap cells, not by Jaccard. A `--companion-token` option and a `max_jaccard_excluding_companions` field were added. Existing receipts keep their original fields and are unchanged.
+
+## IR-H58-13 · The training feature stack is an owner mirror
+
+**Severity: medium.** `data/raw/training_features.tif` (SHA-256 `4371c82e…`) was restored from the repository's pinned GitHub owner mirror, not from an organizer-authenticated source. It was used only for the H58-G1 test. The band names and descriptions were checked in the file. The file carries no units tags, so units are not verified.
+
+## IR-H58-14 · Process: output-name variable shadowing (caught, fixed)
+
+**Severity: low.** During the first H58 build, a loop variable reused the name `name`, which made the output files `both-…` and wrote the wrong receipt names. It was caught by listing the output directory, the bad files were deleted, and both variants were rebuilt. The shipped H58-A bytes are the same as the first correct build (SHA-256 prefix `b92ba079`). No shipped file was affected.

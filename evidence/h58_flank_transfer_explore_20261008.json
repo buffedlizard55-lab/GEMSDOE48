@@ -1,0 +1,110 @@
+{
+  "decision_note": "Post-gate exploration. The primary H58-A artifact was fixed before these variants were scored. The flank-pruned DS variant is not published: its support duplicates the earlier H48-1 file (Jaccard 0.982). Any variant here must be preregistered before any scoring that could promote it.",
+  "generated_utc": "2026-10-08T18:43:59+00:00",
+  "results": {
+    "density_mean_dti": {
+      "12632": {
+        "B2_owner_0.2778": 0.06379504765997895,
+        "H32-1_tip_0.2649 (unpruned)": 0.061193155405848264,
+        "H32-1_tip_flank_pruned_200m (EXPLORATORY)": 0.0637349889937412,
+        "H48-1_prior_artifact_binary (repo, 2026-10-06)": 0.06374760308712456,
+        "H58_DS_flank_pruned_inputs (EXPLORATORY; not published, duplicates H48-1 pairing)": 0.06352507331065176,
+        "H58_DS_unpruned_inputs (primary artifact)": 0.06246966782149444,
+        "union_flank_pruned_binary (EXPLORATORY)": 0.06350024419177579
+      },
+      "25000": {
+        "B2_owner_0.2778": 0.08119109001996289,
+        "H32-1_tip_0.2649 (unpruned)": 0.07926409183082127,
+        "H32-1_tip_flank_pruned_200m (EXPLORATORY)": 0.08115483800073758,
+        "H48-1_prior_artifact_binary (repo, 2026-10-06)": 0.08117244988453524,
+        "H58_DS_flank_pruned_inputs (EXPLORATORY; not published, duplicates H48-1 pairing)": 0.08108874705256723,
+        "H58_DS_unpruned_inputs (primary artifact)": 0.08029654720172726,
+        "union_flank_pruned_binary (EXPLORATORY)": 0.08113765611672016
+      }
+    },
+    "dots": {
+      "B2_owner_0.2778": 37654,
+      "H32-1_tip_0.2649 (unpruned)": 42294,
+      "H32-1_tip_flank_pruned_200m (EXPLORATORY)": 37657,
+      "H48-1_prior_artifact_binary (repo, 2026-10-06)": 37754,
+      "H58_DS_flank_pruned_inputs (EXPLORATORY; not published, duplicates H48-1 pairing)": 38437,
+      "H58_DS_unpruned_inputs (primary artifact)": 43074,
+      "union_flank_pruned_binary (EXPLORATORY)": 38437
+    },
+    "full_footprint_dti": {
+      "B2_owner_0.2778": 0.09538611460482534,
+      "H32-1_tip_0.2649 (unpruned)": 0.09475546244421566,
+      "H32-1_tip_flank_pruned_200m (EXPLORATORY)": 0.09533626022218267,
+      "H48-1_prior_artifact_binary (repo, 2026-10-06)": 0.09540980729698827,
+      "H58_DS_flank_pruned_inputs (EXPLORATORY; not published, duplicates H48-1 pairing)": 0.09545591112641719,
+      "H58_DS_unpruned_inputs (primary artifact)": 0.0951834608407374,
+      "union_flank_pruned_binary (EXPLORATORY)": 0.09558577321215875
+    },
+    "full_minus_B2": {
+      "B2_owner_0.2778": 0.0,
+      "H32-1_tip_0.2649 (unpruned)": -0.0006306521606096738,
+      "H32-1_tip_flank_pruned_200m (EXPLORATORY)": -4.9854382642669504e-05,
+      "H48-1_prior_artifact_binary (repo, 2026-10-06)": 2.3692692162929907e-05,
+      "H58_DS_flank_pruned_inputs (EXPLORATORY; not published, duplicates H48-1 pairing)": 6.979652159185001e-05,
+      "H58_DS_unpruned_inputs (primary artifact)": -0.00020265376408794278,
+      "union_flank_pruned_binary (EXPLORATORY)": 0.00019965860733341112
+    },
+    "quadrant_dti": {
+      "B2_owner_0.2778": [
+        0.10192878789312365,
+        0.09901285478885033,
+        0.10797826214480108,
+        0.07349753005966428
+      ],
+      "H32-1_tip_0.2649 (unpruned)": [
+        0.10118408447159906,
+        0.09839920661434241,
+        0.10543345510781699,
+        0.07325009736217591
+      ],
+      "H32-1_tip_flank_pruned_200m (EXPLORATORY)": [
+        0.10213331410214108,
+        0.09874074310975425,
+        0.10727780207366307,
+        0.07351322716794134
+      ],
+      "H48-1_prior_artifact_binary (repo, 2026-10-06)": [
+        0.10204091611736522,
+        0.09897665732569406,
+        0.10788765772077302,
+        0.07348385082107793
+      ],
+      "H58_DS_flank_pruned_inputs (EXPLORATORY; not published, duplicates H48-1 pairing)": [
+        0.10197663551150114,
+        0.09906785482173945,
+        0.10796158667505483,
+        0.07361419287213165
+      ],
+      "H58_DS_unpruned_inputs (primary artifact)": [
+        0.10154941032301962,
+        0.09888031225183201,
+        0.1072304104216995,
+        0.073490303811875
+      ],
+      "union_flank_pruned_binary (EXPLORATORY)": [
+        0.10210425600213996,
+        0.09917581302704348,
+        0.10835335030513173,
+        0.07371442824582583
+      ]
+    },
+    "quadrant_wins_vs_B2": {
+      "B2_owner_0.2778": 0,
+      "H32-1_tip_0.2649 (unpruned)": 0,
+      "H32-1_tip_flank_pruned_200m (EXPLORATORY)": 2,
+      "H48-1_prior_artifact_binary (repo, 2026-10-06)": 1,
+      "H58_DS_flank_pruned_inputs (EXPLORATORY; not published, duplicates H48-1 pairing)": 3,
+      "H58_DS_unpruned_inputs (primary artifact)": 0,
+      "union_flank_pruned_binary (EXPLORATORY)": 4
+    }
+  },
+  "rule": "drop H32-1 dots within 200 m of the public catalogue (same rule that makes B2 the 0.2708 base minus its flank dots)",
+  "schema": "GEMSDOE48-H58-flank-transfer-explore-v1",
+  "status": "EXPLORATORY, post-gate; not used for any promotion decision",
+  "truth": "SGMC off-catalogue public-map proxy (62,122 px); predictions on catalogue cells zeroed"
+}

@@ -1,0 +1,101 @@
+{
+  "candidate_counts": {
+    "budget": 37654,
+    "eligible_offcatalogue_gt_300m": 12600,
+    "emitted": 12600,
+    "footprint_cells": 5167373,
+    "footprint_cells_without_finite_gravity": 3061,
+    "local_maxima_in_footprint": 13743
+  },
+  "density_sensitivity_mean_dti": {
+    "12632": {
+      "B2": 0.06379504765997895,
+      "G1": 0.023609602952744214,
+      "G1_minus_B2": -0.04018544470723474,
+      "random": 0.04657202195340318
+    },
+    "25000": {
+      "B2": 0.08119109001996289,
+      "G1": 0.026368657635646678,
+      "G1_minus_B2": -0.0548224323843162,
+      "random": 0.05870087762787619
+    }
+  },
+  "exploratory_matched_mass": {
+    "emitted": 12600,
+    "full_footprint_dti": {
+      "G1": 0.027767350142224617,
+      "random_same_mass_seed1": 0.02710773998102705
+    },
+    "label": "EXPLORATORY, post-gate: mass-matched at the realised emission size; not used for the decision",
+    "precision_within_300m_of_truth": {
+      "G1": 0.0869047619047619,
+      "footprint_base_rate": 0.08357767089776566,
+      "random_same_mass_seed1": 0.08325396825396826
+    }
+  },
+  "full_footprint_dti": {
+    "B2_owner_0.2778 (reference)": 0.09538611460482534,
+    "G1_gravity_edge_top37654": 0.027767350142224617,
+    "H58_dot_supported_DS": 0.0951834608407374,
+    "random_budget_37654 (mean of seeds)": 0.06913263018853523
+  },
+  "gate": {
+    "a_full_footprint_G1_gt_B2": false,
+    "b_pass_at_least_3_of_4": false,
+    "b_quadrant_wins_vs_B2": 0,
+    "c_density_12632_G1_gt_B2": false,
+    "c_density_25000_G1_gt_B2": false,
+    "passes_preregistered_proxy_gate": false,
+    "slot_cleared": false
+  },
+  "generated_utc": "2026-10-08T18:18:58+00:00",
+  "inputs": {
+    "dotted_b2": {
+      "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9"
+    },
+    "tip_h32_1": {
+      "sha256": "04d31922f5c1ea4016984fc470ab2b0ff8e266c615792f0e86020da3b940d3ff"
+    },
+    "training_features": {
+      "band": 13,
+      "name": "iso_grav_anom",
+      "path": "data/raw/training_features.tif",
+      "sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5"
+    }
+  },
+  "limitations": [
+    "The public SGMC proxy is a published map; gravity edges may also reflect lithologic contacts.",
+    "Single preregistered configuration; no tuning was performed on this proxy.",
+    "The training feature stack is an owner mirror of the official GeoDAWN features; provenance is unverified."
+  ],
+  "preregistration": "docs/research/h58-gravity-edge-preregistration-20261008.md",
+  "quadrant_dti": {
+    "B2_owner_0.2778 (reference)": [
+      0.10192878789312365,
+      0.09901285478885033,
+      0.10797826214480108,
+      0.07349753005966428
+    ],
+    "G1_gravity_edge_top37654": [
+      0.029187494760327674,
+      0.023639741697702735,
+      0.030566332216832127,
+      0.0318060357472112
+    ],
+    "H58_dot_supported_DS": [
+      0.10154941032301962,
+      0.09888031225183201,
+      0.1072304104216995,
+      0.073490303811875
+    ],
+    "random_budget_37654 (mean of seeds)": [
+      0.06593763183681853,
+      0.0722175404462952,
+      0.052024263658861813,
+      0.0732998182804443
+    ]
+  },
+  "schema": "GEMSDOE48-H58-G1-gravity-edge-holdout-v1",
+  "verdict": "NOT CLEARED"
+}

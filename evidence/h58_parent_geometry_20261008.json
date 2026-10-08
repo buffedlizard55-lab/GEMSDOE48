@@ -1,0 +1,47 @@
+{
+  "generated_utc": "2026-10-08T18:19:37+00:00",
+  "note": "Owner-mirrored raster geometry against the owner-mirrored public catalogue. Not organizer evidence.",
+  "schema": "GEMSDOE48-H58-parent-geometry-v1",
+  "sets": {
+    "B2_owner_0.2778": {
+      "dots": 37654,
+      "min_distance_m": 223.60679774997897,
+      "on_catalogue": 0,
+      "within_100m": 0,
+      "within_200m": 0,
+      "within_300m": 2171
+    },
+    "H32-1_tip_0.2649": {
+      "dots": 42294,
+      "min_distance_m": 100.0,
+      "on_catalogue": 0,
+      "within_100m": 1542,
+      "within_200m": 4637,
+      "within_300m": 6816
+    },
+    "H33-D_tip_0.2632": {
+      "dots": 41865,
+      "min_distance_m": 100.0,
+      "on_catalogue": 0,
+      "within_100m": 1377,
+      "within_200m": 3894,
+      "within_300m": 6024
+    },
+    "difference_base_to_B2": {
+      "B2_equals_base_minus_removed_set": true,
+      "B2_is_base_minus_within_200m": true,
+      "added": 0,
+      "removed": 2545,
+      "removed_max_distance_m": 200.0,
+      "removed_min_distance_m": 141.4213562373095
+    },
+    "dotted_base_0.2708": {
+      "dots": 40199,
+      "min_distance_m": 141.4213562373095,
+      "on_catalogue": 0,
+      "within_100m": 0,
+      "within_200m": 2545,
+      "within_300m": 4716
+    }
+  }
+}

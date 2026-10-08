@@ -1,0 +1,158 @@
+{
+  "class_statistics": {
+    "B2_only": {
+      "cells": 780,
+      "mean_belief": 0.9632694430143354,
+      "mean_conflict_K": 0.36586867818804997,
+      "mean_m_theta": 0.0077060476573889555
+    },
+    "H32_1_only": {
+      "cells": 5420,
+      "mean_belief": 0.45184456161582504,
+      "mean_conflict_K": 0.774177958355952,
+      "mean_m_theta": 0.028346404822138363
+    },
+    "both": {
+      "cells": 36874,
+      "mean_belief": 1.0,
+      "mean_conflict_K": 0.0,
+      "mean_m_theta": 0.004705723542116634
+    }
+  },
+  "counts": {
+    "belief_eq_1_cells": 36874,
+    "both": 36874,
+    "dotted_B2": 37654,
+    "primary_positive_cells": 43074,
+    "support_union": 43074,
+    "tip_H32_1": 42294
+  },
+  "diagnostics": {
+    "conflict_K": {
+      "file": "docs/downloads/diagnostics/GEMSDOE48-H58-ds-belief-dotted-x-tipeuler-20261008-b92ba079-diag-conflict-K.tif",
+      "sha256": "fa74706385562f29645d22db6c0f650e858b9f2a3b48527e67940791ba255e86"
+    },
+    "mtheta": {
+      "file": "docs/downloads/diagnostics/GEMSDOE48-H58-ds-belief-dotted-x-tipeuler-20261008-b92ba079-diag-mtheta.tif",
+      "sha256": "3eae385485378d0841361498e44cfcf0d1e111039cdd7238c274ebe01daf5a43"
+    },
+    "plausibility": {
+      "file": "docs/downloads/diagnostics/GEMSDOE48-H58-ds-belief-dotted-x-tipeuler-20261008-b92ba079-diag-plausibility.tif",
+      "sha256": "c4139c8477181d3f1ce2c8b17806d8ee58763754d26c2b6996a076518f6ff8af"
+    }
+  },
+  "generated_utc": "2026-10-08T18:39:37+00:00",
+  "grid": {
+    "crs": "EPSG:32611",
+    "dtype": "uint8",
+    "shape": [
+      3730,
+      3292
+    ],
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ]
+  },
+  "inputs": {
+    "H49_yager_pignistic": {
+      "path": "docs/downloads/GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif",
+      "sha256": "9f028289c364c071065245799d7ed131600e80e9f0d10602806b12ce34d7cae8"
+    },
+    "catalogue": {
+      "path": "data/official/labels.tif",
+      "sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093"
+    },
+    "dotted_b2": {
+      "path": "data/raw/dotted_h33_2_b2_zeros.tif",
+      "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9"
+    },
+    "dotted_base_0.2708": {
+      "path": "data/families/dotted_d2_8_02708.tif",
+      "sha256": "ab02300152248fdda04e988e2cd2a0c13f35eec42fcf670a15e8b76b19e24a73"
+    },
+    "footprint": {
+      "path": "data/source_mirrors/footprint-mask.tif",
+      "sha256": "ddadb8c96cda673b91ddaa0bbed2aa955c358a8f6196c4c4e8fa70d454dd429f"
+    },
+    "sgmc": {
+      "path": "data/official/derived_sgmc_faults_100m.tif",
+      "sha256": "643cbe992ef4ba37588fb469163ed8291e3ceb23d6c1f78a3cfaa462430c2da0"
+    },
+    "tip_H33-D_0.2632": {
+      "path": "data/families/tip_stepover_r30_02632.tif",
+      "sha256": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757"
+    },
+    "tip_h32_1": {
+      "path": "data/raw/scored/h32_prethin_tip_02649.tif",
+      "sha256": "04d31922f5c1ea4016984fc470ab2b0ff8e266c615792f0e86020da3b940d3ff"
+    }
+  },
+  "nan_outside_sha256": "784dda688cbab572084f1e432aeb0acd3adb72b1a41d9387bc341d159249a548",
+  "nan_outside_twin": "docs/downloads/GEMSDOE48-H58-ds-belief-dotted-x-tipeuler-20261008-b92ba079-nan-outside.tif",
+  "not_average_checks": {
+    "interpretation": "The belief ranks almost identically to the kernel-credit average inside the support; its departure from the average is in magnitudes, and the disagreement itself is carried by the separate conflict K and unassigned-mass m(Theta) layers.",
+    "is_the_average": false,
+    "mae_support_vs_kernel_mean": 0.022591034622437316,
+    "max_abs_diff_support_vs_kernel_mean": 0.26961734561765227,
+    "pearson_support_vs_kernel_mean": 0.9688432805456894,
+    "spearman_support_vs_kernel_mean": 0.9999830823526841,
+    "topK_jaccard_vs_kernel_mean_K_eq_B2": 0.9842436698021236
+  },
+  "primary_bytes": 330764,
+  "primary_encoding": "all-finite float32, zeros outside footprint, nodata unset",
+  "primary_file": "docs/downloads/GEMSDOE48-H58-ds-belief-dotted-x-tipeuler-20261008-b92ba079-zeros-outside.tif",
+  "primary_sha256": "b92ba0799b94370107f05c0646bc5157c1880d22173d40beeebf28e5c767dbc4",
+  "proxy_receipt": "evidence/holdout_h58_20261008.json",
+  "rule": {
+    "emission_support": "union of committed dots of both parents inside the footprint",
+    "frame": "Theta = {F, notF}; two-sided simple support; normalized Dempster rule",
+    "module": "src/gemsdoe48/ds58.py",
+    "normalization": "belief = m12(F) / max over support, clipped to [0,1]",
+    "reliabilities": {
+      "anchor": "owner-reported 0.2778 / 0.2649; ratio heuristic, not calibration",
+      "dotted_B2": 0.95,
+      "tip_H32_1": 0.9058855291576674
+    }
+  },
+  "schema": "GEMSDOE48-H58-build-v1",
+  "sensitivity": {
+    "owner_ratio_primary": {
+      "pearson_vs_primary_support": 1.0,
+      "reliabilities": [
+        0.95,
+        0.9058855291576674
+      ],
+      "topK_jaccard_vs_primary_K_eq_B2": 1.0
+    },
+    "symmetric_0.5": {
+      "pearson_vs_primary_support": 0.9776157218435593,
+      "reliabilities": [
+        0.5,
+        0.5
+      ],
+      "topK_jaccard_vs_primary_K_eq_B2": 0.9842436698021236
+    },
+    "symmetric_0.95": {
+      "pearson_vs_primary_support": 0.9993393170454348,
+      "reliabilities": [
+        0.95,
+        0.95
+      ],
+      "topK_jaccard_vs_primary_K_eq_B2": 0.9842436698021236
+    }
+  },
+  "submission_name": "GEMSDOE48-H58-ds-belief-dotted-x-tipeuler-20261008-b92ba079",
+  "submission_note": "GEMSDOE48 H58 | Dempster fusion, dotted B2 (owner 0.2778) x tip/Euler H32-1 (owner 0.2649); dot-supported Bel, m(Theta)+K diagnostics; unscored research.",
+  "submission_note_length": 153,
+  "variant": "H58-A brief-literal dot-supported DS (preregistered design)",
+  "verdict": {
+    "download_for_inspection": true,
+    "reason": "Does not beat the H49 proxy-best, is below B2 and the prior H48-1 file on the sparse-truth proxies, and does not clearly beat its parents; AGENTS.md gate not met. Public proxy is not private or organizer evidence.",
+    "submit_cleared": false
+  }
+}

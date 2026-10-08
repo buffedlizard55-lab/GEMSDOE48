@@ -1,0 +1,175 @@
+{
+  "schema": "GEMSDOE48-leaderboard-snapshot-v1",
+  "retrieved_utc": "2026-10-08 (fetch_page, this session; relative times are as displayed by the site at fetch time)",
+  "source": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+  "scope": "Rows #1-#22 as read in chunk 0 of the live page; row #23 is cut off in that chunk and is not recorded.",
+  "metric_label_on_site": "Best public DW-Tversky (in descending order)",
+  "verified_claims": {
+    "rank_1_score": 0.3774,
+    "score_0_3195_rank": 7,
+    "score_0_2778_rank": 13,
+    "rows_above_0_2778": 12,
+    "note": "0.2797 (#12, op01) is above 0.2778 and was submitted about 10 min before the fetch; the board changes frequently."
+  },
+  "public_proxy_disclaimer": "Public leaderboard scores are not private-label or organizer acceptance evidence for any local file. None of these rows is linked to a local byte-level artifact.",
+  "rows": [
+    {
+      "rank": 1,
+      "participant": "xiaofanhu",
+      "best_public_dw_tversky": 0.3774,
+      "submissions": 13,
+      "last_active_relative": "2d 5h ago"
+    },
+    {
+      "rank": 2,
+      "participant": "alexoktaba",
+      "best_public_dw_tversky": 0.3345,
+      "submissions": 25,
+      "last_active_relative": "2d 18h ago"
+    },
+    {
+      "rank": 3,
+      "participant": "nchuzhoy",
+      "best_public_dw_tversky": 0.3262,
+      "submissions": 6,
+      "last_active_relative": "4d 19h ago"
+    },
+    {
+      "rank": 4,
+      "participant": "joeyfezster",
+      "best_public_dw_tversky": 0.326,
+      "submissions": 24,
+      "last_active_relative": "17h 14min ago"
+    },
+    {
+      "rank": 5,
+      "participant": "kinghorton42",
+      "best_public_dw_tversky": 0.3222,
+      "submissions": 9,
+      "last_active_relative": "4d 15h ago"
+    },
+    {
+      "rank": 6,
+      "participant": "Batik Shirt Brothers (rariwa, masterozone0617, omizutani)",
+      "best_public_dw_tversky": 0.3221,
+      "submissions": 23,
+      "last_active_relative": "15h 26min ago"
+    },
+    {
+      "rank": 7,
+      "participant": "DARD",
+      "best_public_dw_tversky": 0.3195,
+      "submissions": 16,
+      "last_active_relative": "6d 18h ago"
+    },
+    {
+      "rank": 8,
+      "participant": "ndavis7",
+      "best_public_dw_tversky": 0.2888,
+      "submissions": 9,
+      "last_active_relative": "6d ago"
+    },
+    {
+      "rank": 9,
+      "participant": "mzoorob",
+      "best_public_dw_tversky": 0.2884,
+      "submissions": 27,
+      "last_active_relative": "5d 10h ago"
+    },
+    {
+      "rank": 10,
+      "participant": "GrigorSargsyan",
+      "best_public_dw_tversky": 0.2876,
+      "submissions": 14,
+      "last_active_relative": "5d 18h ago"
+    },
+    {
+      "rank": 11,
+      "participant": "HardcoreTechGod",
+      "best_public_dw_tversky": 0.2854,
+      "submissions": 6,
+      "last_active_relative": "2w 6d ago"
+    },
+    {
+      "rank": 12,
+      "participant": "op01",
+      "best_public_dw_tversky": 0.2797,
+      "submissions": 8,
+      "last_active_relative": "10min ago"
+    },
+    {
+      "rank": 13,
+      "participant": "extradr19",
+      "best_public_dw_tversky": 0.2778,
+      "submissions": 12,
+      "last_active_relative": "4d 2h ago"
+    },
+    {
+      "rank": 14,
+      "participant": "arnofault",
+      "best_public_dw_tversky": 0.2764,
+      "submissions": 1,
+      "last_active_relative": "15h 51min ago"
+    },
+    {
+      "rank": 15,
+      "participant": "No Fault of Our Own",
+      "best_public_dw_tversky": 0.2761,
+      "submissions": 24,
+      "last_active_relative": "1d 18h ago"
+    },
+    {
+      "rank": 16,
+      "participant": "notmyfault (yaoyi, linyijunv5, zekunli, weiweiduan)",
+      "best_public_dw_tversky": 0.2758,
+      "submissions": 16,
+      "last_active_relative": "2h 27min ago"
+    },
+    {
+      "rank": 17,
+      "participant": "wbg1",
+      "best_public_dw_tversky": 0.275,
+      "submissions": 14,
+      "last_active_relative": "2d 18h ago"
+    },
+    {
+      "rank": 18,
+      "participant": "raboush2",
+      "best_public_dw_tversky": 0.2747,
+      "submissions": 9,
+      "last_active_relative": "14h 16min ago"
+    },
+    {
+      "rank": 19,
+      "participant": "li002666",
+      "best_public_dw_tversky": 0.2726,
+      "submissions": 4,
+      "last_active_relative": "2h 20min ago"
+    },
+    {
+      "rank": 20,
+      "participant": "smashi34",
+      "best_public_dw_tversky": 0.271,
+      "submissions": 12,
+      "last_active_relative": "2d 18h ago"
+    },
+    {
+      "rank": 21,
+      "participant": "smrtdoog5",
+      "best_public_dw_tversky": 0.2708,
+      "submissions": 12,
+      "last_active_relative": "4d 4h ago"
+    },
+    {
+      "rank": 22,
+      "participant": "bot_account",
+      "best_public_dw_tversky": 0.2707,
+      "submissions": 1,
+      "last_active_relative": "15h 31min ago"
+    }
+  ],
+  "irregularities": [
+    "Repo snapshot docs/data/leaderboard_20261007.json disagrees with the live page for ranks #4-#6 (see IR-H58-03).",
+    "The owner-reported 0.2778 is an unlinked leaderboard row (extradr19, #13); no local file is proven to be the submission behind it."
+  ]
+}

@@ -4,6 +4,16 @@
 <nav><div class="wrap"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="submission-guide.html">Submission guide</a><a href="method.html">Method</a><a href="hypotheses.html">Hypotheses</a><a href="validation.html">Validation</a><a href="leaderboard.html">Leaderboard</a><a href="irregularities.html">Irregularities</a><a href="sources.html">Sources</a><a href="next-steps.html">Next steps</a></div></nav>
 <main class="wrap">
 <div class="verdict"><strong>DOWNLOAD FOR INSPECTION: OK. SUBMIT: NOT OK / NOT CLEARED TO SUBMIT. NO WEEKLY SUBMISSION SLOT IS CLEARED.</strong> Do not upload H56B, H57-A, or H57-RELIEF and do not spend a weekly slot. H56B and the tested H57-A screen failed their public-proxy gates; H57-RELIEF's former live projection and submit recommendation were invalidated. No candidate in this checkout is slot-cleared.</div>
+<section class="alert" id="h58-submission-rules"><h2>2026-10-08 · H58 file: verdict and submission rules</h2>
+<p><b>Verdict: OK TO DOWNLOAD FOR INSPECTION · NOT OK TO SUBMIT · NOT CLEARED FOR ANY WEEKLY SLOT.</b> The H58 GeoTIFF is on the <a href="index.html#h58-download">overview page</a>. The proxy evidence does not show it beats 0.2778, and the AGENTS.md gate fails.</p>
+<ol>
+<li><b>Format.</b> One band, float32, EPSG:32611, 100 m, 3,292 × 3,730, transform (100, 0, 243350, 0, −100, 4508550). Every value must be finite and in [0, 1]. This avoids the portal error "Predicted values must be in range [0, 1]" in the local audit, but organizer acceptance is untested. The official text asks for null/NaN outside the bounds; the NaN-outside twin follows that text, and the zeros primary does not. The portal's behaviour for each is unknown.</li>
+<li><b>Unique name.</b> Use a name that is not on any earlier submission, for example <code>GEMSDOE48-H58-ds-belief-dotted-x-tipeuler-20261008-b92ba079</code>. Do not reuse a name from <code>docs/downloads</code>.</li>
+<li><b>Short comment.</b> Keep it under 200 characters, for example: "GEMSDOE48 H58 | Dempster fusion, dotted B2 (owner 0.2778) x tip/Euler H32-1 (owner 0.2649); dot-supported Bel, m(Theta)+K diagnostics; unscored research."</li>
+<li><b>Before any upload.</b> Get a written slot clearance under AGENTS.md. Check the file's SHA-256 against the receipt, and re-run <code>scripts/validate_submission.py</code>.</li>
+</ol>
+<p class="small">Public leaderboard rows (2026-10-08): #1 0.3774 · #7 0.3195 · #12 0.2797 · #13 0.2778. Snapshot: <a href="data/leaderboard_20261008.json">leaderboard_20261008.json</a>.</p>
+</section>
 <section class="hero download"><h2>H56B local artifact (not a submission recommendation)</h2>
 <p><a class="button" href="downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros-outside.tif" download>Download H56B for inspection</a> <a class="button alt" href="downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-nan-outside.tif" download>Download NaN-outside twin</a></p>
 <p class="fileline">GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros-outside.tif · 1,646,054 bytes · SHA-256 4d6548d4ec07a47a25b83d28ebc05d58b57448c1507b460aed52cec395bdb6b5</p>
@@ -19,4 +29,4 @@
 
 <div class="alert"><b>Metric correction:</b> old H55/H56 score estimates used <code>FPw=S−TPw</code>; the official metric has <code>FPw=S−Q</code> with differently centred maxima. The old 0.2843 “ceiling,” H56B 0.0649, H57-RELIEF 0.3844, inferred hidden-truth counts, and 0.0556/0.0549 thresholds are invalid as score estimates or gates. See the <a href="research/metric-identity-erratum-20261007.md">general erratum</a> and <a href="research/h57-relief-metric-erratum-20261007.md">H57-RELIEF correction</a>.</div>
 <p><b>Current status: no organizer score exists for any local artifact; no exact file-to-leaderboard link is verified; no weekly slot is cleared.</b></p>
-</main><footer><div class="wrap">GEMSDOE48 · download-for-inspection status only · 2026-10-07</div></footer></body></html>
+</main><footer><div class="wrap">GEMSDOE48 · download-for-inspection status only · 2026-10-08</div></footer></body></html>
