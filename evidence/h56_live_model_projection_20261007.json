@@ -48,5 +48,15 @@
   "recomputed_cov_dotted_c": 75206.82023682502,
   "rel_diff_pct": -1.93491962331915e-14
  },
- "h56_mass_below_breakeven_px": 50084.0
+ "h56_mass_below_breakeven_px": 50084.0,
+ "validity_status": "INVALIDATED_SURROGATE_DO_NOT_USE",
+ "valid_for_decision_gate": false,
+ "invalidated_utc": "2026-10-07T21:30:14.695527+00:00",
+ "invalidity_reason": "This historical live-score inversion treats FPw=S-TPw, but the official metric uses FPw=S-Q where Q is prediction-centred and TPw is truth-centred; Q and TPw are generally unequal. These values are not organizer-score estimates or candidate gates.",
+ "superseded_by": [
+  "docs/research/metric-identity-erratum-20261007.md",
+  "docs/research/h56b-metric-erratum-20261007.md",
+  "evidence/holdout_h56_belief_h49_20261007.json"
+ ],
+ "projection_warning": "Historical values retained solely to document the invalid calculation; do not use, cite as a score estimate, or compare to leaderboard rows."
 }

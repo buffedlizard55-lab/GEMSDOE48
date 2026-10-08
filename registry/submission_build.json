@@ -253,7 +253,9 @@
     "implied_credit_per_dot": 0.12223623274210803,
     "break_even_bar_tau_live": 0.05416,
     "credit_loss_budget_numerator_units": 210.73656,
-    "source": "owner-reported live scores 0.2600 (44,090 px) and 0.2708 (40,199 px); evidence class OWNER-REPORT"
+    "source": "owner-reported live scores 0.2600 (44,090 px) and 0.2708 (40,199 px); evidence class OWNER-REPORT",
+    "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION",
+    "invalidation_reason": "The receipt depends on the invalid general substitution FPw=S-TPw (equivalently Q≈TPw) and/or owner-reported score values without organizer verification. Its inferred truth density, thresholds, projected scores, ceilings, and gate decisions are withdrawn; local proxy measurements are historical diagnostics only."
   },
   "layer_stats": {
     "belief": {
@@ -282,6 +284,16 @@
     }
   },
   "headline_negative_result": {
+    "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION",
+    "claim_withdrawn": "This historical receipt does not establish that the local artifact beats or fails to beat a private-label score or a live leaderboard entry.",
+    "supported_scope": "Public-proxy measurements, file-format checks, and DS-layer calculations only; no score gain or slot clearance."
+  },
+  "elapsed_s": 13.549606323242188,
+  "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION",
+  "invalidation_reason": "The receipt depends on the invalid general substitution FPw=S-TPw (equivalently Q≈TPw) and/or owner-reported score values without organizer verification. Its inferred truth density, thresholds, projected scores, ceilings, and gate decisions are withdrawn; local proxy measurements are historical diagnostics only.",
+  "submission_decision": "NOT CLEARED TO SUBMIT; no score or portal acceptance is established.",
+  "leaderboard_linkage": "The 0.2778 value is owner-reported / a dated row attribution; no organizer receipt links it to local bytes.",
+  "historical_headline_withdrawn": {
     "claim": "No candidate here has a verified organizer-score gain over the owner-reported 0.2778 anchor; available public proxies do not establish private-score performance.",
     "arms_reviewed": [
       "Dempster-Shafer corroboration removal at r in {300,283,250,224,200,173,141,100,0} m: the frozen gate fails at every radius (best safety 0.64 < 2.0).",
@@ -289,6 +301,5 @@
       "Dempster-Shafer ranked re-emission at matched mass: SGMC off-catalogue credit falls 5.8 % (off-flank) to 7.1 % (full union) while catalogue credit rises."
     ],
     "evidence_class": "PROXY + DERIVED"
-  },
-  "elapsed_s": 13.549606323242188
+  }
 }

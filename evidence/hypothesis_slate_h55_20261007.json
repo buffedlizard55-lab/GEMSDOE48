@@ -290,5 +290,9 @@
       "limit": "third-party owner copies, NOT organizer-authenticated. Hash pinning establishes byte identity only; reuse licences were not verified. Fetched over gh api (GitHub egress only); raw.githubusercontent.com is not on this sandbox's allow-list, codeload.github.com and api.github.com are.",
       "reachable_from_this_sandbox": true
     }
-  ]
+  ],
+  "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION",
+  "historical_status": "ARCHIVED — re-rank candidates using current blocked holdouts; do not rely on old inferred score scenarios or threshold screening.",
+  "invalidation_reason": "The receipt depends on the invalid general substitution FPw=S-TPw (equivalently Q≈TPw) and/or owner-reported score values without organizer verification. Its inferred truth density, thresholds, projected scores, ceilings, and gate decisions are withdrawn; local proxy measurements are historical diagnostics only.",
+  "promotion_use": "NONE — all old Gate-2 and live-equivalent rankings are withdrawn."
 }

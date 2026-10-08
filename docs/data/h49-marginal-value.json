@@ -353,5 +353,8 @@
       "dti_without_group": 0.08927711346104297,
       "delta_dti_if_removed": -0.006855342524128755
     }
-  }
+  },
+  "historical_evidence_status": "HISTORICAL_PUBLIC_PROXY_DIAGNOSTICS_ONLY",
+  "promotion_use": "NONE — do not use this receipt to clear a submission slot.",
+  "validity_notice": "Historical public-proxy measurements are retained under their recorded protocol and are not private-label performance or organizer scores. Any live-score conversion, inferred hidden-truth count, live-to-proxy scaling, per-cell/break-even threshold, threshold pass/fail, or live-equivalent projection in this receipt is forensic only and invalid for promotion because it relies on the non-general FPw=S-TPw substitution (or unverified owner-reported score anchors). No local-file-to-leaderboard link or organizer acceptance is established."
 }

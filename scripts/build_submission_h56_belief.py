@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-"""GEMSDOE48 H56 — the session's unique submission: the normalized Dempster-Shafer
-combined BELIEF surface of the two strongest independently-built families.
+"""GEMSDOE48 H56B — a local Dempster-Shafer research artifact, not slot-cleared.
+
+Builds the normalized combined BELIEF surface from two owner-mirrored families.
 
 Prompt mandate (verbatim intent)
 --------------------------------
@@ -10,23 +11,20 @@ as its own diagnostic layer ... Normalize the combined belief to [0,1], write to
 the required format, and verify the result isn't simply the average of the two
 inputs (a quick correlation check against a naive mean will show this)."
 
-What makes H56 unique (not a copy of any prior GEMSDOE submission)
--------------------------------------------------------------------
-Prior DS work in this repository used Dempster's rule to GATE binary dots:
-  * PR1/PR2 2026-10-06 (previous_build_submission.py): DS on RAW BINARY dot maps,
-    symmetric alpha=0.99, no kernel, no absence evidence -> tiered union;
-    its decision emission was the plain union (priced -0.0140 by the live model).
-  * H48-1 (build_ds.py): kernel BPA, but emitted an NMS-selected {0,1} mask.
-  * H49/H53/H54/H55: DS used as a gate; every shipped artifact is {0,1} and
-    additive on top of the dotted core.
-H56 ships the LITERAL normalized combined belief Bel(F) in [0,1] as the
-submission surface — the graded evidential quantity Shafer's theory defines —
-built from a basic probability assignment that (i) uses the competition's OWN
-300 m triangular kernel as evidence support, (ii) discounts each source by its
-live-anchored reliability, and (iii) carries informative ABSENCE evidence
-(on-backbone decline + the live-validated catalogue-flank rejection of the
-dotted family). The unassigned mass m(Theta) — where the two families actively
-disagree — ships as a separate diagnostic layer, not blended away.
+Local distinction and limits
+----------------------------
+This H56B recipe emits a graded, max-normalized Bel(F) raster with separate
+Dempster residual m(Theta) and raw conflict K diagnostics. The implementation
+is locally distinct from earlier binary emissions, but the same B2 × H33-D
+family pair and a Dempster diagnostic already appeared in H53. H56B is not a
+new geological evidence family or a novel Dempster-combination concept. The
+parent masks overlap substantially, so evidence independence is not established.
+The old PR1/PR2 live-equivalent union estimate (-0.0140) is invalidated along
+with other score projections that used FPw=S-TPw; see the metric erratum.
+The score labels 0.2778 and 0.2632 are owner-reported and are not verified
+for these exact local parent bytes. The recipe's catalogue-flank absence rule
+is a preregistered assumption informed by that report, not verified local-file
+performance.
 
 Frozen recipe (pre-registered below, before any scoring is read)
 ----------------------------------------------------------------
@@ -39,25 +37,23 @@ BPA per source i at every footprint pixel x:
   m_i(F)     = r_i * s_i(x)
   m_i(N)     = r_i * (1 - s_i(x)) * a_i(x)
   m_i(Theta) = 1 - m_i(F) - m_i(N)
-Reliability (Shafer discounting, live-anchored as in the H54 session):
+Reliability (fixed recipe values anchored to owner-reported parent scores; not learned):
   r_dot = 0.95
   r_tip = 0.95 * 0.2632 / 0.2778
 Absence informativeness:
   a_i(x) = 0.5 within 100 m of the h19-5 backbone, 0.2 elsewhere,
   dotted source only: a_dot(x) = 1.0 where d(x, catalogue) <= 200 m
-  (the catalogue-flank rejection is the live-validated 0.2708 -> 0.2778 rung;
-   it is NOT applied to the tip source, for which it was never validated).
-Combination: Dempster's normalized rule.
+Combination: normalized Dempster rule; export residual m(Theta), raw conflict
+K, and plausibility Pl(F) = Bel(F) + m(Theta) separately. m(Theta) is
+unassigned/ignorance mass, not conflict or family disagreement.
 Submission surface: Bel(F) / max_footprint(Bel(F)) in [0,1], zeros outside the
-finite footprint (range-error-immune). Diagnostic layers (NOT submissions):
-m(Theta), raw conflict K, plausibility Pl(F) = f + u.
+finite footprint. Local range checks do not prove portal acceptance.
 
-Honesty note, computed and displayed on the site: the repository's metric
-algebra (knowledge/research_notes.md, result (a)) shows the DTI-optimal
-submission is binary {0,1}; a graded surface is a scientific measurement of
-where the two families disagree, not an assertion that grading beats the
-0.2778 core. The site banner is set by pre-registered gates, never by
-optimism.
+The former H56B live-model score projection is invalid and is not used as a
+gate. Corrected same-protocol public-proxy scores are below H49 on both targets;
+H56B remains downloadable for inspection only and is NOT CLEARED to submit.
+See docs/research/h56b-metric-erratum-20261007.md and
+ evidence/holdout_h56_belief_h49_20261007.json.
 
 Outputs
 -------
@@ -70,8 +66,8 @@ Outputs
   evidence/build_h56_belief_receipt_20261007.json
   evidence/h56_format_audit_20261007.json
   evidence/h56_uniqueness_20261007.json
-  evidence/holdout_h56_spatial_20261007.json
-  evidence/h56_live_model_projection_20261007.json
+  evidence/holdout_h56_belief_h49_20261007.json  (current H49 comparison)
+  evidence/h56_live_model_projection_20261007.json  (historical, invalidated)
 
 Deterministic: identical inputs -> identical bytes.
 """
@@ -141,7 +137,7 @@ R_CELLS = 3.0            # official metric support: 300 m at 100 m cells
 R_TOP = 0.95             # live-anchored reliability cap (H54 convention)
 LIVE_DOT, LIVE_TIP = 0.2778, 0.2632
 A_ON, A_OFF = 0.5, 0.2   # absence informativeness on / off the h19-5 backbone
-FLANK_PX = 2.0           # catalogue-flank band, 200 m (live-validated rung)
+FLANK_PX = 2.0           # fixed 200 m catalogue-flank assumption from owner-reported ladder
 MIN_D_SGMC = 3.0         # holdout SGMC truth: > 300 m off-catalogue
 
 R_DOT = R_TOP
@@ -252,7 +248,7 @@ def main() -> int:
     # ---- BPA + Dempster ------------------------------------------------------
     absence = np.where(onbb, A_ON, A_OFF).astype(np.float32)
     absence_d = absence.copy()
-    absence_d[(dcat <= FLANK_PX) & footprint] = 1.0  # live-validated flank rejection
+    absence_d[(dcat <= FLANK_PX) & footprint] = 1.0  # hypothesis; exact local file/score link unverified
 
     s_d = kernel_support(dots_d)
     s_t = kernel_support(dots_t)

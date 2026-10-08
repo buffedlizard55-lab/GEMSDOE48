@@ -1,11 +1,10 @@
-"""Regenerate the retired upstream DS48 sub-site with a prominent archive notice.
+"""RETIRED DS48 site generator — do not run.
 
-This builder writes only to ``docs/ds48-fusion/``. Its historical experiment,
-score-attribution, and slot-suggestion content is not current validation; every
-page receives a link to the current overview and a no-slot warning.
-
-Run explicitly only when preserving/rebuilding that historical sub-site:
-``python scripts/build_site_ds48.py``.
+The former generated pages contained invalidated live-score inversions, hidden-
+truth estimates, thresholds, and submission claims. The corrected DS48 archive in
+``docs/ds48-fusion/`` is manually maintained. ``main`` refuses to write anything,
+so the legacy builder cannot silently regenerate the superseded claims.
+Historical calculation code and receipts remain available for forensic review.
 """
 
 from __future__ import annotations
@@ -988,26 +987,11 @@ def _relativise(html_text: str) -> str:
 
 
 def main() -> int:
-    SUB.mkdir(parents=True, exist_ok=True)
-    ASSETS.mkdir(parents=True, exist_ok=True)
-    # Keep the dedicated historical sub-site stylesheet; do not overwrite it with
-    # the repository-level stylesheet during a legacy rebuild.
-    src_css = REPO / "docs" / "assets" / "ds48-fusion" / "site.css"
-    if not src_css.exists():
-        raise FileNotFoundError(f"missing historical stylesheet: {src_css}")
-    pages = {
-        "index.html": build_index(),
-        "executive-summary.html": build_exec(),
-        "research.html": build_research(),
-        "hypotheses.html": build_hypotheses(),
-        "sources.html": build_sources(),
-        "irregularities.html": build_irregularities(),
-    }
-    for name, html_text in pages.items():
-        (SUB / name).write_text(_relativise(html_text))
-        print(f"wrote docs/ds48-fusion/{name}  ({len(html_text):,} bytes)")
-    (SUB / ".nojekyll").write_text("")
-    return 0
+    raise SystemExit(
+        "build_site_ds48.py is retired: the old generator contains invalidated "
+        "FPw=S-TPw inversion, hidden-truth and threshold claims. The corrected "
+        "docs/ds48-fusion/ archive is manually maintained; no files were written."
+    )
 
 
 if __name__ == "__main__":

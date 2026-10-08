@@ -257,5 +257,9 @@
   "positive_folds_vs_dotted": 4,
   "gate_rule": "h49 mean > dotted mean and 4/4 folds positive",
   "gate_pass": true,
-  "submission_slot_recommendation": "CLEARED ON PROXY ONLY - see docs/data/h49-instrument-calibration.json before spending a slot"
+  "submission_slot_recommendation": "NOT CLEARED TO SUBMIT. This dated, protocol-specific public-proxy result is not private-label performance, current comparable-best evidence, or organizer acceptance.",
+  "historical_evidence_status": "HISTORICAL_PUBLIC_PROXY_DIAGNOSTICS_ONLY",
+  "promotion_use": "NONE — do not use this receipt to clear a submission slot.",
+  "validity_notice": "Historical public-proxy measurements are retained under their recorded protocol and are not private-label performance or organizer scores. Any live-score conversion, inferred hidden-truth count, live-to-proxy scaling, per-cell/break-even threshold, threshold pass/fail, or live-equivalent projection in this receipt is forensic only and invalid for promotion because it relies on the non-general FPw=S-TPw substitution (or unverified owner-reported score anchors). No local-file-to-leaderboard link or organizer acceptance is established.",
+  "legacy_submission_slot_recommendation": "CLEARED ON PROXY ONLY - see docs/data/h49-instrument-calibration.json before spending a slot"
 }

@@ -144,11 +144,16 @@ class TestSessionEvidenceConsistency:
         sgmc = holdout["sgmc_offcat_results"]
         assert sgmc["h49_yager_pignistic_budget"]["mean_dti"] > sgmc["h51_plausibility_budget"]["mean_dti"]
 
-    def test_index_page_links_new_artifacts(self):
-        text = (conftest.DOCS / "index.html").read_text()
-        assert h51_primary().name in text
-        assert h50b_primary().name in text
-        assert "research/h51-h50b-results-20261007.md" in text
+    def test_research_archive_links_historical_artifacts(self):
+        archive = (conftest.DOCS / "research.html").read_text()
+        readme = (ROOT / "README.md").read_text()
+        assert "research/h51-h50b-results-20261007.md" in archive
+        assert "../evidence/build_h51_receipt_20261007.json" in archive
+        assert "../evidence/holdout_h51_20261007.json" in archive
+        assert h51_primary().name in readme
+        assert h50b_primary().name in readme
+        assert "holdout_h50b_20261007.json" in readme
+        assert "Earlier negative experiments" in archive
 
     def test_live_pages_have_no_broken_local_links(self):
         broken = []

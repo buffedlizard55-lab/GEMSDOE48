@@ -89,7 +89,9 @@
         ],
         "closed_form_G": 15200.285714285706
       }
-    ]
+    ],
+    "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION",
+    "invalidation_reason": "The receipt depends on the invalid general substitution FPw=S-TPw (equivalently Q≈TPw) and/or owner-reported score values without organizer verification. Its inferred truth density, thresholds, projected scores, ceilings, and gate decisions are withdrawn; local proxy measurements are historical diagnostics only."
   },
   "rho_fit": {
     "rho": 0.06801513031394778,
@@ -124,14 +126,18 @@
       0.26544367957853454,
       0.2622484984658289,
       0.2619248258692251
-    ]
+    ],
+    "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION",
+    "invalidation_reason": "The receipt depends on the invalid general substitution FPw=S-TPw (equivalently Q≈TPw) and/or owner-reported score values without organizer verification. Its inferred truth density, thresholds, projected scores, ceilings, and gate decisions are withdrawn; local proxy measurements are historical diagnostics only."
   },
   "model": {
     "hidden_truth_px": 14027.470000000054,
     "rho": 0.06801513031394778,
     "target_px": 103805,
     "break_even_credit_at_0_2778": 0.05556,
-    "max_coverage_one_isolated_dot": 9.380297810508184
+    "max_coverage_one_isolated_dot": 9.380297810508184,
+    "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION",
+    "invalidation_reason": "The receipt depends on the invalid general substitution FPw=S-TPw (equivalently Q≈TPw) and/or owner-reported score values without organizer verification. Its inferred truth density, thresholds, projected scores, ceilings, and gate decisions are withdrawn; local proxy measurements are historical diagnostics only."
   },
   "out_of_family_transfer_check": {
     "key": "sgmc_offcat_44k",
@@ -141,7 +147,9 @@
     "inverted_tpw": 1026.0467712000025,
     "implied_rho": 0.11024648191670122,
     "predicted_dti_with_family_rho": 0.03158717277441379,
-    "relative_transfer_error_pct": -38.306303174973074
+    "relative_transfer_error_pct": -38.306303174973074,
+    "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION",
+    "invalidation_reason": "The receipt depends on the invalid general substitution FPw=S-TPw (equivalently Q≈TPw) and/or owner-reported score values without organizer verification. Its inferred truth density, thresholds, projected scores, ceilings, and gate decisions are withdrawn; local proxy measurements are historical diagnostics only."
   },
   "generated_utc": "2026-10-07T05:59:11Z",
   "provenance": {
@@ -444,7 +452,9 @@
         "last_gain": 0.6666666269302368,
         "dti_pred": 0.2764940311160827
       }
-    ]
+    ],
+    "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION",
+    "invalidation_reason": "The receipt depends on the invalid general substitution FPw=S-TPw (equivalently Q≈TPw) and/or owner-reported score values without organizer verification. Its inferred truth density, thresholds, projected scores, ceilings, and gate decisions are withdrawn; local proxy measurements are historical diagnostics only."
   },
   "ceiling_table": [
     {
@@ -537,14 +547,24 @@
     "in_family_headroom_model_units": 0.00655029809142732,
     "instrument_rms_relative_error_pct": 1.7576507966896873,
     "instrument_resolution_in_dti_units": 0.004882753913203951,
-    "headroom_below_instrument_resolution": false
+    "headroom_below_instrument_resolution": false,
+    "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION",
+    "invalidation_reason": "The receipt depends on the invalid general substitution FPw=S-TPw (equivalently Q≈TPw) and/or owner-reported score values without organizer verification. Its inferred truth density, thresholds, projected scores, ceilings, and gate decisions are withdrawn; local proxy measurements are historical diagnostics only."
   },
   "union_priced": {
     "px": 47905,
     "cov": 79152.98003935991,
-    "model_dti": 0.25878990833399795
+    "model_dti": 0.25878990833399795,
+    "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION",
+    "invalidation_reason": "The receipt depends on the invalid general substitution FPw=S-TPw (equivalently Q≈TPw) and/or owner-reported score values without organizer verification. Its inferred truth density, thresholds, projected scores, ceilings, and gate decisions are withdrawn; local proxy measurements are historical diagnostics only."
   },
   "footprint_px": 5167373,
   "catalogue_px": 60988,
-  "backbone_px": 121131
+  "backbone_px": 121131,
+  "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION",
+  "invalidation_reason": "The receipt depends on the invalid general substitution FPw=S-TPw (equivalently Q≈TPw) and/or owner-reported score values without organizer verification. Its inferred truth density, thresholds, projected scores, ceilings, and gate decisions are withdrawn; local proxy measurements are historical diagnostics only.",
+  "leaderboard_linkage": "Owner-reported anchors; local-file-to-row linkage is not organizer-verified.",
+  "promotion_use": "NONE — historical surrogate values only.",
+  "inverted_truth_table_validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION",
+  "ceiling_table_validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION"
 }

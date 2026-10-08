@@ -1,3 +1,7 @@
+> **ARCHIVED — NOT CURRENT GUIDANCE OR DECISION EVIDENCE.** This file preserves superseded project narrative. Any live-score inversion using `FPw=S−TPw`, hidden-truth count, ceiling, score scenario, or universal break-even threshold is invalidated; do not submit from this archive. Current [overview](../../index.html) · [metric erratum](../../research/metric-identity-erratum-20261007.md).
+
+---
+
 # Snapshot of the main GitHub Pages set at `origin/main` (commit 6c4df16) immediately before the H55 merge
 
 Copied verbatim on 2026-10-07 UTC from `origin/main` at the merge base of PR #16, so the

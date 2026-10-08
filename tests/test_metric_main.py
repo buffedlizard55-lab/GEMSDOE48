@@ -238,23 +238,25 @@ def cur_tpw(p, t):
 
 
 class TestCreditBar(unittest.TestCase):
-    """The marginal-value rule: emit a dot iff its realised weight > 0.2 * DTI."""
+    """Test the alpha*DTI helper only in explicitly restricted local cases."""
 
     def test_bar_is_alpha_times_dti(self):
         for v in (0.0, 0.1, 0.2778, 0.3195, 1.0):
             self.assertAlmostEqual(metric.credit_bar(v), 0.2 * v)
 
-    def test_bar_matches_measured_break_even(self):
-        # The live-anchored bar at DTI = 0.2708 is 0.05416 (registry).
+    def test_bar_numeric_example_is_not_a_live_calibration(self):
+        # This is arithmetic only; it does not infer a hidden-truth density or
+        # establish a universal promotion threshold from the owner-reported 0.2708.
         self.assertAlmostEqual(metric.credit_bar(0.2708), 0.05416, places=9)
 
-    def test_adding_a_dot_above_the_bar_raises_the_score(self):
-        """The decision rule, in the geometry where it actually applies.
+    def test_adding_a_dot_above_the_conditional_local_bar_raises_the_score(self):
+        """Check the restricted one-truth case where delta TPw = self-credit.
 
         A second dot next to an *already perfectly covered* truth pixel adds no
-        TPw at all (TPw is a `max`), so it is pure cost and is not the case under
-        test here.  The rule applies to a dot that becomes the argmax of a truth
-        pixel that had no coverage: it adds `k` to TPw and 1 to the mass.
+        TPw at all, so it is not the case tested here. A dot that becomes the
+        argmax for exactly one previously uncovered truth pixel has equal
+        marginal TPw and prediction-centred self-credit; only in this geometry
+        does ``k > alpha*DTI`` apply directly. This is not a general gate.
         """
         t = np.zeros((60, 60), dtype=bool)
         t[10, 10] = True  # covered perfectly
@@ -289,14 +291,12 @@ class TestCreditBar(unittest.TestCase):
         self.assertAlmostEqual(r_far.tpw, cur_tpw(p, t), places=12)
         self.assertLess(r_far.dti, cur)
 
-    def test_worked_credit_bar_arithmetic(self):
-        """A single dot 2 px from a single truth pixel: DTI == k == 1/3.
+    def test_worked_credit_bar_arithmetic_in_single_truth_case(self):
+        """One dot 2 px from one truth: the local marginal terms happen to match.
 
-        Algebra, all of it checked below: TPw = k = 1/3; S = 1; M = k = 1/3;
-        FPw = S - M = 2/3; FNw = |G| - TPw = 2/3;
-        denominator = 1/3 + 0.2*(2/3) + 0.8*(2/3) = 1  =>  DTI = 1/3.
-        The bar is 0.2 * (1/3) = 1/15, and the perfect dot earns k = 1, so it
-        clears the bar by a wide margin.
+        Here TPw = self-credit = k = 1/3, S = 1, FPw = S-self-credit = 2/3,
+        and FNw = |G|-TPw = 2/3. The denominator is 1, so DTI = 1/3. This
+        example does not justify substituting FPw=S-TPw for arbitrary rasters.
         """
         t = np.zeros((60, 60), dtype=bool)
         t[30, 30] = True
@@ -332,8 +332,12 @@ class TestCreditBar(unittest.TestCase):
         worse[30, 33] = 1.0
         self.assertLess(metric.dti(worse, t).dti, cur)
 
-    def test_binary_optimality_derivative_sign(self):
-        """d/dv of (T0 + v k)/(D0 + 0.2 v) has the sign of k - 0.2 DTI."""
+    def test_conditional_single_pixel_derivative_identity(self):
+        """Verify the local rational identity when delta TP=self-credit=k.
+
+        The denominator increment is alpha*v only under that restricted
+        one-variable condition; the official metric does not imply it generally.
+        """
         T0, D0, k = 3.0, 9.0, 0.5
         dti_val = T0 / D0
         for v in (0.0, 0.25, 0.5, 1.0):
@@ -344,7 +348,8 @@ class TestCreditBar(unittest.TestCase):
             expected_sign = np.sign(k - metric.ALPHA * dti_val)
             self.assertEqual(np.sign(num), expected_sign)
         self.assertEqual(
-            metric.optimal_value_is_binary(), "binary {0,1} is DTI-optimal; graded surfaces lose"
+            metric.optimal_value_is_binary(),
+            "conditional local endpoint result only; global binary optimality is not established",
         )
 
 

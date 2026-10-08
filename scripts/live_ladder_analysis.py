@@ -1,22 +1,17 @@
 #!/usr/bin/env python3
-"""Why 0.2778 scored highest: exact-metric algebra on the owner's nested live ladder.
+"""Historical live-ladder calculation — INVALIDATED and forensic-only.
 
-Inputs (all hash-pinned owner mirrors, nested A ⊃ B ⊃ C, verified below):
-    A  dotted d=2.8        44,090 px   owner-reported 0.2600
-    B  A minus d(cat)<=100 m 40,199 px owner-reported 0.2708
-    C  B minus d(cat)<=200 m 37,654 px owner-reported 0.2778   (the group's best)
-
-Official metric (problem page 967), binary emission P, hidden truth G, masked catalogue K:
-    DTI = T / (0.2 T + 0.2 FP + 0.8 |G|)      with  FP = sum_{x in P\\K} (1 - k_x)
-All quantities are *public-chunk* quantities; the unknown public fraction pi cancels in
-ratios, so every derived size below is a "per-pi" (full-region-equivalent) number.
-
-Assumption set S0 (stated, not proven): the dots removed between rungs earned ~0 hidden
-credit (their FP fraction f≈1 and dT≈0). Under S0 the ladder is inverted for T and |G|.
-A synthetic check at the end verifies the algebra against the repository's exact metric.
+The legacy calculation substituted ``FPw=S-TPw`` and assumed that removed dots had
+zero hidden-label credit, then inferred private truth quantities, ceilings, and
+per-cell thresholds from owner-reported scores. Neither premise validates those
+inferences, and no organizer receipt links the local TIFF bytes to the score rows.
+The command refuses by default and writes forensic output only with
+``--legacy-audit-only``. Results do not describe private labels or clear a slot.
+See ``docs/research/metric-identity-erratum-20261007.md``.
 """
 from __future__ import annotations
 
+import argparse
 import json
 import pathlib
 import sys
@@ -53,6 +48,15 @@ def invert_pair(s_big: float, n_big: int, s_small: float, n_small: int, f: float
 
 
 def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--legacy-audit-only", action="store_true",
+                        help="required opt-in for invalidated historical inversion")
+    parser.add_argument("--output", type=pathlib.Path,
+                        default=ROOT / "evidence" / "forensic" / "live_ladder_legacy_20261007.json")
+    args = parser.parse_args()
+    if not args.legacy_audit_only:
+        parser.error("invalidated FPw=S-TPw inversion; pass --legacy-audit-only only for forensic reproduction")
+    print("LEGACY AUDIT ONLY — INVALIDATED; NOT A TRUTH ESTIMATE OR PROMOTION GATE")
     masks = {name: read_pos(p) for name, p, _ in LADDER}
     a, b, c = masks["A_d2.8"], masks["B_B1"], masks["C_B2"]
     nested = bool((b & ~a).sum() == 0 and (c & ~b).sum() == 0)
@@ -61,6 +65,8 @@ def main() -> int:
     cat = lab == 1
     dcat = distance_transform_edt(~cat, sampling=(100.0, 100.0))
     out = {
+        "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION",
+        "invalidation_reason": "Historical hidden-truth inversion assumes FPw=S-TPw, which is not a general official-metric identity.",
         "nested_A_superset_B_superset_C": nested,
         "n": {"A": int(a.sum()), "B": int(b.sum()), "C": int(c.sum())},
         "removed": {
@@ -171,7 +177,8 @@ def main() -> int:
     p5 = pred.copy(); p5[tuple(far[rng.choice(len(far))])] = 1.0
     out["synthetic_check"]["marginal_bar_check"]["add_credit0_dot_delta"] = M.dti(p5, truth).dti - r_full.dti
 
-    dest = ROOT / "evidence" / "live_ladder_20261007.json"
+    dest = args.output if args.output.is_absolute() else ROOT / args.output
+    dest.parent.mkdir(parents=True, exist_ok=True)
     dest.write_text(json.dumps(out, indent=2))
     print(json.dumps(out["inversion_S0"], indent=2))
     print(json.dumps(out["ceiling"], indent=2))

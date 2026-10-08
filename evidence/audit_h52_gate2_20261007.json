@@ -1,8 +1,8 @@
 {
   "schema": "GEMSDOE48-candidate-audit-v1",
   "generated_utc": "2026-10-07T05:14:31.292085+00:00",
-  "protocol": "GEMSDOE48-GATE-2 (mass-neutral): equal-mass credit density vs incumbent + density-matched marginal credit of added cells vs the metric break-even bar",
-  "warning": "Public-proxy instrument only; not the private expert truth and not an organizer score. PASS does not authorize an upload by itself; it means the candidate survives the mass-neutral screen that the 2026-10-06 gate failed to apply.",
+  "protocol": "FORENSIC-ONLY reproduction of invalidated historical GEMSDOE48-GATE-2; not valid for promotion.",
+  "warning": "FORENSIC-ONLY HISTORICAL RECEIPT. The stored legacy values are preserved for reproducibility, but verdicts, density-matched scores, thresholds, and promotion decisions are invalidated. Public proxies are not private-label truth or organizer scores.",
   "candidate": {
     "path": "docs/downloads/GEMSDOE48-H52-lidar-scarp-additions-20261007-38029417f6ca-nan-outside.tif",
     "sha256": "38029417f6cab01f9f56d4d3259a998affad6ae45a2a21a394682ee38b98e0c7",
@@ -148,9 +148,18 @@
       0.01119578512944281
     ]
   },
-  "verdict": "FAIL_MASS_NEUTRAL",
+  "verdict": "INVALIDATED_FOR_FORENSIC_REPRODUCTION_ONLY",
   "reasons": [
+    "This historical Gate-2 result is not a promotion verdict: inferred live truth density and the universal per-cell threshold are invalidated."
+  ],
+  "historical_protocol_invalidated": "GEMSDOE48-GATE-2 (mass-neutral): equal-mass credit density vs incumbent + density-matched marginal credit of added cells vs the metric break-even bar",
+  "legacy_verdict": "FAIL_MASS_NEUTRAL",
+  "legacy_reasons": [
     "equal_mass_credit_density_below_incumbent (-0.00243)",
     "added_cells_below_break_even_bar (0.0099 < 0.0191 per cell)"
-  ]
+  ],
+  "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION",
+  "invalidation_reason": "Gate-2 density matching used a hidden-truth count inferred by substituting FPw=S-TPw, and treated 0.05556 as a universal break-even bar. Neither premise is generally valid. Public-proxy measurements remain historical diagnostics only.",
+  "legacy_opt_in_required_for_reproduction": true,
+  "promotion_decision": "NONE \u2014 NOT CLEARED TO SUBMIT"
 }

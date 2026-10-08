@@ -1,14 +1,14 @@
-# H56 hypothesis slate — five new candidates, frozen 2026-10-07, top two already measured and failed
+> **ARCHIVED / FORENSIC-ONLY H56 SLATE.** The live-model scores, hidden-truth assumptions, 0.0556/0.2727 thresholds, projected deltas, and Gate-2 reasoning in this historical document are invalidated under the [metric-identity erratum](metric-identity-erratum-20261007.md). The H56-F public-proxy pruning test was later run and failed at all three preregistered thresholds; see [measured results](h56-pruning-ladder-results-20261007.md). Keep measured feature/proxy observations only as historical context; do not use the old ranking or predictions for promotion. The current slate is [H57](hypotheses-h57-20261007.md).
+
+# H56 hypothesis slate — five candidates frozen 2026-10-07; later outcomes recorded separately
 
 Machine-readable twin: [`evidence/hypothesis_slate_h56_20261007.json`](../../evidence/hypothesis_slate_h56_20261007.json).
 Measured screen and battery: [`evidence/h56_research_battery_20261007.json`](../../evidence/h56_research_battery_20261007.json)
 and [`evidence/h56_band_screen_20261007.json`](../../evidence/h56_band_screen_20261007.json).
 
-Each entry names the layers, the physical signature and its transform, why it should catch a
-fault **missing** from the USGS/INGENIOUS catalogue, how it differs from everything in this
-repository, its data-obtainability status, and its expected ΔDTI against implementation cost.
+Each entry records the historical layers, physical signature, catalogue-gap rationale, prior-art distinction and data-access notes. Its old rank and expected ΔDTI estimates were not validated; all quantitative score projections are withdrawn under the erratum above.
 
-## What this session measured before ranking (so the ranking is not opinion)
+## Historical 19-band public-proxy screen measurements
 
 The 419 MB official 19-band GeoDAWN features raster was restored byte-identical from the
 hash-pinned mirror (SHA-256 `4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5`,
@@ -31,47 +31,36 @@ incumbent C (37,654 dots) over the >200 m catalogue moat:
 | 15 | depth to basement | 0.751 | 0.469 |
 | 6 | tilt angle / total curvature | 0.906 | 0.373 |
 
-Reproductions of the H55 session's independent measurements validate the pipeline line by
-line: band-3 lift 1.264 vs their 1.26; band-19 1.160 vs 1.16; band-10 1.441 vs 1.44;
-band-4/7/8 1.08 vs 1.03–1.06; C's mean basement depth 402.4 m vs moat 534.9 m (their
-402 m vs 535 m); the live-model projection of C recomputed at **0.2728** with
-`Cov(X;B_elig) = 75,206.82` identical to the calibration to 14 decimal places.
+The local feature screens reproduced these dated proxy statistics: band-3 lift 1.264 vs 1.26; band-19 1.160 vs 1.16; band-10 1.441 vs 1.44; band-4/7/8 1.08 vs 1.03–1.06; and C's mean basement depth 402.4 m vs moat 534.9 m (earlier screen 402 m vs 535 m). These are feature/catalogue-proximity measurements only. The old C live-model projection `0.2728` and associated calibration comparison are withdrawn under the metric erratum; they are not a measured score or valid comparator.
 
-Two candidate fields were then **built and evaluated offline** (this is the
-"validate before spending a slot" step the brief requires):
+Two earlier candidate fields were screened using a live-anchored surrogate. Their area/overlap counts below are historical local measurements; every projected DTI, credit-per-dot comparison, and FAIL label is invalid under the metric erratum and is not a candidate rejection or promotion result:
 
-* **H55-B strain-rate ridge field (previous session's Priority 3, implemented here):**
-  structure-tensor coherence > p95 on |second invariant|+|shear rate| gives 258,369 px
-  (5 % of the footprint) of which only 1,886 of C's dots (5.0 %) lie inside — genuinely
-  unused geometry. But Poisson dots drawn from it score **live-model projection 0.0152**
-  standalone and drag C+field to 0.2152 (< 0.2728): ≈ 0.017 credit per dot against the
-  0.0556 break-even bar. **Offline FAIL.** The slate's formal kill criterion (a live dense
-  emission inverted under calibrated |G|) remains the only way to overturn this, and the
-  projection says the slot is not worth spending.
-* **H56-A DEMGLOW (new, below):** the primary rung z ≤ −1.5 & HG ≥ p75 yields only
-  5,944 conjunction pixels → 1,991 Poisson dots. Standalone projection 0.0028 vs the
-  same-mass random control 0.0023 (within noise of it); C+field 0.2673 < 0.2728.
-  **Offline FAIL.** Demagnetisation lows at this conjunction definition are too sparse
-  and not credit-bearing enough under the family model.
+* **H55-B strain-rate ridge field:** the historical screen reported 258,369 px (about 5% of the footprint) and 1,886 C dots (5.0%) inside the field. The associated standalone `0.0152`, combined `0.2152`, `0.017` credit/dot, and `0.0556` comparison are forensic surrogate outputs only.
+* **H56-A DEMGLOW:** the historical conjunction count was 5,944 pixels and the associated Poisson emission had 1,991 dots. The `0.0028` vs `0.0023` comparison and `0.2673` combined projection were derived from the invalid live model; they do not establish a public-proxy or private-label outcome.
 
-Both failures are the system working: no weekly slot was spent, and the instruments that
-failed them are the ones calibrated against eight live scores.
+These historical model screens are not the H56-F pruning holdout. The later H56-F proxy results are reported separately and fail on the measured public proxies. No current candidate or weekly slot is cleared.
 
 ---
 
-## Rank 1 — H56-F: absence-driven Dempster pruning ladder (the one untested DS direction)
+## Historical rank 1 — H56-F: absence-driven Dempster pruning ladder (later tested; failed)
+
+> H56-F was subsequently evaluated against the catalogue and SGMC public proxies at each preregistered threshold and failed all three comparisons to H49. The measured results, fold values, and no-slot decision are in [the H56-F results report](h56-pruning-ladder-results-20261007.md). The `0.2727` live-score kill value below is withdrawn; it did not define or determine those proxy results.
 
 | field | value |
 |---|---|
-| **Layers** | `data/families/dotted_b2_prune_02778.tif` (C, live 0.2778) × `data/families/tip_stepover_r30_02632.tif` (H33-D, live 0.2632) — the two pinned family surfaces this session already combines |
-| **Physical signature and transform** | Not a new geophysical transform — the evidence-theoretic dual of everything tried so far. Every fusion in this repository has been **additive**; Dempster's rule also defines **removal**. Where C emits a dot and the tip family's kernel support and backbone-absence evidence say "no fault", the combined belief Bel(F) at that dot drops. Emit a ladder of pruned surfaces: keep C's dots with combined belief ≥ τ for τ ∈ {0.90, 0.95, 0.99}, exactly as rungs A→B→C pruned catalogue flanks. |
-| **Why it catches MISSING truth (or rather, stops paying for absent truth)** | The live ladder already proved the mechanism: deleting ~3,900 dots that carried ~0 kernel credit raised the score +0.0108 (0.2600→0.2708) with no new geology. The organizer masks catalogue pixels, so predictions there are pure 0.2-weight false positives; any *other* dot population whose realised kernel weight is below 0.2·DTI = 0.0556 is equally worthless. Tip-family disagreement is the only independent, already-downloaded estimate of which C-dots those are. |
+| **Layers** | `data/families/dotted_b2_prune_02778.tif` (C, owner-reported 0.2778; local bytes are marked UNSCORED) × `data/families/tip_stepover_r30_02632.tif` (H33-D, owner-reported 0.2632; not organizer-verified) — the two pinned family surfaces used in the historical proposal |
+| **Physical signature and transform** | Not a new geophysical transform: the proposed rule thresholds a combined belief surface to retain a subset of C's emitted dots. Dempster's combination does not itself define a removal operation. Where the H33-D support surface is low, the combined belief may fall; that is a model-based ranking signal, not proof of "no fault". The historical proposal retained C dots with combined belief ≥ τ for τ ∈ {0.90, 0.95, 0.99}. |
+| **Motivation to test (historical hypothesis, not a demonstrated mechanism)** | The owner-reported ladder and organizer's known-fault masking clarification motivated asking whether a tip-family support field could help prioritize which C-dots to retain. The ladder does not establish that the removed dots earned zero credit, nor does it identify a universal `0.2·DTI` bar. The two local families overlap substantially, so the tip surface is not established as independent evidence. H56-F must be judged only by its preregistered, comparable public-proxy measurements; those results failed and do not establish private-label performance. |
 | **Difference from anything in the repository** | H49/H53/H54/H55 and this session's H56 all ADD or REWEIGHT. No artifact has ever removed C dots using the other family's evidence. The H55 slate explicitly left 200–300 m flank pruning as "owner decision, not recommendation" — this is a different, evidence-weighted removal rule with a ladder, not a spatial band. |
 | **Data obtainable?** | YES — both parents are pinned and local; builder cost is one script reusing `scripts/build_submission_h56_belief.py`'s BPA. |
-| **Expected ΔDTI / cost** | If even half of the 6,040 C-only dots are sub-bar, model value ≈ +0.002 to +0.005; if they carry average credit (0.138), removal costs ≈ −0.003. **The widest two-sided bet available inside the family.** Cost low; needs ONE live slot to resolve — the removal ladder is exactly the experiment shape that produced the family's best three scores. |
-| **Kill criterion (pre-registered)** | Do not prune below τ = 0.90 in one rung; if the first rung returns below 0.2727 the hypothesis is dead (removals were credit-bearing) and the ladder stops. |
+| **Historical expectation / cost** | The former `+0.002` to `+0.005` gain, `−0.003` loss, and “widest bet” statements depended on the invalid live-truth model and are withdrawn. The construction cost was estimated as low; that is a historical engineering estimate only. No live score or private-label effect was established. |
+| **Original preregistered rule (withdrawn)** | Do not prune below τ = 0.90 in one rung; the former `0.2727` live-score kill check is invalid. H56-F was instead evaluated using the separately preregistered public-proxy fold protocol reported in `h56-pruning-ladder-results-20261007.md`; all three thresholds failed H49. |
 
-## Rank 2 — H56-C: 3 m DEM channel-knickpoint clusters
+## Original ranks 2–5 — other H56 hypotheses (historical order only)
+
+The remaining concepts and source notes below are retained from the H56 planning slate. Their old quantitative ΔDTI ranges, transfer arguments and ordering are not validated and are not the current slate. The numerical predictions shown in this section are withdrawn as decision evidence under the metric erratum. See the [current H57 slate](hypotheses-h57-20261007.md) for the active research ranking.
+
+### Historical rank 2 — H56-C: 3 m DEM channel-knickpoint clusters
 
 | field | value |
 |---|---|
@@ -80,20 +69,20 @@ failed them are the ones calibrated against eight live scores.
 | **Why it catches a MISSING fault** | A young fault perturbing base level leaves knickpoints in channel long-profiles **upstream of any mappable scarp** — including faults mantled by alluvium that show no trace at the surface and are therefore absent from the USGS Quaternary catalogue and the INGENIOUS inventory. Scarps (H52/H54) look at hillslopes; knickpoints look inside the drainage network — a disjoint observation space. |
 | **Difference from anything in the repository** | H52/H54 used a step-height detector on hillslope cells; no channel-profile operator exists in `src/`. The H52 lesson (terrain class beat step height) is incorporated: clusters are the estimator, not individual detections. |
 | **Data obtainable?** | YES — proven: the same workflow already downloaded and mosaicked 706 tiles on hosted runners (sandbox cannot reach USGS; runners can), compact products committed back. |
-| **Expected ΔDTI / cost** | Unknown but structurally similar to the lidar family that produced 0.0921–0.1294 scores from scarps; upside +0.002 to +0.010 if knickpoint clusters carry credit. Cost **medium-high**: one runner mosaic + one new detector module (~1 session). |
+| **Historical estimate / cost** | The old `+0.002` to `+0.010` DTI range and any transfer from lidar/scarp scores are not validated and are withdrawn as decision evidence. Cost was estimated **medium-high** (runner mosaic plus a new detector); this is an engineering estimate, not a measured result. |
 
-## Rank 3 — H56-D: conduit stepping-stone trace propagation
+### Historical rank 3 — H56-D: conduit stepping-stone trace propagation
 
 | field | value |
 |---|---|
 | **Layers** | `data/raw/external/gdr_wellspring_in_footprint.csv` (GDR/INGENIOUS wells and springs, local and hash-pinned) × official band 3 (TMI horizontal gradient) |
 | **Physical signature and transform** | Tier-≥2 conduit anchors (1,005 off-catalogue, measured this session) paired within 15 cells; each pair joined by the straight segment, scored by mean band-3 HG along it (anchors sit at HG 28.77 vs moat background 26.33, a 1.09× lift — weak); emit dots along the top segments at Poisson spacing, ≥ 300 m from existing C dots. |
-| **Why it catches a MISSING fault** | Hydrothermal discharge is point evidence of a fault's *existence*; the fault *trace* connecting two conduits is what the metric's 300 m kernel actually rewards. H55-A dart-threw anchors; this proposes the connective tissue between them, most of which is unmapped because hot-spring alignments are not in the surface-trace catalogue. |
-| **Difference from anything in the repository** | H55-A emitted isolated anchors (modelled ≈ −0.00003 net); no session has connected anchors into traces. |
+| **Historical physical rationale** | Hydrothermal discharge can indicate a fluid pathway and may motivate testing for connecting structures, but it is not direct proof of a fault. The historical proposal was to test segments between conduit anchors; no geological trace or hidden-label score is established by the anchors themselves. |
+| **Difference from anything in the repository** | H55-A emitted isolated anchors; no session had connected anchors into traces. The former `−0.00003` modelled net value for H55-A is invalidated with the live-score inversion and is not a baseline. |
 | **Data obtainable?** | YES — all inputs local. |
-| **Expected ΔDTI / cost** | Small in both directions (mass ≤ ~500 dots): worst ≈ −0.001, upside ≈ +0.002 if conduit pairs straddle hidden faults. The measured 1.09× HG lift at anchors is weak, so rank 3. Cost low. Best spent only after Rank 1's live result says whether conduit evidence carries credit at all. |
+| **Historical estimate / cost** | The former `−0.001` to `+0.002` range was an unvalidated planning estimate, not a measured score effect. The 1.09× HG lift is a dated feature/catalogue statistic only. Cost was estimated low; no candidate was built or slot-cleared. |
 
-## Rank 4 — H56-B: radiometric K-residual alteration halos
+### Historical rank 4 — H56-B: radiometric K-residual alteration halos
 
 | field | value |
 |---|---|
@@ -102,35 +91,31 @@ failed them are the ones calibrated against eight live scores.
 | **Why it catches a MISSING fault** | Potassic metasomatism along upflow zones persists under cover long after surface expression erodes; the catalogue is a surface-trace compilation. K enrichment *at constant Th* is a chemistry signal no geomorphic layer sees. |
 | **Difference from anything in the repository** | H50-B used the Th/K *ratio* inside DS conflict corridors (failed its gate); GEMSDOE46 used scarp∩radiometric coincidence; H53-RadEdge used radiometric *edges*. A lithology-regressed K **residual** is a different operator with a different null. |
 | **Data obtainable?** | YES — mirror already local and hash-pinned. Caveat: uint8 quantisation coarsens the regression; flagged as an implementation risk. |
-| **Expected ΔDTI / cost** | Small-to-moderate: alteration halos are diffuse; expected +0.000 to +0.003. Cost low. |
+| **Historical estimate / cost** | The old `+0.000` to `+0.003` DTI range was not tested or validated; it is not evidence or a forecast. Cost was estimated low. |
 
-## Rank 5 — H56-E: cover-gated additions (basement-depth prior)
+### Historical rank 5 — H56-E: cover-gated additions (basement-depth prior)
 
 | field | value |
 |---|---|
 | **Layers** | official band 15 (depth to basement) × any future addition candidate |
-| **Physical signature and transform** | Not a detector: a **gate**. Measured this session: C's dots sit at mean basement depth 402.4 m vs 534.9 m for the moat background; only 42.5 % of C's dots are below the moat median depth. The family systematically under-emits deep basins — exactly where the trace-based catalogue is blind. Gate future additions to depths above the moat median and re-measure. |
-| **Why it catches MISSING faults** | Deep alluvial basins bury faults beyond any surface mapping; the catalogue's incompleteness is maximal where cover is thickest, so that is where new dots have the highest prior probability of being genuinely new. |
+| **Physical signature and transform** | Not a detector: a proposed **sampling gate**. The historical local screen measured C dots at mean basement depth 402.4 m vs 534.9 m for the moat background; 42.5% of C's dots were below the moat median depth. This describes the local feature distribution only; it does not establish that the family under-emits real faults or that deep basins are missing labels. Any future gate would require an independent holdout test. |
+| **Historical rationale** | Thick alluvial cover can obscure surface traces and motivates a testable hypothesis. The catalogue's relative completeness by cover depth and the probability that an added dot is genuinely new were not established in this screen. |
 | **Difference from anything in the repository** | H55-C proposed basement-depth × gravity × conductivity *conjunction as a detector*; this uses depth as a **sampling prior on additions**, which no session has done. |
 | **Data obtainable?** | YES — band 15 is in the restored official raster. |
-| **Expected ΔDTI / cost** | A modifier, not a source: ±0.001 on whatever it gates. Cost trivial. |
+| **Historical estimate / cost** | The former `±0.001` DTI modifier is an unvalidated planning number, not evidence or a forecast. Cost was estimated trivial. |
 
 ---
 
-## Rejected before ranking, with measured reasons
+## Historical screens that used the invalid live model
 
-| idea | why rejected (this session's measurement) |
+| idea | preserved observation / corrected status |
 |---|---|
-| H55-B strain-rate ridge emission | **Built and measured this session:** 25,837 Poisson dots score live-model projection 0.0152 standalone; C+field 0.2152 < 0.2728. ≈ 0.017 credit/dot vs the 0.0556 bar. Only a live dense emission could overturn; the projection says not worth the slot. |
-| H56-A DEMGLOW emission | **Built and measured this session:** 1,991 dots, projection 0.0028 vs same-mass random 0.0023; C+field 0.2673 < 0.2728. The conjunction is real but sparse and sub-bar. Kept as rank-ineligible measurement, not promoted. |
-| Band-16 seismicity dots | Lift 1.082 / AUC 0.522 — inside the unused-band noise band of the strain bands that just failed; no reason to expect better. |
-| Band-17 conductivity ridge | AUC 0.474 — C's dots sit *below* background conductivity; the sign is inverted, and H55-C already owns the conductivity-conjunction idea. |
-| Any further re-weighting/fusion of dotted × tip | Closed by three instruments now: union priced −0.0140 (live model), graded belief 0.0649 (this session), parents' inverted T differ by 1 %. |
+| H55-B strain-rate ridge emission | The old report records 25,837 Poisson dots. Its `0.0152` standalone / `0.2152` C+field projection, `0.017` credit-per-dot value, and comparison to `0.0556` all came from the invalid surrogate; they are forensic output, not a valid candidate failure. |
+| H56-A DEMGLOW emission | The old report records 1,991 dots. The `0.0028` vs `0.0023` simulation and `0.2673` C+field projection used the same invalid surrogate and are not a public-proxy result or valid reason to reject a geological hypothesis. |
+| Band-16 seismicity dots | Historical catalogue-proximity lift/AUC were 1.082/0.522. These are feature-screen statistics only; comparisons with surrogate “failures” do not establish a ranking. |
+| Band-17 conductivity ridge | Historical AUC was 0.474 in the stated feature screen. It is a proxy statistic, not validation of a geological sign or a candidate rejection. |
+| Further dotted × tip reweighting/fusion | The former live-model union price, H56B 0.0649 projection, and parent `T` comparison are withdrawn. Measured public-proxy results for H56B/H56-F and other current work are listed on the [validation page](../validation.html); no universal conclusion that this entire method family is exhausted follows. |
 
-## Validation rule carried forward
+## Promotion policy correction
 
-No weekly slot is spent on a candidate that has not (a) passed the blocked holdout on both
-truths ≥ 3/4 folds against both parents, AND (b) shown a live-model projection at or above
-the 0.2778 incumbent — except that the **first** rung of the Rank-1 removal ladder is
-explicitly exempted by design: it is the one experiment whose *information value* (which
-C-dots carry credit) exceeds its expected score, mirroring how A→B→C was discovered.
+The former H56 rule requiring a live-model projection at or above `0.2778` (with a pruning-ladder exception) is withdrawn because it depended on invalid score inversion and unverified score-to-file attribution. Do not use it to promote, reject, or rank candidates. Current guidance requires a comparable spatially blocked public-proxy holdout and, before any future promotion, a re-derived and validated mass-neutral audit that does not infer private-label density from a reported score. **No weekly slot is cleared.**

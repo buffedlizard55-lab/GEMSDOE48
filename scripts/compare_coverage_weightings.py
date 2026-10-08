@@ -1,20 +1,10 @@
 #!/usr/bin/env python3
-"""Does weighting the coverage target predict the eight live scores better than uniform?
+"""Retired coverage-weighting fit — invalidated live-score surrogate.
 
-Reproduces the negative result quoted in
-``docs/research/h55-live-model-ceiling-and-candidate-20261007.md`` §2.4 and in the H55
-hypothesis slate: nine target weightings were fitted against the same eight owner-reported
-live scores, and **uniform wins**. Every density weighting is actively worse.
-
-The forward model is ``T = rho * Cov_q(X)`` with
-``Cov_q(X) = sum_{b in B_elig} q(b) * max_{x in X} k(d(x,b))``.  For each weighting ``q``,
-``rho`` is fitted by least squares through the origin and the relative error of the resulting
-DTI prediction is reported for all eight artifacts.
-
-Weightings that need an optional mirror (radiometric ratios, 3 m lidar roughness) are skipped
-with an explicit note rather than silently dropped.
-
-Usage:  python scripts/compare_coverage_weightings.py [--output PATH]
+This historical tool infers hidden truth and scores owner-reported live anchors
+using the invalid ``FPw=S-TPw`` substitution. Its fitted ``rho`` comparisons are
+not evidence about private labels, score estimates, ceilings, or promotion. It
+refuses by default; ``--legacy-audit-only`` is required for forensic reproduction.
 """
 from __future__ import annotations
 
@@ -45,8 +35,13 @@ LIDAR3M = ROOT / "data/external/h52_scarp3m_100m.tif"
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path,
-                        default=ROOT / "evidence/coverage_weighting_comparison_20261007.json")
+                        default=ROOT / "evidence/forensic/coverage_weighting_comparison_legacy_20261007.json")
+    parser.add_argument("--legacy-audit-only", action="store_true",
+                        help="required opt-in for invalidated score-surrogate analysis")
     args = parser.parse_args()
+    if not args.legacy_audit_only:
+        parser.error("invalidated live-score surrogate; pass --legacy-audit-only only for forensic reproduction")
+    print("LEGACY AUDIT ONLY — INVALIDATED; NOT A SCORE MODEL")
     if not BACKBONE.exists():
         raise SystemExit("missing backbone mirror; run: python scripts/restore_h55_inputs.py")
 
@@ -70,9 +65,10 @@ def main() -> int:
     # hidden truth from the nested triple, exactly as scripts/calibrate_live_model.py does
     from gemsdoe48.live_model import fit_hidden_truth
     nested = [i for i, a in enumerate(LIVE_ARTIFACTS) if a.key in ("A_d2_8", "B_prune100", "C_prune200")]
-    gfit = fit_hidden_truth([masses[i] for i in nested], [lives[i] for i in nested])
+    gfit = fit_hidden_truth([masses[i] for i in nested], [lives[i] for i in nested],
+                            legacy_audit_only=True)
     hidden = gfit["hidden_truth_px"]
-    truth = [invert_truth(l, s, hidden) for l, s in zip(lives, masses)]
+    truth = [invert_truth(l, s, hidden, legacy_audit_only=True) for l, s in zip(lives, masses)]
 
     backbone_f = backbone.astype(np.float64)
     dens7 = uniform_filter(backbone_f, size=7) * 49.0
@@ -127,7 +123,7 @@ def main() -> int:
         xs = np.asarray(cov)
         ys = np.asarray(truth)
         rho = float((xs * ys).sum() / (xs * xs).sum())
-        model = ForwardModel(hidden, rho, int(eligible.sum()))
+        model = ForwardModel(hidden, rho, int(eligible.sum()), legacy_audit_only=True)
         pred = np.asarray([model.dti(c, s) for c, s in zip(cov, masses)])
         act = np.asarray(lives)
         rel = (pred - act) / act
@@ -146,6 +142,8 @@ def main() -> int:
 
     best = min(results.items(), key=lambda kv: kv[1]["rms_relative_error_pct"])
     receipt = {
+        "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION",
+        "invalidation_reason": "The fitted hidden-truth/live-score surrogate relies on FPw=S-TPw (Q≈T), which is not a general official-metric identity.",
         "generated_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "question": ("does weighting the coverage target predict the eight owner-reported live "
                      "scores better than uniform weighting?"),

@@ -294,5 +294,9 @@
   "best_rms_relative_error_pct": 1.658643718391136,
   "uniform_rms_relative_error_pct": 1.7576507966896873,
   "conclusion": "uniform RMS 1.758 % vs best alternative 'far_from_catalogue' at 1.659 % on eight points - not a meaningful improvement. Every backbone-density weighting is worse (+0.37 to +0.88 percentage points). A corridor pixel is not more likely to sit near hidden truth because it has more corridor neighbours. Uniform coverage is kept.",
-  "provenance_class": "OWNER-REPORT (all eight live scores are owner-pasted, not organizer receipts)"
+  "provenance_class": "OWNER-REPORT (all eight live scores are owner-pasted, not organizer receipts)",
+  "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION",
+  "invalidation_reason": "The receipt depends on the invalid general substitution FPw=S-TPw (equivalently Q≈TPw) and/or owner-reported score values without organizer verification. Its inferred truth density, thresholds, projected scores, ceilings, and gate decisions are withdrawn; local proxy measurements are historical diagnostics only.",
+  "promotion_use": "NONE — forensic reproduction only; not a score predictor or truth estimate.",
+  "leaderboard_linkage": "Owner-reported scores; no organizer receipt links local bytes to rows."
 }

@@ -1,5 +1,7 @@
 # H56 session — three-pass review log (2026-10-07)
 
+> **HISTORICAL REVIEW LOG — FORENSIC ONLY.** The live-model projections, inferred truth counts, thresholds, and Gate-2 decision language below depended on the subsequently invalidated `FPw=S-TPw` assumption. They are preserved to document the review history, not as score or promotion evidence. No H56 artifact is cleared to submit. See `docs/research/metric-identity-erratum-20261007.md`.
+
 ## Pass 1 — implement completely
 - `scripts/build_submission_h56.py`: frozen-recipe Dempster–Shafer belief builder
   (metric-kernel BPA, live-anchored discounts 0.95 / 0.95×0.2632/0.2778, backbone absence

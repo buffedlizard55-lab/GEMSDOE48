@@ -1,68 +1,26 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>GEMSDOE48 · Candidate geological hypotheses</title><link rel="stylesheet" href="../assets/style.css"></head><body><header><p>DOE GEMS Prize · DrivenData #306</p><h1>Candidate hypotheses</h1><p>Five geological hypotheses not previously tried in this campaign, each with the layers it uses, the physical signature it targets, why it should find a fault the public catalogue lacks, how it differs from this repository, and — as the brief requires — the specific free official source it needs plus a real obtainability check.</p><nav><a href="index.html">H49 summary</a><a href="hypotheses.html">Hypotheses</a><a href="method.html">Method &amp; evidence</a><a href="sources.html">Sources &amp; access</a></nav></header><main class="wrap">
-
-<div class="warn"><strong>Availability and rights remain unverified.</strong> The prior H49 session recorded binary-download failures from <code>dropbox.com</code>, <code>usgs.gov</code>, <code>earthquake.usgs.gov</code>, <code>gdr.openei.org</code> and <code>sciencebase.gov</code> in this sandbox. A listed web page is not proof of complete in-footprint coverage, retrievable bytes, or permission to reuse/redistribute every linked asset. Some source pages state licenses, but asset-level terms and access were not independently verified here. Treat these as research leads only; none is ready until source bytes, coverage, terms, and a comparable blocked validation are documented.</div>
-
-<h2>H-A · Lateral lineament coherence as a pruning signal — <span style="color:#b47b18">FALSIFIED, measured</span></h2>
-<p><strong>Layers:</strong> the incumbent emission's own support field (no external data needed). <strong>Signature:</strong> structure-tensor coherence (λ₁−λ₂)/(λ₁+λ₂) of the kernel-support field at σ = 2 and 4 cells, local dot density at r = 3/5/8 cells, connected-component size, distance to the public catalogue, and local support sum.</p>
-<p><strong>Why it should work:</strong> a fault is a laterally persistent structure that produces a collinear scarp, drainage offset, magnetic contact and strain-rate anomaly over kilometres, whereas ridge-detector noise (alluvial-fan edges, ploughed-field boundaries, roads, canal banks, DEM tile seams) is isolated, blobby or short. If coherence predicted credit, the low-coherence tail could be pruned and the freed mass re-spent.</p>
-<p><strong>Result <code>[MEASURED]</code>:</strong> it does not. Every quintile of every feature carries the same realised proxy credit per cell — coherence σ2: 0.155 / 0.143 / 0.150 / 0.140 / 0.160; coherence σ4: 0.158 / 0.155 / 0.147 / 0.143 / 0.146; density r5: 0.168 / 0.153 / 0.156 / 0.139 / 0.140; distance-to-catalogue: 0.163 / 0.147 / 0.159 / 0.154 / 0.127 — all far above the removal threshold of 0.037 proxy credit per cell. <a href="../data/h49-coherence-pruning.json">Full receipt</a>. The incumbent's cells are homogeneous with respect to every geometric feature computable from the emissions alone, which means <strong>no further pruning can be justified without new data</strong>. This negative result is the single most useful measurement of the session: it closes the pruning lane.</p>
-
-<h2>Ranked hypotheses for the next session</h2>
-<table><thead><tr><th>Rank</th><th>Hypothesis</th><th>Layers / physical signature</th><th>Why it finds a fault the catalogue lacks</th><th>Expected DTI</th><th>Cost</th><th>Source &amp; obtainability</th></tr></thead><tbody>
-<tr>
-<td><strong>1</strong></td>
-<td><strong>Blind-geothermal targeting: 2 m temperature probes + spring/well chemistry + paleo-sinter</strong></td>
-<td><code>2m_temperature_probe_INGENIOUS_regional_data.zip</code> (1.03 MB), <code>wellspringdata.gdb.zip</code> (19.85 MB), <code>paleo_geothermal_regional.zip</code> (82 kB) → interpolate a shallow thermal-anomaly field and a sinter/travertine indicator; use it as a <em>prior mask</em> over any lineament detector.</td>
-<td>The experts labelled faults “indicative of geothermal resources”. A blind system leaks heat and precipitates sinter without necessarily producing a scarp good enough for the USGS/INGENIOUS fault compilation. Thermal anomalies therefore point at structures the fault catalogue is blind to, and the prior converts a regional detector into a targeted one — cutting wasted mass (α·F), the term that dominates the metric.</td>
-<td><strong>Highest.</strong> It attacks the F/T ratio directly: better targeting means less mass for the same credit.</td>
-<td><strong>Low</strong> once the files are on disk (21 MB total, all shapefile/CSV/GDB).</td>
-<td><a href="https://gdr.openei.org/submissions/1391">OpenEI GDR submission 1391</a> — INGENIOUS Great Basin compilation, DOI <a href="https://doi.org/10.15121/1881483">10.15121/1881483</a>. The page is reported to list CC BY 4.0, but asset-level terms and reuse rights were not independently checked; download <strong>blocked in this sandbox</strong>.</td>
-</tr>
-<tr>
-<td><strong>2</strong></td>
-<td><strong>Seismicity lineaments from an independent, richer earthquake catalogue</strong></td>
-<td>INGENIOUS <code>seismicity_INGENIOUS_regional_data.zip</code> (22.98 MB: independent and dependent earthquake-density models, developed at the Nevada Geodetic Laboratory) and/or the ANSS ComCat FDSN event service → anisotropic ridge/coherence maxima of the event density, intersected with a curvature inflection.</td>
-<td>Instrumental seismicity is a <em>dynamic</em> inventory: blind and low-slip-rate faults light up seismically while leaving no preserved scarp for a geomorphic catalogue. The competition's own stack carries only a coarse “density of earthquakes” band; the INGENIOUS models separate dependent from independent events and are built for this exact region.</td>
-<td>High (recall lever: adds genuinely new structures rather than re-cutting existing ones).</td>
-<td>Low–medium (catalogue handling + ridge extraction).</td>
-<td><a href="https://gdr.openei.org/submissions/1391">GDR 1391</a> (page-reported CC BY 4.0; asset terms not independently verified) and the <a href="https://earthquake.usgs.gov/fdsnws/event/1/">USGS ANSS ComCat FDSN API</a>. Both are documented public-source URLs; coverage, asset terms, and current retrieval remain unverified here.</td>
-</tr>
-<tr>
-<td><strong>3</strong></td>
-<td><strong>Geodetic strain localisation not explained by the catalogue</strong></td>
-<td>INGENIOUS <code>geodetics_INGENIOUS_regional_data.zip</code> (51.99 MB: shear and dilation models) and/or the competition bands <code>geod_2ndinv</code>, <code>geod_shearrate</code>, <code>geod_dilaterate</code> → gradient/curvature maxima of the strain-rate field, then <em>residualise</em> against the catalogue: keep only maxima ≥300 m from any mapped fault.</td>
-<td>A mapped catalogue explains most of the regional strain field. The <em>residual</em> localisation is exactly where an unmapped structure must be accommodating deformation. Residualisation is the direct operational form of “not already in the catalogue”.</td>
-<td>Medium-high (targets recall, but the 100 m geodetic grids are smooth and may not localise sharply).</td>
-<td>Medium.</td>
-<td><a href="https://gdr.openei.org/submissions/1391">GDR 1391</a> (page-reported CC BY 4.0; asset terms not independently verified) for the regional models; official bands require <code>training_features.tif</code> from the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/data/">DrivenData data tab</a> (login). Both <strong>blocked in this sandbox</strong>.</td>
-</tr>
-<tr>
-<td><strong>4</strong></td>
-<td><strong>Metre-scale scarp and offset-fan matched filter on 1 m / 3DEP DEMs</strong></td>
-<td>Official <code>1m_DEM_links.csv</code> tile table → anisotropic matched filter for sub-100 m scarps and offset alluvial-fan edges, then downsample the detections to the 100 m grid.</td>
-<td>A fault with &lt;1 m throw produces no resolvable signal once averaged to 100 m, so an entire class of real faults is invisible to every layer in the provided stack. The experts, working with the same high-resolution imagery the tile table points at, can see them.</td>
-<td>Medium (real recall gain, but tile volume and download cost are large).</td>
-<td><strong>High</strong> — many tiles, heavy I/O.</td>
-<td>Official tile table on the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/data/">data tab</a> (login required), tiles served from USGS 3DEP / <a href="https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7">ScienceBase GeoDAWN item 657e1d85d34e23d3533209f7</a>. <strong>Blocked in this sandbox</strong>.</td>
-</tr>
-<tr>
-<td><strong>5</strong></td>
-<td><strong>Cultural and agricultural false-lineament masking</strong></td>
-<td>Roads, canals, field boundaries, pipelines (no geoscience data) → hard mask over any lineament detector before emission.</td>
-<td>This is a <em>precision</em> hypothesis rather than a discovery one: DEM derivative and edge detectors fire strongly on anthropogenic linear features, which are guaranteed false positives (they can never be expert-verified faults). Removing them cuts F without touching T.</td>
-<td>Low–medium (bounded: it can only remove mass that is certainly wasted, and H-A shows geometric features alone cannot identify it).</td>
-<td>Low, but needs vector data.</td>
-<td>USGS National Map / Census TIGER / NHD — public, but <strong>blocked in this sandbox</strong>; not verified this session.</td>
-</tr>
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>H49 hypotheses · historical archive · GEMSDOE48</title><link rel="stylesheet" href="../assets/style.css"></head><body>
+<header><p>GEMSDOE48 · H49 historical archive</p><h1>Hypotheses: old gates withdrawn</h1>
+<p>This page preserves the prior H49/H55-era hypothesis logic while separating it from the active research slate.</p>
+<nav><a href="index.html">H49 archive</a><a href="hypotheses.html">Hypotheses</a><a href="method.html">Metric &amp; method erratum</a><a href="sources.html">Sources &amp; attribution</a><a href="../hypotheses.html">Current slate ↗</a></nav></header>
+<main class="wrap">
+<div class="warn"><strong>Do not use the old H49 pruning threshold or score scenarios.</strong> The former <code>0.037</code> proxy-credit threshold, density-matched gates, inferred live-truth mass, and live-equivalent ranking depend on the invalid <code>FPw=S−TPw</code> substitution. They are archived, not decision evidence.</div>
+<section><h2>Historical lane</h2>
+<p>Earlier H49 notes tested whether already-emitted cells could be pruned using geometric features computed from the existing surfaces. Those local feature/proxy measurements are historical diagnostics; the old conclusion that a threshold closes the pruning lane is withdrawn. No result here estimates private-label truth, an organizer score, or a live improvement.</p>
+<p>Preserved references: <a href="../data/h49-parent-decomposition.json">H49 parent decomposition JSON</a> (now explicitly invalidated for live inversion/projection fields) and <a href="../research/credit-density-audit-20261007.md">credit-density audit erratum</a>.</p>
+</section>
+<section><h2>Current 4-hypothesis geological slate</h2>
+<p>The active slate is re-ranked using current data-access checks and the frozen spatial holdout protocol. Expected ranges are planning priors only, not promised score changes.</p>
+<table><thead><tr><th>Rank</th><th>Geological hypothesis</th><th>Evidence required before any slot</th><th>Status</th></tr></thead><tbody>
+<tr><td>1</td><td>Robust K–Th residual plus magnetic-gradient corroboration</td><td>Pre-registered feature construction, holdout-only test, and comparison with matched random controls.</td><td>H57-A tested; fails the combined public-proxy gate and all eight same-pool controls. No TIFF; no slot.</td></tr>
+<tr><td>2</td><td>Focal-mechanism orientation lineations</td><td>Audit ComCat event-level focal mechanisms, completeness, and local coverage before feature extraction.</td><td>Parked; 98-event count query is not event-by-event coverage proof.</td></tr>
+<tr><td>3</td><td>Channel-profile knickpoint alignments</td><td>Audit target-area 3DEP/3DHP coverage and use terms; test blocked holdouts.</td><td>Parked; complete native-resolution data are not staged.</td></tr>
+<tr><td>4</td><td>Multi-element hydrothermal pathfinder residuals</td><td>Harmonize sampling/method metadata, establish target-area coverage and permissions, then test blocked holdouts.</td><td>Parked; access/use conditions and spatial density are unaudited.</td></tr>
 </tbody></table>
-
-<h2>How each differs from what this repository already does</h2>
-<ul>
-<li><strong>H-A</strong> is new to this repository and was tested here (falsified). It used only the emissions themselves — no external data.</li>
-<li><strong>H-1 … H-5</strong> all require data this repository has never loaded. The current pipeline fuses two <em>existing</em> emissions; it has never built a detector from raw geophysical, thermal or seismic layers, and it has never applied a geothermal prior. Every one of them produces a <em>new</em> candidate surface that could enter a future fusion as a third evidence source.</li>
-</ul>
-
-<h2>Gate before any submission slot</h2>
-<p>Per the standing brief, a candidate is only slot-eligible after it beats the current holdout best under the frozen protocol: 16 spatial blocks, SGMC off-catalogue truth, official metric, with the improvement positive in the block mean and in a majority of blocks, <em>and</em> with the marginal credit of any added mass above the live acceptance bar α·DTI ≈ 0.056 converted into proxy units. Given H-A's falsification and the measured local optimality of the incumbent emission, the honest expectation is that only a hypothesis that brings <strong>new information</strong> (H-1, H-2, H-3) can clear that gate — re-cutting the existing families cannot.</p>
-
-</main><footer>GEMSDOE48 H49 sub-site · · rank by measurement, not by enthusiasm.</footer></body></html>
+<p>The complete active slate, source links, planned ΔDTI ranges, and H57-A fold results are on the <a href="../hypotheses.html">current hypotheses page</a> and in <a href="../research/hypotheses-h57-20261007.md">the H57 preregistration</a> / <a href="../research/h57-results-20261007.md">H57 result report</a>.</p>
+</section>
+<section><h2>Failures stay visible</h2>
+<p>H56-F's pruning ladder failed the comparable public-proxy checks; H57-A slightly raised the catalogue proxy but lost to H49 on the SGMC off-catalogue proxy and to all eight same-pool controls. These are public-proxy results—not evidence about private labels—and do not clear a weekly slot. See <a href="../research/h56-pruning-ladder-results-20261007.md">H56-F results</a> and <a href="../research/h57-results-20261007.md">H57-A results</a>.</p>
+</section>
+</main><footer><p>Historical hypotheses are retained for audit; active decisions require independent, spatially blocked evidence.</p></footer></body></html>

@@ -1,3 +1,5 @@
+> **ARCHIVED / FORENSIC-ONLY H56 PLAN.** This dated plan retains its original wording for provenance. Its live-model projections, inferred truth, universal marginal bars, and threshold-based kill criteria were invalidated by the metric-identity erratum. Do not use those values for promotion or slot decisions. Current slate and results: [H57 hypotheses](hypotheses-h57-20261007.md), [H57-A results](h57-results-20261007.md), [H56-F pruning results](h56-pruning-ladder-results-20261007.md).
+
 # H56 hypothesis slate — frozen before new candidate scoring (2026-10-07)
 
 This slate follows the standing project brief in [`README.md`](../../README.md). It is a

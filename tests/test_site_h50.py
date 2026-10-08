@@ -1,11 +1,10 @@
-"""The H50 sub-site is generated from receipts, so it is tested like a build
-artifact: pages exist, are well formed, local links resolve, the historical
-TIFF download is obvious, the SHA appears, H36 is correctly classified, the
-archival note is within the portal limit, and no slot is recommended."""
+"""Integrity tests for the manually maintained, non-submission H50 archive."""
 from __future__ import annotations
 
 import json
 import re
+import subprocess
+import sys
 import unittest
 from html.parser import HTMLParser
 from pathlib import Path
@@ -45,77 +44,99 @@ class TestH50Site(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.rec = receipt()
-        cls.texts = {n: (SUB / n).read_text() for n in PAGES}
+        cls.texts = {n: (SUB / n).read_text(encoding="utf-8") for n in PAGES}
 
-    def test_pages_exist_and_balanced(self):
+    def test_pages_exist_are_balanced_and_archived(self):
         for name in PAGES:
-            parser = _Nesting()
-            parser.feed(self.texts[name])
-            self.assertEqual(parser.errors, [], name)
-            self.assertEqual(parser.stack, [], name)
+            with self.subTest(page=name):
+                text = self.texts[name]
+                self.assertTrue((SUB / name).exists())
+                parser = _Nesting()
+                parser.feed(text)
+                self.assertEqual(parser.errors, [], name)
+                self.assertEqual(parser.stack, [], name)
+                self.assertIn("archive", text.lower())
+                self.assertTrue("not cleared" in text.lower() or "not ok to submit" in text.lower()
+                                or "not current" in text.lower() or "withdrawn" in text.lower())
 
-    def test_download_at_top_of_index_with_download_attribute(self):
+    def test_archived_downloads_are_explicitly_not_submission_recommendations(self):
         text = self.texts["index.html"]
-        pos = text.find(Path(self.rec["primary_file"]).name)
-        self.assertGreater(pos, 0)
-        self.assertLess(pos, len(text) / 3, "download must be obvious at the top")
-        window = text[max(0, pos - 300): pos + 60]
-        self.assertIn("download", window)
+        self.assertIn("NOT OK TO SUBMIT", text)
+        self.assertIn("OK TO DOWNLOAD FOR AUDIT; NOT CLEARED TO SUBMIT", text)
+        names = ["gemsdoe48-h50-ds-b2xh36rung30-20261007-5b59e106-nan.tif",
+                 "gemsdoe48-h50-ds-b2xh36rung30-20261007-5b59e106-zeros.zip"]
+        for name in names:
+            self.assertIn(name, text)
+            self.assertTrue((conftest.DOWNLOADS / name).exists())
+        self.assertIn(self.rec["primary_sha256"], text)
 
-    def test_zip_offered_too(self):
-        self.assertIn(Path(self.rec["zip_file"]).name, self.texts["index.html"])
+    def test_h50_parent_attribution_is_clearly_unverified(self):
+        text = self.texts["index.html"]
+        self.assertIn("owner-reported", text)
+        self.assertIn("No organizer receipt links either score to these local parent bytes", text)
+        self.assertIn("No organizer score", text)
 
-    def test_sha_and_corrected_archival_note_and_name_appear(self):
-        for name in ("index.html", "executive-summary.html"):
-            self.assertIn(self.rec["primary_sha256"], self.texts[name])
-        index = self.texts["index.html"]
-        self.assertIn(self.rec["submission_name"], index)
-        self.assertIn("H36-1 rung30", index)
-        self.assertIn("H19-5/rung-30 repacking; not tip/step-over", index)
-        self.assertIn("do not paste for submission", index)
-        # The frozen receipt's original note contains the classification error;
-        # the public archive must show the corrected note instead.
-        self.assertNotIn(self.rec["submission_note"], index)
+    def test_metric_and_ds_terms_are_correct(self):
+        method = self.texts["method.html"]
+        self.assertIn("FPw=S−TPw", method)
+        self.assertIn("not a general identity", method)
+        self.assertIn("not a universal", method)
+        self.assertIn("m(Θ)", method)
+        self.assertIn("K", method)
+        self.assertIn("ignorance", method.lower())
+        self.assertIn("conflict", method.lower())
+        self.assertNotIn("break-even credit bar (0.2·0.26", method)
 
-    def test_corrected_archival_note_within_portal_limit(self):
-        match = re.search(r"Corrected archival note \((\d+)/200 chars; do not paste for submission\):</strong> <code>([^<]+)</code>", self.texts["index.html"])
-        self.assertIsNotNone(match)
-        note = match.group(2)
-        self.assertLessEqual(len(note), 200)
-        self.assertEqual(int(match.group(1)), len(note))
+    def test_current_hypothesis_links_preserve_failures_and_gate(self):
+        hypotheses = self.texts["hypotheses.html"]
+        self.assertIn("../hypotheses.html", hypotheses)
+        self.assertIn("H56-F", hypotheses)
+        self.assertIn("H57-A", hypotheses)
+        self.assertIn("not a universal per-dot threshold", self.texts["method.html"])
+        self.assertIn("withdrawn", hypotheses.lower())
+        self.assertIn("NOT CLEARED TO SUBMIT", self.texts["executive-summary.html"])
+        self.assertIn("NOT CLEARED TO SUBMIT", self.texts["sources.html"])
+        self.assertIn("NOT CLEARED TO SUBMIT", self.texts["executive-summary.html"])
 
-    def test_every_local_href_resolves(self):
-        for name in PAGES:
-            for href in re.findall(r'href="([^"#]+)"', self.texts[name]):
+    def test_all_local_links_resolve(self):
+        for name, text in self.texts.items():
+            for href in re.findall(r'href="([^"#]+)"', text):
                 if href.startswith(("http://", "https://", "mailto:")):
                     continue
-                target = (SUB / href).resolve()
-                self.assertTrue(target.exists(), f"{name}: broken link {href}")
+                with self.subTest(page=name, href=href):
+                    self.assertTrue((SUB / href).resolve().exists(), f"broken link: {href}")
 
-    def test_every_page_disclaims_organizer_scores(self):
-        for name in PAGES:
-            self.assertIn("No organizer score exists", self.texts[name])
-        self.assertIn("UNSCORED", self.texts["index.html"])
-
-    def test_portal_error_message_is_addressed(self):
-        self.assertIn("Predicted values must be in range [0, 1]", self.texts["executive-summary.html"])
-
-    def test_no_placeholder_artifacts(self):
-        for name in PAGES:
-            for bad in ("{esc(", "{fmt(", "TODO", "XXX", "None</", "nan<"):
-                self.assertNotIn(bad, self.texts[name])
-
-    def test_leaderboard_snapshot_is_labelled(self):
-        board = json.loads((conftest.DOCS / "data/leaderboard_20261007.json").read_text())
-        self.assertEqual(board["retrieved_utc"], "2026-10-07")
-        top = board["rows"][0]
-        self.assertEqual((top["participant"], top["best_public"]), ("xiaofanhu", 0.3774))
-        self.assertIn("0.3774", self.texts["index.html"])
-
-    def test_holdout_numbers_on_index_match_receipts(self):
+    def test_receipts_distinguish_local_validation_from_performance(self):
+        build = self.rec
+        self.assertEqual(build["validity_status"], "HISTORICAL_LOCAL_BUILD_AND_PROXY_DIAGNOSTICS_ONLY_NOT_CLEARED_TO_SUBMIT")
+        self.assertIn("NOT CLEARED TO SUBMIT", build["promotion_decision"])
+        self.assertIn("no organizer receipt", build["leaderboard_linkage"])
+        self.assertIn("not verified as portal-safe", build["encoding"].lower())
+        self.assertIn("not evidence of organizer acceptance", build["encoding"].lower())
+        superseded = json.loads((conftest.EVIDENCE / "build_ds50_v1_anchor100_withdrawn_receipt_20261007.json").read_text())
+        self.assertEqual(superseded["validity_status"], "WITHDRAWN_HISTORICAL_BUILD_FORENSIC_ONLY")
+        self.assertEqual(superseded["promotion_decision"], "NOT CLEARED TO SUBMIT")
+        self.assertIn("not verified as portal-safe", superseded["encoding"].lower())
+        self.assertIn("not evidence of organizer acceptance", superseded["encoding"].lower())
         holdout = json.loads((conftest.EVIDENCE / "holdout_ds50_20261007.json").read_text())
-        mean = holdout["sgmc_offcat_results"]["h50_ds_belief"]["mean_dti"]
-        self.assertIn(f"{mean:.6f}", self.texts["index.html"])
+        self.assertEqual(holdout["validity_status"], "PUBLIC_PROXY_DIAGNOSTIC_ONLY_NOT_PRIVATE_LABEL_PERFORMANCE")
+        self.assertEqual(holdout["promotion_decision"], "NOT CLEARED TO SUBMIT")
+
+    def test_retired_builder_refuses_and_leaves_pages_unchanged(self):
+        before = {name: (SUB / name).read_bytes() for name in PAGES}
+        script = conftest.repo_path("scripts/build_site_h50.py")
+        result = subprocess.run([sys.executable, str(script)], cwd=str(conftest.repo_path(".")),
+                                capture_output=True, text=True)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("retired", result.stderr + result.stdout)
+        self.assertEqual(before, {name: (SUB / name).read_bytes() for name in PAGES})
+
+    def test_no_stale_upload_note_or_score_projection_is_visible(self):
+        joined = "\n".join(self.texts.values())
+        self.assertNotIn("do not paste for submission", joined)
+        self.assertIn("live-equivalent", joined.lower())
+        self.assertIn("withdrawn", self.texts["hypotheses.html"].lower())
+        self.assertNotIn("0.0247±0.0005", joined)
 
 
 if __name__ == "__main__":

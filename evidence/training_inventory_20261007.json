@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "generated_utc": "2026-10-07T21:33:22.375821+00:00",
+  "data_paths": [
+    {
+      "path": "data/raw/training_features.tif",
+      "present": false
+    },
+    {
+      "path": "data/raw/labels.tif",
+      "present": false
+    },
+    {
+      "path": "data/raw/sample_submission.tif",
+      "present": false
+    },
+    {
+      "path": "data/raw/sample_submission_template.tif",
+      "present": true,
+      "bytes": 1599597,
+      "sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+      "git_ignored": true
+    },
+    {
+      "path": "data/raw/1m_DEM_links.csv",
+      "present": false
+    },
+    {
+      "path": "data/official/training_features.tif",
+      "present": false
+    },
+    {
+      "path": "data/official/labels.tif",
+      "present": true,
+      "bytes": 425830,
+      "sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+      "git_ignored": false
+    },
+    {
+      "path": "data/official/existing_faults.tif",
+      "present": true,
+      "bytes": 425830,
+      "sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+      "git_ignored": false
+    },
+    {
+      "path": "data/official/1m_DEM_links.csv",
+      "present": false
+    },
+    {
+      "path": "data/raw/labels_catalogue.tif",
+      "present": true,
+      "bytes": 425830,
+      "sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+      "git_ignored": true
+    }
+  ],
+  "pipeline_paths": [
+    {
+      "path": "scripts/download_competition_data.sh",
+      "present": false
+    },
+    {
+      "path": "scripts/prepare_data.py",
+      "present": false
+    },
+    {
+      "path": "scripts/train.py",
+      "present": false
+    },
+    {
+      "path": "scripts/infer.py",
+      "present": false
+    },
+    {
+      "path": "scripts/inference.py",
+      "present": false
+    },
+    {
+      "path": "scripts/run_spatial_holdout.py",
+      "present": true,
+      "bytes": 19383,
+      "sha256": "dbb106fb9e831404d774ef152b88e88bfc759e5ea1698c52efecc38ba33dfeb9",
+      "git_ignored": false
+    },
+    {
+      "path": "scripts/restore_h55_inputs.py",
+      "present": true,
+      "bytes": 7991,
+      "sha256": "a266c257fab02b7a6c7f5652a9d876b26c45bee3d42eaf8cdc146665d3c5e886",
+      "git_ignored": false
+    }
+  ],
+  "optional_feature_stack_restore": {
+    "script_present": true,
+    "command": "python scripts/restore_h55_inputs.py --with-official-features",
+    "expected_path": "data/raw/training_features.tif",
+    "expected_bytes": 418912844,
+    "expected_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+    "source_class": "third-party owner GitHub mirror; hash pin proves mirrored-byte identity, not organizer authentication or data-use clearance"
+  },
+  "assessment": {
+    "training_feature_stack_present_now": false,
+    "competition_labels_authenticated_here": false,
+    "official_sample_submission_tif_present_under_named_paths": false,
+    "1m_dem_links_csv_present": false,
+    "download_competition_data_script_present": false,
+    "prepare_data_script_present": false,
+    "supervised_train_and_inference_pipeline_present": false,
+    "available_capability": "local raster analysis, deterministic candidate-building, exact metric, format validation, and public-proxy holdouts; these do not constitute a full supervised training pipeline",
+    "limitation": "README statements that a single data-placement step unlocks a ready full train\u2192inference\u2192validate pipeline are not supported by the files/scripts present in this checkout."
+  }
+}

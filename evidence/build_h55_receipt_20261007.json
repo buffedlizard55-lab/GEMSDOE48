@@ -7,7 +7,7 @@
   "content_id": "055da9855353",
   "paste_ready_note": "GEMSDOE48-H55 | 0.2778 core untouched + 1124 conflict-priced gap dots + 652 GDR hot-spring/well conduit anchors >300 m off-catalogue | model band 0.2778-0.2880, floor 0.2727 | unscored | id 055da9855353",
   "paste_ready_note_length": 202,
-  "status": "RESEARCH CANDIDATE. No organizer score exists for this file. Weekly-slot decision is the owner's; see the scenario band below.",
+  "status": "INVALIDATED_FORENSIC_ONLY_NOT_CLEARED_TO_SUBMIT",
   "inputs": {
     "core_dotted_live_best": {
       "path": "data/families/dotted_b2_prune_02778.tif",
@@ -167,7 +167,9 @@
       "n_used": 1776,
       "n_a1_out_of_family": 652,
       "n_a2_in_family": 1124
-    }
+    },
+    "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION",
+    "historical_threshold_warning": "All break-even bars and model-priced admission rules are invalidated for promotion."
   },
   "dempster_shafer": {
     "frame": "Theta = {F, not F}",
@@ -198,7 +200,7 @@
       "is_the_naive_mean": false,
       "interpretation": "Bel(F) is NOT the naive mean: the best affine fit of Bel on 0.5(b1+b2) leaves a mean residual of 0.0059 and the two differ by up to 0.160. The high rank correlation is expected and is not evidence of equivalence: on this support both statistics are monotone in the same coverage field, so only the affine residual and the difference distribution are informative."
     },
-    "why_the_emission_is_binary": "d/dv[(T0+v k)/(D0+0.2 v)] has the sign of k - 0.2*DTI and is independent of v, so every pixel of a graded belief surface is pushed to 0 or 1. The graded Bel/Pl/mTheta/K layers are therefore shipped as diagnostics and the submission is binary."
+    "historical_binary_claim_status": "INVALIDATED: restricted one-variable derivative does not establish global binary optimality."
   },
   "live_model": {
     "hidden_truth_px": 14027.470000000054,
@@ -356,7 +358,9 @@
       "dti_pred": 0.25878990833399795,
       "delta_vs_C_model": -0.013980463311527358,
       "live_equivalent": 0.26381953668847263
-    }
+    },
+    "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION",
+    "invalidation_reason": "The receipt depends on the invalid general substitution FPw=S-TPw (equivalently Q≈TPw) and/or owner-reported score values without organizer verification. Its inferred truth density, thresholds, projected scores, ceilings, and gate decisions are withdrawn; local proxy measurements are historical diagnostics only."
   },
   "risk": {
     "floor_all_added_pixels_zero_credit": {
@@ -444,7 +448,9 @@
         "delta_vs_C_live_equivalent": 0.010217094359024403
       }
     ],
-    "why_additions_cannot_reduce_tpw": "TPw = sum_g max_x p(x) k(d(x,g)); adding a pixel can only raise or hold the inner maximum, so T is monotone non-decreasing in the emitted set. The only risk of an addition is the 0.2 denominator cost."
+    "why_additions_cannot_reduce_tpw": "TPw = sum_g max_x p(x) k(d(x,g)); adding a pixel can only raise or hold the inner maximum, so T is monotone non-decreasing in the emitted set. The only risk of an addition is the 0.2 denominator cost.",
+    "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION",
+    "invalidation_reason": "The receipt depends on the invalid general substitution FPw=S-TPw (equivalently Q≈TPw) and/or owner-reported score values without organizer verification. Its inferred truth density, thresholds, projected scores, ceilings, and gate decisions are withdrawn; local proxy measurements are historical diagnostics only."
   },
   "emission": {
     "positive_pixels": 39430,
@@ -637,5 +643,10 @@
         "portal_range_error_immune": true
       }
     }
-  }
+  },
+  "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION",
+  "invalidation_reason": "The receipt depends on the invalid general substitution FPw=S-TPw (equivalently Q≈TPw) and/or owner-reported score values without organizer verification. Its inferred truth density, thresholds, projected scores, ceilings, and gate decisions are withdrawn; local proxy measurements are historical diagnostics only.",
+  "submission_decision": "NOT CLEARED TO SUBMIT; do not spend a weekly slot on this historical model output.",
+  "historical_status": "RESEARCH CANDIDATE. No organizer score exists for this file. Weekly-slot decision is the owner's; see the scenario band below.",
+  "leaderboard_linkage": "Owner-reported 0.2778 score; no organizer receipt links it to the local TIFF bytes."
 }

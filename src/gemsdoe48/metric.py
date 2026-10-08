@@ -375,13 +375,21 @@ def dti_bruteforce(
 
 
 def credit_bar(dti_value: float) -> float:
-    """Marginal credit threshold: an added unit pixel helps iff k > alpha*DTI."""
+    """Return the *conditional* local threshold ``alpha * DTI``.
+
+    This is the break-even value only in a one-dimensional case where the new
+    emission's marginal ``TPw`` gain equals its prediction-centred self-credit
+    ``max_g k`` (for example, one isolated truth pixel whose maximum is not
+    shared). In general ``FPw = S - self_credit`` and the ``TPw`` increment can
+    differ from self-credit, so this helper is not a universal per-cell gate,
+    live-score calibration, or removal budget.
+    """
     return ALPHA * float(dti_value)
 
 
 def optimal_value_is_binary() -> str:
-    """State the derivative result for graded values under the official DTI."""
-    return "binary {0,1} is DTI-optimal; graded surfaces lose"
+    """State only the narrow one-variable endpoint result; no global claim."""
+    return "conditional local endpoint result only; global binary optimality is not established"
 
 
 def dilate(mask: np.ndarray, radius_px: int) -> np.ndarray:

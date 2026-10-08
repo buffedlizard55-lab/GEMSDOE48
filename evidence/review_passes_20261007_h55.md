@@ -1,5 +1,7 @@
 # Review passes — H55 session, 2026-10-07 UTC
 
+> **HISTORICAL REVIEW LOG — FORENSIC ONLY.** This log predates the metric-identity erratum. Its H55 live-score inversion, ceilings, thresholds, scenario values, and promotion rationale are invalidated; preserve the record to show what was reviewed, not as valid decision evidence. See `docs/research/metric-identity-erratum-20261007.md`. H55 is not cleared to submit.
+
 Three passes were run as the brief requires: (1) implement and verify, (2) review for bugs,
 missing requirements, incorrect assumptions and edge cases and fix them, (3) re-check the whole
 implementation against the original request and fix what was still wrong. This log records what

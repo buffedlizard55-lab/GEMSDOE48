@@ -1,34 +1,16 @@
-"""SELECT-48: choose the submission by a frozen rule, on measurements.
+"""Retired SELECT-48 gate — forensic reproduction only.
 
-Run:  python3 -u scripts/run_selection.py
-
-The rule, frozen before the run:
-
-  R1 (contested removal, from Dempster-Shafer)
-      A pixel committed by one family survives only if the *other* family also
-      commits evidence within the metric's own kernel geometry -- i.e. only if
-      its Dempster-Shafer belief exceeds the value reached by a single source
-      alone.  Pixels where the two families disagree are removed.
-
-  R2 (covering-optimal re-emission)
-      The surviving corridor is re-covered by a hexagonal lattice at a ladder of
-      spacings; each cover is greedily completed and batched-pruned, so the
-      guarantee "every corridor pixel is within `rho` of a dot" holds by
-      construction and `rho` is re-measured exactly afterwards.
-
-  R3 (promotion gate -- must hold for a candidate to be shipped)
-      (a) the emitted mass is <= the live-best artifact it must beat;
-      (b) TPw on BOTH independent truth layers is >= 95 % of the live-best
-          artifact's at that same mass;
-      (c) the live-anchored credit-loss budget is not overspent
-          (safety factor >= 2.0, computed in live_anchor.py).
-
-Nothing here is a forecast of an organizer score.  Every number is a local
-measurement and is written to evidence/selection.json.
+The historical rule combined public-proxy comparisons with an invalidated
+live-anchor removal budget (``FPw=S-TPw``). The gate's ``passes``, ``eligible``,
+and ``chosen`` values are not promotion evidence and do not predict organizer
+scores. The live-best 0.2778 attribution is owner-reported and not linked to local
+bytes by an organizer receipt. This script refuses by default; explicit
+``--legacy-audit-only`` reproduces old diagnostics under ``evidence/forensic/selection-legacy/`` by default.
 """
 
 from __future__ import annotations
 
+import argparse
 import json
 import sys
 import time
@@ -44,10 +26,23 @@ from gemsdoe48.live_anchor import LiveAnchor  # noqa: E402
 
 A_DOTTED = 0.60
 A_TIP = 0.60
-LIVE_BEST_PX = 37654  # the 0.2778 artifact, the best live result the group has
+LIVE_BEST_PX = 37654  # owner-reported 0.2778 attribution; local-file linkage unverified
 
 
 def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--legacy-audit-only", action="store_true",
+                        help="required opt-in to reproduce the invalidated historical gate")
+    parser.add_argument("--output-dir", type=Path,
+                        default=REPO / "evidence/forensic/selection-legacy",
+                        help="forensic output directory; never writes active download or registry paths")
+    args = parser.parse_args()
+    if not args.legacy_audit_only:
+        parser.error("retired gate relies on invalidated live-anchor inversion; pass --legacy-audit-only only for forensic reproduction")
+    print("FORENSIC REPRODUCTION ONLY — INVALIDATED LIVE GATE; NO PROMOTION DECISION")
+    output_dir = args.output_dir if args.output_dir.is_absolute() else REPO / args.output_dir
+    output_dir.mkdir(parents=True, exist_ok=True)
+    (output_dir / "ds_layers").mkdir(parents=True, exist_ok=True)
     t0 = time.time()
     truth, footprint = G.load_truth_and_footprint()
     sgmc = G.read_mask(REPO / "data/official/derived_sgmc_faults_100m.tif")
@@ -87,7 +82,13 @@ def main() -> int:
             }
         return out
 
-    results: dict = {"stages": {}, "candidates": {}}
+    results: dict = {
+        "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION",
+        "invalidation_reason": "The live-anchor removal budget assumes the invalid FPw=S-TPw substitution; local-file-to-leaderboard linkage is also unverified.",
+        "proxy_measurement_scope": "Public-proxy metrics are local diagnostics only; they are not private-label scores.",
+        "stages": {},
+        "candidates": {},
+    }
 
     # ---- baselines ----------------------------------------------------------
     baselines = {
@@ -139,11 +140,11 @@ def main() -> int:
               f"catTPw={d['catalogue_all']['tpw']:>8.0f} "
               f"corrTPw={d['catalogue_in_corridor_r3']['tpw']:>7.0f} "
               f"sgmcTPw={d['sgmc_off_catalogue']['tpw']:>8.0f}", flush=True)
-        np.save(REPO / "evidence" / "ds_layers" / f"{key}.npy", cov["points"])
+        np.save(output_dir / "ds_layers" / f"{key}.npy", cov["points"])
 
     # ---- R3: promotion gate -------------------------------------------------
     base = results["candidates"]["live_best_02778"]
-    anchor = LiveAnchor()
+    anchor = LiveAnchor(legacy_audit_only=True)
     gate_rows = {}
     for name, d in results["candidates"].items():
         if d.get("kind") == "baseline":
@@ -168,21 +169,22 @@ def main() -> int:
                 n_removed=max(0, LIVE_BEST_PX - mass), measured_credit_loss=measured_loss
             ),
         }
-        rows["passes"] = bool(
+        rows["legacy_rule_passes_not_promotion"] = bool(
             rows["mass_ok"]
             and rows["catalogue_all_tpw_ratio"] >= 0.95
             and rows["corridor_tpw_ratio"] >= 0.95
             and rows["sgmc_tpw_ratio"] >= 0.95
-            and rows["anchor"]["safety"] >= 2.0
+            and rows["anchor"]["safety_invalidated"] >= 2.0
         )
         gate_rows[name] = rows
-        print(f"[{time.time()-t0:.0f}s] GATE {name:<18} n={mass:>6} "
+        print(f"[{time.time()-t0:.0f}s] LEGACY GATE {name:<18} n={mass:>6} "
               f"cat={rows['catalogue_all_tpw_ratio']:.3f} corr={rows['corridor_tpw_ratio']:.3f} "
-              f"sgmc={rows['sgmc_tpw_ratio']:.3f} safety={rows['anchor']['safety']:.2f} "
-              f"-> {'PASS' if rows['passes'] else 'fail'}", flush=True)
+              f"sgmc={rows['sgmc_tpw_ratio']:.3f} safety={rows['anchor']['safety_invalidated']:.2f} "
+              f"-> {'HISTORICALLY PASS' if rows['legacy_rule_passes_not_promotion'] else 'historically fail'} (NOT PROMOTION)", flush=True)
 
     passing = sorted(
-        [n for n, v in gate_rows.items() if v["passes"]], key=lambda n: gate_rows[n]["n"]
+        [n for n, v in gate_rows.items() if v["legacy_rule_passes_not_promotion"]],
+        key=lambda n: gate_rows[n]["n"]
     )
     # ---- the frozen rule's own defects, recorded with the rule -----------------
     # R3 is kept for the record, NOT as a promotion instrument.  Two of its three
@@ -205,24 +207,22 @@ def main() -> int:
     # could not fail.  Nothing in this file promotes a candidate.  The shipped
     # artifact comes from scripts/build_submission.py; see
     # registry/submission_build.json -> headline_negative_result.
-    results["gate"] = gate_rows
-    results["eligible"] = passing
-    results["chosen"] = passing[0] if passing else None
+    results["legacy_gate_diagnostics"] = gate_rows
+    results["legacy_passed_candidates_not_promotion"] = passing
+    results["legacy_first_candidate_not_promotion"] = passing[0] if passing else None
     results["gate_caveat"] = {
-        "status": "degenerate, not a promotion instrument",
-        "catalogue_term": "uninformative: divides by the base's own catalogue credit "
-                          "(378.0), and the catalogue layer is anti-monotone with the "
-                          "live ladder (IR-48-04)",
-        "safety_term": "saturates at the 99.0 ceiling whenever the measured SGMC credit "
-                       "loss is 0.0, so 'safety >= 2.0' cannot fail",
-        "action": "treat `eligible` and `chosen` as descriptive only; no candidate is "
-                  "promoted by this script",
-        "shipped_artifact_built_by": "scripts/build_submission.py",
+        "status": "invalidated, degenerate, and not a promotion instrument",
+        "calibration": "the live-anchor safety budget depends on FPw=S-TPw, an invalid general substitution",
+        "catalogue_term": "uninformative: divides by the base's own catalogue credit (378.0); the catalogue layer is anti-monotone with the live ladder (IR-48-04)",
+        "safety_term": "historical safety saturates at 99.0 when measured proxy loss is 0.0; it is not a private-label bound",
+        "action": "no candidate is promoted or selected by this forensic script",
+        "shipped_artifact_built_by": "scripts/build_submission.py (historical reference only)",
     }
     results["elapsed_s"] = time.time() - t0
-    G.write_json(REPO / "evidence" / "selection.json", results)
-    print(f"\n[{time.time()-t0:.0f}s] eligible: {passing}")
-    print(f"[{time.time()-t0:.0f}s] chosen  : {results['chosen']}")
+    results["forensic_output_dir"] = str(output_dir)
+    G.write_json(output_dir / "selection_legacy.json", results)
+    print(f"\n[{time.time()-t0:.0f}s] historical gate candidates (NOT promotion evidence): {passing}")
+    print(f"[{time.time()-t0:.0f}s] historical first candidate (NOT selected): {results['legacy_first_candidate_not_promotion']}")
     return 0
 
 

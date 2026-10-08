@@ -1,39 +1,25 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Executive summary — future submissions (H50 historical archive)</title><link rel="stylesheet" href="../assets/style.css"></head>
-<body><header><p>DOE GEMS Prize · DrivenData #306 · GEMSDOE48 H50 · research archive · no H50 upload</p>
-<h1>Executive summary — future submissions (H50 historical archive)</h1><nav><a href="index.html">H50 summary</a><a href="executive-summary.html">Executive summary &amp; how to submit</a><a href="method.html">Method &amp; evidence</a><a href="hypotheses.html">Hypotheses</a><a href="sources.html">Sources</a><a href="../index.html">Repository site ↗</a></nav></header><main class="wrap">
-
-<h2 style="margin-top:0">H50 executive summary — historical research only</h2>
-<div class="warn"><strong>Do not upload H50 or spend a weekly slot on it.</strong> It failed the frozen spatial-proxy gate and is not a candidate for submission. The steps below are a general future-candidate checklist only; they do not authorize H50 or H53, both of which are not slot-cleared.</div>
-
-<h2>1 · How to submit a future candidate, step by step</h2>
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Future-submission guidance · H50 historical archive</title><link rel="stylesheet" href="../assets/style.css"></head><body>
+<header><p>DOE GEMS Prize · DrivenData #306 · GEMSDOE48 H50 · historical archive</p>
+<h1>H50 executive summary and future-submission guidance</h1>
+<nav><a href="index.html">H50 archive</a><a href="executive-summary.html">Future-submission guidance</a><a href="method.html">Metric &amp; method erratum</a><a href="hypotheses.html">Hypotheses</a><a href="sources.html">Sources</a><a href="../index.html">Current repository site ↗</a></nav></header>
+<main class="wrap">
+<div class="warn"><strong>NOT CLEARED TO SUBMIT. Do not upload H50 or spend a weekly slot on it.</strong> Its old Gate-2 threshold and live calibration are invalidated. The checklist below applies only to a future candidate that independently passes the current validation gate; it is not authorization to submit H50, H53, H56-F, or H57-A.</div>
+<h2>How to prepare a future candidate</h2>
 <ol>
-<li>Open the official <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/submissions/">New submission</a> page (login required; respect the competition's current weekly allowance).</li>
-<li>First confirm that the candidate passed the preregistered spatial holdout gate against the current best. If it did not, stop; do not spend a slot.</li>
-<li>Use the single, one-band float32 GeoTIFF named on that candidate's landing page. The official format description specifies a raw GeoTIFF; do not substitute diagnostics or an unverified ZIP.</li>
-<li>Re-run the local validator on the exact bytes. Compare the SHA-256 with that candidate's build receipt and keep the validation record.</li>
-<li>Enter the candidate-specific unique name and short optional note exactly as shown on its landing page. Do not reuse H50's historical label or note.</li>
-<li>Check the file, name, and slot budget once more, then submit only if the gate is still cleared. Treat an organizer-reported result as the only competition score evidence.</li>
+<li>Confirm that the candidate addresses a pre-ranked geological hypothesis and has a frozen, reproducible spatially blocked holdout protocol.</li>
+<li>Require a comparable improvement over the current holdout best on the leading public proxy and examine fold-level variation and matched controls. A proxy result is still not a private-label score.</li>
+<li>Check feature-source coverage, provenance, licensing and challenge-use terms. Do not assume a publicly downloadable asset is complete or permitted for this use.</li>
+<li>Build one unique, one-band float32 GeoTIFF on the official grid. Run the local format validator on the exact bytes and save the SHA-256.</li>
+<li>Check the current competition rules and weekly submission allowance. Keep “OK to download for inspection” separate from “OK to submit”; only submit when the current project gate explicitly says <strong>OK TO SUBMIT</strong>.</li>
+<li>Use the candidate-specific unique name and short note, and retain the organizer's resulting score/receipt. Only organizer-provided evidence can establish competition performance.</li>
 </ol>
-<p>The current H53 card on the <a href="../index.html#h53">repository landing page</a> is explicitly marked <strong>do not upload</strong> because its frozen proxy gate failed.</p>
-
-<h2>2 · H50's local format audit (not a score or acceptance)</h2>
-<p>The archived H50 bytes have SHA-256 <code>5b59e106b6e448038b96fb340c5bae39094d4558c239c437aea28b6020d5d32f</code>, one band float32, EPSG:32611, 100 m,
-3730×3292, and in-footprint values [0.0000, 1.0000].
-This is a local format audit only; no organizer file-to-score receipt exists. Its zeros-outside and
-NaN-outside variants are archival twins, not current submission recommendations. The specific portal
-message “Predicted values must be in range [0, 1]” is addressed by the finite in-footprint range check;
-this local check does not establish portal acceptance.</p>
-
-<h2>3 · What never to upload</h2>
-<p>The diagnostics — residual ignorance m(Θ), raw conflict K, plausibility Pl(F) — are review layers,
-not predictions. H50's B2 × H36-1 rung30 parent pair has high overlap, and the Dempster
-independence assumption is not established; m(Θ) is not calibrated uncertainty or probability.
-The family label on the frozen receipt is corrected in the
-<a href="../../evidence/h36_parent_classification_erratum_20261007.json">H36 classification erratum</a>.</p>
-
-</main><footer><p>No organizer score exists for any artifact on this site. Every candidate is UNSCORED research output; owner-reported live values are labelled [OWNER-REPORT].</p>
-<p class="small">Built by scripts/build_site_h50.py from evidence receipts on the same commit.
-Receipts: evidence/build_ds50_receipt_20261007.json, evidence/holdout_ds50_20261007.json,
-docs/data/leaderboard_20261007.json.</p></footer></body></html>
+<section><h2>H50's local format record</h2>
+<p>The H50 GeoTIFF passed the historical local checks for one float32 band, EPSG:32611, 100 m pixels, 3730×3292 grid and in-footprint range [0,1]. The NaN-outside and zeros-outside files are archival encodings. These checks do not establish portal acceptance, organizer scoring, or suitability for a future submission.</p>
+<p><a href="../../evidence/h50_submission_validation_20261007.json">Archived validation receipt</a> · <a href="../../evidence/build_ds50_receipt_20261007.json">Archived build receipt</a>.</p>
+</section>
+<section><h2>What the diagnostics mean</h2>
+<p><em>m(Θ)</em> is ignorance/unassigned mass; <em>K</em> is conflict. H50 stores these as distinct diagnostics under normalized Dempster combination. Neither is a fault probability or score. Details are in the <a href="method.html">metric and method erratum</a>.</p>
+</section>
+</main><footer><p>No organizer score exists for the H50 file. Historical owner-reported values are not locally verified to specific TIFF bytes.</p></footer></body></html>

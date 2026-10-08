@@ -1,9 +1,7 @@
 {
   "schema": "GEMSDOE48-credit-density-audit-v1",
   "generated_utc": "2026-10-07T05:35:21.434980+00:00",
-  "question": "Does any existing candidate or documented addition raise *credit density* over the incumbent dotted family (H33-2-B2, 37,654 cells, owner-reported live 0.2778) on the frozen blocked proxy?",
-  "instrument": "scripts/audit_candidate.py (GEMSDOE48-GATE-2): (1) equal-mass subsample of the candidate support to the incumbent cell count, scored on the frozen SGMC>300 m off-catalogue proxy with the repository's four-quadrant core+300 m halo protocol; (2) marginal credit per added cell on a density-matched proxy (proxy truth thinned to 14,307 cells) compared with the metric break-even bar 0.2*DTI_incumbent = 0.0556.",
-  "warning": "Public-proxy instrument only: SGMC-derived fault traces are not the private expert truth and no organizer score is implied. Equal-mass and density-matched comparisons are the mass-neutral part of the corrected gate; the 2026-10-06 gate lacked both.",
+  "warning": "INVALIDATED. Do not use any 0.05556 value, density-matched result, PASS/FAIL, ceiling, or score scenario as decision evidence. Public-proxy values remain public-proxy measurements and do not establish private-label performance.",
   "incumbent": {
     "file": "data/raw/scored/b2_02778.tif",
     "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
@@ -32,7 +30,8 @@
       "added_raw_proxy_credit_per_cell": 0.03401063175565673,
       "added_density_matched_credit_per_cell": 0.0077282104537578595,
       "break_even_bar_live_scaled": 0.05556,
-      "support_rule": "binary >0"
+      "support_rule": "binary >0",
+      "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION"
     },
     {
       "candidate_file": "docs/downloads/GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif",
@@ -53,7 +52,8 @@
       "added_raw_proxy_credit_per_cell": 0.054994962421199445,
       "added_density_matched_credit_per_cell": 0.012485083699758408,
       "break_even_bar_live_scaled": 0.05556,
-      "support_rule": "binary >0"
+      "support_rule": "binary >0",
+      "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION"
     },
     {
       "candidate_file": "docs/downloads/GEMSDOE48-H52-lidar-scarp-additions-20261007-38029417f6ca-nan-outside.tif",
@@ -74,7 +74,8 @@
       "added_raw_proxy_credit_per_cell": 0.041842888135463,
       "added_density_matched_credit_per_cell": 0.009895826518163085,
       "break_even_bar_live_scaled": 0.05556,
-      "support_rule": "binary >0"
+      "support_rule": "binary >0",
+      "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION"
     },
     {
       "candidate_file": "docs/downloads/GEMSDOE48-H54-ds-core-lidar-20261007-dedc43dc0167.tif",
@@ -94,7 +95,8 @@
       "added_raw_proxy_credit_per_cell": 0.043354732785373926,
       "added_density_matched_credit_per_cell": 0.01070970644801855,
       "break_even_bar_live_scaled": 0.05556,
-      "support_rule": "binary >0"
+      "support_rule": "binary >0",
+      "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION"
     },
     {
       "candidate_file": "data/raw/scored/8GEMSDOE_Hedge-v2_submission.tif",
@@ -115,7 +117,8 @@
       "added_raw_proxy_credit_per_cell": 0.026126090161975472,
       "added_density_matched_credit_per_cell": 0.00598794586991731,
       "break_even_bar_live_scaled": 0.05556,
-      "support_rule": "binary >0"
+      "support_rule": "binary >0",
+      "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION"
     },
     {
       "candidate_file": "data/raw/scored/b2_02778.tif",
@@ -135,7 +138,8 @@
       "added_raw_proxy_credit_per_cell": null,
       "added_density_matched_credit_per_cell": 0.0,
       "break_even_bar_live_scaled": 0.05556,
-      "support_rule": "binary >0"
+      "support_rule": "binary >0",
+      "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION"
     },
     {
       "candidate_file": "docs/downloads/gemsdoe48-h50-ds-b2xh36rung30-20261007-5b59e106-nan.tif",
@@ -156,7 +160,8 @@
       "added_raw_proxy_credit_per_cell": 0.021364106337147214,
       "added_density_matched_credit_per_cell": 0.004936509095818089,
       "break_even_bar_live_scaled": 0.05556,
-      "support_rule": "graded t>0.5"
+      "support_rule": "graded t>0.5",
+      "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION"
     },
     {
       "candidate_file": "data/raw/scored/gems19-h19-5-powerlaw-budget-multiline-corroborated-20260930-e27054cf-nan.tif",
@@ -177,7 +182,8 @@
       "added_raw_proxy_credit_per_cell": 0.0217591464765036,
       "added_density_matched_credit_per_cell": 0.005030233753133504,
       "break_even_bar_live_scaled": 0.05556,
-      "support_rule": "binary >0"
+      "support_rule": "binary >0",
+      "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION"
     },
     {
       "candidate_file": "docs/downloads/gemsdoe48-h51-plausibility-budget-20261007-f8fa1d08-nan.tif",
@@ -198,7 +204,8 @@
       "added_raw_proxy_credit_per_cell": 0.028732785353826923,
       "added_density_matched_credit_per_cell": 0.006302487314994945,
       "break_even_bar_live_scaled": 0.05556,
-      "support_rule": "binary >0"
+      "support_rule": "binary >0",
+      "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION"
     },
     {
       "candidate_file": "docs/downloads/gemsdoe48-h50-ds-b2xh36rung30-20261007-5b59e106-nan.tif",
@@ -219,7 +226,8 @@
       "added_raw_proxy_credit_per_cell": 0.016908964161031804,
       "added_density_matched_credit_per_cell": 0.003897333781194205,
       "break_even_bar_live_scaled": 0.05556,
-      "support_rule": "binary >0"
+      "support_rule": "binary >0",
+      "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION"
     }
   ],
   "lane_ladder_inversion": {
@@ -268,12 +276,15 @@
         "T_implied": 4775.1
       }
     ],
-    "reading": "The dotted ladder A->B->C holds T constant at ~5,270 (spread 0.1%) while removing 6,436 cells: those cells carried ~0 live credit, and every rung step was a pure mass-budget gain. Densification adds credit only at ~0.019 per cell (h19_5 extra cells vs C) - 3x below the 0.0556 break-even bar - which is why every denser submission ranks below the incumbent."
+    "reading": "The dotted ladder A->B->C holds T constant at ~5,270 (spread 0.1%) while removing 6,436 cells: those cells carried ~0 live credit, and every rung step was a pure mass-budget gain. Densification adds credit only at ~0.019 per cell (h19_5 extra cells vs C) - 3x below the 0.0556 break-even bar - which is why every denser submission ranks below the incumbent.",
+    "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION",
+    "invalidation_reason": "The receipt depends on the invalid general substitution FPw=S-TPw (equivalently Q≈TPw) and/or owner-reported score values without organizer verification. Its inferred truth density, thresholds, projected scores, ceilings, and gate decisions are withdrawn; local proxy measurements are historical diagnostics only."
   },
   "frontier_probe": {
     "receipt": "evidence/lam3_residual_probe_20261007.json",
     "script": "scripts/lam3_residual_probe.py",
-    "one_line": "No addition can clear the 0.0556/cell break-even bar under the best-calibrated truth model: shipped additions earn 0.014-0.026 (random control 0.013-0.016) and even the model's own greedy optimum reaches only 0.049-0.059 per cell, i.e. the incumbent is on the frontier of the entire current information set."
+    "one_line": "No addition can clear the 0.0556/cell break-even bar under the best-calibrated truth model: shipped additions earn 0.014-0.026 (random control 0.013-0.016) and even the model's own greedy optimum reaches only 0.049-0.059 per cell, i.e. the incumbent is on the frontier of the entire current information set.",
+    "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION"
   },
   "uniform_random_equal_mass_control": {
     "receipt": "evidence/audit_gate2_random_control_20261007.json",
@@ -290,5 +301,11 @@
     "tp": 4121.432712648064,
     "truth_pixels": 62122,
     "delta_vs_incumbent": -0.028587193398922475
-  }
+  },
+  "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION",
+  "invalidation_reason": "The receipt depends on the invalid general substitution FPw=S-TPw (equivalently Q≈TPw) and/or owner-reported score values without organizer verification. Its inferred truth density, thresholds, projected scores, ceilings, and gate decisions are withdrawn; local proxy measurements are historical diagnostics only.",
+  "historical_question_withdrawn": "Does any existing candidate or documented addition raise *credit density* over the incumbent dotted family (H33-2-B2, 37,654 cells, owner-reported live 0.2778) on the frozen blocked proxy?",
+  "historical_instrument_invalidated": "scripts/audit_candidate.py (GEMSDOE48-GATE-2): (1) equal-mass subsample of the candidate support to the incumbent cell count, scored on the frozen SGMC>300 m off-catalogue proxy with the repository's four-quadrant core+300 m halo protocol; (2) marginal credit per added cell on a density-matched proxy (proxy truth thinned to 14,307 cells) compared with the metric break-even bar 0.2*DTI_incumbent = 0.0556.",
+  "question": "Historical Gate-2 audit (withdrawn): inferred truth-density and universal-threshold claims are invalid; no promotion verdict is supported.",
+  "instrument": "FORENSIC-ONLY historical reproduction; not a valid live-density or break-even calibration."
 }

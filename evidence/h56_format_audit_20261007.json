@@ -1,43 +1,50 @@
 {
- "generated_utc": "2026-10-07T15:20:25.915773+00:00",
- "path": "docs/downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros-outside.tif",
- "sha256": "4d6548d4ec07a47a25b83d28ebc05d58b57448c1507b460aed52cec395bdb6b5",
- "checks": {
-  "crs_matches_template": true,
-  "transform_matches_template": true,
-  "shape_matches_template": true,
-  "single_band_float32": true,
-  "all_cells_finite": true,
-  "values_in_0_1": true,
-  "max_equals_one": true,
-  "nodata_unset": true,
-  "outside_footprint_is_zero": true,
-  "organizer_rule_values_in_range_0_1": true
- },
- "all_passed": true,
- "verdict": {
-  "generated_utc": "2026-10-07T15:20:25.915773+00:00",
-  "gate_1_format": true,
-  "gate_2_holdout_beats_both_parents_3_of_4_both_truths": false,
-  "gate_3_live_model_projection_ge_0.2778": false,
-  "ok_to_download": true,
-  "submit_recommended": false,
-  "banner": "DOWNLOAD OK - SUBMIT NOT RECOMMENDED",
-  "reasons": {
-   "holdout_means": {
-    "catalogue": {
-     "h56_belief": 0.03206902724286595,
-     "dotted_c": 0.006982614211427839,
-     "tip_h33d": 0.08973802114216928
-    },
-    "sgmc_offcat_gt300m": {
-     "h56_belief": 0.07350113392309075,
-     "dotted_c": 0.09695689556403998,
-     "tip_h33d": 0.0969672582294602
+  "generated_utc": "2026-10-07T21:35:01.024202+00:00",
+  "path": "docs/downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros-outside.tif",
+  "sha256": "4d6548d4ec07a47a25b83d28ebc05d58b57448c1507b460aed52cec395bdb6b5",
+  "checks": {
+    "crs_matches_template": true,
+    "transform_matches_template": true,
+    "shape_matches_template": true,
+    "single_band_float32": true,
+    "all_cells_finite": true,
+    "whole_raster_values_in_0_1": true,
+    "max_equals_one": true,
+    "nodata_unset": true,
+    "outside_footprint_finite_zero": true,
+    "official_null_nan_outside_rule_satisfied": false
+  },
+  "local_core_format_passed": true,
+  "official_outside_policy_passed": false,
+  "portal_acceptance_tested": false,
+  "format_interpretation": "local grid/dtype/range checks are distinct from portal acceptance; the zero-outside primary does not satisfy the published null/NaN outside-footprint wording",
+  "verdict": "NOT OK / NOT CLEARED TO SUBMIT",
+  "holdout_gate": {
+    "passed_vs_h49": false,
+    "paired": {
+      "catalogue_proxy": {
+        "fold_delta_dti_vs_h49": {
+          "NW": -0.06004885862489294,
+          "NE": -0.0822230069819814,
+          "SW": -0.05910135505098177,
+          "SE": -0.05065204310457023
+        },
+        "mean_delta_dti_vs_h49": -0.06300631594060659,
+        "positive_folds": 0,
+        "passes_numeric_gate": false
+      },
+      "sgmc_off_catalogue_gt300m": {
+        "fold_delta_dti_vs_h49": {
+          "NW": -0.03485395642465959,
+          "NE": -0.015199239477127202,
+          "SW": -0.0664576595139702,
+          "SE": -0.0042859098977016535
+        },
+        "mean_delta_dti_vs_h49": -0.030199191328364662,
+        "positive_folds": 0,
+        "passes_numeric_gate": false
+      }
     }
-   },
-   "live_projection": 0.06489045881963633,
-   "incumbent_live": 0.2778
-  }
- }
+  },
+  "download_verdict": "OK TO DOWNLOAD FOR INSPECTION"
 }

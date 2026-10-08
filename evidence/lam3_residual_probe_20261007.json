@@ -270,5 +270,9 @@
     "per_cell_ladder_mass": 0.013269712838480387,
     "per_cell_fitted_mass": 0.01576702393545684
   },
-  "reading": "No shipped addition reaches half the bar. Even cells the model itself ranks as the most valuable uncovered pixels reach only ~0.049-0.058 per cell (ladder / fitted mass), i.e. the incumbent is on the frontier of the current information set: only genuinely new information can move the live score, and the maximum model-admissible gain from any addition is ~+0.000-0.002 DTI."
+  "reading": "No shipped addition reaches half the bar. Even cells the model itself ranks as the most valuable uncovered pixels reach only ~0.049-0.058 per cell (ladder / fitted mass), i.e. the incumbent is on the frontier of the current information set: only genuinely new information can move the live score, and the maximum model-admissible gain from any addition is ~+0.000-0.002 DTI.",
+  "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION",
+  "invalidation_reason": "The receipt depends on the invalid general substitution FPw=S-TPw (equivalently Q≈TPw) and/or owner-reported score values without organizer verification. Its inferred truth density, thresholds, projected scores, ceilings, and gate decisions are withdrawn; local proxy measurements are historical diagnostics only.",
+  "promotion_use": "NONE — forensic reproduction only; not a score predictor or truth estimate.",
+  "leaderboard_linkage": "Owner-reported scores; no organizer receipt links local bytes to rows."
 }

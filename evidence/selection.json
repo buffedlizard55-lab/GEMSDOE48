@@ -508,234 +508,237 @@
       }
     }
   },
-  "gate": {
-    "R1_ds_filtered_union": {
-      "n": 44386,
-      "mass_ok": false,
-      "catalogue_all_tpw_ratio": 7.509567731274538,
-      "corridor_tpw_ratio": 7.509567731274539,
-      "sgmc_tpw_ratio": 1.0317204918900214,
-      "measured_credit_loss_corridor": 0.0,
-      "measured_credit_loss_sgmc": 0.0,
-      "anchor": {
-        "n_removed": 0,
-        "budget": 0.0,
-        "measured_credit_loss": 0.0,
-        "safety": 99.0,
-        "tau_live": 0.05416,
-        "passes": true
-      },
-      "passes": false
-    },
-    "R2_hex_1.6": {
-      "n": 150882,
-      "mass_ok": false,
-      "catalogue_all_tpw_ratio": 16.56611476231134,
-      "corridor_tpw_ratio": 16.171639322773956,
-      "sgmc_tpw_ratio": 1.5855054133471387,
-      "measured_credit_loss_corridor": 0.0,
-      "measured_credit_loss_sgmc": 0.0,
-      "anchor": {
-        "n_removed": 0,
-        "budget": 0.0,
-        "measured_credit_loss": 0.0,
-        "safety": 99.0,
-        "tau_live": 0.05416,
-        "passes": true
-      },
-      "passes": false
-    },
-    "R2_hex_2.0": {
-      "n": 121080,
-      "mass_ok": false,
-      "catalogue_all_tpw_ratio": 20.85627544247028,
-      "corridor_tpw_ratio": 19.559336692106385,
-      "sgmc_tpw_ratio": 1.714895471600397,
-      "measured_credit_loss_corridor": 0.0,
-      "measured_credit_loss_sgmc": 0.0,
-      "anchor": {
-        "n_removed": 0,
-        "budget": 0.0,
-        "measured_credit_loss": 0.0,
-        "safety": 99.0,
-        "tau_live": 0.05416,
-        "passes": true
-      },
-      "passes": false
-    },
-    "R2_hex_2.4": {
-      "n": 111415,
-      "mass_ok": false,
-      "catalogue_all_tpw_ratio": 19.832148494511245,
-      "corridor_tpw_ratio": 18.726994973535106,
-      "sgmc_tpw_ratio": 1.6685374521630052,
-      "measured_credit_loss_corridor": 0.0,
-      "measured_credit_loss_sgmc": 0.0,
-      "anchor": {
-        "n_removed": 0,
-        "budget": 0.0,
-        "measured_credit_loss": 0.0,
-        "safety": 99.0,
-        "tau_live": 0.05416,
-        "passes": true
-      },
-      "passes": false
-    },
-    "R2_hex_2.8": {
-      "n": 84083,
-      "mass_ok": false,
-      "catalogue_all_tpw_ratio": 20.28082839458078,
-      "corridor_tpw_ratio": 18.850241813895163,
-      "sgmc_tpw_ratio": 1.6058460815255637,
-      "measured_credit_loss_corridor": 0.0,
-      "measured_credit_loss_sgmc": 0.0,
-      "anchor": {
-        "n_removed": 0,
-        "budget": 0.0,
-        "measured_credit_loss": 0.0,
-        "safety": 99.0,
-        "tau_live": 0.05416,
-        "passes": true
-      },
-      "passes": false
-    },
-    "R2_hex_3.2": {
-      "n": 78253,
-      "mass_ok": false,
-      "catalogue_all_tpw_ratio": 19.52083192237139,
-      "corridor_tpw_ratio": 18.172368899707767,
-      "sgmc_tpw_ratio": 1.5590776086046017,
-      "measured_credit_loss_corridor": 0.0,
-      "measured_credit_loss_sgmc": 0.0,
-      "anchor": {
-        "n_removed": 0,
-        "budget": 0.0,
-        "measured_credit_loss": 0.0,
-        "safety": 99.0,
-        "tau_live": 0.05416,
-        "passes": true
-      },
-      "passes": false
-    },
-    "R2_hex_3.6": {
-      "n": 64548,
-      "mass_ok": false,
-      "catalogue_all_tpw_ratio": 18.103455762382904,
-      "corridor_tpw_ratio": 16.463672676797724,
-      "sgmc_tpw_ratio": 1.4411127263037502,
-      "measured_credit_loss_corridor": 0.0,
-      "measured_credit_loss_sgmc": 0.0,
-      "anchor": {
-        "n_removed": 0,
-        "budget": 0.0,
-        "measured_credit_loss": 0.0,
-        "safety": 99.0,
-        "tau_live": 0.05416,
-        "passes": true
-      },
-      "passes": false
-    },
-    "R2_hex_4.0": {
-      "n": 53175,
-      "mass_ok": false,
-      "catalogue_all_tpw_ratio": 16.793086676654642,
-      "corridor_tpw_ratio": 15.216438041727859,
-      "sgmc_tpw_ratio": 1.3183690745462526,
-      "measured_credit_loss_corridor": 0.0,
-      "measured_credit_loss_sgmc": 0.0,
-      "anchor": {
-        "n_removed": 0,
-        "budget": 0.0,
-        "measured_credit_loss": 0.0,
-        "safety": 99.0,
-        "tau_live": 0.05416,
-        "passes": true
-      },
-      "passes": false
-    },
-    "R2_hex_4.4": {
-      "n": 50123,
-      "mass_ok": false,
-      "catalogue_all_tpw_ratio": 17.29820025651309,
-      "corridor_tpw_ratio": 15.375731182800298,
-      "sgmc_tpw_ratio": 1.2638256829443788,
-      "measured_credit_loss_corridor": 0.0,
-      "measured_credit_loss_sgmc": 0.0,
-      "anchor": {
-        "n_removed": 0,
-        "budget": 0.0,
-        "measured_credit_loss": 0.0,
-        "safety": 99.0,
-        "tau_live": 0.05416,
-        "passes": true
-      },
-      "passes": false
-    },
-    "R2_hex_4.8": {
-      "n": 48874,
-      "mass_ok": false,
-      "catalogue_all_tpw_ratio": 17.22426522249358,
-      "corridor_tpw_ratio": 15.254405679578834,
-      "sgmc_tpw_ratio": 1.2774469277964402,
-      "measured_credit_loss_corridor": 0.0,
-      "measured_credit_loss_sgmc": 0.0,
-      "anchor": {
-        "n_removed": 0,
-        "budget": 0.0,
-        "measured_credit_loss": 0.0,
-        "safety": 99.0,
-        "tau_live": 0.05416,
-        "passes": true
-      },
-      "passes": false
-    },
-    "R2_hex_5.6": {
-      "n": 37499,
-      "mass_ok": true,
-      "catalogue_all_tpw_ratio": 14.545296835818135,
-      "corridor_tpw_ratio": 12.424946153709474,
-      "sgmc_tpw_ratio": 1.0150732977582089,
-      "measured_credit_loss_corridor": 0.0,
-      "measured_credit_loss_sgmc": 0.0,
-      "anchor": {
-        "n_removed": 155,
-        "budget": 8.3948,
-        "measured_credit_loss": 0.0,
-        "safety": 99.0,
-        "tau_live": 0.05416,
-        "passes": true
-      },
-      "passes": true
-    },
-    "R2_hex_6.4": {
-      "n": 32963,
-      "mass_ok": true,
-      "catalogue_all_tpw_ratio": 13.261754939507552,
-      "corridor_tpw_ratio": 11.006209950108927,
-      "sgmc_tpw_ratio": 0.8906909138733536,
-      "measured_credit_loss_corridor": 0.0,
-      "measured_credit_loss_sgmc": 616.3974845432849,
-      "anchor": {
-        "n_removed": 4691,
-        "budget": 254.06456,
-        "measured_credit_loss": 616.3974845432849,
-        "safety": 0.4121765035888283,
-        "tau_live": 0.05416,
+  "gate_caveat": {
+    "status": "INVALIDATED_FORENSIC_ONLY_NOT_A_PROMOTION_INSTRUMENT",
+    "reason": "The receipt depends on the invalid general substitution FPw=S-TPw (equivalently Q≈TPw) and/or owner-reported score values without organizer verification. Its inferred truth density, thresholds, projected scores, ceilings, and gate decisions are withdrawn; local proxy measurements are historical diagnostics only.",
+    "action": "Do not treat any former eligible/chosen candidate as promoted or slot-cleared."
+  },
+  "elapsed_s": 82.932208776474,
+  "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION",
+  "invalidation_reason": "The receipt depends on the invalid general substitution FPw=S-TPw (equivalently Q≈TPw) and/or owner-reported score values without organizer verification. Its inferred truth density, thresholds, projected scores, ceilings, and gate decisions are withdrawn; local proxy measurements are historical diagnostics only.",
+  "historical_gate_and_verdicts_withdrawn": {
+    "gate": {
+      "R1_ds_filtered_union": {
+        "n": 44386,
+        "mass_ok": false,
+        "catalogue_all_tpw_ratio": 7.509567731274538,
+        "corridor_tpw_ratio": 7.509567731274539,
+        "sgmc_tpw_ratio": 1.0317204918900214,
+        "measured_credit_loss_corridor": 0.0,
+        "measured_credit_loss_sgmc": 0.0,
+        "anchor": {
+          "n_removed": 0,
+          "budget": 0.0,
+          "measured_credit_loss": 0.0,
+          "safety": 99.0,
+          "tau_live": 0.05416,
+          "passes": true
+        },
         "passes": false
       },
-      "passes": false
-    }
+      "R2_hex_1.6": {
+        "n": 150882,
+        "mass_ok": false,
+        "catalogue_all_tpw_ratio": 16.56611476231134,
+        "corridor_tpw_ratio": 16.171639322773956,
+        "sgmc_tpw_ratio": 1.5855054133471387,
+        "measured_credit_loss_corridor": 0.0,
+        "measured_credit_loss_sgmc": 0.0,
+        "anchor": {
+          "n_removed": 0,
+          "budget": 0.0,
+          "measured_credit_loss": 0.0,
+          "safety": 99.0,
+          "tau_live": 0.05416,
+          "passes": true
+        },
+        "passes": false
+      },
+      "R2_hex_2.0": {
+        "n": 121080,
+        "mass_ok": false,
+        "catalogue_all_tpw_ratio": 20.85627544247028,
+        "corridor_tpw_ratio": 19.559336692106385,
+        "sgmc_tpw_ratio": 1.714895471600397,
+        "measured_credit_loss_corridor": 0.0,
+        "measured_credit_loss_sgmc": 0.0,
+        "anchor": {
+          "n_removed": 0,
+          "budget": 0.0,
+          "measured_credit_loss": 0.0,
+          "safety": 99.0,
+          "tau_live": 0.05416,
+          "passes": true
+        },
+        "passes": false
+      },
+      "R2_hex_2.4": {
+        "n": 111415,
+        "mass_ok": false,
+        "catalogue_all_tpw_ratio": 19.832148494511245,
+        "corridor_tpw_ratio": 18.726994973535106,
+        "sgmc_tpw_ratio": 1.6685374521630052,
+        "measured_credit_loss_corridor": 0.0,
+        "measured_credit_loss_sgmc": 0.0,
+        "anchor": {
+          "n_removed": 0,
+          "budget": 0.0,
+          "measured_credit_loss": 0.0,
+          "safety": 99.0,
+          "tau_live": 0.05416,
+          "passes": true
+        },
+        "passes": false
+      },
+      "R2_hex_2.8": {
+        "n": 84083,
+        "mass_ok": false,
+        "catalogue_all_tpw_ratio": 20.28082839458078,
+        "corridor_tpw_ratio": 18.850241813895163,
+        "sgmc_tpw_ratio": 1.6058460815255637,
+        "measured_credit_loss_corridor": 0.0,
+        "measured_credit_loss_sgmc": 0.0,
+        "anchor": {
+          "n_removed": 0,
+          "budget": 0.0,
+          "measured_credit_loss": 0.0,
+          "safety": 99.0,
+          "tau_live": 0.05416,
+          "passes": true
+        },
+        "passes": false
+      },
+      "R2_hex_3.2": {
+        "n": 78253,
+        "mass_ok": false,
+        "catalogue_all_tpw_ratio": 19.52083192237139,
+        "corridor_tpw_ratio": 18.172368899707767,
+        "sgmc_tpw_ratio": 1.5590776086046017,
+        "measured_credit_loss_corridor": 0.0,
+        "measured_credit_loss_sgmc": 0.0,
+        "anchor": {
+          "n_removed": 0,
+          "budget": 0.0,
+          "measured_credit_loss": 0.0,
+          "safety": 99.0,
+          "tau_live": 0.05416,
+          "passes": true
+        },
+        "passes": false
+      },
+      "R2_hex_3.6": {
+        "n": 64548,
+        "mass_ok": false,
+        "catalogue_all_tpw_ratio": 18.103455762382904,
+        "corridor_tpw_ratio": 16.463672676797724,
+        "sgmc_tpw_ratio": 1.4411127263037502,
+        "measured_credit_loss_corridor": 0.0,
+        "measured_credit_loss_sgmc": 0.0,
+        "anchor": {
+          "n_removed": 0,
+          "budget": 0.0,
+          "measured_credit_loss": 0.0,
+          "safety": 99.0,
+          "tau_live": 0.05416,
+          "passes": true
+        },
+        "passes": false
+      },
+      "R2_hex_4.0": {
+        "n": 53175,
+        "mass_ok": false,
+        "catalogue_all_tpw_ratio": 16.793086676654642,
+        "corridor_tpw_ratio": 15.216438041727859,
+        "sgmc_tpw_ratio": 1.3183690745462526,
+        "measured_credit_loss_corridor": 0.0,
+        "measured_credit_loss_sgmc": 0.0,
+        "anchor": {
+          "n_removed": 0,
+          "budget": 0.0,
+          "measured_credit_loss": 0.0,
+          "safety": 99.0,
+          "tau_live": 0.05416,
+          "passes": true
+        },
+        "passes": false
+      },
+      "R2_hex_4.4": {
+        "n": 50123,
+        "mass_ok": false,
+        "catalogue_all_tpw_ratio": 17.29820025651309,
+        "corridor_tpw_ratio": 15.375731182800298,
+        "sgmc_tpw_ratio": 1.2638256829443788,
+        "measured_credit_loss_corridor": 0.0,
+        "measured_credit_loss_sgmc": 0.0,
+        "anchor": {
+          "n_removed": 0,
+          "budget": 0.0,
+          "measured_credit_loss": 0.0,
+          "safety": 99.0,
+          "tau_live": 0.05416,
+          "passes": true
+        },
+        "passes": false
+      },
+      "R2_hex_4.8": {
+        "n": 48874,
+        "mass_ok": false,
+        "catalogue_all_tpw_ratio": 17.22426522249358,
+        "corridor_tpw_ratio": 15.254405679578834,
+        "sgmc_tpw_ratio": 1.2774469277964402,
+        "measured_credit_loss_corridor": 0.0,
+        "measured_credit_loss_sgmc": 0.0,
+        "anchor": {
+          "n_removed": 0,
+          "budget": 0.0,
+          "measured_credit_loss": 0.0,
+          "safety": 99.0,
+          "tau_live": 0.05416,
+          "passes": true
+        },
+        "passes": false
+      },
+      "R2_hex_5.6": {
+        "n": 37499,
+        "mass_ok": true,
+        "catalogue_all_tpw_ratio": 14.545296835818135,
+        "corridor_tpw_ratio": 12.424946153709474,
+        "sgmc_tpw_ratio": 1.0150732977582089,
+        "measured_credit_loss_corridor": 0.0,
+        "measured_credit_loss_sgmc": 0.0,
+        "anchor": {
+          "n_removed": 155,
+          "budget": 8.3948,
+          "measured_credit_loss": 0.0,
+          "safety": 99.0,
+          "tau_live": 0.05416,
+          "passes": true
+        },
+        "passes": true
+      },
+      "R2_hex_6.4": {
+        "n": 32963,
+        "mass_ok": true,
+        "catalogue_all_tpw_ratio": 13.261754939507552,
+        "corridor_tpw_ratio": 11.006209950108927,
+        "sgmc_tpw_ratio": 0.8906909138733536,
+        "measured_credit_loss_corridor": 0.0,
+        "measured_credit_loss_sgmc": 616.3974845432849,
+        "anchor": {
+          "n_removed": 4691,
+          "budget": 254.06456,
+          "measured_credit_loss": 616.3974845432849,
+          "safety": 0.4121765035888283,
+          "tau_live": 0.05416,
+          "passes": false
+        },
+        "passes": false
+      }
+    },
+    "eligible": [
+      "R2_hex_5.6"
+    ],
+    "chosen": "R2_hex_5.6"
   },
-  "eligible": [
-    "R2_hex_5.6"
-  ],
-  "chosen": "R2_hex_5.6",
-  "gate_caveat": {
-    "status": "degenerate, not a promotion instrument",
-    "catalogue_term": "uninformative: divides by the base's own catalogue credit (378.0), and the catalogue layer is anti-monotone with the live ladder (DS48-IR-04)",
-    "safety_term": "saturates at the 99.0 ceiling whenever the measured SGMC credit loss is 0.0, so 'safety >= 2.0' cannot fail",
-    "action": "treat `eligible` and `chosen` as descriptive only; no candidate is promoted by this script",
-    "shipped_artifact_built_by": "scripts/build_submission.py"
-  },
-  "elapsed_s": 82.932208776474
+  "promotion_decision": "NONE — historical selection gate is invalidated and degenerate."
 }

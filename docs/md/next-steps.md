@@ -1,18 +1,7 @@
 # Current next steps
 
-No weekly submission slot is cleared. Status after the 2026-10-07 (later) session:
+The prior Markdown next-steps page is retained in [`docs/archive-main-pages/md/next-steps.md`](../archive-main-pages/md/next-steps.md). This page is a bridge to [current priorities](../next-steps.html), not a live slate from the H50/H51 sessions.
 
-1. **H50 (merged) was re-audited line by line — every number reproduced.** It remains the headline Dempster–Shafer artifact and the one that implements the owner's disagreement-preserving brief.
-2. **H51 (plausibility-budget emission) tested and gate-failed** (SGMC 0.086537 vs H49 0.100751; catalogue 0.007589 vs union 0.046889). It is published as a unique downloadable research candidate with its negative gate recorded.
-3. **H50-B (radiometric alteration × conflict corridors) tested and recorded as a clear negative result** (0.019135 / 0.015312). The GeoDAWN radiometric mirror (DOI 10.5066/P93LGLVQ) is now committed SHA-verified at `data/source_mirrors/geodawn_rad_u8.tif` for future hypotheses.
-4. **Consolidated finding:** no fusion of the two best existing surfaces beats the better parent (0.0955) on the proxies. The remaining local fusion space is exhausted; score gains require higher credit density — new signal.
+**No weekly slot is cleared.** H57-A failed the two-proxy gate and all eight same-pool controls beat its means; H56-F failed at each preregistered pruning threshold. The remaining three H57 hypotheses stay parked until data access, footprint coverage, provenance, and challenge-use terms are checked.
 
-Ordered priorities for the next session:
-
-- **N1 · Native-resolution 1 m DEM detection.** Requires the organizer `1m_DEM_links.csv` (DrivenData login) or the USGS 3DEP equivalents inside the footprint; the sibling LiDAR scarp mirror (`lidar_scarp_features_u8.tif` in GEMSDOE24, 36.9 MB) is restorable the same way the radiometric mirror was and is the fastest on-ramp.
-- **H50-A · coverage-budget credit repacking** (top slate candidate): greedy marginal-DTI packing on scatter-blurred family fields; needs a faithful implementation of the break-even bar, then the standard blocked gate.
-- **H50-C · INGENIOUS 2 m temperature-probe residuals** gated by family corridors (GDR 1391, CC BY 4.0 — free, official).
-- **H50-D · scarp-youth continuation past catalogue tips** using the restorable LiDAR scarp mirror.
-- **N2/N3/N4/N5** (gravity–magnetic edge coherence, ComCat planes, drainage deflection, radiometric asymmetry as a *structural* transform) each need their named free official source restored first; none is computable from this sandbox's allow-listed network without the sibling mirrors.
-
-Standing rules (unchanged): a candidate touches a weekly slot only after beating the blocked-holdout best (H49: 0.095353 catalogue / 0.100751 SGMC off-catalogue) in ≥3/4 folds on **both** proxy regimes; preregister constants before scoring; keep owner-mirror provenance and the [OWNER-REPORT] / [DERIVED] evidence classes explicit; automated leaderboard polling stays disabled — only dated human observations are retained.
+Before any future promotion, use a comparable spatially blocked holdout and a newly derived, validated mass-neutral audit that does not rely on `FPw=S−TPw`, inferred hidden-truth density, or the old universal `0.0556` bar. The retired Gate-2 PASS/FAIL values are forensic only. Local checks do not establish private-label performance, organizer acceptance, or file-to-leaderboard linkage.

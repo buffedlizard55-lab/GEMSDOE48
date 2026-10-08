@@ -1,18 +1,13 @@
 #!/usr/bin/env python3
-"""Build the H55 unique submission: conduit-anchored, conflict-priced extension of C.
+"""Retired H55 candidate builder — invalidated calibration; no default writes.
 
-Run from the repository root:
+The candidate-selection/score-risk code consumes H55's invalidated ``FPw=S-TPw``
+calibration and universal per-cell threshold. Its existing TIFF and receipts are
+historical research artifacts, not a cleared submission. The builder refuses by
+default; ``--legacy-audit-only`` is available only for forensic reproduction.
 
-    python scripts/build_submission_h55.py
-
-Writes (all under ``docs/downloads/``):
-  * ``GEMSDOE48-H55-...-zeros-outside.tif``   -- PRIMARY, all-finite, portal-range-immune
-  * ``GEMSDOE48-H55-...-zeros-outside.zip``   -- PRIMARY zipped (portal accepts either)
-  * ``GEMSDOE48-H55-...-nan-outside.tif``     -- NaN-outside twin, sample-template convention
-  * ``diagnostics/gemsdoe48-h55-{bel,plausibility,mtheta,conflict}-<id>.tif``
-and receipts under ``evidence/`` and ``registry/``.
-
-Every number in the receipt is computed here; nothing is transcribed.
+Local format checks do not establish portal acceptance. See
+``docs/research/h55-live-model-ceiling-and-candidate-20261007.md``.
 """
 from __future__ import annotations
 
@@ -108,16 +103,22 @@ def verify_inputs() -> dict:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--output-dir", type=Path, default=ROOT / "docs/downloads")
+    forensic_root = ROOT / "evidence/forensic/h55-build"
+    parser.add_argument("--output-dir", type=Path, default=forensic_root / "artifacts")
     parser.add_argument("--receipt", type=Path,
-                        default=ROOT / f"evidence/build_h55_receipt_{BUILD_DATE}.json")
+                        default=forensic_root / f"build_h55_receipt_{BUILD_DATE}.json")
     parser.add_argument("--calibration", type=Path,
-                        default=ROOT / f"evidence/h55_build_live_model_{BUILD_DATE}.json",
+                        default=forensic_root / f"h55_build_live_model_{BUILD_DATE}.json",
                         help="build-time copy of the calibration. scripts/calibrate_live_model.py "
                              "owns evidence/live_model_calibration_<date>.json and adds the "
                              "coverage frontier and ceiling table; do not point this at that file")
     parser.add_argument("--tag", default=None, help="override the content id used in filenames")
+    parser.add_argument("--legacy-audit-only", action="store_true",
+                        help="required opt-in; rebuilds an invalidated historical artifact, not a submission")
     args = parser.parse_args()
+    if not args.legacy_audit_only:
+        parser.error("retired H55 builder uses invalidated calibration; no writes without --legacy-audit-only")
+    print("LEGACY H55 BUILD ONLY — INVALIDATED; NOT CLEARED TO SUBMIT")
 
     print("[1/8] verifying hash-pinned inputs (fail closed)")
     inputs = verify_inputs()
@@ -140,12 +141,12 @@ def main() -> int:
     print(f"      eligible backbone (>200 m off-catalogue) = {int(eligible_backbone.sum())}")
 
     print("[3/8] calibrating the live-anchored forward model")
-    calib = calibrate(backbone, catalogue_distance_m)
+    calib = calibrate(backbone, catalogue_distance_m, legacy_audit_only=True)
     model = ForwardModel(calib["hidden_truth_fit"]["hidden_truth_px"],
                          calib["rho_fit"]["rho"],
-                         calib["eligible_backbone_px"])
+                         calib["eligible_backbone_px"], legacy_audit_only=True)
     cov_core = coverage(core, eligible_backbone)
-    t_core = invert_truth(0.2778, s_core, model.hidden_truth_px)
+    t_core = invert_truth(0.2778, s_core, model.hidden_truth_px, legacy_audit_only=True)
     dti_core_pred = model.dti(cov_core, s_core)
     dti_core_model = dti_core_pred          # the model's own prediction for the untouched core
     bias = LIVE_C - dti_core_model          # constant offset; only model DELTAS are reported
@@ -373,8 +374,10 @@ def main() -> int:
         "content_id": content_id,
         "paste_ready_note": note,
         "paste_ready_note_length": len(note),
-        "status": ("RESEARCH CANDIDATE. No organizer score exists for this file. "
-                   "Weekly-slot decision is the owner's; see the scenario band below."),
+        "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION",
+        "invalidation_reason": "The H55 score scenarios, ceiling, and per-cell price rely on the invalid FPw=S-TPw live-model substitution.",
+        "submission_decision": "NOT CLEARED TO SUBMIT; do not spend a weekly slot on this historical model output.",
+        "status": "INVALIDATED historical research artifact; no organizer score or acceptance exists. Local-file-to-leaderboard attribution is unverified.",
         "inputs": inputs,
         "construction": {
             "core": {"source": INPUTS["core_dotted_live_best"][0], "px": s_core,
@@ -432,10 +435,8 @@ def main() -> int:
             "conflict_K_max": float(conflict[inside].max()),
             "share_of_footprint_with_K_gt_0": float((conflict[inside] > 0).mean()),
             "not_the_naive_mean": mean_check,
-            "why_the_emission_is_binary": (
-                "d/dv[(T0+v k)/(D0+0.2 v)] has the sign of k - 0.2*DTI and is independent of v, "
-                "so every pixel of a graded belief surface is pushed to 0 or 1. The graded Bel/Pl/"
-                "mTheta/K layers are therefore shipped as diagnostics and the submission is binary."),
+            "historical_binary_claim_status": "INVALIDATED: the one-variable derivative assumes a special relation between truth-centred TPw and prediction-centred self-credit; it does not establish global binary optimality under the general official metric.",
+            "belief_layers_role": "Historical diagnostic outputs only; no candidate or submission is cleared by this receipt.",
         },
         "live_model": {
             "hidden_truth_px": model.hidden_truth_px,

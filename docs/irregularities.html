@@ -1,190 +1,36 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="H56 current provenance, novelty, format, score-attribution, and validation caveats; historical H55 irregularities are retained below.">
-<title>GEMSDOE48 H56 — irregularities and caveats</title>
-<style>
-:root{color-scheme:light;--ink:#12241d;--muted:#54665c;--paper:#f4f4ec;--panel:#fffefa;
---line:#d7ddd1;--green:#1d4c3a;--green2:#2f6b52;--soft:#e3eee5;--amber:#8a4a15;
---ambersoft:#fff1d9;--red:#8d3227;--redsoft:#f9e7e1;
---mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
---sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
-*{box-sizing:border-box}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.62}
-a{color:var(--green);text-underline-offset:3px}
-.wrap{width:min(1120px,calc(100% - 32px));margin:0 auto}
-header{background:#17392e;color:#f2f5ef;padding:34px 0 30px}
-header .eyebrow{color:#a9cbb4;text-transform:uppercase;letter-spacing:.16em;font-size:.72rem;font-weight:800}
-h1{margin:.35rem 0 .5rem;font-size:clamp(1.9rem,5vw,3.2rem);line-height:1.03;letter-spacing:-.045em}
-.deck{max-width:820px;margin:0;color:#d5e5d9;font-size:clamp(1rem,1.8vw,1.15rem)}
-main{padding:26px 0 70px}
-h2{margin:34px 0 10px;font-size:1.42rem;letter-spacing:-.025em;border-bottom:2px solid var(--line);padding-bottom:6px}
-h3{margin:22px 0 6px;font-size:1.06rem}
-p{margin:0 0 12px}
-code,kbd,.mono{font-family:var(--mono);font-size:.86em}
-code{background:#eceee5;padding:1px 5px;border-radius:4px;overflow-wrap:anywhere}
-pre{background:#132a22;color:#dceade;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:.8rem;line-height:1.5}
-pre code{background:none;color:inherit;padding:0}
-.dl{background:var(--soft);border:2px solid #a9c6ae;border-radius:16px;padding:22px;margin:0 0 22px}
-.dl h2{margin:0 0 6px;border:0;padding:0;font-size:1.3rem}
-.bigbtn{display:block;text-align:center;margin:14px 0 10px;padding:20px 22px;border-radius:12px;
-background:var(--green);color:#fff;text-decoration:none;font-weight:850;font-size:1.16rem;
-letter-spacing:-.01em;box-shadow:0 6px 20px rgba(20,60,44,.22)}
-.bigbtn:hover{background:#123327;color:#fff}
-.bigbtn small{display:block;font-weight:600;font-size:.78rem;opacity:.86;margin-top:4px;letter-spacing:.02em}
-.btnrow{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 4px}
-.btn{flex:1 1 210px;text-align:center;padding:11px 14px;border-radius:9px;background:#fff;
-border:1px solid #b9c9bb;color:var(--green);text-decoration:none;font-weight:700;font-size:.9rem}
-.btn:hover{background:var(--green);color:#fff}
-.meta{font-family:var(--mono);font-size:.75rem;color:#3d5347;overflow-wrap:anywhere;margin-top:10px}
-.warn{border:1px solid #e3b87e;background:var(--ambersoft);color:#57340f;border-radius:12px;padding:14px 18px;margin:16px 0}
-.bad{border:1px solid #e0b3aa;background:var(--redsoft);color:#5d231b;border-radius:12px;padding:14px 18px;margin:16px 0}
-.good{border:1px solid #a9c6ae;background:var(--soft);color:#1d4c3a;border-radius:12px;padding:14px 18px;margin:16px 0}
-table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:.88rem;margin:10px 0 18px}
-th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:right;vertical-align:top}
-th:first-child,td:first-child{text-align:left}
-thead th{color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em}
-tbody tr.hl{background:#eef3ea;font-weight:750}
-.neg{color:var(--red);font-weight:700}
-.pos{color:var(--green2);font-weight:700}
-.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px;margin:14px 0}
-.metric{background:#f1f4ed;border:1px solid var(--line);border-radius:11px;padding:15px}
-.metric strong{display:block;font-size:1.5rem;letter-spacing:-.035em;font-variant-numeric:tabular-nums}
-.metric span{color:var(--muted);font-size:.83rem}
-nav.top{background:#0f2a21;padding:9px 0;font-size:.86rem;position:sticky;top:0;z-index:9}
-nav.top .wrap{display:flex;flex-wrap:wrap;gap:6px 16px}
-nav.top a{color:#c6dccc;text-decoration:none;font-weight:650}
-nav.top a:hover{color:#fff;text-decoration:underline}
-footer{border-top:1px solid var(--line);padding:22px 0 46px;color:var(--muted);font-size:.86rem}
-.steps{counter-reset:s;list-style:none;padding:0;margin:12px 0}
-.steps li{counter-increment:s;position:relative;padding:0 0 16px 46px;border-left:2px solid var(--line);margin-left:16px}
-.steps li:before{content:counter(s);position:absolute;left:-17px;top:-2px;width:32px;height:32px;
-border-radius:50%;background:var(--green);color:#fff;font-weight:800;display:grid;place-items:center;font-size:.9rem}
-.steps li:last-child{border-left-color:transparent}
-.pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:.72rem;font-weight:800;
-letter-spacing:.05em;text-transform:uppercase}
-.pill.no{background:var(--redsoft);color:var(--red)}
-.pill.yes{background:var(--soft);color:var(--green)}
-.pill.warn{background:var(--ambersoft);color:var(--amber)}
-.small{color:var(--muted);font-size:.85rem}
-@media print{nav.top{position:static}}
-
-.card{border:1px solid var(--line);border-radius:14px;padding:20px;background:var(--panel);margin:0 0 18px}
-.download-card{background:var(--soft);border-color:#bfcebf}
-.card .eyebrow,.eyebrow{color:var(--muted);text-transform:uppercase;letter-spacing:.14em;
-font-size:.72rem;font-weight:800}
-.button{display:inline-block;margin:8px 0 4px;padding:12px 18px;border-radius:8px;background:var(--green);
-color:#fff;text-decoration:none;font-weight:750}
-.button:hover{color:#fff;background:#123327}
-.file-meta{margin-top:12px;font-family:var(--mono);font-size:.76rem;overflow-wrap:anywhere;color:#3d5145}
-.note{padding:12px 14px;border-radius:9px;background:#f2f4ee;border:1px solid var(--line);
-font-family:var(--mono);font-size:.78rem;overflow-wrap:anywhere;margin:10px 0}
-.diag-links{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:12px;font-size:.88rem}
-</style>
-
-</head>
-<body>
-<nav class="top"><div class="wrap">
-<a href="index.html">Overview</a>
-<a href="executive-summary.html">Executive summary</a>
-<a href="submission-guide.html">How to submit</a>
-<a href="method.html">Method</a>
-<a href="hypotheses.html">Hypotheses</a>
-<a href="validation.html">Validation</a>
-<a href="irregularities.html">Irregularities</a>
-<a href="sources.html">Sources</a>
-<a href="next-steps.html">Next steps</a>
-<a href="research/h56-results-20261007.md">H56 results</a>
-</div></nav>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Current GEMSDOE48 irregularities: invalidated metric projections, unverified 0.2778 attribution, Dempster–Shafer semantics, artifact format caveat and data inventory limits."><title>GEMSDOE48 — current irregularities and caveats</title><link rel="stylesheet" href="style.css"><style>nav a{color:#cdeadd;text-decoration:none;padding:6px 10px;border-radius:8px}nav a:hover{background:#0b6e4f;color:#fff}.verdict{border:3px solid #b91c1c;background:#fff0ed;padding:18px;border-radius:14px;margin:20px 0}.alert{background:#fff7df;border-left:5px solid #b45309;padding:14px;border-radius:9px;margin:14px 0}.columns{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px}</style></head>
+<body><header><div class="wrap"><p>GEMSDOE48 · audit trail</p><h1>Irregularities and unresolved assumptions</h1><p>Current, corrected issues are at the top. Historical H55/H56 ledger entries remain linked for traceability, but superseded calculations are not current facts.</p></div></header>
+<nav><div class="wrap"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="submission-guide.html">Submission guide</a><a href="method.html">Method</a><a href="hypotheses.html">Hypotheses</a><a href="validation.html">Validation</a><a href="leaderboard.html">Leaderboard</a><a href="irregularities.html">Irregularities</a><a href="sources.html">Sources</a><a href="next-steps.html">Next steps</a></div></nav>
 <main class="wrap">
-<div class="bad" role="alert"><strong>Metric correction — no weekly upload cleared.</strong>
-The H55/H56 live-equivalent projections assume <code>FPw = S − TPw</code>,
-which is generally false: FP uses a prediction-centred maximum, TP a truth-centred one.
-Treat the 0.2843 "ceiling" and H56's 0.0649 as <em>historical surrogate outputs</em>,
-not verified private-label results or portal acceptance.
-<a href="research/metric-identity-erratum-20261007.md">Read the derivation and executable counterexample</a>.</div>
-<div class="bad" role="alert"><strong>Research correction — no upload cleared.</strong>
-The H55 0.2843 “ceiling” and inverted truth totals rely on <code>FPw = S − TPw</code>,
-which is false in general under the official metric. They are historical model outputs,
-not private-label bounds or evidence that a new file will beat 0.2778.
-H55 fails the mass-neutral gate. Local TIFF checks are not organizer acceptance.
-<a href="research/metric-identity-erratum-20261007.md">Read the derivation and next validation steps</a>.</div>
+<div class="verdict"><strong>NO LOCAL FILE IS CLEARED TO SUBMIT.</strong> No organizer score exists for any local artifact, and no file-specific receipt connects a local TIFF to a public leaderboard row.</div>
+<h2 class="sec">Current corrections and caveats</h2>
+<div class="columns">
+<div class="card"><h3>Metric identity: live projections invalid</h3><p>The official terms are <code>TPw=T</code>, <code>FPw=S−Q</code>, <code>FNw=N−T</code>. The prediction-centred maximum Q and truth-centred maximum T generally differ. Therefore the H55/H56 substitutions using <code>FPw=S−TPw</code> are invalid; the 0.2843 “ceiling,” 0.0649 H56B projection, inferred hidden-positive totals, universal per-dot threshold and reachability claims are not score estimates or valid promotion evidence.</p><p><a href="research/metric-identity-erratum-20261007.md">Derivation and counterexample</a> · <a href="research/h56b-metric-erratum-20261007.md">H56B correction</a>.</p></div>
+<div class="card"><h3>Gate-2 calibration is not promotion-ready</h3><p>The old audit protocol uses an inferred live truth count of 14,307 and a 0.0556 “live break-even” threshold. Those were based on the invalid inversion / restrictive assumptions. Keep old Gate-2 receipts as historical audit only; do not use their PASS/FAIL or density-matched numbers to promote until the gate is re-derived without inferred private-label mass. The equal-emitted-mass scores remain public-proxy observations only.</p><p><a href="research/metric-identity-erratum-20261007.md#gate-2-calibration-is-also-under-review">Gate-2 erratum</a> · <a href="../evidence/audit_gate2_h55_20261007.json">historical H55 receipt</a>.</p></div>
+<div class="card"><h3>0.2778 score-to-file attribution is unverified</h3><p>A manual 2026-10-07 leaderboard snapshot showed #1=0.3774, #7=0.3195, and a #13 row at 0.2778 for <code>extradr19</code>. The owner-reported 0.2600→0.2708→0.2778 family ladder does not identify the local B2 TIFF bytes. The local B2 audit says <code>UNSCORED</code>; no organizer receipt ties it to the public row.</p><p><a href="leaderboard.html">Dated board</a> · <a href="research/why-02778-and-ceiling-20261007.md">attribution note</a> · <a href="../evidence/source_audit.json">source audit</a>.</p></div>
+<div class="card"><h3>Ignorance, conflict and direct difference are distinct</h3><p>For D-S, <code>m(Θ)</code> is residual unassigned/ignorance mass, not conflict or a literal family-disagreement map. <code>K</code> is raw pre-normalization conflict. H56-OWDS also exports absolute parent-support difference, which is not a mass. The B2 and H33-D positive masks overlap on 31,614 cells, so their statistical independence is not established.</p><p><a href="method.html">Method, equations and naive-mean comparisons</a>.</p></div>
+<div class="card"><h3>H56B outside-footprint encoding is unresolved</h3><p>The zeros-outside primary passes local grid/dtype/range checks and is all finite in [0,1], but conflicts with the public null/NaN outside-footprint wording. A same-value-in-footprint NaN twin is available. Portal acceptance is untested for both; local checks do not establish acceptance or immunity to all portal errors.</p><p><a href="submission-guide.html">Download/submit verdict</a> · <a href="research/h56b-metric-erratum-20261007.md">format receipt and limits</a>.</p></div>
+<div class="card"><h3>Training pipeline is not present</h3><p>The reproducible inventory found no organizer training feature raster, authenticated labels, named official sample TIFF, 1 m DEM links CSV, competition downloader, preparation script or supervised train/inference pipeline. A third-party mirrored feature raster can be restored optionally; that neither authenticates it nor completes the pipeline.</p><p><a href="../evidence/training_inventory_20261007.json">Inventory receipt</a> · <a href="../scripts/audit_training_inventory.py">reproduce audit</a>.</p></div>
+</div>
 
-<header style="background:none;padding:0">
-<p class="eyebrow" style="color:var(--muted)">H56 current irregularities · prior H55 register preserved</p>
-<h1>What remains uncertain, unproven, or non-novel</h1>
-<p class="deck" style="color:var(--muted)">These entries separate measured local checks from source claims, portal assumptions, and public-proxy results. The H56 files are not slot-cleared.</p>
-</header>
-<h2>H56 current caveats</h2>
-<table><thead><tr><th>id</th><th>irregularity</th><th>evidence</th><th>severity</th><th>action taken</th></tr></thead><tbody>
-<tr><td><strong>IR-H56-01</strong></td><td>The 19-band feature stack is not organizer-authenticated and its valid mask differs slightly from the competition footprint</td><td>Stack SHA-256 4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5 came from a third-party GitHub mirror. Of 5,167,373 footprint cells, 3,061 are stack nodata; 1,540 stack-valid cells lie outside the competition footprint.</td><td><span class="pill no">high</span></td><td>H56-A candidates were restricted to the intersection of valid stack and footprint. The stack remains out of Git and is not described as an organizer-authenticated download; provenance/licence review remains open.</td></tr>
-<tr><td><strong>IR-H56-02</strong></td><td>The requested two-family D-S concept already exists as an H53 diagnostic; the H56 output is not a novel geological source combination</td><td>H53 two-family diagnostic uses the same B2 × H33-D parents. H56 is not pixelwise equal to it but Pearson is 0.99054 and top-37,654 rank Jaccard is 1.0. H56 differs from the two-family arithmetic mean numerically (MAE 0.01126) but top-37,654 rank Jaccard is also 1.0.</td><td><span class="pill warn">high</span></td><td>H56 is labelled a distinct alpha=0.60, q=0.10 open-world parameterization only; no new-family, independent-evidence, or materially changed rank claim. See the local prior-art audit.</td></tr>
-<tr><td><strong>IR-H56-03</strong></td><td>Zeros outside the footprint are locally range-safe, but portal acceptance remains unknown</td><td>H56 primary is all-finite float32 in [0,1] with nodata unset and passes the local validator. The official problem description also documents null/NaN outside the footprint; no upload or organizer acceptance test has been run.</td><td><span class="pill no">high</span></td><td>Website says download yes / submit no. The local range pass is not called organizer format compliance; the outside-encoding ambiguity is retained in the receipt.</td></tr>
-<tr><td><strong>IR-H56-04</strong></td><td>Neither H56 candidate beats H49 on the conditional spatial-block proxies</td><td>H56-DS: 0.054242/0.066070 vs H49 0.095353/0.100751; H56-A machine-spec Hessian-only screen: 0.014282/0.006531, 0/4 folds positive. Its prose coherence extension was not tested.</td><td><span class="pill no">high</span></td><td>No weekly slot is cleared or recommended. The sources are frozen mirrors, the targets are public-map proxies, and leakage/transfer to private truth is unresolved.</td></tr>
-<tr><td><strong>IR-H56-05</strong></td><td>Reported 0.2778 does not have a verified organizer receipt for the exact local B2 bytes</td><td>The owner registry reports 0.2778 for family artifact SHA c55bafc4…; the local B2 audit labels the bytes UNSCORED and gives a 0.2747 projection. The dated leaderboard snapshot identifies a row, not a local file hash.</td><td><span class="pill warn">high</span></td><td>Explain the A/B/C ladder only as owner-reported and algebraically consistent with catalogue-distance pruning; do not claim exact file attribution. See the H56 report and source audit.</td></tr>
-<tr><td><strong>IR-H56-06</strong></td><td>The H56-A frozen Markdown and machine-readable test disagree on structure coherence</td><td>The original Markdown slate says H56-A combines Hessian response with structure-tensor line coherence; the machine-readable <code>frozen_test</code> specifies Hessian responses and earthquake density only. The builder followed the machine test and did not compute coherence.</td><td><span class="pill warn">medium</span></td><td>Preserved both frozen files, disclosed the discrepancy in a post-score erratum, and limited the H56-A holdout claim to the Hessian-only screen. The coherence-augmented prose idea remains untested; do not tune/reuse this holdout as confirmation.</td></tr>
+<h2 class="sec">Proxy and provenance limitations</h2>
+<ul><li>H56B (0.032347 catalogue / 0.070552 SGMC off-catalogue), H56 open-world D-S (0.054242 / 0.066070), and H56-F rungs are below H49 on both public-proxy means. H57-A slightly improved catalogue mean but lost on SGMC and to all eight same-pool random controls. These are public map proxies, not private competition labels.</li><li>Frozen upstream surfaces were not reconstructed inside every spatial fold; proxy results are conditional and can be affected by leakage. No result here establishes private-label performance or leaderboard gains.</li><li>Owner-mirror hashes establish byte identity to the mirror, not organizer provenance, license, challenge-use authorization or source completeness. The optional 19-band mirror is not staged now.</li><li>Two SGMC-derived rasters differ by 1,450 positive-mask cells and have different nodata metadata; the cause remains unresolved. Holdout receipts keep the newer pinned derivative and older raw-raster sensitivity separate: <a href="../evidence/sgmc_raster_comparison_20261006.json">comparison</a> · <a href="../evidence/holdout_20261006.json">primary</a> · <a href="../evidence/holdout_raw_sgmc_20261006.json">sensitivity</a>.</li></ul>
+
+<h2 class="sec">Historical H55 irregularity IDs (reinterpreted)</h2>
+<p>The IDs remain stable for cross-references. Several original H55 descriptions contain invalid inverse-metric conclusions; current corrections supersede them. The detailed ledger is <a href="irregularities.md">docs/irregularities.md</a>; read it together with the <a href="research/metric-identity-erratum-20261007.md">metric erratum</a>.</p>
+<table><thead><tr><th>ID</th><th>Historical subject</th><th>Current reading</th></tr></thead><tbody>
+<tr><td>IR-H55-01</td><td>Training-feature band 6 naming / radiometric correspondence</td><td>Historical band/source audit; current training stack absent from the checkout.</td></tr>
+<tr><td>IR-H55-02</td><td>Validator encoding and reported portal range error</td><td>Local all-finite range checks do not prove the historical portal error's cause or current portal acceptance.</td></tr>
+<tr><td>IR-H55-03</td><td>Hidden-truth estimate from owner-reported scores</td><td>Invalidated: depended on <code>FPw=S−TPw</code>.</td></tr>
+<tr><td>IR-H55-04</td><td>SGMC proxy vs owner-reported score inversion</td><td>Score-to-file attribution and inferred truth count are unverified/invalid; retain raw proxy observations only.</td></tr>
+<tr><td>IR-H55-05</td><td>Catalogue-lift vs “live T” table</td><td>Inverse truth values and resulting threshold conclusion are invalid.</td></tr>
+<tr><td>IR-H55-06</td><td>Competing hidden-truth calibrations</td><td>Neither inferred |G| value is established by the invalid inversion.</td></tr>
+<tr><td>IR-H55-07</td><td>Mirrored raster byte/pixel identity comparison</td><td>Bounded historical byte/pixel comparison only; no organizer or global uniqueness claim.</td></tr>
+<tr><td>IR-H55-08</td><td><code>facing_at</code> band unit ambiguity</td><td>Units remain unconfirmed; do not infer dip direction.</td></tr>
+<tr><td>IR-H55-09</td><td>Stale “0.3195 is highest” prompt claim</td><td>Corrected by dated public snapshot; H55 reachability/ceiling claim invalidated.</td></tr>
+<tr><td>IR-H55-10</td><td>Absence of organizer score receipts</td><td>Still current: no organizer score for any local artifact.</td></tr>
 </tbody></table>
-<h2>Prior H55 irregularity register — retained for history</h2>
-<table><thead><tr>
-<th>id</th>
-<th>irregularity</th>
-<th>evidence</th>
-<th>severity</th>
-<th>action taken</th>
-</tr></thead><tbody>
-<tr><td><strong>IR-H55-01</strong></td><td>Official training_features.tif band 6 is gamma-ray total count, but its in-file metadata says it is a magnetic derivative</td><td>Band 6&#x27;s description reads &#x27;Tilt angle or total curvature - magnetic field derivative for edge detection&#x27; and its data_category tag reads &#x27;magnetic_data&#x27;. Reproduced independently this session over 5,164,300 in-footprint cells: Pearson r = 0.9971 and Spearman rho = 1.0000 against the separately mirrored GeoDAWN radiometric TOTAL COUNT (data/source_mirrors/geodawn_rad_u8.tif band TC), r = 0.8817 against its K band, r = -0.0409 against the same file&#x27;s own TMI band 14, and r = -0.1624 against TMI horizontal gradient band 3. Band 6 ranges 2.95-88.57 with a median of 18.5.</td><td><span class="pill no">high</span></td><td>Confirms and strengthens the irregularity already logged in docs/irregularities.md with an independent reproduction and a Spearman check. Recorded in the H55 hypothesis slate so H55-C does not treat band 6 as a magnetic tilt feature. Anyone consuming the official stack should read band 6 as radiometric total count.</td></tr>
-<tr><td><strong>IR-H55-02</strong></td><td>The repository&#x27;s own format validator rejected the encoding used by its highest-scoring artifact</td><td>scripts/validate_submission.py required nodata = NaN and raised SystemExit otherwise. But data/families/dotted_b2_prune_02778.tif - the 0.2778 live-best - is all-finite with zeros outside and nodata unset, verified by reading the bytes (0 NaN cells, min 0.0, max 1.0) and by data/raw/audit-h33-2-b2.json which records nodata null and validator_range_0_1_guaranteed true.</td><td><span class="pill no">high</span></td><td>validate_submission.py now takes --encoding {auto,nan,zeros}, default auto, accepts either encoding, reports which it found, and states the portal range-error exposure explicitly (all_cells_finite, all_cells_in_range_0_1, portal_range_error_immune, portal_range_error_note). A new writer write_float32_zeros_outside was added to src/gemsdoe48/geotiff.py and re-reads the written bytes to assert the encoding. The H55 primary uses the all-finite encoding.</td></tr>
-<tr><td><strong>IR-H55-03</strong></td><td>The dense backbone&#x27;s pixel count and truth yield are both misstated in the repository&#x27;s own notes</td><td>knowledge/research_notes.md and README.md describe dense H19-5 as &#x27;129 k px&#x27; with &#x27;the same T, triple the FP&#x27;. Measured from the restored hash-pinned mirror (SHA-256 ec1f9b56...): 121,131 positive pixels, and inverting its owner-reported live 0.1922 under the calibrated |G| gives T = 6,813.1 - 30.8% HIGHER than C&#x27;s 5,209.5, not equal. The FP part of the claim is correct; the T part is not.</td><td><span class="pill no">high</span></td><td>Corrected in docs/research/h55-live-model-ceiling-and-candidate-20261007.md section 3.2. The error mattered: it hid the fact that the field&#x27;s TOTAL truth content (6,813) is the binding constraint on the whole family, and that #1 at 0.3774 needs T = 7,077 which exceeds it.</td></tr>
-<tr><td><strong>IR-H55-04</strong></td><td>The SGMC off-catalogue proxy that gated every prior session is contradicted by a live score</td><td>gemsdoe29-sgmc-off-catalogue-44k - 44,090 px, 2.8 px Poisson spacing, built directly on the proxy layer - is owner-reported at 0.0512 live, inverting to T = 1,026.0. The backbone family recovers T = 5,209 at the same mass. Were the proxy a good stand-in for the hidden truth, that file would have scored near 0.26.</td><td><span class="pill no">high</span></td><td>Recorded in section 4.1 of the H55 report and in the slate&#x27;s dropped-screens list. The proxy is retained as a RELATIVE ranking device over surfaces that all contain the backbone, and the blocked holdout is still run and reported, but every gate decision that turned on it (H50, H51, H52) is reclassified as unresolved rather than settled. Not deleted - the receipt trail is preserved.</td></tr>
-<tr><td><strong>IR-H55-05</strong></td><td>Catalogue coverage per emitted pixel does not predict live truth yield</td><td>SGMC faults 0.1418 per px, GDR Hot wells/springs 0.1897, INGENIOUS Quaternary centroids 0.3696, against the h19-5 backbone&#x27;s 0.1007 - yet SGMC returned T = 1,026 live where the backbone family returns 5,209 at the same mass.</td><td><span class="pill no">high</span></td><td>The &#x27;&gt;= 2x catalogue lift&#x27; promotion rule that rejected H52 is recorded as unsound and is not used anywhere in this session. Section 4.2 of the report gives the full table. H55-D&#x27;s re-test is explicitly re-judged on the live-calibrated instrument instead.</td></tr>
-<tr><td><strong>IR-H55-06</strong></td><td>Two different hidden-truth calibrations coexist in the repository: |G| = 12,632 and |G| = 14,027.5</td><td>knowledge/research_notes.md, src/gemsdoe48/holdout.py (HIDDEN_TRUTH_PX = 12632), src/gemsdoe48/live_anchor.py and scripts/build_site_ds48.py all use 12,632, derived by assuming the removed dots earned exactly the tau = 0.05416 bar. This session&#x27;s least-squares fit over the strictly nested triple A/B/C, assuming the removed dots earned zero, gives 14,027.5 with the three rungs inverting to T = 5,210.4 / 5,216.1 / 5,209.5 - self-consistent to 0.11%. The three pairwise closed-form solutions are 13,368 / 15,198 / 14,089, a +/-6% spread driven by 4-decimal rounding of the reported scores.</td><td><span class="pill warn">medium</span></td><td>Both are recorded. 14,027.5 is used everywhere in H55 because it is the value that makes the three nested rungs mutually consistent; the 12,632 assumption is documented as the alternative and its derivation is stated. The older constants were NOT edited out of the historical modules, because those modules belong to prior sessions&#x27; receipts.</td></tr>
-<tr><td><strong>IR-H55-07</strong></td><td>A tracked local mirror and its published upstream mirror are pixel-identical but byte-different</td><td>data/raw/ref_h36_1_rung30.tif (SHA-256 7c74270a...) and the GEMSDOE28 published file gems28-h36-1-rung30-blind-r1-20261003-b531dae0a36f-nan.tif (SHA-256 5556aa14...) have identical emission pixel sets (np.array_equal on the boolean mask, 37,660 px) and differ only in outside-footprint encoding and tags. Same for data/raw/tip_h32_1_prethin_tip_euler.tif (26748e4b...) versus 04d31922....</td><td><span class="pill warn">low</span></td><td>live_model.LIVE_ARTIFACTS now points at the restored published mirrors under data/raw/scored/ so every pin is the published one, with a comment recording the pixel-identity check. scripts/restore_h55_inputs.py fetches both. scripts/calibrate_live_model.py fails closed on any pin mismatch.</td></tr>
-<tr><td><strong>IR-H55-08</strong></td><td>h52_scarp3m_100m.tif band facing_at has unconfirmed units</td><td>strike_at takes only the values 0, 1500, 3000, ..., 16500, consistent with a strike in 0.01-degree units quantised to 15-degree bins over 0-165 degrees. facing_at ranges 0-10,000 with a median of 4,893. If facing_at were a dip direction in the same 0.01-degree units the two should be perpendicular, but the measured median deviation from perpendicularity over all valid cells is 46 degrees, with p10 = 8.9 and p90 = 81.4 - i.e. no perpendicular relationship at all.</td><td><span class="pill warn">medium</span></td><td>An along-strike extension of the hydrothermal conduit anchors was designed and then WITHDRAWN rather than shipped on an unverified band. Recorded as a blocker on hypothesis H55-D with the exact check required (re-read src/gemsdoe48/scarp3m.py and data/external/h52_scarp3m_merge_log.txt against the Actions run that produced the mosaic).</td></tr>
-<tr><td><strong>IR-H55-09</strong></td><td>The brief&#x27;s statement that 0.3195 is the highest score is stale</td><td>The single manual read of the official leaderboard on 2026-10-06 UTC (docs/data/leaderboard_20261007.json) shows xiaofanhu at 0.3774 in first place and 0.3195 at seventh (DARD). The 0.2778 row belongs to extradr19, ranked 13th with 10 submissions.</td><td><span class="pill warn">medium</span></td><td>Carried forward and restated. The ceiling table in this session is computed against the full snapshot (0.3774 / 0.3345 / 0.3262 / 0.3195 / 0.2888), not against 0.3195. Automated leaderboard polling remains disabled (.github/workflows/feed.yml.disabled); only dated manual observations are retained.</td></tr>
-<tr><td><strong>IR-H55-10</strong></td><td>No organizer score exists for any file in this repository</td><td>registry/live_scores.json holds 17 entries, all classed OWNER-REPORT, each a score pasted by the repository owner against a SHA-256. No organizer receipt, API response or page capture links any file to any score. The local receipt for the 0.2778 artifact says UNSCORED.</td><td><span class="pill no">high</span></td><td>Stated on every page of this site and in every receipt written this session. The H55 forward model, its |G|, its rho, all eight inverted T values and the whole scenario band are labelled OWNER-REPORT-derived wherever they appear. No projected leaderboard position is claimed.</td></tr>
-</tbody></table>
-<h2>Carried forward from earlier sessions, unchanged</h2>
-<p class="small">The 2026-10-06 leaderboard read (single manual observation, no monitor; #1
-xiaofanhu 0.3774, #2 alexoktaba 0.3345, #3 nchuzhoy 0.3262, #7 DARD 0.3195, and a 0.2778 row
-belonging to <code>extradr19</code> with 10 submissions — <em>not</em> 0.3195 as the brief states);
-the two pinned SGMC rasters that share the grid but differ in hash, nodata metadata and 1,450
-positive cells; the owner mirrors that are not organizer-authenticated and whose reuse licences
-were not verified; the upstream quadrant evaluator that masked truth but retained full-grid
-predictions and is not comparable to the current core-plus-halo folds; and the retired automatic
-leaderboard feed, preserved as <code>.github/workflows/feed.yml.disabled</code>. Full text:
-<a href="../docs/irregularities.md"><code>docs/irregularities.md</code></a> and the
-<a href="archive-main-pages/pre-h55-20261007/irregularities.html">pre-H55 snapshot</a>.</p>
-
-<h2>H56 additions (2026-10-07)</h2>
-<p class="small"><strong>IR-H56-01 · The 0.2778 site itself labels its primary file UNSCORED /
-projected 0.2747 (re-verified at the source).</strong> Fetched directly from the GEMSDOE32 source
-repository via api.github.com: the page's own paste-ready note for
-<code>gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif</code> (SHA-256 prefix
-<code>c55bafc470054e82…</code>, byte-identical to <code>data/families/dotted_b2_prune_02778.tif</code>)
-reads “flank B=2 prune on the 0.2708 base: 37,654 dots, 0 within 200 m of the catalogue;
-live-mirror +0.00487 in 4/4 folds, safety 2.08, projected 0.2747; UNSCORED”. The owner-reported
-leaderboard row 0.2778 therefore remains unauthenticated against these exact bytes by the
-producing site itself. Severity medium.</p>
-<p class="small"><strong>IR-H56-02 · Battery development incident: official-band nodata
-contamination, caught and fixed before publication.</strong> The first two runs of
-<code>scripts/h56_research_battery.py</code> read the 19-band official raster without masking the
-−3.4e38 nodata sentinel; the defect was caught by comparing DEMGLOW ladder counts across runs
-(9,023 contaminated vs 428 masked at the z≤−2 rung), fixed with the reference-solution convention
-X[X &lt; −1e38] = NaN, and the published evidence files were produced by the corrected script only.
-Severity low; flagged because the brief requires every irregularity to be flagged.</p>
-
-</main>
-<footer class="wrap">
-<p><strong>GEMSDOE48</strong> — auditable fault-surface research for DrivenData competition 306
-(DOE GEMS Prize). Built 2026-10-07 16:37 UTC by
-<code>scripts/build_site_h55.py</code> directly from the receipts in <code>evidence/</code>.</p>
-<p class="small"><strong>No organizer score exists for any file in this repository.</strong>
-Every live number is OWNER-REPORT class: a score pasted by the repository owner, not an
-organizer receipt. Proxy numbers are computed against public map layers, not the private
-expert labels. Automated leaderboard access is disabled; the one snapshot here was a single
-dated manual read.</p>
-</footer>
-</body>
-</html>
+<p>Historical additions IR-H56-01 onward and the full H55 record are preserved in the <a href="irregularities.md">Markdown ledger</a>. Do not quote its former hidden-truth inversions, ceiling or “resolved portal rejection” as current findings.</p>
+<p><b>Final current status: no organizer score, no verified exact local-file-to-leaderboard link, no official file acceptance, no submission slot cleared.</b></p>
+</main><footer><div class="wrap">GEMSDOE48 · corrected caveat index · 2026-10-07</div></footer></body></html>

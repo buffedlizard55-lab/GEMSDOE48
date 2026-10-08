@@ -1,30 +1,11 @@
 #!/usr/bin/env python3
-"""Does any new dot pay? Marginal-credit probe against the best-calibrated truth model.
+"""Retired lam3 hidden-truth probe — invalidated; forensic opt-in only.
 
-The 2026-10-07 credit-density audit (docs/research/credit-density-audit-20261007.md)
-showed that every shipped candidate is either the incumbent dotted family C itself or
-an addition whose credit per added cell (0.005-0.013) sits far below the metric's own
-break-even bar 0.2 * DTI = 0.0556. This script asks the sharper question:
-
-    Would *any* new dot, placed wherever the best available truth model wants it,
-    clear that bar?
-
-It rebuilds the two-component hidden-truth density model "lam3" from scratch:
-
-    Pl   = Dempster-Shafer plausibility of the dotted/tip kernel-credit families
-           (live-anchored discounts a1 = 0.95, a2 = 0.95 * 0.2632 / 0.2778)
-    Q    = normalized sum of the 16 other scored submissions' kernel-credit surfaces
-    lam3 = [a * Pl**0.6 normalized + (1 - a) * Q normalized] * N
-
-with (a, N) fitted to minimise rms against the 17 owner-reported live ladder scores.
-The probe then reports, for each documented addition and for greedily selected
-"model-optimal" cells, the marginal credit per added cell against the 0.0556 bar.
-
-Reading: no existing addition comes within 3x of the bar, and even the model's own
-greedy optimum only reaches 0.049-0.058 per cell - i.e. the incumbent sits on the
-frontier of the *entire current information set* and only genuinely new information
-(a detector whose cells are near hidden faults the 100 m layers cannot see) can move
-the live score. Evidence class: model + owner-reported ladder anchors, not organizer truth.
+This historical model fitted a hidden-truth density and per-cell bar from owner-
+reported live scores using the invalid ``FPw=S-TPw`` inversion. Its fitted mass,
+score scenarios, frontier, and addition verdicts are not facts about private labels
+or promotion evidence. The command refuses by default; ``--legacy-audit-only``
+reproduces the old calculation only for forensic comparison.
 """
 from __future__ import annotations
 
@@ -90,8 +71,13 @@ def load_binary(path: pathlib.Path) -> np.ndarray:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--receipt", type=pathlib.Path,
-                        default=ROOT / "evidence" / "lam3_residual_probe_20261007.json")
+                        default=ROOT / "evidence/forensic/lam3_residual_probe_legacy_20261007.json")
+    parser.add_argument("--legacy-audit-only", action="store_true",
+                        help="required opt-in for invalidated hidden-truth model")
     args = parser.parse_args()
+    if not args.legacy_audit_only:
+        parser.error("invalidated FPw=S-TPw hidden-truth model; use --legacy-audit-only only for forensic reproduction")
+    print("LEGACY AUDIT ONLY — INVALIDATED; NOT A TRUTH ESTIMATE OR SCORE GATE")
     t0 = time.time()
 
     labels = rasterio.open(ROOT / "data/official/labels.tif").read(1)
@@ -207,10 +193,11 @@ def main() -> int:
     control_row = marginal(control, "random_2000_in_lam3_support")
 
     receipt = {
+        "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION",
+        "invalidation_reason": "The fitted hidden-truth mass and universal per-cell bar derive from the invalid FPw=S-TPw inversion.",
         "schema": "GEMSDOE48-lam3-residual-probe-v1",
         "generated_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
-        "question": "Would any new dot clear the metric break-even bar 0.2*DTI = 0.0556 "
-                    "under the best-calibrated hidden-truth density model?",
+        "historical_question_withdrawn": "Would any new dot clear a purported 0.0556 per-cell bar under the invalidated hidden-truth density model? This is not a valid scientific or promotion question.",
         "method": {
             "lam3": "a * Pl(ladder)**0.6 + (1-a) * Q(other detectors' normalized kernel credit), "
                     "scaled to N; (a, N) fitted to the 17 owner-reported live ladder scores",
@@ -238,6 +225,7 @@ def main() -> int:
                    "new information can move the live score, and the maximum model-admissible gain from any "
                    "addition is ~+0.000-0.002 DTI.",
     }
+    args.receipt.parent.mkdir(parents=True, exist_ok=True)
     args.receipt.write_text(json.dumps(receipt, indent=2) + "\n")
     print(f"receipt -> {args.receipt} ({time.time() - t0:.0f}s)")
     return 0
