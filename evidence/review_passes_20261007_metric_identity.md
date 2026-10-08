@@ -30,7 +30,7 @@
 - Maintained Markdown local-link audit: **58 files, 391 local references, 0 missing** (includes README, AGENTS, maintained docs and evidence notes; visibly archived/previous-PR snapshots excluded).
 - H57-RELIEF local format validator: `PASS_LOCAL_FORMAT_AUDIT_NOT_ORGANIZER_ACCEPTANCE`, one-band float32 EPSG:32611, 3,730×3,292, all values finite/in `[0,1]`, 58,031 positive cells; SHA-256 matches the report. This is a local check, not a portal test.
 - Refreshed bounded uniqueness comparison: **99 local TIFFs scanned**, no byte- or support-identical duplicate in the configured scan. The receipt now explicitly states `organizer_uniqueness_tested=false` and `global_uniqueness_established=false`.
-- Full/staged diff checks are completed before the merge commit. The incoming mainline registry timestamp is retained in the merge index; the unrelated pre-existing timestamp edit is not staged and will be restored from `stash@{0}` after the merge commit.
+- `git diff --check` and `git diff --cached --check` passed before the merge commit. The incoming mainline registry timestamp is in the merge commit. The pre-existing `registry/inputs.json` timestamp was restored from the original stash as an unstaged worktree edit; the stash was dropped only after verifying the exact preserved value.
 
 ## Disposition and remaining limitations
 
