@@ -62,11 +62,11 @@ def test_h53_radedge_is_retained_as_archival_failed_research_not_current_cta():
     assert "NOT CLEARED TO SUBMIT" in current_index
 
 
-def test_executive_summary_separates_failed_candidates_from_future_guidance():
+def test_executive_summary_separates_h58_failure_from_future_guidance():
     text = (DOCS / "executive-summary.html").read_text(encoding="utf-8")
     assert "NO WEEKLY SUBMISSION SLOT IS CLEARED" in text
-    assert "H57-A" in text and "H56-F" in text
+    assert "H58-A failed" in text and "H56-F" in text
     assert "fails combined gate" in text
     assert "Steps for a future submission after clearance" in text
-    assert "Do not upload H56B" in text
+    assert "Do not upload H58-A" in text
     assert "future submission" in text.lower()

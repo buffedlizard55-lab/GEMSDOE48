@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "status": "FROZEN_BEFORE_H58_BUILD_AND_HOLDOUT",
+  "frozen_utc_date": "2026-10-08",
+  "timing_precision": "date-only; exact ordering not independently timestamped",
+  "planning_note": "Qualitative value-of-information ranks; no numerical DTI forecast or leaderboard projection is claimed.",
+  "prior_art_scope": {
+    "reviewed_files": [
+      "README.md",
+      "docs/research/hypotheses-h57-20261007.md",
+      "docs/research/hypotheses-h56-20261007.md",
+      "docs/research/hypotheses-20261007.md",
+      "docs/research/h50-gdr-probe-slate-20261007.md",
+      "docs/research/h56-results-20261007.md",
+      "docs/research/holdout-h49-results-20261006.md"
+    ],
+    "limitation": "Prior sibling campaigns are not exhaustively byte-compared. Similar concepts in earlier proposal slates are disclosed. Local uniqueness is not global or organizer-side proof.",
+    "key_fact": "H33-2-B2 and H33-D parent masks overlap substantially; separate construction histories do not establish statistical independence."
+  },
+  "hypotheses": [
+    {
+      "rank": 1,
+      "id": "H58-A",
+      "name": "Positive-only simple-support Dempster fusion of dotted and tip/step-over families",
+      "layers": [
+        "H33-2-B2 dotted candidate raster",
+        "H33-D tip/step-over candidate raster",
+        "100 m footprint mask"
+      ],
+      "physical_signature": "Complementary point-spacing versus structural termination/step-over support; a one-family-only support location is retained with greater residual ignorance rather than treated as known no-fault.",
+      "catalogue_gap_rationale": "Different candidate-generation rules can nominate a fault-compatible structure that the public fault catalogue omits. However, the B2 construction is catalogue-pruned, so catalogue-proxy scores are potentially leaky and this rationale is not proof of hidden-fault recovery.",
+      "difference_from_implemented_repo": "A new D-S mass assignment only: m(F)=alpha*s, m(N)=0, m(Theta)=1-alpha*s. Earlier H48/H53/H56 assignments gave some nonzero mass to not-fault when a sparse source did not emit support. H58-A adds no new geological sensor or detector.",
+      "expected_dti_improvement": "Unknown. Prior D-S family fusions underperformed the stronger parent/H49 public-proxy reference; no positive delta is assumed and no point estimate is defensible.",
+      "implementation_cost": "Low; all parent, footprint, proxy and evaluator files are staged.",
+      "source_access": "Local owner-mirror parents, not organizer-authenticated; source SHA pins are recorded in the builder.",
+      "selection": "Selected for immediate blocked test because all required inputs are local; it is not a claim of the highest theoretical geological upside."
+    },
+    {
+      "rank": 2,
+      "id": "H58-B",
+      "name": "Basement-depth step and gravity-edge concordance",
+      "layers": [
+        "Official competition feature band 15 depth-to-basement",
+        "Official competition feature band 13 isostatic gravity",
+        "Verified gravity derivatives after metadata review"
+      ],
+      "physical_signature": "Coherent, multi-scale lateral step in basement depth co-located with a gravity edge beneath basin cover.",
+      "catalogue_gap_rationale": "A buried fault may offset basement and density without a mapped surface trace.",
+      "difference_from_implemented_repo": "H56-B is a written proposal but no such joint basement/gravity candidate was built or scored. Distinct from H57-A K-Th residual by magnetic gradient and from lidar relief detectors.",
+      "expected_dti_improvement": "Potentially moderate but unquantified; strong lithologic/interpolation confounding.",
+      "implementation_cost": "Medium-high.",
+      "source_access": "Exact official training_features.tif is absent and the DrivenData data tab is login-gated in this environment. A hash-pinned third-party GitHub mirror exists, but is not organizer-authenticated or a license determination. Not currently viable without official-source/terms resolution."
+    },
+    {
+      "rank": 3,
+      "id": "H58-C",
+      "name": "Focal-mechanism orientation corridors",
+      "layers": [
+        "USGS ComCat event locations",
+        "Focal-mechanism strike/dip/rake products"
+      ],
+      "physical_signature": "Spatially coherent nodal-plane orientations and aligned events, not event-density peaks.",
+      "catalogue_gap_rationale": "Active blind structures may lack a Quaternary surface-fault trace.",
+      "difference_from_implemented_repo": "Existing seismicity predictors use density channels; no event-level focal-plane corridor detector is implemented. A related H57-B proposal is unbuilt.",
+      "expected_dti_improvement": "Low-to-moderate, highly uncertain and coverage-limited.",
+      "implementation_cost": "Medium.",
+      "source_access": "Official USGS ComCat API; prior repo check recorded bounding-box counts only, not exact footprint coverage or inspected focal-mechanism payloads. Not viable until fields, duplicates, location uncertainty and terms are audited."
+    },
+    {
+      "rank": 4,
+      "id": "H58-D",
+      "name": "Cross-channel longitudinal-profile knickpoint lineations",
+      "layers": [
+        "USGS 3DEP DEM",
+        "DEM-derived channel network and longitudinal elevation profiles"
+      ],
+      "physical_signature": "Repeated slope breaks or lateral deflections across channels with a common orientation.",
+      "catalogue_gap_rationale": "Fault-related drainage deformation may persist upstream of subdued or alluvium-covered traces.",
+      "difference_from_implemented_repo": "No full-area channel-profile extraction exists. H52/H53/H54 test scarp relief or trace persistence; earlier H48-4/H57-C channel proposals remain unbuilt.",
+      "expected_dti_improvement": "Potentially moderate only if profiles are structurally controlled; highly uncertain.",
+      "implementation_cost": "High.",
+      "source_access": "Official USGS 3DEP is free/publicly documented, but this checkout has only two pilot DEM tiles, not verified full-footprint source coverage. Not viable for the full blocked test until the exact tiles and coverage are obtained and audited."
+    },
+    {
+      "rank": 5,
+      "id": "H58-E",
+      "name": "Multi-date Landsat surface-temperature persistence",
+      "layers": [
+        "USGS Landsat Collection 2 Level-2 ST_B10",
+        "Quality/cloud and scene metadata bands"
+      ],
+      "physical_signature": "Repeated dry-season, local temperature residuals organized into persistent linear corridors.",
+      "catalogue_gap_rationale": "Shallow advective heat may persist over a blind structure without a mapped geomorphic trace.",
+      "difference_from_implemented_repo": "Distinct from INGENIOUS point probes and static feature-stack channels. Related H50-2 proposal exists but no scene-level candidate has been built or validated.",
+      "expected_dti_improvement": "Low-to-moderate and unquantified; severe confounders include emissivity, vegetation, cloud, terrain, acquisition timing and lithology.",
+      "implementation_cost": "High.",
+      "source_access": "Official USGS Landsat Collection 2/STAC pages and a prior broad-bbox catalog query are recorded; no scene payload or usable exact-footprint coverage was verified. Not viable until scenes, QA masks, coverage and reuse terms are checked."
+    }
+  ],
+  "frozen_test": {
+    "candidate": "H58-A",
+    "source_sha256": {
+      "dotted_b2_prune_02778.tif": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+      "tip_stepover_r30_02632.tif": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757",
+      "footprint-mask.tif": "ddadb8c96cda673b91ddaa0bbed2aa955c358a8f6196c4c4e8fa70d454dd429f",
+      "sample_submission_template.tif": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc"
+    },
+    "grid": {
+      "crs": "EPSG:32611",
+      "shape_height_width": [3730, 3292],
+      "resolution_m": [100, 100],
+      "footprint_cells": 5167373
+    },
+    "kernel": "s=max(1-Euclidean_distance_m/300m,0)",
+    "alpha_dotted": 0.6,
+    "alpha_tip": 0.6,
+    "mass_assignment": {
+      "m_fault": "alpha*s",
+      "m_not_fault": "0",
+      "m_theta": "1-alpha*s"
+    },
+    "fusion_rule": "normalized Dempster; K is analytically zero because neither source assigns m(not-fault)",
+    "submission_surface": "Bel(F) divided by footprint maximum; relative favorability in [0,1], not probability-calibrated",
+    "outside_encoding": "finite zeros so every TIFF sample, including outside-footprint cells, lies in [0,1]; this is a local range safeguard, not confirmation that the competition accepts zero outside instead of its documented null/NaN convention",
+    "diagnostics": [
+      "raw Bel(F)",
+      "residual m(Theta)",
+      "raw K",
+      "absolute parent-support difference"
+    ],
+    "not_mean_checks": [
+      "Pearson correlation and MAE against binary parent arithmetic mean inside footprint",
+      "Pearson correlation and MAE against normalized 300 m kernel-support mean inside footprint",
+      "deterministic sampled Spearman and top-37654 rank Jaccard"
+    ],
+    "holdout": {
+      "folds": "four fixed map quadrants; each held-out core plus 300 m footprint-clipped halo; only core truth scored",
+      "metric": "distance-weighted Tversky, alpha=0.2, beta=0.8, 300 m triangular kernel",
+      "targets": [
+        "public catalogue labels",
+        "newer derived SGMC fault pixels strictly >300m from a positive catalogue cell",
+        "older raw SGMC sensitivity, reported separately"
+      ],
+      "reference": "pinned H49 current same-protocol public-proxy best",
+      "necessary_pass_rule": "positive mean paired DTI delta and at least 3 of 4 positive folds against H49 on both primary proxy targets",
+      "weekly_slot": "not authorized by a public-proxy pass; do not spend a slot if the candidate fails"
+    },
+    "results": null,
+    "output_paths": null
+  }
+}

@@ -1,8 +1,8 @@
-"""H56-specific contract tests for the current static research pages.
+"""Current H58 page contracts plus retained H56 historical-receipt checks.
 
-The 0.0649 H56B score projection is superseded and must never be presented as a
-current estimate. These tests check the corrected receipt, exact file identity,
-format caveat, D-S semantics, and current download/submit verdict.
+H58 is the current inspection-only download and failed its frozen gate. H56B's
+old 0.0649 score projection remains invalid historical evidence, never a current
+estimate. These tests cover identity, format caveats, D-S semantics, and status.
 """
 from __future__ import annotations
 
@@ -17,10 +17,12 @@ import pytest
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
 EVIDENCE = ROOT / "evidence"
-PRIMARY = "GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros-outside.tif"
+PRIMARY = "GEMSDOE48-H58-OWDS-POSONLY-B2xH33D-20261008-fdbb83476756-zeros-outside.tif"
 PRIMARY_REL = f"downloads/{PRIMARY}"
-PRIMARY_SHA = "4d6548d4ec07a47a25b83d28ebc05d58b57448c1507b460aed52cec395bdb6b5"
-H56_PAGES = ("index.html", "executive-summary.html", "submission-guide.html", "method.html", "validation.html")
+PRIMARY_SHA = "bbd289dd545cd772af3a88631b43233569dcbf4815c69bc5479a53fd73ca3973"
+H58_PAGES = ("index.html", "executive-summary.html", "submission-guide.html", "method.html", "validation.html")
+H56B = "GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros-outside.tif"
+H56B_SHA = "4d6548d4ec07a47a25b83d28ebc05d58b57448c1507b460aed52cec395bdb6b5"
 
 
 def flat(text: str) -> str:
@@ -29,7 +31,7 @@ def flat(text: str) -> str:
 
 @pytest.fixture(scope="module")
 def pages():
-    return {name: (DOCS / name).read_text(encoding="utf-8") for name in H56_PAGES}
+    return {name: (DOCS / name).read_text(encoding="utf-8") for name in H58_PAGES}
 
 
 @pytest.fixture(scope="module")
@@ -37,7 +39,7 @@ def page_text(pages):
     return {name: flat(text) for name, text in pages.items()}
 
 
-def test_current_download_is_top_level_and_not_replaced_by_historical_h55(pages):
+def test_current_h58_download_is_top_level_not_replaced_by_historical_artifacts(pages):
     for name in ("index.html", "executive-summary.html"):
         body = pages[name].split("<main", 1)[1]
         target = body.index(f'href="{PRIMARY_REL}"')
@@ -48,22 +50,47 @@ def test_current_download_is_top_level_and_not_replaced_by_historical_h55(pages)
         assert "H55-conduit" not in before
 
 
-def test_primary_artifact_matches_current_format_and_identity_receipts():
+def test_h58_primary_artifact_matches_build_and_local_format_receipts():
     artifact = DOCS / PRIMARY_REL
     assert artifact.is_file()
     digest = hashlib.sha256(artifact.read_bytes()).hexdigest()
     assert digest == PRIMARY_SHA
-    fmt = json.loads((EVIDENCE / "h56_format_audit_20261007.json").read_text())
-    unique = json.loads((EVIDENCE / "h56_uniqueness_20261007.json").read_text())
+    build = json.loads((EVIDENCE / "build_h58_receipt_20261008.json").read_text())
+    fmt = json.loads((EVIDENCE / "h58_submission_validation_20261008.json").read_text())
+    unique = json.loads((EVIDENCE / "h58_uniqueness_audit_20261008.json").read_text())
+    assert build["candidate"]["primary"]["sha256"] == digest
+    assert build["candidate"]["submission_authorized"] is False
+    assert build["candidate"]["portal_acceptance_tested"] is False
     assert fmt["sha256"] == digest
-    assert fmt["local_core_format_passed"] is True
-    assert fmt["official_outside_policy_passed"] is False
+    assert fmt["all_cells_finite"] is True and fmt["all_cells_in_range_0_1"] is True
+    assert fmt["status"] == "PASS_LOCAL_FORMAT_AUDIT_NOT_ORGANIZER_ACCEPTANCE"
+    assert unique["candidate"]["sha256"] == digest
+    assert unique["scan"]["exact_byte_matches_excluding_companion"] == []
+    assert unique["scan"]["exact_in_footprint_pixel_matches_excluding_companion"] == []
+
+
+def test_h58_preregistered_gate_and_h49_reproduction_support_no_slot():
+    holdout = json.loads((EVIDENCE / "holdout_h58_20261008.json").read_text())
+    slate = json.loads((EVIDENCE / "hypothesis_slate_h58_20261008.json").read_text())
+    assert slate["status"] == "FROZEN_BEFORE_H58_BUILD_AND_HOLDOUT"
+    assert holdout["reference_reproduction_check"]["all_pass"] is True
+    gate = holdout["necessary_gate"]
+    assert gate["passes_both"] is False
+    assert gate["weekly_slot_authorized"] is False
+    assert holdout["paired_H58_minus_H49"]["catalogue"]["positive_folds"] == 0
+    assert holdout["paired_H58_minus_H49"]["sgmc_newer_gt_300m_off_catalogue"]["positive_folds"] == 0
+
+
+def test_h56b_artifact_remains_a_separate_historical_file():
+    artifact = DOCS / "downloads" / H56B
+    assert artifact.is_file()
+    assert hashlib.sha256(artifact.read_bytes()).hexdigest() == H56B_SHA
+    fmt = json.loads((EVIDENCE / "h56_format_audit_20261007.json").read_text())
+    assert fmt["sha256"] == H56B_SHA
     assert fmt["portal_acceptance_tested"] is False
-    assert unique["sha256"] == digest and unique["pass"] is True
-    assert unique["canonical_footprint_comparisons"] == 73
 
 
-def test_h56_status_caveat_and_sha_are_on_submitter_pages(page_text):
+def test_h58_status_caveat_and_sha_are_on_submitter_pages(page_text):
     for name in ("index.html", "executive-summary.html", "submission-guide.html"):
         text = page_text[name]
         assert PRIMARY in text
@@ -71,7 +98,8 @@ def test_h56_status_caveat_and_sha_are_on_submitter_pages(page_text):
         assert "OK TO DOWNLOAD FOR INSPECTION" in text or "DOWNLOAD FOR INSPECTION: OK" in text
         assert ("NOT CLEARED TO SUBMIT" in text or "NOT OK / NOT CLEARED TO SUBMIT" in text
                 or "SUBMIT: NOT OK / NOT CLEARED TO SUBMIT" in text)
-        assert "portal acceptance is untested" in text.lower()
+        assert ("portal-tested" in text.lower() or "portal acceptance is untested" in text.lower()
+                or "neither was uploaded" in text.lower())
         assert "null/nan" in text.lower()
 
 
@@ -100,7 +128,7 @@ def test_h56b_diagnostics_are_separate_layers_not_submission_alternatives(page_t
 
 
 def test_old_h56_projection_is_historical_and_invalidated():
-    text = " ".join(flat((DOCS / name).read_text()) for name in H56_PAGES)
+    text = " ".join(flat((DOCS / name).read_text()) for name in H58_PAGES)
     assert "0.0649" in text
     assert "historical" in text.lower() and "invalid" in text.lower()
     projection = json.loads((EVIDENCE / "h56_live_model_projection_20261007.json").read_text())

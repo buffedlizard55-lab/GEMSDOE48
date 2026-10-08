@@ -14,23 +14,25 @@ nav a{color:#cdeadd;text-decoration:none;padding:6px 10px;border-radius:8px;font
 <header><div class="wrap">
 <p>GEMSDOE48 · DrivenData Competition 306 · DOE GEMS Prize</p>
 <h1>Research, with the limits visible</h1>
-<p>Current status: the current-branch H57-A screen failed the frozen public-proxy gate; H56-F pruning also failed. A distinct H57-RELIEF TIFF exists, but its old live projection and submit recommendation are withdrawn. No weekly submission slot is cleared.</p>
+<p>Current status — H58-A failed its preregistered H49 public-proxy gate (0/4 wins on both targets). The research TIFF is available for inspection only. No candidate is cleared and no weekly submission slot was spent.</p>
 </div></header>
 <nav><div class="wrap">
 <a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="submission-guide.html">Submission guide</a><a href="method.html">Method</a><a href="hypotheses.html">Hypotheses</a><a href="validation.html">Validation</a><a href="leaderboard.html">Leaderboard</a><a href="irregularities.html">Irregularities</a><a href="sources.html">Sources</a><a href="next-steps.html">Next steps</a><a href="research.html">Research index</a>
 </div></nav>
 <main class="wrap">
 <div class="verdict"><strong>NO WEEKLY SLOT CLEARED.</strong> Public-map proxy scores are not private expert-label performance, leaderboard scores, or organizer acceptance. Do not upload a candidate based on these results.</div>
-<section class="hero download" id="h56b-download">
-<h2>⬇ H56B Dempster–Shafer GeoTIFF</h2>
-<p><b>OK TO DOWNLOAD FOR INSPECTION · NOT OK / NOT CLEARED TO SUBMIT.</b> This is the local graded Bel(F) combination of the dotted B2 and H33-D tip/step-over families. It is a research artifact, not a cleared submission.</p>
-<a class="button" href="downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros-outside.tif" download>Download H56B GeoTIFF (zeros outside)</a>
-<a class="button alt" href="downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-nan-outside.tif" download>Download same-value NaN-outside twin</a>
-<p class="fileline">GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros-outside.tif</p>
-<p class="small">1,646,054 bytes · SHA-256 <code>4d6548d4ec07a47a25b83d28ebc05d58b57448c1507b460aed52cec395bdb6b5</code> · float32 · EPSG:32611 · 100 m · 3,292 × 3,730 · all values finite and in [0,1] · 791,389 positive cells.</p>
-<p class="note"><b>Format caveat:</b> local grid/dtype/range checks pass. The zero-outside primary differs from the public problem-page null/NaN outside-footprint wording. A NaN-outside twin is available, but portal acceptance is untested for either file. This is not official format approval.</p>
-<p class="small">The file is byte-distinct from the other local downloads; its NaN twin contains the same in-footprint prediction values. This bounded comparison is not global uniqueness and does not connect the file to any leaderboard row.</p>
-<p><a href="research/h56b-metric-erratum-20261007.md">H56B results, corrected holdout, format caveat, and metric erratum</a> · <a href="submission-guide.html">How to submit only after a future clearance</a>.</p>
+<section class="hero download" id="h58-download">
+<h2>⬇ H58-A positive-only Dempster–Shafer TIFF</h2>
+<p><b>OK TO DOWNLOAD FOR INSPECTION · NOT OK / NOT CLEARED TO SUBMIT. NO WEEKLY SLOT AUTHORIZED.</b> This is a new local H33-2-B2 dotted × H33-D tip/step-over positive-only D-S construction. It failed the preregistered H49 gate on both public proxies.</p>
+<a class="button" href="downloads/GEMSDOE48-H58-OWDS-POSONLY-B2xH33D-20261008-fdbb83476756-zeros-outside.tif" download>Download range-check-safe TIFF</a>
+<a class="button alt" href="downloads/GEMSDOE48-H58-OWDS-POSONLY-B2xH33D-20261008-fdbb83476756-zeros-outside.zip" download>Download one-TIFF ZIP</a>
+<a class="button alt" href="downloads/GEMSDOE48-H58-OWDS-POSONLY-B2xH33D-20261008-fdbb83476756-nan-outside.tif" download>Download NaN-outside alternative</a>
+<p class="fileline">GEMSDOE48-H58-OWDS-POSONLY-B2xH33D-20261008-fdbb83476756-zeros-outside.tif</p>
+<p class="small">1,876,744 bytes · SHA-256 <code>bbd289dd545cd772af3a88631b43233569dcbf4815c69bc5479a53fd73ca3973</code> · single float32 band · EPSG:32611 · 100 m · 3,292 × 3,730 · all cells finite/in [0,1] · 791,389 positive cells.</p>
+<p class="note"><b>Portal error vs official format:</b> the zero-outside TIFF is locally immune to a naive raw-array [0,1] check, but the official problem page says outside-bounds data should be null/NaN. The NaN alternative follows that wording but could trip an unmasked range validator. Neither was portal-tested; the earlier rejected file is unavailable, so its cause is unknown. Local validation is not organizer acceptance.</p>
+<p><b>Blocked result:</b> H58-A DTI 0.055301 catalogue / 0.066341 newer SGMC off-catalogue versus H49 0.095353 / 0.100751; paired deltas −0.040053 / −0.034411, 0/4 wins both. <a href="research/h58-results-20261008.md">Full results, reproducibility and caveats</a> · <a href="research/hypotheses-h58-20261008.md">Frozen five-idea slate</a>.</p>
+<p><b>D-S diagnostics:</b> <a href="downloads/diagnostics/GEMSDOE48-H58-OWDS-POSONLY-B2xH33D-20261008-fdbb83476756-unassigned-mtheta.tif">unassigned m(Theta)</a> · <a href="downloads/diagnostics/GEMSDOE48-H58-OWDS-POSONLY-B2xH33D-20261008-fdbb83476756-conflict-k.tif">K (identically zero by mass assignment)</a> · <a href="downloads/diagnostics/GEMSDOE48-H58-OWDS-POSONLY-B2xH33D-20261008-fdbb83476756-support-difference.tif">direct support difference</a>. m(Theta) is ignorance, not a disagreement map.</p>
+<p class="small">A bounded local audit found no exact byte or in-footprint pixel copy among 113 same-grid local rasters, but H58 has exactly the same positive support and highly similar ranking to prior H56-OWDS. It is a mass-assignment ablation, not a new geological detector; global uniqueness is not established. Name: <code>GEMSDOE48-H58-OWDS-POSONLY-B2xH33D-20261008-fdbb83476756</code>.</p>
 </section>
 
 <h2 class="sec">Current decision summary</h2>
@@ -42,12 +44,13 @@ nav a{color:#cdeadd;text-decoration:none;padding:6px 10px;border-radius:8px;font
 </div>
 
 <h2 class="sec">Leaderboard and the reported 0.2778</h2>
-<p>A single manual official leaderboard snapshot dated 2026-10-07 showed #1 at 0.3774, 0.3195 at #7, and 0.2778 at #13 (`extradr19`). The owner-reported 0.2600→0.2708→0.2778 family ladder may be consistent with removing catalogue-flank predictions that do not earn score, but no organizer receipt connects the public row or score ladder to the exact local B2 TIFF bytes. The local B2 audit marks the file `UNSCORED`. The explanation is deliberately cautious: no hidden-truth inversion and no score gain attribution.</p>
-<p><a class="button alt" href="leaderboard.html">View dated snapshot and evidence limits</a> <a href="research/why-02778-and-ceiling-20261007.md">Read the attribution analysis</a> · <a href="data/leaderboard_20261007.json">Machine-readable snapshot</a>.</p>
+<p>A single fetched official leaderboard snapshot dated 2026-10-08 showed #1 at 0.3774, 0.3195 at #7, and 0.2778 at #13 (<code>extradr19</code>). The local B2 artifact is marked <code>UNSCORED</code>; no organizer receipt establishes a local file-to-leaderboard link for those bytes or H58. Staff clarified the known-fault evaluation mask is pixel-exact with no 300 m buffer, so the earlier “catalogue flank is score-exempt” explanation is unsupported. The cause of the owner-reported 0.2600→0.2708→0.2778 ladder remains unknown.</p>
+<p><a class="button alt" href="leaderboard.html">View dated snapshot and evidence limits</a> · <a href="research/leaderboard-and-mask-clarification-20261008.md">Read mask/leaderboard correction</a> · <a href="research/why-02778-and-ceiling-20261007.md">Read attribution analysis</a> · <a href="data/leaderboard_20261008.json">Machine-readable snapshot</a>.</p>
 
 <h2 class="sec">Same-protocol public-proxy reference</h2>
 <table><thead><tr><th>Surface</th><th>Catalogue mean DTI</th><th>SGMC &gt;300 m off-catalogue mean DTI</th><th>Decision</th></tr></thead><tbody>
 <tr><td>H49 reference</td><td>0.095353</td><td>0.100751</td><td>Comparable proxy reference only; not slot-cleared.</td></tr>
+<tr><td><b>H58-A positive-only D-S</b></td><td>0.055301</td><td>0.066341</td><td>Fails H49 on both; 0/4 winning folds.</td></tr>
 <tr><td>H56B graded belief</td><td>0.032347</td><td>0.070552</td><td>Fails both.</td></tr>
 <tr><td>H56 open-world D-S</td><td>0.054242</td><td>0.066070</td><td>Fails both.</td></tr>
 <tr><td>H57-A</td><td>0.095659</td><td>0.100528</td><td>Catalogue +0.000306; SGMC −0.000223; fails combined gate.</td></tr>
@@ -55,8 +58,8 @@ nav a{color:#cdeadd;text-decoration:none;padding:6px 10px;border-radius:8px;font
 <p class="small">These are blocked public-map proxy results; frozen upstream surfaces were not reconstructed inside every fold, so they remain conditional and potentially leaky. They are not private labels, leaderboard scores, or a slot authorization. See <a href="validation.html">validation protocol and results</a>.</p>
 
 <h2 class="sec">Dempster–Shafer diagnostics</h2>
-<p>The H56B artifact combines discounted evidence with normalized Dempster's rule. The normalized Bel(F) surface is scaled by its in-footprint maximum and is a relative favorability surface, not a calibrated fault probability. Diagnostic layers are separate: <b>m(Θ) is residual unassigned/ignorance mass</b>; <b>raw K is conflict</b>. m(Θ) is not “where the families disagree.” For H56-OWDS, direct absolute support-surface difference is also provided as a separate, non-mass diagnostic.</p>
-<p><a href="downloads/diagnostics/gemsdoe48-h56-mtheta-9ec0d605c45b.tif">H56B m(Θ)</a> · <a href="downloads/diagnostics/gemsdoe48-h56-conflict-9ec0d605c45b.tif">H56B raw K</a> · <a href="downloads/diagnostics/gemsdoe48-h56-plausibility-9ec0d605c45b.tif">H56B plausibility</a> · <a href="downloads/diagnostics/GEMSDOE48-H56-OWDS-B2xH33D-20261007-1f7b5a4f18db-support-disagreement.tif">H56-OWDS absolute parent-support difference</a>.</p>
+<p>H58-A combines positive-only simple-support masses with normalized Dempster's rule. Its normalized Bel(F) is relative favorability, not a calibrated fault probability. H58 assigns m(not F)=0, so raw conflict K is identically zero by construction; this is not evidence of agreement. m(Θ) is unassigned/ignorance, not “where the families disagree.” Direct absolute parent-support difference is exported as a separate non-mass diagnostic. Earlier H56B and H56-OWDS recipes remain below for historical research.</p>
+<p><a href="downloads/diagnostics/GEMSDOE48-H58-OWDS-POSONLY-B2xH33D-20261008-fdbb83476756-unassigned-mtheta.tif">H58-A m(Θ)</a> · <a href="downloads/diagnostics/GEMSDOE48-H58-OWDS-POSONLY-B2xH33D-20261008-fdbb83476756-conflict-k.tif">H58-A raw K</a> · <a href="downloads/diagnostics/GEMSDOE48-H58-OWDS-POSONLY-B2xH33D-20261008-fdbb83476756-support-difference.tif">H58-A direct support difference</a> · <a href="downloads/diagnostics/gemsdoe48-h56-mtheta-9ec0d605c45b.tif">H56B m(Θ)</a> · <a href="downloads/diagnostics/gemsdoe48-h56-conflict-9ec0d605c45b.tif">H56B raw K</a> · <a href="downloads/diagnostics/gemsdoe48-h56-plausibility-9ec0d605c45b.tif">H56B plausibility</a> · <a href="downloads/diagnostics/GEMSDOE48-H56-OWDS-B2xH33D-20261007-1f7b5a4f18db-support-disagreement.tif">H56-OWDS absolute parent-support difference</a>.</p>
 
 <h2 class="sec">Metric correction</h2>
 <div class="note"><b>Do not use historical live-score projections.</b> The former H55/H56 calculations assume `FPw = S − TPw`. The official metric uses prediction-centred `FPw = S − Q`, while `TPw = T` is truth-centred; the maxima are over different axes. The old H55 0.2843 ceiling, H56B 0.0649 projection, inferred hidden-truth counts, and universal 0.0556 threshold are not valid score estimates or gates. See the <a href="research/metric-identity-erratum-20261007.md">derivation and executable counterexample</a>.</div>
@@ -66,13 +69,13 @@ nav a{color:#cdeadd;text-decoration:none;padding:6px 10px;border-radius:8px;font
 
 <h2 class="sec">Official sources and project history</h2>
 <ul>
-<li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">Official competition problem, metric and submission format</a></li>
-<li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">Official public leaderboard</a> · <a href="https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516/4">organizer masking clarification</a></li>
-<li><a href="https://doi.org/10.5066/P93LGLVQ">USGS GeoDAWN DOI</a> · <a href="https://earthquake.usgs.gov/fdsnws/event/1/">USGS ComCat API</a> · <a href="https://mrdata.usgs.gov/geochem/">USGS NGS</a> · <a href="https://www.usgs.gov/national-hydrography/access-national-hydrography-products">USGS hydrography / 3DHP</a></li>
-<li><a href="research/hypotheses-h57-20261007.md">Current-branch H57 slate</a> · <a href="research/h57-hypothesis-slate-20261007.md">separate 17:43 H57-A–E planning slate</a> · <a href="research/h57-relief-metric-erratum-20261007.md">H57-RELIEF metric erratum</a> · <a href="research/h56b-metric-erratum-20261007.md">H56B corrected results</a> · <a href="research/h56-results-20261007.md">H56 open-world results</a> · <a href="research/metric-identity-erratum-20261007.md">general metric erratum</a></li>
+<li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">Official competition problem, metric and submission format</a> · <a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">September 2026 official rules PDF</a> · <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/data/">data tab (login-gated in this environment)</a></li>
+<li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">Official public leaderboard</a> · <a href="data/leaderboard_20261008.json">2026-10-08 snapshot</a> · <a href="https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516/4">staff clarification: pixel-exact mask, no 300m buffer</a></li>
+<li><a href="https://doi.org/10.5066/P93LGLVQ">USGS GeoDAWN</a> · <a href="https://earthquake.usgs.gov/fdsnws/event/1/">USGS ComCat</a> · <a href="https://www.usgs.gov/3d-elevation-program/about-3dep-products-services">USGS 3DEP</a> · <a href="https://www.usgs.gov/landsat-missions/landsat-collection-2-surface-temperature">USGS Landsat C2 ST</a> · <a href="https://www.usgs.gov/data/geologic-map-schema-gems-version-state-geologic-map-compilation-sgmc-geodatabase-conterminous">2026 GeMS-SGMC release</a></li>
+<li><a href="research/hypotheses-h58-20261008.md">Frozen H58 five-hypothesis slate</a> · <a href="research/h58-results-20261008.md">H58 results and no-slot decision</a> · <a href="research/leaderboard-and-mask-clarification-20261008.md">official-source update</a> · <a href="research/hypotheses-h57-20261007.md">historical H57 slate</a> · <a href="research/h57-relief-metric-erratum-20261007.md">H57-RELIEF metric erratum</a> · <a href="research/metric-identity-erratum-20261007.md">general metric erratum</a></li>
 </ul>
 <p><b>No organizer score exists for any local artifact; no local file-to-leaderboard link is verified; no submission slot is cleared.</b></p>
 </main>
-<footer><div class="wrap">GEMSDOE48 research archive · updated 2026-10-07 · local files and public proxies are not organizer acceptance.</div></footer>
+<footer><div class="wrap">GEMSDOE48 research archive · updated 2026-10-08 · downloads are not submission authorization or organizer acceptance.</div></footer>
 </body>
 </html>

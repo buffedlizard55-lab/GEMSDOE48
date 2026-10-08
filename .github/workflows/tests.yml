@@ -21,3 +21,5 @@ jobs:
         run: python -m compileall -q src scripts tests
       - name: Run unit tests
         run: python -m pytest -q
+      - name: Reproduce frozen H58 public-proxy holdout and H49 reference check
+        run: python scripts/validate_h58_holdout.py

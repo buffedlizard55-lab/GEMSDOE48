@@ -1,0 +1,58 @@
+{
+  "status": "PASS_LOCAL_FORMAT_AUDIT_NOT_ORGANIZER_ACCEPTANCE",
+  "file": "docs/downloads/GEMSDOE48-H58-OWDS-POSONLY-B2xH33D-20261008-fdbb83476756-zeros-outside.tif",
+  "sha256": "bbd289dd545cd772af3a88631b43233569dcbf4815c69bc5479a53fd73ca3973",
+  "bytes": 1876744,
+  "dtype": "float32",
+  "bands": 1,
+  "shape": [
+    3730,
+    3292
+  ],
+  "crs": "EPSG:32611",
+  "resolution_m": [
+    100.0,
+    100.0
+  ],
+  "outside_footprint_encoding": "zeros",
+  "nodata": null,
+  "finite_inside_footprint": true,
+  "nan_outside_footprint": false,
+  "zeros_outside_footprint": true,
+  "all_cells_finite": true,
+  "all_cells_in_range_0_1": true,
+  "portal_range_error_immune": true,
+  "portal_range_error_note": "the whole raster is finite and inside [0,1], so a vectorised np.all((v>=0)&(v<=1)) check cannot fail on a NaN comparison",
+  "finite_footprint_cells": 12279160,
+  "nan_outside_cells": 0,
+  "min_inside_footprint": 0.0,
+  "max_inside_footprint": 1.0,
+  "min_whole_raster": 0.0,
+  "max_whole_raster": 1.0,
+  "all_in_footprint_range_0_1": true,
+  "positive_cells": 791389,
+  "positive_mass": 385267.97215589136,
+  "grid_profile": {
+    "width": 3292,
+    "height": 3730,
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ]
+  },
+  "tags": {
+    "alpha_dotted": "0.6",
+    "alpha_tip": "0.6",
+    "candidate": "GEMSDOE48-H58-OWDS-POSONLY-B2xH33D-20261008-fdbb83476756",
+    "inputs": "H33-2-B2 dotted; H33-D tip-step-over",
+    "method": "positive-only simple-support Dempster-Shafer fusion",
+    "outside_encoding": "finite zero; no nodata tag; range-check workaround, not the official null/NaN outside convention",
+    "status": "research-only; not slot-cleared",
+    "support_kernel": "max(1-distance/300m,0), 100m grid",
+    "AREA_OR_POINT": "Area"
+  }
+}

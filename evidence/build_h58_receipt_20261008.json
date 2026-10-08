@@ -1,0 +1,342 @@
+{
+  "schema_version": 1,
+  "session": "H58-A",
+  "built_utc": "2026-10-08T18:09:25.411320+00:00",
+  "status": "BUILT_LOCAL_FORMAT_VALIDATION_PASSED_NOT_PORTAL_TESTED",
+  "decision": "Research-only artifact; the separate preregistered blocked-proxy gate failed, so do not spend a weekly submission slot. Neither local format checks nor proxy scores establish organizer acceptance or private-label performance.",
+  "hypothesis_slate": "docs/research/hypotheses-h58-20261008.md",
+  "frozen_slate_receipt": "evidence/hypothesis_slate_h58_20261008.json",
+  "recipe": {
+    "metric_support": "s_i(x)=max(1-EuclideanDistance(x,D_i)/300m,0), pixel size 100m",
+    "alpha_dotted": 0.6,
+    "alpha_tip": 0.6,
+    "mass_assignment_each_source": {
+      "m_fault": "alpha * support",
+      "m_not_fault": 0.0,
+      "m_theta": "1 - alpha * support"
+    },
+    "combination": "normalized Dempster rule; K is identically zero for this positive-only assignment",
+    "unassigned_semantics": "m(Theta) is residual ignorance, not a direct disagreement map",
+    "direct_disagreement_diagnostic": "absolute difference between the two 300m support surfaces; not a D-S mass",
+    "primary": "Bel(F) divided by the footprint maximum; relative favorability, not a calibrated probability",
+    "outside_encoding": "two clearly labelled variants are exported: finite zero outside is robust to a raw all-cell [0,1] check but differs from the official problem page's null/NaN outside convention; the NaN/nodata variant matches the published convention but can fail a naive unmasked range check. Neither variant has been tested in the organizer portal.",
+    "parameters_are_calibrated": false,
+    "source_independence_established": false
+  },
+  "inputs": {
+    "dotted_b2": {
+      "path": "data/families/dotted_b2_prune_02778.tif",
+      "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+      "family": "GEMSDOE32 H33-2-B2 spacing-tuned dotted",
+      "owner_reported_score": 0.2778,
+      "score_identity_status": "not organizer-verified for these exact local bytes; source receipt says UNSCORED",
+      "source_url": "https://buffedlizard55-lab.github.io/GEMSDOE32/docs/index.html",
+      "bytes": 219065,
+      "sha256_verified": true
+    },
+    "tip_h33d": {
+      "path": "data/families/tip_stepover_r30_02632.tif",
+      "sha256": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757",
+      "family": "GEMSDOE33 H33-D analog tip/step-over",
+      "owner_reported_score": 0.2632,
+      "score_identity_status": "owner-reported family/file association; no organizer receipt links these exact bytes to a score",
+      "source_url": "https://buffedlizard55-lab.github.io/GEMSDOE33/",
+      "bytes": 917544,
+      "sha256_verified": true
+    },
+    "footprint": {
+      "path": "data/source_mirrors/footprint-mask.tif",
+      "sha256": "ddadb8c96cda673b91ddaa0bbed2aa955c358a8f6196c4c4e8fa70d454dd429f",
+      "source_url": "local mask derived from the owner-mirrored sample_submission_template.tif; not organizer-authenticated",
+      "bytes": 34174,
+      "sha256_verified": true
+    },
+    "template": {
+      "path": "data/raw/sample_submission_template.tif",
+      "sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+      "source_url": "https://www.drivendata.org/competitions/306/competition-doe-gems/data/",
+      "provenance": "owner mirror; not organizer-authenticated",
+      "bytes": 1599597,
+      "sha256_verified": true
+    }
+  },
+  "parent_counts": {
+    "dotted_positive_cells": 37654,
+    "tip_positive_cells": 41865,
+    "intersection_cells": 31614,
+    "union_cells": 47905,
+    "dotted_only_cells": 6040,
+    "tip_only_cells": 10251,
+    "footprint_cells": 5167373,
+    "positive_mask_jaccard": 0.6599311136624569
+  },
+  "not_the_naive_average": {
+    "vs_binary_parent_mean": {
+      "definition": "candidate versus the stated naive arithmetic mean, footprint cells only",
+      "pixelwise_identical": false,
+      "pearson_r_all_footprint_cells": 0.41531621187944384,
+      "spearman_r_deterministic_sample": 0.2622063535266161,
+      "spearman_sample_cells": 99373,
+      "footprint_mae": 0.06686346663108922,
+      "footprint_max_abs_difference": 0.761904776096344,
+      "fraction_footprint_abs_difference_gt_0_05": 0.14355282655229262,
+      "top_37654_rank_jaccard": 0.8259140723499175
+    },
+    "vs_normalized_metric_support_mean": {
+      "definition": "candidate versus the stated naive arithmetic mean, footprint cells only",
+      "pixelwise_identical": false,
+      "pearson_r_all_footprint_cells": 0.9957211374137228,
+      "spearman_r_deterministic_sample": 0.9999865086016013,
+      "spearman_sample_cells": 99373,
+      "footprint_mae": 0.012713032588596202,
+      "footprint_max_abs_difference": 0.2142857313156128,
+      "fraction_footprint_abs_difference_gt_0_05": 0.1309613221263493,
+      "top_37654_rank_jaccard": 1.0
+    },
+    "primary_identical_to_binary_parent_mean": false,
+    "primary_identical_to_normalized_metric_support_mean": false,
+    "interpretation": "Correlation/inequality is a construction check, not evidence of improved fault prediction. High correlation is possible because the parent maps overlap and share spatial geometry."
+  },
+  "layers": {
+    "raw_belief_fault": {
+      "minimum_inside_footprint": 0.0,
+      "maximum_inside_footprint": 0.8400000333786011,
+      "mean_inside_footprint": 0.06262855653102872,
+      "positive_cells_inside_footprint": 791389,
+      "all_finite_inside_footprint": true,
+      "meaning": "unnormalized combined Bel(F); not a calibrated probability"
+    },
+    "primary_relative_belief": {
+      "minimum_inside_footprint": 0.0,
+      "maximum_inside_footprint": 1.0,
+      "mean_inside_footprint": 0.07455780183777934,
+      "positive_cells_inside_footprint": 791389,
+      "all_finite_inside_footprint": true,
+      "meaning": "raw Bel(F) divided by the footprint maximum"
+    },
+    "residual_m_theta": {
+      "minimum_inside_footprint": 0.15999998152256012,
+      "maximum_inside_footprint": 1.0,
+      "mean_inside_footprint": 0.9373714438673618,
+      "positive_cells_inside_footprint": 5167373,
+      "all_finite_inside_footprint": true,
+      "meaning": "unassigned/ignorance mass; not a direct disagreement map"
+    },
+    "raw_conflict_K": {
+      "minimum_inside_footprint": 0.0,
+      "maximum_inside_footprint": 0.0,
+      "mean_inside_footprint": 0.0,
+      "positive_cells_inside_footprint": 0,
+      "all_finite_inside_footprint": true,
+      "meaning": "pre-normalization D-S conflict; identically zero because m(N)=0 in both sources"
+    },
+    "absolute_support_difference": {
+      "minimum_inside_footprint": 0.0,
+      "maximum_inside_footprint": 1.0,
+      "mean_inside_footprint": 0.010747747948867365,
+      "positive_cells_inside_footprint": 176781,
+      "all_finite_inside_footprint": true,
+      "meaning": "direct difference between dotted and tip 300m supports; not a D-S mass"
+    },
+    "maximum_mass_sum_absolute_error": 1.1920928955078125e-07
+  },
+  "candidate": {
+    "id": "H58-A",
+    "unique_name": "GEMSDOE48-H58-OWDS-POSONLY-B2xH33D-20261008-fdbb83476756",
+    "paste_ready_portal_note": "H58 positive-only D-S (alpha=0.60), B2 x H33-D; separate mTheta/K/support-difference diagnostics; proxy gate failed, research only\u2014not cleared to submit.",
+    "content_id": "fdbb83476756",
+    "content_id_definition": "first 12 hex characters of SHA-256 of the C-order float32 primary array bytes (including zero outside cells)",
+    "primary": {
+      "path": "docs/downloads/GEMSDOE48-H58-OWDS-POSONLY-B2xH33D-20261008-fdbb83476756-zeros-outside.tif",
+      "bytes": 1876744,
+      "sha256": "bbd289dd545cd772af3a88631b43233569dcbf4815c69bc5479a53fd73ca3973",
+      "dtype": "float32",
+      "bands": 1,
+      "width": 3292,
+      "height": 3730,
+      "crs": "EPSG:32611",
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": null,
+      "encoding": "all_finite_zeros_outside",
+      "all_cells_finite": true,
+      "all_cells_in_range_0_1": true,
+      "finite_cells": 12279160,
+      "nan_cells": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "positive_cells": 791389,
+      "in_footprint_cells": 5167373,
+      "portal_range_error_immune": true,
+      "is_single_band_tif": true,
+      "whole_grid_values_finite_in_0_1": true
+    },
+    "zip": {
+      "path": "docs/downloads/GEMSDOE48-H58-OWDS-POSONLY-B2xH33D-20261008-fdbb83476756-zeros-outside.zip",
+      "bytes": 1737039,
+      "sha256": "d0c985c23c2cd4c2aaccf252927ab35fbf6be9bd74a7c02cdb1653edb07477d1",
+      "contains_exactly_one_tif": true,
+      "is_single_band_tif": true
+    },
+    "published_format_alternative": {
+      "path": "docs/downloads/GEMSDOE48-H58-OWDS-POSONLY-B2xH33D-20261008-fdbb83476756-nan-outside.tif",
+      "bytes": 2008394,
+      "dtype": "float32",
+      "bands": 1,
+      "width": 3292,
+      "height": 3730,
+      "crs": "EPSG:32611",
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": "NaN",
+      "finite_cells": 5167373,
+      "nodata_cells": 7111787,
+      "min": 0.0,
+      "max": 1.0,
+      "range_0_1_with_nan_outside": true,
+      "sha256": "a57d3b732c2280c4c8f626ee37a54aa35fb496fde83b47df33501009eb29a294",
+      "outside_convention_matches_published_problem_page": true,
+      "portal_range_error_immune": false,
+      "local_portal_acceptance_tested": false
+    },
+    "portal_acceptance_tested": false,
+    "download_authorized": true,
+    "submission_authorized": false,
+    "format_choice_note": "The all-finite zero-outside TIFF addresses a naive raw-array range check but is not the official problem-page outside-bounds convention. The NaN-outside TIFF matches the published convention but is not guaranteed to pass an unmasked portal range check. No actual portal upload was made; user-reported failure cause remains unconfirmed.",
+    "diagnostics": {
+      "raw_belief": {
+        "path": "docs/downloads/diagnostics/GEMSDOE48-H58-OWDS-POSONLY-B2xH33D-20261008-fdbb83476756-belief-raw.tif",
+        "bytes": 1883630,
+        "sha256": "2a597525d28a9a8003717cb900d75ab6e693380507ba89739d06bdadb03b237a",
+        "dtype": "float32",
+        "bands": 1,
+        "width": 3292,
+        "height": 3730,
+        "crs": "EPSG:32611",
+        "transform": [
+          100.0,
+          0.0,
+          243350.0,
+          0.0,
+          -100.0,
+          4508550.0
+        ],
+        "nodata": null,
+        "encoding": "all_finite_zeros_outside",
+        "all_cells_finite": true,
+        "all_cells_in_range_0_1": true,
+        "finite_cells": 12279160,
+        "nan_cells": 0,
+        "min": 0.0,
+        "max": 0.8400000333786011,
+        "positive_cells": 791389,
+        "in_footprint_cells": 5167373,
+        "portal_range_error_immune": true,
+        "is_submission": false
+      },
+      "m_theta": {
+        "path": "docs/downloads/diagnostics/GEMSDOE48-H58-OWDS-POSONLY-B2xH33D-20261008-fdbb83476756-unassigned-mtheta.tif",
+        "bytes": 1816436,
+        "sha256": "f9389d4d0d33aa5a7478f71e0e8cc8af1706510ac3f3fac83fdf936516518885",
+        "dtype": "float32",
+        "bands": 1,
+        "width": 3292,
+        "height": 3730,
+        "crs": "EPSG:32611",
+        "transform": [
+          100.0,
+          0.0,
+          243350.0,
+          0.0,
+          -100.0,
+          4508550.0
+        ],
+        "nodata": null,
+        "encoding": "all_finite_zeros_outside",
+        "all_cells_finite": true,
+        "all_cells_in_range_0_1": true,
+        "finite_cells": 12279160,
+        "nan_cells": 0,
+        "min": 0.0,
+        "max": 1.0,
+        "positive_cells": 5167373,
+        "in_footprint_cells": 5167373,
+        "portal_range_error_immune": true,
+        "is_submission": false
+      },
+      "conflict_k": {
+        "path": "docs/downloads/diagnostics/GEMSDOE48-H58-OWDS-POSONLY-B2xH33D-20261008-fdbb83476756-conflict-k.tif",
+        "bytes": 58566,
+        "sha256": "3248770e8d9d02c0942033965284d16e19141f2bc28dc9e24fb3d0bacb5db057",
+        "dtype": "float32",
+        "bands": 1,
+        "width": 3292,
+        "height": 3730,
+        "crs": "EPSG:32611",
+        "transform": [
+          100.0,
+          0.0,
+          243350.0,
+          0.0,
+          -100.0,
+          4508550.0
+        ],
+        "nodata": null,
+        "encoding": "all_finite_zeros_outside",
+        "all_cells_finite": true,
+        "all_cells_in_range_0_1": true,
+        "finite_cells": 12279160,
+        "nan_cells": 0,
+        "min": 0.0,
+        "max": 0.0,
+        "positive_cells": 0,
+        "in_footprint_cells": 5167373,
+        "portal_range_error_immune": true,
+        "is_submission": false
+      },
+      "support_difference": {
+        "path": "docs/downloads/diagnostics/GEMSDOE48-H58-OWDS-POSONLY-B2xH33D-20261008-fdbb83476756-support-difference.tif",
+        "bytes": 792894,
+        "sha256": "eafb1828c98a375dae0a6718abf8edf8bdba6aa2ce635acd45be429e4738e6b7",
+        "dtype": "float32",
+        "bands": 1,
+        "width": 3292,
+        "height": 3730,
+        "crs": "EPSG:32611",
+        "transform": [
+          100.0,
+          0.0,
+          243350.0,
+          0.0,
+          -100.0,
+          4508550.0
+        ],
+        "nodata": null,
+        "encoding": "all_finite_zeros_outside",
+        "all_cells_finite": true,
+        "all_cells_in_range_0_1": true,
+        "finite_cells": 12279160,
+        "nan_cells": 0,
+        "min": 0.0,
+        "max": 1.0,
+        "positive_cells": 176781,
+        "in_footprint_cells": 5167373,
+        "portal_range_error_immune": true,
+        "is_submission": false
+      }
+    },
+    "diagnostics_are_submission_candidates": false
+  }
+}

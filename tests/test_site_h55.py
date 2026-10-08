@@ -1,8 +1,8 @@
 """Regression checks for the manually maintained active GEMSDOE48 pages.
 
-The H55-generated site is retired. These checks protect the current H56/H57
-status, downloadable research artifact, attribution limits, and metric/D-S
-corrections without treating old H55 receipts as current score evidence.
+The generated H55 site is retired. These checks protect the current H58
+no-submit status, artifact, attribution limits, and metric/D-S corrections,
+while keeping H48-H57 receipts historical rather than current score evidence.
 """
 from __future__ import annotations
 
@@ -22,8 +22,8 @@ ACTIVE_PAGES = [
     "hypotheses.html", "validation.html", "leaderboard.html", "irregularities.html",
     "sources.html", "next-steps.html", "research.html",
 ]
-H56B = "GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros-outside.tif"
-H56B_SHA256 = "4d6548d4ec07a47a25b83d28ebc05d58b57448c1507b460aed52cec395bdb6b5"
+H58A = "GEMSDOE48-H58-OWDS-POSONLY-B2xH33D-20261008-fdbb83476756-zeros-outside.tif"
+H58A_SHA256 = "bbd289dd545cd772af3a88631b43233569dcbf4815c69bc5479a53fd73ca3973"
 
 
 class NestingParser(HTMLParser):
@@ -90,33 +90,34 @@ def test_relative_links_resolve(pages):
 def test_current_download_is_obvious_and_submit_verdict_is_unambiguous(page_text):
     for name in ("index.html", "executive-summary.html", "submission-guide.html"):
         text = page_text[name]
-        assert H56B in text, f"{name} must identify the unique H56B artifact"
+        assert H58A in text, f"{name} must identify the current H58-A artifact"
         assert "OK TO DOWNLOAD" in text or "DOWNLOAD FOR INSPECTION: OK" in text, name
         assert "NOT OK" in text or "NOT CLEARED TO SUBMIT" in text, name
         assert ("NO WEEKLY" in text or "no weekly submission slot" in text.lower()
                 or "no candidate in this checkout is slot-cleared" in text.lower()), name
     for name in ("index.html", "executive-summary.html"):
         text = page_text[name]
-        assert f'href="downloads/{H56B}"' in text, name
+        assert f'href="downloads/{H58A}"' in text, name
         assert 'download>' in text or 'download ' in text, name
-        assert "<table" not in text.split(f'href="downloads/{H56B}"', 1)[0], name
+        assert "<table" not in text.split(f'href="downloads/{H58A}"', 1)[0], name
 
 
 def test_download_bytes_hash_and_current_format_caveat():
-    artifact = DOCS / "downloads" / H56B
+    artifact = DOCS / "downloads" / H58A
     assert artifact.is_file()
-    assert hashlib.sha256(artifact.read_bytes()).hexdigest() == H56B_SHA256
+    assert hashlib.sha256(artifact.read_bytes()).hexdigest() == H58A_SHA256
     for name in ("index.html", "submission-guide.html", "executive-summary.html"):
         text = (DOCS / name).read_text()
-        assert H56B_SHA256 in text, f"{name} must show the exact downloaded file hash"
+        assert H58A_SHA256 in text, f"{name} must show the exact downloaded file hash"
         assert "null/NaN" in text or "null/NaN outside" in text
-        assert "acceptance is untested" in text.lower() or "portal acceptance is untested" in text.lower()
+        assert ("portal-tested" in text.lower() or "portal acceptance is untested" in text.lower()
+                or "neither was uploaded" in text.lower())
 
 
-def test_h56_note_is_archive_only_and_never_recommends_upload(page_text):
+def test_h58_name_and_note_are_provenance_only_and_never_recommend_upload(page_text):
     guide = page_text["submission-guide.html"]
-    assert "retained solely as an archive, not for use" in guide
-    assert "H49 proxy gate failed" in guide
+    assert "short note retained for provenance only" in guide.lower()
+    assert "failed its frozen comparison against h49" in guide.lower()
     assert "NOT CLEARED" in guide
 
 
@@ -162,14 +163,15 @@ def test_training_inventory_does_not_claim_a_ready_supervised_pipeline(page_text
     assert audit["assessment"]["supervised_train_and_inference_pipeline_present"] is False
 
 
-def test_h57_slate_and_results_are_referenced_without_claiming_success(page_text):
+def test_h58_slate_and_h57_archive_are_referenced_without_claiming_success(page_text):
     hypotheses = page_text["hypotheses.html"]
-    for code in ("H57-A", "H57-B", "H57-C", "H57-D"):
+    for code in ("H58-A", "H58-B", "H58-C", "H58-D", "H58-E"):
         assert code in hypotheses
-    assert "H57-A" in page_text["validation.html"]
-    assert "h57-a screen emitted no tiff" in page_text["index.html"].lower()
-    assert "a distinct h57-relief tiff exists" in page_text["index.html"].lower()
-    assert "fails" in page_text["hypotheses.html"].lower()
+    assert "H58-A" in page_text["validation.html"]
+    assert "failed" in page_text["index.html"].lower()
+    assert "failed its preregistered h49 public-proxy gate" in page_text["index.html"].lower()
+    assert "H57-RELIEF" in page_text["submission-guide.html"]
+    assert "historical h57 slate" in hypotheses.lower()
 
 
 def test_irregularity_register_marks_old_metric_inversions_invalid(page_text):
