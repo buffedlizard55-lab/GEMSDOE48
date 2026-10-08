@@ -164,7 +164,9 @@
         "weighted_recall": {
           "dotted": 0.37873374794029707,
           "tip": 0.3754106305336615
-        }
+        },
+        "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION",
+        "assumption_warning": "Historical sensitivity case only; F=M-TPw or F=M does not follow from the official metric."
       },
       "B_all_wasted": {
         "assumption": "F = M",
@@ -180,10 +182,21 @@
         "weighted_recall": {
           "dotted": 0.4183827911832276,
           "tip": 0.4145101074961868
-        }
+        },
+        "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION",
+        "assumption_warning": "Historical sensitivity case only; F=M-TPw or F=M does not follow from the official metric."
       }
     },
-    "provenance": "[ANCHOR] owner-reported leaderboard scores; [MODEL] regime assumptions; not organizer-confirmed."
+    "provenance": "[ANCHOR] owner-reported leaderboard scores; [MODEL] regime assumptions; not organizer-confirmed.",
+    "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION",
+    "invalidation_reason": "F=M-TP and F=M are scenario assumptions, not official-metric identities; the inferred truth count and TPw are not observed.",
+    "do_not_use_for": [
+      "private-label truth density",
+      "score prediction",
+      "ceiling",
+      "threshold",
+      "candidate promotion"
+    ]
   },
   "live_projection_by_class": {
     "method": "[MODEL] proxy-measured *relative* credit split between the three dot classes, rescaled so each parent reproduces its owner-reported live score; both extreme regimes are reported.",
@@ -272,7 +285,15 @@
           }
         }
       }
-    }
+    },
+    "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION",
+    "invalidation_reason": "The live scale and hidden-truth count are derived from the invalid FPw=S-TPw inversion; these are not organizer-score scenarios.",
+    "do_not_use_for": [
+      "score estimates",
+      "live brackets",
+      "thresholds",
+      "promotion decisions"
+    ]
   },
   "kernel_support_fields": {
     "dotted": {
@@ -284,5 +305,9 @@
       "mean": 0.027399618169853174
     },
     "correlation_on_union": -0.16855839004382833
-  }
+  },
+  "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION",
+  "invalidation_reason": "Live-anchor inversion and live-scale projections assume FPw=S-TPw (or Q\u2248T), which is not a general identity under the official metric. Owner-reported leaderboard scores are not organizer receipts linking those scores to local TIFF bytes.",
+  "leaderboard_linkage": "0.2778 is owner-reported / a dated leaderboard-row attribution; this JSON does not verify the local-file-to-row link.",
+  "promotion_use": "NONE; public-proxy geometry remains a local diagnostic, while every live-anchor inversion/projection field is invalidated."
 }

@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "recorded_utc": "2026-10-07T21:30:14.695527Z",
+  "candidate": "H56B graded Dempster belief",
+  "historical_projection": {
+    "receipt": "evidence/h56_live_model_projection_20261007.json",
+    "reported_dti_projection": 0.06489045881963633,
+    "reported_pignistic_threshold_projection": 0.0854,
+    "status": "INVALIDATED; PRESERVED FOR AUDIT ONLY"
+  },
+  "reason": {
+    "incorrect_identity": "FPw = S - TPw",
+    "official_metric_terms": "FPw = S - Q, where Q=sum_x p(x) max_g k(d(x,g)); TPw=T=sum_g max_x p(x) k(d(x,g)).",
+    "explanation": "The maxima operate on different axes, so Q and T are generally unequal. The historical inversion/projection is not a verified score estimate or valid submission gate."
+  },
+  "current_validator": "scripts/validate_h56.py",
+  "current_projection_used": false,
+  "replacement_evaluation": "evidence/holdout_h56_belief_h49_20261007.json",
+  "replacement_result": {
+    "catalogue_proxy_mean_dti": 0.032346931924512205,
+    "h49_catalogue_proxy_mean_dti": 0.0953532478651188,
+    "catalogue_delta": -0.06300631594060659,
+    "catalogue_positive_folds": 0,
+    "sgmc_off_catalogue_mean_dti": 0.07055199715340402,
+    "h49_sgmc_off_catalogue_mean_dti": 0.10075118848176869,
+    "sgmc_delta": -0.030199191328364662,
+    "sgmc_positive_folds": 0,
+    "slot_cleared": false
+  },
+  "status": "NOT_OK_NOT_CLEARED_TO_SUBMIT",
+  "download_status": "OK_TO_DOWNLOAD_FOR_INSPECTION",
+  "organizer_score_or_file_link_verified": false,
+  "portal_acceptance_verified": false,
+  "related_errata": [
+    "docs/research/metric-identity-erratum-20261007.md",
+    "docs/research/h56b-metric-erratum-20261007.md"
+  ]
+}

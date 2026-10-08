@@ -1,11 +1,8 @@
-"""H57 contract: format, uniqueness, the exact emission, and an independent
-re-derivation of the marginal-credit projection that the site publishes.
+"""H57-RELIEF artifact integrity and metric-identity regression tests.
 
-The scientific assertions here deliberately do NOT trust the build receipt. The
-marginal credit is recomputed from the shipped GeoTIFF and the official metric, and
-the identity ``sum_g max(K_S - K_A, 0) == T_SGMC(S) - T_SGMC(A)`` is asserted — that
-identity is what exposed the per-offset double-count in the exploratory scripts
-(``scratch/newcov2.py``, ``scratch/bcv.py``) that first reported 4/4 spatial folds.
+These tests preserve local construction/format evidence while preventing the old
+FPw=S-TPw surrogate projection and recommendation from becoming current guidance.
+They do not treat public-proxy measurements as private-label scores.
 """
 from __future__ import annotations
 
@@ -14,6 +11,7 @@ import html
 import json
 import pathlib
 import re
+import sys
 
 import numpy as np
 import pytest
@@ -21,26 +19,21 @@ import rasterio
 from scipy import ndimage as ndi
 
 REPO = pathlib.Path(__file__).resolve().parents[1]
-import sys
-
 if str(REPO / "src") not in sys.path:
     sys.path.insert(0, str(REPO / "src"))
 
-from gemsdoe48 import metric as M  # noqa: E402
-
 EV = REPO / "evidence"
 RECEIPT = EV / "build_h57_receipt_20261007.json"
+ERRATUM = EV / "h57_metric_identity_erratum_20261007.json"
 SLUG = "GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07"
 PRIMARY = REPO / "docs" / "downloads" / f"{SLUG}.tif"
 PARENT = REPO / "data" / "families" / "dotted_b2_prune_02778.tif"
 SHA256 = "28a51fb032b8f2cfd1f04ad3bd429c29d7bb780d36961fea783ff8099130986e"
 DOTS = 58031
-ALPHA = 0.9324
-DENOM_CONST = 11215.3
 
 needs_artifacts = pytest.mark.skipif(
     not (RECEIPT.exists() and PRIMARY.exists()),
-    reason="H57 artefacts not built in this checkout")
+    reason="H57-RELIEF artifacts not present in this checkout")
 
 
 def sha256_file(path: pathlib.Path) -> str:
@@ -60,183 +53,150 @@ def flat(text: str) -> str:
     return re.sub(r"\s+", " ", html.unescape(text))
 
 
-# --------------------------------------------------------------------------- format
 @needs_artifacts
-def test_primary_matches_the_recorded_sha256():
+def test_local_primary_hash_and_grid_match_receipt():
     assert sha256_file(PRIMARY) == SHA256
-
-
-@needs_artifacts
-def test_primary_is_portal_range_error_immune():
-    """The portal rejected an earlier upload with 'Predicted values must be in range
-    [0, 1]'. A vectorised ``np.all((v >= 0) & (v <= 1))`` must not fail on a NaN."""
+    receipt = json.loads(RECEIPT.read_text())
+    assert receipt["files"]["primary_zeros_outside"]["sha256"] == SHA256
     with rasterio.open(PRIMARY) as ds:
         v = ds.read(1)
         assert ds.count == 1
         assert ds.dtypes[0] == "float32"
         assert (ds.height, ds.width) == (3730, 3292)
         assert str(ds.crs) == "EPSG:32611"
-        t = ds.transform
-        assert (t.a, t.e, t.c, t.f) == (100.0, -100.0, 243350.0, 4508550.0)
-    assert np.isfinite(v).all(), "a NaN anywhere can make a vectorised range check raise/fail"
+        assert (ds.transform.a, ds.transform.e, ds.transform.c, ds.transform.f) == (
+            100.0, -100.0, 243350.0, 4508550.0)
+    assert np.isfinite(v).all()
     assert float(v.min()) >= 0.0 and float(v.max()) <= 1.0
-    assert bool(np.all((v >= 0.0) & (v <= 1.0)))
 
 
 @needs_artifacts
-def test_format_audit_receipt_agrees():
+def test_format_audit_is_local_not_portal_acceptance():
     audit = json.loads((EV / "h57_format_audit_20261007.json").read_text())
+    assert audit["status"] == "PASS_LOCAL_FORMAT_AUDIT_NOT_ORGANIZER_ACCEPTANCE"
+    assert audit["sha256"] == SHA256
     assert audit["positive_cells"] == DOTS
     assert audit["all_cells_finite"] and audit["all_cells_in_range_0_1"]
-    assert audit["portal_range_error_immune"] is True
+    assert audit.get("organizer_acceptance_tested", False) is False
+    assert "NOT_ORGANIZER_ACCEPTANCE" in audit["status"]
 
 
-# ----------------------------------------------------------------------- uniqueness
 @needs_artifacts
-def test_uniqueness_receipt_verdict_is_unique():
+def test_local_uniqueness_receipt_is_bounded_and_does_not_claim_organizer_uniqueness():
     u = json.loads((EV / "h57_uniqueness_20261007.json").read_text())
     assert u["candidate"]["sha256"] == SHA256
     assert u["verdict"] == "UNIQUE", u["duplicates_byte_or_support_identical"]
+    assert u["compared_files"] == 99
     assert u["max_overlap_excluding_companions"]["identical_support"] is False
     assert u["max_overlap_excluding_companions"]["jaccard"] < 0.05
+    assert "local" in u["uniqueness_scope"].lower()
+    assert "not organizer-side or global" in u["uniqueness_scope"].lower()
+    assert u["organizer_uniqueness_tested"] is False
+    assert u["global_uniqueness_established"] is False
 
 
-# ------------------------------------------------------------------------- emission
 @needs_artifacts
-def test_emission_is_parent_union_lidar_and_avoids_the_catalogue():
+def test_emission_is_the_recorded_parent_plus_lidar_support_and_avoids_catalogue():
     with rasterio.open(REPO / "data" / "official" / "labels.tif") as ds:
         lab = ds.read(1).astype(np.float32)
     footprint, catalogue = lab != -1, lab == 1
     dcat = ndi.distance_transform_edt(~catalogue)
-    S, A = positives(PRIMARY), positives(PARENT)
-    L = S & ~A
-    assert int(S.sum()) == DOTS
-    assert int(A.sum()) == 37654
-    assert int(L.sum()) == DOTS - 37654
-    assert bool((S == (A | L)).all())
-    assert int((S & catalogue).sum()) == 0, "dots on published catalogue cells earn nothing"
-    assert int((S & ~footprint).sum()) == 0, "no dot may sit outside the footprint"
-    assert float(dcat[L].min()) > 2.0, "new dots must clear the 200 m catalogue flank"
-    # no new dot may be within kernel reach of a parent dot: that is what makes the
-    # addition non-redundant rather than a re-price of coverage the parent already had
-    assert bool((M.max_kernel_to_truth(A)[L] == 0).all())
+    surface, parent = positives(PRIMARY), positives(PARENT)
+    lidar = surface & ~parent
+    assert int(surface.sum()) == DOTS
+    assert int(parent.sum()) == 37654
+    assert int(lidar.sum()) == DOTS - 37654
+    assert bool((surface == (parent | lidar)).all())
+    assert int((surface & catalogue).sum()) == 0
+    assert int((surface & ~footprint).sum()) == 0
+    assert float(dcat[lidar].min()) > 2.0
 
 
-# ------------------------------------------------- independent projection re-derivation
-def surrogate_truth() -> np.ndarray:
-    """G = SGMC-derived faults & footprint & d(catalogue) > 3  (|G| = 62,122).
-
-    Rebuilt from the tracked official rasters so the test does not depend on the
-    gitignored scratch cache.
-    """
-    with rasterio.open(REPO / "data" / "official" / "labels.tif") as ds:
-        lab = ds.read(1).astype(np.float32)
-    with rasterio.open(REPO / "data" / "official" / "derived_sgmc_faults_100m.tif") as ds:
-        sgmc = ds.read(1) > 0
-    footprint, catalogue = lab != -1, lab == 1
-    dcat = ndi.distance_transform_edt(~catalogue)
-    return sgmc & footprint & (dcat > 3)
-
-
-@needs_artifacts
-def test_marginal_credit_recomputed_from_the_shipped_file():
-    G = surrogate_truth()
-    assert int(G.sum()) == 62122
-    gi = np.flatnonzero(G.ravel())
-    S, A = positives(PRIMARY), positives(PARENT)
-    K_A = M.max_kernel_to_truth(A).ravel()
-    K_S = M.max_kernel_to_truth(S).ravel()
-    t_a, t_s = float(K_A[gi].sum()), float(K_S[gi].sum())
-    gain = np.maximum(K_S[gi] - K_A[gi], 0.0)
-    # the identity that the exploratory scripts violated by accumulating per offset
-    assert abs(gain.sum() - (t_s - t_a)) < 1e-6
-    n_new = int((S & ~A).sum())
-    credit = ALPHA * gain.sum() / n_new
-    dti_parent = ALPHA * t_a / (0.2 * int(A.sum()) + DENOM_CONST)
-    dti_h57 = ALPHA * t_s / (0.2 * int(S.sum()) + DENOM_CONST)
-    break_even = 0.2 * dti_parent
-    r = json.loads(RECEIPT.read_text())["proxy_projection_LABELLED_PROXY_ONLY"]
-    assert abs(t_a - r["T_SGMC_parent"]) < 0.5
-    assert abs(t_s - r["T_SGMC_h57"]) < 0.5
-    assert abs(credit - r["marginal_credit_per_lidar_dot"]) < 1e-3
-    assert abs(dti_h57 - r["DTI_h57"]) < 5e-4
-    # the actual decision criterion: the candidate must beat the metric's break-even
-    assert credit > break_even, f"credit {credit:.4f} <= break-even {break_even:.4f}"
-    assert credit / break_even > 2.0, "margin too thin to spend a weekly slot"
-    assert dti_h57 > dti_parent + 0.05
-
-
-@needs_artifacts
-def test_every_spatial_block_is_disclosed_including_the_one_that_fails():
-    blocks = json.loads(RECEIPT.read_text())["proxy_projection_LABELLED_PROXY_ONLY"]["spatial_blocks"]
-    assert len(blocks) == 4
-    assert sum(1 for b in blocks if b["pass"]) == 3, (
-        "the receipt must keep reporting the block that fails, not hide it")
-    worst = min(blocks, key=lambda b: b["G"])
-    assert worst["pass"] is False
-    assert worst["G"] < 5000, "the failing block should be the truth-poor one"
-
-
-# -------------------------------------------------------------- Dempster–Shafer layers
 @needs_artifacts
 @pytest.mark.parametrize("tag", ["belief", "mtheta", "conflict-k", "plausibility"])
-def test_diagnostic_layers_are_normalised(tag):
-    p = REPO / "docs" / "downloads" / "diagnostics" / f"{SLUG}-diag-{tag}.tif"
-    assert p.exists()
-    with rasterio.open(p) as ds:
-        v = ds.read(1)
-    assert np.isfinite(v).all() and float(v.min()) >= 0.0 and float(v.max()) <= 1.0
+def test_dempster_diagnostics_are_finite_and_in_range(tag):
+    path = REPO / "docs" / "downloads" / "diagnostics" / f"{SLUG}-diag-{tag}.tif"
+    assert path.is_file()
+    with rasterio.open(path) as ds:
+        values = ds.read(1)
+    assert np.isfinite(values).all()
+    assert float(values.min()) >= 0.0 and float(values.max()) <= 1.0
 
 
 @needs_artifacts
-def test_belief_is_not_the_naive_mean_of_the_two_parents():
+def test_belief_differs_from_naive_mean_but_is_not_claimed_as_improved_prediction():
     with rasterio.open(REPO / "docs" / "downloads" / "diagnostics" / f"{SLUG}-diag-belief.tif") as ds:
-        bel = ds.read(1).astype(np.float64)
-    A, B = positives(PARENT), positives(REPO / "data" / "families" / "tip_stepover_r30_02632.tif")
-    naive = 0.5 * A + 0.5 * B
-    r = json.loads(RECEIPT.read_text())["not_the_naive_mean"]
-    assert r["pearson_bel_vs_binary_mean"] < 0.95, "belief would be indistinguishable from the mean"
-    assert r["mean_abs_diff_on_positive_cells"] > 0.05
-    assert r["max_abs_diff_vs_binary_mean"] > 0.5
-    assert abs(r["pearson_bel_vs_binary_mean"] - float(np.corrcoef(bel.ravel(), naive.ravel())[0, 1])) < 1e-6
-    m = json.loads(RECEIPT.read_text())["dempster"]
-    assert m["mtheta_max"] > 0.0, "the unassigned mass m(Theta) must be shipped, not averaged away"
+        belief = ds.read(1).astype(np.float64)
+    a = positives(PARENT)
+    b = positives(REPO / "data" / "families" / "tip_stepover_r30_02632.tif")
+    naive = 0.5 * a + 0.5 * b
+    receipt = json.loads(RECEIPT.read_text())
+    stats = receipt["not_the_naive_mean"]
+    assert stats["pearson_bel_vs_binary_mean"] < 0.95
+    assert stats["mean_abs_diff_on_positive_cells"] > 0.05
+    assert stats["max_abs_diff_vs_binary_mean"] > 0.5
+    assert abs(stats["pearson_bel_vs_binary_mean"] - float(np.corrcoef(belief.ravel(), naive.ravel())[0, 1])) < 1e-6
+    assert receipt["dempster"]["mtheta_max"] > 0.0
+    assert "unassigned" in receipt.get("dempster_semantics", "unassigned/ignorance").lower()
 
 
-# ------------------------------------------------------------------------------- site
-def page(name: str) -> str:
-    return (REPO / "docs" / name).read_text()
+@needs_artifacts
+def test_historical_inversion_is_retained_only_as_invalid_forensic_record():
+    receipt = json.loads(RECEIPT.read_text())
+    audit = json.loads(ERRATUM.read_text())
+    assert receipt["candidate_id"] == "H57-RELIEF"
+    assert receipt["verdict"]["download"] == "OK FOR INSPECTION"
+    assert receipt["verdict"]["submit"] == "NOT CLEARED TO SUBMIT"
+    assert receipt["metric_projection_status"]["status"] == "INVALIDATED_METRIC_IDENTITY_DO_NOT_USE"
+    assert receipt["metric_projection_status"]["recomputed_by_current_builder"] is False
+    old = audit["withdrawn_metrics"]
+    assert old["candidate_dti"] == pytest.approx(0.3844)
+    assert old["break_even_credit_per_dot"] == pytest.approx(0.0549)
+    assert audit["status"] == "INVALIDATED_METRIC_IDENTITY_DO_NOT_USE"
+    assert audit["decision"]["weekly_slot"] == "NOT CLEARED"
+    assert audit["decision"]["portal_acceptance"] == "NOT TESTED"
+
+
+def test_builder_cannot_regenerate_the_invalid_live_projection():
+    text = (REPO / "scripts" / "build_submission_h57.py").read_text()
+    assert "proxy_projection_LABELLED_PROXY_ONLY" not in text
+    assert "DTI_h57" not in text
+    assert "marginal_credit_per_lidar_dot" not in text
+    assert "does not regenerate live-equivalent DTI" in text
+    assert "NOT CLEARED TO SUBMIT" in text
+
+
+def test_builder_defaults_to_ignored_scratch_outputs_not_archival_files():
+    text = (REPO / "scripts" / "build_submission_h57.py").read_text()
+    assert 'scratch_dir = ROOT / "scratch" / "h57-relief-rebuild"' in text
+    assert 'ap.add_argument("--out-dir", default=str(scratch_dir))' in text
+    assert 'ap.add_argument("--receipt", default=str(scratch_dir / "build_h57_receipt.json"))' in text
+    assert 'default=str(ROOT / "docs" / "downloads")' not in text
+    assert 'default=str(ROOT / "evidence" / "build_h57_receipt_20261007.json")' not in text
+
+
+def test_current_h57_pages_show_inspection_only_and_clear_namespace():
+    report = flat((REPO / "docs" / "research" / "h57-ds-relief-augmented-20261007.md").read_text())
+    assert "OK TO DOWNLOAD FOR INSPECTION" in report
+    assert "NOT OK / NOT CLEARED TO SUBMIT" in report
+    assert "metric-identity correction" in report.lower()
+    assert "Neither H57-A refers to this relief artifact" in report
+    erratum = flat((REPO / "docs" / "research" / "h57-relief-metric-erratum-20261007.md").read_text())
+    assert "INVALIDATED / FORENSIC ONLY" in erratum
+    assert "0.3844" in erratum and "not" in erratum.lower()
 
 
 @pytest.mark.parametrize("name", ["index.html", "executive-summary.html", "submission-guide.html"])
-def test_h57_download_is_the_first_content_on_every_entry_page(name):
-    body = page(name).split("<main", 1)[1]
-    link = body.index(f'href="downloads/{SLUG}.tif"')
-    before = body[:link]
-    assert "<table" not in before, f"{name}: a table appears before the one-click download"
-    assert "bigbtn" in before
-    assert len(before) < 3500, f"{name}: too much content before the download button"
+def test_entry_pages_do_not_clear_the_h57_relief_artifact(name):
+    text = flat((REPO / "docs" / name).read_text()).lower()
+    assert "no weekly" in text and "cleared" in text
+    assert "h57-relief" in text
+    assert "not cleared to submit" in text
 
 
-@pytest.mark.parametrize("name", ["index.html", "executive-summary.html", "submission-guide.html"])
-def test_verdict_is_unmistakable_and_both_halves_are_stated(name):
-    text = flat(page(name))
-    assert "DOWNLOAD: OK" in text, f"{name}: the download verdict is missing"
-    assert "SUBMIT: RECOMMENDED" in text, f"{name}: the submit verdict is missing"
-    assert "0.3844" in text, f"{name}: the projection is missing"
-    assert "proxy" in text.lower(), f"{name}: the projection must be labelled as a proxy"
-    assert SLUG in text, f"{name}: the submission name is missing"
-
-
-@pytest.mark.parametrize("name", ["index.html", "executive-summary.html", "submission-guide.html"])
-def test_paste_ready_note_and_sha_are_published(name):
-    text = page(name)
-    assert "58,031 dots. id e6b785718c07" in flat(text)
-    assert SHA256 in text
-
-
-def test_superseded_candidates_are_not_advertised_as_submissions():
-    """H55/H56 lost on the forward model; they must not read as cleared submissions."""
-    for name in ("index.html", "executive-summary.html"):
-        text = flat(page(name))
-        assert "SUBMIT: NOT RECOMMENDED" in text or "Superseded" in text
+def test_no_h57_active_builder_or_test_treats_projection_as_a_submission_gate():
+    source = (REPO / "scripts" / "build_submission_h57.py").read_text().lower()
+    tests = (REPO / "tests" / "test_h57.py").read_text().lower()
+    assert "metric-optimal binary decision surface" not in source
+    invalid_gate = "credit > break_" + "even"
+    assert invalid_gate not in tests

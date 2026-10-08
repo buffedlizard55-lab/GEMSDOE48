@@ -30,7 +30,7 @@ class LiveAnchorFixture:
     def anchor():
         from gemsdoe48.live_anchor import LiveAnchor
 
-        return LiveAnchor()
+        return LiveAnchor(legacy_audit_only=True)
 
 # --- the pinned facts ------------------------------------------------------
 # Populated from registry/inputs.json, which is itself checked against the disk.
@@ -192,11 +192,10 @@ class TestFamilyRasters(unittest.TestCase):
         """Single band, float32, official grid, finite and inside [0, 1].
 
         One family raster (`dotted_d2_8_02708.tif`) carries NaN in exactly the
-        7,111,787 cells outside the study area.  That file has an owner-reported
-        live score of 0.2708, i.e. the competition portal ACCEPTED a raster with
-        NaN outside the footprint -- which is recorded as evidence on irregularity
-        IR-48-03 and is the reason the check here is scoped to the footprint
-        rather than to the whole array.
+        7,111,787 cells outside the study area. An owner-reported 0.2708 score is
+        not a file-specific organizer receipt and does not establish that the
+        portal accepted these bytes or this outside-footprint encoding. This
+        check is scoped to in-footprint values; portal acceptance remains unverified.
         """
         _, footprint = grid.load_truth_and_footprint()
         for rel in FAMILIES:
@@ -262,32 +261,41 @@ class TestFamilyAgreement(unittest.TestCase):
 
 
 class TestLiveAnchor(unittest.TestCase):
-    """The live-anchor inversion, re-derived from the two owner-reported scores."""
+    """Keep the retired inversion reproducible but impossible to call silently."""
 
-    def test_anchor_inverts_to_the_published_numbers(self):
+    def test_inversion_and_removal_gate_require_forensic_opt_in(self):
         from gemsdoe48.live_anchor import LiveAnchor
 
-        a = LiveAnchor()
-        inv = a.invert()
-        # Both anchors must recover the same weighted true-positive total.  They
-        # agree to 0.13 %, which is the calibration's internal consistency check.
-        self.assertAlmostEqual(inv["tpw_consistency_rel"], 0.0012946626331831756, places=12)
-        self.assertLess(inv["tpw_consistency_rel"], 0.002)
-        self.assertAlmostEqual(inv["implied_tpw_from_small"], 4913.77432, places=4)
-        self.assertAlmostEqual(inv["implied_tpw_from_big"], 4920.136, places=3)
-        self.assertAlmostEqual(inv["implied_credit_per_dot"], 0.12223623274210803, places=12)
-        self.assertAlmostEqual(inv["break_even_bar_tau_live"], 0.2 * 0.2708, places=9)
-        self.assertAlmostEqual(inv["break_even_bar_tau_live"], 0.05416, places=5)
-        self.assertEqual(inv["dn_removed"], 3891)
+        anchor = LiveAnchor()
+        with self.assertRaisesRegex(RuntimeError, "invalidated live-anchor inversion"):
+            anchor.invert()
+        with self.assertRaisesRegex(RuntimeError, "invalidated live-anchor inversion"):
+            anchor.assess_removal(3891, 100.0)
 
-    def test_removal_safety_gate(self):
-        a = LiveAnchorFixture.anchor()
-        self.assertFalse(a.assess_removal(512, 96.0)["passes"])   # 0.54 safety
-        self.assertTrue(a.assess_removal(3891, 100.0)["passes"])  # 2.1 safety
+    def test_forensic_reproduction_is_explicitly_invalidated(self):
+        anchor = LiveAnchorFixture.anchor()
+        result = anchor.invert()
+        self.assertEqual(result["validity_status"], "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION")
+        self.assertIn("not a general identity", result["invalidation_reason"])
+        self.assertAlmostEqual(result["tpw_consistency_rel_invalidated"], 0.0012946626331831756, places=12)
+        self.assertAlmostEqual(result["implied_tpw_from_small_invalidated"], 4913.77432, places=4)
+        self.assertAlmostEqual(result["implied_tpw_from_big_invalidated"], 4920.136, places=3)
+        self.assertEqual(result["assumed_truth_px_invalidated"], 12632)
+        self.assertEqual(result["dn_removed"], 3891)
 
-    def test_credit_bar_is_alpha_times_the_anchor(self):
+    def test_historical_removal_result_is_not_a_promotion_verdict(self):
+        anchor = LiveAnchorFixture.anchor()
+        failed = anchor.assess_removal(512, 96.0)
+        passed = anchor.assess_removal(3891, 100.0)
+        self.assertEqual(failed["validity_status"], "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION")
+        self.assertFalse(failed["legacy_rule_passes_not_promotion"])
+        self.assertTrue(passed["legacy_rule_passes_not_promotion"])
+        self.assertNotIn("passes", passed)
+
+    def test_local_credit_bar_helper_is_not_a_live_anchor_calibration(self):
+        # This algebraic helper is tested in test_metric_main.py only for the
+        # restricted one-truth/local-kernel case; it does not recover hidden truth.
         self.assertAlmostEqual(metric.credit_bar(0.2708), 0.05416, places=5)
-        self.assertAlmostEqual(metric.credit_bar(0.2778), 0.2 * 0.2778, places=9)
 
 
 if __name__ == "__main__":

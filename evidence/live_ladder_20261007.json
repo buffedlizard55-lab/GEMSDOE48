@@ -30,7 +30,9 @@
     "addition_bar_credit_per_dot": 0.05556,
     "addition_bar_as_fraction_of_mean_dot": 0.39684452239272955,
     "removal_rule": "removing n dots gains iff their total credit < 0.2*DTI*n, i.e. < 0.40 of the average C dot",
-    "note": "per-pi = full-region-equivalent; the public-chunk fraction pi cancels"
+    "note": "per-pi = full-region-equivalent; the public-chunk fraction pi cancels",
+    "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION",
+    "invalidation_reason": "The receipt depends on the invalid general substitution FPw=S-TPw (equivalently Q≈TPw) and/or owner-reported score values without organizer verification. Its inferred truth density, thresholds, projected scores, ceilings, and gate decisions are withdrawn; local proxy measurements are historical diagnostics only."
   },
   "ceiling": {
     "xiaofanhu_0.3774": {
@@ -47,7 +49,9 @@
       "T_needed_at_37654_px": 6190.19999366131,
       "T_gain_pct_needed": 17.422606191504684,
       "recall_needed": 0.4326579293207008
-    }
+    },
+    "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION",
+    "invalidation_reason": "The receipt depends on the invalid general substitution FPw=S-TPw (equivalently Q≈TPw) and/or owner-reported score values without organizer verification. Its inferred truth density, thresholds, projected scores, ceilings, and gate decisions are withdrawn; local proxy measurements are historical diagnostics only."
   },
   "removal_frontier": [
     {
@@ -166,6 +170,12 @@
       "note": "adding a dot with realised credit k changes DTI with the sign of k - 0.2*DTI",
       "add_credit1_dot_delta": 0.0031109253627961964,
       "add_credit0_dot_delta": -4.7678144535268085e-05
-    }
-  }
+    },
+    "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION",
+    "invalidation_reason": "The receipt depends on the invalid general substitution FPw=S-TPw (equivalently Q≈TPw) and/or owner-reported score values without organizer verification. Its inferred truth density, thresholds, projected scores, ceilings, and gate decisions are withdrawn; local proxy measurements are historical diagnostics only."
+  },
+  "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION",
+  "invalidation_reason": "The receipt depends on the invalid general substitution FPw=S-TPw (equivalently Q≈TPw) and/or owner-reported score values without organizer verification. Its inferred truth density, thresholds, projected scores, ceilings, and gate decisions are withdrawn; local proxy measurements are historical diagnostics only.",
+  "leaderboard_linkage": "Owner-reported score rows; no organizer receipt links the local TIFF bytes to the leaderboard rows.",
+  "promotion_decision": "NONE — not cleared to submit."
 }

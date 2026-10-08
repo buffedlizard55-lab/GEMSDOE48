@@ -1,37 +1,16 @@
-"""Build the GEMSDOE48 deliverables.  Freeze the rule here, then run.
+"""Retired DS48 deliverable builder — forensic reproduction only.
 
-Run:  python3 -u scripts/build_submission.py
-
-Produces, in docs/downloads/:
-
-  1. `gemsdoe48-ds48-belief.tif`    the Dempster-Shafer combined belief Bel(F) on
-        the official grid -- the artifact the brief asks for.  **Diagnostic**:
-        the metric's derivative in a pixel value is
-        (k - 0.2 DTI) * D0 / (D0 + 0.2 v)^2, independent of v, so a graded
-        surface is strictly worse than its own binarisation (see research/03).
-
-    "Normalised to [0, 1]" is satisfied by the mass-function construction itself,
-    which is what Dempster's rule *is*: Dempster's normalisation divides by
-    (1 - K), and the resulting belief obeys Bel(F) in [0, 1] and
-    m(F) + m(notF) + m(Theta) = 1 at every pixel.  No affine rescale is applied
-    to any layer, because rescaling a belief or a mass surface destroys the
-    calibration that is the only reason to ship it, and because a rescaled mass
-    is no longer a mass.  The natural range of each layer is recorded in
-    registry/submission_build.json, together with the min-max affine map that
-    would take it to [0, 1] if a reader wants that instead.
-  2. `gemsdoe48-ds48-emission.tif`  the DS-ranked, off-flank emission at exactly
-        the mass of the best live artifact (37,654 px).  Mass-neutral, so it
-        spends none of the live-anchored removal budget.  **Historical research artifact, not slot-cleared.**
-  3. `gemsdoe48-ds48-mtheta.tif`    the unassigned/uncertain belief mass m12(Theta)
-        -- the disagreement layer, shipped as its own raster as the brief asks.
-  4. `gemsdoe48-ds48-conflict.tif`  Shafer's conflict K (= Smets' m(empty set)).
-
-Every file is single-band float32, EPSG:32611, 100 m, 3730 x 3292, all-finite,
-inside [0, 1].  Nothing here is a forecast of an organizer score.
+This historical builder writes stale score-attribution and live-anchor claims,
+including the invalid ``FPw=S-TPw`` substitution. It is guarded by default and,
+when explicitly opted into, writes TIFFs and a receipt only under
+``evidence/forensic``; it never writes active downloads or registry files.
+The archived DS48 pages now carry the corrected historical status and separate
+ignorance mass from conflict. No output from this script is cleared to submit.
 """
 
 from __future__ import annotations
 
+import argparse
 import hashlib
 import json
 import sys
@@ -60,6 +39,20 @@ def _hash8(p: Path) -> str:
 
 
 def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--legacy-audit-only", action="store_true",
+                        help="required opt-in to rebuild an invalidated historical artifact")
+    parser.add_argument("--out-dir", type=Path,
+                        default=REPO / "evidence/forensic/ds48-build/artifacts")
+    parser.add_argument("--receipt", type=Path,
+                        default=REPO / "evidence/forensic/ds48-build/submission-build-legacy.json")
+    args = parser.parse_args()
+    if not args.legacy_audit_only:
+        parser.error("retired builder uses invalidated FPw=S-TPw score claims; pass --legacy-audit-only only for forensic reproduction")
+    print("FORENSIC DS48 REBUILD ONLY — INVALIDATED; NOT CLEARED TO SUBMIT")
+    out_dir = args.out_dir if args.out_dir.is_absolute() else REPO / args.out_dir
+    receipt_path = args.receipt if args.receipt.is_absolute() else REPO / args.receipt
+    out_dir.mkdir(parents=True, exist_ok=True)
     t0 = time.time()
     truth, footprint = G.load_truth_and_footprint()
     sgmc = G.read_mask(REPO / "data/official/derived_sgmc_faults_100m.tif")
@@ -96,8 +89,7 @@ def main() -> int:
     # [0, 1] too.  See the module docstring for why nothing is rescaled here.
     belief_norm = bel
 
-    out = REPO / "docs" / "downloads"
-    out.mkdir(parents=True, exist_ok=True)
+    out = out_dir
     files = {}
     for tag, arr in (
         ("belief", belief_norm),
@@ -227,6 +219,9 @@ def main() -> int:
         }
 
     receipt = {
+        "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION",
+        "invalidation_reason": "The historical live-anchor inversion substitutes FPw=S-TPw; owner-reported scores are not linked to local raster bytes by organizer receipts.",
+        "submission_decision": "NOT CLEARED TO SUBMIT; historical archive output only.",
         "generated_unix": int(time.time()),
         "unique_name": UNIQUE_NAME,
         "portal_note": (
@@ -241,7 +236,7 @@ def main() -> int:
         "measurements": measures,
         "not_the_mean": diag,
         "normalisation": normalisation,
-        "live_anchor_inversion": {**LiveAnchor().invert(),
+        "live_anchor_inversion": {**LiveAnchor(legacy_audit_only=True).invert(),
                                   "source": "owner-reported live scores 0.2600 (44,090 px) and "
                                             "0.2708 (40,199 px); evidence class OWNER-REPORT"},
         "layer_stats": {
@@ -252,32 +247,19 @@ def main() -> int:
                              ("conflict", conflict),
                              ("emission", emission.astype(np.float64)))
         },
-        "headline_negative_result": {
-            "claim": "No arm tested in this repository beats the 0.2778 artifact on any "
-                     "instrument that has been validated against the live leaderboard.",
-            "falsified_arms": [
-                "Dempster-Shafer corroboration removal at r in {300,283,250,224,200,173,141,100,0} m: "
-                "the frozen gate fails at every radius (best safety 0.64 < 2.0).",
-                "Hexagonal covering-optimal re-emission at 11 spacings: NOT a clean "
-                "falsification, contrary to an earlier reading of this receipt.  At matched mass "
-                "the best arm (spacing 5.6 px, 37,499 dots) scores ABOVE the live-best base on "
-                "all three local truth layers per unit mass -- x1.019 on the SGMC off-catalogue "
-                "layer, x12.5 on the catalogue-in-corridor layer, x14.6 on the whole catalogue. "
-                "The catalogue-side gains are NOT evidence of a live gain, because that "
-                "instrument is anti-monotone with the live ladder (Spearman -1.0, n = 4, "
-                "IR-48-04).  The SGMC-side gain is +1.9 %, which is inside the noise of a point "
-                "set that merely re-samples the same 48,394-pixel union corridor at a similar "
-                "mass; it is not a better detector and it emits 37,499 dots of the SAME two "
-                "families.  Recorded as a live-candidate worth ONE slot if the owner wants to "
-                "test it, and as UNVALIDATED here.",
-                "Dempster-Shafer ranked re-emission at matched mass: SGMC off-catalogue credit "
-                "falls 5.8 % (off-flank) to 7.1 % (full union) while catalogue credit rises.",
+        "historical_proxy_summary": {
+            "validity_status": "INVALIDATED_FOR_LIVE_SCORE_INFERENCE; local proxy measurements only",
+            "claim_withdrawn": "This receipt cannot determine whether any arm beats a 0.2778 live result; the calibration and local-file attribution are unverified/invalidated.",
+            "archival_observations": [
+                "The historical selection gate reported best safety 0.64 for its tested corroboration-removal radii; this is not a promotion result.",
+                "A 5.6 px hex-cover arm had historical public-proxy ratios x1.019 on SGMC off-catalogue, x12.5 on catalogue-in-corridor, and x14.6 on whole catalogue per unit mass. Those proxy values do not establish live/private-label performance.",
+                "The historical DS-ranked re-emission reported lower SGMC off-catalogue proxy credit than its parents; this is not a calibrated score comparison."
             ],
-            "evidence_class": "PROXY + DERIVED",
+            "evidence_class": "HISTORICAL_PUBLIC_PROXY_MEASUREMENTS; INVALIDATED_LIVE_PROJECTION",
         },
         "elapsed_s": time.time() - t0,
     }
-    G.write_json(REPO / "registry" / "submission_build.json", receipt)
+    G.write_json(receipt_path, receipt)
     print("\n--- is the DS result the naive mean? ---")
     for k, v in diag.items():
         print(f"   {k}: {v}")

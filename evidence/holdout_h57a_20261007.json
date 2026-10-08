@@ -1,0 +1,1335 @@
+{
+  "schema_version": 1,
+  "evaluated_utc": "2026-10-07T21:24:53.686474+00:00",
+  "status": "PUBLIC_PROXY_HOLDOUT_ONLY_NOT_SLOT_CLEARED",
+  "preregistration": "docs/research/hypotheses-h57-20261007.md#h57-a-preregistration--residual-k--tmi-up150-gradient",
+  "candidate": {
+    "name": "H57-A K-Th residual x TMI_up150 gradient, H49 + up to 2000 additions",
+    "construction": "label-free K~Th residual and TMI-up150 gradient; fixed thresholds and budget from frozen H57 slate; H49 values are preserved; no candidate TIFF is written",
+    "baseline_h49_sha256": "9f028289c364c071065245799d7ed131600e80e9f0d10602806b12ce34d7cae8",
+    "baseline_logical_sha256": "f810ea98683776a44894fd50159239fc65d8bc7e0d8149c51bd304392e1da6ea",
+    "addition_mask_sha256": "f40b9c11f2e860d36cd1e910418e65adce1d3dd82c8ddbaea51a1918c36d31d9",
+    "candidate_logical_sha256": "394a11c2eff65824afdfe6cf04da635a08d2741d70f906428aee3e6bdfa9b491",
+    "addition_count": 2000,
+    "candidate_pool_count": 17663,
+    "positive_cells_in_footprint": 49905
+  },
+  "inputs": {
+    "radiometrics": {
+      "path": "data/source_mirrors/geodawn_rad_u8.tif",
+      "sha256": "c22420f75999030d7cc65c9e31e50d232ea6158423bca051613a18a8b20ba682"
+    },
+    "geodawn_extensions": {
+      "path": "data/raw/external/geodawn_extensions_u8.tif",
+      "sha256": "a35a9c6d2a14786f4dab85481ee59769213072f5dab5b2535ea82ae4d9bb7d9b"
+    },
+    "footprint": {
+      "path": "data/source_mirrors/footprint-mask.tif",
+      "sha256": "ddadb8c96cda673b91ddaa0bbed2aa955c358a8f6196c4c4e8fa70d454dd429f"
+    },
+    "catalogue_labels": {
+      "path": "data/raw/labels_catalogue.tif",
+      "sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093"
+    },
+    "sgmc": {
+      "path": "data/official/derived_sgmc_faults_100m.tif",
+      "sha256": "643cbe992ef4ba37588fb469163ed8291e3ceb23d6c1f78a3cfaa462430c2da0"
+    },
+    "h49_reference": {
+      "path": "docs/downloads/GEMSDOE48-H49-DS-conflict-balanced-20261006-e6f08013888b-nan-outside.tif",
+      "sha256": "9f028289c364c071065245799d7ed131600e80e9f0d10602806b12ce34d7cae8"
+    }
+  },
+  "feature_fit": {
+    "k_band": 1,
+    "th_band": 2,
+    "magnetic_band": 4,
+    "huber_intercept_quantized_units": 20.405299831914768,
+    "huber_slope_quantized_units": 0.8196962581263934,
+    "huber_iterations": 5,
+    "fit_valid_pixels": 5146342,
+    "residual_mad_scale": 34.6344366554036,
+    "residual_z_threshold": 2.0,
+    "gradient_p75_cutoff_quantized_units_per_m": 0.04743416607379913,
+    "gradient_p75": 75.0,
+    "candidate_budget": 2000,
+    "rank_score": "positive_K_Th_residual_z * TMI_up150_gradient_magnitude; descending; ties row-major",
+    "edge_nodata_handling": "3x3 erosion of TMI-valid mask before gradient cells are considered",
+    "catalogue_mask_used_for_feature_selection": false,
+    "holdout_truth_used_for_feature_selection": false
+  },
+  "truth_sources": {
+    "catalogue_proxy": {
+      "path": "data/raw/labels_catalogue.tif",
+      "sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+      "positive_pixels": 60988,
+      "is_private_expert_truth": false
+    },
+    "sgmc_off_catalogue_gt300m": {
+      "path": "data/official/derived_sgmc_faults_100m.tif",
+      "sha256": "643cbe992ef4ba37588fb469163ed8291e3ceb23d6c1f78a3cfaa462430c2da0",
+      "positive_pixels": 62122,
+      "definition": "SGMC positives inside footprint and >300 m Euclidean distance from any catalogue-positive cell",
+      "is_private_expert_truth": false
+    }
+  },
+  "fold_protocol": {
+    "source_implementation": "scripts/run_spatial_holdout.py:quadrants, fold_domain, official distance_weighted_tversky metric",
+    "geometry": "four fixed NW/NE/SW/SE blocks split at the full raster row/column midpoint",
+    "radius_m": 300,
+    "pixel_size_m": 100,
+    "alpha": 0.2,
+    "beta": 0.8,
+    "halo": "300 m around each held-out core, clipped to footprint; only core truth scored",
+    "surface_retrained_within_folds": false
+  },
+  "results": {
+    "H49_reference": {
+      "catalogue_proxy": {
+        "NW": {
+          "tp": 2563.0005524658554,
+          "fp": 21759.66972546101,
+          "fn": 26755.999447534145,
+          "n_truth": 29319,
+          "dti": 0.09050228181646242,
+          "coverage": 0.08741773431787767,
+          "prediction_mass": 22944.0,
+          "positive_cells": 22944,
+          "valid_domain_cells": 2457001
+        },
+        "NE": {
+          "tp": 1491.7903041458371,
+          "fp": 12025.075340371868,
+          "fn": 11104.209695854162,
+          "n_truth": 12596,
+          "dti": 0.11672692451810496,
+          "coverage": 0.11843365386994578,
+          "prediction_mass": 12726.0,
+          "positive_cells": 12726,
+          "valid_domain_cells": 1372176
+        },
+        "SW": {
+          "tp": 851.7600840038215,
+          "fp": 5687.007870616726,
+          "fn": 8621.239915996179,
+          "n_truth": 9473,
+          "dti": 0.09585250528122405,
+          "coverage": 0.08991450269226449,
+          "prediction_mass": 6061.0,
+          "positive_cells": 6061,
+          "valid_domain_cells": 570886
+        },
+        "SE": {
+          "tp": 708.6911764073908,
+          "fp": 6128.101699477727,
+          "fn": 8891.30882359261,
+          "n_truth": 9600,
+          "dti": 0.07833127984468374,
+          "coverage": 0.07382199754243654,
+          "prediction_mass": 6437.0,
+          "positive_cells": 6437,
+          "valid_domain_cells": 792240
+        },
+        "mean_dti": 0.0953532478651188
+      },
+      "sgmc_off_catalogue_gt300m": {
+        "NW": {
+          "tp": 2477.004979416913,
+          "fp": 21784.005614845555,
+          "fn": 20652.995020583086,
+          "n_truth": 23130,
+          "dti": 0.10605341428423166,
+          "coverage": 0.10709057412092145,
+          "prediction_mass": 22944.0,
+          "positive_cells": 22944,
+          "valid_domain_cells": 2457001
+        },
+        "NE": {
+          "tp": 2303.5008671562737,
+          "fp": 11669.507011754318,
+          "fn": 20888.499132843725,
+          "n_truth": 23192,
+          "dti": 0.10790140138874353,
+          "coverage": 0.0993230798187424,
+          "prediction_mass": 12726.0,
+          "positive_cells": 12726,
+          "valid_domain_cells": 1372176
+        },
+        "SW": {
+          "tp": 345.30310553328235,
+          "fp": 5879.508853461417,
+          "fn": 2007.6968944667176,
+          "n_truth": 2353,
+          "dti": 0.11041352496876927,
+          "coverage": 0.14675015109786754,
+          "prediction_mass": 6061.0,
+          "positive_cells": 6061,
+          "valid_domain_cells": 570886
+        },
+        "SE": {
+          "tp": 955.5810931077159,
+          "fp": 6015.872014221409,
+          "fn": 12491.418906892284,
+          "n_truth": 13447,
+          "dti": 0.07863641328533028,
+          "coverage": 0.0710627718530316,
+          "prediction_mass": 6437.0,
+          "positive_cells": 6437,
+          "valid_domain_cells": 792240
+        },
+        "mean_dti": 0.10075118848176869
+      }
+    },
+    "H57A_candidate": {
+      "catalogue_proxy": {
+        "NW": {
+          "tp": 2625.0226821741308,
+          "fp": 23353.542708882935,
+          "fn": 26693.97731782587,
+          "n_truth": 29319,
+          "dti": 0.09162090838111615,
+          "coverage": 0.08953315877670216,
+          "prediction_mass": 24609.0,
+          "positive_cells": 24609,
+          "valid_domain_cells": 2457001
+        },
+        "NE": {
+          "tp": 1493.2595177634216,
+          "fp": 12039.742007038536,
+          "fn": 11102.740482236579,
+          "n_truth": 12596,
+          "dti": 0.11681238810803618,
+          "coverage": 0.11855029515428879,
+          "prediction_mass": 12742.0,
+          "positive_cells": 12742,
+          "valid_domain_cells": 1372176
+        },
+        "SW": {
+          "tp": 853.2478736514063,
+          "fp": 5923.972178025723,
+          "fn": 8619.752126348594,
+          "n_truth": 9473,
+          "dti": 0.09550736196695363,
+          "coverage": 0.0900715584979844,
+          "prediction_mass": 6299.0,
+          "positive_cells": 6299,
+          "valid_domain_cells": 570886
+        },
+        "SE": {
+          "tp": 713.4744158940998,
+          "fp": 6217.5731039985185,
+          "fn": 8886.5255841059,
+          "n_truth": 9600,
+          "dti": 0.07869599920242364,
+          "coverage": 0.0743202516556354,
+          "prediction_mass": 6529.0,
+          "positive_cells": 6529,
+          "valid_domain_cells": 792240
+        },
+        "mean_dti": 0.0956591644146324
+      },
+      "sgmc_off_catalogue_gt300m": {
+        "NW": {
+          "tp": 2500.320782125176,
+          "fp": 23422.458857400416,
+          "fn": 20629.679217874826,
+          "n_truth": 23130,
+          "dti": 0.10554973421489984,
+          "coverage": 0.10809860709577068,
+          "prediction_mass": 24609.0,
+          "positive_cells": 24609,
+          "valid_domain_cells": 2457001
+        },
+        "NE": {
+          "tp": 2303.5008671562737,
+          "fp": 11685.4498207959,
+          "fn": 20888.499132843725,
+          "n_truth": 23192,
+          "dti": 0.10788528767037134,
+          "coverage": 0.0993230798187424,
+          "prediction_mass": 12742.0,
+          "positive_cells": 12742,
+          "valid_domain_cells": 1372176
+        },
+        "SW": {
+          "tp": 345.30310553328235,
+          "fp": 6117.508853461417,
+          "fn": 2007.6968944667176,
+          "n_truth": 2353,
+          "dti": 0.10875817188424484,
+          "coverage": 0.14675015109786754,
+          "prediction_mass": 6299.0,
+          "positive_cells": 6299,
+          "valid_domain_cells": 570886
+        },
+        "SE": {
+          "tp": 972.761015531727,
+          "fp": 6099.502988297073,
+          "fn": 12474.238984468273,
+          "n_truth": 13447,
+          "dti": 0.07991758099098363,
+          "coverage": 0.07234037447250145,
+          "prediction_mass": 6529.0,
+          "positive_cells": 6529,
+          "valid_domain_cells": 792240
+        },
+        "mean_dti": 0.10052769369012492
+      }
+    }
+  },
+  "paired_vs_current_comparable_best_H49": {
+    "catalogue_proxy": {
+      "fold_delta_dti_vs_h49": {
+        "NW": 0.001118626564653738,
+        "NE": 8.546358993122283e-05,
+        "SW": -0.00034514331427042133,
+        "SE": 0.0003647193577398927
+      },
+      "mean_delta_dti_vs_h49": 0.00030591654951360805,
+      "positive_folds": 3,
+      "passes_numeric_gate": true
+    },
+    "sgmc_off_catalogue_gt300m": {
+      "fold_delta_dti_vs_h49": {
+        "NW": -0.0005036800693318244,
+        "NE": -1.611371837219322e-05,
+        "SW": -0.0016553530845244274,
+        "SE": 0.001281167705653355
+      },
+      "mean_delta_dti_vs_h49": -0.00022349479164377253,
+      "positive_folds": 1,
+      "passes_numeric_gate": false
+    }
+  },
+  "same_candidate_pool_random_controls": [
+    {
+      "seed_index": 0,
+      "selected_mask_sha256": "08bc901d857ca16ec03e4ad01c4cc14fd3683dd6d3708095a6a59b6cb5d639c3",
+      "results": {
+        "catalogue_proxy": {
+          "NW": {
+            "tp": 2645.08634574882,
+            "fp": 23221.90443066344,
+            "fn": 26673.91365425118,
+            "n_truth": 29319,
+            "dti": 0.0923931493746842,
+            "coverage": 0.09021748169271872,
+            "prediction_mass": 24450.0,
+            "positive_cells": 24450,
+            "valid_domain_cells": 2457001
+          },
+          "NE": {
+            "tp": 1491.7903041458371,
+            "fp": 12037.075340371868,
+            "fn": 11104.209695854162,
+            "n_truth": 12596,
+            "dti": 0.11670500838150097,
+            "coverage": 0.11843365386994578,
+            "prediction_mass": 12738.0,
+            "positive_cells": 12738,
+            "valid_domain_cells": 1372176
+          },
+          "SW": {
+            "tp": 859.0883040965332,
+            "fp": 6009.6366537891845,
+            "fn": 8613.911695903467,
+            "n_truth": 9473,
+            "dti": 0.09596452078298869,
+            "coverage": 0.09068809290578837,
+            "prediction_mass": 6389.0,
+            "positive_cells": 6389,
+            "valid_domain_cells": 570886
+          },
+          "SE": {
+            "tp": 715.3957265682666,
+            "fp": 6291.101699477727,
+            "fn": 8884.604273431734,
+            "n_truth": 9600,
+            "dti": 0.07877680146254822,
+            "coverage": 0.07452038818419443,
+            "prediction_mass": 6603.0,
+            "positive_cells": 6603,
+            "valid_domain_cells": 792240
+          },
+          "mean_dti": 0.09595987000043052
+        },
+        "sgmc_off_catalogue_gt300m": {
+          "NW": {
+            "tp": 2514.7670345069278,
+            "fp": 23265.19690924909,
+            "fn": 20615.232965493073,
+            "n_truth": 23130,
+            "dti": 0.10628773461429526,
+            "coverage": 0.10872317485978936,
+            "prediction_mass": 24450.0,
+            "positive_cells": 24450,
+            "valid_domain_cells": 2457001
+          },
+          "NE": {
+            "tp": 2303.5008671562737,
+            "fp": 11681.507011754318,
+            "fn": 20888.499132843725,
+            "n_truth": 23192,
+            "dti": 0.10788927229896525,
+            "coverage": 0.0993230798187424,
+            "prediction_mass": 12738.0,
+            "positive_cells": 12738,
+            "valid_domain_cells": 1372176
+          },
+          "SW": {
+            "tp": 348.34098902749145,
+            "fp": 6206.256400357123,
+            "fn": 2004.6590109725084,
+            "n_truth": 2353,
+            "dti": 0.10908429032571638,
+            "coverage": 0.1480412193062012,
+            "prediction_mass": 6389.0,
+            "positive_cells": 6389,
+            "valid_domain_cells": 570886
+          },
+          "SE": {
+            "tp": 992.5744203047482,
+            "fp": 6166.488794073486,
+            "fn": 12454.425579695251,
+            "n_truth": 13447,
+            "dti": 0.08142922463822558,
+            "coverage": 0.07381381871828276,
+            "prediction_mass": 6603.0,
+            "positive_cells": 6603,
+            "valid_domain_cells": 792240
+          },
+          "mean_dti": 0.10117263046930061
+        }
+      },
+      "paired_vs_h49": {
+        "catalogue_proxy": {
+          "fold_delta_dti_vs_h49": {
+            "NW": 0.0018908675582217788,
+            "NE": -2.1916136603988834e-05,
+            "SW": 0.00011201550176463682,
+            "SE": 0.0004455216178644722
+          },
+          "mean_delta_dti_vs_h49": 0.0006066221353117247,
+          "positive_folds": 3,
+          "passes_numeric_gate": true
+        },
+        "sgmc_off_catalogue_gt300m": {
+          "fold_delta_dti_vs_h49": {
+            "NW": 0.00023432033006359765,
+            "NE": -1.2129089778281643e-05,
+            "SW": -0.0013292346430528873,
+            "SE": 0.0027928113528953025
+          },
+          "mean_delta_dti_vs_h49": 0.0004214419875319328,
+          "positive_folds": 2,
+          "passes_numeric_gate": false
+        }
+      }
+    },
+    {
+      "seed_index": 1,
+      "selected_mask_sha256": "f74801dce8e7a38cf5879ca511f14a135b72f4b57da88d3d34bdbce17e16a00c",
+      "results": {
+        "catalogue_proxy": {
+          "NW": {
+            "tp": 2658.871044704527,
+            "fp": 23225.900776891816,
+            "fn": 26660.128955295473,
+            "n_truth": 29319,
+            "dti": 0.0928631150444603,
+            "coverage": 0.09068764435023455,
+            "prediction_mass": 24463.0,
+            "positive_cells": 24463,
+            "valid_domain_cells": 2457001
+          },
+          "NE": {
+            "tp": 1491.7903041458371,
+            "fp": 12039.742007038536,
+            "fn": 11104.209695854162,
+            "n_truth": 12596,
+            "dti": 0.11670013924649683,
+            "coverage": 0.11843365386994578,
+            "prediction_mass": 12741.0,
+            "positive_cells": 12741,
+            "valid_domain_cells": 1372176
+          },
+          "SW": {
+            "tp": 867.5859061612923,
+            "fp": 6009.753226609226,
+            "fn": 8605.414093838708,
+            "n_truth": 9473,
+            "dti": 0.09689509862858704,
+            "coverage": 0.09158512679840518,
+            "prediction_mass": 6391.0,
+            "positive_cells": 6391,
+            "valid_domain_cells": 570886
+          },
+          "SE": {
+            "tp": 717.0951634885208,
+            "fp": 6277.318459991018,
+            "fn": 8882.90483651148,
+            "n_truth": 9600,
+            "dti": 0.07898495720601341,
+            "coverage": 0.07469741286338759,
+            "prediction_mass": 6590.0,
+            "positive_cells": 6590,
+            "valid_domain_cells": 792240
+          },
+          "mean_dti": 0.09636082753138939
+        },
+        "sgmc_off_catalogue_gt300m": {
+          "NW": {
+            "tp": 2523.7866593412764,
+            "fp": 23275.082527332255,
+            "fn": 20606.213340658724,
+            "n_truth": 23130,
+            "dti": 0.10665190923011016,
+            "coverage": 0.10911312837619007,
+            "prediction_mass": 24463.0,
+            "positive_cells": 24463,
+            "valid_domain_cells": 2457001
+          },
+          "NE": {
+            "tp": 2305.281915739776,
+            "fp": 11683.725963170815,
+            "fn": 20886.718084260225,
+            "n_truth": 23192,
+            "dti": 0.10796864587824287,
+            "coverage": 0.09939987563555434,
+            "prediction_mass": 12741.0,
+            "positive_cells": 12741,
+            "valid_domain_cells": 1372176
+          },
+          "SW": {
+            "tp": 346.65501489661597,
+            "fp": 6208.920876120583,
+            "fn": 2006.344985103384,
+            "n_truth": 2353,
+            "dti": 0.10854966879839033,
+            "coverage": 0.14732469821360644,
+            "prediction_mass": 6391.0,
+            "positive_cells": 6391,
+            "valid_domain_cells": 570886
+          },
+          "SE": {
+            "tp": 990.2374331997913,
+            "fp": 6155.643981821946,
+            "fn": 12456.76256680021,
+            "n_truth": 13447,
+            "dti": 0.08125507601060784,
+            "coverage": 0.07364002626606614,
+            "prediction_mass": 6590.0,
+            "positive_cells": 6590,
+            "valid_domain_cells": 792240
+          },
+          "mean_dti": 0.1011063249793378
+        }
+      },
+      "paired_vs_h49": {
+        "catalogue_proxy": {
+          "fold_delta_dti_vs_h49": {
+            "NW": 0.002360833227997891,
+            "NE": -2.678527160812627e-05,
+            "SW": 0.001042593347362994,
+            "SE": 0.0006536773613296659
+          },
+          "mean_delta_dti_vs_h49": 0.0010075796662706062,
+          "positive_folds": 3,
+          "passes_numeric_gate": true
+        },
+        "sgmc_off_catalogue_gt300m": {
+          "fold_delta_dti_vs_h49": {
+            "NW": 0.0005984949458784916,
+            "NE": 6.724448949933792e-05,
+            "SW": -0.0018638561703789441,
+            "SE": 0.002618662725277568
+          },
+          "mean_delta_dti_vs_h49": 0.00035513649756911334,
+          "positive_folds": 3,
+          "passes_numeric_gate": true
+        }
+      }
+    },
+    {
+      "seed_index": 2,
+      "selected_mask_sha256": "ea0355a36144f7364c7b594e1ad8f0049ddf2f28da845a6b86561edf6607afb9",
+      "results": {
+        "catalogue_proxy": {
+          "NW": {
+            "tp": 2662.404660129848,
+            "fp": 23228.21553419515,
+            "fn": 26656.595339870153,
+            "n_truth": 29319,
+            "dti": 0.09298273076908828,
+            "coverage": 0.09080816740440834,
+            "prediction_mass": 24465.0,
+            "positive_cells": 24465,
+            "valid_domain_cells": 2457001
+          },
+          "NE": {
+            "tp": 1491.7903041458371,
+            "fp": 12036.075340371868,
+            "fn": 11104.209695854162,
+            "n_truth": 12596,
+            "dti": 0.1167068344118821,
+            "coverage": 0.11843365386994578,
+            "prediction_mass": 12737.0,
+            "positive_cells": 12737,
+            "valid_domain_cells": 1372176
+          },
+          "SW": {
+            "tp": 860.16480251916,
+            "fp": 5984.774724976642,
+            "fn": 8612.83519748084,
+            "n_truth": 9473,
+            "dti": 0.09613585681140453,
+            "coverage": 0.09080173150207538,
+            "prediction_mass": 6363.0,
+            "positive_cells": 6363,
+            "valid_domain_cells": 570886
+          },
+          "SE": {
+            "tp": 719.2645454605681,
+            "fp": 6300.399340220058,
+            "fn": 8880.735454539432,
+            "n_truth": 9600,
+            "dti": 0.07917986219260961,
+            "coverage": 0.07492339015214251,
+            "prediction_mass": 6615.0,
+            "positive_cells": 6615,
+            "valid_domain_cells": 792240
+          },
+          "mean_dti": 0.09625132104624612
+        },
+        "sgmc_off_catalogue_gt300m": {
+          "NW": {
+            "tp": 2511.270481246517,
+            "fp": 23280.003838006418,
+            "fn": 20618.729518753484,
+            "n_truth": 23130,
+            "dti": 0.10612980443732127,
+            "coverage": 0.10857200524195924,
+            "prediction_mass": 24465.0,
+            "positive_cells": 24465,
+            "valid_domain_cells": 2457001
+          },
+          "NE": {
+            "tp": 2305.284106642983,
+            "fp": 11679.84034508765,
+            "fn": 20886.715893357017,
+            "n_truth": 23192,
+            "dti": 0.10797267613864255,
+            "coverage": 0.09939997010361257,
+            "prediction_mass": 12737.0,
+            "positive_cells": 12737,
+            "valid_domain_cells": 1372176
+          },
+          "SW": {
+            "tp": 347.0076556941581,
+            "fp": 6180.66842301629,
+            "fn": 2005.992344305842,
+            "n_truth": 2353,
+            "dti": 0.10885028465466519,
+            "coverage": 0.14747456680584703,
+            "prediction_mass": 6363.0,
+            "positive_cells": 6363,
+            "valid_domain_cells": 570886
+          },
+          "SE": {
+            "tp": 992.6166856053703,
+            "fp": 6179.741247177779,
+            "fn": 12454.38331439463,
+            "n_truth": 13447,
+            "dti": 0.08141493252876411,
+            "coverage": 0.07381696182087977,
+            "prediction_mass": 6615.0,
+            "positive_cells": 6615,
+            "valid_domain_cells": 792240
+          },
+          "mean_dti": 0.10109192443984827
+        }
+      },
+      "paired_vs_h49": {
+        "catalogue_proxy": {
+          "fold_delta_dti_vs_h49": {
+            "NW": 0.0024804489526258633,
+            "NE": -2.0090106222864224e-05,
+            "SW": 0.000283351530180484,
+            "SE": 0.0008485823479258692
+          },
+          "mean_delta_dti_vs_h49": 0.0008980731811273381,
+          "positive_folds": 3,
+          "passes_numeric_gate": true
+        },
+        "sgmc_off_catalogue_gt300m": {
+          "fold_delta_dti_vs_h49": {
+            "NW": 7.639015308960606e-05,
+            "NE": 7.127474989901406e-05,
+            "SW": -0.0015632403141040835,
+            "SE": 0.0027785192434338357
+          },
+          "mean_delta_dti_vs_h49": 0.0003407359580795931,
+          "positive_folds": 3,
+          "passes_numeric_gate": true
+        }
+      }
+    },
+    {
+      "seed_index": 3,
+      "selected_mask_sha256": "1bafbc64424adca74a6a0a18b754988e57194ba35f894818c4bf24b9114eacca",
+      "results": {
+        "catalogue_proxy": {
+          "NW": {
+            "tp": 2631.7297372089333,
+            "fp": 23231.48291295724,
+            "fn": 26687.270262791066,
+            "n_truth": 29319,
+            "dti": 0.09192902798902877,
+            "coverage": 0.08976192016129245,
+            "prediction_mass": 24457.0,
+            "positive_cells": 24457,
+            "valid_domain_cells": 2457001
+          },
+          "NE": {
+            "tp": 1493.8259967368397,
+            "fp": 12032.408673705202,
+            "fn": 11102.17400326316,
+            "n_truth": 12596,
+            "dti": 0.11686907460439366,
+            "coverage": 0.11859526808009206,
+            "prediction_mass": 12734.0,
+            "positive_cells": 12734,
+            "valid_domain_cells": 1372176
+          },
+          "SW": {
+            "tp": 862.7906633542025,
+            "fp": 6002.891297796684,
+            "fn": 8610.209336645798,
+            "n_truth": 9473,
+            "dti": 0.09638464566854622,
+            "coverage": 0.09107892572091232,
+            "prediction_mass": 6382.0,
+            "positive_cells": 6382,
+            "valid_domain_cells": 570886
+          },
+          "SE": {
+            "tp": 714.926512950682,
+            "fp": 6292.3778418526435,
+            "fn": 8885.073487049318,
+            "n_truth": 9600,
+            "dti": 0.07872373433185917,
+            "coverage": 0.07447151176569604,
+            "prediction_mass": 6604.0,
+            "positive_cells": 6604,
+            "valid_domain_cells": 792240
+          },
+          "mean_dti": 0.09597662064845697
+        },
+        "sgmc_off_catalogue_gt300m": {
+          "NW": {
+            "tp": 2507.7105749827183,
+            "fp": 23275.789999830544,
+            "fn": 20622.289425017283,
+            "n_truth": 23130,
+            "dti": 0.10598632174019575,
+            "coverage": 0.108418096627009,
+            "prediction_mass": 24457.0,
+            "positive_cells": 24457,
+            "valid_domain_cells": 2457001
+          },
+          "NE": {
+            "tp": 2303.5008671562737,
+            "fp": 11677.507011754318,
+            "fn": 20888.499132843725,
+            "n_truth": 23192,
+            "dti": 0.107893315025898,
+            "coverage": 0.0993230798187424,
+            "prediction_mass": 12734.0,
+            "positive_cells": 12734,
+            "valid_domain_cells": 1372176
+          },
+          "SW": {
+            "tp": 347.43898581753353,
+            "fp": 6199.451662502999,
+            "fn": 2005.5610141824664,
+            "n_truth": 2353,
+            "dti": 0.1088543663447236,
+            "coverage": 0.14765787752551363,
+            "prediction_mass": 6382.0,
+            "positive_cells": 6382,
+            "valid_domain_cells": 570886
+          },
+          "SE": {
+            "tp": 986.5030351227431,
+            "fp": 6169.405722941239,
+            "fn": 12460.496964877257,
+            "n_truth": 13447,
+            "dti": 0.08093532686252346,
+            "coverage": 0.07336231390813885,
+            "prediction_mass": 6604.0,
+            "positive_cells": 6604,
+            "valid_domain_cells": 792240
+          },
+          "mean_dti": 0.1009173324933352
+        }
+      },
+      "paired_vs_h49": {
+        "catalogue_proxy": {
+          "fold_delta_dti_vs_h49": {
+            "NW": 0.0014267461725663566,
+            "NE": 0.00014215008628870596,
+            "SW": 0.0005321403873221747,
+            "SE": 0.0003924544871754254
+          },
+          "mean_delta_dti_vs_h49": 0.0006233727833381657,
+          "positive_folds": 4,
+          "passes_numeric_gate": true
+        },
+        "sgmc_off_catalogue_gt300m": {
+          "fold_delta_dti_vs_h49": {
+            "NW": -6.709254403591824e-05,
+            "NE": -8.086362845535766e-06,
+            "SW": -0.0015591586240456673,
+            "SE": 0.002298913577193182
+          },
+          "mean_delta_dti_vs_h49": 0.00016614401156651512,
+          "positive_folds": 1,
+          "passes_numeric_gate": false
+        }
+      }
+    },
+    {
+      "seed_index": 4,
+      "selected_mask_sha256": "3195b44304082a35fa861b10db4085d955ad3b8fff9fb9cb78f5809e9105342b",
+      "results": {
+        "catalogue_proxy": {
+          "NW": {
+            "tp": 2654.585728052136,
+            "fp": 23224.255608592568,
+            "fn": 26664.414271947862,
+            "n_truth": 29319,
+            "dti": 0.0927172879123794,
+            "coverage": 0.09054148258986104,
+            "prediction_mass": 24456.0,
+            "positive_cells": 24456,
+            "valid_domain_cells": 2457001
+          },
+          "NE": {
+            "tp": 1491.7903041458371,
+            "fp": 12042.075340371868,
+            "fn": 11104.209695854162,
+            "n_truth": 12596,
+            "dti": 0.11669587908664697,
+            "coverage": 0.11843365386994578,
+            "prediction_mass": 12743.0,
+            "positive_cells": 12743,
+            "valid_domain_cells": 1372176
+          },
+          "SW": {
+            "tp": 863.7855501135809,
+            "fp": 6010.557964463351,
+            "fn": 8609.214449886418,
+            "n_truth": 9473,
+            "dti": 0.09647711676879671,
+            "coverage": 0.09118394913053741,
+            "prediction_mass": 6389.0,
+            "positive_cells": 6389,
+            "valid_domain_cells": 570886
+          },
+          "SE": {
+            "tp": 713.9221311442691,
+            "fp": 6284.182579706768,
+            "fn": 8886.077868855731,
+            "n_truth": 9600,
+            "dti": 0.07862906785331365,
+            "coverage": 0.07436688866086136,
+            "prediction_mass": 6595.0,
+            "positive_cells": 6595,
+            "valid_domain_cells": 792240
+          },
+          "mean_dti": 0.09612983790528418
+        },
+        "sgmc_off_catalogue_gt300m": {
+          "NW": {
+            "tp": 2519.918568483764,
+            "fp": 23271.820579180923,
+            "fn": 20610.081431516235,
+            "n_truth": 23130,
+            "dti": 0.10649486630141822,
+            "coverage": 0.10894589574075936,
+            "prediction_mass": 24456.0,
+            "positive_cells": 24456,
+            "valid_domain_cells": 2457001
+          },
+          "NE": {
+            "tp": 2305.281915739776,
+            "fp": 11685.783154129233,
+            "fn": 20886.718084260225,
+            "n_truth": 23192,
+            "dti": 0.1079665653792993,
+            "coverage": 0.09939987563555434,
+            "prediction_mass": 12743.0,
+            "positive_cells": 12743,
+            "valid_domain_cells": 1372176
+          },
+          "SW": {
+            "tp": 346.2437236716579,
+            "fp": 6206.980257982208,
+            "fn": 2006.7562763283422,
+            "n_truth": 2353,
+            "dti": 0.10843685126796128,
+            "coverage": 0.14714990381285928,
+            "prediction_mass": 6389.0,
+            "positive_cells": 6389,
+            "valid_domain_cells": 570886
+          },
+          "SE": {
+            "tp": 979.8771742877005,
+            "fp": 6163.824318310025,
+            "fn": 12467.1228257123,
+            "n_truth": 13447,
+            "dti": 0.08040782960957855,
+            "coverage": 0.07286957494516996,
+            "prediction_mass": 6595.0,
+            "positive_cells": 6595,
+            "valid_domain_cells": 792240
+          },
+          "mean_dti": 0.10082652813956433
+        }
+      },
+      "paired_vs_h49": {
+        "catalogue_proxy": {
+          "fold_delta_dti_vs_h49": {
+            "NW": 0.002215006095916988,
+            "NE": -3.104543145798777e-05,
+            "SW": 0.0006246114875726599,
+            "SE": 0.0002977880086299095
+          },
+          "mean_delta_dti_vs_h49": 0.0007765900401653925,
+          "positive_folds": 3,
+          "passes_numeric_gate": true
+        },
+        "sgmc_off_catalogue_gt300m": {
+          "fold_delta_dti_vs_h49": {
+            "NW": 0.0004414520171865527,
+            "NE": 6.516399055576938e-05,
+            "SW": -0.001976673700807993,
+            "SE": 0.0017714163242482789
+          },
+          "mean_delta_dti_vs_h49": 7.533965779565194e-05,
+          "positive_folds": 3,
+          "passes_numeric_gate": true
+        }
+      }
+    },
+    {
+      "seed_index": 5,
+      "selected_mask_sha256": "cc7632f5da397a5b57782cabd9f31b6b6865059be111b1c2c3ec5f755420730f",
+      "results": {
+        "catalogue_proxy": {
+          "NW": {
+            "tp": 2647.39672124574,
+            "fp": 23244.13465396611,
+            "fn": 26671.60327875426,
+            "n_truth": 29319,
+            "dti": 0.09245799993252214,
+            "coverage": 0.0902962829989338,
+            "prediction_mass": 24475.0,
+            "positive_cells": 24475,
+            "valid_domain_cells": 2457001
+          },
+          "NE": {
+            "tp": 1491.7903041458371,
+            "fp": 12040.075340371868,
+            "fn": 11104.209695854162,
+            "n_truth": 12596,
+            "dti": 0.11669953063318897,
+            "coverage": 0.11843365386994578,
+            "prediction_mass": 12741.0,
+            "positive_cells": 12741,
+            "valid_domain_cells": 1372176
+          },
+          "SW": {
+            "tp": 860.4908317086654,
+            "fp": 5984.891297796684,
+            "fn": 8612.509168291335,
+            "n_truth": 9473,
+            "dti": 0.09617134382357516,
+            "coverage": 0.0908361481799499,
+            "prediction_mass": 6364.0,
+            "positive_cells": 6364,
+            "valid_domain_cells": 570886
+          },
+          "SE": {
+            "tp": 716.3713058634362,
+            "fp": 6283.513722136894,
+            "fn": 8883.628694136563,
+            "n_truth": 9600,
+            "dti": 0.0788957180642214,
+            "coverage": 0.07462201102744127,
+            "prediction_mass": 6595.0,
+            "positive_cells": 6595,
+            "valid_domain_cells": 792240
+          },
+          "mean_dti": 0.09605614811337693
+        },
+        "sgmc_off_catalogue_gt300m": {
+          "NW": {
+            "tp": 2522.030031462604,
+            "fp": 23286.6748864795,
+            "fn": 20607.969968537396,
+            "n_truth": 23130,
+            "dti": 0.10656881748226546,
+            "coverage": 0.10903718251027254,
+            "prediction_mass": 24475.0,
+            "positive_cells": 24475,
+            "valid_domain_cells": 2457001
+          },
+          "NE": {
+            "tp": 2303.5580581146914,
+            "fp": 11684.4498207959,
+            "fn": 20888.441941885307,
+            "n_truth": 23192,
+            "dti": 0.10788891903524216,
+            "coverage": 0.0993255457965976,
+            "prediction_mass": 12741.0,
+            "positive_cells": 12741,
+            "valid_domain_cells": 1372176
+          },
+          "SW": {
+            "tp": 345.3602964917003,
+            "fp": 6182.451662502999,
+            "fn": 2007.6397035082996,
+            "n_truth": 2353,
+            "dti": 0.10833261313876928,
+            "coverage": 0.14677445664755645,
+            "prediction_mass": 6364.0,
+            "positive_cells": 6364,
+            "valid_domain_cells": 570886
+          },
+          "SE": {
+            "tp": 977.3248895378697,
+            "fp": 6164.03888792011,
+            "fn": 12469.67511046213,
+            "n_truth": 13447,
+            "dti": 0.08020146846662546,
+            "coverage": 0.07267977166192234,
+            "prediction_mass": 6595.0,
+            "positive_cells": 6595,
+            "valid_domain_cells": 792240
+          },
+          "mean_dti": 0.10074795453072559
+        }
+      },
+      "paired_vs_h49": {
+        "catalogue_proxy": {
+          "fold_delta_dti_vs_h49": {
+            "NW": 0.0019557181160597265,
+            "NE": -2.7393884915988265e-05,
+            "SW": 0.0003188385423511103,
+            "SE": 0.0005644382195376524
+          },
+          "mean_delta_dti_vs_h49": 0.0007029002482581252,
+          "positive_folds": 3,
+          "passes_numeric_gate": true
+        },
+        "sgmc_off_catalogue_gt300m": {
+          "fold_delta_dti_vs_h49": {
+            "NW": 0.0005154031980337953,
+            "NE": -1.2482353501375165e-05,
+            "SW": -0.00208091182999999,
+            "SE": 0.001565055181295183
+          },
+          "mean_delta_dti_vs_h49": -3.233951043096761e-06,
+          "positive_folds": 2,
+          "passes_numeric_gate": false
+        }
+      }
+    },
+    {
+      "seed_index": 6,
+      "selected_mask_sha256": "f93b38454303ef5108cca0e92a2bba35f2348287ce7057a6e7cd2e5bbc9e8e00",
+      "results": {
+        "catalogue_proxy": {
+          "NW": {
+            "tp": 2648.6546049607946,
+            "fp": 23248.92081579024,
+            "fn": 26670.345395039207,
+            "n_truth": 29319,
+            "dti": 0.09249802546234759,
+            "coverage": 0.0903391863624542,
+            "prediction_mass": 24484.0,
+            "positive_cells": 24484,
+            "valid_domain_cells": 2457001
+          },
+          "NE": {
+            "tp": 1491.7903041458371,
+            "fp": 12034.075340371868,
+            "fn": 11104.209695854162,
+            "n_truth": 12596,
+            "dti": 0.11671048664407614,
+            "coverage": 0.11843365386994578,
+            "prediction_mass": 12735.0,
+            "positive_cells": 12735,
+            "valid_domain_cells": 1372176
+          },
+          "SW": {
+            "tp": 865.0474982649091,
+            "fp": 5984.950679658308,
+            "fn": 8607.952501735092,
+            "n_truth": 9473,
+            "dti": 0.09667063759925502,
+            "coverage": 0.09131716438983523,
+            "prediction_mass": 6364.0,
+            "positive_cells": 6364,
+            "valid_domain_cells": 570886
+          },
+          "SE": {
+            "tp": 716.9622055416846,
+            "fp": 6284.847055470227,
+            "fn": 8883.037794458316,
+            "n_truth": 9600,
+            "dti": 0.07895744874614109,
+            "coverage": 0.07468356307725882,
+            "prediction_mass": 6598.0,
+            "positive_cells": 6598,
+            "valid_domain_cells": 792240
+          },
+          "mean_dti": 0.09620914961295496
+        },
+        "sgmc_off_catalogue_gt300m": {
+          "NW": {
+            "tp": 2515.655160863438,
+            "fp": 23299.22059851971,
+            "fn": 20614.34483913656,
+            "n_truth": 23130,
+            "dti": 0.10629390299013197,
+            "coverage": 0.10876157202176559,
+            "prediction_mass": 24484.0,
+            "positive_cells": 24484,
+            "valid_domain_cells": 2457001
+          },
+          "NE": {
+            "tp": 2303.5008671562737,
+            "fp": 11678.507011754318,
+            "fn": 20888.499132843725,
+            "n_truth": 23192,
+            "dti": 0.10789230431576159,
+            "coverage": 0.0993230798187424,
+            "prediction_mass": 12735.0,
+            "positive_cells": 12735,
+            "valid_domain_cells": 1372176
+          },
+          "SW": {
+            "tp": 346.498367679158,
+            "fp": 6181.980257982208,
+            "fn": 2006.501632320842,
+            "n_truth": 2353,
+            "dti": 0.10868505764982378,
+            "coverage": 0.1472581248105219,
+            "prediction_mass": 6364.0,
+            "positive_cells": 6364,
+            "valid_domain_cells": 570886
+          },
+          "SE": {
+            "tp": 987.7070608814447,
+            "fp": 6160.7033636835695,
+            "fn": 12459.292939118555,
+            "n_truth": 13447,
+            "dti": 0.08104407972177458,
+            "coverage": 0.07345185252334682,
+            "prediction_mass": 6598.0,
+            "positive_cells": 6598,
+            "valid_domain_cells": 792240
+          },
+          "mean_dti": 0.10097883616937298
+        }
+      },
+      "paired_vs_h49": {
+        "catalogue_proxy": {
+          "fold_delta_dti_vs_h49": {
+            "NW": 0.001995743645885173,
+            "NE": -1.643787402881569e-05,
+            "SW": 0.0008181323180309757,
+            "SE": 0.0006261689014573496
+          },
+          "mean_delta_dti_vs_h49": 0.0008559017478361707,
+          "positive_folds": 3,
+          "passes_numeric_gate": true
+        },
+        "sgmc_off_catalogue_gt300m": {
+          "fold_delta_dti_vs_h49": {
+            "NW": 0.00024048870590030746,
+            "NE": -9.097072981939514e-06,
+            "SW": -0.0017284673189454924,
+            "SE": 0.0024076664364443
+          },
+          "mean_delta_dti_vs_h49": 0.0002276476876042939,
+          "positive_folds": 2,
+          "passes_numeric_gate": false
+        }
+      }
+    },
+    {
+      "seed_index": 7,
+      "selected_mask_sha256": "160ca4a2d4b73347ade1ce6d5ea04f880b1fe3bbbc4b3966019e047062c80c8b",
+      "results": {
+        "catalogue_proxy": {
+          "NW": {
+            "tp": 2653.5624494461636,
+            "fp": 23234.451602172652,
+            "fn": 26665.437550553837,
+            "n_truth": 29319,
+            "dti": 0.09267560940591545,
+            "coverage": 0.09050658103776267,
+            "prediction_mass": 24466.0,
+            "positive_cells": 24466,
+            "valid_domain_cells": 2457001
+          },
+          "NE": {
+            "tp": 1492.6715404225881,
+            "fp": 12036.408673705202,
+            "fn": 11103.328459577411,
+            "n_truth": 12596,
+            "dti": 0.11677355679163758,
+            "coverage": 0.11850361546702033,
+            "prediction_mass": 12738.0,
+            "positive_cells": 12738,
+            "valid_domain_cells": 1372176
+          },
+          "SW": {
+            "tp": 863.7691649867872,
+            "fp": 5988.522271872349,
+            "fn": 8609.230835013213,
+            "n_truth": 9473,
+            "dti": 0.09652283422631623,
+            "coverage": 0.09118221946445552,
+            "prediction_mass": 6367.0,
+            "positive_cells": 6367,
+            "valid_domain_cells": 570886
+          },
+          "SE": {
+            "tp": 714.3764191040577,
+            "fp": 6295.456531178477,
+            "fn": 8885.623580895943,
+            "n_truth": 9600,
+            "dti": 0.07865878078501197,
+            "coverage": 0.07441421032333935,
+            "prediction_mass": 6608.0,
+            "positive_cells": 6608,
+            "valid_domain_cells": 792240
+          },
+          "mean_dti": 0.0961576953022203
+        },
+        "sgmc_off_catalogue_gt300m": {
+          "NW": {
+            "tp": 2512.871921376729,
+            "fp": 23287.16486703029,
+            "fn": 20617.12807862327,
+            "n_truth": 23130,
+            "dti": 0.10618961883313661,
+            "coverage": 0.1086412417369965,
+            "prediction_mass": 24466.0,
+            "positive_cells": 24466,
+            "valid_domain_cells": 2457001
+          },
+          "NE": {
+            "tp": 2303.5580581146914,
+            "fp": 11681.4498207959,
+            "fn": 20888.441941885307,
+            "n_truth": 23192,
+            "dti": 0.10789195095690446,
+            "coverage": 0.0993255457965976,
+            "prediction_mass": 12738.0,
+            "positive_cells": 12738,
+            "valid_domain_cells": 1372176
+          },
+          "SW": {
+            "tp": 348.08634501999137,
+            "fp": 6184.313591315541,
+            "fn": 2004.9136549800087,
+            "n_truth": 2353,
+            "dti": 0.10915630140044995,
+            "coverage": 0.14793299830853862,
+            "prediction_mass": 6367.0,
+            "positive_cells": 6367,
+            "valid_domain_cells": 570886
+          },
+          "SE": {
+            "tp": 982.3402258603153,
+            "fp": 6177.800629039403,
+            "fn": 12464.659774139685,
+            "n_truth": 13447,
+            "dti": 0.08058820269833901,
+            "coverage": 0.07305274231131964,
+            "prediction_mass": 6608.0,
+            "positive_cells": 6608,
+            "valid_domain_cells": 792240
+          },
+          "mean_dti": 0.1009565184722075
+        }
+      },
+      "paired_vs_h49": {
+        "catalogue_proxy": {
+          "fold_delta_dti_vs_h49": {
+            "NW": 0.0021733275894530307,
+            "NE": 4.663227353261801e-05,
+            "SW": 0.0006703289450921829,
+            "SE": 0.0003275009403282264
+          },
+          "mean_delta_dti_vs_h49": 0.0008044474371015145,
+          "positive_folds": 4,
+          "passes_numeric_gate": true
+        },
+        "sgmc_off_catalogue_gt300m": {
+          "fold_delta_dti_vs_h49": {
+            "NW": 0.00013620454890495015,
+            "NE": -9.45043183907257e-06,
+            "SW": -0.001257223568319324,
+            "SE": 0.0019517894130087338
+          },
+          "mean_delta_dti_vs_h49": 0.00020532999043882186,
+          "positive_folds": 2,
+          "passes_numeric_gate": false
+        }
+      }
+    }
+  ],
+  "feature_ranking_control_summary": {
+    "catalogue_proxy": {
+      "feature_rank_mean_dti": 0.0956591644146324,
+      "random_same_pool_mean_dti": 0.09613768377004492,
+      "feature_minus_random_mean": -0.00047851935541251556,
+      "random_draws_at_or_below_feature": 0,
+      "random_draws": 8,
+      "warning": "small descriptive control sample; not a significance test"
+    },
+    "sgmc_off_catalogue_gt300m": {
+      "feature_rank_mean_dti": 0.10052769369012492,
+      "random_same_pool_mean_dti": 0.10097475621171154,
+      "feature_minus_random_mean": -0.0004470625215866192,
+      "random_draws_at_or_below_feature": 0,
+      "random_draws": 8,
+      "warning": "small descriptive control sample; not a significance test"
+    }
+  },
+  "numeric_proxy_gate": {
+    "rule": "mean paired delta > 0 and >=3/4 positive folds on both truth proxies",
+    "passed_both_truths": false
+  },
+  "download_verdict": "NO H57-A TIFF generated; this is an evidence-only research test, not a download artifact",
+  "submit_verdict": "NOT CLEARED / DO NOT SUBMIT",
+  "slot_decision": {
+    "cleared": false,
+    "reason": "Public map proxies and frozen, potentially label-informed H49 surfaces cannot authorize a weekly slot or establish private expert-label performance; external mirror provenance/licence and portal acceptance also remain unresolved."
+  },
+  "caveats": [
+    "GeoDAWN inputs are hash-pinned third-party owner mirrors; hashes do not authenticate them with the organizer or verify sponsor-sharing rights.",
+    "Radiometric and TMI extension bands are uint8 quantized relative signals, not calibrated physical units.",
+    "The feature fit and p75 threshold use the full unlabeled feature grid, not a fold-local fit; no public target labels are used in H57-A feature selection.",
+    "The H49 reference is a frozen upstream surface that used public catalogue-derived evidence; the holdout is conditional and not an independent end-to-end retraining test.",
+    "Catalogue/SGMC targets are public-map proxies, not private expert labels or competition scores.",
+    "No organizer receipt links a leaderboard row to the H49 or any H57-A TIFF bytes.",
+    "The random-control sample is small and descriptive, not a statistical significance claim."
+  ]
+}

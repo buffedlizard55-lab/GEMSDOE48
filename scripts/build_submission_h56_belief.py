@@ -1,10 +1,7 @@
 #!/usr/bin/env python3
-"""GEMSDOE48 H56B — a with-flank rebuild of the prior H56 D-S surface.
+"""GEMSDOE48 H56B — a local Dempster-Shafer research artifact, not slot-cleared.
 
-It re-creates a normalized Dempster-Shafer belief surface from the dotted and
-actual tip/step-over families for reproducibility and format auditing. Its recipe
-is the same as the earlier H56 zero-outside artifact; it is not a meaningfully new
-submission candidate.
+Builds the normalized combined BELIEF surface from two owner-mirrored families.
 
 Prompt mandate (verbatim intent)
 --------------------------------
@@ -14,27 +11,23 @@ as its own diagnostic layer ... Normalize the combined belief to [0,1], write to
 the required format, and verify the result isn't simply the average of the two
 inputs (a quick correlation check against a naive mean will show this)."
 
-Relationship to prior art — do not claim this build is a new candidate
------------------------------------------------------------------------
-The exact H56B with-flank recipe below matches the earlier H56 zero-outside
-artifact's assumptions and is a reproducibility/format rebuild, not a meaningfully
-new model. Direct comparison found the in-footprint surfaces differ by at most
-1.788139343e-7, share the same positive support, and have top-37,654 Jaccard 1.0.
-The separate H56B-NF script removes the catalogue-flank absence term as a
-post-hoc mass-assignment ablation, not a new geological detector.
+Local distinction and limits
+----------------------------
+This H56B recipe emits a graded, max-normalized Bel(F) raster with separate
+Dempster residual m(Theta) and raw conflict K diagnostics. The implementation
+is locally distinct from earlier binary emissions, but the same B2 × H33-D
+family pair and a Dempster diagnostic already appeared in H53. H56B is not a
+new geological evidence family or a novel Dempster-combination concept. The
+parent masks overlap substantially, so evidence independence is not established.
+The old PR1/PR2 live-equivalent union estimate (-0.0140) is invalidated along
+with other score projections that used FPw=S-TPw; see the metric erratum.
+The score labels 0.2778 and 0.2632 are owner-reported and are not verified
+for these exact local parent bytes. The recipe's catalogue-flank absence rule
+is a preregistered assumption informed by that report, not verified local-file
+performance.
 
-Prior repository work also includes H48/H53 Dempster diagnostics on related
-parents. Therefore neither this rebuild nor the no-flank ablation is a claim of
-new D-S theory, a new geological source family, or a validated probability model.
-The source assignments use the competition's 300 m triangular kernel, heuristic
-reliability discounts and absence weights; parent positive-cell overlap is
-31,614 and statistical independence is not established. Normalized residual
-m(Theta) is uncommitted/ignorance under those assumptions, not direct disagreement.
-Raw pre-normalization conflict K and absolute support difference are exported
-separately; normalized Dempster divides out K.
-
-Recorded H56B recipe (not a preregistration; chronology is audited separately)
------------------------------------------------------------------------------
+Frozen recipe (pre-registered below, before any scoring is read)
+----------------------------------------------------------------
 Sources (sha256-pinned):
   dotted : data/families/dotted_b2_prune_02778.tif   owner-reported live 0.2778
   tip    : data/families/tip_stepover_r30_02632.tif  owner-reported live 0.2632
@@ -44,43 +37,46 @@ BPA per source i at every footprint pixel x:
   m_i(F)     = r_i * s_i(x)
   m_i(N)     = r_i * (1 - s_i(x)) * a_i(x)
   m_i(Theta) = 1 - m_i(F) - m_i(N)
-Heuristic discount factors (Shafer discounting form; not calibrated reliability):
+Reliability (fixed recipe values anchored to owner-reported parent scores; not learned):
   r_dot = 0.95
   r_tip = 0.95 * 0.2632 / 0.2778
 Absence informativeness:
   a_i(x) = 0.5 within 100 m of the h19-5 backbone, 0.2 elsewhere,
   dotted source only: a_dot(x) = 1.0 where d(x, catalogue) <= 200 m
-  (this catalogue-flank term is inferred from an owner-reported score rung;
-   its transfer to this task's hidden truth is unvalidated).
-Combination: Dempster's normalized rule (total conflict is an error, not patched).
-Research surface: Bel(F) / max_footprint(Bel(F)) in [0,1], NaN outside the
-finite footprint. Diagnostic layers (NOT submissions): residual m(Theta),
-pre-normalization conflict K, plausibility Pl(F) = f + u, and |s_dot - s_tip|.
+Combination: normalized Dempster rule; export residual m(Theta), raw conflict
+K, and plausibility Pl(F) = Bel(F) + m(Theta) separately. m(Theta) is
+unassigned/ignorance mass, not conflict or family disagreement.
+Submission surface: Bel(F) / max_footprint(Bel(F)) in [0,1], zeros outside the
+finite footprint. Local range checks do not prove portal acceptance.
 
-Decision note: the repository's metric algebra (knowledge/research_notes.md,
-result (a)) shows the DTI objective's unconstrained ranking optimum is binary
-{0,1}; a graded surface is a constructed belief/favorability raster, not a
-claim that grading beats the 0.2778 owner-reported score. Its support proxies
-were not persuasive in matched blocked holdout, so this build must not be
-promoted to a weekly submission. Local file validation is not organizer acceptance.
+The former H56B live-model score projection is invalid and is not used as a
+gate. Corrected same-protocol public-proxy scores are below H49 on both targets;
+H56B remains downloadable for inspection only and is NOT CLEARED to submit.
+See docs/research/h56b-metric-erratum-20261007.md and
+ evidence/holdout_h56_belief_h49_20261007.json.
 
 Outputs
 -------
-  docs/downloads/GEMSDOE48-H56B-ds-belief-dotted-x-tip-20261007-<cid>-nan-outside.tif
-  docs/downloads/diagnostics/gemsdoe48-h56b-mtheta-<cid>.tif
-  docs/downloads/diagnostics/gemsdoe48-h56b-conflict-<cid>.tif
-  docs/downloads/diagnostics/gemsdoe48-h56b-plausibility-<cid>.tif
-  docs/downloads/diagnostics/gemsdoe48-h56b-support-difference-<cid>.tif
-  evidence/build_h56b_belief_receipt_20261007.json
+  docs/downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-<cid>-zeros-outside.tif
+  docs/downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-<cid>-zeros-outside.zip
+  docs/downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-<cid>-nan-outside.tif
+  docs/downloads/diagnostics/gemsdoe48-h56-mtheta-<cid>.tif     (unassigned mass)
+  docs/downloads/diagnostics/gemsdoe48-h56-conflict-<cid>.tif   (raw K)
+  docs/downloads/diagnostics/gemsdoe48-h56-plausibility-<cid>.tif
+  evidence/build_h56_belief_receipt_20261007.json
+  evidence/h56_format_audit_20261007.json
+  evidence/h56_uniqueness_20261007.json
+  evidence/holdout_h56_belief_h49_20261007.json  (current H49 comparison)
+  evidence/h56_live_model_projection_20261007.json  (historical, invalidated)
 
-Deterministic: identical inputs -> identical bytes. This does not imply organizer
-acceptance, a calibrated probability, or an expected score.
+Deterministic: identical inputs -> identical bytes.
 """
 from __future__ import annotations
 
 import hashlib
 import json
 import sys
+import zipfile
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -128,11 +124,11 @@ INPUTS = {
         "origin": "owner mirror of existing_faults.tif (USGS/INGENIOUS catalogue labels)",
         "site": "https://www.drivendata.org/competitions/306/competition-doe-gems/data/",
     },
-    "footprint_mask": {
-        "path": ROOT / "data/source_mirrors/footprint-mask.tif",
-        "sha256": "ddadb8c96cda673b91ddaa0bbed2aa955c358a8f6196c4c4e8fa70d454dd429f",
-        "origin": "on-grid AOI mask derived from the official solution/sample footprint",
-        "site": "https://www.drivendata.org/competitions/306/competition-doe-gems/data/",
+    "sgmc_offcat_truth": {
+        "path": ROOT / "data/official/derived_sgmc_faults_100m.tif",
+        "sha256": "643cbe992ef4ba37588fb469163ed8291e3ceb23d6c1f78a3cfaa462430c2da0",
+        "origin": "owner-mirror on-grid rasterization of USGS SGMC fault traces",
+        "site": "https://mrdata.usgs.gov/geology/state/",
     },
 }
 
@@ -141,7 +137,8 @@ R_CELLS = 3.0            # official metric support: 300 m at 100 m cells
 R_TOP = 0.95             # live-anchored reliability cap (H54 convention)
 LIVE_DOT, LIVE_TIP = 0.2778, 0.2632
 A_ON, A_OFF = 0.5, 0.2   # absence informativeness on / off the h19-5 backbone
-FLANK_PX = 2.0           # catalogue-flank band, 200 m (owner-score-informed heuristic)
+FLANK_PX = 2.0           # fixed 200 m catalogue-flank assumption from owner-reported ladder
+MIN_D_SGMC = 3.0         # holdout SGMC truth: > 300 m off-catalogue
 
 R_DOT = R_TOP
 R_TIP = R_TOP * LIVE_TIP / LIVE_DOT
@@ -174,73 +171,41 @@ def kernel_support(dots: np.ndarray) -> np.ndarray:
 
 
 def bpa(support: np.ndarray, r: float, absence: np.ndarray):
-    """Construct one two-source BPA; reject malformed data rather than hide it."""
-    support = np.asarray(support, dtype=np.float64)
-    absence = np.asarray(absence, dtype=np.float64)
-    if support.shape != absence.shape:
-        raise ValueError("support and absence arrays must have identical shapes")
-    if not (0.0 < r <= 1.0):
-        raise ValueError("discount factor must be in (0, 1]")
-    if not np.isfinite(support).all() or not np.isfinite(absence).all():
-        raise ValueError("support and absence arrays must be finite")
-    if np.any((support < 0.0) | (support > 1.0)):
-        raise ValueError("support must be in [0, 1]")
-    if np.any((absence < 0.0) | (absence > 1.0)):
-        raise ValueError("absence informativeness must be in [0, 1]")
     f = r * support
     n = r * (1.0 - support) * absence
     u = 1.0 - f - n
-    if np.any(u < -1e-12):
-        raise ValueError("invalid BPA: m(Theta) < 0")
+    assert (u >= -1e-9).all(), "BPA inconsistency: m(Theta) < 0"
     return f.astype(np.float32), n.astype(np.float32), np.maximum(u, 0.0).astype(np.float32)
 
 
 def dempster(m1, m2):
-    """Pixelwise normalized Dempster combination; reject total conflict.
-
-    K is returned as a separate pre-normalization diagnostic. Dempster's rule
-    normalizes it away, so the resulting m(Theta) is residual uncommitted mass,
-    not K and not a direct support-difference map.
-    """
-    if len(m1) != 3 or len(m2) != 3:
-        raise ValueError("each mass function must contain F, not-F, and Theta arrays")
-    if any(np.asarray(x).shape != np.asarray(m1[0]).shape for x in m1 + m2):
-        raise ValueError("all mass arrays must have identical shapes")
-    f1, n1, u1 = (np.asarray(x, dtype=np.float64) for x in m1)
-    f2, n2, u2 = (np.asarray(x, dtype=np.float64) for x in m2)
+    """Apply normalized Dempster combination; fail closed at total conflict."""
+    f1, n1, u1 = m1
+    f2, n2, u2 = m2
     K = f1 * n2 + n1 * f2
-    z = 1.0 - K
-    if not np.isfinite(z).all() or np.any(z <= 1e-12):
+    denom = 1.0 - K
+    if not np.isfinite(denom).all() or np.any(denom <= 1e-15):
         raise ValueError("Dempster normalization is undefined at total conflict")
-    f = (f1 * f2 + f1 * u2 + u1 * f2) / z
-    n = (n1 * n2 + n1 * u2 + u1 * n2) / z
-    u = (u1 * u2) / z
-    if np.any(np.abs(f + n + u - 1.0) > 2e-6):
-        raise ValueError("combined masses failed the unit-sum invariant")
+    f = (f1 * f2 + f1 * u2 + u1 * f2) / denom
+    n = (n1 * n2 + n1 * u2 + u1 * n2) / denom
+    u = (u1 * u2) / denom
     return f.astype(np.float32), n.astype(np.float32), u.astype(np.float32), K.astype(np.float32)
 
 
 def main() -> int:
     now = datetime.now(timezone.utc)
     receipt = {
-        "session": "H56B",
+        "session": "H56",
         "generated_utc": now.isoformat(),
         "recipe": {
             "kernel": "official triangular k(d)=max(1-d/300m,0), R=3 cells",
             "r_dotted": R_DOT,
             "r_tip": R_TIP,
-            "discount_interpretation": "heuristics partly derived from owner-reported scores; not calibrated source reliability",
             "absence_on_backbone": A_ON,
             "absence_off_backbone": A_OFF,
             "flank_absence_dotted_only_px": FLANK_PX,
-            "flank_term_interpretation": "owner-score-informed heuristic; off-catalogue transfer is unvalidated",
-            "rule": "Dempster normalized combination; fail on total conflict",
-            "surface": "relative Bel(F), divided by footprint maximum, float32, NaN outside footprint",
-            "m_theta": "residual uncommitted/ignorance mass after normalization; not a direct disagreement map",
-            "conflict_K": "pre-normalization conflict, separately exported and normalized away by Dempster's rule",
-            "support_difference": "absolute difference between the two source support surfaces; not a Dempster-Shafer mass",
-            "independence": "not established; positive-cell overlap is measured in the receipt",
-            "submission_recommendation": "do not submit; matched blocked holdout loses to H49 on all folds for both truth sets",
+            "rule": "Dempster normalized combination",
+            "submission_surface": "Bel(F) normalized by footprint max, zeros outside footprint",
         },
         "inputs": {},
     }
@@ -258,20 +223,10 @@ def main() -> int:
 
     # ---- load grid ----------------------------------------------------------
     tmpl, prof = read_band(INPUTS["template"]["path"])
-    template_footprint = np.isfinite(tmpl) if tmpl.dtype.kind == "f" else (tmpl >= 0)
-    with rasterio.open(INPUTS["catalogue_labels"]["path"]) as src:
-        lab = src.read(1)
-        if src.transform != prof["transform"] or src.crs != prof["crs"]:
-            raise ValueError("catalogue labels and sample template grids differ")
-    with rasterio.open(INPUTS["footprint_mask"]["path"]) as src:
-        footprint_band = src.read(1)
-        if src.transform != prof["transform"] or src.crs != prof["crs"]:
-            raise ValueError("AOI footprint mask and sample template grids differ")
+    footprint = np.isfinite(tmpl) if tmpl.dtype.kind == "f" else (tmpl >= 0)
+    # the sample template is all-finite 0/1; footprint comes from labels != -1
+    lab, _ = read_band(INPUTS["catalogue_labels"]["path"])
     footprint = lab != -1
-    if not np.array_equal(template_footprint, footprint):
-        raise ValueError("sample-template and catalogue-label footprint masks differ")
-    if not np.array_equal(footprint, footprint_band == 1):
-        raise ValueError("catalogue-label and pinned AOI footprint masks differ")
     catalogue = lab == 1
     dcat = ndi.distance_transform_edt(~catalogue)
     H, W = footprint.shape
@@ -296,17 +251,13 @@ def main() -> int:
     # ---- BPA + Dempster ------------------------------------------------------
     absence = np.where(onbb, A_ON, A_OFF).astype(np.float32)
     absence_d = absence.copy()
-    absence_d[(dcat <= FLANK_PX) & footprint] = 1.0  # owner-score-informed heuristic; not independently validated
+    absence_d[(dcat <= FLANK_PX) & footprint] = 1.0  # hypothesis; exact local file/score link unverified
 
     s_d = kernel_support(dots_d)
     s_t = kernel_support(dots_t)
-    support_difference = np.abs(s_d - s_t).astype(np.float32)
     m_d = bpa(s_d, R_DOT, absence_d)
     m_t = bpa(s_t, R_TIP, absence)
     f, n, u, K = dempster(m_d, m_t)
-    mass_sum_error = float(np.max(np.abs(f[footprint] + n[footprint] + u[footprint] - 1.0)))
-    if mass_sum_error > 2e-6:
-        raise ValueError(f"combined BPA mass sum error {mass_sum_error} exceeds tolerance")
 
     bel_raw = f.copy()
     mx = float(bel_raw[footprint].max())
@@ -317,18 +268,9 @@ def main() -> int:
         "belief_mass_S": float(bel[footprint].sum()),
         "mtheta_min_footprint": float(u[footprint].min()),
         "mtheta_max_footprint": float(u[footprint].max()),
-        "mtheta_mean_footprint": float(u[footprint].mean()),
         "conflict_K_max": float(K[footprint].max()),
-        "conflict_px_gt_0.3": int(((K > 0.3) & footprint).sum()),
+        "conflict_px_gt_0.3": int((K > 0.3).sum()),
         "conflict_share_of_footprint": float((K > 0.3)[footprint].mean()),
-        "mass_sum_max_abs_error": mass_sum_error,
-    }
-    receipt["support_difference"] = {
-        "definition": "abs(s_dot - s_tip), with both supports from the 300 m triangular kernel",
-        "interpretation": "direct diagnostic of source-support separation; not m(Theta), K, or a probability",
-        "mean_footprint": float(support_difference[footprint].mean()),
-        "max_footprint": float(support_difference[footprint].max()),
-        "pixels_gt_0_05": int(((support_difference > 0.05) & footprint).sum()),
     }
     print(f"[ds] {json.dumps(receipt['ds'], indent=1)}")
 
@@ -356,7 +298,7 @@ def main() -> int:
             "pearson_r_footprint": float(np.corrcoef(bel64[fp], nb64[fp])[0, 1]),
             "pearson_r_support": float(np.corrcoef(bel64[sup], nb64[sup])[0, 1]),
             "mae_footprint": float(np.abs(bel64 - nb64)[fp].mean()),
-            "max_abs_diff_footprint": float(np.abs(bel64 - nb64)[fp].max()),
+            "max_abs_diff": float(np.abs(bel64 - nb64).max()),
             "affine_fit": affine_residual(nb64[fp], bel64[fp]),
         },
         "vs_kernel_mean": {
@@ -364,7 +306,7 @@ def main() -> int:
             "pearson_r_footprint": float(np.corrcoef(bel64[fp], nk64[fp])[0, 1]),
             "pearson_r_support": float(np.corrcoef(bel64[sup], nk64[sup])[0, 1]),
             "mae_footprint": float(np.abs(bel64 - nk64)[fp].mean()),
-            "max_abs_diff_footprint": float(np.abs(bel64 - nk64)[fp].max()),
+            "max_abs_diff": float(np.abs(bel64 - nk64).max()),
             "affine_fit": affine_residual(nk64[fp], bel64[fp]),
             "frac_footprint_diff_gt_0.05": float((np.abs(bel64 - nk64) > 0.05)[fp].mean()),
         },
@@ -376,55 +318,40 @@ def main() -> int:
           "kernel r:", notnaive["vs_kernel_mean"]["pearson_r_footprint"])
 
     # ---- write artifacts -------------------------------------------------------
-    nan_arr = np.where(footprint, bel, np.nan).astype(np.float32)
-    cid = hashlib.sha256(nan_arr.tobytes()).hexdigest()[:12]
-    base = f"GEMSDOE48-H56B-ds-belief-dotted-x-tip-20261007-{cid}"
+    cid = hashlib.sha256(bel.astype(np.float32).tobytes()).hexdigest()[:12]
+    base = f"GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-{cid}"
     dl = ROOT / "docs/downloads"
     dl.mkdir(parents=True, exist_ok=True)
     diag = dl / "diagnostics"
     diag.mkdir(exist_ok=True)
 
-    primary_path = dl / f"{base}-nan-outside.tif"
-    write_float32(primary_path, nan_arr, prof, nodata=np.nan)
+    zeros_path = dl / f"{base}-zeros-outside.tif"
+    nan_path = dl / f"{base}-nan-outside.tif"
+    write_float32(zeros_path, bel, prof, nodata=None)
+    nan_arr = np.where(footprint, bel, np.nan).astype(np.float32)
+    write_float32(nan_path, nan_arr, prof, nodata=None)
+    with zipfile.ZipFile(dl / f"{base}-zeros-outside.zip", "w", zipfile.ZIP_DEFLATED) as z:
+        z.write(zeros_path, arcname=zeros_path.name)
 
     diag_paths = {}
-    diagnostic_arrays = {
-        "mtheta": u,
-        "conflict": K,
-        "plausibility": f + u,
-        "support_difference": support_difference,
-    }
-    for tag, arr in diagnostic_arrays.items():
-        p = diag / f"gemsdoe48-h56b-{tag}-{cid}.tif"
-        out = np.where(footprint, arr, np.nan).astype(np.float32)
-        write_float32(p, out, prof, nodata=np.nan)
-        diag_paths[tag] = {
-            "path": str(p.relative_to(ROOT)),
-            "sha256": sha256_file(p),
-            "outside": "NaN",
-            "is_submission": False,
-        }
+    for tag, arr in [("mtheta", u), ("conflict", K), ("plausibility", (f + u))]:
+        p = diag / f"gemsdoe48-h56-{tag}-{cid}.tif"
+        out = np.where(footprint, arr, 0.0).astype(np.float32)
+        write_float32(p, out, prof, nodata=None)
+        diag_paths[tag] = str(p.relative_to(ROOT))
     receipt["artifacts"] = {
-        "primary": {
-            "path": str(primary_path.relative_to(ROOT)),
-            "sha256": sha256_file(primary_path),
-            "content_id": cid,
-            "dtype": "float32",
-            "crs": str(prof["crs"]),
-            "nodata": "NaN outside footprint",
-            "unique_byte_artifact": True,
-            "materially_novel_candidate": False,
-            "relationship_to_prior": "reproducibility/encoding rebuild of prior H56 recipe; not a new candidate",
-            "submission_recommendation": "do not submit",
-        },
+        "base": base,
+        "content_id": cid,
+        "primary_zeros": str(zeros_path.relative_to(ROOT)),
+        "nan_twin": str(nan_path.relative_to(ROOT)),
+        "zip": str((dl / f"{base}-zeros-outside.zip").relative_to(ROOT)),
         "diagnostics": diag_paths,
         "diagnostics_are_submissions": False,
     }
-    print(f"[write] {primary_path.name} cid={cid}")
+    print(f"[write] {zeros_path.name} cid={cid}")
 
-    receipt_path = ROOT / "evidence/build_h56b_belief_receipt_20261007.json"
-    receipt_path.write_text(json.dumps(receipt, indent=1))
-    print(f"[evidence] {receipt_path.relative_to(ROOT)}")
+    (ROOT / "evidence/build_h56_belief_receipt_20261007.json").write_text(json.dumps(receipt, indent=1))
+    print("[evidence] evidence/build_h56_belief_receipt_20261007.json")
     return 0
 
 

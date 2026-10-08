@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
-"""Prove a candidate is not a copy of any earlier artifact in this repository.
+"""Compare a candidate with GeoTIFFs in a bounded set of local artifact directories.
 
 The competition brief requires a *unique* submission: prior submissions may be used
-only for learning. This script loads every GeoTIFF under the artifact directories,
-compares its in-footprint support (positive cells) with the candidate's, and writes a
-receipt listing byte identity, pixel identity, Jaccard overlap and the symmetric
-difference for each file. The candidate is unique if no other file has identical
-byte hash, identical support, or support overlap above the reported maximum.
+only for learning. This script compares local in-footprint support (positive cells),
+byte hashes, Jaccard overlap and symmetric difference for files under ``SEARCH_DIRS``.
+A no-duplicate result is scoped to those scanned local files only; it is not a proof of
+global uniqueness, organizer-side uniqueness, prior submission status, or score linkage.
 """
 from __future__ import annotations
 
@@ -94,6 +93,9 @@ def main() -> int:
         "candidate": {"file": str(candidate.relative_to(ROOT)), "sha256": candidate_sha,
                       "bytes": candidate.stat().st_size, "positive_cells": n_candidate},
         "compared_files": len(comparisons),
+        "uniqueness_scope": "bounded comparison of local TIFFs in SEARCH_DIRS only; not organizer-side or global",
+        "organizer_uniqueness_tested": False,
+        "global_uniqueness_established": False,
         "max_overlap_excluding_companions": max(
             (row for row in comparisons if not row["companion_of_same_artifact"]),
             key=lambda row: row["overlap_cells"], default=None),

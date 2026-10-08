@@ -1,19 +1,22 @@
 {
- "n_added": 100,
- "n_removed": 0,
- "T_b2_lsi": 5762.564086343573,
- "K_lsi": 17117.16906005549,
- "T_lsi": {
-  "worst_case_dti": 0.27753,
-  "best_case_dti": 0.29142
- },
- "T_lsi_x0.5": {
-  "worst_case_dti": 0.27727,
-  "best_case_dti": 0.30496
- },
- "T_lsi_x1.5": {
-  "worst_case_dti": 0.27762,
-  "best_case_dti": 0.28689
- },
- "break_even_mean_credit_per_added_dot": 0.05556
+  "n_added": 100,
+  "n_removed": 0,
+  "T_b2_lsi": 5762.564086343573,
+  "K_lsi": 17117.16906005549,
+  "T_lsi": {
+    "worst_case_dti": 0.27753,
+    "best_case_dti": 0.29142
+  },
+  "T_lsi_x0.5": {
+    "worst_case_dti": 0.27727,
+    "best_case_dti": 0.30496
+  },
+  "T_lsi_x1.5": {
+    "worst_case_dti": 0.27762,
+    "best_case_dti": 0.28689
+  },
+  "break_even_mean_credit_per_added_dot": 0.05556,
+  "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION",
+  "invalidation_reason": "The receipt depends on the invalid general substitution FPw=S-TPw (equivalently Q≈TPw) and/or owner-reported score values without organizer verification. Its inferred truth density, thresholds, projected scores, ceilings, and gate decisions are withdrawn; local proxy measurements are historical diagnostics only.",
+  "interpretation": "Historical surrogate arithmetic only; not a live-score risk bound or promotion gate."
 }

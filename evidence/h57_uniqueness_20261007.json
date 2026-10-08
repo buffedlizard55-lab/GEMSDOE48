@@ -1,6 +1,6 @@
 {
   "schema": "GEMSDOE48-candidate-uniqueness-v1",
-  "generated_utc": "2026-10-07T22:01:35Z",
+  "generated_utc": "2026-10-08T03:52:30Z",
   "candidate": {
     "file": "docs/downloads/GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07.tif",
     "sha256": "28a51fb032b8f2cfd1f04ad3bd429c29d7bb780d36961fea783ff8099130986e",
@@ -8,6 +8,9 @@
     "positive_cells": 58031
   },
   "compared_files": 99,
+  "uniqueness_scope": "bounded comparison of local TIFFs in SEARCH_DIRS only; not organizer-side or global",
+  "organizer_uniqueness_tested": false,
+  "global_uniqueness_established": false,
   "max_overlap_excluding_companions": {
     "file": "docs/downloads/GEMSDOE48-H53-3SRC-DS-20261007-9242c831-diag-plausibility-nan.tif",
     "companion_of_same_artifact": false,

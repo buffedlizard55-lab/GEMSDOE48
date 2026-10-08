@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
-"""Calibrate the live-anchored DTI forward model and write its receipt.
+"""INVALIDATED H55 surrogate; forensic reproduction requires explicit opt-in.
 
-Reads only hash-pinned local artifacts and owner-reported live scores; writes
-``evidence/live_model_calibration_<date>.json`` and prints the ceiling table used in
-``docs/research/h55-live-model-ceiling-and-candidate-20261007.md``.
-
-Usage:  python scripts/calibrate_live_model.py [--output PATH] [--csv PATH]
+The historical calibration infers hidden-truth mass with the generally false
+``FPw = S - TPw`` substitution. It is not an official-metric inverse, score
+estimate, ceiling, or promotion gate. Its command refuses by default; only pass
+``--legacy-audit-only`` to reproduce old outputs for forensic comparison.
 """
 from __future__ import annotations
 
@@ -47,14 +46,20 @@ def sha256_file(path: Path) -> str:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
+    forensic_root = ROOT / "evidence/forensic"
     parser.add_argument("--output", type=Path,
-                        default=ROOT / "evidence/live_model_calibration_20261007.json")
+                        default=forensic_root / "live_model_calibration_legacy_20261007.json")
     parser.add_argument("--csv", type=Path,
-                        default=ROOT / "evidence/live_model_inverted_truth_20261007.csv")
+                        default=forensic_root / "live_model_inverted_truth_legacy_20261007.csv")
     parser.add_argument("--no-frontier", action="store_true",
                         help="skip the ~5 min from-scratch greedy coverage frontier")
     parser.add_argument("--frontier-max", type=int, default=45_000)
+    parser.add_argument("--legacy-audit-only", action="store_true",
+                        help="required opt-in; outputs reproduce an invalidated surrogate, not a score gate")
     args = parser.parse_args()
+    if not args.legacy_audit_only:
+        parser.error("invalidated historical calibration; rerun only with --legacy-audit-only for forensic reproduction")
+    print("LEGACY AUDIT ONLY — INVALIDATED; NOT A SCORE ESTIMATE OR PROMOTION GATE")
 
     missing = [a.path for a in (*LIVE_ARTIFACTS, OUT_OF_FAMILY) if not (ROOT / a.path).exists()]
     if missing:
@@ -71,7 +76,7 @@ def main() -> int:
     footprint = load_binary(FOOTPRINT)
     catalogue_distance_m = distance_transform_edt(~catalogue, sampling=(100.0, 100.0))
 
-    receipt = calibrate(backbone, catalogue_distance_m)
+    receipt = calibrate(backbone, catalogue_distance_m, legacy_audit_only=True)
     receipt["generated_utc"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     receipt["provenance"] = {
         "class": "OWNER-REPORT",
@@ -85,7 +90,8 @@ def main() -> int:
     }
 
     model = ForwardModel(receipt["hidden_truth_fit"]["hidden_truth_px"],
-                         receipt["rho_fit"]["rho"], receipt["eligible_backbone_px"])
+                         receipt["rho_fit"]["rho"], receipt["eligible_backbone_px"],
+                         legacy_audit_only=True)
     eligible = backbone & (catalogue_distance_m > 200.0)
 
     # ---- inverted truth table + the greedy coverage frontier (the family ceiling)
@@ -93,7 +99,7 @@ def main() -> int:
     for art in LIVE_ARTIFACTS:
         mask = load_binary(ROOT / art.path)
         s = int(mask.sum())
-        t = invert_truth(art.live, s, model.hidden_truth_px)
+        t = invert_truth(art.live, s, model.hidden_truth_px, legacy_audit_only=True)
         rows.append({"artifact": art.key, "emitted_px": s, "live": art.live,
                      "inverted_tpw": t, "recall": t / model.hidden_truth_px,
                      "credit_per_px": t / s,
@@ -134,7 +140,7 @@ def main() -> int:
     # different questions: (i) does the field CONTAIN that much truth at all (dense
     # backbone yield), and (ii) can any 37,654-px SUBSET of it deliver that much
     # (measured coverage geometry).
-    t_dense = invert_truth(0.1922, 121_131, model.hidden_truth_px)
+    t_dense = invert_truth(0.1922, 121_131, model.hidden_truth_px, legacy_audit_only=True)
     ceiling_live_equiv = frontier.get("argmax_live_equivalent")
     ceiling = []
     for who, dti in LEADERBOARD:
@@ -143,7 +149,7 @@ def main() -> int:
             "who": who, "dti": dti, "tpw_needed_at_37654_px": needed,
             "recall_needed": needed / model.hidden_truth_px,
             "pct_above_C_tpw": 100.0 * (needed / invert_truth(0.2778, 37_654,
-                                                              model.hidden_truth_px) - 1.0),
+                                                              model.hidden_truth_px, legacy_audit_only=True) - 1.0),
             "test_1_within_dense_backbone_truth_yield": bool(needed <= t_dense),
             "dense_backbone_truth_yield": t_dense,
             "test_2_achievable_by_any_37654_px_subset": (

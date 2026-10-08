@@ -1,5 +1,7 @@
 # H53 three-source adaptive DS — blocked results 2026-10-07 (gate FAILED, no slot)
 
+> **HISTORICAL PUBLIC-PROXY RESULT; LIVE-LADDER INVERSION WITHDRAWN.** The fold scores below remain observations against the named public proxy under the recorded protocol. The old hidden-truth, zero-credit removal, per-dot threshold, and “new signal required” interpretations are invalid under the [metric-identity erratum](metric-identity-erratum-20261007.md); they are not decision evidence. No organizer score or local-file-to-leaderboard link is established.
+
 > **Parent-classification erratum:** the frozen H53-1 lidar candidate uses H36-1 rung30, which is an H19-5/rung-30 repacking, not the actual tip/step-over family. Its scores and source bytes are unchanged, but it must be described as B2 × H36-1 rung30 × lidar—not as B2 × the tip family. H33-D is the explicit tip/step-over parent and is used by the separate H53-RadEdge experiment. See [`evidence/h36_parent_classification_erratum_20261007.json`](../../evidence/h36_parent_classification_erratum_20261007.json) and the [H53 namespace erratum](../../evidence/h53_radedge_namespace_erratum_20261007.json).
 
 **Decision: no weekly submission slot is cleared.** Neither the graded primary
@@ -11,26 +13,9 @@ repository.
 
 ## 0. The brief's two questions, answered at the level of the evidence
 
-**Why did 0.2778 win the family ladder?** Metric bookkeeping, not geology.
-A(44,090 dots, 0.2600) → B(40,199, 0.2708) → C(37,654, 0.2778) is two rounds
-of deleting dots within 200 m of the public catalogue, which the organizer
-masks from scoring — both steps independently imply the removed dots carried
-≈ zero credit (T/π = 5,073 vs 5,470, 7.5 % apart). C recovers ≈ 37 % of the
-≈ 14,300 hidden kernel mass; each added dot must carry ≥ 0.056 expected
-weight (0.2·DTI) to pay for itself. Full derivation:
-`docs/research/why-02778-and-ceiling-20261007.md`,
-`evidence/live_ladder_20261007.json`.
+**What does the reported 0.2778 ladder establish?** Only that the project owner reported scores of 0.2600→0.2708→0.2778 for A/B/C variants with decreasing dot counts. The exact local-file identity, score attribution, rung masks, and cause of the reported change are not organizer-verified. The public known-fault masking clarification makes catalogue-adjacent pruning a plausible explanation to investigate, but it does not prove that removed dots earned zero credit. The former hidden-mass, recall, credit-per-dot, and `0.2·DTI` threshold calculations used `FPw=S−TPw` and are invalid; see the [metric erratum](metric-identity-erratum-20261007.md) and [attribution note](why-02778-and-ceiling-20261007.md).
 
-**Can we beat 0.2778 live?** Plausibly, but only with new information about
-where hidden faults are — not with a new combination of the same two
-surfaces. H53 tests exactly the most generous version of "combination":
-adding a third, new-sensor (lidar) source with terrain-adaptive reliability.
-It narrows the fusion deficit on the proxy (below) but still loses to both
-parents, both unions, and H49. The session's consolidated finding stands and
-is now stronger: **no fusion of existing surfaces — two-source or
-three-source, scalar or adaptive discount — has beaten the better parent on
-the blocked proxies. Raising the live score requires higher credit density
-(new signal: H53-2's v2 scarp detector), not better combination.**
+**Can we beat 0.2778 on the competition target?** These experiments cannot answer that. H53 adds a lidar source with terrain-adaptive reliability and, on the recorded public proxies, its binary twin modestly improves over the two-source twin but still loses to both parents and H49. This is a candidate/proxy-specific result, not evidence that all fusion strategies fail or that higher live scores require one particular type of signal. No private-label, organizer-score, or leaderboard-gain claim follows.
 
 ## 1. Candidates scored (identical folds/domain/metric as all prior runs)
 
@@ -100,12 +85,7 @@ absolute mean DTIs are comparable across runs:
 | dotted C parent (37,654 px) | 0.095491 |
 | H49 (47,905 px) | 0.100751 |
 
-Reading: the lidar third source makes the H53 twin the best *fusion-decision*
-surface on this proxy (+0.0024 over the best 2-source twin), but it still
-loses to both parents (−0.0038 vs H36, −0.0059 vs C) and to H49 (−0.0112).
-For diffuse graded belief the third source is neutral (0.0714 vs 0.0716).
-New-sensor information helps the decision surface a little; it does not
-rescue fusion as a strategy.
+Reading: on this recorded proxy, the lidar third source makes the H53 twin the best *fusion-decision* surface among the tested fusion variants (+0.0024 over the best two-source twin), but it still loses to both parents (−0.0038 vs H36, −0.0059 vs C) and to H49 (−0.0112). For diffuse graded belief the third source is nearly neutral (0.0714 vs 0.0716). This result characterizes these specific constructions and masks only; it does not establish that fusion cannot help on other targets.
 
 ## 6. Disagreement diagnostics (what the geologist sees)
 

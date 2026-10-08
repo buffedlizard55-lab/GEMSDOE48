@@ -1,156 +1,21 @@
 <!doctype html>
-<html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>A Dempster–Shafer fusion of two independent fault-detector families · GEMSDOE48</title>
-<link rel="stylesheet" href="../assets/ds48-fusion/site.css">
-</head><body>
-<div style="background:#fff0d7;border:2px solid #b65c00;border-radius:8px;padding:1rem;margin:1rem auto;max-width:1100px;color:#3d270e"><strong>HISTORICAL SUB-SITE — NOT A CURRENT SUBMISSION RECOMMENDATION.</strong> The figures, candidate names, and slot suggestions below belong to an earlier upstream experiment and are superseded by later H48/H49/H52 results and like-for-like blocked proxy checks. No weekly slot is cleared. Use the <a href="../index.html">current overview</a> and <a href="../validation.html">current validation</a>.</div>
-<header class="top"><div class="wrap">
-  <div class="brand"><span class="dot"></span><b>GEMSDOE48</b>
-    <span class="tag">Dempster&ndash;Shafer disagreement-preserving fusion</span></div>
-  <nav><a href="index.html" class="on">Historical fusion</a><a href="executive-summary.html">Archived instructions</a><a href="research.html">Archived 0.2778 analysis</a><a href="hypotheses.html">Hypotheses</a><a href="sources.html">Sources</a><a href="irregularities.html">Irregularities</a></nav>
-</div></header>
-<div class="namestrip"><div class="wrap">
-  <span class="ns-label">Historical research artifact — NOT slot-cleared</span>
-  <code class="ns-name">GEMSDOE48-DS48-FUSION</code>
-  <a class="ns-dl" download href="../downloads/gemsdoe48-ds48-emission.tif">
-    ↓ Download for audit only — do not submit</a>
-</div></div>
-<div class="xlink"><div class="wrap">
-  This is the <b>DS48 fusion</b> sub-site. The repository landing page is
-  <a href="../index.html">docs/index.html</a>, and its
-  <a href="../leaderboard.html">leaderboard page</a> carries a <b>newer snapshot</b> than the
-  2026-10-02 figure quoted here — a later session measured the leader at 0.3774, not 0.3195.
-  Treat both numbers as dated, and the landing page as the newer one.
-</div></div>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DS48 historical archive · GEMSDOE48</title><link rel="stylesheet" href="../assets/ds48-fusion/site.css"></head><body>
+<header class="top"><div class="wrap"><div class="brand"><span class="dot"></span><b>GEMSDOE48</b><span class="tag">DS48 historical fusion archive</span></div>
+<nav><a class="on" href="index.html">Archive</a><a href="executive-summary.html">Future-submission guidance</a><a href="research.html">Metric erratum</a><a href="hypotheses.html">Hypotheses</a><a href="sources.html">Sources</a><a href="irregularities.html">Corrections</a></nav></div></header>
+<div class="namestrip"><div class="wrap"><span class="ns-label">HISTORICAL / INVALIDATED LIVE INFERENCE — NOT SLOT-CLEARED</span><code class="ns-name">GEMSDOE48-DS48-FUSION</code></div></div>
+<div class="xlink"><div class="wrap"><strong>Archive notice:</strong> old inversion-derived truth counts, ceilings, break-even bars, score scenarios, local-file attributions, and submission suggestions are withdrawn. Use the <a href="../index.html">current project overview</a>, <a href="../validation.html">validation</a>, and <a href="../submission-guide.html">submission guide</a>.</div></div>
 <main class="wrap">
-  <div class="hero"><h1>A Dempster–Shafer fusion of two independent fault-detector families</h1><p class="lead">DOE GEMS Prize · DrivenData competition 306 · the disagreement-preserving combination of the spacing-tuned dotted family and the tip / step-over family, with the unassigned-belief mass shipped as its own diagnostic layer.</p></div>
-
-<section class="callout warn">
-  <h2>Read this before uploading anything</h2>
-  <p>Every file on this page is <b>UNSCORED</b>. No organizer score exists for any artifact in
-  this repository. The measurements below are local proxies, and this repository's central
-  finding is that <b>the catalogue-based proxy ranks artifacts in the exact reverse of the live
-  leaderboard</b> (Spearman &rho; = -1.0 on
-  n = 4). No weekly slot is cleared: do not upload any artifact on this historical page or
-  spend a slot. No owner override applies.</p>
-</section>
-
-<section>
-<h2>⬇ One-click downloads</h2>
-<div class="grid2">
-  <article class="card feature">
-    <span class="badge amber">Artifact the brief asked for</span>
-    <h3>Dempster&ndash;Shafer combined belief Bel(F)</h3>
-    <p class="fileline">gemsdoe48-ds48-belief.tif</p>
-    <p>1,238,649 bytes · sha256 <code>f7e5645f…</code> ·
-    single band float32 · EPSG:32611 · 100 m · 3730 × 3292 · all finite ·
-    <b>PASS</b> all format checks</p>
-    <p><a class="button primary" download href="../downloads/gemsdoe48-ds48-belief.tif">
-      ↓ Download combined belief .tif</a></p>
-    <p class="micro"><b>Diagnostic.</b> A graded belief surface is <i>strictly worse</i> than its
-    own binarisation on this metric: the score's derivative in a pixel value <i>v</i> is
-    <code>(k − 0.2·DTI)·D₀/(D₀ + 0.2v)²</code>, independent of <i>v</i>. Do not upload this one
-    as a prediction.</p>
-  </article>
-  <article class="card feature">
-    <span class="badge blue">Historical research artifact — not slot-cleared</span>
-    <h3>DS-ranked, off-flank emission at the live-best mass</h3>
-    <p class="fileline">gemsdoe48-ds48-emission.tif</p>
-    <p>282,876 bytes · sha256 <code>a579081d…</code> ·
-    37,654 positive px · values in {0.0, 1.0} ·
-    <b>PASS</b> all format checks</p>
-    <p><a class="button primary" download href="../downloads/gemsdoe48-ds48-emission.tif">
-      ↓ Download emission .tif</a></p>
-    <p class="micro">Mass-neutral: exactly 37,654 px, the same as the best live
-    artifact, so it spends none of the removal budget. Measured against both independent truth
-    layers it gains on one and loses 5.8 %
-    on the other — see below.</p>
-  </article>
-</div>
-<div class="grid2">
-  <article class="card">
-    <span class="badge">Disagreement layer 1</span>
-    <h3>Unassigned belief <code>m₁₂(&Theta;)</code></h3>
-    <p class="fileline">gemsdoe48-ds48-mtheta.tif</p>
-    <p>The mass Dempster's rule leaves on the frame itself.
-    0.1600 where the two families agree,
-    0.2500 where they disagree.
-    1,189,415 B · sha256 <code>0a7f1d02…</code> ·
-    observed range <code>[0.1600, 0.2500]</code></p>
-    <p><a class="button" download href="../downloads/gemsdoe48-ds48-mtheta.tif">
-      ↓ Download m<sub>12</sub>(&Theta;) .tif</a></p>
-  </article>
-  <article class="card">
-    <span class="badge">Disagreement layer 2</span>
-    <h3>Conflict mass <code>K</code> (Shafer)</h3>
-    <p class="fileline">gemsdoe48-ds48-conflict.tif</p>
-    <p>Shafer's conflict, equal to Smets' mass on the empty set before normalisation. This is the
-    layer that shows <i>where</i> the two approaches actively contradict each other; Dempster's
-    renormalisation removes it from <code>m₁₂(&Theta;)</code>, which is why both are shipped.
-    1,211,081 B · sha256 <code>b7e39108…</code> ·
-    observed range <code>[0.0000, 0.3600]</code></p>
-    <p><a class="button" download href="../downloads/gemsdoe48-ds48-conflict.tif">
-      ↓ Download conflict K .tif</a></p>
-  </article>
-</div>
-</section>
-
-<section>
-<h2>Why the top score was 0.2778, in one table</h2>
-<p>The group's own live-recorded ladder. Every step up the ladder is a <b>removal</b>; no addition
-has ever improved a live score.</p>
-<table>
-<tr><th>artifact</th><th>emitted px</th><th>owner-reported live</th><th>what changed</th></tr>
-<tr><td><code>gems25-dotted-h19-5-d2-8</code></td><td>44,090</td><td>0.2600</td>
-    <td>spacing-tuned dotting of the H19-5 habitat field</td></tr>
-<tr><td><code>gems28-h27-4-r1-solo-d2-8</code></td><td>40,199</td><td>0.2708</td>
-    <td>remove every dot within 100 m of the catalogue (B = 1)</td></tr>
-<tr><td><code>gems32-h33-2-b2</code></td><td>37,654</td><td><b>0.2778</b></td>
-    <td>take the catalogue-flank buffer to B = 2 (200 m)</td></tr>
-<tr><td>B = 3 (300 m) — rejected</td><td>35,483</td><td>not shipped</td>
-    <td>safety 1.27 &lt; 2.0; wins only 3 of 4 blocks</td></tr>
-</table>
-<p><b>The mechanism, arithmetically.</b> With the official identity <code>FNw = |G| − TPw</code>,
-the metric is <code>DTI = TPw / (0.2·TPw + 0.2·FPw + 0.8·|G|)</code>. Deleting one unit of mass
-lowers the denominator by <code>0.2·(1 − k)</code> and the numerator by the credit it was
-earning. So <b>a dot is worth emitting iff its realised kernel weight exceeds
-<code>0.2·DTI</code></b> — 0.0556 at 0.2778. The measured live break-even is
-0.05416 credit per dot.
-Full derivation: <a href="research.html">Why 0.2778 won</a>.</p>
-</section>
-
-<section>
-<h2>What this session built, and what it falsified</h2>
-<div class="grid3">
-  <article class="card"><h3>Dempster&amp;ndash;Shafer fusion <span class="badge blue">DERIVED</span></h3><p>The dotted family and the tip / step-over family agree on 69.6 % of their pixels and disagree on 14,724. They are combined with Dempster&rsquo;s rule on the frame {F, &not;F} with Shafer reliability discounts a = 0.60. Belief is 0.8400 at agreement and 0.3750 where only one family supports a pixel.</p></article><article class="card"><h3>Not the naive mean &amp;mdash; measured <span class="badge blue">MEASURED</span></h3><p>Pearson r = 0.991085 and Spearman rho = 1.000000 on the union. Values differ (mean |delta| = 0.1423) but the <b>ranking is identical</b>, because a union pixel has belief 1 in its own family, so both statistics are monotone in the other family&rsquo;s belief alone. Reproduced honestly rather than claimed as a win.</p></article><article class="card"><h3>Three falsified arms <span class="badge blue">PROXY</span></h3><ul><li>DS corroboration removal at 9 radii: gate fails everywhere (best safety 0.64 &lt; 2.0).</li><li>Hexagonal covering-optimal re-emission at 11 spacings: <b>not cleanly falsified</b>. At matched mass the best arm (spacing 5.6 px, 37,499 dots) is x1.019 on the SGMC off-catalogue layer and x12.5 on the catalogue-in-corridor layer. The catalogue side is anti-monotone and carries no live information; the SGMC side is +1.9 %, inside the noise of re-sampling the same corridor. Historical proxy candidate only; not slot-cleared.</li><li>DS-ranked re-emission at matched mass: SGMC credit falls 5.8 %.</li></ul><p>Conclusion: <b>the emission is at a local optimum</b> and the binding constraint is detector quality. PROXY + DERIVED</p></article></div>
-</section>
-
-<section>
-<h2>Independent truth layers, and what each one says</h2>
-<table>
-<tr><th>truth layer</th><th>pixels</th><th>live-best base TPw</th><th>DS emission TPw</th><th>usable as a gate?</th></tr>
-<tr><td>published catalogue (organizer labels == existing faults)</td>
-    <td>60,988</td>
-    <td>378.0</td>
-    <td>1,362.1</td>
-    <td><b>No</b> — anti-monotone with the live ladder</td></tr>
-<tr><td>USGS SGMC faults &ge; 300 m from the catalogue</td>
-    <td>63,121</td>
-    <td>5,639.0</td>
-    <td>5,313.9</td>
-    <td>Partially — but the pure-SGMC arm scored 0.0512 live, near random</td></tr>
-</table>
-<p>The competition's hidden truth is a third population, roughly
-12,632 px of <i>newly identified</i> faults, that no file in this repository can see.
-Its size is <span class="badge">DERIVED</span> by inverting the live score pair through the
-official metric: <code>|G| = 12,632</code>, implied TPw = 4,914,
-and the two anchors agree to 0.13 %.</p>
-</section>
-
-  <footer><p>Historical sub-site rebuilt from <code>registry/</code> and <code>evidence/</code> by
-  <code>scripts/build_site_ds48.py</code>. Owner-reported scores are labelled
-  <span class="badge amber">OWNER-REPORT</span>; local measurements are labelled
-  <span class="badge blue">PROXY</span> or <span class="badge">DERIVED</span>.
-  No organizer score exists for any artifact in this repository.</p></footer>
+<div class="hero"><h1>DS48: preserved research, corrected claims</h1><p class="lead">An earlier experiment combined dotted-family and tip/step-over kernel-credit surfaces with Dempster–Shafer evidence theory. This sub-site now serves only as a forensic archive.</p></div>
+<section class="callout"><h2>Submission status</h2><p><strong>NOT OK TO SUBMIT. Do not spend a weekly slot on any DS48 artifact from this evidence.</strong> No organizer score or portal acceptance is established. The 0.2778 leaderboard attribution is owner-reported; the local-file-to-row link is not verified.</p><p><strong>OK TO DOWNLOAD FOR AUDIT; NOT CLEARED TO SUBMIT.</strong> The four archived outputs below are available for inspection only.</p></section>
+<section><h2>Archived artifacts</h2><div class="grid">
+<article class="card"><h3>Belief field</h3><p><code>Bel(F)</code> from the historical combination; local diagnostic, not a private-label score estimate.</p><p><a class="button" download href="../downloads/gemsdoe48-ds48-belief.tif">Download for audit</a></p></article>
+<article class="card"><h3>Binary emission</h3><p>Historical DS-ranked mask. The former live-score rationale and local-file attribution are withdrawn.</p><p><a class="button" download href="../downloads/gemsdoe48-ds48-emission.tif">Download for audit</a></p></article>
+<article class="card"><h3>Ignorance / unassigned mass</h3><p><code>m(Θ)</code> is ignorance mass under the stored combination, not conflict <code>K</code>.</p><p><a class="button" download href="../downloads/gemsdoe48-ds48-mtheta.tif">Download for audit</a></p></article>
+<article class="card"><h3>Conflict</h3><p><code>K</code> is the separate raw conjunctive conflict diagnostic. It is not interchangeable with <code>m(Θ)</code>.</p><p><a class="button" download href="../downloads/gemsdoe48-ds48-conflict.tif">Download for audit</a></p></article>
+</div></section>
+<section><h2>Metric correction</h2><p>The official metric uses truth-centred <code>TPw</code> and prediction-centred <code>FPw</code>. They are generally not complements. The old <code>FPw=S−TPw</code> inversion cannot infer hidden truth density, live thresholds, ceilings, or private-score scenarios. See the <a href="research.html">metric erratum</a> and the preserved <a href="../research/metric-identity-erratum-20261007.md">project-wide erratum</a>.</p></section>
+<section><h2>Leaderboard context</h2><p>The dated 2026-10-07 snapshot reports #1 <code>0.3774</code>, #7 <code>0.3195</code>, and #13 <code>0.2778</code> under <code>extradr19</code>. It is not evidence that the local DS48 TIFF or any parent TIFF produced those scores. See <a href="../data/leaderboard_20261007.json">the snapshot receipt</a>.</p></section>
+<section><h2>Preserved provenance</h2><p>See the annotated <a href="../../registry/submission_build.json">historical build receipt</a>, <a href="../hypotheses.html">current geological slate</a>, and <a href="../sources.html">current source register</a>. The former builder <code>scripts/build_site_ds48.py</code> now refuses to overwrite these corrected pages.</p></section>
+<footer><p>Historical public-proxy diagnostics are not private-label performance. File checks are not organizer acceptance.</p></footer>
 </main></body></html>

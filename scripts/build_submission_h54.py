@@ -1,36 +1,11 @@
 #!/usr/bin/env python3
-"""Build, re-read and audit the GEMSDOE48 H54 submission candidate.
+"""Retired H54 candidate builder — invalidated live-density gate; no default writes.
 
-H54 = Dempster-Shafer-diagnosed core + bounded novel content
------------------------------------------------------------
-Emission (binary, p = 1 on support - optimal for the official metric because a
-cell with expected kernel credit above 0.2*DTI is always worth full mass):
-
-  * the incumbent dotted family C (GEMSDOE48 H33-2-B2, 37,654 dots, owner-reported
-    live DTI 0.2778) is kept byte-for-byte at the support level;
-  * plus the strongest 1,000 line-persistent 3 m lidar-scarp cells from the
-    region-scale USGS 3DEP product (`data/external/h52_scarp3m_100m.tif`,
-    layer ``h_gate12``), each > 200 m from the public catalogue and > 200 m from
-    any C dot, Poisson-spaced at >= 3 px. The detector is label-free with respect
-    to the private truth; its pilot catalogue lift was 2.3-3.2x.
-
-Diagnostics (never merged into the emission, per the project brief):
-
-  * combined DS belief on the two families' kernel-credit surfaces with the
-    live-anchored discounts (a1 = 0.95, a2 = 0.95 * 0.2632/0.2778), normalized to
-    [0, 1] over the footprint;
-  * unassigned belief m(Theta) and raw conflict K as separate layers;
-  * the naive-average contrast check (Pearson / max-abs-difference).
-
-Honest status: `scripts/audit_candidate.py` (GATE-2, mass-neutral) does **not**
-clear this candidate. The 1,000 added cells buy ~0.010-0.014 credit per cell on a
-live-density-matched truth against a 0.0556 break-even bar, so the modelled live
-bracket is roughly -0.000 to -0.003. The additions are published because they are
-the only bounded source of genuinely novel, lidar-visible content available for
-Phase-2 evaluation, and the owner decides whether to spend a slot measuring them.
-
-Outputs are written to ``docs/downloads`` (primary TIFF + NaN/zero twins + zip)
-and the receipt to ``evidence/``.
+The historical H54 risk/bracket and addition selection cite an inversion-derived
+truth density and a universal 0.0556 per-cell bar. Those are invalid as score or
+promotion evidence under the corrected metric. Existing H54 artifacts are archival
+research only. This builder refuses by default; ``--legacy-audit-only`` is an
+explicit forensic opt-in. Local checks do not establish portal acceptance.
 """
 from __future__ import annotations
 
@@ -81,11 +56,17 @@ def load_h52_builder():
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--n-add", type=int, default=MAX_DOTS)
-    parser.add_argument("--out-dir", type=pathlib.Path, default=ROOT / "docs" / "downloads")
-    parser.add_argument("--diag-dir", type=pathlib.Path, default=ROOT / "docs" / "downloads" / "diagnostics")
+    forensic_root = ROOT / "evidence" / "forensic" / "h54-build"
+    parser.add_argument("--out-dir", type=pathlib.Path, default=forensic_root / "artifacts")
+    parser.add_argument("--diag-dir", type=pathlib.Path, default=forensic_root / "diagnostics")
     parser.add_argument("--receipt", type=pathlib.Path,
-                        default=ROOT / "evidence" / "build_h54_receipt_20261007.json")
+                        default=forensic_root / "build_h54_receipt_20261007.json")
+    parser.add_argument("--legacy-audit-only", action="store_true",
+                        help="required opt-in; uses invalidated H54 score-risk assumptions")
     args = parser.parse_args()
+    if not args.legacy_audit_only:
+        parser.error("retired H54 builder uses invalidated Gate-2 assumptions; no writes without --legacy-audit-only")
+    print("LEGACY H54 BUILD ONLY — INVALIDATED; NOT CLEARED TO SUBMIT")
     t0 = time.time()
 
     h52 = load_h52_builder()
@@ -197,6 +178,9 @@ def main() -> int:
 
     receipt = {
         "schema": "GEMSDOE48-h54-build-v1",
+        "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION",
+        "invalidation_reason": "The historical Gate-2 status used an invalid FPw=S-TPw inferred truth density and a non-universal 0.0556 threshold.",
+        "submission_decision": "NOT CLEARED TO SUBMIT; public-proxy comparisons do not establish private-label performance.",
         "generated_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         "artifact": {"file": str(primary.relative_to(ROOT)), "sha256": sha256_file(primary),
                      "bytes": primary.stat().st_size, **tags,
@@ -236,10 +220,8 @@ def main() -> int:
                          and not any(identical_parents.values())),
         },
         "blocked_proxy_diagnostic": proxy,
-        "status": "NOT_SLOT_CLEARED",
-        "status_basis": "scripts/audit_candidate.py (GATE-2): additions are worth ~0.010-0.014 credit/cell on a "
-                        "live-density-matched truth vs the 0.0556 break-even bar; see "
-                        "docs/research/credit-density-audit-20261007.md",
+        "status": "INVALIDATED_FORENSIC_ONLY_NOT_CLEARED_TO_SUBMIT",
+        "status_basis": "Historical Gate-2 verdict withdrawn: its density match used an invalid FPw=S-TPw inversion and universal 0.0556 threshold. See docs/research/credit-density-audit-20261007.md.",
         "evidence_class": {"measured": "format_checks, composition, ds_diagnostics, not_the_average_check, "
                                        "blocked_proxy_diagnostic",
                            "owner_reported": "live anchors 0.2778 / 0.2632 (registry/live_scores.json)",

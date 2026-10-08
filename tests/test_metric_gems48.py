@@ -148,13 +148,14 @@ def test_credit_per_dot_sums_to_tp():
     assert np.all((tot == 0) | (pred > 0))
 
 
-def test_mass_scaling_identity_used_by_live_anchor_inversions():
-    """Scaling every prediction by lambda leaves only the beta*K/T term changed.
+def test_exact_metric_prediction_scaling_identity_is_not_a_live_inverse():
+    """Check an algebraic identity; it does not identify hidden truth from owner scores.
 
-    1/DTI(lambda p) = alpha + alpha (F/T) + (beta/lambda)(K/T),  with alpha = 1 - beta = 0.2.
-    Hence  1/DTI(p/2) - 1/DTI(p) = beta K / T,
-    which is exactly the identity the GEMSDOE32 three-slot identification
-    experiment uses to recover the hidden truth-pixel count K.
+    Scaling p by lambda scales both TPw and FPw linearly while FNw changes as
+    N-lambda*TPw. Thus 1/DTI(lambda*p) = alpha*(1+FPw/TPw) +
+    (beta/lambda)*(N/TPw). For a known synthetic truth mask this implies
+    1/DTI(p/2)-1/DTI(p)=beta*N/TPw. No claim is made that owner-reported scores
+    plus emitted counts invert the organizer's hidden truth or local file linkage.
     """
     rng = np.random.default_rng(3)
     truth = rng.random((35, 35)) < 0.08

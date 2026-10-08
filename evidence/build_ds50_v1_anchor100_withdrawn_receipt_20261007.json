@@ -4,14 +4,14 @@
   "candidate_id": "H50",
   "submission_status": "UNSCORED_RESEARCH_CANDIDATE",
   "submission_name": "GEMSDOE48-H50-DS-B2xH36",
-  "submission_note": "GEMSDOE48 H50 | Dempster fusion, best dotted H33-2-B2 (0.2778) x best tip H36-1 rung30 (0.2710); kernel-credit beliefs, live-anchored discounts; m(Theta)+K diagnostics; unscored research candidate.",
-  "submission_note_length": 197,
+  "submission_note": "WITHDRAWN BUILD — NOT OK TO SUBMIT. Replaced by the later audited H50 archive; no organizer acceptance or score attribution is established.",
+  "submission_note_length": 139,
   "primary_file": "docs/downloads/gemsdoe48-h50-ds-b2xh36rung30-20261007-2c01d212-zeros.tif",
   "primary_sha256": "2c01d21239ae7a2a5f39dc21dd5b63126f70c072d6993baf4aae1349ed86b0db",
   "primary_bytes": 1292713,
   "zip_file": "docs/downloads/gemsdoe48-h50-ds-b2xh36rung30-20261007-2c01d212-zeros.zip",
   "zip_sha256": "692e79e79b82feddf0dd45d85096c248e45af6e36d173abc5bf3ef7d70919de8",
-  "encoding": "all-finite float32 in [0,1]; zeros outside footprint (portal-safe per GEMSDOE32/33 precedent)",
+  "encoding": "Historical local encoding choice only; not verified as portal-safe and not evidence of organizer acceptance.",
   "diagnostics": {
     "unassigned_mass_mTheta": {
       "path": "docs/downloads/diagnostics/gemsdoe48-h50-unassigned-mTheta-20261007-2c01d212.tif",
@@ -205,5 +205,9 @@
     "zero_outside_footprint": true
   },
   "organizer_score": null,
-  "score_claim": "No organizer score exists for this artifact; no leaderboard projection is claimed."
+  "score_claim": "No organizer score exists for this artifact; no private-label performance or leaderboard projection is claimed.",
+  "historical_submission_note_withdrawn": "GEMSDOE48 H50 | Dempster fusion, best dotted H33-2-B2 (0.2778) x best tip H36-1 rung30 (0.2710); kernel-credit beliefs, live-anchored discounts; m(Theta)+K diagnostics; unscored research candidate.",
+  "validity_status": "WITHDRAWN_HISTORICAL_BUILD_FORENSIC_ONLY",
+  "promotion_decision": "NOT CLEARED TO SUBMIT",
+  "interpretation_scope": "Superseded local build and format/DS diagnostics only; no organizer score, portal acceptance, or file-to-leaderboard link."
 }

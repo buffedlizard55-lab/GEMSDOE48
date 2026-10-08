@@ -1,42 +1,24 @@
 #!/usr/bin/env python3
-"""Mass-neutral candidate audit against the frozen blocked proxy (GEMSDOE48-GATE-2).
+"""RETIRED: historical GEMSDOE48-GATE-2 proxy audit; not valid for promotion.
 
-Why this exists
----------------
-The 2026-10-06/07 gate compared candidates at *unequal emitted mass* on the
-frozen blocked SGMC off-catalogue proxy. That proxy truth is ~4.3x denser than
-the live hidden truth inferred from the owner-reported ladder (62,122 proxy
-pixels vs ~14,307 live truth pixels), so its per-cell credit is inflated for any
-new cell, and its ranking is dominated by how much mass a candidate emits.
-Measured control: C + 18,000 *random* new cells scores 0.1189 mean4 on the
-proxy, beating C (0.0956) and H49 (0.1010) - a curated candidate cannot be
-certified by that comparison.
+The original protocol compared equal-mass surfaces and randomly thinned a public
+SGMC proxy to ``LIVE_TRUTH_PX = 14,307``. That count came from an invalid
+``FPw = S - TPw`` hidden-truth inversion. It also applied ``0.05556`` as a
+universal live break-even bar, although that condition only follows under
+restrictive assumptions about the increments to both truth-centred T and
+prediction-centred Q. The metric-identity erratum invalidates the inferred
+truth-density calibration and the general interpretation of this threshold.
 
-This tool implements the mass-neutral part of the corrected gate:
+The code is retained only to reproduce historical receipts. Its PASS/FAIL,
+density-matched values and live-scaled threshold MUST NOT be used to promote a
+candidate or claim private-label performance. A re-derived, independently
+validated gate is required before a future promotion. Local format checks and
+equal-mass public-proxy scores may still be inspected as historical diagnostics.
 
-1. Format block  - independent re-read; must be single-band float32 on the
-   pinned competition grid with finite in-[0,1] values inside the footprint.
-2. Equal-mass block - the candidate's support is uniformly subsampled to the
-   incumbent's cell count and scored on the frozen proxy. This measures *credit
-   density*, the quantity the live ladder actually rewards (the local ladder
-   A->B->C held T constant at ~5,270 while mass fell; denser submissions rank
-   below the sparse dotted family).
-3. Additions block - cells the candidate emits that the incumbent does not are
-   scored for marginal credit per added cell on (a) the raw frozen proxy and
-   (b) a *density-matched* proxy: the proxy truth is randomly thinned to the
-   live-truth pixel count, which removes the ~4.3x density inflation of new
-   cells. The pass bar is the metric's own break-even rule
-   `credit_bar = 0.2 * DTI_incumbent`, because adding one unit of mass pays only
-   if it brings more than that much new kernel credit.
+Usage for forensic reproduction only (requires an explicit opt-in):
+    python scripts/audit_candidate.py CANDIDATE.tif --legacy-audit-only --receipt evidence/audit_x.json
 
-Verdicts are conservative: PASS requires both the equal-mass and the
-density-matched additions tests. FAIL means the candidate destroys credit
-density relative to the incumbent under this instrument. This is still a public
-proxy - never an organizer score.
-
-Usage
------
-    python scripts/audit_candidate.py docs/downloads/<candidate>.tif --receipt evidence/audit_x.json
+See ``docs/research/metric-identity-erratum-20261007.md``.
 """
 from __future__ import annotations
 
@@ -59,7 +41,7 @@ RADIUS_M = 300.0
 ALPHA = 0.2
 BETA = 0.8
 PIXEL_YX_M = (100.0, 100.0)
-LIVE_TRUTH_PX = 14307  # live-ladder inversion (see docs/research/credit-density-audit-20261007.md)
+LIVE_TRUTH_PX = 14307  # HISTORICAL ONLY: invalid FPw=S-TPw inversion; do not use for promotion
 INCUMBENT_LIVE_DTI = 0.2778  # owner-reported ladder value for the incumbent; not organizer-authenticated
 EQUAL_MASS_TOLERANCE = -0.002  # subsample repeat-resolution of the equal-mass test
 DEFAULT_INCUMBENT = ROOT / "data/raw/scored/b2_02778.tif"
@@ -67,6 +49,11 @@ DEFAULT_LABELS = ROOT / "data/official/labels.tif"
 DEFAULT_SGMC = ROOT / "data/official/derived_sgmc_faults_100m.tif"
 DEFAULT_FOOTPRINT = ROOT / "data/source_mirrors/footprint-mask.tif"
 EXPECTED_GRID = (3730, 3292)
+VALIDITY_STATUS = "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION"
+INVALIDATION_REASON = (
+    "The historical density match uses a hidden-truth count inferred through the invalid "
+    "FPw=S-TPw substitution, and its 0.05556 threshold is not universal."
+)
 
 
 def sha256(path: Path) -> str:
@@ -113,8 +100,11 @@ def grid_ok(info: dict) -> bool:
 
 
 def decide(*, format_ok: bool, identical: bool, equal_mass_delta: float, n_added: int,
-           density_matched_credit: float, bar_live: float, bar_proxy: float) -> tuple[str, list[str]]:
-    """Mass-neutral verdict logic (pure function; unit-tested)."""
+           density_matched_credit: float, bar_live: float, bar_proxy: float,
+           legacy_audit_only: bool = False) -> tuple[str, list[str]]:
+    """Reproduce the retired Gate-2 verdict logic for forensic comparison only."""
+    if not legacy_audit_only:
+        raise RuntimeError("invalidated Gate-2 decision logic; explicit legacy_audit_only=True is required")
     reasons: list[str] = []
     if not format_ok:
         reasons.append("format_or_range_failed")
@@ -139,14 +129,18 @@ def decide(*, format_ok: bool, identical: bool, equal_mass_delta: float, n_added
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("candidate", type=Path)
+    parser.add_argument("--legacy-audit-only", action="store_true",
+                        help="required opt-in: reproduce the invalidated historical Gate-2 proxy diagnostic only")
     parser.add_argument("--incumbent", type=Path, default=DEFAULT_INCUMBENT)
     parser.add_argument("--labels", type=Path, default=DEFAULT_LABELS)
     parser.add_argument("--sgmc", type=Path, default=DEFAULT_SGMC)
     parser.add_argument("--footprint", type=Path, default=DEFAULT_FOOTPRINT)
     parser.add_argument("--equal-mass-seeds", type=int, default=3)
     parser.add_argument("--density-match-seeds", type=int, default=5)
-    parser.add_argument("--live-truth-px", type=int, default=LIVE_TRUTH_PX)
-    parser.add_argument("--incumbent-live-dti", type=float, default=INCUMBENT_LIVE_DTI)
+    parser.add_argument("--live-truth-px", type=int, default=LIVE_TRUTH_PX,
+                        help="historical inferred density (invalidated); retained for forensic reproduction")
+    parser.add_argument("--incumbent-live-dti", type=float, default=INCUMBENT_LIVE_DTI,
+                        help="owner-reported historical anchor; not organizer-authenticated")
     parser.add_argument("--support-threshold", type=float, default=0.0,
                         help="cells with candidate value > threshold count as emitted (use >0 for graded "
                              "candidates; the mass-neutral blocks assume a near-binary emission)")
@@ -154,6 +148,11 @@ def main() -> int:
                         help="also score a uniform-random equal-mass control drawn from the allowed pool")
     parser.add_argument("--receipt", type=Path)
     args = parser.parse_args()
+    if not args.legacy_audit_only:
+        parser.error(
+            "the historical Gate-2 calibration is invalidated; no current promotion audit is available. "
+            "Use --legacy-audit-only only to reproduce old receipts."
+        )
 
     cand, cand_info = read_surface(args.candidate)
     incumbent, inc_info = read_surface(args.incumbent)
@@ -279,7 +278,7 @@ def main() -> int:
         })
 
     # --------------------------------------------------------------- verdict
-    verdict, reasons = decide(
+    legacy_verdict, legacy_reasons = decide(
         format_ok=bool(format_block["bands_dtype_crs_shape_ok"] and format_block["portal_range_ok"]),
         identical=bool(np.array_equal(support, incumbent_support)),
         equal_mass_delta=equal_mass_delta,
@@ -287,16 +286,23 @@ def main() -> int:
         density_matched_credit=addition_block.get("density_matched_credit_per_cell", 0.0),
         bar_live=bar_live,
         bar_proxy=bar_proxy,
+        legacy_audit_only=True,
     )
 
     report = {
         "schema": "GEMSDOE48-candidate-audit-v1",
         "generated_utc": datetime.now(timezone.utc).isoformat(),
-        "protocol": "GEMSDOE48-GATE-2 (mass-neutral): equal-mass credit density vs incumbent + "
-                    "density-matched marginal credit of added cells vs the metric break-even bar",
-        "warning": "Public-proxy instrument only; not the private expert truth and not an organizer score. "
-                   "PASS does not authorize an upload by itself; it means the candidate survives the "
-                   "mass-neutral screen that the 2026-10-06 gate failed to apply.",
+        "protocol": "RETIRED historical GEMSDOE48-GATE-2 reproduction; equal-mass public proxy + "
+                    "density-matched test using an invalid inferred live-truth count",
+        "protocol_status": "INVALIDATED_DO_NOT_USE_FOR_PROMOTION",
+        "validity_status": VALIDITY_STATUS,
+        "invalidation_reason": INVALIDATION_REASON,
+        "promotion_use": "NONE — historical forensic reproduction only.",
+        "leaderboard_linkage": "No organizer receipt links owner-reported anchors to the local TIFF bytes.",
+        "warning": "Forensic reproduction only. Public proxy, not private truth or an organizer score. "
+                   "The density match uses an invalid FPw=S-TPw inversion and the 0.05556 threshold "
+                   "is not a universal break-even rule. PASS/FAIL does not authorize or clear any upload.",
+        "legacy_opt_in_required": True,
         "candidate": cand_info,
         "incumbent": inc_info,
         "counts": {
@@ -319,18 +325,21 @@ def main() -> int:
             "per_seed": equal_mass,
         },
         "additions": addition_block,
-        "verdict": verdict,
-        "reasons": reasons,
+        "legacy_verdict": legacy_verdict,
+        "legacy_reasons": legacy_reasons,
+        "verdict": "INVALIDATED_FOR_FORENSIC_REPRODUCTION_ONLY",
+        "reasons": ["Historical verdict is invalidated; see validity_status and invalidation_reason."],
     }
     if args.receipt:
         args.receipt.parent.mkdir(parents=True, exist_ok=True)
         args.receipt.write_text(json.dumps(report, indent=2) + "\n")
-    print(json.dumps({k: report[k] for k in ("verdict", "reasons", "counts", "equal_mass", "additions")}, indent=2))
-    print(f"\nincumbent proxy mean4={incumbent_score['mean4']:.6f}  candidate mean4={candidate_score['mean4']:.6f}")
-    print(f"equal-mass mean4={equal_mass_mean4:.6f} (delta {equal_mass_delta:+.6f})")
+    print("LEGACY AUDIT ONLY — INVALIDATED; DO NOT USE FOR PROMOTION")
+    print(json.dumps({k: report[k] for k in ("verdict", "legacy_verdict", "reasons", "counts", "equal_mass", "additions")}, indent=2))
+    print(f"\nincumbent proxy mean4={incumbent_score['mean4']:.6f}  candidate proxy mean4={candidate_score['mean4']:.6f}")
+    print(f"historical equal-mass mean4={equal_mass_mean4:.6f} (delta {equal_mass_delta:+.6f}; not a gate)")
     if args.receipt:
         print(f"receipt -> {args.receipt}")
-    return 0 if verdict.startswith("PASS") or verdict.startswith("IDENTICAL") else 2
+    return 0
 
 
 if __name__ == "__main__":

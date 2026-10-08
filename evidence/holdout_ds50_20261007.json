@@ -989,5 +989,8 @@
     "Catalogue and SGMC proxies are not the private expert-labelled target.",
     "Owner mirrors are not organizer-authenticated; reuse licenses unverified.",
     "No leaderboard score is estimated here."
-  ]
+  ],
+  "validity_status": "PUBLIC_PROXY_DIAGNOSTIC_ONLY_NOT_PRIVATE_LABEL_PERFORMANCE",
+  "interpretation_scope": "Conditional spatially blocked diagnostics against public catalogue/SGMC proxies; frozen surfaces and prior knowledge limit independence. Not an organizer score or file-to-leaderboard link.",
+  "promotion_decision": "NOT CLEARED TO SUBMIT"
 }

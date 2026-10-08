@@ -1,27 +1,33 @@
-# Historical credit-density audit — public-proxy diagnostics only
+# Retired Gate-2 / credit-density audit — invalidated 2026-10-07
 
-> **Correction (2026-10-07): this is not a validated promotion gate.** The “density-matched” analysis used an assumed hidden-truth count derived from the now-retracted `FPw=S−TPw` inversion, and its universal `0.0556` per-cell bar is not supported for arbitrary raster additions. Neither a pass nor a fail under `GEMSDOE48-GATE-2` establishes private-label performance, a score bound, or slot clearance. Preserve the calculations and receipts as provenance, not as current decision criteria.
+> **INVALIDATED — FORENSIC RECEIPTS ONLY. No result in the former Gate-2 audit is a promotion-grade pass/fail or a claim about hidden/private truth.** The historical density-matching protocol derived a notional live-truth count from owner-reported scores using `FPw = S − TPw`; that is generally false for the official metric. The same protocol then treated `0.05556` as a universal per-cell break-even threshold. Neither basis is valid as a general promotion rule. Do not interpret old `PASS_MASS_NEUTRAL` / `FAIL_MASS_NEUTRAL` values as current clearance.
 
-## What remains directly measured
+## What was invalidated
 
-The audit script compared candidate rasters against public map layers under the named four-quadrant/core-plus-halo protocol. Raw own-mass and equal-mass DTI values in the original receipt are computations on those particular public rasters; they do not estimate private-label scores. The machine-readable roll-up is [`evidence/credit_density_audit_20261007.json`](../../evidence/credit_density_audit_20261007.json), with per-candidate GATE-2 receipts indexed there. The historical protocol and artifacts are preserved in `scripts/audit_candidate.py` and the receipts.
+The earlier version of this report treated the following as measured or decision-ready. They are **historical calculations under a now-invalid assumption**, not established facts:
 
-The SGMC off-catalogue set contained 62,122 public-proxy pixels, and a historical random-addition control scored 0.118872 versus 0.095607 for the then-incumbent C under that proxy protocol. Those observations describe proxy density and sensitivity to added mass; they do not establish that random mass performs well on private expert labels or that prior candidates failed on the organizer test set.
+- SGMC public-proxy density compared with a purported live hidden-truth density of about 14,307 pixels;
+- the resulting density-matched proxy means, marginal-credit figures, and candidate verdicts;
+- the universal `0.05556` per-cell bar and the associated raw-proxy scaling;
+- inferred hidden-truth counts, inverted true-positive totals, live-equivalent scenarios, reachability/ceiling statements, and H55's mass-neutral verdict;
+- any conclusion that these quantities establish a general promotion gate or private-label performance.
 
-## What is withdrawn
+For the exact metric and a counterexample showing why `FPw = S − TPw` fails, see the [metric-identity erratum](metric-identity-erratum-20261007.md). In the official metric, `TPw = T` is truth-centred and `FPw = S − Q` is prediction-centred; `Q` and `T` are generally unequal. An owner-reported leaderboard value and emitted-pixel count do not identify the hidden truth count.
 
-1. The “live hidden truth” count of approximately 14,307 was inferred from owner-reported scores using `FPw=S−TPw`. That identity is generally false; the count is not a measured private-label total.
-2. Thinning the public proxy to that assumed count does not reproduce the unknown private label distribution. Density matching is an exploratory sensitivity analysis only.
-3. The `0.0556` hurdle was treated as a universal added-cell break-even threshold. The restricted one-pixel algebra does not justify applying it to arbitrary raster additions. See the [metric-identity erratum](metric-identity-erratum-20261007.md) for the correct `TPw`/`FPw` definitions and the coordinate-wise binary-maximizer proof.
-4. The old pass/fail outcomes and statements that H52/H54 or any prior candidate did or did not “clear” a private-label gate are not supported by this audit. Its GATE-2 `FAIL` is a historical receipt label, not an organizer score or upload recommendation.
+## What remains reproducible
 
-## Current candidate decision protocol
+The original JSON receipts and candidate rasters are retained as dated forensic artifacts. They document what the old implementation computed, but the stored values must be read with the invalidation fields and this warning:
 
-A public-proxy holdout can support a **relative proxy comparison** only when the candidate, baseline, masks, source construction, spatial blocks, and scoring code are matched and frozen. It cannot establish private-label transfer. H56B-NF loses to H49 on all four folds for each of the two public proxies (catalogue means 0.056305 vs 0.095353; SGMC off-catalogue 0.068987 vs 0.100751), so it is not recommended for submission; see the [H56B-NF review](h56b-review-erratum-20261007.md) and matched receipts. No current weekly slot is cleared.
+- [`evidence/credit_density_audit_20261007.json`](../../evidence/credit_density_audit_20261007.json) — historical summary table and protocol inputs.
+- [`evidence/audit_gate2_h55_20261007.json`](../../evidence/audit_gate2_h55_20261007.json) — H55's historical equal-mass delta `−0.002014`, density-matched credit `0.010245`, and old `0.05556` threshold; **not a valid promotion decision**.
+- [`evidence/live_ladder_20261007.json`](../../evidence/live_ladder_20261007.json), [`evidence/live_model_calibration_20261007.json`](../../evidence/live_model_calibration_20261007.json), and [`evidence/lam3_residual_probe_20261007.json`](../../evidence/lam3_residual_probe_20261007.json) — historical inversions/fits and downstream scenarios, invalidated for score estimation and promotion.
+- [`scripts/audit_candidate.py`](../../scripts/audit_candidate.py) — refuses to run unless `--legacy-audit-only` is supplied. That option reproduces the former calculations for forensic comparison only; its output is not a gate.
+- [`scripts/calibrate_live_model.py`](../../scripts/calibrate_live_model.py), [`scripts/live_ladder_analysis.py`](../../scripts/live_ladder_analysis.py), and [`scripts/lam3_residual_probe.py`](../../scripts/lam3_residual_probe.py) — historical model tools; their score-inversion outputs must not be used as truth estimates or promotion evidence.
 
-## Provenance and limitations
+Equal-emitted-mass scores and ordinary blocked-holdout scores against the named public masks are direct **public-proxy observations** under their recorded evaluation protocol. They are not private-label scores, a hidden-truth density estimate, an organizer score, or proof that an equal-mass gate is sufficient for promotion. Random controls remain useful diagnostics, but cannot rehabilitate the invalid density conversion or threshold.
 
-- Original input/output hashes and measured summaries: [`evidence/credit_density_audit_20261007.json`](../../evidence/credit_density_audit_20261007.json).
-- Original per-artifact computations: the receipt files listed in that JSON.
-- Historical tool: [`scripts/audit_candidate.py`](../../scripts/audit_candidate.py); do not treat its legacy `GEMSDOE48-GATE-2` status as a validated promotion gate.
-- No organizer score, private expert-label access, organizer file-to-score receipt, or portal acceptance is present in this audit.
+## Current decision and replacement requirements
+
+**No candidate has a promotion-grade Gate-2 pass. No weekly submission slot is cleared.** The H56B, H56 open-world, H56-F, and current-branch H57-A evidence is summarized in the [current validation page](../validation.html); those reports compare candidates with H49 on fixed public proxies and are explicitly conditional diagnostics. A separate H57-RELIEF artifact has a dedicated [metric-identity erratum](h57-relief-metric-erratum-20261007.md); its old live projection is withdrawn.
+
+Before any future Gate-2-style policy can be used for promotion, its estimand and pass rule must be re-derived without inferring private truth density from an unverified score. It must be validated against synthetic cases with known truth, checked against the exact official `T` and `Q` computations, compared on spatially blocked public proxies, and reviewed separately from portal acceptance and owner slot authorization. Until that work is completed, the legacy tool and its PASS/FAIL labels cannot clear a candidate.

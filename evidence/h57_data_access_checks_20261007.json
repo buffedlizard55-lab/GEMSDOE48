@@ -1,0 +1,99 @@
+{
+  "checked_utc": "2026-10-07T21:12:03Z",
+  "purpose": "source-page and query-level availability checks performed before freezing the H57 slate; availability is not predictive usefulness or a license determination",
+  "competition_footprint_bbox_wgs84": {
+    "derived_from": "data/raw/sample_submission_template.tif, EPSG:32611 bounds transformed by rasterio",
+    "west": -120.03717095080793,
+    "south": 37.33119286569775,
+    "east": -116.14092181157623,
+    "north": 40.72787799633184
+  },
+  "sources": [
+    {
+      "hypothesis": "H57-A",
+      "source": "USGS GeoDAWN data release",
+      "official_url": "https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and",
+      "doi": "https://doi.org/10.5066/P93LGLVQ",
+      "availability": "official release page describes public airborne magnetic and radiometric survey products; local radiometric mirror is present and SHA-pinned; magnetic extension can be restored from public owner-mirror GitHub via an existing script",
+      "local_mirror_sha256": "c22420f75999030d7cc65c9e31e50d232ea6158423bca051613a18a8b20ba682",
+      "extension_expected_sha256": "a35a9c6d2a14786f4dab85481ee59769213072f5dab5b2535ea82ae4d9bb7d9b",
+      "caveat": "Local byte identity is mirror-to-pin only. No direct USGS payload retrieval, organizer authentication, extension metadata audit, or competition-use licence determination was performed before freeze."
+    },
+    {
+      "hypothesis": "H57-B",
+      "source": "USGS ComCat FDSN Event API",
+      "official_url": "https://earthquake.usgs.gov/fdsnws/event/1/",
+      "query_url": "https://earthquake.usgs.gov/fdsnws/event/1/count?starttime=1900-01-01&endtime=2026-10-07&minlatitude=37.331&maxlatitude=40.728&minlongitude=-120.038&maxlongitude=-116.141&minmagnitude=4.5&producttype=focal-mechanism",
+      "query_result": 98,
+      "query_result_unit": "events",
+      "query_result_definition": "USGS count response for 1900-01-01 through 2026-10-07, M>=4.5, competition-area WGS84 bounding box, producttype=focal-mechanism",
+      "availability": "count endpoint returned HTTP 200 and 98; the separate event query demonstrated focal-mechanism products in example records, but no complete records or product fields were downloaded for the target box",
+      "caveat": "Count is not a coverage, completeness, mechanism quality, or reuse-rights audit."
+    },
+    {
+      "hypothesis": "H57-C",
+      "source": "USGS 3DEP DEM and National Hydrography/3DHP",
+      "official_urls": [
+        "https://www.usgs.gov/faqs/what-is-the-coverage-of-3d-elevation-program-3dep-dems",
+        "https://www.usgs.gov/faqs/how-can-i-download-3d-elevation-program-3dep-standard-dem-data-bulk",
+        "https://www.usgs.gov/national-hydrography/access-national-hydrography-products"
+      ],
+      "availability": "USGS documents 1 m DEM where available, availability maps and free download routes; USGS identifies current 3DHP access and public hydrography products",
+      "local_coverage": "two 3 m pilot DEM tiles only; no full-footprint channel network/DEM mosaic is staged",
+      "caveat": "Neither complete 1 m coverage nor 3DHP product coverage over the competition raster was checked."
+    },
+    {
+      "hypothesis": "H57-D",
+      "source": "USGS National Geochemical Survey",
+      "official_url": "https://mrdata.usgs.gov/geochem/",
+      "availability": "official page lists public downloads, including 74,409-sample shapefile package and 77,212-record CSV package with 287 attributes",
+      "local_coverage": "no NGS payload or target-area sample-count report is in this checkout",
+      "caveat": "National counts do not establish ROI density, method consistency, data-use licence for this competition, or suitability for a fault detector."
+    },
+    {
+      "hypothesis": "all candidates",
+      "source": "DrivenData GEMS problem/metric page",
+      "official_url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+      "availability": "official page states target faults were expert-identified faults absent from the public USGS database; provides DTI equation, 300 m triangular support, alpha=0.2, beta=0.8, and submission file requirements",
+      "license_rule": "external data must be licensed for competition use and sharing with the sponsor",
+      "caveat": "Public source availability does not itself satisfy sponsor-sharing licence conditions."
+    }
+  ],
+  "data_not_verified": [
+    "local owner mirrors are not organizer-authenticated",
+    "no private expert labels or private leaderboard test data were accessed",
+    "no USGS NGS target-area counts or complete 3DEP/3DHP footprint inventory was obtained",
+    "the full training_features.tif is absent from the tracked checkout and is not needed by the H57-A transform"
+  ],
+  "post_freeze_source_validation": {
+    "checked_utc": "2026-10-07T21:20:51.692328Z",
+    "source": "owner-mirror restoration only; not an official USGS download or organizer-authenticated artifact",
+    "command": "./.venv/bin/python scripts/restore_h55_inputs.py --only geodawn_extensions_u8",
+    "restore_result": "SHA-256 matched pinned owner mirror",
+    "path": "data/raw/external/geodawn_extensions_u8.tif (git-ignored, not added to Git)",
+    "sha256": "a35a9c6d2a14786f4dab85481ee59769213072f5dab5b2535ea82ae4d9bb7d9b",
+    "bytes": 27132925,
+    "grid": {
+      "crs": "EPSG:32611",
+      "width": 3292,
+      "height": 3730,
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ]
+    },
+    "bands": [
+      "ThK",
+      "UK",
+      "UTh",
+      "TMI_up150"
+    ],
+    "dtype": "uint8",
+    "nodata": 0,
+    "checks": "TMI_up150 band and grid match required H57-A inputs; zero denotes the mirror nodata mask; gradient extraction will erode nodata edges before scoring"
+  }
+}

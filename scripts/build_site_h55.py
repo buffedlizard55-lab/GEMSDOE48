@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""Build the H55 GitHub Pages set from the receipts.
+"""RETIRED H55 site generator — do not run.
 
-Every number on these pages is read out of a receipt written by
-``scripts/calibrate_live_model.py``, ``scripts/build_submission_h55.py``,
-``scripts/audit_h55.py``, ``scripts/validate_submission.py`` or
-``scripts/run_spatial_holdout.py``.  Nothing is transcribed by hand, so the site cannot
-drift from the artifacts.
+This legacy script renders H55-era pages containing score inversions invalidated
+by ``docs/research/metric-identity-erratum-20261007.md``. Its ``main`` function
+used to overwrite the manually maintained active pages in ``docs/``. It is kept
+only so old rendering functions can be inspected/tested; it no longer writes files.
 
-Usage:  python scripts/build_site_h55.py
+Update current static pages manually alongside their evidence receipts. No flag
+is provided to force regeneration of the obsolete site.
 """
 from __future__ import annotations
 
@@ -1352,28 +1352,11 @@ the 0.2778 leaderboard row, which belongs to <code>extradr19</code>.</p>
 
 
 def main() -> int:
-    # This builder is for archived H55 pages. Never silently overwrite the
-    # current H56 landing page or its verified one-click downloads.
-    current = DOCS / "index.html"
-    if current.exists() and "GEMSDOE48 — H56" in current.read_text(encoding="utf-8"):
-        raise SystemExit("Refusing to overwrite the current H56 site with archived H55 pages")
-    pages = {
-        "research.html": build_research(),
-        "leaderboard.html": build_leaderboard(),
-        "index.html": build_index(),
-        "executive-summary.html": build_exec(),
-        "submission-guide.html": build_guide(),
-        "method.html": build_method(),
-        "hypotheses.html": build_hypotheses(),
-        "validation.html": build_validation(),
-        "irregularities.html": build_irregularities(),
-        "sources.html": build_sources(),
-        "next-steps.html": build_next(),
-    }
-    for name, text in pages.items():
-        (DOCS / name).write_text(text, encoding="utf-8")
-        print(f"wrote docs/{name}  {len(text):,} bytes")
-    return 0
+    raise SystemExit(
+        "build_site_h55.py is retired: it would overwrite current docs/*.html pages "
+        "with H55-era content containing invalidated score projections. No files were written. "
+        "Update the manually maintained pages directly."
+    )
 
 
 if __name__ == "__main__":

@@ -4,7 +4,7 @@
   "candidate_id": "H50",
   "submission_status": "UNSCORED_RESEARCH_CANDIDATE",
   "submission_name": "GEMSDOE48-H50-DS-B2xH36",
-  "submission_note": "GEMSDOE48 H50 | Dempster fusion, best dotted H33-2-B2 (0.2778) x best tip H36-1 rung30 (0.2710); kernel-credit beliefs, live-anchored discounts; m(Theta)+K diagnostics; unscored research candidate.",
+  "submission_note": "ARCHIVAL RESEARCH ONLY — NOT OK TO SUBMIT. No organizer score, portal acceptance, or local-file-to-leaderboard linkage is established.",
   "submission_note_length": 197,
   "primary_file": "docs/downloads/gemsdoe48-h50-ds-b2xh36rung30-20261007-5b59e106-zeros.tif",
   "primary_sha256": "5b59e106b6e448038b96fb340c5bae39094d4558c239c437aea28b6020d5d32f",
@@ -36,7 +36,7 @@
     "sha256": "54dfe8bd79f767370558bebc1c23366cb43e5e5a4b26c7d9d14131c8b58bdc0c",
     "purpose": "official sample-template convention (NaN/nodata outside); passes scripts/validate_submission.py; in-footprint values identical to the primary"
   },
-  "encoding": "all-finite float32 in [0,1]; zeros outside footprint (portal-safe per GEMSDOE32/33 precedent)",
+  "encoding": "Historical local encoding choice only; not verified as portal-safe and not evidence of organizer acceptance.",
   "diagnostics": {
     "unassigned_mass_mTheta": {
       "path": "docs/downloads/diagnostics/gemsdoe48-h50-unassigned-mTheta-20261007-5b59e106.tif",
@@ -241,5 +241,11 @@
     "zero_outside_footprint": true
   },
   "organizer_score": null,
-  "score_claim": "No organizer score exists for this artifact; no leaderboard projection is claimed."
+  "score_claim": "No organizer score exists for this artifact; no leaderboard projection or private-label performance is claimed.",
+  "validity_status": "HISTORICAL_LOCAL_BUILD_AND_PROXY_DIAGNOSTICS_ONLY_NOT_CLEARED_TO_SUBMIT",
+  "promotion_decision": "NOT CLEARED TO SUBMIT",
+  "leaderboard_linkage": "The 0.2778 and 0.2710 values are owner-reported; no organizer receipt links them to local TIFF bytes.",
+  "historical_submission_note_withdrawn": "GEMSDOE48 H50 | Dempster fusion, best dotted H33-2-B2 (0.2778) x best tip H36-1 rung30 (0.2710); kernel-credit beliefs, live-anchored discounts; m(Theta)+K diagnostics; unscored research candidate.",
+  "interpretation_scope": "Local format, DS arithmetic, and named public-proxy diagnostics only. Reliability discounts are assumptions, not calibrated performance.",
+  "encoding_status": "LOCAL_CHECK_ONLY_NOT_ORGANIZER_OR_PORTAL_VERIFIED"
 }

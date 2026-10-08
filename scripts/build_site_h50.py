@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Generate the docs/h50 research sub-site from the machine receipts.
+"""RETIRED H50 site generator — do not run.
 
-Every number on these pages is read from evidence JSON receipts at build time;
-nothing is hand-typed into the HTML.  The sub-site lives in its own directory
-and never overwrites the repository landing page or the other sessions'
-sub-sites (docs/ds48-fusion, docs/h49).
+The previous generator rendered obsolete H50 threshold and score-anchor claims
+into ``docs/h50/``. The archived pages have been corrected manually; this script
+is retained only as historical source and its ``main`` refuses to write files.
+No force flag is provided, so it cannot silently restore invalidated claims.
 """
 from __future__ import annotations
 
@@ -312,15 +312,11 @@ format rewrite. None of these bytes is organizer-authenticated.</p>
 
 
 def main() -> int:
-    OUT.mkdir(parents=True, exist_ok=True)
-    (OUT / ".nojekyll").write_text("")
-    (OUT / "index.html").write_text(build_index())
-    (OUT / "executive-summary.html").write_text(build_exec())
-    (OUT / "method.html").write_text(build_method())
-    (OUT / "hypotheses.html").write_text(build_hypotheses())
-    (OUT / "sources.html").write_text(build_sources())
-    print("wrote", sorted(p.name for p in OUT.iterdir()))
-    return 0
+    raise SystemExit(
+        "build_site_h50.py is retired: its historical output contained invalidated "
+        "break-even and score-anchor claims. The corrected docs/h50/ archive is "
+        "manually maintained; no files were written."
+    )
 
 
 if __name__ == "__main__":

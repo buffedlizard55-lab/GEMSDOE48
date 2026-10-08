@@ -1,18 +1,39 @@
 {
-  "schema": "GEMSDOE48-leaderboard-observation-v1-redacted",
-  "retention_note": "Data minimized in 2026-10-07 review: no participant names, full row table, or submission counts are retained here. The original row-by-row snapshot is not republished.",
-  "refresh_mode": "single_manual_observation; no polling or scraping",
+  "schema": "GEMSDOE48-leaderboard-v2",
+  "refresh_mode": "manual-page-reader-snapshot",
+  "attribution_warning": "Public leaderboard rows do not identify any local TIFF hash or owner-site artifact. Submission counts are participant display metadata, not file identity.",
   "source": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
   "retrieved_utc": "2026-10-07",
-  "observation": {
-    "top_displayed_score": 0.3774,
-    "score_0_3195_rank": 7,
-    "score_0_2778_rank": 13,
-    "artifact_to_score_receipt": false,
-    "participant_names_retained": false,
-    "full_table_retained": false,
-    "historical_submission_count_notes_conflict": true
-  },
-  "scope_limit": "A dated public participant-level display observation, not a permanent leaderboard, organizer score certificate, or artifact-to-score link.",
-  "terms_note": "DrivenData Terms of Use restrict automated monitoring/copying and manual monitoring/copying without prior written consent; do not refresh or republish the table absent authorization."
+  "method": "one manual fetch via agent web tool on 2026-10-07; rows 1-24 fully visible in the returned page chunk; row 25 was truncated before its score and is omitted; exact fetch time not captured",
+  "rows": [
+    {"rank": 1, "participant": "xiaofanhu", "best_public": 0.3774, "submissions": 12},
+    {"rank": 2, "participant": "alexoktaba", "best_public": 0.3345, "submissions": 24},
+    {"rank": 3, "participant": "nchuzhoy", "best_public": 0.3262, "submissions": 6},
+    {"rank": 4, "participant": "kinghorton42", "best_public": 0.3222, "submissions": 9},
+    {"rank": 5, "participant": "joeyfezster", "best_public": 0.3220, "submissions": 22},
+    {"rank": 6, "participant": "Batik Shirt Brothers", "best_public": 0.3218, "submissions": 22},
+    {"rank": 7, "participant": "DARD", "best_public": 0.3195, "submissions": 16},
+    {"rank": 8, "participant": "ndavis7", "best_public": 0.2888, "submissions": 8},
+    {"rank": 9, "participant": "mzoorob", "best_public": 0.2884, "submissions": 26},
+    {"rank": 10, "participant": "GrigorSargsyan", "best_public": 0.2876, "submissions": 13},
+    {"rank": 11, "participant": "HardcoreTechGod", "best_public": 0.2854, "submissions": 6},
+    {"rank": 12, "participant": "op01", "best_public": 0.2792, "submissions": 7},
+    {"rank": 13, "participant": "extradr19", "best_public": 0.2778, "submissions": 11},
+    {"rank": 14, "participant": "No Fault of Our Own", "best_public": 0.2761, "submissions": 23},
+    {"rank": 15, "participant": "wbg1", "best_public": 0.2750, "submissions": 13},
+    {"rank": 16, "participant": "smashi34", "best_public": 0.2710, "submissions": 11},
+    {"rank": 17, "participant": "smrtdoog5", "best_public": 0.2708, "submissions": 11},
+    {"rank": 18, "participant": "jgaines", "best_public": 0.2682, "submissions": 23},
+    {"rank": 19, "participant": "Mekhi12", "best_public": 0.2671, "submissions": 3},
+    {"rank": 20, "participant": "ad3002", "best_public": 0.2634, "submissions": 22},
+    {"rank": 21, "participant": "1stop", "best_public": 0.2617, "submissions": 2},
+    {"rank": 22, "participant": "raboush2", "best_public": 0.2613, "submissions": 8},
+    {"rank": 23, "participant": "SDCF9", "best_public": 0.2600, "submissions": 12},
+    {"rank": 24, "participant": "moongrega", "best_public": 0.2599, "submissions": 20}
+  ],
+  "irregularities": [
+    "At this 2026-10-07 manual observation, #1 was xiaofanhu at 0.3774; 0.3195 was DARD at rank #7; the 0.2778 row was extradr19 at rank #13. A brief claiming 0.3195 was the current leader is stale.",
+    "No organizer receipt connects the 0.2778 public row, or any public row, to the local B2 TIFF bytes or an H56 candidate. The exact local file-to-score link remains unverified.",
+    "A leaderboard row is a public-score observation, not private-test performance or official acceptance for a local artifact."
+  ]
 }

@@ -1,0 +1,32 @@
+{
+  "schema": "GEMSDOE48-metric-identity-erratum-v1",
+  "candidate_id": "H57-RELIEF-e6b785718c07",
+  "artifact": "GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07",
+  "artifact_sha256": "28a51fb032b8f2cfd1f04ad3bd429c29d7bb780d36961fea783ff8099130986e",
+  "status": "INVALIDATED_METRIC_IDENTITY_DO_NOT_USE",
+  "prior_receipt": "evidence/build_h57_receipt_20261007.json#historical_invalid_projection_forensic_only",
+  "reason": "The historical score inversion used FPw = S - TPw. The official metric defines FPw = S - Q, and the different maximization axes mean Q and TPw are generally unequal.",
+  "withdrawn_metrics": {
+    "live_truth_scale": "T_live = 0.9324 × T_SGMC",
+    "denominator_constant": 11215.3,
+    "parent_dti": 0.2744,
+    "candidate_dti": 0.3844,
+    "worst_case_floor": 0.2254,
+    "break_even_credit_per_dot": 0.0549,
+    "candidate_marginal_credit_per_dot": 0.1781,
+    "apparent_multiple_over_break_even": 3.24,
+    "scale_break_even": 0.3,
+    "legacy_block_pass_count": 3,
+    "sgmc_proxy_truth_cells_used_as_G_not_live_truth": 62122,
+    "note": "This is a direct count on the recorded SGMC public proxy after the stated filters; it is not an inferred private-label/live-truth count."
+  },
+  "decision": {
+    "download": "OK FOR INSPECTION",
+    "submit": "NOT CLEARED TO SUBMIT",
+    "weekly_slot": "NOT CLEARED",
+    "organizer_score": "NONE ESTABLISHED",
+    "portal_acceptance": "NOT TESTED"
+  },
+  "valid_residue": "Direct measurements made on the named public SGMC proxy may be reproduced as conditional proxy measurements. They do not estimate private-label or live leaderboard performance; comparisons to the invalid per-dot threshold are withdrawn.",
+  "superseding_erratum": "docs/research/h57-relief-metric-erratum-20261007.md"
+}

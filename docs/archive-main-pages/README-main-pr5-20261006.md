@@ -1,3 +1,7 @@
+> **ARCHIVED — NOT CURRENT GUIDANCE OR DECISION EVIDENCE.** This file preserves superseded project narrative. Any live-score inversion using `FPw=S−TPw`, hidden-truth count, ceiling, score scenario, or universal break-even threshold is invalidated; do not submit from this archive. Current [overview](../index.html) · [metric erratum](../research/metric-identity-erratum-20261007.md).
+
+---
+
 > **Historical main-branch README snapshot (after PR #5).** Preserved for provenance; its candidate recommendations and validation claims are superseded by the current README and [current validation](../validation.html). Any six-hour leaderboard-feed instructions in this archive are historical: the current branch disables that workflow under the Terms-of-Use review, and the retained parser has no network-fetch path.
 
 ---

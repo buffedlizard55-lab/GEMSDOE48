@@ -1,14 +1,15 @@
+> **HISTORICAL H50 SLATE — NOT CURRENT RANKING OR PROMOTION GUIDANCE.** The former H50-A hidden-truth calibration, 0.2·DTI break-even rule, +0.0247 simulation, and related expected-score claims depended on invalid live-score inversion assumptions; those numerical results are forensic only. H50-B and H51 public-proxy failures remain dated measurements, not evidence of private-label performance. The current slate is [H57](hypotheses-h57-20261007.md); see the [metric-identity erratum](metric-identity-erratum-20261007.md).
+
 # Preregistered hypothesis slate — H50 session, 2026-10-07 UTC
 
-**Status: preregistered before holdout scoring.** Distinct from the frozen
+**Historical preregistration record:** this slate was frozen before the later metric erratum and subsequent sessions. Distinct from the frozen
 2026-10-06 slate (H48-1…H48-5) and from everything implemented in this or the
 reviewed sibling repos. Ranking is expected value-of-information per cost, not
 a promised gain. No candidate is promoted to a submission slot on this page.
 
 ## Session-later results (added 2026-10-07, later session)
 
-- **H50-A** — not yet validated on the blocked folds; still the top slate
-  priority (implementation sketch in `docs/md/next-steps.md`).
+- **H50-A** — remained unvalidated on the blocked folds in the H50 session; its old top-priority ranking was based partly on invalid live-truth calibration and is superseded by the current H57 slate. No H50-A score is established.
 - **H50-B** — **tested this session, negative result.** Preregistered
   construction (conflict K>0.3 corridor ∩ high-K gate ∩ robust-z low-Th/K,
   budget 37,654) scored 0.015312 catalogue / 0.019135 SGMC off-catalogue,
@@ -23,26 +24,13 @@ a promised gain. No candidate is promoted to a submission slot on this page.
   failed (0.086537 SGMC / 0.007589 catalogue vs required wins over H49 and
   the union). See `docs/research/h51-h50b-results-20261007.md`.
 
-## H50-A — coverage-budget credit repacking on scatter-blurred family fields
+## H50-A — historical coverage-budget repacking proposal
 
-- **Layers:** the two frozen family surfaces, the mirrored catalogue
-  (footprint/geometry only), no new external data.
-- **Physical signature:** the hidden expert set is inferred (GEMSDOE32
-  derivation, [DERIVED]) to be ~12,632 px scattered around true fault surfaces
-  at ~1.85 px scale; covering the family fields *blurred* at that scale with a
-  greedy credit-packing budget (break-even bar k > 0.2·DTI) instead of fusing
-  them should raise credit density where the families are corroborated and cut
-  budget where they are lone.
-- **Why off-catalogue:** the repacker is free to spend budget on
-  single-family corridors far from the catalogue whenever the marginal credit
-  model says so; it is not tied to catalogue proximity.
-- **Difference from prior art:** H33/H49 emitted fixed-budget unions or
-  pignistic ranks; this is a two-round objective (cover the blurred field,
-  then spend residual budget on the highest marginal-credit single-family
-  cells), measured +0.0247±0.0005 in 12/12 draws on the sibling live-anchored
-  truth model ([DERIVED], not a score).
-- **Expected DTI / cost:** highest expected gain of the slate; medium cost;
-  fully computable locally. **Validation required before any slot.**
+- **Layers:** the two frozen family surfaces and the public catalogue for geometry/footprint only; no new external data.
+- **Physical idea:** blur family support fields at a proposed spatial scale, then compare fixed-budget selections that cover shared versus single-family corridors. The earlier page assigned this design a hidden-truth kernel scale of about 1.85 pixels and a hidden-label mass of about 12,632 pixels; both values came from the invalid `FPw=S−TPw` inversion and are withdrawn. They are not observations of the competition labels.
+- **Why off-catalogue:** the proposed selection could include single-family corridors far from the public catalogue, but that alone does not establish hidden-fault support or expected score.
+- **Difference from prior art:** the two-round greedy selection was a design idea beyond fixed-budget unions/pignistic ranks. An earlier sibling-model simulation reported `+0.0247±0.0005` in 12/12 draws; that simulation depended on the invalid live-anchored truth model and is forensic only, not a public-holdout or competition result.
+- **Historical cost/prior:** the old “highest expected gain” ranking is withdrawn. No comparable blocked-holdout result or verified DTI gain for H50-A is established; it is not the current top hypothesis and is not slot-cleared.
 
 ## H50-B — radiometric alteration ratio × DS conflict corridors
 

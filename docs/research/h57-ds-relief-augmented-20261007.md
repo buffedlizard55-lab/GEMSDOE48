@@ -1,32 +1,38 @@
-# H57 — Dempster–Shafer two-family fusion gated by USGS 3DEP lidar relief
+# H57-RELIEF — Dempster–Shafer two-family fusion gated by lidar relief
 
-> **Namespace collision — read this first.** A concurrent same-day session froze a *future,
-unbuilt* hypothesis slate under the names **H57-A … H57-E**
-([`h57-hypothesis-slate-20261007.md`](h57-hypothesis-slate-20261007.md)). Those are **plans, not
-built candidates, and not this file**. The submission described here is the built artefact
-`GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07`. Note also that this candidate uses the
-**100 m scarp mosaic** `data/external/h52_scarp3m_100m.tif` (697 tiles merged, 0 failures), which
-*is* present locally — not the full-area 3 m DEM that slate's H57-C correctly reports as absent.
+> **Namespace collision — read this first.** Three same-day records use H57 labels. This page is
+> only the built relief artifact `GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07` from
+> source branch `arena/567db1fc-gemsdoe48`. The upstream `h57-hypothesis-slate-20261007.md` is a
+> separate, unbuilt H57-A–E slate. The current branch's `hypotheses-h57-20261007.md` is another
+> H57-A–D slate; its H57-A radiometric-residual × magnetic-gradient screen failed and produced no
+> TIFF. Neither H57-A refers to this relief artifact. The cited local 100 m scarp mosaic exists,
+> but its historical source receipt is not independent source authentication or a coverage/license
+> audit.
 
-**Session date:** 2026-10-07 (UTC) · **Branch:** `arena/567db1fc-gemsdoe48` · **Candidate id:** `e6b785718c07`
+> **Superseding correction.** This `H57-RELIEF` artifact is distinct from both H57-A slates
+> referenced in the repository. Its former **SUBMIT RECOMMENDED** banner and all live-equivalent
+> projections/thresholds are invalidated. **OK TO DOWNLOAD FOR INSPECTION · NOT OK / NOT CLEARED TO
+> SUBMIT.** The corrected builder does not regenerate those projections. Start with the
+> [metric-identity erratum](h57-relief-metric-erratum-20261007.md); the remainder of this page is
+> historical/forensic evidence, not current submission guidance.
 
-**Verdict: ✅ DOWNLOAD OK · ✅ SUBMIT RECOMMENDED.** This is the first candidate in this repository
-whose live-calibrated forward model projects a *gain* rather than a loss.
+**Session date:** 2026-10-07 (UTC) · **Source branch:** `arena/567db1fc-gemsdoe48` · **Artifact id:** `e6b785718c07` · **Current label:** H57-RELIEF
+
+**Current verdict: OK TO DOWNLOAD FOR INSPECTION · NOT OK / NOT CLEARED TO SUBMIT. No weekly slot is cleared.** The former live projection and recommendation are withdrawn by the [metric-identity correction](h57-relief-metric-erratum-20261007.md). The remaining report is a historical forensic record, not current decision guidance.
 
 | | value |
 |---|---|
-| Submission name | `GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07` |
+| Research artifact name | `GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07` |
 | File | `docs/downloads/GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07.tif` |
 | SHA-256 | `28a51fb032b8f2cfd1f04ad3bd429c29d7bb780d36961fea783ff8099130986e` |
 | Positive cells | **58,031** (37,654 parent + 20,377 new) |
 | Format | single band float32, EPSG:32611, 100 m, 3,730 × 3,292, **all 12,279,160 cells finite, all inside [0, 1]** |
 | Uniqueness | **UNIQUE** against 99 tracked artefacts (`evidence/h57_uniqueness_20261007.json`) |
-| Projected DTI *(proxy only)* | **0.3844** vs 0.2744 for the parent |
-| Marginal credit per added dot | **0.1781** vs break-even **0.0549** (3.24×) |
-| Floor if every new dot is worthless | 0.2254 |
+| Former projected DTI / marginal-credit / floor claims | **INVALIDATED — FORENSIC ONLY**; see the metric-identity correction |
 
-> **Nothing on this page is an organizer score.** Every DTI number except the eight
-> owner-reported live scores in §5 is a projection from a surrogate truth raster.
+> **Nothing on this page is an organizer score.** The former live-equivalent estimates and
+> threshold-derived decisions are invalidated. Owner-reported ladder values are not tied by an
+> organizer receipt to exact local parent-file bytes.
 
 ---
 
@@ -34,15 +40,15 @@ whose live-calibrated forward model projects a *gain* rather than a loss.
 
 | Brief requirement | Where |
 |---|---|
-| Combine the two best families (dotted 0.2778, tip/step-over 0.2632) with Dempster–Shafer | §2 — Dempster's rule, not a weighted mean |
-| Preserve disagreement rather than averaging it away | §2 — m(Θ) shipped as `…-diag-mtheta.tif`; raw conflict K as `…-diag-conflict-k.tif` |
+| Combine the selected dotted and tip/step-over families with Dempster–Shafer | §2 — historical recipe; owner-reported scores do not verify these exact bytes as the two best families |
+| Export Dempster diagnostics separately | `m(Θ)` is residual unassigned/ignorance mass; raw conflict `K` is a separate diagnostic, not a disagreement or acceptance metric |
 | Normalize combined belief to [0, 1] | `…-diag-belief.tif`, max = 1.0 |
 | Verify it is not the naive mean | §6 — r = 0.789, mean \|Δ\| = 0.097 on positive cells, max \|Δ\| = 0.907 |
-| Unique submission, not a copy of any previous one | `evidence/h57_uniqueness_20261007.json` → UNIQUE / 88 files |
-| Values in range [0, 1] (portal rejection) | `evidence/h57_format_audit_20261007.json` → `portal_range_error_immune: true` |
-| Unique name + short paste-ready note | banner on the landing page (254 characters) |
-| Validate on a spatially-blocked holdout before spending a slot | §4 — four disjoint truth blocks |
-| Free official external source, named and obtained | §3 — USGS 3DEP, DOI 10.5066/P9US5S7C, 1 m → 3 m |
+| Bounded local uniqueness check | `evidence/h57_uniqueness_20261007.json` → UNIQUE / 99 compared files; not organizer verification |
+| Local range audit | `evidence/h57_format_audit_20261007.json` records finite [0,1] values; this is not portal acceptance |
+| Historical name/note | retained in the prior concurrent-session page; not submission clearance |
+| Public-proxy diagnostics | §4 — four recorded blocks; old break-even and PASS/FAIL labels withdrawn; not a comparable H49 promotion holdout |
+| Recorded source trail | §3 — previous session cites USGS 3DEP pages and receipts; authentication, completeness and use rights not re-verified here |
 
 ---
 
@@ -50,11 +56,13 @@ whose live-calibrated forward model projects a *gain* rather than a loss.
 
 Three mass functions on the frame Θ = {F = "new fault here", N = "not a new fault"}:
 
-**A — dotted family.** `data/families/dotted_b2_prune_02778.tif`, 37,654 dots, owner-reported
-public score **0.2778**. Shafer reliability discount **r_A = 1.0** (the live anchor).
+**A — dotted family.** `data/families/dotted_b2_prune_02778.tif`, 37,654 dots; its **0.2778**
+score is owner-reported and not linked by organizer receipt to these exact bytes. The recipe used
+Shafer reliability discount **r_A = 1.0** as an assumption, not a validated reliability.
 
-**B — tip / step-over family.** `data/families/tip_stepover_r30_02632.tif`, 41,865 dots,
-owner-reported **0.2632**. Discount **r_B = 0.2632 / 0.2778 = 0.9474** (live ratio).
+**B — tip / step-over family.** `data/families/tip_stepover_r30_02632.tif`, 41,865 dots; its
+**0.2632** score is likewise owner-reported and unverified at file level. The recipe used
+**r_B = 0.2632 / 0.2778 = 0.9474** as a heuristic weight, not a calibrated likelihood.
 
 **C — lidar relief.** `data/external/h52_scarp3m_100m.tif`, band `sigma_mean`, stored in
 **centimetres** per the docstring of `scripts/dem_region_merge.py`
@@ -68,43 +76,36 @@ all four gates:
 4. `cover ≥ 50` — at least half the 100 m cell is covered by valid 3 m samples —
    then a 3-cell non-maximum suppression.
 
-That yields **20,377** cells. Discount **r_C = 0.95** (the pre-registered `RHO_MAX` ceiling already
-used in this repository; its measured per-dot credit exceeds the anchor family's, so the live-ratio
-rule would return a discount above 1, which is not admissible).
+That yields **20,377** cells in the recorded build. Discount **r_C = 0.95** was a recipe
+parameter; the former marginal-credit argument for it is invalidated and does not show that the
+weight is optimal.
 
-**Absence evidence.** a(x) = 0 inside the 200 m catalogue flank. This is not a guess: the nested
-ladder that produced 0.2600 → 0.2708 → 0.2778 removed exactly the dots at `d(catalogue) ≤ 1` and
-`≤ 2` cells, and the nested-chain algebra prices their marginal credit at 0.0014–0.0046 per dot
-against a 0.055 break-even.
+**Absence assignment.** The historical recipe set `a(x) = 0` inside the 200 m catalogue flank.
+This was motivated by an owner-reported ladder, not by verified score-to-file attribution. It is an
+assumption for the artifact, not measured proof that excluded dots earned zero live credit.
 
 Dempster's rule is applied **A ⊕ B**, then **⊕ C** (`src/gems48/ds.py`), which is why the
 diagnostics carry a real conflict field (K max 0.947) instead of a smoothed average.
 
-### Decision rule — the metric's break-even, applied per source
+### Former per-dot decision analysis — withdrawn
 
-DTI = TPw / (TPw + 0.2 FPw + 0.8 FNw) with FNw = |G| − TPw, so
-DTI = T / (0.2 T + 0.2 FP + 0.8 |G|). Adding a dot with marginal credit *c* raises DTI iff
-**c > 0.2 · DTI ≈ 0.0549**. Each source is therefore admitted on its *measured* marginal, not its
-belief:
-
-| source | marginal credit / dot | vs break-even 0.0549 | decision |
-|---|---|---|---|
-| A — dotted | 0.1366 | 2.5× | **admitted in full** (37,654) |
-| B ∖ A — tip-only | 0.0291 | 0.53× | **rejected** (10,251 dots) |
-| C — lidar relief | **0.1781** | **3.24×** | **admitted** (20,377) |
-
-This is why the emission is A ∪ C and not the Dempster union: cross-family corroboration turned out
-to be *anti*-correlated with quality (A∖B prices at 0.1597/dot, B∖A at 0.1032), so agreement is not
-evidence of a good dot. That negative result is itself recorded in §7.
+The former statement that arbitrary additions are profitable iff `credit > 0.2·DTI`, and its
+application to the three sources, was generalized beyond its one-variable assumptions and then
+calibrated through the invalid `FPw = S − TPw` inversion. The resulting 0.0549 break-even,
+per-source live-credit figures, admission/rejection decisions, and explanation of the emission as
+an optimized A ∪ C selection are withdrawn. The recipe and emitted file remain reproducible
+historical artifacts; they are not established as metric-optimal. See the [metric-identity
+correction](h57-relief-metric-erratum-20261007.md).
 
 ---
 
-## 3. External data — named, official, free, and already in hand
+## 3. External-data notes as recorded (not independently source-verified here)
 
 **USGS 3D Elevation Program (3DEP), 1 m lidar.** Official programme page (already cited in
 `docs/sources.html`): <https://www.usgs.gov/3d-elevation-program/about-3dep-products-services>.
-The tiles were pulled from the official USGS staging bucket for The National Map elevation
-products — every URL in the receipts has the form
+The prior session's receipts record that tiles were obtained from a URL pattern attributed to a
+USGS staging bucket for The National Map elevation products. This correction has not independently
+re-fetched or authenticated those source bytes. The recorded URLs have the form
 
 ```
 https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/<PROJECT>/TIFF/USGS_1M_11_<tile>_<PROJECT>.tif
@@ -119,115 +120,71 @@ mosaics them onto the official 100 m grid. Merged product: `data/external/h52_sc
 SHA-256 recorded in `data/external/h52_scarp3m_100m.json`). No per-project DOI is asserted here
 because none is recorded in this repository's receipts.
 
-Coverage actually achieved: `cover > 0` over **5,900,588 cells = 48.1 % of the grid and 73.8 % of
-the footprint**; `sigma_mean ≥ 2.0 m` over 2,300,700 cells.
+The prior local mosaic receipt reports `cover > 0` over **5,900,588 cells = 48.1 % of the grid and
+73.8 % of the footprint**; `sigma_mean ≥ 2.0 m` over 2,300,700 cells. These are recorded artifact
+measurements, not an independent completeness or source-authentication check.
 
 **Geological reading.** In the Basin and Range, a 100 m cell whose *mean* 3 m context roughness
 exceeds 2 m is bare, blocky, steep terrain: range fronts, triangular facets, and young fault
-scarps too recent to be planed smooth. The published USGS/INGENIOUS catalogue is a compilation of
-mapped traces; staff have confirmed that "new fault" for this competition means *any fault pixel not
-already captured by USGS/INGENIOUS*, and explicitly "can include newly mapped geometry of an
-existing fault system" (forum topic 11536). Continuations past mapped endpoints, splays and
-parallel strands therefore all count — which is precisely the population that high-relief
-range-front terrain exposes and a compilation catalogue under-maps.
+scarps too recent to be planed smooth. The original report cited forum topic 11536 for an interpretation that "new fault" can include
+geometry not captured by the published USGS/INGENIOUS mask, including newly mapped geometry of an
+existing system. This correction does not independently verify that interpretation or infer that
+the selected high-relief cells are faults.
 
 Selected cells: median roughness **7.67 m**, range 2.00–173.44 m.
 
 ---
 
-## 4. Validation
+## 4. Historical validation work — live interpretation withdrawn
 
-### 4.1 The instrument
+### 4.1 Retired live-equivalent surrogate
 
-`T_live = 0.9324 × T_SGMC`, where `T_SGMC = Σ_{g∈G} K(g)`, `K = max_kernel_to_truth(prediction)`,
-and `G` = SGMC-derived faults ∩ footprint ∩ `d(catalogue) > 3` (|G| = **62,122**).
-Fitted over eight families with owner-reported live scores: **RMS 46.1 = 0.84 %**.
-The projector is the live-anchored fit
+The prior report fitted `T_live = 0.9324 × T_SGMC` and a DTI denominator constant from owner-
+reported scores, then used the results to infer hidden-truth totals, per-dot break-even and a live
+score. The construction substituted `FPw = S − TPw`; this is invalid because the official metric
+uses `FPw = S − Q`, and `TPw` and `Q` are generally unequal. The former fit and derived numbers
+are retained under `historical_invalid_projection_forensic_only` in
+[`evidence/build_h57_receipt_20261007.json`](../../evidence/build_h57_receipt_20261007.json), but
+the corrected builder does not regenerate them. See the [erratum](h57-relief-metric-erratum-20261007.md).
 
-```
-1/DTI = 0.2·|S|/T + A/T     →    DTI(S) = T_live(S) / (0.2·|S| + 11,215.3)
-```
+### 4.2 Conditional public-proxy arithmetic
 
-fitted to three owner-reported live scores (44,090 → 0.2600; 40,199 → 0.2708; 37,654 → 0.2778)
-with **max residual 0.0029 (0.078 %)**. Break-even credit = 0.2 × 0.2744 = **0.0549**.
+The earlier calculation recorded `T_SGMC(parent) = 5,517.6`, `T_SGMC(H57-RELIEF) = 9,409.7`,
+and a difference of 3,892.0 on its named SGMC-derived public proxy. These kernel sums are conditional
+proxy measurements, not private-label credit or live score. The old conversion to `T_live`,
+`0.1781` marginal live credit per new dot, and DTI `0.2744 → 0.3844` is withdrawn.
 
-### 4.2 Marginal credit of the exact shipped dot set
+### 4.3 Four disjoint proxy blocks — descriptive counts only
 
-Measured on the file that is actually published, not on a proxy of it:
+The prior run recorded the following block counts and raw public-proxy credit-per-dot arithmetic.
+The table is retained as a historical calculation; no universal threshold or PASS/FAIL status
+follows from it.
 
-```
-T_SGMC(parent) = 5,517.6      T_SGMC(H57) = 9,409.7      ΔT_SGMC = 3,892.0
-T_live(parent) = 5,144.6      T_live(H57) = 8,773.6      ΔT_live = 3,628.9
-credit per new dot = 3,628.9 / 20,377 = 0.1781          break-even 0.0549   →  3.24×
-DTI 0.2744 → 0.3844
-```
+| block | lidar dots | proxy-truth cells | recorded raw proxy credit/dot |
+|---|---:|---:|---:|
+| 0 (SW) | 9,148 | 23,130 | 0.1318 |
+| 1 (NE) | 2,867 | 2,353 | 0.0520 |
+| 2 (NW) | 4,087 | 23,192 | 0.2587 |
+| 3 (SE) | 4,275 | 13,447 | 0.2847 |
 
-Cross-check: `Σ_g max(K_S − K_A, 0) = 3,892.0`, identical to `ΔT_SGMC` to 1e-3. (This identity is
-what exposed the defect described in §8.)
+The former comparisons with 0.0549 and the 3/4 “pass” interpretation are invalidated. These
+calculations are not the required like-for-like H49 promotion holdout across both proxy regimes.
 
-### 4.3 Four spatially-disjoint truth blocks
+### 4.4 Retired sensitivity scenarios
 
-| block | lidar dots | proxy-truth cells \|G\| | credit/dot | vs 0.0549 |
-|---|---|---|---|---|
-| 0 (SW) | 9,148 | 23,130 | 0.1318 | PASS |
-| 1 (NE) | 2,867 | **2,353** | 0.0520 | fail |
-| 2 (NW) | 4,087 | 23,192 | 0.2587 | PASS |
-| 3 (SE) | 4,275 | 13,447 | 0.2847 | PASS |
-
-**3 of 4 pass. The failure is explained, and it is not a rule failure.** Block 1 holds 2,353 proxy
-truth cells against 13,447–23,192 elsewhere — an order of magnitude less truth to buy. Normalised
-by available truth, block 1 is the *best* of the four:
-
-| block | share of available truth within 300 m of a lidar dot | credit per dot per 1,000 truth cells |
-|---|---|---|
-| 0 | 15.3 % | 0.00570 |
-| **1** | **18.9 %** | **0.02209** |
-| 2 | 13.3 % | 0.01115 |
-| 3 | 26.1 % | 0.02117 |
-
-Excluding the truth-poor block entirely, credit per dot is **0.1987** over 17,510 dots. A 4×4
-sub-block grid shows 11 of 13 populated sub-blocks above break-even; the two that are not
-(0.053, 0.048) are within 10 % of it, and one sub-block holds a single dot.
-
-### 4.4 Sensitivity to the one untested assumption
-
-The instrument's 0.9324 scale was fitted on families that all sample the same ridge backbone. The
-new dots sit in terrain none of those families sampled, so that scale is **extrapolated**. The
-submission survives a large error:
-
-| true scale of the instrument in the new terrain | projected DTI |
-|---|---|
-| 1.00 (calibrated) | 0.3844 |
-| 0.90 | 0.3685 |
-| 0.70 | 0.3367 |
-| 0.50 | 0.3049 |
-| 0.35 | 0.2811 |
-| **0.30** | **0.2731 — break-even with the parent** |
-| 0.00 (every new dot worthless) | 0.2254 |
-
-The bet is: **+0.107 if the instrument holds, −0.049 if it is completely wrong, break-even if it is
-3.4× optimistic.** Under "Maximize P(Win)" that is the right side of the trade, and the downside is
-bounded and known.
-
+The former sensitivity table (including the 0.3844 projection, 0.2254 floor and 0.30 scale
+break-even) reused the invalid surrogate and has no valid score-estimate or decision-bound meaning.
+Exact recorded values remain only in the explicitly invalidated forensic receipt and erratum.
 ---
 
-## 5. Why the parent sits at 0.2778, and what it would take to go higher
+## 5. Historical ladder note — no causal or ceiling inference
 
-Three owner-reported live scores on nested dot sets from one spacing ladder
-(44,090 → 0.2600; 40,199 → 0.2708; 37,654 → 0.2778) are consistent with a single
-`1/DTI` line to 0.078 %. That line says the 0.2632 → 0.2778 spread across six families whose dot
-sets differ by up to 47 % (Jaccard down to 0.53) is **false-positive mass, not coverage** — all six
-saturate at T_live ≈ 5,100–5,200. Spacing is exhausted: `|S| ∝ 1/s` and
-`T(s) ≈ 7,734 − 709·s` fit the four spacing points within 2.5 %, which peaks at s ≈ 3.3–3.75 —
-exactly where the 0.2778 family sits.
-
-So the only remaining headroom is **placement**, and the ideal-coverage ceiling at this mass is
-T ≈ 10,900 against the parent's 5,145 (48 % realised). Matching the current leaderboard leader
-(0.3774) at the parent's mass needs T ≈ 7,075 — which H57's 8,774 clears on the proxy.
-
-Leaderboard as read 2026-10-06: `xiaofanhu` 0.3774 #1, `alexoktaba` 0.3345 #2, `nchuzhoy` 0.3262 #3,
-DARD 0.3195 #7. **The standing brief's "0.3195 is the top score" is stale.**
-
+The original report recorded an owner-reported 0.2600 → 0.2708 → 0.2778 sequence and a dated
+2026-10-06 leaderboard read. The ladder is not tied by an organizer receipt to exact local TIFF
+bytes. The old inverse fit, inferred hidden-truth totals, spacing saturation, false-positive
+interpretation, ideal-coverage ceiling, and leaderboard-reachability calculation are all withdrawn;
+see the [metric-identity correction](h57-relief-metric-erratum-20261007.md). The dated public row
+remains historical context only and does not verify a score for this artifact.
 ---
 
 ## 6. Not the naive mean
@@ -241,65 +198,60 @@ DARD 0.3195 #7. **The standing brief's "0.3195 is the top score" is stale.**
 | max \|Δ\| | 0.9069 |
 | mean \|Δ\| vs any affine rescaling of ½(K_A + K_B) | 0.0198 |
 
-About 21 % of the belief's variance is not explained by the naive mean, and the affine-residual test
-confirms it is not a rescaled kernel average either. The correlation is dominated by family A, which
-is correct behaviour: A is the reliable anchor (r_A = 1.0) and B is discounted (0.9474).
+About 21 % of the belief's variance is not explained by the naive mean, and the recorded
+affine-residual test found it was not a rescaled kernel average. This is a construction comparison
+only; it does not establish prediction quality or validate the owner-score-derived recipe weights.
 
 Dempster internals: m(Θ) mean 0.0221, max 1.0, 756,450 positive cells; raw conflict K mean 0.0212,
 max 0.9474.
 
 ---
 
-## 7. Refuted levers from this session (do not retry)
+## 7. Historical lever measurements — generalized/refutation claims withdrawn
 
-| lever | measurement | verdict |
+The previous session compared multiple variants on public-proxy calculations. Only the named
+measurements are retained; the old universal break-even, “exhausted,” “every emission loses,” and
+“do not retry” verdicts are not current scientific or promotion conclusions.
+
+| lever | recorded measurement | current interpretation |
 |---|---|---|
-| Redundancy sparsification (drop 30 % of A's dots) | in-sample projection 0.3119, but cross-validated held-out coverage retention only **69.60 %** (fold 2 −91 %) | **proxy overfitting** |
-| Provably coverage-neutral dots in A | **0 of 37,654**; the 500 lowest-total-drop removals still cost 0.687 % of T | no assumption-free thinning exists |
-| Rigid-shift registration | best shift (0, −1) gives +0.72 % on T_SGMC → projected 0.2764 < 0.2778 | not a lever |
-| Dempster consensus emissions of A × B | union 0.2617, intersection 0.2458; belief-ranked sweep over the union peaks at exactly n = 37,654 | every consensus emission loses |
-| Bulk lidar additions (all candidates, redundancy included) | 44 candidates below break-even | see §8 — the framing was wrong, not the data |
-| Catalogue-flank prune ladder | `dcat ∈ (2,3]` credit 0.0597 ≈ break-even; B = 3 → 0.2739 | exhausted |
-| ρ-weighted coverage-greedy placement | halves T | refuted |
-
+| Redundancy sparsification | a recorded holdout retained 69.60 % of the chosen public-proxy coverage (one fold −91 %) | conditional result for this tested proxy/protocol; not a live-score bound |
+| Coverage-neutral removals | the recorded kernel calculation found no zero-cost removal among the tested parent dots | finite calculation on the named artifact/proxy, not a universal impossibility result |
+| Rigid-shift registration | best tested shift (0, −1) changed recorded `T_SGMC` by +0.72 % | public-proxy diagnostic only; the old live-score comparison is withdrawn |
+| Dempster consensus emissions | recorded union 0.2617 and intersection 0.2458 in the old proxy analysis | do not generalize to every fusion or geological candidate |
+| Bulk lidar additions | prior screen recorded 44 candidates | the invalid break-even cannot classify them as profitable/unprofitable |
+| Catalogue-flank pruning ladder | the old nested-chain analysis used owner-reported scores | score attribution and live-credit interpretation remain unresolved |
+| ρ-weighted coverage-greedy placement | the prior run reported reduced `T_SGMC` | conditional algorithm comparison, not live performance |
 ---
 
-## 8. Irregularities and self-corrections found this session
+## 8. Original self-correction notes — later metric correction supersedes the projections
 
-1. **A marginal-credit bug that inflated every earlier number in this session.**
-   `scratch/newcov2.py` and `scratch/bcv.py` accumulated the marginal gain as
-   `Σ_offsets Σ_g max(k − K_A, 0)`, which **double-counts** a truth pixel reached by several kernel
-   offsets of several new dots. The exact marginal is `Σ_g max(K_S − K_A, 0)`. Correcting it also
-   required correcting `T_SGMC`, which is a **sum** of kernel credits (parent → 5,517.6), not a
-   count of covered truth cells (12,457). The corrected headline is 0.1781/dot and 0.3844; the
-   block test changed from a reported 4/4 to an honest **3/4**.
-2. **The earlier "no new coverage is available locally" conclusion was a framing error.** It priced
-   *bulk* additions, which are diluted by redundancy with the parent. Pricing only cells with zero
-   kernel support flips 20 of 22 candidates above break-even. The old 0.008–0.040 figures are not a
-   ceiling and must not be quoted as one.
-3. **`registry/live_scores.json` attributes 0.2778 and 0.2708 using the SHA-256 of
-   `dotted_d2_8_02708.tif`**, while `ref_h27_4_solo.tif` has a different SHA but byte-identical
-   positive cells. Two files, one live data point — the attribution is unresolved.
-4. **`scripts/check_candidate_uniqueness.py`'s companion heuristic is filename-prefix based.** The
-   first build named the primary `…-zeros-outside.tif` and its twin `…-nan-outside.tif`, so the twin
-   was scored as a *prior artefact* and the verdict read `DUPLICATE_OF_PRIOR_ART`. Renaming so every
-   companion starts with the primary's stem returns `UNIQUE`. The script's verdict logic is correct;
-   the convention needed to be obeyed.
-5. **Hand-rolled array slicing is a recurring defect source** in this repository's scratch scripts
-   (`cov_instr.py`, `shift_redun.py`, `xval.py`, and `h57_verify.py` this session). Every such script
-   must assert an identity — here, `Σ_g max(K_S − K_A, 0) == ΔT_SGMC`.
-6. **No organizer score exists for H57.** Portal acceptance is untested from this sandbox (no
-   DrivenData authentication; the data URLs redirect to login).
-
+1. Exploratory scripts initially accumulated marginal gain per kernel offset and double-counted
+   truth pixels reached by multiple dots. The later exact public-proxy calculation used
+   `Σ_g max(K_S − K_A, 0)` and recorded `T_SGMC` as a sum of kernel credits. This corrected the
+   scratch arithmetic, but **did not validate the live-score inversion**.
+2. The subsequently identified metric-identity error invalidates the fitted `T_live` scale,
+   `0.1781` live credit/dot, `0.3844` projection, `0.0549` threshold, block pass labels, ceiling,
+   floor and associated recommendations. They are preserved only in the forensic receipt and
+   [`h57-relief-metric-erratum-20261007.md`](h57-relief-metric-erratum-20261007.md).
+3. The source audit records unresolved attribution between the owner-reported 0.2778 score and
+   exact local B2 bytes. No organizer receipt ties that row or the owner-reported ladder to the
+   shipped H57-RELIEF TIFF or its parent.
+4. The local uniqueness receipt compares 99 tracked artifacts and records no byte- or support-
+   identical duplicate. This is a bounded local comparison, not organizer-side uniqueness.
+5. No organizer score or portal-acceptance result is recorded for H57-RELIEF. The builder emits
+   local format and construction receipts only.
 ---
 
 ## 9. Receipts
 
 | file | content |
 |---|---|
-| `evidence/build_h57_receipt_20261007.json` | construction, emission counts, Dempster internals, not-naive-mean, format, per-file SHA-256 and byte counts, full projection block |
+| `evidence/build_h57_receipt_20261007.json` | construction, emission counts, Dempster internals, local format, per-file SHA-256s; former projection retained only under an explicitly invalid forensic key |
 | `evidence/h57_format_audit_20261007.json` | independent re-open and grid/range audit |
-| `evidence/h57_uniqueness_20261007.json` | 88-artefact byte and support comparison → UNIQUE |
+| `evidence/h57_metric_identity_erratum_20261007.json` | machine-readable withdrawal of the former inverse-model claims |
+| `docs/research/h57-relief-metric-erratum-20261007.md` | current verdict, invalidated quantities and corrected scope |
+| `evidence/h57_uniqueness_20261007.json` | bounded 99-file local byte/support comparison; not organizer verification |
 | `scratch/h57_exact.py` / `scratch/h57_exact.json` | corrected marginal-credit derivation and block table |
 | `scratch/h57_block1.py` | the truth-density diagnosis of block 1 |
 
@@ -310,3 +262,7 @@ python scripts/build_submission_h57.py
 python scripts/validate_submission.py docs/downloads/GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07.tif
 python scripts/check_candidate_uniqueness.py docs/downloads/GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07.tif --receipt /tmp/u.json
 ```
+
+The builder now writes a rebuild and receipt under the ignored `scratch/h57-relief-rebuild/`
+folder by default. It does not overwrite the retained download or dated forensic receipt in
+`evidence/`; it also does not regenerate any invalidated live-score projection.

@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-07T15:20:25.915773+00:00",
+  "generated_utc": "2026-10-07T21:35:01.024202+00:00",
   "path": "docs/downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros-outside.tif",
   "sha256": "4d6548d4ec07a47a25b83d28ebc05d58b57448c1507b460aed52cec395bdb6b5",
   "checks": {
@@ -8,49 +8,43 @@
     "shape_matches_template": true,
     "single_band_float32": true,
     "all_cells_finite": true,
-    "values_in_0_1": true,
+    "whole_raster_values_in_0_1": true,
     "max_equals_one": true,
     "nodata_unset": true,
-    "outside_footprint_is_zero": true,
-    "organizer_rule_values_in_range_0_1": true
+    "outside_footprint_finite_zero": true,
+    "official_null_nan_outside_rule_satisfied": false
   },
-  "all_passed": true,
-  "verdict": {
-    "generated_utc": "2026-10-07T15:20:25.915773+00:00",
-    "local_grid_dtype_and_whole_raster_range_checks": true,
-    "official_outside_bounds_rule_confirmed": false,
-    "blocked_holdout_beats_h49_3_of_4_both_public_proxies": false,
-    "ok_to_download_for_inspection": true,
-    "submit_recommended": false,
-    "banner": "DOWNLOAD OK FOR INSPECTION - SUBMIT NOT RECOMMENDED",
-    "reasons": {
-      "same_protocol_public_proxy_means": {
-        "catalogue": {
-          "h56b": 0.032346931924512205,
-          "h49": 0.0953532478651188,
-          "h56b_positive_folds_vs_h49": 0
+  "local_core_format_passed": true,
+  "official_outside_policy_passed": false,
+  "portal_acceptance_tested": false,
+  "format_interpretation": "local grid/dtype/range checks are distinct from portal acceptance; the zero-outside primary does not satisfy the published null/NaN outside-footprint wording",
+  "verdict": "NOT OK / NOT CLEARED TO SUBMIT",
+  "holdout_gate": {
+    "passed_vs_h49": false,
+    "paired": {
+      "catalogue_proxy": {
+        "fold_delta_dti_vs_h49": {
+          "NW": -0.06004885862489294,
+          "NE": -0.0822230069819814,
+          "SW": -0.05910135505098177,
+          "SE": -0.05065204310457023
         },
-        "sgmc_off_catalogue_gt300m": {
-          "h56b": 0.07055199715340402,
-          "h49": 0.10075118848176869,
-          "h56b_positive_folds_vs_h49": 0
-        }
+        "mean_delta_dti_vs_h49": -0.06300631594060659,
+        "positive_folds": 0,
+        "passes_numeric_gate": false
       },
-      "holdout_receipt": "evidence/h56f_pruning_holdout_20261007.json",
-      "metric_projection": "retired due to invalid FPw identity; not used for decision",
-      "organizer_upload_or_score": "not performed / none exists"
+      "sgmc_off_catalogue_gt300m": {
+        "fold_delta_dti_vs_h49": {
+          "NW": -0.03485395642465959,
+          "NE": -0.015199239477127202,
+          "SW": -0.0664576595139702,
+          "SE": -0.0042859098977016535
+        },
+        "mean_delta_dti_vs_h49": -0.030199191328364662,
+        "positive_folds": 0,
+        "passes_numeric_gate": false
+      }
     }
   },
-  "official_format_acceptance_confirmed": false,
-  "outside_bounds_requirement": {
-    "official_rule": "outside-bounds cells should be null or NaN",
-    "primary_encoding": "zeros",
-    "primary_passes_official_null_nan_outside_requirement": false,
-    "nan_twin_available": "docs/downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-nan-outside.tif",
-    "nan_twin_portal_range_acceptance": "untested; an unmasked range check can reject NaN",
-    "nan_twin_nodata": "NaN",
-    "nan_twin_passes_masked_local_format_audit": true,
-    "nan_twin_sha256": "883d93f2801987481f8ffb761eeae8f7a39520ad3b670e09129bdaaf7983e2c7",
-    "nan_twin_bytes": 1694269
-  }
+  "download_verdict": "OK TO DOWNLOAD FOR INSPECTION"
 }

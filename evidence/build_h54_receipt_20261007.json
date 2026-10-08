@@ -115,11 +115,14 @@
     "C_dotted": 0.09549116770426949,
     "H54": 0.09599561836145015
   },
-  "status": "NOT_SLOT_CLEARED",
-  "status_basis": "scripts/audit_candidate.py (GATE-2): additions are worth ~0.010-0.014 credit/cell on a live-density-matched truth vs the 0.0556 break-even bar; see docs/research/credit-density-audit-20261007.md",
+  "status": "INVALIDATED_FORENSIC_ONLY_NOT_CLEARED_TO_SUBMIT",
+  "status_basis": "Historical Gate-2 truth-density and universal threshold are invalidated. Public-proxy diagnostics do not establish private-label performance.",
   "evidence_class": {
     "measured": "format_checks, composition, ds_diagnostics, not_the_average_check, blocked_proxy_diagnostic",
     "owner_reported": "live anchors 0.2778 / 0.2632 (registry/live_scores.json)",
     "proxy": "SGMC > 300 m off-catalogue, four fixed quadrants; not the private truth"
-  }
+  },
+  "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION",
+  "invalidation_reason": "The receipt depends on the invalid general substitution FPw=S-TPw (equivalently Q≈TPw) and/or owner-reported score values without organizer verification. Its inferred truth density, thresholds, projected scores, ceilings, and gate decisions are withdrawn; local proxy measurements are historical diagnostics only.",
+  "submission_decision": "NOT CLEARED TO SUBMIT"
 }

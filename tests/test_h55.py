@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import json
 import pathlib
+import subprocess
 import sys
 
 import numpy as np
@@ -18,7 +19,7 @@ SRC = REPO / "src"
 if str(SRC) not in sys.path:
     sys.path.insert(0, str(SRC))
 
-from gemsdoe48 import conduit, h55, live_model  # noqa: E402
+from gemsdoe48 import conduit, h55, live_model, metric as current_metric  # noqa: E402
 from gemsdoe48.dempster_shafer import dempster_combine  # noqa: E402
 from gemsdoe48.geotiff import HEIGHT, WIDTH, write_float32_zeros_outside  # noqa: E402
 from gemsdoe48.metric import dti_fast, triangular_kernel  # noqa: E402
@@ -44,73 +45,73 @@ def test_triangular_kernel_reach_and_shape():
     assert triangular_kernel(np.array([0.0, 150.0, 300.0, 301.0])) .tolist() == [1.0, 0.5, 0.0, 0.0]
 
 
-def test_single_truth_marginal_credit_special_case():
-    """Special case: TP changes by k, FP by 1-k, and FN by -k.
+def test_retired_global_binary_optimality_claim_is_withdrawn():
+    """The one-variable derivative cannot establish global raster optimality."""
+    assert live_model.MODEL_VALIDITY_STATUS == "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION"
+    assert "global binary optimality is not established" in current_metric.optimal_value_is_binary()
 
-    The derivative sign is that of k - 0.2*DTI in this one-pixel setup only;
-    this is not a universal raster-level break-even threshold.
-    """
-    t0, d0 = 5209.5, 18752.4
-    for k in (0.02, 0.0556, 0.14, 0.9):
-        signs = set()
-        for v in (0.05, 0.25, 0.5, 0.75, 1.0):
-            lo = (t0 + (v - 1e-4) * k) / (d0 + 0.2 * (v - 1e-4))
-            hi = (t0 + (v + 1e-4) * k) / (d0 + 0.2 * (v + 1e-4))
-            signs.add(np.sign(hi - lo))
-        assert len(signs) == 1, f"sign of the derivative must not depend on v (k={k})"
-        expected = np.sign(k - 0.2 * (t0 / d0))
-        assert signs.pop() == expected or expected == 0
+
+def test_live_ladder_cli_requires_explicit_forensic_opt_in():
+    result = subprocess.run(
+        [sys.executable, str(REPO / "scripts/live_ladder_analysis.py")],
+        cwd=REPO, capture_output=True, text=True, check=False)
+    assert result.returncode != 0
+    assert "--legacy-audit-only" in result.stderr + result.stdout
+    assert "invalidated" in (result.stderr + result.stdout).lower()
+
+
+def test_readme_marks_historical_inversion_builders_forensic_only():
+    readme = (REPO / "README.md").read_text(encoding="utf-8")
+    for script in ("scripts/calibrate_live_model.py", "scripts/build_submission_h55.py",
+                   "scripts/live_ladder_analysis.py"):
+        commands = [line for line in readme.splitlines()
+                    if script in line and "python" in line]
+        assert commands, f"missing historical command for {script}"
+        assert all("--legacy-audit-only" in line for line in commands), (script, commands)
 
 
 # ---------------------------------------------------------------------------
 # forward model
 # ---------------------------------------------------------------------------
 
-def test_hidden_truth_fit_is_stable_and_positive():
-    fit = live_model.fit_hidden_truth([44090, 40199, 37654], [0.2600, 0.2708, 0.2778])
-    g = fit["hidden_truth_px"]
-    assert 12_000.0 < g < 16_500.0, g
-    # the three pairwise closed-form solutions must agree to a few percent
-    closed = [p["closed_form_G"] for p in fit["pairwise_closed_form"]]
-    assert max(closed) / min(closed) - 1.0 < 0.15, closed
-    # the shared TPw implied by the nested ladder must be the same from every rung
-    t = [live * (0.2 * s + 0.8 * g) for s, live in zip([44090, 40199, 37654],
-                                                       [0.2600, 0.2708, 0.2778])]
-    assert (max(t) - min(t)) / np.mean(t) < 0.005, t
+def test_hidden_truth_fit_is_explicit_forensic_reproduction_only():
+    with pytest.raises(RuntimeError, match="invalidated FPw=S-TPw surrogate"):
+        live_model.fit_hidden_truth([44090, 40199, 37654], [0.2600, 0.2708, 0.2778])
+    fit = live_model.fit_hidden_truth(
+        [44090, 40199, 37654], [0.2600, 0.2708, 0.2778], legacy_audit_only=True)
+    assert fit["validity_status"] == live_model.MODEL_VALIDITY_STATUS
+    assert fit["promotion_use"] == "NONE — historical surrogate values only."
+    assert "FPw=S-TPw" in fit["invalidation_reason"]
+    assert np.isfinite(fit["hidden_truth_px"])  # schema/sanity only, never evidence of truth density
 
 
-def test_invert_truth_round_trips():
-    g = 14_027.5
-    for s in (37_654, 44_090, 121_131):
-        for dti in (0.19, 0.26, 0.2778, 0.32):
-            t = live_model.invert_truth(dti, s, g)
-            assert abs(t / (0.2 * s + 0.8 * g) - dti) < 1e-12
+def test_invert_truth_requires_explicit_forensic_opt_in():
+    with pytest.raises(RuntimeError, match="invalidated FPw=S-TPw surrogate"):
+        live_model.invert_truth(0.2778, 37_654, 14_027.5)
+    # The explicit path exists only for forensic reproduction; do not treat its
+    # number as an estimate of local or organizer hidden truth.
+    value = live_model.invert_truth(0.2778, 37_654, 14_027.5, legacy_audit_only=True)
+    assert np.isfinite(value) and value > 0
 
 
-def test_forward_model_dataclass_bounds():
-    model = live_model.ForwardModel(hidden_truth_px=14_027.5, rho=0.068015, target_px=103_805)
-    assert abs(model.break_even_credit(0.2778) - 0.05556) < 1e-4
-    # adding mass with no coverage can only lower the score
-    assert model.worst_case_dti(75_206.8, 37_654, 1_000) < model.dti(75_206.8, 37_654)
-    # ... and adding credit raises it
-    assert model.scenario_dti(75_206.8, 37_654, 1_000, 0.2) > model.dti(75_206.8, 37_654)
-    assert model.tpw_needed(0.3195, 37_654) > model.tpw_needed(0.2778, 37_654)
+def test_forward_model_requires_forensic_opt_in_and_labels_outputs():
+    with pytest.raises(RuntimeError, match="invalidated FPw=S-TPw surrogate"):
+        live_model.ForwardModel(hidden_truth_px=14_027.5, rho=0.068015, target_px=103_805)
+    model = live_model.ForwardModel(hidden_truth_px=14_027.5, rho=0.068015,
+                                    target_px=103_805, legacy_audit_only=True)
+    serialized = model.to_json()
+    assert serialized["validity_status"] == live_model.MODEL_VALIDITY_STATUS
+    assert serialized["promotion_use"] == "NONE — historical surrogate values only."
+    assert "FPw=S-TPw" in serialized["invalidation_reason"]
 
 
-@needs(BACKBONE)
-@needs(CORE)
-def test_calibration_reproduces_the_live_ladder():
-    receipt = json.loads(CALIBRATION.read_text()) if CALIBRATION.exists() else None
-    if receipt is None:
-        pytest.skip("calibration receipt not built yet")
-    rms = receipt["rho_fit"]["rms_relative_error_pct"]
-    assert rms < 3.0, rms
-    assert len(receipt["artifacts"]) == 8
-    # the nested triple must invert to one shared TPw
-    t = {a["key"]: a["live"] * (0.2 * a["emitted"] + 0.8 * receipt["hidden_truth_fit"]["hidden_truth_px"])
-         for a in receipt["artifacts"]}
-    triple = [t[k] for k in ("A_d2_8", "B_prune100", "C_prune200")]
-    assert (max(triple) - min(triple)) / np.mean(triple) < 0.005, triple
+def test_historical_calibration_receipt_is_explicitly_invalidated():
+    if not CALIBRATION.exists():
+        pytest.skip("historical calibration receipt not restored")
+    receipt = json.loads(CALIBRATION.read_text())
+    assert receipt["validity_status"] == live_model.MODEL_VALIDITY_STATUS
+    assert "FPw=S-TPw" in receipt["invalidation_reason"]
+    assert receipt["promotion_use"] == "NONE — historical surrogate values only."
 
 
 def test_coverage_is_monotone_under_addition():
@@ -130,43 +131,40 @@ def test_coverage_is_monotone_under_addition():
 # greedy priced additions
 # ---------------------------------------------------------------------------
 
-def test_greedy_incremental_coverage_matches_exact_recomputation():
+def test_greedy_incremental_coverage_matches_exact_recomputation_without_a_live_bar():
     rng = np.random.default_rng(11)
     target = rng.random((80, 80)) < 0.06
     core = rng.random((80, 80)) < 0.01
     pool = (rng.random((80, 80)) < 0.30) & ~core
-    model = live_model.ForwardModel(1_000.0, 0.07, int(target.sum()))
-    priced = h55.price_addition_path(core, pool, target, break_even_bar=0.2 * 0.27 / 0.07,
-                                     max_add=60, model=model)
-    rows = priced["rows"]
+    rows, gains, trace = h55.greedy_priced_additions(core, pool, target, bar=0.0, max_add=60)
     for n in (1, 5, 20, len(rows)):
         if n == 0 or n > len(rows):
             continue
         exact = core.copy()
         exact[rows[:n, 0], rows[:n, 1]] = True
         expected = live_model.coverage(exact, target)
-        # gains are float32; the incremental total may drift by ~1e-5 relative
-        assert abs(priced["path"][n]["coverage"] - expected) <= 1e-5 * max(1.0, expected), (n, expected)
+        # This checks geometric bookkeeping only; no live-calibrated threshold is applied.
+        actual = trace[n - 1]["coverage"]
+        assert abs(actual - expected) <= 1e-5 * max(1.0, expected), (n, expected)
+    assert len(gains) == len(trace) == len(rows)
 
 
-def test_greedy_stops_at_the_bar_and_respects_the_safety_prefix():
-    rng = np.random.default_rng(3)
-    target = rng.random((70, 70)) < 0.05
-    core = rng.random((70, 70)) < 0.01
-    pool = (rng.random((70, 70)) < 0.4) & ~core
-    model = live_model.ForwardModel(1_000.0, 0.07, int(target.sum()))
-    bar = 0.2 * 0.27 / 0.07
-    priced = h55.price_addition_path(core, pool, target, break_even_bar=bar,
-                                     max_add=500, model=model, safety_factor=1.25)
-    gains = priced["gains"]
-    assert (gains[:priced["n_admitted_at_break_even"]] >= bar - 1e-9).all()
-    robust = priced["robust_n"]
-    assert robust <= priced["n_admitted_at_break_even"]
-    assert (gains[:robust] >= 1.25 * bar - 1e-9).all()
-    if robust < len(gains):
-        assert gains[robust] < 1.25 * bar + 1e-9
-    # the robust prefix is a prefix of the path, so its DTI is on the path
-    assert priced["robust_prefix"]["n"] == robust
+def test_live_pricing_requires_and_marks_a_forensic_only_model():
+    with pytest.raises(RuntimeError, match="invalidated FPw=S-TPw surrogate"):
+        live_model.ForwardModel(1_000.0, 0.07, 100)
+    core = np.zeros((8, 8), dtype=bool)
+    pool = np.zeros_like(core)
+    target = np.zeros_like(core)
+    pool[3, 3] = True
+    target[3, 3] = True
+    with pytest.raises(RuntimeError, match="invalidated H55 pricing path"):
+        h55.price_addition_path(core, pool, target, break_even_bar=0.0,
+                                max_add=1, model=object())
+    model = live_model.ForwardModel(100.0, 0.5, 1, legacy_audit_only=True)
+    result = h55.price_addition_path(core, pool, target, break_even_bar=0.0,
+                                    max_add=1, model=model)
+    assert result["validity_status"] == live_model.MODEL_VALIDITY_STATUS
+    assert result["promotion_use"] == "NONE — historical surrogate outputs only."
 
 
 def test_dart_throw_enforces_min_separation_and_is_deterministic():
@@ -238,11 +236,11 @@ def test_site_arrays_collapse_duplicates_by_maximum():
 # Dempster-Shafer
 # ---------------------------------------------------------------------------
 
-def test_dempster_reports_residual_ignorance_and_raw_conflict_separately():
+def test_dempster_preserves_disagreement_as_unassigned_mass():
     b1 = np.array([[1.0, 1.0, 0.0], [0.0, 0.5, 1.0]])
     b2 = np.array([[1.0, 0.0, 0.0], [1.0, 0.5, 0.0]])
     out = dempster_combine(b1, b2, alpha1=0.6, alpha2=0.6)
-    # The closed-form example: residual m(Theta) rises as normalized-away K rises.
+    # agreement -> maximal belief; one-sided support -> belief drops AND mTheta rises
     assert out["bel"][0, 0] == pytest.approx(0.84)
     assert out["unc"][0, 0] == pytest.approx(0.16)
     assert out["bel"][0, 1] == pytest.approx(0.375)
@@ -271,10 +269,10 @@ def test_dempster_belief_is_not_the_naive_mean():
     assert np.abs(out["bel"] - (slope * naive + intercept)).mean() > 1e-3
 
 
-def test_full_conflict_is_rejected_because_normalized_rule_is_undefined():
+def test_full_conflict_raises_instead_of_fabricating_vacuous_mass():
     b1 = np.array([[1.0]])
     b2 = np.array([[0.0]])
-    with pytest.raises(ValueError, match="undefined"):
+    with pytest.raises(ValueError, match="total/numerical conflict"):
         dempster_combine(b1, b2, alpha1=1.0, alpha2=1.0)
 
 
@@ -318,32 +316,18 @@ def test_write_float32_zeros_outside_rejects_out_of_range(tmp_path):
 # ---------------------------------------------------------------------------
 
 @needs(RECEIPT)
-def test_build_receipt_is_internally_consistent():
-    r = json.loads(RECEIPT.read_text())
-    e = r["emission"]
-    assert e["positive_pixels"] == e["core_px"] + e["a2_px"] + e["a1_px"]
-    assert e["core_preserved_exactly"] is True
-    assert e["on_catalogue_positive_pixels"] == 0
-    assert e["within_200m_of_catalogue_positive_pixels"] == 0
-    assert e["outside_footprint_positive_pixels"] == 0
-    assert e["unique_values"] == [0.0, 1.0]
-    risk = r["risk"]
-    # the pre-registered floor must hold: worst case >= 0.2778 - 0.0100
-    assert risk["floor_all_added_pixels_zero_credit"]["live_equivalent"] >= 0.2778 - 0.0100 - 1e-6
-    assert risk["floor_all_added_pixels_zero_credit"]["within_pre_registered_floor"] is True
-    assert risk["coverage_bookkeeping_check_incremental_vs_exact"]["match"] is True
-    # every scenario with more credit must score higher than the zero-credit case
-    band = risk["scenario_band"]
-    assert all(band[i]["dti_live_equivalent"] <= band[i + 1]["dti_live_equivalent"] + 1e-12
-               for i in range(len(band) - 1))
-    # the naive union of the two families must be priced BELOW the untouched core
-    union = r["live_model"]["union_of_both_families_priced"]
-    assert union["delta_vs_C_model"] < 0
-    ds = r["dempster_shafer"]
-    assert ds["not_the_naive_mean"]["is_the_naive_mean"] is False
-    assert ds["not_the_naive_mean"]["best_affine_fit_mean_abs_residual"] > 1e-3
-    assert 0.15 <= ds["mtheta_max"] <= 0.26
-    assert ds["conflict_K_max"] == pytest.approx(0.36)
+def test_build_receipt_invalidates_live_model_and_clears_no_slot():
+    receipt = json.loads(RECEIPT.read_text())
+    assert receipt["validity_status"] == "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION"
+    assert receipt["submission_decision"].startswith("NOT CLEARED TO SUBMIT")
+    assert "FPw=S-TPw" in receipt["invalidation_reason"]
+    assert "no organizer receipt links" in receipt["leaderboard_linkage"]
+    assert receipt["status"] == "INVALIDATED_FORENSIC_ONLY_NOT_CLEARED_TO_SUBMIT"
+    assert receipt["live_model"]["validity_status"] == receipt["validity_status"]
+    assert receipt["risk"]["validity_status"] == receipt["validity_status"]
+    ds = receipt["dempster_shafer"]
+    assert ds["historical_binary_claim_status"].startswith("INVALIDATED")
+    assert "why_the_emission_is_binary" not in ds
 
 
 @needs(PRIMARY)

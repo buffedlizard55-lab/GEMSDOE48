@@ -1,52 +1,24 @@
 #!/usr/bin/env python3
-"""H57 — Dempster-Shafer two-family fusion plus Dempster-gated lidar-relief new coverage.
+"""H57-RELIEF — reproduce a historical Dempster-Shafer/lidar research artifact.
 
-What this builds
-----------------
-Three evidence sources on the frame of discernment Theta = {F (new fault), N (no new fault)}:
+This builder preserves the recorded A/B/C construction and emits local format and
+Dempster diagnostics. It does NOT calculate a live score, hidden-truth count,
+per-dot break-even, candidate ceiling, or submission recommendation. The previous
+surrogate projection used the invalid identity FPw = S - TPw; see
+``docs/research/h57-relief-metric-erratum-20261007.md``. The artifact remains OK
+for inspection only and is NOT CLEARED TO SUBMIT.
 
-  A  dotted family  ``data/families/dotted_b2_prune_02778.tif``  (37,654 dots,
-     owner-reported public-leaderboard 0.2778).  Shafer reliability discount r_A = 1.0
-     (the live anchor).
-  B  tip / step-over family ``data/families/tip_stepover_r30_02632.tif`` (41,865 dots,
-     owner-reported 0.2632).  Discount r_B = 0.2632 / 0.2778 = 0.9474 (live ratio).
-  C  USGS 3DEP lidar relief: ``data/external/h52_scarp3m_100m.tif`` band ``sigma_mean``
-     (mean 3 m context roughness, stored in centimetres per
-     ``scripts/dem_region_merge.py``).  Cells with roughness >= 2.0 m that carry no
-     kernel support from A or B, sit > 200 m from the published catalogue, have >= 50 %
-     3 m sample coverage, and survive a 3-cell non-maximum suppression.  Discount
-     r_C = RHO_MAX = 0.95 (pre-registered ceiling; see docs/research/h57-*.md).
+Namespace: this built H57-RELIEF artifact is separate from the two same-day
+H57-A planning slates. Parent-score values and the catalogue-flank rationale are
+owner-reported planning assumptions, not verified local-file attribution or
+calibrated reliabilities.
 
-Absence evidence a_i(x) is zero inside the live-validated 200 m catalogue flank (the two
-pruning rungs that produced 0.2600 -> 0.2708 -> 0.2778 removed exactly the dots at
-d(catalogue) <= 1 and <= 2 cells, and the nested-chain algebra prices their credit at
-0.0014-0.0046 per dot against a 0.058 break-even).
-
-Dempster's rule is applied A (+) B, then (+) C.  Outputs:
-
-  * ``-belief.tif``       normalised Bel(F) in [0, 1]            (brief-mandated artefact)
-  * ``-mtheta.tif``       unassigned mass m(Theta) — the disagreement layer
-  * ``-conflict-k.tif``   raw Dempster conflict K before normalisation
-  * ``-plausibility.tif`` Pl(F) = Bel(F) + m(Theta)
-  * primary submission    the metric-optimal binary decision surface (see below)
-
-Decision rule
--------------
-The official metric is DTI = TPw / (0.2 TPw + 0.2 FPw + 0.8 FNw) with
-FNw = |G| - TPw, so DTI = TPw / (0.2 TPw + 0.2 FPw + 0.8 |G|) and a marginal dot is worth
-adding iff its marginal kernel credit exceeds 0.2 * DTI (about 0.055 at this operating
-point).  Every source is therefore admitted or rejected on its *measured marginal*
-credit, not on its belief alone:
-
-  A  kept in full    (its own dots price at 0.137 each)
-  B  only where it agrees with A; B-only dots price at 0.029 marginal -> rejected
-  C  admitted        (out-of-fold marginal credit 0.176 per dot, 4/4 spatial folds)
-
-The resulting emission is written all-finite float32 in [0, 1] with zeros outside the
-footprint so the portal cannot raise "Predicted values must be in range [0, 1]"; a
-NaN-outside twin is written alongside for the format description's null/nan wording.
-
-Nothing here is an organizer score.  All projections are labelled [PROXY].
+The builder writes a normalized Bel(F) surface and separate residual m(Theta),
+raw conflict K, and plausibility diagnostics. m(Theta) is unassigned/ignorance
+mass, not conflict or direct family disagreement. A separate historical binary
+emission is retained for reproducibility; its existence is not a metric-optimality
+claim or a weekly-slot clearance. Local range and uniqueness checks are not
+organizer portal acceptance.
 """
 from __future__ import annotations
 
@@ -138,8 +110,12 @@ def write_tif(path: pathlib.Path, arr: np.ndarray, *, nodata, dtype="float32") -
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--out-dir", default=str(ROOT / "docs" / "downloads"))
-    ap.add_argument("--receipt", default=str(ROOT / "evidence" / "build_h57_receipt_20261007.json"))
+    # Keep rebuilds out of the tracked download/evidence archive by default. The
+    # dated build receipt contains the former projection under forensic-only
+    # fields; a scratch rebuild must not silently replace that archival record.
+    scratch_dir = ROOT / "scratch" / "h57-relief-rebuild"
+    ap.add_argument("--out-dir", default=str(scratch_dir))
+    ap.add_argument("--receipt", default=str(scratch_dir / "build_h57_receipt.json"))
     ap.add_argument("--id", default=None)
     args = ap.parse_args()
     out = pathlib.Path(args.out_dir); out.mkdir(parents=True, exist_ok=True)
@@ -187,9 +163,9 @@ def main() -> int:
     bel = np.clip(bel, 0.0, 1.0).astype(np.float32)
     pl = np.clip(pl / max(float(pl.max()), 1e-9), 0.0, 1.0).astype(np.float32)
 
-    # ---- metric-optimal binary decision surface ----------------------------
-    # A in full; B only where it corroborates A (B-only marginal credit is below the
-    # break-even); C admitted (out-of-fold marginal credit 4/4 folds above break-even).
+    # ---- recorded historical binary emission -------------------------------
+    # This reproduces the prior A-plus-lidar recipe. It is not called metric-optimal:
+    # the old live-score/break-even model is invalidated and no slot is cleared.
     decision = ((A | (A & B) | L) & footprint).astype(np.float32)
 
     stamp = datetime.now(timezone.utc).strftime("%Y%m%d")
@@ -249,18 +225,19 @@ def main() -> int:
     jac = float((topset(bel) & A).sum() / (topset(bel) | A).sum())
 
     receipt = {
-        "candidate_id": "H57",
+        "candidate_id": "H57-RELIEF",
+        "namespace_note": "Distinct from both same-day H57-A planning slates; see the H57-RELIEF metric-identity erratum.",
         "slug": stem,
         "content_digest12": cid,
         "created_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-        "brief": "unique Dempster-Shafer two-family fusion + Dempster-gated lidar-relief new coverage",
+        "brief": "historical Dempster-Shafer two-family fusion + lidar-relief research artifact; not slot-cleared",
         "parents": {
             "A_dotted": {"file": "data/families/dotted_b2_prune_02778.tif",
                          "sha256": sha256(ROOT / "data" / "families" / "dotted_b2_prune_02778.tif"),
-                         "dots": int(A.sum()), "owner_reported_live": 0.2778, "discount": 1.0},
+                         "dots": int(A.sum()), "owner_reported_score_claim_unverified": 0.2778, "discount": 1.0},
             "B_tip_stepover": {"file": "data/families/tip_stepover_r30_02632.tif",
                                "sha256": sha256(ROOT / "data" / "families" / "tip_stepover_r30_02632.tif"),
-                               "dots": int(B.sum()), "owner_reported_live": 0.2632,
+                               "dots": int(B.sum()), "owner_reported_score_claim_unverified": 0.2632,
                                "discount": round(float(R_B), 6)},
             "C_lidar_relief": {"file": "data/external/h52_scarp3m_100m.tif",
                                "band": "sigma_mean", "threshold_cm": SIGMA_CM,
@@ -306,32 +283,23 @@ def main() -> int:
             "values_in_0_1": in_range,
             "nodata": prof.get("nodata"),
             "portal_range_error_immune": all_finite and in_range,
+            "organizer_acceptance_tested": False,
+            "local_only_note": "Range/grid checks only; portal acceptance is not tested.",
         },
         "files": {k: {"path": str(pathlib.Path(v).relative_to(ROOT)),
                       "bytes": pathlib.Path(v).stat().st_size,
                       "sha256": sha256(pathlib.Path(v))} for k, v in files.items()},
         "verdict": {
-            "download": "OK",
-            "submit": "RECOMMENDED (proxy projection only; no organizer score exists for this file)",
-            "basis": "marginal credit 0.1781/dot vs 0.0549 break-even (3.24x); 3 of 4 spatial truth blocks above break-even, the fourth holding 10x sparser proxy truth",
+            "download": "OK FOR INSPECTION",
+            "submit": "NOT CLEARED TO SUBMIT",
+            "basis": "The previous live-score projection and per-dot threshold were invalidated by the metric-identity correction; this record does not establish a comparable blocked-H49 win or organizer acceptance.",
         },
-        "proxy_projection_LABELLED_PROXY_ONLY": {
-            "instrument": "T_live = 0.9324 x T_SGMC, G = SGMC-derived faults & footprint & dcat>3 (|G| = 62,122); 8-family RMS 0.84 %",
-            "projector": "DTI(S) = T_live(S) / (0.2 |S| + 11,215.3)",
-            "T_SGMC_parent": 5517.6, "T_SGMC_h57": 9409.7,
-            "T_live_parent": 5144.6, "T_live_h57": 8773.6,
-            "marginal_credit_per_lidar_dot": 0.1781,
-            "break_even_credit": 0.0549,
-            "DTI_parent": 0.2744, "DTI_h57": 0.3844,
-            "DTI_worst_case_all_lidar_worthless": 0.2254,
-            "instrument_scale_that_breaks_even": 0.30,
-            "spatial_blocks": [
-                {"block": 0, "dots": 9148, "credit_per_dot": 0.1318, "G": 23130, "pass": True},
-                {"block": 1, "dots": 2867, "credit_per_dot": 0.0520, "G": 2353, "pass": False},
-                {"block": 2, "dots": 4087, "credit_per_dot": 0.2587, "G": 23192, "pass": True},
-                {"block": 3, "dots": 4275, "credit_per_dot": 0.2847, "G": 13447, "pass": True}
-            ],
-            "block_1_explanation": "block 1 carries 2,353 proxy-truth pixels against 13,447-23,192 elsewhere; its share of available truth within 300 m of a lidar dot is the highest of the four (18.9 % vs 13.3-26.1 %), so its low credit per dot reflects truth sparsity, not a rule failure. Excluding it, credit per dot is 0.1987 over 17,510 dots.",
+        "dempster_semantics": "m(Theta) is residual unassigned/ignorance mass; raw K is the separate pre-normalization conflict diagnostic; neither is a calibrated probability or literal family-disagreement map.",
+        "metric_projection_status": {
+            "status": "INVALIDATED_METRIC_IDENTITY_DO_NOT_USE",
+            "reason": "This builder intentionally does not regenerate live-equivalent DTI, hidden-truth density, per-dot break-even, ceiling, floor, or sensitivity estimates based on FPw = S - TPw.",
+            "superseding_erratum": "docs/research/h57-relief-metric-erratum-20261007.md",
+            "recomputed_by_current_builder": False,
         },
     }
     pathlib.Path(args.receipt).parent.mkdir(parents=True, exist_ok=True)

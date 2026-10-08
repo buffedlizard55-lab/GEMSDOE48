@@ -1,12 +1,15 @@
 # Future hypothesis slate after H56 review — frozen 2026-10-07 17:43 UTC
 
-> **Namespace collision.** The identifiers **H57-A … H57-E** in this slate are *future, unbuilt*
-> plans. A separate same-day session built and cleared an actual submission under the bare name
-> **H57** — `GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07`, documented in
-> [`h57-ds-relief-augmented-20261007.md`](h57-ds-relief-augmented-20261007.md). That file is not
-> part of this slate and is not superseded by it. Where this slate's H57-C needs the full-area 3 m
-> DEM, the cleared H57 uses the 100 m scarp mosaic `data/external/h52_scarp3m_100m.tif`, which is
-> present locally (697 tiles, 0 merge failures).
+> **Namespace collision and later correction.** The identifiers **H57-A … H57-E** in this
+> 17:43 UTC slate are future, unbuilt plans. A separate concurrent session built the artifact
+> `GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07`, now labeled **H57-RELIEF** and
+> documented in [`h57-ds-relief-augmented-20261007.md`](h57-ds-relief-augmented-20261007.md).
+> Its former submit recommendation and live-equivalent projection were later withdrawn; it is
+> **OK TO DOWNLOAD FOR INSPECTION · NOT OK / NOT CLEARED TO SUBMIT**. A third, later 21:18 UTC
+> slate on the current branch uses H57-A–D labels; its H57-A radiometric/magnetic screen failed
+> and emitted no TIFF (`hypotheses-h57-20261007.md`, `h57-results-20261007.md`). These slates and
+> the relief artifact are distinct namespaces. Source and coverage statements below are preserved
+> from dated repository receipts and were not independently re-verified in this correction.
 
 **Purpose:** document five exact, unbuilt candidate operators before any future implementation. This is a new forward plan, not a preregistration for earlier H56/H56B scores. It does not supersede historical receipts. `H57-A` to `H57-E` are namespaced to avoid the conflicting reuse of H56-B/C/D across the main and later H56 lists.
 
@@ -26,6 +29,6 @@ The ordering below is **screening order by data/implementation readiness**, not 
 2. Freeze the operator, scales, thresholds, mask rules, emitted mass/budget, random controls, and expected direction before holdout. Do not tune on the same folds used to claim improvement.
 3. Use the pinned four-quadrant/core-plus-300 m-halo evaluator against both public proxy targets; compare to H49 and the candidate's parents/baselines using **higher DTI = better**. Preserve fold-level deltas and the older-SGMC sensitivity where appropriate.
 4. A public-proxy pass is not private-label evidence or organizer acceptance. **No weekly submission slot is spent unless the candidate first beats the comparable blocked-holdout best on the frozen gate; even then this repository cannot claim private-label performance or portal acceptance.**
-5. No new geological detector was implemented as part of this review. The H56-A lead from the date-only main slate was already holdout-tested and failed. The later H56-F rank is exploratory, post-score, and is not a replacement preregistration.
+5. No detector from this 17:43 UTC slate was implemented in its own session. The H56-A lead from the date-only main slate was already holdout-tested and failed. The later H56-F rank is exploratory, post-score, and is not a replacement preregistration. Later H57-A and H57-RELIEF records belong to separate namespaces and do not alter this slate's frozen, unbuilt status.
 
 Machine-readable companion: [`evidence/hypothesis_slate_h57_20261007.json`](../../evidence/hypothesis_slate_h57_20261007.json).

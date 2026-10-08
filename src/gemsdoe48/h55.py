@@ -1,32 +1,19 @@
-"""H55 -- Conduit-Anchored, Conflict-Priced Additive Extension.
+"""Historical H55 helper functions — FORENSIC ONLY; not a validated score model.
 
-Construction (frozen before any scoring; see ``docs/research/h55-*.md``)
-------------------------------------------------------------------------
-``X = C  U  A2  U  A1``
+The former H55 construction combined dotted-family and tip/step-over evidence,
+then priced additions using a live-anchor surrogate. That surrogate inferred
+hidden truth and a per-dot bar through ``FPw = S - TPw``; the identity is not
+general under the official metric. Its ``T = 5,209``, union score, break-even
+bar, scenario bands, ceiling, and ``live-equivalent`` values are invalidated by
+``docs/research/metric-identity-erratum-20261007.md``. They are historical
+outputs, not private-label facts, score estimates, or promotion evidence.
 
-``C``
-    The live-best dotted artifact (37,654 px, owner-reported 0.2778).  It is
-    carried through **untouched**.  Nothing is pruned, re-weighted or moved, so
-    the calibrated ``T = 5,209`` it already recovers cannot be lost.
-``A2`` -- conflict-priced gap closure (in-family, model-priced)
-    The dotted family and the tip/step-over family disagree on 10,251 pixels.
-    Instead of averaging the two surfaces -- which the metric punishes, because
-    the live-calibrated model prices the naive union at 0.2588, i.e. **-0.019
-    against C** -- each disagreement site is *priced*: it is admitted only if its
-    greedy marginal coverage of the eligible backbone exceeds a safety-multiplied
-    break-even bar ``1.25 * 0.2 * DTI_C / rho``.  This is Dempster-Shafer
-    disagreement preserved as an **economy** rather than washed out by a mean.
-``A1`` -- hydrothermal conduit anchors (out-of-family, new signal)
-    GDR/INGENIOUS wells and springs at tier >= 2 (see :mod:`gemsdoe48.conduit`),
-    more than 300 m from every already-emitted dot, mutually >= 300 m apart, and
-    vetoed where the two families are in *maximal* Dempster conflict unless the
-    anchor is tier 3.  A1 is the only out-of-family mass, so its credit is
-    reported as a scenario band, never as a point prediction.
-
-Risk accounting is exact for A1: because ``TPw`` is a maximum over emitted pixels,
-**adding a pixel can never reduce ``T``**.  The worst case is therefore
-``T_C / (0.2 (S_C + n) + 0.8 |G|)``, computed in
-:func:`gemsdoe48.live_model.ForwardModel.worst_case_dti`.
+The geometry-only ``greedy_priced_additions`` helper still accepts an arbitrary
+caller-supplied coverage cutoff, but that cutoff has no organizer-score meaning.
+``price_addition_path`` is guarded for explicit legacy-model opt-in and returns
+forensic-only surrogate values. Neither helper establishes that a blend beats
+a parent, that the surfaces are independent, or that Dempster-Shafer ignorance
+is conflict. No H55 artifact is cleared to submit.
 """
 from __future__ import annotations
 
@@ -109,8 +96,10 @@ def greedy_priced_additions(
 ) -> tuple[np.ndarray, np.ndarray, list[dict]]:
     """Greedily add pool pixels whose marginal target coverage exceeds ``bar``.
 
-    ``bar`` is expressed in coverage units (``0.2 * DTI / rho`` times a safety
-    factor).  Returns ``(rows_cols, gains, trace)`` in selection order.
+    ``bar`` is a caller-supplied geometric cutoff in coverage units; this helper
+    does not calibrate it to DTI or an organizer score. Historical H55 runs used
+    an invalid live-model threshold, which must not be treated as a current gate.
+    Returns ``(rows_cols, gains, trace)`` in selection order.
     """
     core = np.asarray(core, dtype=bool)
     pool = np.asarray(pool, dtype=bool) & ~core
@@ -157,18 +146,16 @@ def price_addition_path(
     extra_mass: int = 0,
     safety_factor: float = 1.0,
 ) -> dict:
-    """Walk the greedy path and report the prefix that maximises modelled DTI.
+    """Reproduce the retired H55 surrogate path for forensic comparison only.
 
-    The exact break-even bar is ``0.2 * DTI / rho`` in coverage units.  Greedy
-    marginal gains fall monotonically along the path, so predicted DTI is unimodal
-    in the prefix length and the argmax prefix is the model-optimal budget.
-    Coverage along the path is accumulated from the greedy gains, which are exact
-    marginal coverages (verified against a full recomputation in
-    ``evidence/live_model_calibration_*.json``).  ``extra_mass`` carries pixels
-    that are already committed to the emission but contribute no target coverage
-    (the out-of-family conduit anchors), so the optimal prefix is priced against
-    the true final denominator.
+    The caller must pass an explicitly opted-in historical ``ForwardModel``.
+    ``break_even_bar`` and all modelled DTI values inherit the invalid
+    ``FPw=S-TPw`` assumption; the returned argmax/robust prefixes are not
+    organizer-score optima or candidate recommendations. Coverage accounting
+    remains a geometric helper and is checked separately without any live bar.
     """
+    if not getattr(model, "legacy_audit_only", False):
+        raise RuntimeError("invalidated H55 pricing path; explicit forensic-only ForwardModel required")
     rows, gains, trace = greedy_priced_additions(
         core, pool, target, bar=break_even_bar, max_add=max_add)
     core = np.asarray(core, dtype=bool)
@@ -182,17 +169,20 @@ def price_addition_path(
                      "coverage": point["coverage"], "last_gain": point["gain"],
                      "dti_pred": model.dti(point["coverage"], base_emitted + point["n"])})
     best = max(path, key=lambda p: p["dti_pred"])
-    # Robustness-first prefix: the longest initial run of the greedy path in which
-    # EVERY admitted dot clears `safety_factor` x break-even.  Gains are not
-    # guaranteed monotone along a greedy max-coverage path (a local update can lift
-    # a neighbour), so the prefix is defined by the first violation, not by a count.
+    # Historical robustness-first prefix; `safety_factor * break_even_bar` has no
+    # current promotion meaning. Gains are not guaranteed monotone along a greedy
+    # max-coverage path, so this reproduces the old first-violation rule only.
     robust_n = 0
     for value in gains:
         if value < safety_factor * break_even_bar:
             break
         robust_n += 1
     robust = path[robust_n] if robust_n else path[0]
-    return {"break_even_bar_coverage_units": float(break_even_bar),
+    return {"validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION",
+            "invalidation_reason": "H55 live-model path depends on invalid FPw=S-TPw substitution.",
+            "promotion_use": "NONE — historical surrogate outputs only.",
+            "break_even_bar_coverage_units_invalidated": float(break_even_bar),
+            "break_even_bar_coverage_units": float(break_even_bar),
             "safety_factor": float(safety_factor), "path": path,
             "argmax_prefix": best, "robust_prefix": robust, "robust_n": robust_n,
             "n_admitted_at_break_even": int(len(rows)),

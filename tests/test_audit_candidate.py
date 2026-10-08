@@ -1,8 +1,10 @@
-"""Unit checks for the mass-neutral candidate audit tool (GEMSDOE48-GATE-2)."""
+"""Tests for the retired Gate-2 tool's fail-closed forensic status."""
 from __future__ import annotations
 
 import importlib.util
 import json
+import subprocess
+import sys
 from pathlib import Path
 
 import pytest
@@ -14,12 +16,14 @@ audit = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(audit)
 
 
-def test_constants_match_documented_protocol():
+def test_metric_grid_constants_and_gate_invalidation_are_documented():
     assert audit.ALPHA == 0.2 and audit.BETA == 0.8 and audit.RADIUS_M == 300.0
-    assert audit.LIVE_TRUTH_PX == 14307
-    assert audit.INCUMBENT_LIVE_DTI == 0.2778
+    assert audit.LIVE_TRUTH_PX > 0  # retained only for explicit forensic reproduction
     assert audit.EXPECTED_GRID == (3730, 3292)
-    assert abs(0.2 * audit.INCUMBENT_LIVE_DTI - 0.05556) < 1e-9
+    assert "RETIRED" in audit.__doc__
+    assert "not valid for promotion" in audit.__doc__
+    assert "universal live break-even bar" in audit.__doc__
+    assert "only follows under" in audit.__doc__
 
 
 def test_grid_ok_accepts_competition_grid_and_rejects_deviations():
@@ -31,44 +35,41 @@ def test_grid_ok_accepts_competition_grid_and_rejects_deviations():
     assert not audit.grid_ok({**good, "shape": [3292, 3730]})
 
 
-def test_decide_identical_support_is_flagged_not_passed():
-    verdict, reasons = audit.decide(
-        format_ok=True, identical=True, equal_mass_delta=0.0, n_added=0,
-        density_matched_credit=0.0, bar_live=0.05556, bar_proxy=0.0191)
+def test_legacy_verdict_logic_requires_explicit_forensic_opt_in():
+    args = dict(format_ok=True, identical=True, equal_mass_delta=0.0, n_added=0,
+                density_matched_credit=0.0, bar_live=0.05556, bar_proxy=0.0191)
+    with pytest.raises(RuntimeError, match="invalidated Gate-2"):
+        audit.decide(**args)
+    # The old value can be reproduced only when explicitly called forensic.
+    verdict, _ = audit.decide(**args, legacy_audit_only=True)
     assert verdict == "IDENTICAL_TO_INCUMBENT"
-    assert "identical_support_to_incumbent" in reasons
 
 
-def test_decide_passes_only_with_density_and_additions():
-    verdict, reasons = audit.decide(
-        format_ok=True, identical=False, equal_mass_delta=-0.001, n_added=0,
-        density_matched_credit=0.0, bar_live=0.05556, bar_proxy=0.0191)
-    assert verdict == "PASS_MASS_NEUTRAL" and reasons == []
-    verdict, reasons = audit.decide(
-        format_ok=True, identical=False, equal_mass_delta=-0.010, n_added=0,
-        density_matched_credit=0.0, bar_live=0.05556, bar_proxy=0.0191)
-    assert verdict == "FAIL_MASS_NEUTRAL"
-    assert any("equal_mass" in reason for reason in reasons)
+def test_cli_refuses_default_execution_before_reading_inputs():
+    result = subprocess.run([sys.executable, str(ROOT / "scripts/audit_candidate.py"), "missing.tif"],
+                            cwd=ROOT, capture_output=True, text=True)
+    assert result.returncode != 0
+    assert "invalidated" in (result.stderr + result.stdout).lower()
+    assert "--legacy-audit-only" in (result.stderr + result.stdout)
 
 
-@pytest.mark.parametrize("credit, expected", [(0.0099, True), (0.0500, True), (0.0560, False)])
-def test_decide_additions_bar(credit, expected):
-    _, reasons = audit.decide(
-        format_ok=True, identical=False, equal_mass_delta=0.0, n_added=100,
-        density_matched_credit=credit, bar_live=0.05556, bar_proxy=0.0191)
-    failed = any("added_cells_below_live_break_even_bar" in reason for reason in reasons)
-    assert failed is expected
-
-
-def test_gate2_receipts_are_internally_consistent():
-    receipts = sorted((ROOT / "evidence").glob("audit_gate2_*_20261007.json"))
-    assert receipts, "expected the committed GATE-2 receipts"
+def test_gate2_receipts_preserve_but_invalidate_old_verdicts():
+    receipts = sorted((ROOT / "evidence").glob("audit*.json"))
+    marked = 0
     for path in receipts:
         report = json.loads(path.read_text())
-        assert report["schema"] == "GEMSDOE48-candidate-audit-v1"
-        counts = report["counts"]
-        assert counts["candidate_cells"] - counts["added_cells"] <= counts["incumbent_cells"]
-        if report["verdict"] == "FAIL_MASS_NEUTRAL":
-            assert report["reasons"], path.name
-        if report["verdict"] == "IDENTICAL_TO_INCUMBENT":
-            assert abs(report["equal_mass"]["delta_vs_incumbent"]) < 1e-9
+        if "legacy_verdict" not in report:
+            continue
+        marked += 1
+        assert report["validity_status"] == "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION"
+        assert report["verdict"] == "INVALIDATED_FOR_FORENSIC_REPRODUCTION_ONLY"
+        assert report["legacy_verdict"] in {"IDENTICAL_TO_INCUMBENT", "FAIL_MASS_NEUTRAL", "PASS_MASS_NEUTRAL"}
+        assert "promotion decisions are invalidated" in report["warning"].lower()
+    assert marked == 17
+
+
+def test_credit_density_rollup_is_invalidated():
+    report = json.loads((ROOT / "evidence/credit_density_audit_20261007.json").read_text())
+    assert report["validity_status"] == "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION"
+    assert "invalidated" in report["warning"].lower()
+    assert "historical_instrument_invalidated" in report

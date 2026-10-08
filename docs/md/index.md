@@ -1,3 +1,11 @@
-# Current overview
+# Current overview — Markdown bridge
 
-The upstream Markdown site is retired and these files are no longer build inputs. Open the [current GEMSDOE48 overview](../index.html), the separate [H53-A strike-coherence TIFF](../downloads/GEMSDOE48-H53-STRIKE-COHERENCE-20261007-de35531d3867-nan-outside.tif) and [H53-A paired H49 report](../research/holdout-h53a-scarp-results-20261007.md), and the merged [H53-1 three-source Dempster result](../research/holdout-h53-results-20261007.md). H53-A fails its preregistered comparison against H49 on both SGMC public-map proxies, and H53-1 also fails its fusion gate; no weekly slot is cleared. H49 remains proxy-best, not a private-label or organizer-score result.
+> **The former upstream Markdown site is retired.** Its historical snapshot is preserved in [`docs/archive-main-pages/md/index.md`](../archive-main-pages/md/index.md); this file is only a bridge to the maintained pages.
+
+**Current decision: NO WEEKLY SUBMISSION SLOT IS CLEARED.** The H56B Dempster–Shafer GeoTIFF is **OK TO DOWNLOAD FOR INSPECTION · NOT OK / NOT CLEARED TO SUBMIT**. Local format checks and public-proxy diagnostics are not organizer acceptance, private-label performance, or a score attribution.
+
+- [Current overview and H56B download](../index.html)
+- [Executive summary](../executive-summary.html) · [submission guide](../submission-guide.html)
+- [Validation and holdout results](../validation.html) · [four-hypothesis slate](../hypotheses.html)
+- [Metric-identity erratum](../research/metric-identity-erratum-20261007.md)
+- [Current H57-A results](../research/h57-results-20261007.md) · [H56-F results](../research/h56-pruning-ladder-results-20261007.md)

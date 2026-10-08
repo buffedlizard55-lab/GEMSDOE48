@@ -1,177 +1,32 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="H56 open-world Dempster-Shafer method, official metric assumptions, uncertainty diagnostics, and explicit status as a failed proxy candidate.">
-<title>GEMSDOE48 H56 — method and assumptions</title>
-<style>
-:root{color-scheme:light;--ink:#12241d;--muted:#54665c;--paper:#f4f4ec;--panel:#fffefa;
---line:#d7ddd1;--green:#1d4c3a;--green2:#2f6b52;--soft:#e3eee5;--amber:#8a4a15;
---ambersoft:#fff1d9;--red:#8d3227;--redsoft:#f9e7e1;
---mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
---sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
-*{box-sizing:border-box}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.62}
-a{color:var(--green);text-underline-offset:3px}
-.wrap{width:min(1120px,calc(100% - 32px));margin:0 auto}
-header{background:#17392e;color:#f2f5ef;padding:34px 0 30px}
-header .eyebrow{color:#a9cbb4;text-transform:uppercase;letter-spacing:.16em;font-size:.72rem;font-weight:800}
-h1{margin:.35rem 0 .5rem;font-size:clamp(1.9rem,5vw,3.2rem);line-height:1.03;letter-spacing:-.045em}
-.deck{max-width:820px;margin:0;color:#d5e5d9;font-size:clamp(1rem,1.8vw,1.15rem)}
-main{padding:26px 0 70px}
-h2{margin:34px 0 10px;font-size:1.42rem;letter-spacing:-.025em;border-bottom:2px solid var(--line);padding-bottom:6px}
-h3{margin:22px 0 6px;font-size:1.06rem}
-p{margin:0 0 12px}
-code,kbd,.mono{font-family:var(--mono);font-size:.86em}
-code{background:#eceee5;padding:1px 5px;border-radius:4px;overflow-wrap:anywhere}
-pre{background:#132a22;color:#dceade;padding:14px 16px;border-radius:10px;overflow-x:auto;font-size:.8rem;line-height:1.5}
-pre code{background:none;color:inherit;padding:0}
-.dl{background:var(--soft);border:2px solid #a9c6ae;border-radius:16px;padding:22px;margin:0 0 22px}
-.dl h2{margin:0 0 6px;border:0;padding:0;font-size:1.3rem}
-.bigbtn{display:block;text-align:center;margin:14px 0 10px;padding:20px 22px;border-radius:12px;
-background:var(--green);color:#fff;text-decoration:none;font-weight:850;font-size:1.16rem;
-letter-spacing:-.01em;box-shadow:0 6px 20px rgba(20,60,44,.22)}
-.bigbtn:hover{background:#123327;color:#fff}
-.bigbtn small{display:block;font-weight:600;font-size:.78rem;opacity:.86;margin-top:4px;letter-spacing:.02em}
-.btnrow{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 4px}
-.btn{flex:1 1 210px;text-align:center;padding:11px 14px;border-radius:9px;background:#fff;
-border:1px solid #b9c9bb;color:var(--green);text-decoration:none;font-weight:700;font-size:.9rem}
-.btn:hover{background:var(--green);color:#fff}
-.meta{font-family:var(--mono);font-size:.75rem;color:#3d5347;overflow-wrap:anywhere;margin-top:10px}
-.warn{border:1px solid #e3b87e;background:var(--ambersoft);color:#57340f;border-radius:12px;padding:14px 18px;margin:16px 0}
-.bad{border:1px solid #e0b3aa;background:var(--redsoft);color:#5d231b;border-radius:12px;padding:14px 18px;margin:16px 0}
-.good{border:1px solid #a9c6ae;background:var(--soft);color:#1d4c3a;border-radius:12px;padding:14px 18px;margin:16px 0}
-table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:.88rem;margin:10px 0 18px}
-th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:right;vertical-align:top}
-th:first-child,td:first-child{text-align:left}
-thead th{color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em}
-tbody tr.hl{background:#eef3ea;font-weight:750}
-.neg{color:var(--red);font-weight:700}
-.pos{color:var(--green2);font-weight:700}
-.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px;margin:14px 0}
-.metric{background:#f1f4ed;border:1px solid var(--line);border-radius:11px;padding:15px}
-.metric strong{display:block;font-size:1.5rem;letter-spacing:-.035em;font-variant-numeric:tabular-nums}
-.metric span{color:var(--muted);font-size:.83rem}
-nav.top{background:#0f2a21;padding:9px 0;font-size:.86rem;position:sticky;top:0;z-index:9}
-nav.top .wrap{display:flex;flex-wrap:wrap;gap:6px 16px}
-nav.top a{color:#c6dccc;text-decoration:none;font-weight:650}
-nav.top a:hover{color:#fff;text-decoration:underline}
-footer{border-top:1px solid var(--line);padding:22px 0 46px;color:var(--muted);font-size:.86rem}
-.steps{counter-reset:s;list-style:none;padding:0;margin:12px 0}
-.steps li{counter-increment:s;position:relative;padding:0 0 16px 46px;border-left:2px solid var(--line);margin-left:16px}
-.steps li:before{content:counter(s);position:absolute;left:-17px;top:-2px;width:32px;height:32px;
-border-radius:50%;background:var(--green);color:#fff;font-weight:800;display:grid;place-items:center;font-size:.9rem}
-.steps li:last-child{border-left-color:transparent}
-.pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:.72rem;font-weight:800;
-letter-spacing:.05em;text-transform:uppercase}
-.pill.no{background:var(--redsoft);color:var(--red)}
-.pill.yes{background:var(--soft);color:var(--green)}
-.pill.warn{background:var(--ambersoft);color:var(--amber)}
-.small{color:var(--muted);font-size:.85rem}
-@media print{nav.top{position:static}}
-
-.card{border:1px solid var(--line);border-radius:14px;padding:20px;background:var(--panel);margin:0 0 18px}
-.download-card{background:var(--soft);border-color:#bfcebf}
-.card .eyebrow,.eyebrow{color:var(--muted);text-transform:uppercase;letter-spacing:.14em;
-font-size:.72rem;font-weight:800}
-.button{display:inline-block;margin:8px 0 4px;padding:12px 18px;border-radius:8px;background:var(--green);
-color:#fff;text-decoration:none;font-weight:750}
-.button:hover{color:#fff;background:#123327}
-.file-meta{margin-top:12px;font-family:var(--mono);font-size:.76rem;overflow-wrap:anywhere;color:#3d5145}
-.note{padding:12px 14px;border-radius:9px;background:#f2f4ee;border:1px solid var(--line);
-font-family:var(--mono);font-size:.78rem;overflow-wrap:anywhere;margin:10px 0}
-.diag-links{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:12px;font-size:.88rem}
-</style>
-
-</head>
-<body>
-<nav class="top"><div class="wrap">
-<a href="index.html">Overview</a>
-<a href="executive-summary.html">Executive summary</a>
-<a href="submission-guide.html">How to submit</a>
-<a href="method.html">Method</a>
-<a href="hypotheses.html">Hypotheses</a>
-<a href="validation.html">Validation</a>
-<a href="irregularities.html">Irregularities</a>
-<a href="sources.html">Sources</a>
-<a href="next-steps.html">Next steps</a>
-<a href="research/h56-results-20261007.md">H56 results</a>
-</div></nav>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="GEMSDOE48 method note for H56 Dempster–Shafer surface combination, mass diagnostics, normalization and naive-mean comparisons."><title>GEMSDOE48 — method and assumptions</title><link rel="stylesheet" href="style.css"><style>nav a{color:#cdeadd;text-decoration:none;padding:6px 10px;border-radius:8px}nav a:hover{background:#0b6e4f;color:#fff}.alert{background:#fff7df;border-left:5px solid #b45309;padding:14px;border-radius:9px;margin:14px 0}.formula{background:#eef3f7;padding:14px;border-radius:9px;font-family:ui-monospace,monospace;overflow-wrap:anywhere}.columns{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px}</style></head>
+<body><header><div class="wrap"><p>GEMSDOE48 · method note</p><h1>Dempster–Shafer combination</h1><p>Two geological evidence families, normalized belief as a relative favorability surface, and separate uncertainty/conflict diagnostics.</p></div></header>
+<nav><div class="wrap"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="submission-guide.html">Submission guide</a><a href="method.html">Method</a><a href="hypotheses.html">Hypotheses</a><a href="validation.html">Validation</a><a href="leaderboard.html">Leaderboard</a><a href="irregularities.html">Irregularities</a><a href="sources.html">Sources</a><a href="next-steps.html">Next steps</a></div></nav>
 <main class="wrap">
-<div class="bad" role="alert"><strong>Metric correction — no weekly upload cleared.</strong>
-The H55/H56 live-equivalent projections assume <code>FPw = S − TPw</code>,
-which is generally false: FP uses a prediction-centred maximum, TP a truth-centred one.
-Treat the 0.2843 "ceiling" and H56's 0.0649 as <em>historical surrogate outputs</em>,
-not verified private-label results or portal acceptance.
-<a href="research/metric-identity-erratum-20261007.md">Read the derivation and executable counterexample</a>.</div>
+<div class="alert"><b>Research only; not a submission recommendation.</b> H56B and H56 open-world D-S are below H49 on both same-protocol public proxies. No candidate is cleared and no organizer score or acceptance exists.</div>
+<h2 class="sec">Inputs are distinct evidence families</h2>
+<p>The two parent surfaces are a dotted-family B2 mask and an H33-D tip/step-over mask. Each was converted to a 300 m triangular maximum-credit support field using the official DTI distance kernel. Their masks share 31,614 cells (out of 37,654 dotted and 41,865 tip cells), so statistical independence is not established. This is a combination of two related/overlapping sources, not two independent confirmations.</p>
+<div class="columns"><div class="card"><h3>H56B: graded belief recipe</h3><p>Fixed reliabilities: dotted r=0.95; tip r=0.95×0.2632/0.2778. The two numbers are owner-reported parent leaderboard figures used as recipe constants, not organizer-verified scores for the exact local bytes. Absence information varies by the H19-5 backbone and, for dotted evidence only, a 200 m catalogue flank; that rule is an assumption, not verified local file attribution.</p><p>For support sᵢ(x) and absence informativeness aᵢ(x):</p><div class="formula">mᵢ(F)=rᵢsᵢ<br>mᵢ(¬F)=rᵢ(1−sᵢ)aᵢ<br>mᵢ(Θ)=1−mᵢ(F)−mᵢ(¬F)</div></div>
+<div class="card"><h3>H56 open-world D-S: separate recipe</h3><p>Uses the same pinned family pair with discounted open-world BPAs: reliability α=0.60 per parent and absence informativeness 0.10. It does not use H56B's owner-reported-score-scaled reliability or its backbone/catalogue-conditioned absence settings. It is a different parameterization of family fusion, not a new geology hypothesis.</p><p>Its recipe and file identity are recorded in <a href="research/h56-results-20261007.md">the H56 results report</a> and <a href="../evidence/build_h56_receipt_20261007.json">the build receipt</a>.</p></div></div>
 
-<header style="background:none;padding:0">
-<p class="eyebrow" style="color:var(--muted)">Method</p>
-<h1>The metric, the model, and the selection rule</h1>
-</header>
+<h2 class="sec">Normalized Dempster rule and mass terms</h2>
+<p>For two sources over frame {F, ¬F}, with Θ as uncommitted mass, the unnormalized conflict is:</p>
+<div class="formula">K = m₁(F)m₂(¬F) + m₁(¬F)m₂(F)</div>
+<p>Normalized Dempster combination divides non-conflicting intersections by 1−K. For example, m₁₂(F)=[m₁(F)m₂(F)+m₁(F)m₂(Θ)+m₁(Θ)m₂(F)]/(1−K); m₁₂(Θ)=m₁(Θ)m₂(Θ)/(1−K), with the corresponding expression for ¬F. Code uses a bounded denominator for numeric safety and checks that masses sum to one across the footprint.</p>
+<ul><li><b>Bel(F):</b> combined mass committed to fault-supporting singleton F.</li><li><b>m(Θ):</b> unassigned / ignorance mass. It is not conflict and does not directly map “where sources disagree.”</li><li><b>K:</b> raw, pre-normalization conflict mass.</li><li><b>Pl(F)=Bel(F)+m(Θ):</b> plausibility of F, exported separately.</li><li><b>H56-OWDS support difference:</b> absolute difference between its two pre-combination support fields; this is a direct disagreement diagnostic, not a D-S mass.</li></ul>
+<p>For H56B, the primary is raw Bel(F) divided by its maximum within the valid footprint, written on the footprint and zero outside. This normalizes to [0,1] but removes absolute mass scale. It is a relative ranking/favorability surface, not a calibrated probability of fault or a validation score. Diagnostic mass TIFFs are not submission candidates.</p>
 
-<div class="bad"><strong>Current H56B-NF decision: download OK for inspection; submit NOT recommended; no slot cleared.</strong> The post-hoc no-catalogue-flank ablation is locally format-checked and independently recomputed, but loses to H49 on both matched four-fold public-map proxies (0.056305 vs 0.095353 catalogue; 0.068987 vs 0.100751 SGMC off-catalogue; 0/4 folds). The NaN-outside file may trigger an all-pixel portal range check (<code>portal_range_error_immune=false</code>); organizer acceptance is untested. The old 0.0649 projection is invalid; no score above 0.2778 or 0.3195 is supported. See the <a href="research/h56b-review-erratum-20261007.md">full erratum</a>. This method is heuristic and does not establish a calibrated probability model.</div>
-<h2>Historical separate H56 open-world Dempster–Shafer construction</h2>
-<p>This heading refers to the <em>older, separate</em> H56-DS recipe, not the H56B file linked above. Its assignment uses <code>m(F)=0.60·b</code>, <code>m(not F)=0.60·0.10·(1−b)</code>, and residual <code>m(Theta)</code>; it has a different recipe, filename, and output mask. Its public-proxy results are archived in <a href="research/h56-results-20261007.md">the H56 report</a>; neither H56 artifact is slot-cleared. H56B's current method is specified in section 8 below.</p>
-<p>This is a distinct parameterization from H53's already-existing two-family D-S diagnostic, not a new geological evidence concept. It is pixelwise different from the arithmetic mean (Pearson 0.99668; mean absolute difference 0.01126; max difference 0.19650), but the top-37,654 rank selection is identical (Jaccard 1.0). See the <a href="research/h56-results-20261007.md">full H56 report</a> and the <a href="../evidence/h56_diagnostics_validation_20261007.json">independent diagnostic audit</a>.</p>
-<h2>1 · The official metric</h2>
-<p>Transcribed by two independent sibling repositories from the organizer's problem description
-(competition 306, page 967) and corroborated independently by the organizers' own reference
-solution, which trains with <code>TverskyLoss(alpha=0.2, beta=0.8, mode="binary")</code> — the
-metric's own weights:</p>
-<pre><code>k(d)  = max(1 − d / 300 m, 0)
-TPw   = Σ_g max_x p(x) · k(d(x, g))
-FPw   = Σ_x p(x) · (1 − max_g k(d(x, g)))
-FNw   = Σ_g (1 − max_x p(x) · k(d(x, g)))
-DTI   = TPw / (TPw + 0.2·FPw + 0.8·FNw)</code></pre>
+<h2 class="sec">Comparison against simple means</h2>
+<p>Both builders calculate pixelwise comparisons to naïve means; correlation alone is not treated as proof of identity. Results below use in-footprint pixels from the frozen build receipts.</p>
+<table><thead><tr><th>Artifact compared with</th><th>Pearson r</th><th>Mean absolute difference</th><th>Other check</th></tr></thead><tbody>
+<tr><td>H56B Bel(F) vs normalized mean of the two continuous kernel-support fields</td><td>0.986600</td><td>0.018752</td><td>12.46% of footprint differs by &gt;0.05; max abs difference 0.666667; not pixelwise equal.</td></tr>
+<tr><td>H56B Bel(F) vs mean of the two binary masks</td><td>0.388654</td><td>0.069910</td><td>Not pixelwise equal; max abs difference 0.823061.</td></tr>
+<tr><td>H56-OWDS Bel(F) vs normalized mean of continuous support fields</td><td>0.996679</td><td>0.011261</td><td>Median difference 0; top-37,654-cell Jaccard=1.0; still not pixelwise equal.</td></tr>
+</tbody></table>
+<p>High correlation, especially for H56-OWDS, means the result tracks the broad continuous-mean ranking closely. D-S fusion is mathematically not a simple arithmetic average here, but it has not demonstrated a better proxy result; both variants lose to H49 on catalogue and SGMC proxies. Full statistics: <a href="../evidence/build_h56_belief_receipt_20261007.json">H56B receipt</a> and <a href="../evidence/build_h56_receipt_20261007.json">open-world receipt</a>.</p>
 
-<h2>2 · What the metric does—and what the historical model cannot establish</h2>
-<p>The official score uses two different distance-weighted maxima: <code>TPw = Σ_g max_x p(x)k(d(x,g))</code> is truth-centred, while <code>Q = Σ_x p(x)max_g k(d(x,g))</code> is prediction-centred and <code>FPw = S − Q</code>. In general <code>Q ≠ TPw</code>. Do not substitute one for the other, and do not infer private-label mass or score from owner-reported leaderboard values.</p>
-<div class="bad"><strong>H55/H54 score model retracted.</strong> The former H55 “family ceiling,” inferred <code>|G|</code>/<code>TPw</code>, fitted <code>rho</code>, H56's 0.0649 projection, H54 live-equivalent brackets, and universal per-cell break-even claims depend on <code>FPw=S−TPw</code>. They are not supportable private-label estimates or bounds. The build files, raw raster facts, and public-map holdout receipts remain available as historical records; their model-derived score implications are withdrawn. No numerical score above 0.2778 or 0.3195 is supportable for H56B-NF. Read the <a href="research/metric-identity-erratum-20261007.md">metric-identity erratum</a> and <a href="research/h55-live-model-ceiling-and-candidate-20261007.md">H55 report correction banner</a> before using historical calculations.</div>
-<p>H56B-NF's DTI values elsewhere on this page are direct computations on the two public-map proxies under the fixed spatial-block protocol; they are not organizer scores or conversions of a private-label forecast. The old “best frontier” and “reachable/unreachable” conclusions must not be used to rank candidates. See the current <a href="research/h56b-review-erratum-20261007.md">H56B review</a>.</p>
-
-<h2>8 · Dempster–Shafer terminology and total-conflict behavior</h2>
-<p>For a binary frame <code>Θ={F,N}</code>, a two-source normalized Dempster combination computes pre-normalization raw conflict <code>K=m₁(F)m₂(N)+m₁(N)m₂(F)</code>, then divides every non-empty combined mass by <code>1−K</code>. The resulting <code>m₁₂(Θ)=m₁(Θ)m₂(Θ)/(1−K)</code> is residual uncommitted/ignorance mass; it is <strong>not</strong> a direct map of source disagreement and is not K. <code>K</code> is normalized away and exported separately. A direct <code>|s₁−s₂|</code> layer is a separate support-difference diagnostic, not a D-S mass. Dempster's rule is undefined at total conflict (<code>K=1</code>); both <code>src/gemsdoe48/dempster_shafer.py</code> and the H56B-specific implementation raise <code>ValueError</code> at total/numerical conflict. Neither silently falls back to vacuous mass. Mathematical discount parameters are not automatically calibrated source reliabilities; using this rule does not establish statistical independence.</p>
-<h2>8b · H56B-NF current research artifact and measured limitations</h2>
-<p><strong>Current artifact:</strong> <code>GEMSDOE48-H56B-NF-DS-dotted-x-tip-20261007-5bb2c03c981e-nan-outside.tif</code>, float32, EPSG:32611, 3,292 × 3,730, NaN/nodata outside, finite-footprint values in [0,1]. SHA-256 <code>b9530b70065da1f5e9da82caf4f5aaba3d7175dbbbfb2851e4b2ab2dd13aa4f1</code>. It combines the pinned dotted B2 and actual H33-D tip/step-over supports with a post-hoc D-S mass assignment that removes catalogue-flank absence. This is an ablation, not a new geological detector or preregistered candidate; local checks do not establish organizer acceptance or calibrated fault probability. The earlier with-flank H56B rebuild was within 1.8e-7 of the prior H56 surface and is not a meaningfully new candidate.</p>
-<pre><code>s_i(x)     = triangular max-credit support k(d(x,D_i)), R = 300 m
-m_i(F)     = r_i · s_i(x)
-m_i(N)     = r_i · (1 − s_i(x)) · a_i(x)
-m_i(Θ)     = 1 − m_i(F) − m_i(N)
-K          = f₁n₂ + n₁f₂
-Bel(F)     = (f₁f₂ + f₁u₂ + u₁f₂)/(1−K)
-m₁₂(Θ)    = u₁u₂/(1−K);  Pl(F) = Bel(F) + m₁₂(Θ)
-primary    = Bel(F) / max_footprint(Bel(F)); NaN outside
-extra diag = K and |s_dot − s_tip|, each separate from m(Θ)</code></pre>
-<p class="small">The heuristic recipe uses <code>r_dot=0.95</code>, <code>r_tip=0.95×0.2632/0.2778</code>; absence weights 0.5 within 100 m of the h19-5 backbone and 0.2 elsewhere; and a dotted-only weight 1.0 within 200 m of the public catalogue. The tip/dotted positive support overlap is substantial; source independence is unproven. The catalogue-flank term was inferred from owner-reported score rungs, and its transfer to private truth is unvalidated.</p>
-<p><strong>Not the arithmetic mean:</strong> Pearson <code>r=0.392708</code> vs binary mean; <code>r=0.992499</code> vs normalized kernel mean; footprint MAE 0.018375, max absolute difference 0.417241, 12.58% differs by &gt;0.05. High kernel-mean correlation is disclosed; non-identity is not evidence of improvement.</p>
-<p><strong>Blocked result:</strong> higher DTI is better. Against same-protocol H49, H56B-NF mean DTI is 0.056305 vs 0.095353 on catalogue and 0.068987 vs 0.100751 on SGMC &gt;300 m off-catalogue; 0/4 folds on both public proxies. No score above 0.2778 or 0.3195 is supportable. The owner-reported 0.2778 may plausibly benefit from tapered 300 m credit and catalogue pruning, but exact bytes are not tied to the score by an organizer receipt and the mechanism remains unproven. The former 0.0649 projection is invalid under the <a href="research/metric-identity-erratum-20261007.md">metric-identity erratum</a>. Full evidence: <a href="research/h56b-review-erratum-20261007.md">review</a> · <a href="../evidence/audit_h56b_noflank_artifact_20261007.json">artifact audit</a> · <a href="../evidence/holdout_h56b_noflank_vs_h49_currentprotocol_20261007.json">matched holdout</a>.</p>
-<p><strong>Decision:</strong> download OK for inspection; submit NOT recommended; no weekly slot cleared.</p>
-
-<h2>9 · Reproduce the current research artifact</h2>
-<p>Rebuilding writes deterministic local files and receipts; it does not submit or establish organizer acceptance. Install the project dependencies first. Do not run historical H55 live-model calibration as a score estimator—the derived outputs are withdrawn.</p>
-<pre><code>python -m pip install -e ".[test]"
-python scripts/build_submission_h56b_noflank.py
-python scripts/audit_h56b_artifact.py \
-  --build-receipt evidence/build_h56b_noflank_receipt_20261007.json \
-  --output evidence/audit_h56b_noflank_artifact_20261007.json
-python scripts/validate_submission.py \
-  docs/downloads/GEMSDOE48-H56B-NF-DS-dotted-x-tip-20261007-5bb2c03c981e-nan-outside.tif \
-  --encoding nan --receipt evidence/h56b_noflank_format_validation_20261007.json
-python -m pytest -q</code></pre>
-<p class="small">The spatial holdout receipts and H49 comparison are preserved under <code>evidence/</code>; the holdout protocol is documented in <a href="research/h56b-review-erratum-20261007.md">the current review</a>. A public-proxy pass is not private-label validation.</p>
-
-</main>
-<footer class="wrap">
-<p><strong>GEMSDOE48</strong> — auditable fault-surface research for DrivenData competition 306
-(DOE GEMS Prize). Built 2026-10-07 06:11 UTC by
-<code>scripts/build_site_h55.py</code> directly from the receipts in <code>evidence/</code>.</p>
-<p class="small"><strong>No organizer score exists for any file in this repository.</strong>
-Every live number is OWNER-REPORT class: a score pasted by the repository owner, not an
-organizer receipt. Proxy numbers are computed against public map layers, not the private
-expert labels. Automated leaderboard access is disabled; the one snapshot here was a single
-dated manual read.</p>
-</footer>
-</body>
-</html>
+<h2 class="sec">Validation result and limitations</h2>
+<p>H56B: 0.032347 catalogue / 0.070552 SGMC off-catalogue, versus H49 0.095353 / 0.100751; 0/4 folds above H49 for either proxy. H56-OWDS: 0.054242 / 0.066070; also 0/4 folds above. Proxies use public map products, not private competition labels. Fixed upstream sources were not refit inside each fold, making results conditional and potentially leaky.</p>
+<p>The parent sources' provenance is owner-mirrored, and their 0.2778/0.2632 report-to-local-file association remains unverified. The exact B2 file is marked UNSCORED. H56B's primary zeros-outside TIFF passes local core format checks but differs from the problem page's null/NaN outside wording; the NaN-outside twin is available, and neither is portal-accepted. See <a href="research/h56b-metric-erratum-20261007.md">H56B erratum</a>, <a href="validation.html">validation record</a>, and <a href="submission-guide.html">submission status</a>.</p>
+<p><b>No private-label performance, exact local-file leaderboard attribution, organizer acceptance, or submission clearance is claimed.</b></p>
+</main><footer><div class="wrap">GEMSDOE48 · D-S method and limits · 2026-10-07</div></footer></body></html>

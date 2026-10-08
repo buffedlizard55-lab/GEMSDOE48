@@ -375,18 +375,21 @@ def dti_bruteforce(
 
 
 def credit_bar(dti_value: float) -> float:
-    """Return ``alpha * DTI`` for the special one-pixel credit/cost case.
+    """Return the *conditional* local threshold ``alpha * DTI``.
 
-    This is a local algebraic boundary when changing one unit prediction changes
-    weighted TP by ``k``, weighted FP by ``1-k``, and weighted FN by ``-k``.
-    It is not a universal per-cell threshold for arbitrary raster additions.
+    This is the break-even value only in a one-dimensional case where the new
+    emission's marginal ``TPw`` gain equals its prediction-centred self-credit
+    ``max_g k`` (for example, one isolated truth pixel whose maximum is not
+    shared). In general ``FPw = S - self_credit`` and the ``TPw`` increment can
+    differ from self-credit, so this helper is not a universal per-cell gate,
+    live-score calibration, or removal budget.
     """
     return ALPHA * float(dti_value)
 
 
 def optimal_value_is_binary() -> str:
-    """Summarize the coordinate-wise endpoint result; no fixed threshold is implied."""
-    return "a binary {0,1} maximizer exists; arbitrary thresholding is not guaranteed"
+    """State only the narrow one-variable endpoint result; no global claim."""
+    return "conditional local endpoint result only; global binary optimality is not established"
 
 
 def dilate(mask: np.ndarray, radius_px: int) -> np.ndarray:

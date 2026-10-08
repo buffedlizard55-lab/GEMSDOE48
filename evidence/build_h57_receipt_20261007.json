@@ -1,5 +1,5 @@
 {
-  "candidate_id": "H57",
+  "candidate_id": "H57-RELIEF",
   "slug": "GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07",
   "content_digest12": "e6b785718c07",
   "created_utc": "2026-10-07T21:43:27+00:00",
@@ -9,15 +9,15 @@
       "file": "data/families/dotted_b2_prune_02778.tif",
       "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
       "dots": 37654,
-      "owner_reported_live": 0.2778,
-      "discount": 1.0
+      "discount": 1.0,
+      "owner_reported_score_claim_unverified": 0.2778
     },
     "B_tip_stepover": {
       "file": "data/families/tip_stepover_r30_02632.tif",
       "sha256": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757",
       "dots": 41865,
-      "owner_reported_live": 0.2632,
-      "discount": 0.947444
+      "discount": 0.947444,
+      "owner_reported_score_claim_unverified": 0.2632
     },
     "C_lidar_relief": {
       "file": "data/external/h52_scarp3m_100m.tif",
@@ -121,11 +121,17 @@
     }
   },
   "verdict": {
+    "download": "OK FOR INSPECTION",
+    "submit": "NOT CLEARED TO SUBMIT",
+    "basis": "Prior live-score projection and per-dot threshold were invalidated by the metric-identity correction; no comparable blocked-H49 win or organizer acceptance is established."
+  },
+  "namespace_note": "Distinct from the two same-day H57-A planning slates; see docs/research/h57-relief-metric-erratum-20261007.md.",
+  "historical_verdict_as_recorded": {
     "download": "OK",
     "submit": "RECOMMENDED (proxy projection only; no organizer score exists for this file)",
     "basis": "marginal credit 0.1781/dot vs 0.0549 break-even (3.24x); 3 of 4 spatial truth blocks above break-even, the fourth holding 10x sparser proxy truth"
   },
-  "proxy_projection_LABELLED_PROXY_ONLY": {
+  "historical_invalid_projection_forensic_only": {
     "instrument": "T_live = 0.9324 x T_SGMC, G = SGMC-derived faults & footprint & dcat>3 (|G| = 62,122); 8-family RMS 0.84 %",
     "projector": "DTI(S) = T_live(S) / (0.2 |S| + 11,215.3)",
     "T_SGMC_parent": 5517.6,
@@ -169,5 +175,13 @@
       }
     ],
     "block_1_explanation": "block 1 carries 2,353 proxy-truth pixels against 13,447-23,192 elsewhere; its share of available truth within 300 m of a lidar dot is the highest of the four (18.9 % vs 13.3-26.1 %), so its low credit per dot reflects truth sparsity, not a rule failure. Excluding it, credit per dot is 0.1987 over 17,510 dots."
-  }
+  },
+  "metric_projection_status": {
+    "status": "INVALIDATED_METRIC_IDENTITY_DO_NOT_USE",
+    "reason": "The historical inversion substitutes FPw = S - TPw, although the official metric defines FPw = S - Q and Q is generally unequal to TPw. These values are not live-score estimates, thresholds, ceilings, floors, or promotion evidence.",
+    "superseding_erratum": "docs/research/h57-relief-metric-erratum-20261007.md",
+    "recomputed_by_current_builder": false
+  },
+  "source_provenance_caveat": "The source/data lineage is preserved as recorded by the prior session; it was not independently re-fetched or authenticated in this correction, and use rights are not established.",
+  "dempster_semantics": "m(Theta) is residual unassigned/ignorance mass; raw K is the separate pre-normalization conflict diagnostic; neither is a calibrated probability or literal family-disagreement map."
 }

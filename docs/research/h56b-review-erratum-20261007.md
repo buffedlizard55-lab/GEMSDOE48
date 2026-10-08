@@ -1,6 +1,6 @@
 # H56B review: score evidence, artifact identity, D-S assumptions, and chronology — 2026-10-07
 
-**Decision: OK to download for inspection; SUBMIT NOT RECOMMENDED. No weekly slot is cleared.** This report separates owner-reported leaderboard context, local file checks, public-map proxy diagnostics, and unobserved private-label performance. It does not claim organizer acceptance or a score prediction.
+**Decision: OK TO DOWNLOAD FOR INSPECTION · NOT OK / NOT CLEARED TO SUBMIT. No weekly slot is cleared.** This report separates owner-reported leaderboard context, local file checks, public-map proxy diagnostics, and unobserved private-label performance. It does not claim organizer acceptance or a score prediction.
 
 ## Why 0.2778 may have scored well — plausible mechanism, not established cause
 
@@ -65,7 +65,7 @@ Full comparison: [`evidence/holdout_h56b_noflank_vs_h49_currentprotocol_20261007
 
 ## Format and portal caveat — download OK; do not submit
 
-The local format receipt passes the finite-footprint checks, expected CRS/shape/transform, float32 range `[0,1]`, and NaN outside convention. It explicitly records `portal_range_error_immune=false`: a portal implementation that range-checks **all** pixels without masking nodata can treat outside NaNs as out of range and return the previously observed “Predicted values must be in range [0, 1]” error. The official challenge description documents null/NaN outside, but portal acceptance of this file is untested. **OK to download for inspection; not OK/recommended to submit.**
+The local format receipt passes the finite-footprint checks, expected CRS/shape/transform, float32 range `[0,1]`, and NaN outside convention. It explicitly records `portal_range_error_immune=false`: a portal implementation that range-checks **all** pixels without masking nodata can treat outside NaNs as out of range and return the previously observed “Predicted values must be in range [0, 1]” error. The official challenge description documents null/NaN outside, but portal acceptance of this file is untested. **OK TO DOWNLOAD FOR INSPECTION · NOT OK / NOT CLEARED TO SUBMIT.**
 
 ## Corrected chronology and preregistration limits
 
@@ -77,6 +77,6 @@ The prior chronology summary mislabelled an H56 predecessor receipt as the H56B 
 4. The final with-flank H56B artifact was rebuilt at 20:33Z and independently audited; the current H56B-NF ablation was built at 20:41Z and evaluated at 20:44Z. H56B-NF is post-hoc, not preregistered.
 5. The two H56 slates reuse H56-B for different ideas (basement-step edges versus radiometric K-residual halos). The original main slate's requested `alpha=0.60`, `q=0.10` recipe also differs from the with-flank H56B recipe. Do not merge their ranks/IDs or claim a single validated H56B ranking.
 
-See the original timestamped records in [`evidence/h56_preregistration_reconciliation_20261007.json`](../../evidence/h56_preregistration_reconciliation_20261007.json) and the correction record [`evidence/h56b_review_corrections_20261007.json`](../../evidence/h56b_review_corrections_20261007.json). Five different future hypotheses with target signatures, off-catalogue rationale, prior-art distinctions, expected DTI/cost, and verified data availability are preserved in [`h57-hypothesis-slate-20261007.md`](h57-hypothesis-slate-20261007.md) and [`evidence/hypothesis_slate_h57_20261007.json`](../../evidence/hypothesis_slate_h57_20261007.json). Several required layers are unavailable or only partial; no H57 geological detector was built in this review.
+See the original timestamped records in [`evidence/h56_preregistration_reconciliation_20261007.json`](../../evidence/h56_preregistration_reconciliation_20261007.json) and the correction record [`evidence/h56b_review_corrections_20261007.json`](../../evidence/h56b_review_corrections_20261007.json). Five different future hypotheses with target signatures, off-catalogue rationale, prior-art distinctions, expected DTI/cost, and verified data availability are preserved in [`h57-hypothesis-slate-20261007.md`](h57-hypothesis-slate-20261007.md) and [`evidence/hypothesis_slate_h57_20261007.json`](../../evidence/hypothesis_slate_h57_20261007.json). Several required layers are unavailable or only partial; no detector from that 17:43 UTC H57 planning slate was built in its session. A later, separate branch H57-A screen and a concurrent H57-RELIEF artifact are documented in their own records; neither changes this slate's frozen status.
 
-**Decision:** Download is OK for inspection. Submission is not recommended. The final H56B-NF artifact loses the comparable H49 baseline on all eight proxy folds, remains based on heuristic masses and frozen owner-mirror inputs, and has unresolved portal NaN handling. No score above 0.2778 or 0.3195 is supportable for it. No slot is cleared.
+**Decision:** **OK TO DOWNLOAD FOR INSPECTION · NOT OK / NOT CLEARED TO SUBMIT.** The final H56B-NF artifact loses the comparable H49 baseline on all eight proxy folds, remains based on heuristic masses and frozen owner-mirror inputs, and has unresolved portal NaN handling. No score above 0.2778 or 0.3195 is supportable for it. No slot is cleared.

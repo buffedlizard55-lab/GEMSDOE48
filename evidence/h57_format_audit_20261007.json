@@ -46,5 +46,7 @@
   },
   "tags": {
     "AREA_OR_POINT": "Area"
-  }
+  },
+  "organizer_acceptance_tested": false,
+  "audit_scope_note": "Local re-open/grid/dtype/range check only; not organizer portal acceptance or submission verification."
 }

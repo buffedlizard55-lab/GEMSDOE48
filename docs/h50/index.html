@@ -1,66 +1,28 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GEMSDOE48 H50 — B2 x H36-1 rung30 research fusion (historical)</title><link rel="stylesheet" href="../assets/style.css"></head>
-<body><header><p>DOE GEMS Prize · DrivenData #306 · GEMSDOE48 H50 · research candidate · unscored</p>
-<h1>GEMSDOE48 H50 — B2 x H36-1 rung30 research fusion (historical)</h1><nav><a href="index.html">H50 summary</a><a href="executive-summary.html">Executive summary &amp; how to submit</a><a href="method.html">Method &amp; evidence</a><a href="hypotheses.html">Hypotheses</a><a href="sources.html">Sources</a><a href="../index.html">Repository site ↗</a></nav></header><main class="wrap">
-
-<section class="download">
-<p class="eyebrow">1 · One-click historical H50 research TIFF — not slot-cleared</p>
-<p><a class="button" href="../downloads/gemsdoe48-h50-ds-b2xh36rung30-20261007-5b59e106-zeros.tif" download>⬇ Download H50 historical research GeoTIFF — do not upload (1,453,567 B)</a>
-<a class="button alt" href="../downloads/gemsdoe48-h50-ds-b2xh36rung30-20261007-5b59e106-zeros.zip" download>⬇ archival .zip (not a submission format recommendation)</a>
-<a class="button alt" href="../downloads/gemsdoe48-h50-ds-b2xh36rung30-20261007-5b59e106-nan.tif" download>⬇ NaN-outside twin (official sample convention)</a></p>
-<p class="small">All three carry identical in-footprint values (SHA-audited twin). The zeros file is immune to the
-portal's "[0, 1]" range rejection by construction; the NaN twin additionally passes
-<code>scripts/validate_submission.py</code>'s official-convention audit
-(<a href="../../evidence/h50_submission_validation_20261007.json">receipt</a>).</p>
-<p><strong>Historical artifact identifier (not an authorization to submit):</strong> <code>GEMSDOE48-H50-DS-B2xH36</code><br>
-<strong>Corrected archival note (177/200 chars; do not paste for submission):</strong> <code>GEMSDOE48 H50 | Dempster fusion: B2 dotted x H36-1 rung30 (H19-5/rung-30 repacking; not tip/step-over); kernel-credit Bel, m(Theta)+K diagnostics; historical, unscored research.</code></p>
-<p class="small">SHA-256 <code>5b59e106b6e448038b96fb340c5bae39094d4558c239c437aea28b6020d5d32f</code> · one band float32 · EPSG:32611 · 100 m ·
-3730×3292 · in-footprint [0.0000, 1.0000] ·
-all-finite, no nodata tag · zeros outside footprint · 767,043 positive cells</p>
-<p class="small">Disagreement diagnostics (review only, never upload):
-<a href="../downloads/diagnostics/gemsdoe48-h50-unassigned-mTheta-20261007-5b59e106.tif" download>unassigned mass m(Θ)</a> ·
-<a href="../downloads/diagnostics/gemsdoe48-h50-conflict-K-20261007-5b59e106.tif" download>raw conflict K</a> ·
-<a href="../downloads/diagnostics/gemsdoe48-h50-plausibility-20261007-5b59e106.tif" download>plausibility Pl(F)</a></p>
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>H50 historical archive · GEMSDOE48</title><link rel="stylesheet" href="../assets/style.css"></head><body>
+<header><p>DOE GEMS Prize · DrivenData #306 · GEMSDOE48 H50 · historical archive</p>
+<h1>H50 is preserved for audit.<br>It is not cleared to submit.</h1>
+<p>H50 combined kernel-credit surfaces from the dotted B2 family and the H36-1 rung30 family. Its local format and public-proxy results are historical diagnostics; owner-reported score anchors and any live performance inference remain unverified.</p>
+<nav><a href="index.html">H50 archive</a><a href="executive-summary.html">Future-submission guidance</a><a href="method.html">Metric &amp; method erratum</a><a href="hypotheses.html">Hypotheses</a><a href="sources.html">Sources</a><a href="../index.html">Current repository site ↗</a></nav></header>
+<main class="wrap">
+<div class="warn"><strong>NOT OK TO SUBMIT. Do not spend a weekly slot on H50 from this evidence.</strong> No organizer score, private-label performance, or portal acceptance is established for the H50 file.</div>
+<section><h2>Archived artifact</h2>
+<p><strong>OK TO DOWNLOAD FOR AUDIT; NOT CLEARED TO SUBMIT.</strong> The archived file is available for inspection only. Local format checks do not guarantee organizer acceptance.</p>
+<p><a class="button" href="../downloads/gemsdoe48-h50-ds-b2xh36rung30-20261007-5b59e106-nan.tif" download>Download archived H50 TIFF for audit</a>
+<a class="button alt" href="../downloads/gemsdoe48-h50-ds-b2xh36rung30-20261007-5b59e106-zeros.zip" download>Archived ZIP twin</a></p>
+<p>Local SHA-256 for the original archived build is <code>5b59e106b6e448038b96fb340c5bae39094d4558c239c437aea28b6020d5d32f</code>. The file-format receipt is in <a href="../../evidence/build_ds50_receipt_20261007.json">evidence/build_ds50_receipt_20261007.json</a>; it is not an organizer validation receipt.</p>
 </section>
-
-<div class="warn"><strong>UNSCORED — HISTORICAL RESEARCH; DO NOT UPLOAD.</strong> This H50
-Dempster–Shafer variant combines B2 with H36-1 rung30 (not the actual tip/step-over family), and
-failed the public-proxy gate. No organizer score exists for this artifact. A separate one-time
-leaderboard observation is not linked to these or any local TIFF bytes; no participant table is
-reproduced. See the current repository review for the post-hoc H56B-NF ablation and its no-submit verdict.</div>
-
-<h2>2 · What the fusion preserves that averaging destroys</h2>
-<p>Parents: dotted H33-2-B2 (37,654 px, owner-reported
-0.2778) × H36-1 rung30 (not tip/step-over)
-(37,660 px, owner-reported 0.2710);
-intersection 26,248 / union
-49,066 (Jaccard 0.535) —
-22,818 positive-support cells differ. Under
-normalized Dempster, m(Θ) is residual uncommitted/ignorance, not a direct disagreement map; raw
-pre-normalization conflict K is a separate diagnostic. Neither is calibrated uncertainty.</p>
-<p><strong>Not the naive mean (brief's required check):</strong> Pearson 0.9749,
-Spearman 1.0000, MAE 0.0133, max |Δ| 0.2648,
-10.3% of cells with |Δ|&gt;0.05, top-37,654 emission Jaccard
-0.9687. Pearson vs the prior H48 artifact 0.454; zero SHA-256 collisions against
-44 existing grid rasters.</p>
-<img src="../assets/h50_ds_layers.png" alt="Dempster-Shafer layers: belief, unassigned mass, conflict" style="width:100%;border:1px solid var(--line);border-radius:10px">
-<img src="../assets/h50_disagreement.png" alt="DS belief versus naive mean disagreement" style="width:100%;border:1px solid var(--line);border-radius:10px;margin-top:.6rem">
-
-<h2>3 · Blocked-holdout diagnostics (public proxies only)</h2>
-<h3>SGMC off-catalogue truth (&gt;300 m from catalogue), 4 fixed quadrants, official metric</h3>
-<div class="table-scroll"><table><tr><th>candidate</th><th>mean DTI</th><th>folds NW·NE·SW·SE</th></tr><tr><td>dotted_b2_parent</td><td>0.095491</td><td>0.1018 · 0.0991 · 0.1075 · 0.0736</td></tr><tr><td>H36-1 rung30 parent (not tip/step-over)</td><td>0.093315</td><td>0.0998 · 0.0972 · 0.1048 · 0.0715</td></tr><tr><td>union_decision</td><td>0.097037</td><td>0.1037 · 0.1025 · 0.1057 · 0.0763</td></tr><tr><td>naive_mean_beliefs</td><td>0.062656</td><td>0.0646 · 0.0807 · 0.0415 · 0.0638</td></tr><tr><td>raw_sparse_rho05_same_parents</td><td>0.065108</td><td>0.0698 · 0.0666 · 0.0749 · 0.0491</td></tr><tr style="background:#edf8f3;font-weight:700"><td>h50_ds_belief</td><td>0.071553</td><td>0.0743 · 0.0914 · 0.0486 · 0.0718</td></tr><tr><td>h50_binary_budget_matched</td><td>0.087161</td><td>0.0933 · 0.0930 · 0.0950 · 0.0673</td></tr></table></div>
-<h3>Catalogue truth proxy, same folds</h3>
-<div class="table-scroll"><table><tr><th>candidate</th><th>mean DTI</th><th>folds NW·NE·SW·SE</th></tr><tr><td>dotted_b2_parent</td><td>0.006831</td><td>0.0061 · 0.0086 · 0.0075 · 0.0051</td></tr><tr><td>H36-1 rung30 parent (not tip/step-over)</td><td>0.047560</td><td>0.0411 · 0.0596 · 0.0445 · 0.0450</td></tr><tr><td>union_decision</td><td>0.046889</td><td>0.0407 · 0.0586 · 0.0443 · 0.0440</td></tr><tr><td>naive_mean_beliefs</td><td>0.035945</td><td>0.0325 · 0.0399 · 0.0386 · 0.0328</td></tr><tr><td>raw_sparse_rho05_same_parents</td><td>0.018654</td><td>0.0162 · 0.0234 · 0.0178 · 0.0172</td></tr><tr style="background:#edf8f3;font-weight:700"><td>h50_ds_belief</td><td>0.030323</td><td>0.0278 · 0.0345 · 0.0326 · 0.0264</td></tr><tr><td>h50_binary_budget_matched</td><td>0.007604</td><td>0.0066 · 0.0097 · 0.0086 · 0.0055</td></tr></table></div>
-<p>H50 beats the naive mean 4/4 folds on the SGMC proxy and improves on the raw-sparse rho=0.5 recipe
-with the same parents (+0.0064 mean), but loses to both parents and to the union on both proxies.
-<strong>The slot gate is not cleared; do not spend a weekly submission on this evidence alone.</strong></p>
-
-<h2>4 · Score context (one-time observation, no participant table)</h2>
-<div class="warn"><strong>Single dated observation; no table republished.</strong> Top displayed score 0.3774; 0.3195 at rank 7; 0.2778 at rank 13. No participant names or submission counts retained; no row is linked to local TIFF bytes. Do not poll or refresh without authorization.</div>
-<p class="small">Source: official DrivenData public leaderboard. Values are dated display observations, not file scores or targets for this H50 artifact. The Terms of Use prohibit unauthorized monitoring/copying; no polling is implemented.</p>
-
-</main><footer><p>Historical H50 research only; no organizer score exists. Owner values are [OWNER-REPORT]. Later metric-identity review invalidates old H55/H56 score ceilings/projections based on FPw=S−TPw. Normalized m(Theta) is residual ignorance, not direct disagreement; K is separate.</p>
-<p class="small">Built by scripts/build_site_h50.py from evidence receipts on the same commit.
-Receipts: evidence/build_ds50_receipt_20261007.json, evidence/holdout_ds50_20261007.json,
-docs/data/leaderboard_20261007.json.</p></footer></body></html>
+<section><h2>Attribution and status</h2>
+<p>The historical parents are local dotted B2 and H36-1 rung30 surfaces—not the tip/step-over family. The associated <code>0.2778</code> and <code>0.2710</code> values are owner-reported. No organizer receipt links either score to these local parent bytes, and no H50 result is a leaderboard score.</p>
+<p>The historical reliability discounts were assumptions anchored to owner-reported scores, not a validated calibration. They must not be used as private-label probabilities or evidence that H50 will improve an organizer score.</p>
+</section>
+<section><h2>Dempster–Shafer layers</h2>
+<p>For the normalized Dempster combination, <em>m(Θ)</em> is residual ignorance/unassigned mass; raw conjunctive conflict <em>K</em> is a different quantity and is normalized away from the non-empty output. The H50 archive carries an ignorance diagnostic and a separate raw conflict diagnostic; do not call them the same layer. Neither layer is a calibrated probability of fault or score.</p>
+<p>See the <a href="method.html">method erratum</a> for the official metric identity and the corrected distinction between TPw, FPw, ignorance, and conflict.</p>
+</section>
+<section><h2>Evidence and next steps</h2>
+<p>The H50 spatial holdout receipt contains public-proxy measurements only: <a href="../../evidence/holdout_ds50_20261007.json">open receipt</a>. Its proxy values do not establish private-label performance. H50's old Gate-2 receipt is preserved as <a href="../../evidence/audit_gate2_gemsdoe48_h50_ds_b2xh36run__20261007.json">forensic-only invalidated evidence</a>.</p>
+<p>Use the <a href="../hypotheses.html">current four-hypothesis geological slate</a>, the <a href="../validation.html">current validation results</a>, and <a href="../submission-guide.html">current submission guidance</a> for active decisions. H56-F and H57-A failure results remain visible; neither clears a slot.</p>
+</section>
+</main><footer><p>Historical file and measurements retained for reproducibility. No score gains, private-label result, or official acceptance are claimed.</p></footer></body></html>

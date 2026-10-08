@@ -1,6 +1,8 @@
+> **HISTORICAL H53 SLATE — NOT CURRENT PROMOTION GUIDANCE.** The dated public-proxy results remain in their separate reports. The owner-reported live-ladder inversion, inferred hidden-truth mass, universal `0.2·DTI` removal bar, and claims that higher live scores require new signal are invalid under the [metric-identity erratum](metric-identity-erratum-20261007.md). The current research slate is [H57](hypotheses-h57-20261007.md); this page preserves H53 preregistration and planning priors only.
+
 # Research slate H53 — 2026-10-07 UTC (preregistered BEFORE any H53 proxy scoring)
 
-**Status: preregistered.** All constants in §3 were frozen before any H53
+**Historical preregistration record.** All constants in §3 were frozen before any H53
 candidate was scored on any proxy. Label-free distribution quantiles of the
 lidar product (§3) were read to set ramp anchors; no proxy label was touched
 before freezing. The unique files built from this slate are
@@ -10,16 +12,8 @@ its pignistic budget-matched binary twin. This session's work is labelled
 
 ## 1. Standing results this slate builds on (all receipts in `evidence/`)
 
-* The live ladder A(44,090 dots, 0.2600) → B(40,199, 0.2708) → C(37,654,
-  0.2778) is bookkeeping: both pruning steps remove catalogue-adjacent dots
-  the organizer masks from scoring, giving the same hidden-mass estimate
-  within 7.5 %. C recovers ≈ 37 % of the hidden kernel mass
-  (`docs/research/why-02778-and-ceiling-20261007.md`).
-* No two-source fusion of the existing surfaces has beaten the better parent
-  on the blocked proxies (H48 ρ=0.5, Yager, arithmetic mean, H50 graded
-  belief, H51 plausibility emission). Consolidated reading: higher live
-  scores need higher credit density (new signal), not new combinations of the
-  same two surfaces (`docs/research/h51-h50b-results-20261007.md`).
+* The owner-reported A/B/C score/count ladder is retained as an attribution-unresolved report. The former hidden-mass, credit-per-dot and removal-threshold interpretation used the invalid `FPw=S−TPw` identity; catalogue-adjacent pruning remains a plausible mechanism only, not a demonstrated explanation. See the [metric erratum](metric-identity-erratum-20261007.md) and [attribution analysis](why-02778-and-ceiling-20261007.md).
+* The tested H48/H50/H51 two-source rules did not beat their better parent on the recorded public proxies. This does not establish that every fusion strategy fails on private labels or that a higher organizer score requires a particular type of signal. See the dated [H50/H51 results](h51-h50b-results-20261007.md).
 * H52 (C + 2,000 native-lidar scarp dots) failed its gate: 0.096409 vs H49
   0.100751 on the shared SGMC proxy; the v1 detector's region-wide value is
   its terrain class, not its step height
@@ -35,7 +29,7 @@ its pignistic budget-matched binary twin. This session's work is labelled
 | 1 | **H53-2 scarp detector v2** (next step, not this session) | Same USGS 3DEP 1 m tiles (zone 11 + missing zone-10 strip): dual-baseline offset consistency (±21 m AND ±42 m must agree), relative step test (0.3–1.5 m) in the smooth-basin class (σ_ctx < 0.3 m), ≥ 500 m connected-component line tracing at 3 m, playa/agricultural exclusion by strike-cardinality + NLCD cultivated classes | Rejects the canals/road cuts/terrace risers that pollute v1 heights while recovering subtle basin scarps v1's absolute-height ranking misses | v1 uses one baseline, an absolute height floor, and 150 m averaging; no sibling emits a consistency-gated relative-step map | Highest expected gain (directly targets H52's measured failure mode); medium–high cost (≈ 1 h free CI re-run). Data obtainable: USGS 3DEP public S3 bucket, no login (precedent: H52 runs 37561683197/37565284104); NLCD 2021 free from MRLC (mrlc.gov), no login |
 | 2 | **H53-1 three-source adaptive Dempster fusion** (implemented + validated this session) | (A) dotted B2 kernel-credit belief, (B) tip H36-1 kernel-credit belief, (L) line-persistent lidar scarp height `h_gate12` (σ<1.2 m gate) ramped to a graded belief; per-pixel reliability discount by terrain class (context-dependent discounting) | Lidar resolves unmapped piedmont/basin scarps invisible to the 100 m geophysics both families were built from; the discount map admits ignorance (low reliability) where the detector is unproven instead of asserting counter-evidence | First 3-source fusion anywhere in the campaign (all prior fusions are 2-source); first context-dependent (per-pixel) reliability discount (all prior builds use scalar ρ); first fusion to add new-sensor information rather than re-weight the same two surfaces | Small/uncertain gain: every 2-source fusion lost to its parents, but a new-source fusion is untested — this is the experiment. Low cost (all inputs committed and SHA-pinned) |
 | 3 | **H53-3 drainage-deflection detector on the 3 m DEM** | Same 3DEP tiles: channel long-profiles extracted from the DEM itself, aligned knickpoints, systematic lateral deflection vectors | Strike-slip or low-rate faults leave deflected channels with no preserved scarp; fluvial geometry is independent of mapped-fault proximity | H48-4 proposed this with NHDPlus vectors (never implemented); H53-3 derives channels from the 3 m DEM already in hand | Uncertain (no pilot measurement); medium–high cost. Data obtainable via the same CI path as H53-2 |
-| 4 | **H53-4 U/K halo tie-break for additions** | GeoDAWN radiometric mirror `data/source_mirrors/geodawn_rad_u8.tif` (K/Th/U/TC, official USGS DOI 10.5066/P93LGLVQ, SHA-verified): eU/K ratio as a hydrothermal-alteration halo proxy | A buried/eroded fault can keep a geochemical halo after its scarp is gone | 15GEMSDOE used alteration as a *generator*; H50-B crossed alteration with conflict corridors (negative result, 0.019); H53-4 would only *order* lidar additions, never generate or veto them | Tiny positive at best (measured 1.43× top-20 % per-dot lift, below the ≈ 2.6× removal bar); low cost (mirror committed) |
+| 4 | **H53-4 U/K halo tie-break for additions** | GeoDAWN radiometric mirror `data/source_mirrors/geodawn_rad_u8.tif` (K/Th/U/TC, official USGS DOI 10.5066/P93LGLVQ, SHA-verified): eU/K ratio as a hydrothermal-alteration halo proxy | A buried/eroded fault can keep a geochemical halo after its scarp is gone | 15GEMSDOE used alteration as a *generator*; H50-B crossed alteration with conflict corridors (negative result, 0.019); H53-4 would only *order* lidar additions, never generate or veto them | Historical planning prior was small; the measured 1.43× top-20% catalogue-proximity lift is a feature-screen statistic only. The old ≈2.6× removal comparison is invalid; low implementation cost (mirror committed) |
 | 5 | **H53-5 NLCD exclusion + Quaternary-alluvium validation proxy** | NLCD 2021 land-cover (cultivated/open-water classes) to mask playa/agricultural false positives; a held-out subset of public-catalogue *Quaternary* traces in alluvium (σ_ctx < 1.2 m, > 1 km from SGMC bedrock faults) as a scarp-like proxy | Removes non-tectonic linears from future additions; gives lidar candidates an instrument that does not reward bedrock faults by construction (the documented SGMC-proxy bias) | No sibling uses land-cover masking or an alluvium-conditioned proxy | ≈ Zero direct DTI; enables future validation. Low–medium cost (NLCD via CI; sandbox allowlist excludes mrlc.gov) |
 
 Not viable without new external data: OPERA InSAR displacement gradients

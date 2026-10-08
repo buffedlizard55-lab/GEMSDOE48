@@ -1,35 +1,15 @@
 #!/usr/bin/env python3
-"""GEMSDOE48 H56 research battery — band screen + candidate-field validation.
+"""Retired H56 research battery — invalidated live-score projections.
 
-Purpose
--------
-1. Per-band screen over ALL 19 official GeoDAWN bands (restored byte-identical
-   this session, SHA-256 4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5):
-   lift of the incumbent C dots over the >200 m catalogue moat, plus a
-   rank-based AUC robust to signed bands.
-2. H55-B strain-rate localisation ridge field (previous session's Priority-3
-   next step), gated exactly as its frozen slate says: structure-tensor
-   coherence above the 95th percentile; the conjunctive p90-ridgeness variant
-   is reported alongside.
-3. New H56-A DEMGLOW candidate (hydrothermal demagnetisation lows x magnetic
-   gradient ridges) with a pre-registered two-tier sensitivity ladder
-   (z in {-1.5, -2.0} x HG in {p75, p90}); the battery evaluates the primary
-   rung z<=-1.5 & HG>=p75 plus same-mass controls.
-4. Light statistics for H56-D (conduit stepping-stone anchors) and H56-E
-   (cover / basement depth).
-
-Everything here is a PROXY measurement. The repository's measured position:
-the SGMC off-catalogue proxy is NOT a model of the hidden truth, the
-catalogue proxy can be anti-monotone, and the live-calibrated forward model
-is the only instrument fitted to live scores (in-family RMS 1.76 %,
-out-of-family transfer error -38 %). Results are labelled [PROXY] or
-[PROJECTION], never scores.
-
-Staged to survive the 3 GB sandbox: each stage frees its arrays and writes a
-checkpoint JSON before the next stage allocates.
+This older exploratory battery uses the H55 live-score surrogate, including an
+inversion-derived truth count and projected DTI fields. Those projections are not
+valid scores or decision gates. The command refuses by default; use
+``--legacy-audit-only`` solely to reproduce historical diagnostics. Current H56
+and H57 evidence is in the active research reports and exact public-proxy receipts.
 """
 from __future__ import annotations
 
+import argparse
 import json
 import sys
 from datetime import datetime, timezone
@@ -135,6 +115,13 @@ def stage_screen(footprint, catalogue, dcat, dots_c) -> dict:
 
 
 def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--legacy-audit-only", action="store_true",
+                        help="required opt-in for invalidated H55 score projections")
+    args = parser.parse_args()
+    if not args.legacy_audit_only:
+        parser.error("invalidated live-score projections; pass --legacy-audit-only only for forensic reproduction")
+    print("LEGACY AUDIT ONLY — INVALIDATED; PROXY HOLDS MAY BE READ SEPARATELY, PROJECTIONS ARE NOT VALID")
     now = datetime.now(timezone.utc).isoformat()
     footprint, catalogue, dcat = load_grid()
     moat = footprint & (dcat > 2.0)
@@ -145,7 +132,11 @@ def main() -> int:
     sgmc_truth = (sgmc > 0) & footprint & (dcat > 3.0)
     del sgmc
 
-    out = {"generated_utc": now}
+    out = {
+        "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION",
+        "invalidation_reason": "Live projections use the invalid H55 surrogate. Public-proxy/holdout diagnostics remain historical unless independently reproduced.",
+        "generated_utc": now,
+    }
     out["screen"] = stage_screen(footprint, catalogue, dcat, dots_c)
 
     # ------------------------------------------------ Part 1: H55-B strain ridge

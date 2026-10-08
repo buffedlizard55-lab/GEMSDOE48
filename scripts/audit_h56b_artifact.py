@@ -241,7 +241,7 @@ def main() -> int:
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(json.dumps(report, indent=2) + "\n")
     print(json.dumps({
-        "output": str(output_path.relative_to(ROOT)), 
+        "output": str(output_path.relative_to(ROOT)),
         "status": report["status"],
         "primary": report["primary"],
         "not_the_arithmetic_mean": comparison,

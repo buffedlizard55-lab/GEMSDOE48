@@ -1,91 +1,17 @@
 <!doctype html>
-<html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>How to make a submission, step by step · GEMSDOE48</title>
-<link rel="stylesheet" href="../assets/ds48-fusion/site.css">
-</head><body>
-<div style="background:#fff0d7;border:2px solid #b65c00;border-radius:8px;padding:1rem;margin:1rem auto;max-width:1100px;color:#3d270e"><strong>HISTORICAL SUB-SITE — NOT A CURRENT SUBMISSION RECOMMENDATION.</strong> The figures, candidate names, and slot suggestions below belong to an earlier upstream experiment and are superseded by later H48/H49/H52 results and like-for-like blocked proxy checks. No weekly slot is cleared. Use the <a href="../index.html">current overview</a> and <a href="../validation.html">current validation</a>.</div>
-<header class="top"><div class="wrap">
-  <div class="brand"><span class="dot"></span><b>GEMSDOE48</b>
-    <span class="tag">Dempster&ndash;Shafer disagreement-preserving fusion</span></div>
-  <nav><a href="index.html">Historical fusion</a><a href="executive-summary.html" class="on">Archived instructions</a><a href="research.html">Archived 0.2778 analysis</a><a href="hypotheses.html">Hypotheses</a><a href="sources.html">Sources</a><a href="irregularities.html">Irregularities</a></nav>
-</div></header>
-<div class="namestrip"><div class="wrap">
-  <span class="ns-label">Historical research artifact — NOT slot-cleared</span>
-  <code class="ns-name">GEMSDOE48-DS48-FUSION</code>
-  <a class="ns-dl" download href="../downloads/gemsdoe48-ds48-emission.tif">
-    ↓ Download for audit only — do not submit</a>
-</div></div>
-<div class="xlink"><div class="wrap">
-  This is the <b>DS48 fusion</b> sub-site. The repository landing page is
-  <a href="../index.html">docs/index.html</a>, and its
-  <a href="../leaderboard.html">leaderboard page</a> carries a <b>newer snapshot</b> than the
-  2026-10-02 figure quoted here — a later session measured the leader at 0.3774, not 0.3195.
-  Treat both numbers as dated, and the landing page as the newer one.
-</div></div>
-<main class="wrap">
-  <div class="hero"><h1>How to make a submission, step by step</h1><p class="lead">Everything needed to go from this page to a scored leaderboard row, with the format claims verified against the bytes on disk.</p></div>
-
-<section class="callout">
-  <h2>Executive summary: exactly how to enter a submission</h2>
-  <ol class="steps">
-    <li><b>Open the submission page.</b>
-        <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/" target="_blank" rel="noopener">competition-doe-gems</a> → the
-        <i>Submissions</i> tab → <i>New submission</i>.</li>
-    <li><b>Choose the file.</b> Click the download button below. The browser saves one
-        <code>.tif</code>. A <code>.zip</code> is also accepted, and is unnecessary.</li>
-    <li><b>Upload it</b> into <i>“File to submit”</i>. The competition accepts a single-band
-        GeoTIFF or a <code>.zip</code> containing one. It must match the submission format's CRS,
-        shape and geotransform — this file does, and the table at the bottom proves it from the
-        bytes on disk.</li>
-    <li><b>Name it.</b> Put the unique name in the note field so you can tell submissions apart:
-        <br><code class="block">GEMSDOE48-DS48-FUSION</code></li>
-    <li><b>Note (optional), ≤ 200 characters.</b> Paste this:
-        <br><code class="block">GEMSDOE48-DS48-FUSION | research audit only; 37,654 px DS-ranked off-flank emission; UNSCORED and NOT slot-cleared; do not upload</code></li>
-    <li><b>Click Submit.</b> The score appears on the leaderboard shortly afterwards.
-        Three submissions per week.</li>
-  </ol>
-  <p class="big"><a class="button primary" download href="../downloads/gemsdoe48-ds48-emission.tif">
-     ↓ Download the submission file</a>
-     <span class="micro">gemsdoe48-ds48-emission.tif · 282,876 bytes ·
-     sha256 <code>a579081d…</code></span></p>
-</section>
-
-<section>
-  <h2>Why your earlier upload was rejected</h2>
-  <p>The portal said <i>“Predicted values must be in range [0, 1]”</i>. Two things produce that
-  message and both are avoided here, verifiably:</p>
-  <ul>
-    <li><b>NaN written as a nodata value.</b> Several shipped artifacts in this project use
-    <code>NaN</code> outside the study area. Some validators treat a NaN as an out-of-range
-    value. Every file here is <b>all-finite</b>: NaN count and infinity count are both
-    <b>0</b>, read back from the bytes on disk.</li>
-    <li><b>A value outside [0, 1].</b> The minimum is 0.0 and the maximum is 1.0 exactly;
-    the count of values below 0 and above 1 is <b>0</b>.</li>
-  </ul>
-  <p>This is registered as <code>IR-48-03</code>; the siblings reported the same portal message
-  and could not establish its cause, but an all-finite in-range raster cannot trigger either of
-  the two known causes.</p>
-</section>
-
-<section>
-  <h2>Format verification, read back from disk</h2>
-  <table>
-    <tr><th>file</th><th>dtype</th><th>CRS</th><th>size</th><th>bands</th><th>range</th>
-        <th>NaN</th><th>out of [0,1]</th><th>verdict</th></tr>
-    <tr><td><code>gemsdoe48-ds48-belief.tif</code></td><td>float32</td><td>EPSG:32611</td><td>3292 × 3730</td><td>1</td><td>[0.0000, 0.8400]</td><td>0</td><td>0</td><td><b>PASS</b></td></tr><tr><td><code>gemsdoe48-ds48-emission.tif</code></td><td>float32</td><td>EPSG:32611</td><td>3292 × 3730</td><td>1</td><td>[0.0000, 1.0000]</td><td>0</td><td>0</td><td><b>PASS</b></td></tr><tr><td><code>gemsdoe48-ds48-mtheta.tif</code></td><td>float32</td><td>EPSG:32611</td><td>3292 × 3730</td><td>1</td><td>[0.1600, 0.2500]</td><td>0</td><td>0</td><td><b>PASS</b></td></tr><tr><td><code>gemsdoe48-ds48-conflict.tif</code></td><td>float32</td><td>EPSG:32611</td><td>3292 × 3730</td><td>1</td><td>[0.0000, 0.3600]</td><td>0</td><td>0</td><td><b>PASS</b></td></tr>
-  </table>
-  <p>The grid is the organizers' own: <code>EPSG:32611</code>, 100 m pixels,
-  <code>3292 × 3730</code>, transform <code>(100, 0, 243350, 0, −100, 4508550)</code>, identical to
-  the supplied <code>labels.tif</code>. Predictions are required on the whole grid, and the
-  study-area footprint is the 5,167,373 pixels that are not <code>−1</code> in
-  <code>labels.tif</code>; the emission has <b>0</b>
-  positive pixels outside it.</p>
-</section>
-
-  <footer><p>Historical sub-site rebuilt from <code>registry/</code> and <code>evidence/</code> by
-  <code>scripts/build_site_ds48.py</code>. Owner-reported scores are labelled
-  <span class="badge amber">OWNER-REPORT</span>; local measurements are labelled
-  <span class="badge blue">PROXY</span> or <span class="badge">DERIVED</span>.
-  No organizer score exists for any artifact in this repository.</p></footer>
-</main></body></html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Future-submission guidance · DS48 archive</title><link rel="stylesheet" href="../assets/ds48-fusion/site.css"></head><body>
+<header class="top"><div class="wrap"><div class="brand"><span class="dot"></span><b>GEMSDOE48</b><span class="tag">Historical archive</span></div><nav><a href="index.html">Archive</a><a class="on" href="executive-summary.html">Future-submission guidance</a><a href="research.html">Metric erratum</a><a href="hypotheses.html">Hypotheses</a><a href="sources.html">Sources</a><a href="irregularities.html">Corrections</a></nav></div></header>
+<div class="namestrip"><div class="wrap"><span class="ns-label">DS48 ARCHIVE — NO ARTIFACT CLEARED</span></div></div>
+<main class="wrap"><div class="hero"><h1>Executive summary and future-submission guidance</h1><p class="lead">The original submission note and live-score rationale are not current guidance. This page preserves a safe, conditional checklist only.</p></div>
+<section class="callout"><h2>Do not upload DS48</h2><p><strong>NOT OK TO SUBMIT.</strong> No DS48 artifact is cleared by the historical proxy results or file-format audit. No organizer score or acceptance exists for these files.</p></section>
+<section><h2>Before considering any future candidate</h2><ol>
+<li>Rank 3–5 not-yet-tried geological hypotheses with explicit public data sources, access checks, use terms, and pre-registered expected outcomes.</li>
+<li>Test the leading candidate on spatially blocked holdouts using comparable protocol, fold-level results, and matched controls. Require it to beat the current comparable holdout best before a weekly slot is considered.</li>
+<li>Do not use hidden-truth densities, score scenarios, or thresholds derived from the withdrawn <code>FPw=S−TPw</code> inversion.</li>
+<li>Audit the exact candidate TIFF: one band, float32, official grid/CRS/resolution, finite in-footprint values in [0,1], and a unique content hash. These local checks do not prove portal acceptance.</li>
+<li>Keep download status and submission status separate. “OK to download for inspection” never means “OK to submit.” Submit only when the active project status explicitly says <strong>OK TO SUBMIT</strong> and the current competition rules are checked.</li>
+<li>Retain the organizer's score/receipt for the exact submitted bytes. Owner-reported scores and a public leaderboard row alone do not link local bytes to a score.</li>
+</ol></section>
+<section><h2>Current project records</h2><p>Use the <a href="../hypotheses.html">current geological slate</a>, <a href="../validation.html">validation status</a>, and <a href="../submission-guide.html">current submission guide</a>. H56-F and H57-A failure results are preserved there; neither clears a slot.</p></section>
+<footer><p>Archive maintained to preserve history while preventing stale live-score claims from being reused.</p></footer></main></body></html>

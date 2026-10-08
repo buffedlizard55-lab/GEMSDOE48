@@ -45,5 +45,8 @@
     "source_tip_sha256": "5556aa1438fd67376b60d5ffc99228ec09dcc11a8408298a743ccb88d6163641",
     "submission_name": "GEMSDOE48-H50-DS-B2xH36",
     "AREA_OR_POINT": "Area"
-  }
+  },
+  "validity_status": "LOCAL_FORMAT_CHECK_ONLY_NOT_ORGANIZER_ACCEPTANCE",
+  "submission_decision": "NOT CLEARED TO SUBMIT",
+  "warning": "A passing local format check does not establish portal acceptance, score, or suitability for submission."
 }

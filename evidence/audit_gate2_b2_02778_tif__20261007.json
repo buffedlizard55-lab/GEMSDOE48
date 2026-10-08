@@ -1,8 +1,8 @@
 {
   "schema": "GEMSDOE48-candidate-audit-v1",
   "generated_utc": "2026-10-07T05:24:29.202208+00:00",
-  "protocol": "GEMSDOE48-GATE-2 (mass-neutral): equal-mass credit density vs incumbent + density-matched marginal credit of added cells vs the metric break-even bar",
-  "warning": "Public-proxy instrument only; not the private expert truth and not an organizer score. PASS does not authorize an upload by itself; it means the candidate survives the mass-neutral screen that the 2026-10-06 gate failed to apply.",
+  "protocol": "FORENSIC-ONLY reproduction of invalidated historical GEMSDOE48-GATE-2; not valid for promotion.",
+  "warning": "FORENSIC-ONLY HISTORICAL RECEIPT. The stored legacy values are preserved for reproducibility, but verdicts, density-matched scores, thresholds, and promotion decisions are invalidated. Public proxies are not private-label truth or organizer scores.",
   "candidate": {
     "path": "data/raw/scored/b2_02778.tif",
     "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
@@ -144,8 +144,17 @@
     "marginal_credit_per_cell": 0.0,
     "density_matched_credit_per_cell": 0.0
   },
-  "verdict": "IDENTICAL_TO_INCUMBENT",
+  "verdict": "INVALIDATED_FOR_FORENSIC_REPRODUCTION_ONLY",
   "reasons": [
+    "This historical Gate-2 result is not a promotion verdict: inferred live truth density and the universal per-cell threshold are invalidated."
+  ],
+  "historical_protocol_invalidated": "GEMSDOE48-GATE-2 (mass-neutral): equal-mass credit density vs incumbent + density-matched marginal credit of added cells vs the metric break-even bar",
+  "legacy_verdict": "IDENTICAL_TO_INCUMBENT",
+  "legacy_reasons": [
     "identical_support_to_incumbent"
-  ]
+  ],
+  "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION",
+  "invalidation_reason": "Gate-2 density matching used a hidden-truth count inferred by substituting FPw=S-TPw, and treated 0.05556 as a universal break-even bar. Neither premise is generally valid. Public-proxy measurements remain historical diagnostics only.",
+  "legacy_opt_in_required_for_reproduction": true,
+  "promotion_decision": "NONE \u2014 NOT CLEARED TO SUBMIT"
 }

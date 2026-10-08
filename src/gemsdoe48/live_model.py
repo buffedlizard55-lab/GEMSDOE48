@@ -1,62 +1,17 @@
-"""Live-anchored forward model for the official DTI metric (H55 session, 2026-10-07).
+"""Retired H55 score surrogate — INVALIDATED for metric inference and promotion.
 
-What this module is
--------------------
-The organizer's metric (DrivenData competition 306, problem-description page 967) is
+The historical implementation tried to infer hidden truth from owner-reported
+scores by substituting ``FPw = S - TPw`` (or an equivalent ``Q ≈ T`` assumption).
+The official metric instead uses truth-centred ``TPw = T`` and prediction-centred
+``FPw = S - Q``; these quantities are generally unequal. Therefore this module's
+``hidden_truth_px``, inverted ``TPw``, fitted ``rho``, live-equivalent scores,
+frontier/ceiling, and per-pixel thresholds are not private-label facts, metric
+bounds, or promotion evidence.
 
-    k(d)  = max(1 - d/300 m, 0)
-    TPw   = sum_g max_x p(x) k(d(x, g))
-    FPw   = sum_x p(x) (1 - max_g k(d(x, g)))
-    FNw   = sum_g (1 - max_x p(x) k(d(x, g)))
-    DTI   = TPw / (TPw + 0.2 FPw + 0.8 FNw)
-
-IMPORTANT: This is a historical ASSUMPTION-DEPENDENT surrogate, not an exact
-inversion of the official metric.  The `M = TPw` assertion below is false in
-general: M sums over predictions and TPw sums over truth pixels.  See
-docs/research/metric-identity-erratum-20261007.md.  Do not use its fitted
-"ceiling" or per-cell threshold as an upload gate or a private-label bound.
-
-The hidden truth ``G`` is never published.  Every previous session in this
-repository scored candidates against *public-map proxies* (the SGMC raster, the
-public catalogue) and used those numbers as a promotion gate.
-
-This module replaces the proxy with a **forward model calibrated on owner-reported
-live scores**.  Two identities make that possible for a binary emission ``X``:
-
-    FPw = S - M ,  FNw = |G| - TPw ,  M = TPw to within 0.2 %
-    =>  DTI = T / (0.2 S + 0.8 |G|)                       (removal regime)
-
-with ``S = |X|`` and ``T = TPw``.  Two constants are then fitted from the eight
-owner-reported live scores of the h19-5 backbone family:
-
-``G``
-    The hidden-truth pixel mass.  ``A_d2_8 -> B_prune100 -> C_prune200`` are
-    strictly nested (verified pixel-wise in this repository) and the removed dots
-    carry statistically zero credit, so the three artifacts share one ``T`` and
-    ``G`` is identified by least squares.
-``rho``
-    ``T = rho * Cov(X)``, where ``Cov(X) = sum_{b in B_elig} max_{x in X} k(d(x,b))``
-    is the triangular-kernel coverage of the *eligible backbone*
-    ``B_elig = backbone AND (distance to public catalogue > 200 m)``.
-
-Why ``Cov`` and not ``S``
--------------------------
-Across the eight artifacts ``S`` spans 37,654-121,131 (3.2x) while ``T`` spans
-5,082-6,813.  ``Cov`` tracks ``T`` far more tightly than ``S`` does: two artifacts
-with the *same* mass (``C_prune200`` 37,654 and ``h36_rung30`` 37,660) differ by
-2.4 % in ``T`` and by 2.7 % in ``Cov``; two artifacts differing 12 % in mass
-(``C`` and ``h32_prethin_tip``) differ 0.07 % in ``T`` and 0.9 % in ``Cov``.
-
-Honest limits (see ``evidence/live_model_calibration_*.json``)
---------------------------------------------------------------
-* ``G`` and every ``T`` are derived from **owner-reported** scores pasted into the
-  session brief, not from an organizer receipt.  They are OWNER-REPORT class.
-* ``rho`` is calibrated *inside* the h19-5 backbone family.  On the one available
-  out-of-family live artifact (``sgmc-off-catalogue-44k``, live 0.0512) the implied
-  ratio is 0.110 instead of 0.068, i.e. the model **under-predicts out-of-family T
-  by ~38 %**.  The model is therefore a within-family instrument only.
-* ``Cov`` measures coverage of the *backbone*, not of the truth.  The empirical
-  statement is only that, for this family, the two are proportional to within 1.8 %.
+The functions remain only to reproduce historical H55/H48 calculations under an
+explicit forensic opt-in in their command-line tools. Do not use the results as
+score estimates, candidate gates, or claims about organizer labels. See
+``docs/research/metric-identity-erratum-20261007.md``.
 """
 from __future__ import annotations
 
@@ -75,6 +30,11 @@ from .metric import OFFSETS
 # ---------------------------------------------------------------------------
 
 ROOT = Path(__file__).resolve().parents[2]
+MODEL_VALIDITY_STATUS = "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION"
+MODEL_INVALIDATION_REASON = (
+    "Historical calibration substitutes FPw=S-TPw (Q≈T), which is not a general "
+    "identity under the official metric."
+)
 
 
 @dataclass(frozen=True)
@@ -173,18 +133,30 @@ def kernel_weight_sum() -> float:
 # calibration
 # ---------------------------------------------------------------------------
 
-def invert_truth(live: float, emitted: int, hidden_truth_px: float) -> float:
-    """Solve ``DTI = T / (0.2 S + 0.8 |G|)`` for ``T``."""
+def _require_legacy_audit_only(enabled: bool, operation: str) -> None:
+    if not enabled:
+        raise RuntimeError(
+            f"{operation} is an invalidated FPw=S-TPw surrogate; pass legacy_audit_only=True "
+            "only for forensic reproduction"
+        )
+
+
+def invert_truth(live: float, emitted: int, hidden_truth_px: float, *,
+                 legacy_audit_only: bool = False) -> float:
+    """FOR FORENSIC REPRODUCTION ONLY: solve the invalid historical surrogate for T."""
+    _require_legacy_audit_only(legacy_audit_only, "invert_truth")
     return float(live * (ALPHA * emitted + BETA * hidden_truth_px))
 
 
 def fit_hidden_truth(masses: Sequence[int], lives: Sequence[float],
-                     lo: float = 4000.0, hi: float = 60000.0) -> dict:
-    """Least-squares ``|G|`` assuming all listed artifacts share one ``T``.
+                     lo: float = 4000.0, hi: float = 60000.0, *,
+                     legacy_audit_only: bool = False) -> dict:
+    """INVALIDATED forensic fit assuming the false ``FPw = S - TPw`` identity.
 
-    Returns the fitted ``|G|``, the shared ``T``, and the pairwise closed-form
-    solutions used as a consistency check.
+    Returned ``hidden_truth_px`` and shared ``T`` are historical surrogate values,
+    not estimates of private/organizer labels or promotion inputs.
     """
+    _require_legacy_audit_only(legacy_audit_only, "fit_hidden_truth")
     if len(masses) != len(lives) or len(masses) < 2:
         raise ValueError("need at least two (mass, live) pairs")
     masses = np.asarray(masses, dtype=np.float64)
@@ -211,21 +183,29 @@ def fit_hidden_truth(masses: Sequence[int], lives: Sequence[float],
             g = 0.25 * (l2 * s2 - l1 * s1) / (l1 - l2)
             pairs.append({"pair": [int(s1), int(s2)], "live": [float(l1), float(l2)],
                           "closed_form_G": float(g)})
-    return {"hidden_truth_px": best, "shared_tpw": shared_t, "sse": sse(best),
+    return {"validity_status": MODEL_VALIDITY_STATUS,
+            "invalidation_reason": MODEL_INVALIDATION_REASON,
+            "promotion_use": "NONE — historical surrogate values only.",
+            "hidden_truth_px": best, "shared_tpw": shared_t, "sse": sse(best),
             "pairwise_closed_form": pairs}
 
 
 def fit_rho(coverages: Sequence[float], masses: Sequence[int], lives: Sequence[float],
-            hidden_truth_px: float) -> dict:
-    """Least-squares ``rho`` for ``T = rho * Cov`` through the origin."""
+            hidden_truth_px: float, *, legacy_audit_only: bool = False) -> dict:
+    """INVALIDATED least-squares ``rho`` fit for the historical surrogate."""
+    _require_legacy_audit_only(legacy_audit_only, "fit_rho")
     xs = np.asarray(coverages, dtype=np.float64)
-    ys = np.asarray([invert_truth(l, s, hidden_truth_px) for l, s in zip(lives, masses)])
+    ys = np.asarray([invert_truth(l, s, hidden_truth_px, legacy_audit_only=True)
+                     for l, s in zip(lives, masses)])
     rho = float((xs * ys).sum() / (xs * xs).sum())
     denom = ALPHA * np.asarray(masses, dtype=np.float64) + BETA * hidden_truth_px
     pred = rho * xs / denom
     act = np.asarray(lives, dtype=np.float64)
     rel = (pred - act) / act
     return {
+        "validity_status": MODEL_VALIDITY_STATUS,
+        "invalidation_reason": MODEL_INVALIDATION_REASON,
+        "promotion_use": "NONE — historical surrogate values only.",
         "rho": rho,
         "rms_relative_error_pct": float(100.0 * np.sqrt((rel ** 2).mean())),
         "max_abs_relative_error_pct": float(100.0 * np.abs(rel).max()),
@@ -237,11 +217,15 @@ def fit_rho(coverages: Sequence[float], masses: Sequence[int], lives: Sequence[f
 
 @dataclass(frozen=True)
 class ForwardModel:
-    """Calibrated constants plus the prediction rule."""
+    """Historical surrogate parameters; never an official-score predictor."""
 
     hidden_truth_px: float
     rho: float
     target_px: int
+    legacy_audit_only: bool = False
+
+    def __post_init__(self) -> None:
+        _require_legacy_audit_only(self.legacy_audit_only, "ForwardModel")
 
     def tpw(self, cov: float) -> float:
         return self.rho * cov
@@ -250,7 +234,7 @@ class ForwardModel:
         return self.tpw(cov) / (ALPHA * emitted + BETA * self.hidden_truth_px)
 
     def break_even_credit(self, dti: float) -> float:
-        """Kernel credit a single added pixel must exceed to raise the score."""
+        """Return the invalid surrogate's historical threshold; not a live gate."""
         return ALPHA * dti
 
     def worst_case_dti(self, base_cov: float, base_emitted: int, added: int) -> float:
@@ -266,9 +250,13 @@ class ForwardModel:
         return dti_target * (ALPHA * emitted + BETA * self.hidden_truth_px)
 
     def to_json(self) -> dict:
-        return {"hidden_truth_px": self.hidden_truth_px, "rho": self.rho,
+        return {"validity_status": MODEL_VALIDITY_STATUS,
+                "invalidation_reason": MODEL_INVALIDATION_REASON,
+                "promotion_use": "NONE — historical surrogate values only.",
+                "hidden_truth_px_invalidated": self.hidden_truth_px,
+                "rho_invalidated": self.rho,
                 "target_px": self.target_px,
-                "break_even_credit_at_0_2778": self.break_even_credit(0.2778),
+                "break_even_credit_at_0_2778_invalidated": self.break_even_credit(0.2778),
                 "max_coverage_one_isolated_dot": kernel_weight_sum()}
 
 
@@ -286,8 +274,10 @@ def load_binary(path: str | Path) -> np.ndarray:
 
 def calibrate(backbone: np.ndarray, catalogue_distance_m: np.ndarray,
               artifacts: Iterable[LiveArtifact] = LIVE_ARTIFACTS,
-              buffer_m: float = CATALOGUE_BUFFER_M) -> dict:
-    """Run the whole calibration and return a JSON-serialisable receipt."""
+              buffer_m: float = CATALOGUE_BUFFER_M, *,
+              legacy_audit_only: bool = False) -> dict:
+    """Recreate an invalidated H55 surrogate receipt for forensic comparison only."""
+    _require_legacy_audit_only(legacy_audit_only, "calibrate")
     artifacts = tuple(artifacts)
     eligible = np.asarray(backbone, dtype=bool) & (np.asarray(catalogue_distance_m) > buffer_m)
     masses, lives, covs, keys = [], [], [], []
@@ -301,16 +291,19 @@ def calibrate(backbone: np.ndarray, catalogue_distance_m: np.ndarray,
     nested = [i for i, a in enumerate(artifacts) if a.key in NESTED_TRIPLE]
     if len(nested) != 3:
         raise ValueError(f"nested triple not fully present: {[keys[i] for i in nested]}")
-    gfit = fit_hidden_truth([masses[i] for i in nested], [lives[i] for i in nested])
-    rfit = fit_rho(covs, masses, lives, gfit["hidden_truth_px"])
+    gfit = fit_hidden_truth([masses[i] for i in nested], [lives[i] for i in nested],
+                            legacy_audit_only=True)
+    rfit = fit_rho(covs, masses, lives, gfit["hidden_truth_px"], legacy_audit_only=True)
 
-    model = ForwardModel(gfit["hidden_truth_px"], rfit["rho"], int(eligible.sum()))
+    model = ForwardModel(gfit["hidden_truth_px"], rfit["rho"], int(eligible.sum()),
+                         legacy_audit_only=True)
     oof = None
     try:
         oof_mask = load_binary(ROOT / OUT_OF_FAMILY.path)
         oof_cov = coverage(oof_mask, eligible)
         oof_s = int(oof_mask.sum())
-        oof_t = invert_truth(OUT_OF_FAMILY.live, oof_s, model.hidden_truth_px)
+        oof_t = invert_truth(OUT_OF_FAMILY.live, oof_s, model.hidden_truth_px,
+                             legacy_audit_only=True)
         oof = {
             "key": OUT_OF_FAMILY.key, "live": OUT_OF_FAMILY.live, "emitted": oof_s,
             "cov_eligible_backbone": oof_cov, "inverted_tpw": oof_t,
@@ -323,6 +316,9 @@ def calibrate(backbone: np.ndarray, catalogue_distance_m: np.ndarray,
         oof = {"key": OUT_OF_FAMILY.key, "status": "mirror not restored; transfer error not measured"}
 
     return {
+        "validity_status": MODEL_VALIDITY_STATUS,
+        "invalidation_reason": MODEL_INVALIDATION_REASON,
+        "promotion_use": "NONE — historical surrogate values only.",
         "eligible_backbone_px": int(eligible.sum()),
         "catalogue_buffer_m": buffer_m,
         "artifacts": [{"key": k, "emitted": s, "live": l, "cov_eligible_backbone": c}

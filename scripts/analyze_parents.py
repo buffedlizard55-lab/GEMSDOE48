@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
-"""Forensic decomposition of the two parent families and live-anchored projection.
+"""Retired H49 parent decomposition with invalidated live-anchor inversion.
 
-Everything written to ``docs/data/h49-parent-decomposition.json`` is either
-
-* ``[MEASURED]``  - computed here from hash-pinned inputs with the published metric,
-* ``[ANCHOR]``    - an owner-reported leaderboard score used as an input, or
-* ``[MODEL]``     - a stated modelling assumption whose sensitivity is swept.
-
-No cell of the report is allowed to present a modelled number as a measurement.
+The public-proxy geometry/metric diagnostics can be reproduced, but the former
+live-anchor inversion and live-scale projections depend on the invalid
+``FPw=S-TPw`` substitution. Those fields are not hidden-truth estimates, score
+scenarios, thresholds, or promotion evidence. This command refuses by default;
+``--legacy-audit-only`` is required for forensic reproduction, whose default
+output is under ``evidence/forensic`` rather than the active docs-data path.
 """
 from __future__ import annotations
 
+import argparse
 import json
 import sys
 from datetime import datetime, timezone
@@ -48,6 +48,16 @@ def rd(p: Path) -> np.ndarray:
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--legacy-audit-only", action="store_true",
+                        help="required opt-in to reproduce invalid live-anchor projections")
+    parser.add_argument("--output", type=Path,
+                        default=ROOT / "evidence/forensic/h49-parent-decomposition-legacy_20261007.json")
+    args = parser.parse_args()
+    if not args.legacy_audit_only:
+        parser.error("invalidated FPw=S-TPw live inversion; pass --legacy-audit-only only for forensic reproduction")
+    print("FORENSIC REPRODUCTION ONLY — INVALIDATED H49 LIVE INVERSION/PROJECTIONS")
+
     dotted = rd(DOTTED) > 0
     tip = rd(TIP) > 0
     labels = rd(LABELS) > 0
@@ -67,6 +77,9 @@ def main() -> None:
 
     report: dict = {
         "schema": "GEMSDOE48-parent-decomposition-v1",
+        "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION",
+        "invalidation_reason": "Live-anchor inversion and live-scale projections use FPw=S-TPw, which is not a general official-metric identity.",
+        "leaderboard_linkage": "Owner-reported anchors; no organizer receipt links local raster bytes to leaderboard rows.",
         "generated_utc": datetime.now(timezone.utc).isoformat(),
         "classes": {
             "intersection": int(inter.sum()),
@@ -166,6 +179,8 @@ def main() -> None:
             "weighted_recall": {k: T[k] / K for k in T},
         }
     report["live_anchor_inversion"] = {
+        "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION",
+        "invalidation_reason": "The inversion assumes FPw=S-TPw (or Q≈T), which is not a general identity under the official metric.",
         "inputs": {"pair_before": PAIR["before"], "pair_after": PAIR["after"],
                    "removed_dots": dm, "zero_credit_assumption": "[MODEL] owner-reported; the removed dots sat within 100 m of the masked public catalogue"},
         "weighted_tp_of_pair": t_pair,
@@ -216,7 +231,9 @@ def main() -> None:
             "candidates": out,
         }
     report["live_projection_by_class"] = {
-        "method": "[MODEL] proxy-measured *relative* credit split between the three dot classes, rescaled so each parent reproduces its owner-reported live score; both extreme regimes are reported.",
+        "validity_status": "INVALIDATED_FORENSIC_ONLY_DO_NOT_USE_FOR_PROMOTION",
+        "invalidation_reason": "The live scale and truth count come from the invalid FPw=S-TPw inversion; outputs are not organizer-score scenarios.",
+        "method": "Historical model: proxy-measured relative credit split rescaled to reproduce owner-reported scores under invalid inversion regimes; not evidence or forecast.",
         "regimes": proj,
     }
 
@@ -229,7 +246,7 @@ def main() -> None:
         "correlation_on_union": float(np.corrcoef(sup_d[union], sup_t[union])[0, 1]),
     }
 
-    outp = ROOT / "docs" / "data" / "h49-parent-decomposition.json"
+    outp = args.output if args.output.is_absolute() else ROOT / args.output
     outp.parent.mkdir(parents=True, exist_ok=True)
     outp.write_text(json.dumps(report, indent=2) + "\n")
     print(json.dumps(report, indent=2))
