@@ -1,16 +1,15 @@
 #!/usr/bin/env python3
 """Build H59 -- sparse emission of the normalized Dempster-Shafer combined belief.
 
-The artifact, its gates and its verdict
----------------------------------------
-H59 answers the standing brief literally: combine the best dotted-family surface
-(H33-2-B2, owner-reported 0.2778, SHA-256 pinned) with the best tip/step-over
-surface (H33-D, owner-reported 0.2632, SHA-256 pinned) with Dempster's rule,
-normalize the combined belief to [0, 1], export the residual unassigned mass
-``m(Theta)`` and the raw conflict ``K`` as separate diagnostic layers, verify the
-result is not the naive mean, verify the file cannot trigger the portal's
-``Predicted values must be in range [0, 1]`` error, and state an unambiguous
-verdict.
+The artifact, local checks and current disposition
+--------------------------------------------------
+H59 combines SHA-pinned B2 dotted and H33-D tip/step-over surfaces with
+Dempster's rule, normalizes the combined belief to [0, 1], exports residual
+unassigned mass ``m(Theta)`` and raw conflict ``K`` separately, and checks that
+the emitted raster is not the naive mean. The builder records local byte and
+format properties only. It does not emulate the organizer portal or prove the
+cause of the reported ``Predicted values must be in range [0, 1]`` error. A local
+range pass is not portal acceptance and does not clear a weekly submission slot.
 
 What is new here relative to the registry
 -----------------------------------------
@@ -28,16 +27,17 @@ blending it into the surface.
 
 Gates (all measured, nothing projected)
 ---------------------------------------
-* format: single band, float32, EPSG:32611, 3292x3730, 100 m, transform equal to
-  the organizer template, finite everywhere, min >= 0, max <= 1, no nodata tag,
-  and the portal's own range predicate ``all(0 <= v <= 1)`` including NaN must
-  evaluate True.
-* not-the-average: Pearson/Spearman against the naive mean of the two opinion
-  surfaces and the maximum absolute difference.
-* registry: SHA-256 byte identity, dot overlap within the 3-pixel metric halo
-  (both directions) and Spearman rank correlation against every locally
-  available registry raster.
-* verdict: printed as one line, derived mechanically from the gate dictionary.
+* local format audit: one band, float32, EPSG:32611, 3292x3730, 100 m,
+  template-aligned transform, finite values in [0,1], no nodata tag, and zero
+  outside. The official problem description says outside cells should be null/NaN;
+  this audit does not establish that the zero-outside file is accepted.
+* distinctness: Pearson/Spearman against the naive mean and maximum absolute
+  difference.
+* local registry: byte identity, exact-cell overlap and rank correlation against
+  tracked local rasters; not a global or organizer-side uniqueness proof.
+* verdict: download is for inspection only; no submission slot is cleared. The
+  public-proxy holdout result and format audit cannot establish private-label
+  performance or organizer acceptance.
 
 Nothing in this builder fits anything to a hidden label.  Parents, reliabilities
 and the emission mass are preregistered constants; the mass is fixed by the
@@ -242,31 +242,34 @@ def main() -> int:
     del diag_arrays, arr
     gc.collect()
 
-    # ---------------- gate 1: format / portal predicate ----------------
+    # ---------------- gate 1: local layout and value audit ----------------
     with rasterio.open(tif_path) as src:
         back = src.read(1)
         got_profile = src.profile.copy()
     template_transform = tuple(template_profile["transform"])[:6]
-    finite = bool(np.isfinite(back).all())
+    outside = back[~footprint]
+    inside = back[footprint]
     checks = {
         "single_band": int(got_profile["count"]) == 1,
         "dtype_float32": got_profile["dtype"] == "float32",
         "shape_matches_template": back.shape == template_raw.shape,
         "crs_matches_template": got_profile["crs"] == template_profile["crs"],
         "transform_matches_template": tuple(got_profile["transform"])[:6] == template_transform,
-        "all_finite": finite,
-        "min_ge_0": float(np.nanmin(back)) >= 0.0,
-        "max_le_1": float(np.nanmax(back)) <= 1.0,
+        "in_footprint_all_finite": bool(np.isfinite(inside).all()),
+        "in_footprint_min_ge_0": float(np.nanmin(inside)) >= 0.0,
+        "in_footprint_max_le_1": float(np.nanmax(inside)) <= 1.0,
         "no_nodata_tag": got_profile.get("nodata") is None,
-        "zero_outside_footprint": bool((back[~footprint] == 0).all()),
-        # the exact predicate a portal range check uses; NaN fails it, hence the
-        # all-finite encoding (repository irregularity IR-48-03)
-        "portal_range_predicate_all": bool(np.all((back >= 0) & (back <= 1))),
-        "portal_range_predicate_any_nan": bool(np.isnan(back).any()),
+        "outside_all_zero": bool((outside == 0).all()),
+        "outside_matches_published_null_nan_convention": bool(outside.size > 0 and np.isnan(outside).all()),
+        "whole_array_all_finite": bool(np.isfinite(back).all()),
+        "whole_array_range_predicate_0_1": bool(np.all((back >= 0) & (back <= 1))),
         "bytes_equal_planned_surface": bool(np.array_equal(back, surface)),
     }
-    print("  format gates:", json.dumps(checks))
-    format_ok = all(v for k, v in checks.items() if k != "portal_range_predicate_any_nan")
+    print("  local format and range checks:", json.dumps(checks))
+    # Do not hide the outside-footprint mismatch: current output is zero outside,
+    # while the public problem page specifies null/NaN. A local range result is
+    # not a portal test or organizer acceptance.
+    format_ok = all(checks.values())
 
     # ---------------- gate 2: not the naive mean ----------------
     naive = 0.5 * (fusion.belief_a + fusion.belief_b)
@@ -418,22 +421,30 @@ def main() -> int:
     in_lane_duplicate = bool(
         n_exact_vs_parents > 0.95 or uniqueness["max_spearman_on_corridor_vs_registry"] > 0.99)
     verdict = {
-        "format_valid_and_portal_safe": format_ok,
-        "unique_bytes": True,
+        "local_format_checks_pass": format_ok,
+        "portal_acceptance_tested": False,
+        "submission_slot_cleared": False,
+        "unique_bytes_within_local_registry": True,
         "distinct_from_naive_mean": distinct_from_mean,
         "max_identical_dot_cells_vs_a_parent": n_exact_vs_parents,
         "in_lane_duplicate_flag": in_lane_duplicate,
         "three_px_proximity_to_parent_dots": uniqueness["max_my_dots_within_3px_of_any_registry"],
         "score_improvement_supported_by_local_evidence": False,
+        "slot_clearance_reason": (
+            "No same-protocol H49 comparison is recorded in the strict H59 evaluator; "
+            "H59's SGMC off-catalogue result is below both parents and their union."
+        ),
     }
     if format_ok and distinct_from_mean and not in_lane_duplicate:
-        headline = ("OK TO DOWNLOAD AND SUBMIT (format-valid, portal-safe, unique bytes and "
-                    "unique dot cells); no local evidence that it beats the current best")
+        headline = ("DOWNLOAD FOR INSPECTION ONLY; NOT CLEARED TO SUBMIT: local format and "
+                    "uniqueness checks pass, but no matched H49 promotion gate or organizer "
+                    "portal acceptance is established")
     elif format_ok and distinct_from_mean:
-        headline = ("OK TO DOWNLOAD AND SUBMIT AS A UNIQUE FILE (format-valid, portal-safe); "
-                    "near-copy of a registry raster -- score comparison only")
+        headline = ("DOWNLOAD FOR INSPECTION ONLY; NOT CLEARED TO SUBMIT: local format checks "
+                    "pass, but the candidate is near a registry raster and no promotion gate "
+                    "or organizer acceptance is established")
     else:
-        headline = "NOT CLEARED -- see failed gates"
+        headline = "NOT CLEARED TO SUBMIT; see failed local checks"
 
     receipt = {
         "rule": {"name": args.rule, "spacing_px": float(args.spacing),
@@ -510,7 +521,9 @@ def main() -> int:
     receipt_path.write_text(json.dumps(receipt, indent=1))
     print("\n" + "=" * 78)
     print(f"VERDICT: {headline}")
-    print(f"  format valid & portal safe : {format_ok}")
+    print(f"  local format checks pass   : {format_ok}")
+    print("  portal acceptance tested   : False")
+    print("  weekly slot cleared       : False")
     print(f"  distinct from naive mean   : {distinct_from_mean} "
           f"(spearman {not_average['spearman_all_support']:.4f}, "
           f"max |diff| {not_average['max_abs_diff']:.3f})")

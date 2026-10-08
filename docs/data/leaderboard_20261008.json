@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "snapshot_date_utc": "2026-10-08",
+  "captured_at_utc": null,
+  "capture_method": "single fetched read of the official DrivenData leaderboard; exact fetch time was not captured",
+  "source_url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+  "dynamic_page_warning": "This is a dated observation, not a live feed. Participant ranks/scores/submission counts may change.",
+  "file_to_score_identity_verified": false,
+  "private_test_score": false,
+  "rows": [
+    {"rank": 1, "participant": "xiaofanhu", "best_public_dti": 0.3774, "submissions_displayed": 13},
+    {"rank": 2, "participant": "alexoktaba", "best_public_dti": 0.3345, "submissions_displayed": 25},
+    {"rank": 3, "participant": "nchuzhoy", "best_public_dti": 0.3262, "submissions_displayed": 6},
+    {"rank": 4, "participant": "joeyfezster", "best_public_dti": 0.3260, "submissions_displayed": 24},
+    {"rank": 5, "participant": "kinghorton42", "best_public_dti": 0.3222, "submissions_displayed": 9},
+    {"rank": 6, "participant": "Batik Shirt Brothers", "best_public_dti": 0.3221, "submissions_displayed": 23},
+    {"rank": 7, "participant": "DARD", "best_public_dti": 0.3195, "submissions_displayed": 16},
+    {"rank": 8, "participant": "ndavis7", "best_public_dti": 0.2888, "submissions_displayed": 9},
+    {"rank": 9, "participant": "mzoorob", "best_public_dti": 0.2884, "submissions_displayed": 27},
+    {"rank": 10, "participant": "GrigorSargsyan", "best_public_dti": 0.2876, "submissions_displayed": 14},
+    {"rank": 11, "participant": "HardcoreTechGod", "best_public_dti": 0.2854, "submissions_displayed": 6},
+    {"rank": 12, "participant": "op01", "best_public_dti": 0.2792, "submissions_displayed": 7},
+    {"rank": 13, "participant": "extradr19", "best_public_dti": 0.2778, "submissions_displayed": 12}
+  ],
+  "interpretation": {
+    "0.3195": "DARD was shown at rank 7 in this observation; this does not identify its TIFF or private test result.",
+    "0.2778": "extradr19 was shown at rank 13 in this observation; the row is not linked to local H33-2-B2 raster bytes.",
+    "current_top_score": "0.3774 was shown at rank 1; the leaderboard is dynamic."
+  },
+  "related_local_evidence": {
+    "h33_2_b2_path": "data/families/dotted_b2_prune_02778.tif",
+    "h33_2_b2_sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+    "local_artifact_score_status": "UNSCORED",
+    "attribution_note": "docs/research/leaderboard-and-mask-clarification-20261008.md"
+  }
+}

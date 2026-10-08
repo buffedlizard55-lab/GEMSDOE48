@@ -19,5 +19,9 @@ jobs:
         run: python -m pip install -e '.[test]'
       - name: Compile source, scripts, and tests
         run: python -m compileall -q src scripts tests
+      - name: Regenerate local file-audit feed (no portal acceptance inferred)
+        run: python scripts/build_status_feed.py
       - name: Run unit tests
         run: python -m pytest -q
+      - name: Reproduce frozen H58 public-proxy holdout and H49 reference check
+        run: python scripts/validate_h58_holdout.py

@@ -60,32 +60,37 @@ Ranking is a qualitative research priority, **not a predicted score**. No additi
 4. Retrieve candidate inputs only from documented, license-compatible official sources; authenticate, checksum, and record provenance. The DrivenData training data page requires account access in the existing project inventory; this review did not bypass that restriction.
 5. Preserve output names and verdicts; a unique byte sequence is not evidence of novel science, improved DTI, permission to submit, or organizer acceptance.
 
-Official/manual-review references recorded by the project: [DrivenData competition overview](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/), [DrivenData data page](https://www.drivendata.org/competitions/306/competition-doe-gems/data/), [GEMS reference solution](https://github.com/drivendataorg/gems-prize-reference-solution), [USGS GeoDawn data](https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and), [INGENIOUS](https://gbcge.org/current-projects/ingenious/), and [DOE GDR submission 1391](https://gdr.openei.org/submissions/1391). This is a repository evidence review, not a fresh verification of every live webpage or data download.
+Official/manual-review references recorded by the project: [DrivenData competition overview](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/), [DrivenData data page](https://www.drivendata.org/competitions/306/competition-doe-gems/data/), [GEMS reference solution](https://github.com/drivendataorg/gems-prize-reference-solution), [USGS GeoDawn data](https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and-california), [INGENIOUS](https://gbcge.org/current-projects/ingenious/), and [DOE GDR submission 1391](https://gdr.openei.org/submissions/1391). This is a repository evidence review, not a fresh verification of every live webpage or data download.
 
 ---
 
-## Addendum — 2026-10-08 (later the same day, H59 session)
+## Addendum — H58-A / H59 reconciliation (2026-10-08)
 
-This review's run-card verdict (**negative**, for the H56/H56B artifacts) stands unchanged for those artifacts.
-Its forward-looking conclusions were, however, **superseded later the same day** by the H59 session, which implemented
-exactly the gates this review listed as missing:
+This review's **negative H56/H56B verdict remains unchanged** for those artifacts.
+The later H59 build added a distinct cover-rule artifact, strict segment-withheld
+receipts and a registry audit. Its original build receipt used overly broad “OK TO
+DOWNLOAD AND SUBMIT / portal-safe” wording. That wording is retained only as a historic
+receipt; it does not satisfy the user's separate requirement to pass a comparable
+spatially blocked promotion gate before spending a slot.
 
-- the whole-fault-segment buffered hide-and-recover evaluator with pixel-exact masking, pooled components,
-  per-feature leakage canaries (positive controls AUC 1.0000; real canaries 0.49–0.50) and segment-bootstrap 95% CIs
-  now exists at `scripts/evaluate_holdout.py` with receipts `evidence/holdout59_catalogue.json` and
-  `evidence/holdout59_sgmc_offcat.json`;
-- the registry-wide correlation and dot-overlap audit now exists and is applied mechanically in
-  `scripts/build_submission_h59.py` (74 rasters, 47 submission-like; both duplicate tripwires evaluated);
-- a top-k cut of the fusion was caught by that tripwire as an in-lane duplicate of the dotted family
-  (Jaccard 0.939; 100% of dots within 3 px) and was logged and deleted — confirming this review's warning;
-- a **distinct** emission rule (hex-covering of the fused belief corridor, spacing 4.0 px, 37,723 dots) passed
-  every gate and is the current primary artifact:
-  `docs/downloads/gemsdoe48-h59-cover-ds-belief-b2xh33d-20261008T184547Z-b79c4c61d8d8.tif`
-  (SHA-256 `f1584187b459baf47f75e5daf64de6f7696f9feb14910d3cf2762f7a1119597a`), verdict
-  "OK TO DOWNLOAD AND SUBMIT (format-valid, portal-safe, unique bytes and unique dot cells);
-  no local evidence that it beats the current best."
+- H59's local strict evaluator reports 0.0974 [0.0927, 0.1023] on the catalogue proxy
+  and 0.0917 [0.0844, 0.0990] on the SGMC off-catalogue proxy. On SGMC, its result is
+  below dotted (0.0954), tip (0.0957) and their union (0.0975). The H59 receipts do not
+  report the matched H49 comparison required by the current slot rule.
+- H59's local raw-array [0,1] check and registry comparison are not organizer portal
+  acceptance or global uniqueness. The file encodes zeros outside while the official
+  problem page says outside values should be null/NaN; no portal upload was made.
+- H58-A is a separate positive-only simple-support mass ablation and did run the matched
+  H49 gate. It failed on both primary public proxies: paired mean deltas −0.040053
+  (catalogue) and −0.034411 (newer SGMC off-catalogue), with 0/4 positive folds on both.
+  It shares support/ranking with H56-OWDS and is not a new geological detector.
+- The 2026-10-08 official leaderboard snapshot placed 0.2778 at #13 (extradr19), not
+  the top row; no exact local B2 TIFF-to-row receipt exists. Official staff clarified
+  known-fault masking is pixel-exact with no 300 m buffer, so nearby predictions are
+  scored normally and cannot be assumed exempt.
 
-So: "do not duplicate the fusion under a new name" remains correct for rank-cut variants; the cover-rule artifact is
-not a duplicate under the measured tripwires and carries its own honest-negative score statement
-(HOLDOUT-DTI 0.0974 [0.0927, 0.1023] catalogue / 0.0917 [0.0844, 0.0990] SGMC off-catalogue; UNSCORED by the organizer).
-Full record: [h59-method-results-20261008.md](h59-method-results-20261008.md).
+**Current decision: download for inspection only; no weekly submission slot is cleared;
+no submission was made.** See the [machine-readable reconciliation](../../evidence/submission_gate_reconciliation_20261008.json),
+[H58-A report](h58-results-20261008.md), [H59 method/results](h59-method-results-20261008.md),
+[leaderboard/mask clarification](leaderboard-and-mask-clarification-20261008.md), and
+[official sources](../sources.md).

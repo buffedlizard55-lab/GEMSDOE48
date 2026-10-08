@@ -1,69 +1,29 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Reproducible validation results and artifact checks for GEMSDOE48; public-proxy limitations, H56/H57 outcomes, and explicit no-submit verdict."><title>GEMSDOE48 — validation results</title><link rel="stylesheet" href="style.css"><style>nav a{color:#cdeadd;text-decoration:none;padding:6px 10px;border-radius:8px}nav a:hover{background:#0b6e4f;color:#fff}.verdict{border:3px solid #b91c1c;background:#fff0ed;padding:18px;border-radius:14px;margin:20px 0}.alert{background:#fff7df;border-left:5px solid #b45309;padding:14px;border-radius:9px;margin:14px 0}.mono{word-break:break-all}</style></head>
-<body><header><div class="wrap"><p>GEMSDOE48 · reproducible diagnostics</p><h1>Validation and holdout results</h1><p>Separate format checks, public-map proxies and historical score claims. None substitutes for organizer acceptance or private-label scoring.</p></div></header>
-<nav><div class="wrap"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="submission-guide.html">Submission guide</a><a href="method.html">Method</a><a href="hypotheses.html">Hypotheses</a>
-<a href="status.html">Status feed</a><a href="validation.html">Validation</a><a href="leaderboard.html">Leaderboard</a><a href="irregularities.html">Irregularities</a><a href="sources.html">Sources</a><a href="next-steps.html">Next steps</a></div></nav>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="GEMSDOE48 validation: H58-A matched H49 spatial holdout failure, H59 strict-proxy limitations, local format audits, and no cleared slot.">
+<title>GEMSDOE48 — validation and holdout results</title><link rel="stylesheet" href="style.css">
+<style>nav a{color:#cdeadd;text-decoration:none;padding:6px 10px;border-radius:8px}nav a:hover{background:#0b6e4f;color:#fff}.stop{border:4px solid #b91c1c;background:#fff0ed;padding:18px;border-radius:14px;margin:18px 0}.card{background:#f8fafc;border:1px solid #dbe3ea;border-radius:12px;padding:16px;margin:16px 0}.caution{background:#fff7df;border-left:5px solid #b45309;padding:14px;margin:14px 0}table{border-collapse:collapse;width:100%;margin:12px 0}th,td{border:1px solid #d1d5db;padding:8px 10px;text-align:left;vertical-align:top}th{background:#f3f4f6}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;overflow-wrap:anywhere}</style></head>
+<body><header><div class="wrap"><p>GEMSDOE48 · reproducible diagnostics</p><h1>Validation and holdout results</h1><p>Public-map proxies, local file properties and organizer acceptance are separate evidence types.</p></div></header>
+<nav><div class="wrap"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="submission-guide.html">Download / submission status</a><a href="method.html">Method</a><a href="hypotheses.html">Hypotheses</a><a href="validation.html">Validation</a><a href="leaderboard.html">Leaderboard</a><a href="status.html">Local file audit</a><a href="irregularities.html">Irregularities</a><a href="sources.html">Sources</a><a href="next-steps.html">Next steps</a></div></nav>
 <main class="wrap">
-<div class="verdict"><strong>NO CANDIDATE CLEARED TO SUBMIT.</strong> The current local comparator H49 remains ahead of tested H56B and H56 open-world D-S on both public proxy means. The current-branch H57-A screen fails the combined proxy gate and loses to all eight same-pool random controls. A distinct H57-RELIEF TIFF exists, but its former live projection and submit recommendation are withdrawn.</div>
-<div class="alert"><b>Interpretation limit:</b> Catalogue and SGMC are external public maps, not the competition's private expert labels. Their spatial folds overlap fixed upstream feature products that were not refit/reconstructed inside each fold. Scores are conditional proxy diagnostics and may be optimistic due to feature construction/leakage. They are not leaderboard scores, score estimates or official validation.</div>
-<h2 class="sec">Comparable public-proxy means</h2>
-<table><thead><tr><th>Candidate</th><th>Catalogue mean DTI</th><th>Catalogue folds above H49</th><th>SGMC &gt;300 m off-catalogue mean DTI</th><th>SGMC folds above H49</th><th>Decision</th></tr></thead><tbody>
-<tr><td>H49 reference</td><td>0.095353</td><td>—</td><td>0.100751</td><td>—</td><td>Current comparable local reference only.</td></tr>
-<tr><td>H56B graded Bel(F)</td><td>0.032347</td><td>0/4</td><td>0.070552</td><td>0/4</td><td>Fails both mean and fold comparisons.</td></tr>
-<tr><td>H56 open-world D-S</td><td>0.054242</td><td>0/4</td><td>0.066070</td><td>0/4</td><td>Fails both mean and fold comparisons.</td></tr>
-<tr><td>H57-A robust K~Th × TMI gradient</td><td>0.095659 (+0.000306)</td><td>3/4</td><td>0.100528 (−0.000223)</td><td>1/4</td><td>Fails combined two-proxy gate.</td></tr>
-</tbody></table>
-<p>H57-A's eight same-pool random controls averaged 0.096138 on catalogue and 0.100975 on SGMC; all eight had higher values than H57-A on both means. The control comparison is descriptive and does not provide a significance test. This current-branch H57-A screen produced an evidence table only and no TIFF. A separate concurrent H57-RELIEF file exists but is **OK TO DOWNLOAD FOR INSPECTION · NOT OK / NOT CLEARED TO SUBMIT**; its former score projection is invalidated.</p>
-
-<h2 class="sec">H56-F pruning ladder (public proxy; historical candidate family)</h2>
-<table><thead><tr><th>Threshold τ</th><th>Catalogue mean DTI</th><th>SGMC mean DTI</th><th>Against H49 0.095353 / 0.100751</th><th>Decision</th></tr></thead><tbody>
-<tr><td>0.99</td><td>0.005337</td><td>0.081123</td><td>−0.090016 / −0.019628</td><td>Fails both.</td></tr><tr><td>0.95</td><td>0.006744</td><td>0.094821</td><td>−0.088609 / −0.005930</td><td>Fails both.</td></tr><tr><td>0.90</td><td>0.006831</td><td>0.095491</td><td>−0.088522 / −0.005260</td><td>Fails both.</td></tr>
-</tbody></table>
-<p>The strongest SGMC pruning rung, τ=.90, still loses H49 on both targets. No rung is promoted or cleared. Detailed results: <a href="research/h56-pruning-ladder-results-20261007.md">H56-F pruning ladder report</a>.</p>
-
-<h2 class="sec">Local file checks are not portal acceptance</h2>
-<ul><li>H56B zero-outside primary: local core GeoTIFF/grid/dtype/value-range checks pass; every value is finite and inside [0,1].</li><li>Its outside-footprint encoding conflicts with the public null/NaN wording. A NaN-outside twin is available with identical in-footprint predictions; acceptance for either variant is untested.</li><li>H56B identity: SHA-256 <code>4d6548d4ec07a47a25b83d28ebc05d58b57448c1507b460aed52cec395bdb6b5</code>. Byte/canonical uniqueness was true among the audited 73 local files; this limited check is not proof of global uniqueness.</li><li>Organizer score exists for no local artifact. No exact local TIFF-to-leaderboard connection or organizer acceptance is verified.</li></ul>
-<p>See <a href="research/h56b-metric-erratum-20261007.md">H56B corrected audit</a>, <a href="research/h56-results-20261007.md">H56 open-world test</a>, and <a href="../evidence/h56b_projection_erratum_20261007.json">machine-readable invalidation receipt</a>.</p>
-<p>H57-RELIEF local file: <a href="downloads/GEMSDOE48-H57-ds-relief-augmented-20261007-e6b785718c07.tif" download>download for inspection</a> · SHA-256 <code>28a51fb032b8f2cfd1f04ad3bd429c29d7bb780d36961fea783ff8099130986e</code>. Its local format/uniqueness receipts do not establish portal acceptance or organizer uniqueness. See the <a href="research/h57-ds-relief-augmented-20261007.md">forensic report</a> and <a href="research/h57-relief-metric-erratum-20261007.md">metric-identity correction</a>.</p>
-
-<h2 class="sec">Metric implementation and historical correction</h2>
-<p>The exact weighted DTI implementation and tests are documented in <a href="../src/gemsdoe48/metric.py">the metric module</a> and its test suite. For the official metric's sufficient statistics, <code>TPw=T</code>, <code>FPw=S−Q</code> and <code>FNw=N−T</code>; the maxima T and Q use different axes. Therefore <code>FPw=S−TPw</code> is not a general identity. H55/H56/H57-RELIEF live-score projections, the 0.2843 claimed ceiling, H56B's 0.0649 and H57-RELIEF's 0.3844 projections, inferred hidden-positive counts, and universal 0.0556/0.0549-per-dot claims are invalid as scores/gates. Read the <a href="research/metric-identity-erratum-20261007.md">derivation and counterexample</a>.</p>
-
-<h2 class="sec">Promotion audit status</h2>
-<div class="alert">No candidate has a promotion-grade Gate-2 pass. The historical Gate-2 tool used an invalid inferred live-truth count and treated 0.0556 as a universal bar; its old receipts are forensic only, not current clearance. The current-branch H57-A screen wrote no TIFF; H57-RELIEF is a separate artifact with withdrawn projection claims. Re-derive and validate the mass-neutral audit before any future promotion; see the <a href="research/metric-identity-erratum-20261007.md#gate-2-calibration-is-also-under-review">Gate-2 metric erratum</a> and <a href="research/h57-relief-metric-erratum-20261007.md">H57-RELIEF correction</a>.</div>
-<h2 class="sec">Reproduce</h2>
-<pre><code>python scripts/audit_training_inventory.py
-python scripts/validate_h56.py docs/downloads/GEMSDOE48-H56-ds-belief-dotted-x-tip-20261007-9ec0d605c45b-zeros-outside.tif
-python scripts/test_dti_metric.py
-python scripts/test_h56_dempster_shafer.py</code></pre>
-<p>Paths use the repository's project root. Test/validator results establish local reproducibility only; public-proxy tables remain conditional on frozen upstream inputs.</p>
-<p><b>Final status: no local candidate is cleared; no organizer score exists for a local file; no leaderboard attribution is verified.</b></p>
-
-<h2 class="sec">Strict hide-and-recover holdout (evaluator <code>evaluate_holdout.py@2026-10-08</code>)</h2>
-<p>Whole catalogue fault segments (3,199) are split into four spatial folds; hidden segments
-within 300 m of a visible fault are not scored (buffer); the candidate prediction is zeroed
-pixel-exactly on visible faults; components are pooled over folds; the 95% CI is a segment
-bootstrap (400 draws, seed 20261008, FPw held at its point estimate). A second truth
-population — SGMC faults more than 300 m from the catalogue (62,122 cells) — acts as the
-off-catalogue analogue of the hidden expert mapping. Full receipts:
-<a href="../evidence/holdout59_catalogue.json">catalogue</a> ·
-<a href="../evidence/holdout59_sgmc_offcat.json">SGMC off-catalogue</a>.</p>
-<table>
-<tr><th>Emission rule (frozen, nothing fitted)</th><th>Catalogue proxy</th><th>SGMC off-catalogue proxy</th></tr>
-<tr><td>Parent A — dotted B2 (37,654 dots)</td><td>0.0067 [0.0062, 0.0073]</td><td>0.0954 [0.0870, 0.1046]</td></tr>
-<tr><td>Parent B — tip H33-D (41,865 dots)</td><td>0.0863 [0.0820, 0.0899]</td><td>0.0957 [0.0875, 0.1047]</td></tr>
-<tr><td>Union, binary (47,905)</td><td>0.0850</td><td>0.0975</td></tr>
-<tr><td>DS belief, dense (792,278)</td><td>0.0341</td><td>0.0767</td></tr>
-<tr><td>DS pignistic × (1−K), dense (H58 rule)</td><td>0.0207</td><td>0.0701</td></tr>
-<tr><td>DS belief top-38k</td><td>0.0070</td><td>0.0946</td></tr>
-<tr><td><b>H59 — covering emission over the fused corridor (37,723)</b></td><td><b>0.0974 [0.0927, 0.1023]</b></td><td><b>0.0917 [0.0844, 0.0990]</b></td></tr>
-<tr><td>Random emission, same mass (38,000)</td><td>0.0707</td><td>0.0724</td></tr>
-</table>
-<p><b>Leakage canary.</b> Every catalogue-derived feature is scored alone on the withheld
-pixels. The positive controls (distance to the full catalogue, kernel credit of the full
-catalogue) return AUC 1.0000, confirming the canary fires on leaked features. The real
-canaries — kernel credit derived from visible faults only, and every candidate surface
-after masking — return AUC ≈ 0.49–0.50 in all four folds, i.e. the candidates carry no
-measurable ranking information about withheld fault segments. This is a negative result
-and it is the reason the site claims “format-valid and unique”, not “better”.</p>
-</main><footer><div class="wrap">GEMSDOE48 · independent evidence layers · 2026-10-07</div></footer></body></html>
+<section class="stop"><h2>NO CANDIDATE CLEARED TO SUBMIT</h2><p>No weekly submission slot is cleared. No submission was made. H58-A failed the matched H49 spatial holdout on both primary proxy targets. H59 has later strict holdout results but no same-protocol H49 comparison and is below its parents/union on SGMC off-catalogue cells. No organizer score exists for any local artifact, and no private-label score or portal acceptance exists.</p></section>
+<section class="card"><h2>H58-A — direct matched comparison with H49</h2><p>Four fixed geographic folds; same scoring protocol for H58-A and H49; catalogue and newer SGMC faults strictly &gt;300 m from the catalogue were kept as separate targets. The preregistered numeric gate required a positive paired mean and at least 3/4 positive folds on both targets. The result fails clearly.</p>
+<table><thead><tr><th>Target</th><th>H58-A mean DTI</th><th>H49 mean DTI</th><th>Paired mean Δ</th><th>Positive folds</th><th>Gate</th></tr></thead><tbody>
+<tr><td>Catalogue</td><td>0.055301</td><td>0.095353</td><td>−0.040053</td><td>0/4</td><td>Fail</td></tr>
+<tr><td>Newer SGMC off-catalogue &gt;300 m</td><td>0.066341</td><td>0.100751</td><td>−0.034411</td><td>0/4</td><td>Fail</td></tr>
+<tr><td>Older raw-SGMC sensitivity (not pooled)</td><td>0.065501</td><td>0.099768</td><td>−0.034267</td><td>0/4</td><td>Fail / sensitivity</td></tr>
+</tbody></table><p>The H58-A candidate has 791,389 positive cells because it is a continuous dense belief surface; the run is a mass-assignment ablation using the same B2/H33-D geometry, not a new geological detector. Its 0/4 folds and negative paired means are not a tune-after-failure invitation; the confirmatory gate is failed. See <a href="research/h58-results-20261008.md">full report</a>, <a href="../evidence/holdout_h58_20261008.json">holdout receipt</a>, and <a href="research/hypotheses-h58-20261008.md">frozen five-item slate</a>.</p></section>
+<section class="card"><h2>H59 — strict whole-segment hide-and-recover</h2><p>H59's evaluator withholds whole 8-connected segments, uses a 300 m truth buffer, masks visible known-fault pixels exactly, pools weighted confusion counts, and reports 400-draw segment-bootstrap confidence intervals. These are frozen local public-map proxies, not private test labels. H59's output is not a same-protocol H49 comparison, so it does not pass the project's H49 promotion gate.</p>
+<table><thead><tr><th>Proxy / method</th><th>DTI (95% CI)</th><th>Reference values in the same H59 receipt</th><th>Interpretation</th></tr></thead><tbody>
+<tr><td>Catalogue</td><td>0.0974 [0.0927, 0.1023]</td><td>Best parent 0.0863; same-mass random 0.0707</td><td>Best local rule on this proxy only.</td></tr>
+<tr><td>SGMC off-catalogue</td><td>0.0917 [0.0844, 0.0990]</td><td>Dotted 0.0954; tip 0.0957; union 0.0975</td><td>Below both parents and union; no promotion.</td></tr>
+</tbody></table><p>Receipts: <a href="../evidence/holdout59_catalogue.json">catalogue</a> · <a href="../evidence/holdout59_sgmc_offcat.json">SGMC off-catalogue</a> · <a href="../evidence/build_h59_receipt_20261008T184547Z.json">historical H59 build receipt</a>. The reconciliation clarifies that the old build headline is not current submission authorization.</p></section>
+<section class="card"><h2>Local raster checks do not prove portal acceptance</h2><ul>
+<li>H58-A zero-outside TIFF is finite and in [0,1], but differs from the official null/NaN outside wording. Its NaN-outside alternative follows that wording but fails a naive raw-array [0,1] predicate because NaNs are present.</li>
+<li>H59 is finite in [0,1] with zero outside. That local check does not prove the portal will accept it and does not conform to the published null/NaN outside wording.</li>
+<li>The reported “Predicted values must be in range [0, 1]” error was not reproduced. The exact rejected file and validator semantics are unknown; no portal test was attempted.</li>
+<li>Identity, format, and uniqueness audits are bounded to the local files and mirrors described in their receipts. No local file-to-leaderboard association is confirmed.</li>
+</ul><p>See the <a href="status.html">local file audit</a>, H58-A <a href="../evidence/h58_submission_validation_20261008.json">zero-outside check</a> and <a href="../evidence/h58_nan_submission_validation_20261008.json">NaN-outside check</a>.</p></section>
+<section class="caution"><b>Metric and source limitations:</b> the official DTI uses distance-weighted Tversky (α=0.2, β=0.8, triangular 300 m kernel). Catalogue and SGMC rasters are public-map proxies, not the final expert truth. Frozen parents were not rebuilt independently within every fold. These scores do not establish organizer rank or geological discovery. The historical H56B 0.0649 and H55 0.2843 live-score projections are invalidated: they used the incorrect identity FPw = S − TPw and are not score estimates or current gate results.</section>
+<p>Decision and slot record: <a href="../evidence/submission_gate_reconciliation_20261008.json">submission gate reconciliation</a>. Official metric and format source: <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">DrivenData problem description</a>.</p>
+</main><footer><div class="wrap">GEMSDOE48 · validation is not organizer acceptance</div></footer></body></html>

@@ -1,7 +1,7 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Current GEMSDOE48 irregularities: invalidated metric projections, unverified 0.2778 attribution, Dempster–Shafer semantics, artifact format caveat and data inventory limits."><title>GEMSDOE48 — current irregularities and caveats</title><link rel="stylesheet" href="style.css"><style>nav a{color:#cdeadd;text-decoration:none;padding:6px 10px;border-radius:8px}nav a:hover{background:#0b6e4f;color:#fff}.verdict{border:3px solid #b91c1c;background:#fff0ed;padding:18px;border-radius:14px;margin:20px 0}.alert{background:#fff7df;border-left:5px solid #b45309;padding:14px;border-radius:9px;margin:14px 0}.columns{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px}</style></head>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Current GEMSDOE48 caveats: failed H58-A holdout, unresolved H59 promotion comparison, reported range error, outside-footprint format ambiguity, and unverified leaderboard attribution."><title>GEMSDOE48 — current irregularities and caveats</title><link rel="stylesheet" href="style.css"><style>nav a{color:#cdeadd;text-decoration:none;padding:6px 10px;border-radius:8px}nav a:hover{background:#0b6e4f;color:#fff}.verdict{border:3px solid #b91c1c;background:#fff0ed;padding:18px;border-radius:14px;margin:20px 0}.alert{background:#fff7df;border-left:5px solid #b45309;padding:14px;border-radius:9px;margin:14px 0}.columns{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px}</style></head>
 <body><header><div class="wrap"><p>GEMSDOE48 · audit trail</p><h1>Irregularities and unresolved assumptions</h1><p>Current, corrected issues are at the top. Historical H55/H56 ledger entries remain linked for traceability, but superseded calculations are not current facts.</p></div></header>
-<nav><div class="wrap"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="submission-guide.html">Submission guide</a><a href="method.html">Method</a><a href="hypotheses.html">Hypotheses</a><a href="validation.html">Validation</a><a href="leaderboard.html">Leaderboard</a><a href="irregularities.html">Irregularities</a><a href="sources.html">Sources</a><a href="next-steps.html">Next steps</a></div></nav>
+<nav><div class="wrap"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="submission-guide.html">Download / submission status</a><a href="method.html">Method</a><a href="hypotheses.html">Hypotheses</a><a href="validation.html">Validation</a><a href="leaderboard.html">Leaderboard</a><a href="irregularities.html">Irregularities</a><a href="sources.html">Sources</a><a href="next-steps.html">Next steps</a></div></nav>
 <main class="wrap">
 <div class="verdict"><strong>NO LOCAL FILE IS CLEARED TO SUBMIT.</strong> No organizer score exists for any local artifact, and no file-specific receipt connects a local TIFF to a public leaderboard row.</div>
 <h2 class="sec">Current corrections and caveats</h2>
@@ -15,7 +15,7 @@
 </div>
 
 <h2 class="sec">Proxy and provenance limitations</h2>
-<ul><li>H56B (0.032347 catalogue / 0.070552 SGMC off-catalogue), H56 open-world D-S (0.054242 / 0.066070), and H56-F rungs are below H49 on both public-proxy means. H57-A slightly improved catalogue mean but lost on SGMC and to all eight same-pool random controls. These are public map proxies, not private competition labels.</li><li>Frozen upstream surfaces were not reconstructed inside every spatial fold; proxy results are conditional and can be affected by leakage. No result here establishes private-label performance or leaderboard gains.</li><li>Owner-mirror hashes establish byte identity to the mirror, not organizer provenance, license, challenge-use authorization or source completeness. The optional 19-band mirror is not staged now.</li><li>Two SGMC-derived rasters differ by 1,450 positive-mask cells and have different nodata metadata; the cause remains unresolved. Holdout receipts keep the newer pinned derivative and older raw-raster sensitivity separate: <a href="../evidence/sgmc_raster_comparison_20261006.json">comparison</a> · <a href="../evidence/holdout_20261006.json">primary</a> · <a href="../evidence/holdout_raw_sgmc_20261006.json">sensitivity</a>.</li></ul>
+<ul><li>H56B (0.032347 catalogue / 0.070552 SGMC off-catalogue), H56 open-world D-S (0.054242 / 0.066070), and H56-F rungs are below H49 on both public-proxy means. H57-A slightly improved catalogue mean but lost on SGMC and to all eight same-pool random controls. H58-A failed both matched H49 proxies; H59 falls below its parents/union on SGMC. These are public map proxies, not private competition labels.</li><li>Frozen upstream surfaces were not reconstructed inside every spatial fold; proxy results are conditional and can be affected by leakage. No result here establishes private-label performance or leaderboard gains.</li><li>Owner-mirror hashes establish byte identity to the mirror, not organizer provenance, license, challenge-use authorization or source completeness. The optional 19-band mirror is not staged now.</li><li>Two SGMC-derived rasters differ by 1,450 positive-mask cells and have different nodata metadata; the cause remains unresolved. Holdout receipts keep the newer pinned derivative and older raw-raster sensitivity separate: <a href="../evidence/sgmc_raster_comparison_20261006.json">comparison</a> · <a href="../evidence/holdout_20261006.json">primary</a> · <a href="../evidence/holdout_raw_sgmc_20261006.json">sensitivity</a>.</li></ul>
 
 <h2 class="sec">Historical H55 irregularity IDs (reinterpreted)</h2>
 <p>The IDs remain stable for cross-references. Several original H55 descriptions contain invalid inverse-metric conclusions; current corrections supersede them. The detailed ledger is <a href="irregularities.md">docs/irregularities.md</a>; read it together with the <a href="research/metric-identity-erratum-20261007.md">metric erratum</a>.</p>
@@ -34,32 +34,13 @@
 <p>Historical additions IR-H56-01 onward and the full H55 record are preserved in the <a href="irregularities.md">Markdown ledger</a>. Do not quote its former hidden-truth inversions, ceiling or “resolved portal rejection” as current findings.</p>
 <p><b>Final current status: no organizer score, no verified exact local-file-to-leaderboard link, no official file acceptance, no submission slot cleared.</b></p>
 
-<h2 class="sec">New irregularities flagged 2026-10-08 (H59 session)</h2>
+<h2 class="sec">Current-session reconciliations (2026-10-08)</h2>
 <ol>
-<li><b>Portal range error, explained.</b> Files that carry <code>NaN</code> outside the
-footprint fail the portal predicate <code>all(0 ≤ v ≤ 1)</code> and produce
-<i>"Predicted values must be in range [0, 1]"</i>. The automated feed
-(<a href="status.html">status.html</a>) now reports portal safety for every download; the
-primary candidate is all-finite. 28 of 56 downloadable GeoTIFFs are <b>not</b> portal-safe
-and are retained only for traceability.</li>
-<li><b><code>data/raw/sample_submission_template.tif</code> is a local artifact, not the
-organizer sample submission.</b> It has exactly 60,988 positive cells, identical to
-<code>existing_faults.tif</code> / <code>labels.tif</code> (SHA-256 <code>7ba308cc…</code>).
-Its finite-cell mask is used as the footprint definition; that use is documented, but the
-file must not be cited as an organizer deliverable.</li>
-<li><b>Two SGMC rasters.</b> <code>data/raw/sgmc_faults_100m.tif</code>
-(<code>26d142c4…</code>, 82,151 positives) and
-<code>data/official/derived_sgmc_faults_100m.tif</code> (<code>643cbe99…</code>, 83,593 in
-footprint; 62,122 off-catalogue at &gt; 300 m). Holdout scripts pin the derived raster; the
-mirror should be reconciled or explicitly labelled.</li>
-<li><b>16 pre-existing failing tests at merge commit <code>36d9785</code></b>
-(<code>tests/test_site_*.py</code>, <code>tests/test_h57.py</code>,
-<code>tests/test_site_classification.py</code>) asserted the pre-H58 site verdicts and were
-not updated when the site changed. Fixed in this session.</li>
-<li><b>README contradiction resolved.</b> The previous merge left the top of the README
-claiming the H58 fusion was “ready to download and submit” while a later section said
-“NOT OK / NOT CLEARED TO SUBMIT” for the same family. Each artifact now has one gated
-verdict; the fusion is format-submittable but is <b>not</b> evidenced as a score
-improvement.</li>
+<li><b>Reported portal range error remains unexplained.</b> The exact rejected file and portal validation semantics are not available, and no local TIFF was uploaded for a new test. A raw whole-array [0,1] predicate is a local diagnostic; NaN outside makes it false while a zero-outside file makes it true. Neither outcome proves what the organizer checks or why the earlier error occurred; the error's cause remains unknown.</li>
+<li><b>Outside-footprint format ambiguity.</b> The official problem description says outside cells should be null/NaN. H59 and H58-A's zero-outside primary variants are all-finite but differ from that wording. H58-A's NaN-outside twin follows the published wording but contains NaNs in the raw array. No variant has portal acceptance evidence.</li>
+<li><b>H58-A failed its matched H49 gate.</b> Paired mean deltas are −0.040053 on the catalogue proxy and −0.034411 on newer SGMC off-catalogue, with 0/4 positive folds on both. Its bounded local uniqueness result does not make it a new geological detector: its support is identical to H56-OWDS and top-rank Jaccard is 1.0.</li>
+<li><b>H59 is not submission-cleared.</b> Its strict catalogue proxy is 0.0974 [0.0927, 0.1023]; the SGMC off-catalogue proxy is 0.0917 [0.0844, 0.0990], below parents 0.0954/0.0957 and union 0.0975. The H59 receipt does not report the matched H49 comparison required by this project's slot rule. Its historic build headline implied submission authorization and is superseded by the current no-slot reconciliation.</li>
+<li><b>Leaderboard/mask corrections.</b> The 2026-10-08 live snapshot has #1 at 0.3774, DARD 0.3195 at #7 and extradr19 0.2778 at #13; no receipt links that row to local B2 bytes. Staff clarified the known-fault mask is pixel-exact with no 300 m buffer; nearby unmasked predictions are scored normally. Do not claim catalogue-adjacent pixels are free or masked by distance.</li>
 </ol>
-</main><footer><div class="wrap">GEMSDOE48 · corrected caveat index · 2026-10-07</div></footer></body></html>
+<p><b>Current decision:</b> no submission was made; no weekly submission slot is cleared; no slot has been authorized. The user reports a 3-per-week limit and zero used. See the <a href="../evidence/submission_gate_reconciliation_20261008.json">reconciliation receipt</a>, <a href="validation.html">validation</a>, <a href="leaderboard.html">board snapshot</a>, and <a href="research/leaderboard-and-mask-clarification-20261008.md">official mask clarification</a>.</p>
+</main><footer><div class="wrap">GEMSDOE48 · caveat index · no submission slot cleared · 2026-10-08</div></footer></body></html>

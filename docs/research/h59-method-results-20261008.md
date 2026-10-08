@@ -1,8 +1,14 @@
 # H59 — method, strict holdout results, run card, and next hypotheses (2026-10-08)
 
-This document is the session record for the H59 build in this checkout.  Every number
+This document is the session record for the H59 build in this checkout. Every number
 below is a **measurement on a frozen local proxy** or an **owner-reported value copied
 from a campaign page**; nothing is a projection and nothing is an organizer score.
+
+**Current disposition (reconciled 2026-10-08): download for inspection only; no weekly
+submission slot is cleared.** The original build receipt used broader download/submit
+wording; it is retained as a historical build record, not current authorization. The
+H59 holdout is not a matched H49 gate, and its SGMC off-catalogue score is below both
+parents and their union. See [`evidence/submission_gate_reconciliation_20261008.json`](../../evidence/submission_gate_reconciliation_20261008.json).
 Evaluator version: `scripts/evaluate_holdout.py@2026-10-08`.
 
 ## 1. What was asked and what was done
@@ -20,12 +26,14 @@ Delivered artifact (built by `scripts/build_submission_h59.py`):
 | File | `docs/downloads/gemsdoe48-h59-cover-ds-belief-b2xh33d-20261008T184547Z-b79c4c61d8d8.tif` |
 | SHA-256 | `f1584187b459baf47f75e5daf64de6f7696f9feb14910d3cf2762f7a1119597a` |
 | Bands / dtype | 1 / float32 |
-| CRS / pixel / grid | EPSG:32611 / 100 m / 3292 × 3730 (equals the organizer template) |
+| CRS / pixel / grid | EPSG:32611 / 100 m / 3292 × 3730 (matches the locally held sample template) |
 | Values | all finite, min 0.0, max 1.0, **no NaN anywhere**, no nodata tag |
-| Portal predicate | `all(0 <= v <= 1)` over the whole array → **True** (the exact check that produces “Predicted values must be in range [0, 1]”) |
+| Local raw-array predicate | `all(0 <= v <= 1)` over the whole array → **True**. This is a local diagnostic only; it is not a verified model of the portal's validator or proof of the reported error's cause. |
+| Outside-footprint encoding | Zero outside. The official problem page says outside cells should be null/NaN; no portal upload or acceptance test was made. |
 | Positive cells | 37,723 |
-| Portal name | `GEMSDOE48-H59-CoverDSBelief-B2xH33D` |
-| Portal note (108 chars) | `GEMSDOE48 H59 | Dempster Bel(F), dotted B2 x tip H33D; 400m hex-cover of the fusion corridor; m(Theta) layer` |
+| Identification name (not submission authorization) | `GEMSDOE48-H59-CoverDSBelief-B2xH33D` |
+| Identification note (108 chars; not for an authorized upload) | `GEMSDOE48 H59 | Dempster Bel(F), dotted B2 x tip H33D; 400m hex-cover of the fusion corridor; m(Theta) layer` |
+| Weekly slot decision | **NOT CLEARED**; no submission was made. |
 | Receipt | `evidence/build_h59_receipt_20261008T184547Z.json` |
 
 Diagnostic layers written next to the submission (NaN outside the footprint, never part
@@ -97,12 +105,14 @@ Readings that matter:
   0.0863 for the best parent and 0.0707 for a same-mass random emission, i.e. +0.027),
   and it is **statistically indistinguishable from both parents on the off-catalogue
   proxy** (0.0917 vs 0.0954/0.0957; CIs overlap).
-* **The dotted family is anti-correlated with the catalogue**: 0 of its 37,654 dots lie
-  within 200 m of a catalogue cell and only 2,171 within 300 m, so its catalogue-proxy
-  DTI is 0.0067 — far *below* the same-mass random control (0.0707) — while it is
-  competitive (0.0954) on the off-catalogue population.  Its owner-reported 0.2778 is
-  therefore consistent with a surface whose signal lives **off the existing catalogue**,
-  which is exactly the discovery setting of this competition.
+* **The local dotted raster is sparse near the catalogue**: the local audit found 0 of
+  37,654 dots within 200 m and 2,171 within 300 m. Under this evaluator it scores 0.0067
+  on the catalogue proxy and 0.0954 on SGMC off-catalogue cells. The owner-reported 0.2778
+  is not attributed to these exact local bytes, and these measurements do not show that
+  its signal lives off-catalogue or explain the public score. Official staff clarified
+  that known-fault masking is pixel-exact with no 300 m buffer; nearby unmasked
+  predictions are scored normally. Catalogue-flank pruning is therefore not automatically
+  score-exempt. The mechanism and score-to-file link remain unknown.
 * **No fusion rule beats its parents by more than noise on either proxy**, and the
   fusion surfaces carry essentially no ranking information about *withheld* segments
   (leakage canary AUC ≈ 0.50 for every candidate; the positive-control features that
@@ -146,15 +156,16 @@ Readings that matter:
   },
   "correlation_overlap_vs_registry": "No byte identity; max exact-cell overlap 0.208 with any submission-like raster; max corridor Spearman 0.9201 (same-parent DS derivative); 3-px proximity 1.000 but structurally degenerate for corridor-covering sets (documented).",
   "raster_sha256": "f1584187b459baf47f75e5daf64de6f7696f9feb14910d3cf2762f7a1119597a",
-  "validator_output": "single band, float32, EPSG:32611, 3292x3730, transform equals organizer template, all finite, min 0, max 1, no nodata tag, portal range predicate True -- all gates pass.",
-  "submission_name": "GEMSDOE48-H59-CoverDSBelief-B2xH33D",
-  "submission_note": "GEMSDOE48 H59 | Dempster Bel(F), dotted B2 x tip H33D; 400m hex-cover of the fusion corridor; m(Theta) layer",
-  "verdict": "promote-format-only",
-  "verdict_detail": "OK to download and submit (format-valid, portal-safe, unique bytes and unique dot cells). NOT SUPPORTED as a score improvement: the fusion does not beat its parents beyond noise on either public proxy, and the leakage canary is ~0.50 for every candidate surface."
+  "local_audit_record": "single-band float32, EPSG:32611, 3292x3730, local-template transform, finite [0,1] values, no nodata tag, zero outside; whole-array range predicate is true. Outside zero conflicts with the official null/NaN wording. No portal test was run.",
+  "identification_name_only": "GEMSDOE48-H59-CoverDSBelief-B2xH33D",
+  "identification_note_only": "GEMSDOE48 H59 | Dempster Bel(F), dotted B2 x tip H33D; 400m hex-cover of the fusion corridor; m(Theta) layer",
+  "historic_builder_disposition": "promote-format-only (superseded by current gate reconciliation)",
+  "current_disposition": "DOWNLOAD_FOR_INSPECTION_ONLY_NOT_CLEARED_TO_SUBMIT",
+  "current_disposition_detail": "No same-protocol H49 promotion comparison is recorded for H59, and its SGMC off-catalogue result is below the two parents and their union. Local artifact checks do not establish portal acceptance or private-label performance."
 }
 ```
 
-## 6. Why 0.2778 happened, and what could actually beat it
+## 6. What the 0.2778 public row does—and does not—establish
 
 Measured decomposition of the metric `DTI = TPw / (TPw + 0.2 FPw + 0.8 FNw)`:
 
@@ -201,11 +212,14 @@ review on an unrestricted machine.
 
 ## 8. Irregularities flagged in this session
 
-1. **Portal range error and NaN.**  The submission portal rejected an earlier download
-   with “Predicted values must be in range [0, 1]”.  Files in `docs/downloads` that carry
-   NaN outside the footprint fail the predicate `all(0 <= v <= 1)`; the H59 primary is
-   all-finite with no nodata tag and passes it.  Older NaN-outside files remain in
-   `docs/downloads` for traceability but must not be treated as portal-safe.
+1. **Reported range error and outside encoding.** The user reported an earlier error,
+   “Predicted values must be in range [0, 1]”; the exact rejected bytes and validator
+   semantics are unavailable. A raw whole-array check returns false when an array has
+   NaN values, while H59's zero-outside array returns true. That does not identify the
+   cause of the earlier error or prove that H59 is accepted: the official problem page
+   says outside cells should be null/NaN, and no portal upload or acceptance test was
+   made for H59 or either H58-A encoding. See the H58-A format receipts and the current
+   [`submission gate reconciliation`](../../evidence/submission_gate_reconciliation_20261008.json).
 2. **`data/raw/sample_submission_template.tif` is a local artifact, not an organizer
    file**: it is float32 with NaN outside the footprint and exactly 60,988 positive
    cells, identical to `data/official/existing_faults.tif` / `labels.tif`
